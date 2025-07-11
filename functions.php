@@ -20,15 +20,196 @@ function partypro_theme_setup() {
     
     // Register navigation menus
     register_nav_menus(array(
-        'primary' => __('Primary Menu', 'partypro'),
+        'primary' => __('Main Menu', 'partypro'),
         'footer' => __('Footer Menu', 'partypro'),
     ));
     
     // Add custom image sizes
     add_image_size('service-thumbnail', 300, 200, true);
     add_image_size('hero-image', 1920, 1080, true);
+    
+    // Set default pages on theme activation
+    if (get_option('partypro_pages_created') !== 'yes') {
+        partypro_create_default_pages();
+        update_option('partypro_pages_created', 'yes');
+    }
 }
 add_action('after_setup_theme', 'partypro_theme_setup');
+
+// Create default pages
+function partypro_create_default_pages() {
+    // Only create pages if they don't exist
+    if (!get_page_by_path('home')) {
+        $home_page = array(
+            'post_title'    => 'Home',
+            'post_content'  => 'Welcome to our party rental business!',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_name'     => 'home'
+        );
+        $home_id = wp_insert_post($home_page);
+        
+        // Set Home as front page
+        if ($home_id) {
+            update_option('page_on_front', $home_id);
+            update_option('show_on_front', 'page');
+        }
+    }
+    
+    // Create Services page
+    if (!get_page_by_path('services')) {
+        $services_page = array(
+            'post_title'    => 'Services',
+            'post_content'  => 'Our comprehensive party rental services to make your event perfect.',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_name'     => 'services'
+        );
+        $services_id = wp_insert_post($services_page);
+        if ($services_id) {
+            update_post_meta($services_id, '_wp_page_template', 'page-services.php');
+        }
+    }
+    
+    // Create Pricing page
+    if (!get_page_by_path('pricing')) {
+        $pricing_page = array(
+            'post_title'    => 'Pricing',
+            'post_content'  => 'Our competitive pricing packages for all event sizes.',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_name'     => 'pricing'
+        );
+        $pricing_id = wp_insert_post($pricing_page);
+        if ($pricing_id) {
+            update_post_meta($pricing_id, '_wp_page_template', 'page-pricing.php');
+        }
+    }
+    
+    // Create About page
+    if (!get_page_by_path('about')) {
+        $about_page = array(
+            'post_title'    => 'About',
+            'post_content'  => 'Learn more about our party rental business and our commitment to excellence.',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_name'     => 'about'
+        );
+        $about_id = wp_insert_post($about_page);
+        if ($about_id) {
+            update_post_meta($about_id, '_wp_page_template', 'page-about.php');
+        }
+    }
+    
+    // Create Contact page
+    if (!get_page_by_path('contact')) {
+        $contact_page = array(
+            'post_title'    => 'Contact',
+            'post_content'  => 'Get in touch with us to plan your perfect event.',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_name'     => 'contact'
+        );
+        $contact_id = wp_insert_post($contact_page);
+        if ($contact_id) {
+            update_post_meta($contact_id, '_wp_page_template', 'page-contact.php');
+        }
+    }
+}
+
+// Assign the correct page templates
+function partypro_assign_page_templates($page_id, $template) {
+    update_post_meta($page_id, '_wp_page_template', $template);
+}
+
+// Force custom page templates to load
+function partypro_force_template_redirect() {
+    global $post;
+    
+    if (is_page()) {
+        $page_slug = $post->post_name;
+        $template_file = '';
+        
+        switch ($page_slug) {
+            case 'services':
+                $template_file = 'page-services.php';
+                break;
+            case 'pricing':
+                $template_file = 'page-pricing.php';
+                break;
+            case 'contact':
+                $template_file = 'page-contact.php';
+                break;
+            case 'about':
+                $template_file = 'page-about.php';
+                break;
+        }
+        
+        if ($template_file) {
+            $template_path = get_template_directory() . '/' . $template_file;
+            if (file_exists($template_path)) {
+                // Set global variables that templates might need
+                global $wp_query;
+                
+                // Load the template
+                load_template($template_path);
+                exit;
+            }
+        }
+    }
+}
+add_action('template_redirect', 'partypro_force_template_redirect', 5);
+
+// Better page template selection
+function partypro_page_template($template) {
+    if (is_page()) {
+        global $post;
+        $page_slug = $post->post_name;
+        
+        // Check for specific page templates
+        $custom_templates = array(
+            'services' => 'page-services.php',
+            'pricing' => 'page-pricing.php',
+            'contact' => 'page-contact.php',
+            'about' => 'page-about.php'
+        );
+        
+        if (isset($custom_templates[$page_slug])) {
+            $custom_template = get_template_directory() . '/' . $custom_templates[$page_slug];
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }
+        }
+    }
+    
+    return $template;
+}
+add_filter('page_template', 'partypro_page_template');
+
+// Alternative template include filter
+function partypro_template_include($template) {
+    if (is_page()) {
+        global $post;
+        $page_slug = $post->post_name;
+        
+        $custom_templates = array(
+            'services' => 'page-services.php',
+            'pricing' => 'page-pricing.php',
+            'contact' => 'page-contact.php',
+            'about' => 'page-about.php'
+        );
+        
+        if (isset($custom_templates[$page_slug])) {
+            $custom_template = get_template_directory() . '/' . $custom_templates[$page_slug];
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }
+        }
+    }
+    
+    return $template;
+}
+add_filter('template_include', 'partypro_template_include', 99);
 
 // Enqueue styles and scripts
 function partypro_scripts() {
@@ -303,4 +484,225 @@ function partypro_admin_styles() {
 }
 add_action('admin_head', 'partypro_admin_styles');
 
-?>
+// Helper function to get page URL by slug
+function partypro_get_page_url($slug) {
+    $page = get_page_by_path($slug);
+    if ($page) {
+        return get_permalink($page->ID);
+    }
+    return home_url('/' . $slug . '/');
+}
+
+// Helper function to get dynamic contact information
+function partypro_get_contact_phone($format = 'display') {
+    $phone = get_theme_mod('contact_phone', '+91 98765 43210');
+    
+    if ($format === 'tel') {
+        return str_replace([' ', '-', '(', ')'], '', $phone);
+    } elseif ($format === 'whatsapp') {
+        return str_replace(['+', ' ', '-', '(', ')'], '', $phone);
+    }
+    
+    return $phone;
+}
+
+// Helper function to get contact email
+function partypro_get_contact_email() {
+    return get_theme_mod('contact_email', 'info@partyprorentals.com');
+}
+
+// Helper function to get contact address
+function partypro_get_contact_address() {
+    return get_theme_mod('contact_address', '123 Party Street, Your City');
+}
+
+// Shortcode for contact button
+function partypro_contact_button_shortcode($atts) {
+    $atts = shortcode_atts(array(
+        'type' => 'contact',
+        'text' => 'Contact Us',
+        'class' => 'btn btn-primary'
+    ), $atts);
+    
+    $url = '';
+    switch ($atts['type']) {
+        case 'phone':
+            $url = 'tel:' . partypro_get_contact_phone('tel');
+            break;
+        case 'whatsapp':
+            $url = 'https://wa.me/' . partypro_get_contact_phone('whatsapp');
+            break;
+        case 'email':
+            $url = 'mailto:' . partypro_get_contact_email();
+            break;
+        default:
+            $url = partypro_get_page_url('contact');
+    }
+    
+    return '<a href="' . esc_url($url) . '" class="' . esc_attr($atts['class']) . '">' . esc_html($atts['text']) . '</a>';
+}
+add_shortcode('contact_button', 'partypro_contact_button_shortcode');
+
+// Debug function to check template loading
+function partypro_debug_template() {
+    if (is_admin() || !current_user_can('manage_options')) {
+        return;
+    }
+    
+    global $template;
+    if (WP_DEBUG) {
+        echo '<!-- Template: ' . basename($template) . ' -->';
+        if (is_page()) {
+            global $post;
+            echo '<!-- Page slug: ' . $post->post_name . ' -->';
+        }
+    }
+}
+add_action('wp_footer', 'partypro_debug_template');
+
+// Force page template assignment
+function partypro_force_page_templates() {
+    // Get all pages
+    $pages = get_pages();
+    
+    foreach ($pages as $page) {
+        $slug = $page->post_name;
+        
+        // Assign custom templates based on slug
+        switch ($slug) {
+            case 'services':
+                update_post_meta($page->ID, '_wp_page_template', 'page-services.php');
+                break;
+            case 'pricing':
+                update_post_meta($page->ID, '_wp_page_template', 'page-pricing.php');
+                break;
+            case 'contact':
+                update_post_meta($page->ID, '_wp_page_template', 'page-contact.php');
+                break;
+            case 'about':
+                update_post_meta($page->ID, '_wp_page_template', 'page-about.php');
+                break;
+        }
+    }
+}
+
+// Run this on theme activation
+add_action('after_switch_theme', 'partypro_force_page_templates');
+add_action('after_switch_theme', 'partypro_create_default_pages');
+add_action('after_switch_theme', 'partypro_flush_rewrite_rules');
+
+// Also run on admin init to ensure pages exist
+add_action('admin_init', 'partypro_ensure_pages_exist');
+
+function partypro_ensure_pages_exist() {
+    // Check if our pages exist, if not create them
+    $required_pages = array('services', 'pricing', 'contact', 'about');
+    
+    foreach ($required_pages as $page_slug) {
+        if (!get_page_by_path($page_slug)) {
+            partypro_create_default_pages();
+            break;
+        }
+    }
+}
+
+// Flush rewrite rules to ensure proper page loading
+function partypro_flush_rewrite_rules() {
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'partypro_flush_rewrite_rules');
+
+// Emergency page content injection
+function partypro_emergency_page_content($content) {
+    if (is_page()) {
+        global $post;
+        $page_slug = $post->post_name;
+        
+        // If content is empty, inject our custom content
+        if (empty(trim($content))) {
+            switch ($page_slug) {
+                case 'services':
+                    return partypro_get_services_content();
+                case 'pricing':
+                    return partypro_get_pricing_content();
+                case 'contact':
+                    return partypro_get_contact_content();
+                case 'about':
+                    return partypro_get_about_content();
+            }
+        }
+    }
+    return $content;
+}
+add_filter('the_content', 'partypro_emergency_page_content');
+
+function partypro_get_services_content() {
+    return '
+    <div class="services-grid">
+        <div class="service-card">
+            <h3>🎪 Tent Rentals</h3>
+            <p>Weather protection for outdoor events with various sizes available.</p>
+        </div>
+        <div class="service-card">
+            <h3>🪑 Tables & Chairs</h3>
+            <p>Complete seating solutions for your guests with high-quality furniture.</p>
+        </div>
+        <div class="service-card">
+            <h3>🍽️ Dinnerware & Linens</h3>
+            <p>Elegant table settings and premium linens to enhance your event.</p>
+        </div>
+        <div class="service-card">
+            <h3>💡 Lighting & Decor</h3>
+            <p>Create the perfect ambiance with professional lighting.</p>
+        </div>
+        <div class="service-card">
+            <h3>🎵 Audio & Entertainment</h3>
+            <p>Professional sound systems and entertainment equipment.</p>
+        </div>
+        <div class="service-card">
+            <h3>🎂 Specialty Items</h3>
+            <p>Unique rental items to make your event extra special.</p>
+        </div>
+    </div>';
+}
+
+function partypro_get_pricing_content() {
+    return '
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3>Starter Package</h3>
+            <div class="price">₹15,000</div>
+            <p>Perfect for small gatherings (up to 30 guests)</p>
+        </div>
+        <div class="pricing-card featured">
+            <h3>Standard Package</h3>
+            <div class="price">₹35,000</div>
+            <p>Ideal for weddings (up to 100 guests)</p>
+        </div>
+        <div class="pricing-card">
+            <h3>Premium Package</h3>
+            <div class="price">₹65,000</div>
+            <p>Luxury experience (up to 200 guests)</p>
+        </div>
+    </div>';
+}
+
+function partypro_get_contact_content() {
+    return '
+    <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> info@partyrentals.com</p>
+        <p><strong>Address:</strong> 123 Event Street, Party District</p>
+        <p><strong>Hours:</strong> Monday - Friday: 9:00 AM - 6:00 PM</p>
+    </div>';
+}
+
+function partypro_get_about_content() {
+    return '
+    <div class="about-content">
+        <h3>About Our Party Rentals</h3>
+        <p>We are a premier party rental company dedicated to making your special events unforgettable. With years of experience in the industry, we provide high-quality equipment and professional service.</p>
+        <p>Our mission is to help you create magical moments that your guests will remember forever.</p>
+    </div>';
+}

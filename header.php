@@ -35,10 +35,28 @@
 function partypro_fallback_menu() {
     echo '<ul>';
     echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    echo '<li><a href="' . esc_url(get_permalink(get_page_by_path('services'))) . '">Services</a></li>';
-    echo '<li><a href="' . esc_url(get_permalink(get_page_by_path('pricing'))) . '">Pricing</a></li>';
-    echo '<li><a href="' . esc_url(get_permalink(get_page_by_path('about'))) . '">About</a></li>';
-    echo '<li><a href="' . esc_url(get_permalink(get_page_by_path('contact'))) . '">Contact</a></li>';
+    
+    // Get pages dynamically
+    $services_page = get_page_by_path('services');
+    if ($services_page) {
+        echo '<li><a href="' . esc_url(get_permalink($services_page)) . '">Services</a></li>';
+    }
+    
+    $pricing_page = get_page_by_path('pricing');
+    if ($pricing_page) {
+        echo '<li><a href="' . esc_url(get_permalink($pricing_page)) . '">Pricing</a></li>';
+    }
+    
+    $about_page = get_page_by_path('about');
+    if ($about_page) {
+        echo '<li><a href="' . esc_url(get_permalink($about_page)) . '">About</a></li>';
+    }
+    
+    $contact_page = get_page_by_path('contact');
+    if ($contact_page) {
+        echo '<li><a href="' . esc_url(get_permalink($contact_page)) . '">Contact</a></li>';
+    }
+    
     echo '</ul>';
 }
 ?>

@@ -12,9 +12,9 @@
                 </p>
                 
                 <div class="error-actions">
-                    <a href="<?php echo home_url(); ?>" class="btn btn-primary">Go Home</a>
-                    <a href="<?php echo home_url('/services'); ?>" class="btn btn-secondary">Browse Services</a>
-                    <a href="<?php echo home_url('/contact'); ?>" class="btn btn-secondary">Contact Us</a>
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="btn btn-primary">Go Home</a>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-secondary">Browse Services</a>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-secondary">Contact Us</a>
                 </div>
                 
                 <div class="search-section">
@@ -25,11 +25,11 @@
                 <div class="helpful-links">
                     <h3>Quick Links:</h3>
                     <ul>
-                        <li><a href="<?php echo home_url('/services'); ?>">Our Services</a></li>
-                        <li><a href="<?php echo home_url('/contact'); ?>">Contact Us</a></li>
-                        <li><a href="<?php echo home_url(); ?>">Home Page</a></li>
-                        <li><a href="tel:+919876543210">Call: +91 98765 43210</a></li>
-                        <li><a href="https://wa.me/919876543210">WhatsApp Us</a></li>
+                        <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>">Our Services</a></li>
+                        <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>">Contact Us</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/')); ?>">Home Page</a></li>
+                        <li><a href="tel:<?php echo esc_attr(get_theme_mod('contact_phone', '+919876543210')); ?>">Call: <?php echo esc_html(get_theme_mod('contact_phone', '+91 98765 43210')); ?></a></li>
+                        <li><a href="https://wa.me/<?php echo esc_attr(str_replace(['+', ' ', '-'], '', get_theme_mod('contact_phone', '919876543210'))); ?>">WhatsApp Us</a></li>
                     </ul>
                 </div>
             </div>
