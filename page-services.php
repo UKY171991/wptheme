@@ -4,33 +4,33 @@ Template Name: Services Page
 */
 get_header(); ?>
 
-<!-- Fancy Services Hero Section -->
+<!-- Services Hero Section -->
 <section class="services-hero-section">
     <div class="services-hero-bg"></div>
     <div class="container">
         <div class="services-hero-content">
-            <div class="services-hero-badge">🎪 Our Services</div>
-            <h1 class="services-hero-title">Complete <span class="gradient-text">Home & Event Services</span></h1>
-            <p class="services-hero-subtitle">From party rentals to home maintenance, cleaning services to personal assistance - we're your one-stop solution for all your home and event needs.</p>
+            <div class="services-hero-badge">� Our Services</div>
+            <h1 class="services-hero-title">Complete <span class="gradient-text">Home & Lifestyle Services</span></h1>
+            <p class="services-hero-subtitle">From cleaning and maintenance to personal errands and business support - we handle it all with professionalism and care.</p>
             <div class="services-hero-stats">
                 <div class="services-stat">
-                    <div class="stat-icon">📦</div>
-                    <div class="stat-text">1000+ Items</div>
+                    <div class="stat-icon">🧹</div>
+                    <div class="stat-text">50+ Services</div>
                 </div>
                 <div class="services-stat">
-                    <div class="stat-icon">🚚</div>
-                    <div class="stat-text">Free Setup</div>
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-text">Licensed & Insured</div>
                 </div>
                 <div class="services-stat">
-                    <div class="stat-icon">🛡️</div>
-                    <div class="stat-text">Insured</div>
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-text">5-Star Rated</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Enhanced Services Grid -->
+<!-- Services Grid -->
 <section class="services-showcase-section">
     <div class="container">
         <div class="services-showcase-grid">
@@ -48,66 +48,122 @@ get_header(); ?>
                         <span>Spotless results guaranteed</span>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">🏠 House cleaning</div>
-                        <div class="feature-item">📦 Move-in/move-out cleaning</div>
-                        <div class="feature-item">💨 Pressure washing</div>
-                        <div class="feature-item">🌊 Gutter cleaning</div>
-                        <div class="feature-item">🪟 Window cleaning</div>
-                        <div class="feature-item">🧽 Carpet shampooing</div>
-                        <div class="feature-item">📚 Garage/attic organization</div>
-                        <div class="feature-item">🗑️ Trash hauling & junk removal</div>
-                        <div class="feature-item">🏨 Airbnb cleaning & reset</div>
-                        <div class="feature-item">🌱 Lawn mowing & yard maintenance</div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>House cleaning (weekly, bi-weekly, monthly)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Move-in/move-out cleaning</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Pressure washing (driveways, decks, siding)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Gutter cleaning & maintenance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Window cleaning (interior & exterior)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Carpet shampooing & deep cleaning</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Garage/attic organization</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Trash hauling & junk removal</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Airbnb cleaning & reset services</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Lawn mowing and yard maintenance</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-pricing">
-                    <span class="price-from">Starting from</span>
-                    <span class="price-amount">$75</span>
+                <div class="service-card-footer">
+                    <div class="pricing-info">Starting at $75/visit</div>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
                 </div>
-                
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
             </div>
             
             <!-- Home & Property Maintenance -->
             <div class="service-card-enhanced maintenance-service">
                 <div class="service-card-header">
-                    <div class="service-icon-large">�</div>
+                    <div class="service-icon-large">🧰</div>
                     <h3 class="service-title">Home & Property Maintenance</h3>
                     <p class="service-subtitle">Expert handyman & maintenance services</p>
                 </div>
                 
                 <div class="service-features">
                     <div class="feature-highlight">
-                        <span class="feature-icon">�</span>
+                        <span class="feature-icon">🔧</span>
                         <span>Professional craftsmanship</span>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">🪑 Furniture assembly</div>
-                        <div class="feature-item">📺 TV mounting</div>
-                        <div class="feature-item">🔨 Handyman services (minor repairs)</div>
-                        <div class="feature-item">🎨 Fence painting</div>
-                        <div class="feature-item">💡 Light bulb/fixture installation</div>
-                        <div class="feature-item">🧱 Basic drywall patching</div>
-                        <div class="feature-item">📮 Mailbox installation</div>
-                        <div class="feature-item">🎄 Holiday light hanging</div>
-                        <div class="feature-item">🔑 Lockout assistance</div>
-                        <div class="feature-item">🏊 Pool cleaning</div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Furniture assembly</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>TV mounting</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Handyman services (minor repairs)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Fence painting</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Light bulb/fixture installation</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Basic drywall patching</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Mailbox installation</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Holiday light hanging</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Lockout assistance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Pool cleaning</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-pricing">
-                    <span class="price-from">Starting from</span>
-                    <span class="price-amount">$65</span>
+                <div class="service-card-footer">
+                    <div class="pricing-info">Starting at $65/hour</div>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
                 </div>
-                
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
             </div>
             
             <!-- Personal Errands & Concierge -->
             <div class="service-card-enhanced concierge-service">
                 <div class="service-card-header">
-                    <div class="service-icon-large">�️</div>
+                    <div class="service-icon-large">🛍️</div>
                     <h3 class="service-title">Personal Errands & Concierge</h3>
                     <p class="service-subtitle">Your personal assistant for daily tasks</p>
                 </div>
@@ -118,25 +174,53 @@ get_header(); ?>
                         <span>Save time, live better</span>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">🛒 Grocery shopping/delivery</div>
-                        <div class="feature-item">💊 Prescription pickup</div>
-                        <div class="feature-item">⏰ Waiting-in-line service</div>
-                        <div class="feature-item">👨‍💼 Personal assistant service</div>
-                        <div class="feature-item">📦 Moving assistance</div>
-                        <div class="feature-item">🚚 Courier/delivery services</div>
-                        <div class="feature-item">🐕 Dog waste cleanup</div>
-                        <div class="feature-item">📦 Packing/unpacking service</div>
-                        <div class="feature-item">🗂️ Decluttering service</div>
-                        <div class="feature-item">🌿 Plant watering (travel)</div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Grocery shopping/delivery</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Prescription pickup</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Waiting-in-line service</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Personal assistant service</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Moving assistance (loading/unloading)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Courier/delivery services</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Dog waste cleanup</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Packing/unpacking service</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Decluttering service</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Plant watering (for traveling homeowners)</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-pricing">
-                    <span class="price-from">Starting from</span>
-                    <span class="price-amount">$35</span>
+                <div class="service-card-footer">
+                    <div class="pricing-info">Starting at $35/hour</div>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
                 </div>
-                
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
             </div>
             
             <!-- Pet & Animal Services -->
@@ -153,22 +237,41 @@ get_header(); ?>
                         <span>Trusted pet care specialists</span>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">🐕 Dog walking</div>
-                        <div class="feature-item">🏠 Pet sitting</div>
-                        <div class="feature-item">🛁 Mobile pet grooming</div>
-                        <div class="feature-item">💩 Pet poop scooping service</div>
-                        <div class="feature-item">🚗 Pet taxi (vet/groomer transport)</div>
-                        <div class="feature-item">🐠 Aquarium cleaning</div>
-                        <div class="feature-item">🌬️ Pet yard deodorizing</div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Dog walking</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Pet sitting</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Mobile pet grooming</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Pet poop scooping service</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Pet taxi (transporting pets to vet/groomer)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Aquarium cleaning</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Pet yard deodorizing</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-pricing">
-                    <span class="price-from">Starting from</span>
-                    <span class="price-amount">$25</span>
+                <div class="service-card-footer">
+                    <div class="pricing-info">Starting at $25/visit</div>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
                 </div>
-                
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
             </div>
             
             <!-- Child & Family Support -->
@@ -181,24 +284,37 @@ get_header(); ?>
                 
                 <div class="service-features">
                     <div class="feature-highlight">
-                        <span class="feature-icon">�</span>
+                        <span class="feature-icon">🏠</span>
                         <span>Safe & trusted family support</span>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">👥 Parent helper/mother's helper</div>
-                        <div class="feature-item">👶 Babysitting (informal)</div>
-                        <div class="feature-item">🧸 Toy organization service</div>
-                        <div class="feature-item">🔒 Home safety baby-proofing</div>
-                        <div class="feature-item">🎉 Birthday party setup & hosting</div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Parent helper/mother's helper</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Babysitting (unlicensed, informal)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Toy organization service</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Home safety baby-proofing</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Birthday party setup & hosting</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-pricing">
-                    <span class="price-from">Starting from</span>
-                    <span class="price-amount">$20</span>
+                <div class="service-card-footer">
+                    <div class="pricing-info">Starting at $20/hour</div>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
                 </div>
-                
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
             </div>
             
             <!-- Creative & Digital Services -->
@@ -215,31 +331,59 @@ get_header(); ?>
                         <span>Creative excellence delivered</span>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">🎨 Graphic design</div>
-                        <div class="feature-item">📱 Social media management</div>
-                        <div class="feature-item">✍️ Content writing/blogging</div>
-                        <div class="feature-item">📸 Photography</div>
-                        <div class="feature-item">🎥 Videography for events</div>
-                        <div class="feature-item">🎯 Logo design</div>
-                        <div class="feature-item">📄 Resume writing</div>
-                        <div class="feature-item">🎙️ Voiceover work</div>
-                        <div class="feature-item">👕 T-shirt & merch design</div>
-                        <div class="feature-item">💻 Basic website setup</div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Graphic design</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Social media management</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Content writing/blogging</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Photography services</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Videography for events</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Logo design</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Resume writing</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Voiceover work</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>T-shirt & merch design</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Basic website setup (Wix/Shopify)</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-pricing">
-                    <span class="price-from">Starting from</span>
-                    <span class="price-amount">$85</span>
+                <div class="service-card-footer">
+                    <div class="pricing-info">Starting at $85/project</div>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
                 </div>
-                
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
             </div>
             
             <!-- Coaching & Consulting -->
             <div class="service-card-enhanced coaching-service">
                 <div class="service-card-header">
-                    <div class="service-icon-large">�</div>
+                    <div class="service-icon-large">🎓</div>
                     <h3 class="service-title">Coaching & Consulting</h3>
                     <p class="service-subtitle">Personal & professional development</p>
                 </div>
@@ -250,23 +394,45 @@ get_header(); ?>
                         <span>Unlock your potential</span>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">🏢 Business coaching</div>
-                        <div class="feature-item">🌟 Life coaching</div>
-                        <div class="feature-item">📈 Marketing consulting</div>
-                        <div class="feature-item">📱 Social media consulting</div>
-                        <div class="feature-item">💕 Relationship coaching</div>
-                        <div class="feature-item">⏱️ Productivity/time management</div>
-                        <div class="feature-item">✅ Accountability coaching</div>
-                        <div class="feature-item">🎤 Confidence/public speaking</div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Business coaching</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Life coaching</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Marketing consulting</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Social media consulting</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Relationship coaching</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Productivity/time management coaching</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Accountability coaching</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Confidence or public speaking coaching</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-pricing">
-                    <span class="price-from">Starting from</span>
-                    <span class="price-amount">$125</span>
+                <div class="service-card-footer">
+                    <div class="pricing-info">Starting at $125/session</div>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
                 </div>
-                
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
             </div>
             
             <!-- Office & Admin Services -->
@@ -283,58 +449,96 @@ get_header(); ?>
                         <span>Streamline your operations</span>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">💻 Virtual assistant</div>
-                        <div class="feature-item">⌨️ Data entry</div>
-                        <div class="feature-item">📧 Email inbox management</div>
-                        <div class="feature-item">🎧 Transcription services</div>
-                        <div class="feature-item">🔍 Online research assistant</div>
-                        <div class="feature-item">📚 Bookkeeping</div>
-                        <div class="feature-item">🗂️ CRM/data organization setup</div>
-                        <div class="feature-item">☎️ Cold calling/appointment setting</div>
-                        <div class="feature-item">🎧 Customer service outsourcing</div>
-                        <div class="feature-item">📦 Print-on-demand order management</div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Virtual assistant</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Data entry</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Email inbox management</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Transcription services</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Online research assistant</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Bookkeeping</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>CRM/data organization setup</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Cold calling or appointment setting</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Customer service outsourcing</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Print-on-demand order management</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-pricing">
-                    <span class="price-from">Starting from</span>
-                    <span class="price-amount">$45</span>
+                <div class="service-card-footer">
+                    <div class="pricing-info">Starting at $45/hour</div>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
                 </div>
-                
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
             </div>
             
-            <!-- Party Rental Setup -->
-            <div class="service-card-enhanced rental-service">
+            <!-- Selling, Flipping & Setup -->
+            <div class="service-card-enhanced setup-service">
                 <div class="service-card-header">
-                    <div class="service-icon-large">🎪</div>
-                    <h3 class="service-title">Party Rental & Setup</h3>
-                    <p class="service-subtitle">Complete event rental solutions</p>
+                    <div class="service-icon-large">📦</div>
+                    <h3 class="service-title">Selling, Flipping & Setup</h3>
+                    <p class="service-subtitle">Business setup and selling solutions</p>
                 </div>
                 
                 <div class="service-features">
                     <div class="feature-highlight">
-                        <span class="feature-icon">🎉</span>
-                        <span>Unforgettable celebrations</span>
+                        <span class="feature-icon">💰</span>
+                        <span>Maximize your profits</span>
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">🪑 Furniture flipping</div>
-                        <div class="feature-item">🛒 Product sourcing</div>
-                        <div class="feature-item">💰 eBay/Amazon seller services</div>
-                        <div class="feature-item">🏢 Home office setup</div>
-                        <div class="feature-item">🎮 Gaming setup installer</div>
-                        <div class="feature-item">🎪 Party rental setup</div>
-                        <div class="feature-item">🏰 Bounce house setup</div>
-                        <div class="feature-item">🪑 Tables & chairs rental</div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Furniture flipping</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Product sourcing for others</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Drop-off eBay/Amazon seller services</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Home office or gaming setup installer</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="check-icon">✓</span>
+                            <span>Party rental setup (tables, chairs, bounce houses)</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-pricing">
-                    <span class="price-from">Starting from</span>
-                    <span class="price-amount">$150</span>
+                <div class="service-card-footer">
+                    <div class="pricing-info">Starting at $150/project</div>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
                 </div>
-                
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-btn">Get Quote</a>
             </div>
         </div>
     </div>
@@ -353,48 +557,40 @@ get_header(); ?>
             <div class="process-step">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h4>📞 Consultation</h4>
-                    <p>Tell us about your vision and we'll help you plan the perfect setup</p>
+                    <h4>📞 Contact Us</h4>
+                    <p>Reach out via phone, email, or our online form to discuss your needs</p>
                 </div>
             </div>
             
             <div class="process-step">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h4>💰 Custom Quote</h4>
-                    <p>Receive a detailed quote tailored to your specific needs and budget</p>
+                    <h4>💰 Get Quote</h4>
+                    <p>Receive a detailed quote tailored to your specific requirements</p>
                 </div>
             </div>
             
             <div class="process-step">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h4>📅 Schedule</h4>
-                    <p>Book your date and we'll handle all the logistics and coordination</p>
+                    <h4>📅 Schedule Service</h4>
+                    <p>Book your preferred date and time - flexible scheduling available</p>
                 </div>
             </div>
             
             <div class="process-step">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h4>🚚 Delivery & Setup</h4>
-                    <p>Our team arrives early to set up everything perfectly for your event</p>
+                    <h4>✅ Service Delivery</h4>
+                    <p>Our professional team arrives on time and completes the work efficiently</p>
                 </div>
             </div>
             
             <div class="process-step">
                 <div class="step-number">5</div>
                 <div class="step-content">
-                    <h4>🎉 Enjoy Your Event</h4>
-                    <p>Relax and enjoy while we handle everything behind the scenes</p>
-                </div>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">6</div>
-                <div class="step-content">
-                    <h4>🧹 Cleanup</h4>
-                    <p>We return to pack up everything, leaving your venue spotless</p>
+                    <h4>😊 Satisfaction Guaranteed</h4>
+                    <p>We ensure you're completely satisfied with our service quality</p>
                 </div>
             </div>
         </div>
@@ -408,87 +604,45 @@ get_header(); ?>
             <div class="why-choose-text">
                 <div class="section-badge">🌟 Why Choose Us</div>
                 <h2 class="section-title-fancy">What Makes Us <span class="gradient-text">Different</span></h2>
-                <p class="section-subtitle-fancy">We go above and beyond to ensure your event is perfect</p>
+                <p class="section-subtitle-fancy">We go above and beyond to ensure your satisfaction</p>
             </div>
             
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <div class="benefit-icon">🛡️</div>
-                    <h4>Fully Insured</h4>
-                    <p>Complete liability coverage for your peace of mind</p>
+                    <h4>Licensed & Insured</h4>
+                    <p>Complete coverage and professional licensing for your peace of mind</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <div class="benefit-icon">🚚</div>
-                    <h4>Free Delivery</h4>
-                    <p>No hidden fees - delivery and setup included</p>
+                    <div class="benefit-icon">🔍</div>
+                    <h4>Background Checked</h4>
+                    <p>All team members undergo thorough background verification</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <div class="benefit-icon">🧹</div>
-                    <h4>Complete Cleanup</h4>
-                    <p>We handle all breakdown and cleanup services</p>
+                    <div class="benefit-icon">⭐</div>
+                    <h4>5-Star Service</h4>
+                    <p>Consistently rated excellent by our satisfied customers</p>
                 </div>
                 
                 <div class="benefit-card">
                     <div class="benefit-icon">📞</div>
                     <h4>24/7 Support</h4>
-                    <p>Emergency support hotline during your event</p>
+                    <p>Customer support available whenever you need assistance</p>
                 </div>
                 
                 <div class="benefit-card">
                     <div class="benefit-icon">💯</div>
-                    <h4>Quality Guarantee</h4>
-                    <p>Premium equipment maintained to highest standards</p>
+                    <h4>Satisfaction Guarantee</h4>
+                    <p>100% satisfaction guaranteed or we'll make it right</p>
                 </div>
                 
                 <div class="benefit-card">
                     <div class="benefit-icon">⚡</div>
                     <h4>Quick Response</h4>
-                    <p>Fast quotes and flexible scheduling options</p>
+                    <p>Fast quotes and flexible scheduling to meet your needs</p>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Service Areas Section -->
-<section class="service-areas-section">
-    <div class="container">
-        <div class="service-areas-content">
-            <div class="areas-header">
-                <h2>📍 Service Areas</h2>
-                <p>We proudly serve the following areas with free delivery and setup</p>
-            </div>
-            
-            <div class="areas-grid">
-                <div class="area-item">
-                    <div class="area-icon">🏙️</div>
-                    <h4>Downtown Metro</h4>
-                    <p>Full service area</p>
-                </div>
-                
-                <div class="area-item">
-                    <div class="area-icon">🏘️</div>
-                    <h4>Suburban Districts</h4>
-                    <p>Complete coverage</p>
-                </div>
-                
-                <div class="area-item">
-                    <div class="area-icon">🌲</div>
-                    <h4>Rural Venues</h4>
-                    <p>Extended delivery available</p>
-                </div>
-                
-                <div class="area-item">
-                    <div class="area-icon">🏖️</div>
-                    <h4>Waterfront Locations</h4>
-                    <p>Specialized setup team</p>
-                </div>
-            </div>
-            
-            <div class="areas-note">
-                <p><strong>Service Radius:</strong> We deliver within 50 miles of our location. Extended delivery available for additional fee.</p>
             </div>
         </div>
     </div>
@@ -498,15 +652,22 @@ get_header(); ?>
 <section class="services-cta-section">
     <div class="container">
         <div class="cta-content">
-            <h2>Ready to Start Planning Your <span class="gradient-text">Perfect Event?</span></h2>
-            <p>Contact us today for a free consultation and customized quote</p>
+            <h2>Ready to Get <span class="gradient-text">Started?</span></h2>
+            <p>Contact us today for a free consultation and customized quote for any of our services</p>
             <div class="cta-buttons">
                 <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="cta-btn primary">
                     <span>Get Free Quote</span>
                     <div class="btn-glow"></div>
                 </a>
-                <a href="tel:+15551234567" class="cta-btn secondary">
-                    <span>Call (555) 123-4567</span>
+                <a href="tel:+1234567890" class="cta-btn secondary">
+                    <span>📞 Call (123) 456-7890</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php get_footer(); ?>
                 </a>
             </div>
         </div>
