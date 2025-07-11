@@ -1,578 +1,116 @@
 <?php get_header(); ?>
 
 <!-- Hero Section -->
-<section class="hero-section-ultra">
-    <div class="hero-animated-bg">
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-        </div>
-    </div>
-    <div class="hero-overlay-gradient"></div>
-    <div class="hero-particles-advanced"></div>
-    
-    <div class="hero-content-ultra">
-        <div class="hero-badge-premium">
-            <span class="badge-icon">💼</span>
-            <span class="badge-text">Business Blueprints</span>
-            <div class="badge-glow"></div>
-        </div>
-        
-        <h1 class="hero-title-ultra">
-            <span class="title-line-1">75 Proven</span>
-            <span class="title-line-2 gradient-text-animated">Business Blueprints</span>
-            <div class="title-underline"></div>
-        </h1>
-        
-        <p class="hero-subtitle-ultra">
-            Discover profitable business opportunities with detailed startup guides, 
-            cost analysis, and step-by-step implementation plans for each blueprint.
-        </p>
-        
-        <div class="hero-stats-ultra">
-            <div class="stat-card">
-                <div class="stat-icon">📊</div>
-                <div class="stat-number" data-target="75">0</div>
+<section class="hero-section-advanced">
+    <div class="hero-overlay"></div>
+    <div class="hero-particles"></div>
+    <div class="hero-content">
+        <div class="hero-badge">💼 Business Blueprints</div>
+        <h1 class="hero-title-fancy">75 Proven <span class="gradient-text">Business Blueprints</span></h1>
+        <p class="hero-subtitle-fancy">Discover profitable business opportunities with detailed startup guides, cost analysis, and step-by-step implementation plans for each blueprint.</p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number">75</div>
                 <div class="stat-label">Business Blueprints</div>
-                <div class="stat-glow"></div>
             </div>
-            <div class="stat-card">
-                <div class="stat-icon">💰</div>
+            <div class="stat-item">
                 <div class="stat-number">$1K-50K</div>
                 <div class="stat-label">Startup Range</div>
-                <div class="stat-glow"></div>
             </div>
-            <div class="stat-card">
-                <div class="stat-icon">✅</div>
-                <div class="stat-number" data-target="100">0</div>
-                <div class="stat-label">Success Rate</div>
-                <div class="stat-glow"></div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Detailed Analysis</div>
             </div>
         </div>
-        
-        <div class="hero-buttons-ultra">
-            <a href="#blueprints" class="btn-primary-ultra">
-                <span class="btn-content">
-                    <span class="btn-text">Explore Blueprints</span>
-                    <span class="btn-icon">→</span>
-                </span>
-                <div class="btn-particles"></div>
-                <div class="btn-shine-effect"></div>
+        <div class="hero-buttons">
+            <a href="#blueprints" class="btn-primary-fancy">
+                <span>Explore Blueprints</span>
+                <i class="arrow-right">→</i>
             </a>
-            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-secondary-ultra">
-                <span class="btn-content">
-                    <span class="btn-icon">📞</span>
-                    <span class="btn-text">Get Started</span>
-                </span>
-                <div class="btn-ripple"></div>
+            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-secondary-fancy">
+                <span>Get Started</span>
+                <i class="phone-icon">📞</i>
             </a>
         </div>
-        
-        <!-- Social Proof -->
-        <div class="hero-social-proof">
-            <div class="proof-avatars">
-                <div class="avatar avatar-1"></div>
-                <div class="avatar avatar-2"></div>
-                <div class="avatar avatar-3"></div>
-                <div class="avatar avatar-4"></div>
-                <div class="avatar-more">+150</div>
-            </div>
-            <div class="proof-text">
-                <span class="proof-number">1,000+</span> entrepreneurs already started their journey
-            </div>
-        </div>
     </div>
-    
-    <!-- Floating Elements -->
-    <div class="hero-floating-elements">
-        <div class="floating-card-ultra card-1">
-            <div class="card-icon">💡</div>
-            <div class="card-text">Innovative</div>
-            <div class="card-pulse"></div>
-        </div>
-        <div class="floating-card-ultra card-2">
-            <div class="card-icon">📈</div>
-            <div class="card-text">Profitable</div>
-            <div class="card-pulse"></div>
-        </div>
-        <div class="floating-card-ultra card-3">
-            <div class="card-icon">🚀</div>
-            <div class="card-text">Scalable</div>
-            <div class="card-pulse"></div>
-        </div>
-        <div class="floating-card-ultra card-4">
-            <div class="card-icon">💰</div>
-            <div class="card-text">Low-Cost</div>
-            <div class="card-pulse"></div>
-        </div>
-    </div>
-    
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator">
-        <div class="scroll-text">Scroll to explore</div>
-        <div class="scroll-arrow">
-            <div class="arrow-line"></div>
-            <div class="arrow-head"></div>
-        </div>
+    <div class="hero-image">
+        <div class="floating-card card-1">💡 Innovative</div>
+        <div class="floating-card card-2">📈 Profitable</div>
+        <div class="floating-card card-3">🚀 Scalable</div>
+        <div class="floating-card card-4">💰 Low-Cost</div>
     </div>
 </section>
 
 <!-- Featured Business Categories -->
-<section class="services-section-ultra" id="blueprints">
-    <div class="section-bg-pattern"></div>
+<section class="services-section-fancy" id="blueprints">
     <div class="container">
-        <div class="section-header-ultra">
-            <div class="section-badge-premium">
-                <span class="badge-icon">🎯</span>
-                <span class="badge-text">Business Categories</span>
-                <div class="badge-shine"></div>
-            </div>
-            <h2 class="section-title-ultra">
-                Explore <span class="gradient-text-dynamic">Business Blueprint</span> Categories
-            </h2>
-            <p class="section-subtitle-ultra">
-                Discover 75+ profitable business opportunities across 9 major categories with detailed startup guides, 
-                profit analysis, and step-by-step implementation plans
-            </p>
-            <div class="section-stats">
-                <div class="stat-item">
-                    <span class="stat-number">75+</span>
-                    <span class="stat-label">Blueprints</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">9</span>
-                    <span class="stat-label">Categories</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">$500+</span>
-                    <span class="stat-label">Starting From</span>
-                </div>
-            </div>
+        <div class="section-header-fancy">
+            <div class="section-badge">Our Categories</div>
+            <h2 class="section-title-fancy">Business <span class="gradient-text">Blueprint Categories</span></h2>
+            <p class="section-subtitle-fancy">Explore profitable business opportunities across diverse industries and investment levels</p>
         </div>
         
-        <div class="blueprints-grid-ultra">
-            <!-- Home & Cleaning Services -->
-            <div class="blueprint-category-card-ultra" data-category="cleaning">
-                <div class="card-glow-effect"></div>
-                <div class="card-content">
-                    <div class="category-header">
-                        <div class="category-icon-ultra">🧹</div>
-                        <div class="category-badge">High Demand</div>
-                    </div>
-                    <h3 class="category-title">Home & Cleaning Services</h3>
-                    <p class="category-description">Recurring revenue businesses with excellent profit margins and steady demand</p>
-                    
-                    <div class="category-metrics">
-                        <div class="metric-row">
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-value">10 Blueprints</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">💰</span>
-                                <span class="metric-value">$500 - $5K</span>
-                            </div>
-                        </div>
-                        <div class="profit-potential">
-                            <span class="profit-label">Monthly Profit:</span>
-                            <span class="profit-value">$3,000 - $15,000</span>
-                        </div>
-                    </div>
-                    
-                    <div class="services-preview">
-                        <div class="service-tag">House Cleaning</div>
-                        <div class="service-tag">Pressure Washing</div>
-                        <div class="service-tag">Window Cleaning</div>
-                        <div class="service-tag-more">+7 more</div>
-                    </div>
-                    
-                    <a href="#cleaning-services" class="category-btn-ultra">
-                        <span class="btn-text">Explore Services</span>
-                        <span class="btn-icon">→</span>
-                        <div class="btn-hover-effect"></div>
-                    </a>
-                </div>
-                <div class="card-border-glow"></div>
+        <div class="blueprints-grid">
+            <!-- Online & Digital Businesses -->
+            <div class="blueprint-category-card">
+                <div class="category-icon">💻</div>
+                <h3>Online & Digital</h3>
+                <p>Low-cost, high-scalability digital business models</p>
+                <div class="blueprint-count">15 Blueprints</div>
+                <div class="startup-range">$500 - $5,000</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('online-digital-blueprints'))); ?>" class="category-btn">View Blueprints</a>
             </div>
             
-            <!-- Home & Property Maintenance -->
-            <div class="blueprint-category-card-ultra featured" data-category="maintenance">
-                <div class="popular-badge-ultra">
-                    <span class="badge-icon">🔥</span>
-                    <span class="badge-text">Most Popular</span>
-                </div>
-                <div class="card-glow-effect"></div>
-                <div class="card-content">
-                    <div class="category-header">
-                        <div class="category-icon-ultra">🧰</div>
-                        <div class="category-badge premium">Premium Skills</div>
-                    </div>
-                    <h3 class="category-title">Home & Property Maintenance</h3>
-                    <p class="category-description">Skill-based services with immediate income potential and repeat customers</p>
-                    
-                    <div class="category-metrics">
-                        <div class="metric-row">
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-value">10 Blueprints</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">💰</span>
-                                <span class="metric-value">$1K - $8K</span>
-                            </div>
-                        </div>
-                        <div class="profit-potential">
-                            <span class="profit-label">Monthly Profit:</span>
-                            <span class="profit-value">$4,000 - $20,000</span>
-                        </div>
-                    </div>
-                    
-                    <div class="services-preview">
-                        <div class="service-tag">Handyman Services</div>
-                        <div class="service-tag">TV Mounting</div>
-                        <div class="service-tag">Furniture Assembly</div>
-                        <div class="service-tag-more">+7 more</div>
-                    </div>
-                    
-                    <a href="#maintenance-services" class="category-btn-ultra">
-                        <span class="btn-text">Explore Services</span>
-                        <span class="btn-icon">→</span>
-                        <div class="btn-hover-effect"></div>
-                    </a>
-                </div>
-                <div class="card-border-glow"></div>
+            <!-- Service-Based Businesses -->
+            <div class="blueprint-category-card featured">
+                <div class="popular-badge">Most Popular</div>
+                <div class="category-icon">🛠️</div>
+                <h3>Service-Based</h3>
+                <p>Skill-based businesses with immediate income potential</p>
+                <div class="blueprint-count">20 Blueprints</div>
+                <div class="startup-range">$1,000 - $10,000</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('service-based-blueprints'))); ?>" class="category-btn">View Blueprints</a>
             </div>
             
-            <!-- Personal Errands & Concierge -->
-            <div class="blueprint-category-card-ultra" data-category="errands">
-                <div class="card-glow-effect"></div>
-                <div class="card-content">
-                    <div class="category-header">
-                        <div class="category-icon-ultra">🛍️</div>
-                        <div class="category-badge">Flexible</div>
-                    </div>
-                    <h3 class="category-title">Personal Errands & Concierge</h3>
-                    <p class="category-description">Flexible service business perfect for part-time or full-time income</p>
-                    
-                    <div class="category-metrics">
-                        <div class="metric-row">
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-value">10 Blueprints</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">💰</span>
-                                <span class="metric-value">$300 - $2K</span>
-                            </div>
-                        </div>
-                        <div class="profit-potential">
-                            <span class="profit-label">Monthly Profit:</span>
-                            <span class="profit-value">$2,000 - $8,000</span>
-                        </div>
-                    </div>
-                    
-                    <div class="services-preview">
-                        <div class="service-tag">Grocery Shopping</div>
-                        <div class="service-tag">Personal Assistant</div>
-                        <div class="service-tag">Moving Assistance</div>
-                        <div class="service-tag-more">+7 more</div>
-                    </div>
-                    
-                    <a href="#errands-services" class="category-btn-ultra">
-                        <span class="btn-text">Explore Services</span>
-                        <span class="btn-icon">→</span>
-                        <div class="btn-hover-effect"></div>
-                    </a>
-                </div>
-                <div class="card-border-glow"></div>
+            <!-- E-commerce & Retail -->
+            <div class="blueprint-category-card">
+                <div class="category-icon">🛒</div>
+                <h3>E-commerce & Retail</h3>
+                <p>Product-based businesses for the digital marketplace</p>
+                <div class="blueprint-count">12 Blueprints</div>
+                <div class="startup-range">$2,000 - $15,000</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('ecommerce-retail-blueprints'))); ?>" class="category-btn">View Blueprints</a>
             </div>
             
-            <!-- Pet & Animal Services -->
-            <div class="blueprint-category-card-ultra" data-category="pet">
-                <div class="card-glow-effect"></div>
-                <div class="card-content">
-                    <div class="category-header">
-                        <div class="category-icon-ultra">🐶</div>
-                        <div class="category-badge">Growing Market</div>
-                    </div>
-                    <h3 class="category-title">Pet & Animal Services</h3>
-                    <p class="category-description">Rapidly growing industry with passionate customer base and loyalty</p>
-                    
-                    <div class="category-metrics">
-                        <div class="metric-row">
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-value">7 Blueprints</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">💰</span>
-                                <span class="metric-value">$500 - $3K</span>
-                            </div>
-                        </div>
-                        <div class="profit-potential">
-                            <span class="profit-label">Monthly Profit:</span>
-                            <span class="profit-value">$2,500 - $12,000</span>
-                        </div>
-                    </div>
-                    
-                    <div class="services-preview">
-                        <div class="service-tag">Dog Walking</div>
-                        <div class="service-tag">Pet Sitting</div>
-                        <div class="service-tag">Mobile Grooming</div>
-                        <div class="service-tag-more">+4 more</div>
-                    </div>
-                    
-                    <a href="#pet-services" class="category-btn-ultra">
-                        <span class="btn-text">Explore Services</span>
-                        <span class="btn-icon">→</span>
-                        <div class="btn-hover-effect"></div>
-                    </a>
-                </div>
-                <div class="card-border-glow"></div>
+            <!-- Food & Beverage -->
+            <div class="blueprint-category-card">
+                <div class="category-icon">🍕</div>
+                <h3>Food & Beverage</h3>
+                <p>Culinary businesses from food trucks to specialty products</p>
+                <div class="blueprint-count">10 Blueprints</div>
+                <div class="startup-range">$5,000 - $25,000</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('food-beverage-blueprints'))); ?>" class="category-btn">View Blueprints</a>
             </div>
             
-            <!-- Child & Family Support -->
-            <div class="blueprint-category-card-ultra" data-category="family">
-                <div class="card-glow-effect"></div>
-                <div class="card-content">
-                    <div class="category-header">
-                        <div class="category-icon-ultra">👶</div>
-                        <div class="category-badge">Essential</div>
-                    </div>
-                    <h3 class="category-title">Child & Family Support</h3>
-                    <p class="category-description">Essential services for busy families with reliable recurring income</p>
-                    
-                    <div class="category-metrics">
-                        <div class="metric-row">
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-value">5 Blueprints</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">💰</span>
-                                <span class="metric-value">$200 - $1K</span>
-                            </div>
-                        </div>
-                        <div class="profit-potential">
-                            <span class="profit-label">Monthly Profit:</span>
-                            <span class="profit-value">$1,500 - $6,000</span>
-                        </div>
-                    </div>
-                    
-                    <div class="services-preview">
-                        <div class="service-tag">Babysitting</div>
-                        <div class="service-tag">Parent Helper</div>
-                        <div class="service-tag">Party Setup</div>
-                        <div class="service-tag-more">+2 more</div>
-                    </div>
-                    
-                    <a href="#family-services" class="category-btn-ultra">
-                        <span class="btn-text">Explore Services</span>
-                        <span class="btn-icon">→</span>
-                        <div class="btn-hover-effect"></div>
-                    </a>
-                </div>
-                <div class="card-border-glow"></div>
+            <!-- Health & Wellness -->
+            <div class="blueprint-category-card">
+                <div class="category-icon">🧘</div>
+                <h3>Health & Wellness</h3>
+                <p>Growing industry with diverse business opportunities</p>
+                <div class="blueprint-count">8 Blueprints</div>
+                <div class="startup-range">$3,000 - $20,000</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('health-wellness-blueprints'))); ?>" class="category-btn">View Blueprints</a>
             </div>
             
-            <!-- Creative & Digital Services -->
-            <div class="blueprint-category-card-ultra" data-category="creative">
-                <div class="card-glow-effect"></div>
-                <div class="card-content">
-                    <div class="category-header">
-                        <div class="category-icon-ultra">🎨</div>
-                        <div class="category-badge">High Value</div>
-                    </div>
-                    <h3 class="category-title">Creative & Digital Services</h3>
-                    <p class="category-description">High-value creative services with global client potential</p>
-                    
-                    <div class="category-metrics">
-                        <div class="metric-row">
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-value">10 Blueprints</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">💰</span>
-                                <span class="metric-value">$500 - $5K</span>
-                            </div>
-                        </div>
-                        <div class="profit-potential">
-                            <span class="profit-label">Monthly Profit:</span>
-                            <span class="profit-value">$3,000 - $25,000</span>
-                        </div>
-                    </div>
-                    
-                    <div class="services-preview">
-                        <div class="service-tag">Graphic Design</div>
-                        <div class="service-tag">Social Media</div>
-                        <div class="service-tag">Photography</div>
-                        <div class="service-tag-more">+7 more</div>
-                    </div>
-                    
-                    <a href="#creative-services" class="category-btn-ultra">
-                        <span class="btn-text">Explore Services</span>
-                        <span class="btn-icon">→</span>
-                        <div class="btn-hover-effect"></div>
-                    </a>
-                </div>
-                <div class="card-border-glow"></div>
+            <!-- Creative & Entertainment -->
+            <div class="blueprint-category-card">
+                <div class="category-icon">🎨</div>
+                <h3>Creative & Entertainment</h3>
+                <p>Turn your creativity into a profitable business venture</p>
+                <div class="blueprint-count">10 Blueprints</div>
+                <div class="startup-range">$1,500 - $12,000</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('creative-entertainment-blueprints'))); ?>" class="category-btn">View Blueprints</a>
             </div>
-            
-            <!-- Coaching & Consulting -->
-            <div class="blueprint-category-card-ultra" data-category="coaching">
-                <div class="card-glow-effect"></div>
-                <div class="card-content">
-                    <div class="category-header">
-                        <div class="category-icon-ultra">🎓</div>
-                        <div class="category-badge">Knowledge Based</div>
-                    </div>
-                    <h3 class="category-title">Coaching & Consulting</h3>
-                    <p class="category-description">Leverage your expertise to help others and build a knowledge-based business</p>
-                    
-                    <div class="category-metrics">
-                        <div class="metric-row">
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-value">7 Blueprints</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">💰</span>
-                                <span class="metric-value">$300 - $2K</span>
-                            </div>
-                        </div>
-                        <div class="profit-potential">
-                            <span class="profit-label">Monthly Profit:</span>
-                            <span class="profit-value">$5,000 - $30,000</span>
-                        </div>
-                    </div>
-                    
-                    <div class="services-preview">
-                        <div class="service-tag">Business Coaching</div>
-                        <div class="service-tag">Life Coaching</div>
-                        <div class="service-tag">Marketing Consulting</div>
-                        <div class="service-tag-more">+4 more</div>
-                    </div>
-                    
-                    <a href="#coaching-services" class="category-btn-ultra">
-                        <span class="btn-text">Explore Services</span>
-                        <span class="btn-icon">→</span>
-                        <div class="btn-hover-effect"></div>
-                    </a>
-                </div>
-                <div class="card-border-glow"></div>
-            </div>
-            
-            <!-- Office & Admin Services -->
-            <div class="blueprint-category-card-ultra" data-category="office">
-                <div class="card-glow-effect"></div>
-                <div class="card-content">
-                    <div class="category-header">
-                        <div class="category-icon-ultra">💼</div>
-                        <div class="category-badge">Remote Friendly</div>
-                    </div>
-                    <h3 class="category-title">Office & Admin Services</h3>
-                    <p class="category-description">Location-independent services perfect for remote work lifestyle</p>
-                    
-                    <div class="category-metrics">
-                        <div class="metric-row">
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-value">10 Blueprints</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">💰</span>
-                                <span class="metric-value">$500 - $3K</span>
-                            </div>
-                        </div>
-                        <div class="profit-potential">
-                            <span class="profit-label">Monthly Profit:</span>
-                            <span class="profit-value">$2,500 - $15,000</span>
-                        </div>
-                    </div>
-                    
-                    <div class="services-preview">
-                        <div class="service-tag">Virtual Assistant</div>
-                        <div class="service-tag">Data Entry</div>
-                        <div class="service-tag">Bookkeeping</div>
-                        <div class="service-tag-more">+7 more</div>
-                    </div>
-                    
-                    <a href="#office-services" class="category-btn-ultra">
-                        <span class="btn-text">Explore Services</span>
-                        <span class="btn-icon">→</span>
-                        <div class="btn-hover-effect"></div>
-                    </a>
-                </div>
-                <div class="card-border-glow"></div>
-            </div>
-            
-            <!-- Selling, Flipping & Setup -->
-            <div class="blueprint-category-card-ultra" data-category="selling">
-                <div class="card-glow-effect"></div>
-                <div class="card-content">
-                    <div class="category-header">
-                        <div class="category-icon-ultra">📦</div>
-                        <div class="category-badge">Scalable</div>
-                    </div>
-                    <h3 class="category-title">Selling, Flipping & Setup</h3>
-                    <p class="category-description">Product and setup-based businesses with excellent scalability potential</p>
-                    
-                    <div class="category-metrics">
-                        <div class="metric-row">
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-value">6 Blueprints</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">💰</span>
-                                <span class="metric-value">$1K - $10K</span>
-                            </div>
-                        </div>
-                        <div class="profit-potential">
-                            <span class="profit-label">Monthly Profit:</span>
-                            <span class="profit-value">$3,000 - $20,000</span>
-                        </div>
-                    </div>
-                    
-                    <div class="services-preview">
-                        <div class="service-tag">Furniture Flipping</div>
-                        <div class="service-tag">eBay Selling</div>
-                        <div class="service-tag">Setup Services</div>
-                        <div class="service-tag-more">+3 more</div>
-                    </div>
-                    
-                    <a href="#selling-services" class="category-btn-ultra">
-                        <span class="btn-text">Explore Services</span>
-                        <span class="btn-icon">→</span>
-                        <div class="btn-hover-effect"></div>
-                    </a>
-                </div>
-                <div class="card-border-glow"></div>
-            </div>
-        </div>
-        
-        <!-- Category Filter Tabs -->
-        <div class="category-filter-tabs">
-            <button class="filter-tab active" data-filter="all">
-                <span class="tab-icon">🌟</span>
-                <span class="tab-text">All Categories</span>
-            </button>
-            <button class="filter-tab" data-filter="low-cost">
-                <span class="tab-icon">💰</span>
-                <span class="tab-text">Low Startup Cost</span>
-            </button>
-            <button class="filter-tab" data-filter="high-profit">
-                <span class="tab-icon">📈</span>
-                <span class="tab-text">High Profit Potential</span>
-            </button>
-            <button class="filter-tab" data-filter="remote">
-                <span class="tab-icon">🌐</span>
-                <span class="tab-text">Remote Friendly</span>
-            </button>
         </div>
     </div>
 </section>
