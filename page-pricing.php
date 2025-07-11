@@ -4,7 +4,7 @@ Template Name: Pricing Page
 */
 get_header(); ?>
 
-<!-- Fancy Pricing Hero Section -->
+<!-- Pricing Hero Section -->
 <section class="pricing-hero-section">
     <div class="pricing-hero-bg"></div>
     <div class="container">
@@ -30,7 +30,7 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Enhanced Pricing Categories -->
+<!-- Service Categories Pricing -->
 <section class="pricing-showcase-section">
     <div class="container">
         <div class="pricing-category-tabs">
@@ -42,12 +42,102 @@ get_header(); ?>
             <button class="tab-btn" data-category="creative">🎨 Creative</button>
             <button class="tab-btn" data-category="coaching">🎓 Coaching</button>
             <button class="tab-btn" data-category="admin">💼 Admin</button>
-            <button class="tab-btn" data-category="rentals">🎪 Rentals</button>
+            <button class="tab-btn" data-category="selling">📦 Selling</button>
         </div>
 
         <!-- Cleaning Services Pricing -->
         <div class="pricing-category-content active" id="cleaning">
             <div class="category-header">
+                <h2>🧹 Home & Cleaning Services</h2>
+                <p>Professional cleaning solutions for every need</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>House Cleaning</h3>
+                        <div class="price">$75-150</div>
+                        <div class="price-unit">per visit</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Regular or deep cleaning</li>
+                        <li>All rooms included</li>
+                        <li>Eco-friendly products</li>
+                        <li>Flexible scheduling</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Move-in/Move-out</h3>
+                        <div class="price">$200-400</div>
+                        <div class="price-unit">per home</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Complete deep cleaning</li>
+                        <li>Inside appliances</li>
+                        <li>Windows & baseboards</li>
+                        <li>Same-day service available</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Pressure Washing</h3>
+                        <div class="price">$100-300</div>
+                        <div class="price-unit">per service</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Driveways & walkways</li>
+                        <li>Deck & patio cleaning</li>
+                        <li>Siding & exterior walls</li>
+                        <li>Professional equipment</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Window Cleaning</h3>
+                        <div class="price">$8-15</div>
+                        <div class="price-unit">per window</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Interior & exterior</li>
+                        <li>Screen cleaning included</li>
+                        <li>Streak-free guarantee</li>
+                        <li>Monthly packages available</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Airbnb Cleaning</h3>
+                        <div class="price">$85-180</div>
+                        <div class="price-unit">per turnover</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Fast turnaround</li>
+                        <li>Inventory checking</li>
+                        <li>Restocking essentials</li>
+                        <li>Quality photos</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Lawn Maintenance</h3>
+                        <div class="price">$45-85</div>
+                        <div class="price-unit">per visit</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Mowing & edging</li>
+                        <li>Trimming & cleanup</li>
+                        <li>Seasonal scheduling</li>
+                        <li>Equipment included</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
                 <h2>🧹 Home & Cleaning Services</h2>
                 <p>Professional cleaning solutions for your home and property</p>
             </div>
@@ -150,534 +240,540 @@ get_header(); ?>
                 <h2>🧰 Home & Property Maintenance</h2>
                 <p>Expert handyman and maintenance services</p>
             </div>
+            
             <div class="pricing-grid">
-                <div class="pricing-card standard">
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Basic Handyman</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">65</span>
-                            <span class="period">/hour</span>
-                        </div>
+                        <h3>Furniture Assembly</h3>
+                        <div class="price">$65-120</div>
+                        <div class="price-unit">per hour</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Minor repairs</li>
-                        <li>✅ Light installation</li>
-                        <li>✅ Basic drywall patching</li>
-                        <li>✅ Furniture assembly</li>
-                        <li>✅ 2-hour minimum</li>
+                        <li>IKEA & other brands</li>
+                        <li>Professional tools</li>
+                        <li>Cleanup included</li>
+                        <li>Same-day service</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card premium">
-                    <div class="popularity-badge">Popular</div>
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>TV Mounting & Setup</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">125</span>
-                            <span class="period">/service</span>
-                        </div>
+                        <h3>TV Mounting</h3>
+                        <div class="price">$95-180</div>
+                        <div class="price-unit">per TV</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Professional wall mounting</li>
-                        <li>✅ Cable management</li>
-                        <li>✅ Device setup</li>
-                        <li>✅ Safety guaranteed</li>
-                        <li>✅ All hardware included</li>
+                        <li>Wall stud mounting</li>
+                        <li>Cable management</li>
+                        <li>All hardware included</li>
+                        <li>Safety guaranteed</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card enterprise">
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Fence Painting</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">15</span>
-                            <span class="period">/linear ft</span>
-                        </div>
+                        <h3>Handyman Services</h3>
+                        <div class="price">$75-95</div>
+                        <div class="price-unit">per hour</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Surface preparation</li>
-                        <li>✅ Premium paint included</li>
-                        <li>✅ 2-coat application</li>
-                        <li>✅ Cleanup included</li>
-                        <li>✅ 2-year warranty</li>
+                        <li>Minor repairs</li>
+                        <li>Drywall patching</li>
+                        <li>Fixture installation</li>
+                        <li>2-hour minimum</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Pool Cleaning</h3>
+                        <div class="price">$85-140</div>
+                        <div class="price-unit">per visit</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Chemical balancing</li>
+                        <li>Skimming & vacuuming</li>
+                        <li>Filter cleaning</li>
+                        <li>Weekly/bi-weekly</li>
+                    </ul>
                 </div>
             </div>
         </div>
-
+        
         <!-- Personal Services Pricing -->
         <div class="pricing-category-content" id="personal">
             <div class="category-header">
                 <h2>🛍️ Personal Errands & Concierge</h2>
-                <p>Your personal assistant for daily tasks</p>
+                <p>Personal assistant services for your convenience</p>
             </div>
+            
             <div class="pricing-grid">
-                <div class="pricing-card standard">
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Basic Errands</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">35</span>
-                            <span class="period">/hour</span>
-                        </div>
+                        <h3>Grocery Shopping</h3>
+                        <div class="price">$35-55</div>
+                        <div class="price-unit">per hour</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Grocery shopping</li>
-                        <li>✅ Prescription pickup</li>
-                        <li>✅ Basic deliveries</li>
-                        <li>✅ Waiting in line</li>
-                        <li>✅ 2-hour minimum</li>
+                        <li>Shopping & delivery</li>
+                        <li>Receipt & change</li>
+                        <li>Special requests</li>
+                        <li>Same-day service</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card premium">
-                    <div class="popularity-badge">Time Saver</div>
-                    <div class="pricing-header">
-                        <h3>Personal Assistant</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">45</span>
-                            <span class="period">/hour</span>
-                        </div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>✅ Everything in basic</li>
-                        <li>✅ Administrative tasks</li>
-                        <li>✅ Appointment scheduling</li>
-                        <li>✅ Research services</li>
-                        <li>✅ Priority booking</li>
-                    </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
-                </div>
-
-                <div class="pricing-card enterprise">
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Moving Assistance</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">85</span>
-                            <span class="period">/hour</span>
-                        </div>
+                        <div class="price">$45-65</div>
+                        <div class="price-unit">per hour</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Professional packing</li>
-                        <li>✅ Loading/unloading</li>
-                        <li>✅ Furniture protection</li>
-                        <li>✅ Unpacking service</li>
-                        <li>✅ 4-hour minimum</li>
+                        <li>Loading & unloading</li>
+                        <li>Packing services</li>
+                        <li>Furniture protection</li>
+                        <li>2-person minimum</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Personal Assistant</h3>
+                        <div class="price">$40-60</div>
+                        <div class="price-unit">per hour</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Errands & tasks</li>
+                        <li>Waiting services</li>
+                        <li>Courier delivery</li>
+                        <li>Custom requests</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Decluttering</h3>
+                        <div class="price">$50-80</div>
+                        <div class="price-unit">per hour</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Organization systems</li>
+                        <li>Donation coordination</li>
+                        <li>Storage solutions</li>
+                        <li>Room transformation</li>
+                    </ul>
                 </div>
             </div>
         </div>
-
+        
         <!-- Pet Services Pricing -->
         <div class="pricing-category-content" id="pets">
             <div class="category-header">
                 <h2>🐶 Pet & Animal Services</h2>
-                <p>Loving care for your furry friends</p>
+                <p>Loving care for your furry family members</p>
             </div>
+            
             <div class="pricing-grid">
-                <div class="pricing-card standard">
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Dog Walking</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">25</span>
-                            <span class="period">/walk</span>
-                        </div>
+                        <div class="price">$25-40</div>
+                        <div class="price-unit">per walk</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ 30-minute walks</li>
-                        <li>✅ GPS tracking</li>
-                        <li>✅ Photo updates</li>
-                        <li>✅ Fresh water</li>
-                        <li>✅ Insured walker</li>
+                        <li>30-60 minute walks</li>
+                        <li>Exercise & playtime</li>
+                        <li>Photo updates</li>
+                        <li>Flexible scheduling</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card premium">
-                    <div class="popularity-badge">Popular</div>
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Pet Sitting</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">45</span>
-                            <span class="period">/day</span>
-                        </div>
+                        <div class="price">$35-65</div>
+                        <div class="price-unit">per visit</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ In-home pet care</li>
-                        <li>✅ Feeding & medication</li>
-                        <li>✅ Playtime & walks</li>
-                        <li>✅ Daily photo updates</li>
-                        <li>✅ Emergency vet transport</li>
+                        <li>In-home care</li>
+                        <li>Feeding & medication</li>
+                        <li>Companionship</li>
+                        <li>Daily updates</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card enterprise">
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Mobile Pet Grooming</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">75</span>
-                            <span class="period">/session</span>
-                        </div>
+                        <h3>Pet Grooming</h3>
+                        <div class="price">$65-120</div>
+                        <div class="price-unit">per session</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Bath & brush-out</li>
-                        <li>✅ Nail trimming</li>
-                        <li>✅ Ear cleaning</li>
-                        <li>✅ Professional products</li>
-                        <li>✅ At your location</li>
+                        <li>Mobile service</li>
+                        <li>Bath & brush</li>
+                        <li>Nail trimming</li>
+                        <li>Basic styling</li>
+                    </ul>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Poop Scooping</h3>
+                        <div class="price">$20-35</div>
+                        <div class="price-unit">per visit</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Yard cleanup</li>
+                        <li>Waste disposal</li>
+                        <li>Weekly service</li>
+                        <li>Deodorizing option</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
             </div>
         </div>
-
+        
         <!-- Family Services Pricing -->
         <div class="pricing-category-content" id="family">
             <div class="category-header">
                 <h2>👶 Child & Family Support</h2>
-                <p>Helping families with childcare and organization</p>
+                <p>Trusted support for busy families</p>
             </div>
+            
             <div class="pricing-grid">
-                <div class="pricing-card standard">
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Mother's Helper</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">20</span>
-                            <span class="period">/hour</span>
-                        </div>
+                        <div class="price">$20-30</div>
+                        <div class="price-unit">per hour</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Child supervision</li>
-                        <li>✅ Light housework</li>
-                        <li>✅ Meal preparation</li>
-                        <li>✅ Activity assistance</li>
-                        <li>✅ 3-hour minimum</li>
+                        <li>Childcare assistance</li>
+                        <li>Light housework</li>
+                        <li>Meal preparation</li>
+                        <li>Flexible hours</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card premium">
-                    <div class="popularity-badge">Flexible</div>
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Babysitting</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">18</span>
-                            <span class="period">/hour</span>
-                        </div>
+                        <div class="price">$18-25</div>
+                        <div class="price-unit">per hour</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Responsible childcare</li>
-                        <li>✅ Age-appropriate activities</li>
-                        <li>✅ Bedtime routines</li>
-                        <li>✅ Emergency contact</li>
-                        <li>✅ Background checked</li>
+                        <li>Evening & weekend</li>
+                        <li>Background checked</li>
+                        <li>Activities included</li>
+                        <li>References available</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card enterprise">
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Party Setup & Hosting</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">125</span>
-                            <span class="period">/party</span>
-                        </div>
+                        <h3>Baby-Proofing</h3>
+                        <div class="price">$150-300</div>
+                        <div class="price-unit">per home</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Complete party setup</li>
-                        <li>✅ Activity coordination</li>
-                        <li>✅ Cleanup service</li>
-                        <li>✅ Up to 15 children</li>
-                        <li>✅ 4-hour service</li>
+                        <li>Safety assessment</li>
+                        <li>Cabinet locks</li>
+                        <li>Outlet covers</li>
+                        <li>Corner guards</li>
+                    </ul>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Party Setup</h3>
+                        <div class="price">$100-250</div>
+                        <div class="price-unit">per party</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Decoration setup</li>
+                        <li>Table arrangement</li>
+                        <li>Cleanup service</li>
+                        <li>Photo assistance</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
             </div>
         </div>
-
+        
         <!-- Creative Services Pricing -->
         <div class="pricing-category-content" id="creative">
             <div class="category-header">
                 <h2>🎨 Creative & Digital Services</h2>
-                <p>Professional design and digital solutions</p>
+                <p>Professional creative solutions for your business</p>
             </div>
+            
             <div class="pricing-grid">
-                <div class="pricing-card standard">
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Logo Design</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">85</span>
-                            <span class="period">/project</span>
-                        </div>
+                        <h3>Graphic Design</h3>
+                        <div class="price">$85-200</div>
+                        <div class="price-unit">per project</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ 3 design concepts</li>
-                        <li>✅ 2 revision rounds</li>
-                        <li>✅ High-res files</li>
-                        <li>✅ Web-ready formats</li>
-                        <li>✅ 5-day delivery</li>
+                        <li>Logo design</li>
+                        <li>Business cards</li>
+                        <li>Flyers & brochures</li>
+                        <li>2-3 revisions</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card premium">
-                    <div class="popularity-badge">Best Value</div>
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Social Media Management</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">350</span>
-                            <span class="period">/month</span>
-                        </div>
+                        <h3>Social Media</h3>
+                        <div class="price">$300-800</div>
+                        <div class="price-unit">per month</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ 12 posts per month</li>
-                        <li>✅ Content creation</li>
-                        <li>✅ Hashtag research</li>
-                        <li>✅ Analytics reporting</li>
-                        <li>✅ Community management</li>
+                        <li>Content creation</li>
+                        <li>Daily posting</li>
+                        <li>Engagement management</li>
+                        <li>Monthly analytics</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card enterprise">
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Photography</h3>
+                        <div class="price">$150-400</div>
+                        <div class="price-unit">per session</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Event photography</li>
+                        <li>Product photos</li>
+                        <li>Basic editing</li>
+                        <li>Digital delivery</li>
+                    </ul>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
+                </div>
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Website Setup</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">485</span>
-                            <span class="period">/project</span>
-                        </div>
+                        <div class="price">$400-1200</div>
+                        <div class="price-unit">per site</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Professional design</li>
-                        <li>✅ Mobile responsive</li>
-                        <li>✅ SEO optimization</li>
-                        <li>✅ Content upload</li>
-                        <li>✅ Training included</li>
+                        <li>Wix/Shopify build</li>
+                        <li>Mobile responsive</li>
+                        <li>Basic SEO setup</li>
+                        <li>Training included</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
             </div>
         </div>
-
+        
         <!-- Coaching Services Pricing -->
         <div class="pricing-category-content" id="coaching">
             <div class="category-header">
                 <h2>🎓 Coaching & Consulting</h2>
                 <p>Personal and professional development services</p>
             </div>
+            
             <div class="pricing-grid">
-                <div class="pricing-card standard">
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Life Coaching Session</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">125</span>
-                            <span class="period">/hour</span>
-                        </div>
+                        <h3>Life Coaching</h3>
+                        <div class="price">$125-200</div>
+                        <div class="price-unit">per session</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Goal setting strategies</li>
-                        <li>✅ Accountability support</li>
-                        <li>✅ Personal action plan</li>
-                        <li>✅ Progress tracking</li>
-                        <li>✅ Email follow-up</li>
+                        <li>1-hour sessions</li>
+                        <li>Goal setting</li>
+                        <li>Action planning</li>
+                        <li>Email support</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card premium">
-                    <div class="popularity-badge">Growth Package</div>
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Business Coaching</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">185</span>
-                            <span class="period">/hour</span>
-                        </div>
+                        <div class="price">$175-300</div>
+                        <div class="price-unit">per session</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Business strategy development</li>
-                        <li>✅ Marketing guidance</li>
-                        <li>✅ Financial planning</li>
-                        <li>✅ Resource recommendations</li>
-                        <li>✅ Monthly check-ins</li>
+                        <li>Strategy development</li>
+                        <li>Performance analysis</li>
+                        <li>Growth planning</li>
+                        <li>Resource materials</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card enterprise">
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Public Speaking Coaching</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">155</span>
-                            <span class="period">/session</span>
-                        </div>
+                        <h3>Marketing Consulting</h3>
+                        <div class="price">$150-250</div>
+                        <div class="price-unit">per hour</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Confidence building</li>
-                        <li>✅ Speech preparation</li>
-                        <li>✅ Presentation skills</li>
-                        <li>✅ Video practice reviews</li>
-                        <li>✅ 90-minute sessions</li>
+                        <li>Marketing strategy</li>
+                        <li>Campaign planning</li>
+                        <li>Analytics review</li>
+                        <li>Implementation guide</li>
+                    </ul>
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Productivity Coaching</h3>
+                        <div class="price">$100-175</div>
+                        <div class="price-unit">per session</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Time management</li>
+                        <li>System optimization</li>
+                        <li>Habit formation</li>
+                        <li>Progress tracking</li>
                     </ul>
                     <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
             </div>
         </div>
-
+        
         <!-- Admin Services Pricing -->
         <div class="pricing-category-content" id="admin">
             <div class="category-header">
                 <h2>💼 Office & Admin Services</h2>
-                <p>Professional administrative support for your business</p>
+                <p>Professional administrative support solutions</p>
             </div>
+            
             <div class="pricing-grid">
-                <div class="pricing-card standard">
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Virtual Assistant</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">45</span>
-                            <span class="period">/hour</span>
-                        </div>
+                        <div class="price">$25-45</div>
+                        <div class="price-unit">per hour</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Email management</li>
-                        <li>✅ Calendar scheduling</li>
-                        <li>✅ Data entry</li>
-                        <li>✅ Research tasks</li>
-                        <li>✅ 10-hour minimum</li>
+                        <li>Email management</li>
+                        <li>Calendar scheduling</li>
+                        <li>Data entry</li>
+                        <li>Research tasks</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card premium">
-                    <div class="popularity-badge">Business Growth</div>
-                    <div class="pricing-header">
-                        <h3>Customer Service</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">35</span>
-                            <span class="period">/hour</span>
-                        </div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>✅ Phone support</li>
-                        <li>✅ Email responses</li>
-                        <li>✅ Order processing</li>
-                        <li>✅ Issue resolution</li>
-                        <li>✅ 20-hour minimum</li>
-                    </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
-                </div>
-
-                <div class="pricing-card enterprise">
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Bookkeeping</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">65</span>
-                            <span class="period">/hour</span>
-                        </div>
+                        <div class="price">$35-65</div>
+                        <div class="price-unit">per hour</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Transaction recording</li>
-                        <li>✅ Financial reports</li>
-                        <li>✅ Expense tracking</li>
-                        <li>✅ QuickBooks setup</li>
-                        <li>✅ Monthly packages available</li>
+                        <li>Transaction recording</li>
+                        <li>Invoice creation</li>
+                        <li>Expense tracking</li>
+                        <li>Monthly reports</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Transcription</h3>
+                        <div class="price">$2-4</div>
+                        <div class="price-unit">per minute</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Audio to text</li>
+                        <li>Video transcription</li>
+                        <li>Fast turnaround</li>
+                        <li>Accurate results</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Customer Service</h3>
+                        <div class="price">$20-35</div>
+                        <div class="price-unit">per hour</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Phone support</li>
+                        <li>Email responses</li>
+                        <li>Chat management</li>
+                        <li>Issue resolution</li>
+                    </ul>
                 </div>
             </div>
         </div>
-
-        <!-- Rental Services Pricing -->
-        <div class="pricing-category-content" id="rentals">
+        
+        <!-- Selling Services Pricing -->
+        <div class="pricing-category-content" id="selling">
             <div class="category-header">
-                <h2>🎪 Party Rental & Setup</h2>
-                <p>Complete event rental solutions with professional setup</p>
+                <h2>📦 Selling, Flipping & Setup</h2>
+                <p>Business setup and selling solutions</p>
             </div>
+            
             <div class="pricing-grid">
-                <div class="pricing-card standard">
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Basic Party Package</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">275</span>
-                            <span class="period">/event</span>
-                        </div>
+                        <h3>Furniture Flipping</h3>
+                        <div class="price">$200-600</div>
+                        <div class="price-unit">per piece</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Tables & chairs (up to 25 people)</li>
-                        <li>✅ Basic sound system</li>
-                        <li>✅ Delivery & setup</li>
-                        <li>✅ Pickup & cleanup</li>
-                        <li>✅ 6-hour rental</li>
+                        <li>Sourcing & purchase</li>
+                        <li>Restoration work</li>
+                        <li>Photography & listing</li>
+                        <li>Revenue sharing</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card premium">
-                    <div class="popularity-badge">Most Popular</div>
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Premium Event Package</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">545</span>
-                            <span class="period">/event</span>
-                        </div>
+                        <h3>eBay/Amazon Selling</h3>
+                        <div class="price">20-30%</div>
+                        <div class="price-unit">commission</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Everything in basic package</li>
-                        <li>✅ Tent (20x20)</li>
-                        <li>✅ Lighting package</li>
-                        <li>✅ Dance floor</li>
-                        <li>✅ Premium sound system</li>
-                        <li>✅ Up to 50 people</li>
+                        <li>Item photography</li>
+                        <li>Listing creation</li>
+                        <li>Customer service</li>
+                        <li>Shipping handling</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
                 </div>
-
-                <div class="pricing-card enterprise">
+                
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Luxury Wedding Package</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">1,250</span>
-                            <span class="period">/event</span>
-                        </div>
+                        <h3>Home Office Setup</h3>
+                        <div class="price">$300-800</div>
+                        <div class="price-unit">per setup</div>
                     </div>
                     <ul class="pricing-features">
-                        <li>✅ Everything in premium</li>
-                        <li>✅ Large tent (40x60)</li>
-                        <li>✅ Elegant lighting design</li>
-                        <li>✅ Premium linens</li>
-                        <li>✅ Professional coordination</li>
-                        <li>✅ Up to 150 people</li>
+                        <li>Equipment assembly</li>
+                        <li>Cable management</li>
+                        <li>Ergonomic layout</li>
+                        <li>Testing & training</li>
                     </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="pricing-btn">Book Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Party Rental Setup</h3>
+                        <div class="price">$150-400</div>
+                        <div class="price-unit">per event</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Equipment delivery</li>
+                        <li>Professional setup</li>
+                        <li>Event coordination</li>
+                        <li>Breakdown service</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -757,7 +853,7 @@ get_header(); ?>
         <div class="offers-header">
             <h2>🎉 Special Offers & Packages</h2>
             <p>Save more with our bundle deals and seasonal promotions</p>
-        </div>
+        </div
         
         <div class="offers-grid">
             <div class="offer-card">
