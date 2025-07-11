@@ -5,111 +5,111 @@
     <div class="hero-overlay"></div>
     <div class="hero-particles"></div>
     <div class="hero-content">
-        <div class="hero-badge">💼 Business Blueprints</div>
-        <h1 class="hero-title-fancy">75 Proven <span class="gradient-text">Business Blueprints</span></h1>
-        <p class="hero-subtitle-fancy">Discover profitable business opportunities with detailed startup guides, cost analysis, and step-by-step implementation plans for each blueprint.</p>
+        <div class="hero-badge">🎉 PartyPro Rentals</div>
+        <h1 class="hero-title-fancy">Make Your Event <span class="gradient-text">Unforgettable</span></h1>
+        <p class="hero-subtitle-fancy">Premium party rental equipment and professional setup services for weddings, birthdays, corporate events, and special celebrations. We bring your vision to life!</p>
         <div class="hero-stats">
             <div class="stat-item">
-                <div class="stat-number">75</div>
-                <div class="stat-label">Business Blueprints</div>
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">Events Served</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">$1K-50K</div>
-                <div class="stat-label">Startup Range</div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support Available</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">100%</div>
-                <div class="stat-label">Detailed Analysis</div>
+                <div class="stat-label">Satisfaction Guaranteed</div>
             </div>
         </div>
         <div class="hero-buttons">
-            <a href="#blueprints" class="btn-primary-fancy">
-                <span>Explore Blueprints</span>
+            <a href="#services" class="btn-primary-fancy">
+                <span>Browse Rentals</span>
                 <i class="arrow-right">→</i>
             </a>
             <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-secondary-fancy">
-                <span>Get Started</span>
+                <span>Get Free Quote</span>
                 <i class="phone-icon">📞</i>
             </a>
         </div>
     </div>
     <div class="hero-image">
-        <div class="floating-card card-1">💡 Innovative</div>
-        <div class="floating-card card-2">📈 Profitable</div>
-        <div class="floating-card card-3">🚀 Scalable</div>
-        <div class="floating-card card-4">💰 Low-Cost</div>
+        <div class="floating-card card-1">🎪 Tents</div>
+        <div class="floating-card card-2">🪑 Tables & Chairs</div>
+        <div class="floating-card card-3">🎂 Party Supplies</div>
+        <div class="floating-card card-4">� Lighting</div>
     </div>
 </section>
 
-<!-- Featured Business Categories -->
-<section class="services-section-fancy" id="blueprints">
+<!-- Featured Services Categories -->
+<section class="services-section-fancy" id="services">
     <div class="container">
         <div class="section-header-fancy">
-            <div class="section-badge">Our Categories</div>
-            <h2 class="section-title-fancy">Business <span class="gradient-text">Blueprint Categories</span></h2>
-            <p class="section-subtitle-fancy">Explore profitable business opportunities across diverse industries and investment levels</p>
+            <div class="section-badge">Our Services</div>
+            <h2 class="section-title-fancy">Everything You Need for <span class="gradient-text">Perfect Events</span></h2>
+            <p class="section-subtitle-fancy">From intimate gatherings to grand celebrations, we have the equipment and expertise to make your event spectacular</p>
         </div>
         
         <div class="blueprints-grid">
-            <!-- Online & Digital Businesses -->
+            <!-- Tables & Chairs -->
             <div class="blueprint-category-card">
-                <div class="category-icon">💻</div>
-                <h3>Online & Digital</h3>
-                <p>Low-cost, high-scalability digital business models</p>
-                <div class="blueprint-count">15 Blueprints</div>
-                <div class="startup-range">$500 - $5,000</div>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('online-digital-blueprints'))); ?>" class="category-btn">View Blueprints</a>
+                <div class="category-icon">🪑</div>
+                <h3>Tables & Chairs</h3>
+                <p>Round, rectangular, cocktail tables with matching chairs</p>
+                <div class="blueprint-count">25+ Options</div>
+                <div class="startup-range">$8 - $15 per set</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#tables-chairs" class="category-btn">View Options</a>
             </div>
             
-            <!-- Service-Based Businesses -->
+            <!-- Tents & Canopies -->
             <div class="blueprint-category-card featured">
                 <div class="popular-badge">Most Popular</div>
-                <div class="category-icon">🛠️</div>
-                <h3>Service-Based</h3>
-                <p>Skill-based businesses with immediate income potential</p>
-                <div class="blueprint-count">20 Blueprints</div>
-                <div class="startup-range">$1,000 - $10,000</div>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('service-based-blueprints'))); ?>" class="category-btn">View Blueprints</a>
+                <div class="category-icon">🎪</div>
+                <h3>Tents & Canopies</h3>
+                <p>Weather protection for outdoor events, all sizes available</p>
+                <div class="blueprint-count">15+ Sizes</div>
+                <div class="startup-range">$150 - $800</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#tents" class="category-btn">View Options</a>
             </div>
             
-            <!-- E-commerce & Retail -->
+            <!-- Wedding Packages -->
             <div class="blueprint-category-card">
-                <div class="category-icon">🛒</div>
-                <h3>E-commerce & Retail</h3>
-                <p>Product-based businesses for the digital marketplace</p>
-                <div class="blueprint-count">12 Blueprints</div>
-                <div class="startup-range">$2,000 - $15,000</div>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('ecommerce-retail-blueprints'))); ?>" class="category-btn">View Blueprints</a>
+                <div class="category-icon">�</div>
+                <h3>Wedding Packages</h3>
+                <p>Complete wedding rental packages with elegant décor</p>
+                <div class="blueprint-count">5 Packages</div>
+                <div class="startup-range">$500 - $2000</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#wedding" class="category-btn">View Options</a>
             </div>
             
-            <!-- Food & Beverage -->
+            <!-- Party Entertainment -->
             <div class="blueprint-category-card">
-                <div class="category-icon">🍕</div>
-                <h3>Food & Beverage</h3>
-                <p>Culinary businesses from food trucks to specialty products</p>
-                <div class="blueprint-count">10 Blueprints</div>
-                <div class="startup-range">$5,000 - $25,000</div>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('food-beverage-blueprints'))); ?>" class="category-btn">View Blueprints</a>
+                <div class="category-icon">�</div>
+                <h3>Party Entertainment</h3>
+                <p>Bounce houses, games, and interactive entertainment</p>
+                <div class="blueprint-count">20+ Activities</div>
+                <div class="startup-range">$200 - $500</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#entertainment" class="category-btn">View Options</a>
             </div>
             
-            <!-- Health & Wellness -->
+            <!-- Event Lighting -->
             <div class="blueprint-category-card">
-                <div class="category-icon">🧘</div>
-                <h3>Health & Wellness</h3>
-                <p>Growing industry with diverse business opportunities</p>
-                <div class="blueprint-count">8 Blueprints</div>
-                <div class="startup-range">$3,000 - $20,000</div>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('health-wellness-blueprints'))); ?>" class="category-btn">View Blueprints</a>
+                <div class="category-icon">💡</div>
+                <h3>Event Lighting</h3>
+                <p>String lights, uplighting, and decorative illumination</p>
+                <div class="blueprint-count">12+ Styles</div>
+                <div class="startup-range">$75 - $300</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#lighting" class="category-btn">View Options</a>
             </div>
             
-            <!-- Creative & Entertainment -->
+            <!-- Audio Visual -->
             <div class="blueprint-category-card">
-                <div class="category-icon">🎨</div>
-                <h3>Creative & Entertainment</h3>
-                <p>Turn your creativity into a profitable business venture</p>
-                <div class="blueprint-count">10 Blueprints</div>
-                <div class="startup-range">$1,500 - $12,000</div>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('creative-entertainment-blueprints'))); ?>" class="category-btn">View Blueprints</a>
+                <div class="category-icon">�</div>
+                <h3>Audio Visual</h3>
+                <p>Sound systems, microphones, and projection equipment</p>
+                <div class="blueprint-count">8+ Systems</div>
+                <div class="startup-range">$100 - $400</div>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#audio-visual" class="category-btn">View Options</a>
             </div>
         </div>
     </div>
@@ -120,104 +120,104 @@
     <div class="container">
         <div class="section-header-fancy">
             <div class="section-badge">How It Works</div>
-            <h2 class="section-title-fancy">Your Path to <span class="gradient-text">Business Success</span></h2>
-            <p class="section-subtitle-fancy">Our comprehensive blueprint process takes you from idea to implementation</p>
+            <h2 class="section-title-fancy">Simple <span class="gradient-text">Rental Process</span></h2>
+            <p class="section-subtitle-fancy">From booking to pickup, we handle everything so you can focus on enjoying your event</p>
         </div>
         
         <div class="steps-timeline">
             <div class="step-item">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h4>🔍 Choose Your Blueprint</h4>
-                    <p>Browse 75 detailed business blueprints across various industries and investment levels</p>
+                    <h4>� Request Quote</h4>
+                    <p>Contact us with your event details, date, and guest count for a personalized quote</p>
                 </div>
             </div>
             
             <div class="step-item">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h4>📊 Review Profitability</h4>
-                    <p>Get detailed profit analysis, startup costs, and market potential for each business</p>
+                    <h4>� Plan Together</h4>
+                    <p>We'll help you select the perfect items and create a custom package for your event</p>
                 </div>
             </div>
             
             <div class="step-item">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h4>📋 Follow the Plan</h4>
-                    <p>Step-by-step implementation guide with timelines, resources, and milestones</p>
+                    <h4>� Setup & Delivery</h4>
+                    <p>Our professional team delivers and sets up everything before your event starts</p>
                 </div>
             </div>
             
             <div class="step-item">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h4>🚀 Launch & Scale</h4>
-                    <p>Execute your business plan and scale using our proven growth strategies</p>
+                    <h4>🎉 Enjoy Your Event</h4>
+                    <p>Relax and celebrate while we handle the logistics. We'll pick up everything afterward</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Featured Blueprints Showcase -->
+<!-- Featured Packages Showcase -->
 <section class="featured-blueprints-section">
     <div class="container">
         <div class="section-header-fancy">
-            <div class="section-badge">Featured This Month</div>
-            <h2 class="section-title-fancy">Top Performing <span class="gradient-text">Business Blueprints</span></h2>
+            <div class="section-badge">Popular Packages</div>
+            <h2 class="section-title-fancy">Ready-to-Go <span class="gradient-text">Event Packages</span></h2>
         </div>
         
         <div class="featured-blueprints-grid">
             <div class="featured-blueprint-card">
-                <div class="blueprint-badge">💻 Digital</div>
-                <h3>Social Media Agency</h3>
+                <div class="blueprint-badge">🎂 Birthday</div>
+                <h3>Birthday Bash Package</h3>
                 <div class="profit-metrics">
                     <div class="metric">
-                        <span class="metric-label">Startup Cost</span>
-                        <span class="metric-value">$2,500</span>
+                        <span class="metric-label">Package Price</span>
+                        <span class="metric-value">$350</span>
                     </div>
                     <div class="metric">
-                        <span class="metric-label">Monthly Profit</span>
-                        <span class="metric-value">$8,000+</span>
+                        <span class="metric-label">Serves</span>
+                        <span class="metric-value">25-30 guests</span>
                     </div>
                 </div>
-                <p>Help businesses grow their social media presence with proven marketing strategies.</p>
-                <a href="#" class="blueprint-link">View Blueprint →</a>
+                <p>Complete birthday setup with bounce house, tables, chairs, and party decorations.</p>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('pricing'))); ?>" class="blueprint-link">View Details →</a>
             </div>
             
             <div class="featured-blueprint-card popular">
-                <div class="blueprint-badge popular">🛠️ Service</div>
-                <h3>Home Cleaning Service</h3>
+                <div class="blueprint-badge popular">� Wedding</div>
+                <h3>Elegant Wedding Package</h3>
                 <div class="profit-metrics">
                     <div class="metric">
-                        <span class="metric-label">Startup Cost</span>
-                        <span class="metric-value">$3,000</span>
+                        <span class="metric-label">Package Price</span>
+                        <span class="metric-value">$1,200</span>
                     </div>
                     <div class="metric">
-                        <span class="metric-label">Monthly Profit</span>
-                        <span class="metric-value">$12,000+</span>
+                        <span class="metric-label">Serves</span>
+                        <span class="metric-value">100+ guests</span>
                     </div>
                 </div>
-                <p>Recurring revenue business with high demand and excellent profit margins.</p>
-                <a href="#" class="blueprint-link">View Blueprint →</a>
+                <p>Complete wedding reception setup with elegant linens, lighting, and dance floor.</p>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('pricing'))); ?>" class="blueprint-link">View Details →</a>
             </div>
             
             <div class="featured-blueprint-card">
-                <div class="blueprint-badge">🛒 E-commerce</div>
-                <h3>Dropshipping Store</h3>
+                <div class="blueprint-badge">🏢 Corporate</div>
+                <h3>Corporate Event Package</h3>
                 <div class="profit-metrics">
                     <div class="metric">
-                        <span class="metric-label">Startup Cost</span>
-                        <span class="metric-value">$1,500</span>
+                        <span class="metric-label">Package Price</span>
+                        <span class="metric-value">$800</span>
                     </div>
                     <div class="metric">
-                        <span class="metric-label">Monthly Profit</span>
-                        <span class="metric-value">$6,000+</span>
+                        <span class="metric-label">Serves</span>
+                        <span class="metric-value">50-75 guests</span>
                     </div>
                 </div>
-                <p>Low-risk e-commerce model with no inventory requirements and global reach.</p>
-                <a href="#" class="blueprint-link">View Blueprint →</a>
+                <p>Professional setup with presentation equipment, networking tables, and catering support.</p>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('pricing'))); ?>" class="blueprint-link">View Details →</a>
             </div>
         </div>
     </div>
@@ -228,42 +228,42 @@
     <div class="container">
         <div class="section-header-fancy">
             <div class="section-badge">Success Stories</div>
-            <h2 class="section-title-fancy">Real Results from <span class="gradient-text">Our Blueprints</span></h2>
+            <h2 class="section-title-fancy">What Our <span class="gradient-text">Customers Say</span></h2>
         </div>
         
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                <div class="testimonial-text">"The Social Media Agency blueprint helped me build a $15K/month business in just 6 months. The step-by-step guide was incredibly detailed!"</div>
+                <div class="testimonial-text">"PartyPro made our wedding absolutely perfect! The setup was flawless and the team was incredibly professional. Our guests are still talking about how beautiful everything looked."</div>
                 <div class="testimonial-author">
-                    <div class="author-avatar">👩‍💼</div>
+                    <div class="author-avatar">�</div>
                     <div class="author-info">
-                        <div class="author-name">Sarah Martinez</div>
-                        <div class="author-business">Digital Marketing Agency Owner</div>
+                        <div class="author-name">Sarah & Mike Johnson</div>
+                        <div class="author-business">Wedding Celebration</div>
                     </div>
                 </div>
             </div>
             
             <div class="testimonial-card">
                 <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                <div class="testimonial-text">"I started my cleaning service with their blueprint and now have 50+ recurring clients. The profit projections were spot on!"</div>
+                <div class="testimonial-text">"Amazing service for our daughter's 10th birthday! The bounce house was a huge hit and the setup was done quickly and professionally. Will definitely use again!"</div>
                 <div class="testimonial-author">
-                    <div class="author-avatar">👨‍💼</div>
+                    <div class="author-avatar">👨‍👩‍�</div>
                     <div class="author-info">
-                        <div class="author-name">Mike Johnson</div>
-                        <div class="author-business">Cleaning Service Owner</div>
+                        <div class="author-name">Rodriguez Family</div>
+                        <div class="author-business">Birthday Party</div>
                     </div>
                 </div>
             </div>
             
             <div class="testimonial-card">
                 <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                <div class="testimonial-text">"The food truck blueprint guided me through every step. I'm now running three trucks and planning expansion!"</div>
+                <div class="testimonial-text">"Our corporate event was a huge success thanks to PartyPro. The tent saved us from unexpected rain and the AV equipment worked perfectly for our presentations."</div>
                 <div class="testimonial-author">
-                    <div class="author-avatar">👩‍🍳</div>
+                    <div class="author-avatar">�</div>
                     <div class="author-info">
-                        <div class="author-name">Maria Rodriguez</div>
-                        <div class="author-business">Food Truck Owner</div>
+                        <div class="author-name">David Chen</div>
+                        <div class="author-business">TechStart Corp</div>
                     </div>
                 </div>
             </div>
@@ -276,22 +276,22 @@
     <div class="cta-background-pattern"></div>
     <div class="container">
         <div class="cta-content-fancy">
-            <div class="cta-icon">🚀</div>
-            <h2 class="cta-title-fancy">Ready to Start Your <span class="gradient-text">Business Journey?</span></h2>
-            <p class="cta-subtitle-fancy">Join thousands of successful entrepreneurs who started with our proven business blueprints</p>
+            <div class="cta-icon">🎉</div>
+            <h2 class="cta-title-fancy">Ready to Plan Your <span class="gradient-text">Perfect Event?</span></h2>
+            <p class="cta-subtitle-fancy">Get a free quote today and let us help you create an unforgettable celebration!</p>
             <div class="cta-buttons-fancy">
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('all-blueprints'))); ?>" class="cta-btn-primary">
-                    <span>Browse All 75 Blueprints</span>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="cta-btn-primary">
+                    <span>Get Free Quote</span>
                     <div class="btn-shine"></div>
                 </a>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="cta-btn-secondary">
-                    <span>💬 Get Consultation</span>
+                <a href="tel:<?php echo esc_attr(str_replace([' ', '-', '(', ')'], '', get_theme_mod('contact_phone', '+919876543210'))); ?>" class="cta-btn-secondary">
+                    <span>� Call Now</span>
                 </a>
             </div>
             <div class="cta-trust-badges">
-                <div class="trust-badge">✅ Proven Profitable</div>
-                <div class="trust-badge">✅ Step-by-Step Guides</div>
-                <div class="trust-badge">✅ Real Success Stories</div>
+                <div class="trust-badge">✅ Licensed & Insured</div>
+                <div class="trust-badge">✅ Professional Setup</div>
+                <div class="trust-badge">✅ 5-Star Service</div>
             </div>
         </div>
     </div>
