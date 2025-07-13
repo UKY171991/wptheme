@@ -211,29 +211,25 @@ function partypro_template_include($template) {
 }
 add_filter('template_include', 'partypro_template_include', 99);
 
-// Enqueue styles and scripts
+// Enqueue scripts and styles
 function partypro_scripts() {
     // Enqueue main stylesheet
-    wp_enqueue_style('partypro-style', get_stylesheet_uri(), array(), '1.0');
+    wp_enqueue_style('partypro-style', get_stylesheet_uri(), array(), '1.0.0');
     
-    // Enqueue custom JavaScript
-    wp_enqueue_script('partypro-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0', true);
+    // Enqueue enhanced pages CSS
+    wp_enqueue_style('partypro-enhanced-pages', get_template_directory_uri() . '/enhanced-pages.css', array(), '1.0.0');
     
-    // Add smooth scrolling for anchor links
-    wp_add_inline_script('partypro-script', '
-        jQuery(document).ready(function($) {
-            $("a[href^=\'#\']").on("click", function(e) {
-                e.preventDefault();
-                var target = this.hash;
-                var $target = $(target);
-                if ($target.length) {
-                    $("html, body").animate({
-                        scrollTop: $target.offset().top - 100
-                    }, 800, "swing");
-                }
-            });
-        });
-    ');
+    // Enqueue main JavaScript
+    wp_enqueue_script('partypro-main', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0.0', true);
+    
+    // Enqueue enhanced pages JavaScript
+    wp_enqueue_script('partypro-enhanced-pages', get_template_directory_uri() . '/js/enhanced-pages.js', array('jquery'), '1.0.0', true);
+    
+    // Localize script for AJAX
+    wp_localize_script('partypro-main', 'partypro_ajax', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('partypro_nonce')
+    ));
 }
 add_action('wp_enqueue_scripts', 'partypro_scripts');
 
@@ -706,3 +702,48 @@ function partypro_get_about_content() {
         <p>Our mission is to help you create magical moments that your guests will remember forever.</p>
     </div>';
 }
+
+// Blog helper functions
+function get_post_views($post_id) {
+    $views = get_post_meta($post_id, '_post_views', true);
+    return $views ? $views : rand(100, 1000); // Fallback to random number for demo
+}
+
+function set_post_views($post_id) {
+    $views = get_post_meta($post_id, '_post_views', true);
+    $views = $views ? $views + 1 : 1;
+    update_post_meta($post_id, '_post_views', $views);
+}
+
+// Track post views on single post pages
+function partypro_track_post_views() {
+    if (is_single()) {
+        set_post_views(get_the_ID());
+    }
+}
+add_action('wp_head', 'partypro_track_post_views');
+
+// Add blog page template to the custom templates list
+function partypro_add_blog_template($templates) {
+    $templates['page-blog.php'] = 'Blog Page';
+    return $templates;
+}
+add_filter('theme_page_templates', 'partypro_add_blog_template');
+
+// Create Blog page if it doesn't exist
+function partypro_create_blog_page() {
+    if (!get_page_by_path('blog')) {
+        $blog_page = array(
+            'post_title'    => 'Blog',
+            'post_content'  => 'Our latest articles, tips, and insights.',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_name'     => 'blog'
+        );
+        $blog_id = wp_insert_post($blog_page);
+        if ($blog_id) {
+            update_post_meta($blog_id, '_wp_page_template', 'page-blog.php');
+        }
+    }
+}
+add_action('after_setup_theme', 'partypro_create_blog_page');

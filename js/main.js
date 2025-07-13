@@ -37,258 +37,17 @@ jQuery(document).ready(function($) {
     // Run animation on scroll
     $(window).on('scroll', animateOnScroll);
     animateOnScroll(); // Run once on load
-});
-
-// Single Line Contact Form
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('.single-line-form');
-    const input = document.querySelector('.single-field-input');
-    const submitBtn = document.querySelector('.single-field-submit');
-    const fieldWrapper = document.querySelector('.field-wrapper');
     
-    if (!form || !input || !submitBtn) return;
-    
-    // Input focus effects
-    input.addEventListener('focus', function() {
-        fieldWrapper.classList.add('focused');
-    });
-    
-    input.addEventListener('blur', function() {
-        fieldWrapper.classList.remove('focused');
-    });
-    
-    // Form validation
-    function validateInput() {
-        const value = input.value.trim();
+    // Contact form validation (basic)
+    $('.contact-form').on('submit', function(e) {
+        var isValid = true;
+        var email = $(this).find('input[type="email"]').val();
+        var phone = $(this).find('input[type="tel"]').val();
         
-        if (value.length < 10) {
-            return {
-                valid: false,
-                message: 'Please provide more details about your event'
-            };
-        }
-        
-        // Check if it contains contact info
-        const hasPhone = /\d{3}.*\d{3}.*\d{4}/.test(value);
-        const hasEmail = /@/.test(value);
-        const hasName = /\b[A-Z][a-z]+\b/.test(value);
-        
-        if (!hasPhone && !hasEmail) {
-            return {
-                valid: false,
-                message: 'Please include your phone number or email'
-            };
-        }
-        
-        if (!hasName) {
-            return {
-                valid: false,
-                message: 'Please include your name'
-            };
-        }
-        
-        return { valid: true };
-    }
-    
-    // Real-time validation
-    input.addEventListener('input', function() {
-        const validation = validateInput();
-        
-        if (input.value.length > 0) {
-            if (validation.valid) {
-                fieldWrapper.classList.add('success');
-                fieldWrapper.classList.remove('error');
-            } else if (input.value.length > 5) {
-                fieldWrapper.classList.add('error');
-                fieldWrapper.classList.remove('success');
-            }
-        } else {
-            fieldWrapper.classList.remove('success', 'error');
-        }
-    });
-    
-    // Form submission
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const validation = validateInput();
-        
-        if (!validation.valid) {
-            // Show error animation
-            fieldWrapper.classList.add('error');
-            input.focus();
-            
-            // Create temporary error message
-            let errorMsg = document.querySelector('.temp-error');
-            if (!errorMsg) {
-                errorMsg = document.createElement('div');
-                errorMsg.className = 'temp-error';
-                errorMsg.style.cssText = `
-                    color: #e74c3c;
-                    font-size: 0.9rem;
-                    margin-top: 0.5rem;
-                    padding: 0.5rem;
-                    background: rgba(231, 76, 60, 0.1);
-                    border-radius: 8px;
-                    animation: slideInUp 0.3s ease;
-                `;
-                fieldWrapper.parentNode.appendChild(errorMsg);
-            }
-            
-            errorMsg.textContent = validation.message;
-            
-            // Remove error message after 3 seconds
-            setTimeout(() => {
-                if (errorMsg) {
-                    errorMsg.remove();
-                }
-                fieldWrapper.classList.remove('error');
-            }, 3000);
-            
-            return;
-        }
-        
-        // Show loading state
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
-        
-        // Simulate form submission
-        setTimeout(() => {
-            // Show success state
-            fieldWrapper.classList.add('success');
-            submitBtn.classList.remove('loading');
-            submitBtn.innerHTML = `
-                <span class="submit-icon">✅</span>
-                <span class="submit-text">Sent!</span>
-            `;
-            
-            // Show success message
-            const successMsg = document.createElement('div');
-            successMsg.className = 'success-message';
-            successMsg.style.cssText = `
-                background: rgba(39, 174, 96, 0.1);
-                color: #27ae60;
-                padding: 1rem;
-                border-radius: 12px;
-                margin-top: 1rem;
-                text-align: center;
-                font-weight: 600;
-                border: 1px solid rgba(39, 174, 96, 0.2);
-                animation: slideInUp 0.3s ease;
-            `;
-            successMsg.innerHTML = `
-                <span style="font-size: 1.2rem; margin-right: 0.5rem;">🎉</span>
-                Thank you! We've received your message and will contact you within 24 hours.
-            `;
-            
-            form.appendChild(successMsg);
-            
-            // Reset form after 3 seconds
-            setTimeout(() => {
-                input.value = '';
-                fieldWrapper.classList.remove('success');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `
-                    <span class="submit-icon">🚀</span>
-                    <span class="submit-text">Send</span>
-                `;
-                if (successMsg) {
-                    successMsg.remove();
-                }
-            }, 3000);
-            
-        }, 1500);
-    });
-    
-    // Add ripple effect to submit button
-    submitBtn.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-            position: absolute;
-            width: ${size}px;
-            height: ${size}px;
-            left: ${x}px;
-            top: ${y}px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: scale(0);
-            pointer-events: none;
-            animation: ripple 0.6s ease-out;
-        `;
-        
-        this.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-    
-    // Add character counter
-    const maxLength = 500;
-    input.addEventListener('input', function() {
-        const length = this.value.length;
-        
-        // Add visual feedback for length
-        if (length > maxLength * 0.8) {
-            this.style.color = '#f39c12';
-        } else {
-            this.style.color = '#333';
-        }
-        
-        if (length > maxLength) {
-            this.value = this.value.substring(0, maxLength);
-        }
-    });
-});
-
-// Add CSS animations
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInUp {
-        0% {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    @keyframes ripple {
-        0% {
-            transform: scale(0);
-            opacity: 1;
-        }
-        100% {
-            transform: scale(2);
-            opacity: 0;
-        }
-    }
-    
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    
-    .field-wrapper.error {
-        border-color: #e74c3c !important;
-        box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1) !important;
-        animation: shake 0.5s ease-in-out;
-    }
-    
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-        20%, 40%, 60%, 80% { transform: translateX(5px); }
-    }
-`;
-document.head.appendChild(style);
+        // Basic email validation
+        if (email && !isValidEmail(email)) {
+            alert('Please enter a valid email address.');
+            isValid = false;
         }
         
         // Basic phone validation (Indian format)
@@ -360,6 +119,542 @@ document.head.appendChild(style);
         
         $('#calculated-price').text('₹' + totalPrice.toLocaleString('en-IN'));
     }
+    
+    // Enhanced Contact Page Functionality
+    
+    // Multi-step form functionality
+    let currentStep = 1;
+    const totalSteps = 3;
+    
+    function updateProgressBar() {
+        const progressFill = $('.progress-fill');
+        const progressSteps = $('.progress-step');
+        const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+        
+        progressFill.css('width', progressPercentage + '%');
+        
+        progressSteps.each(function(index) {
+            const step = $(this);
+            const stepNumber = index + 1;
+            
+            if (stepNumber < currentStep) {
+                step.removeClass('active').addClass('completed');
+            } else if (stepNumber === currentStep) {
+                step.removeClass('completed').addClass('active');
+            } else {
+                step.removeClass('active completed');
+            }
+        });
+    }
+    
+    function showStep(stepNumber) {
+        $('.form-step').removeClass('active');
+        $(`.form-step[data-step="${stepNumber}"]`).addClass('active');
+        currentStep = stepNumber;
+        updateProgressBar();
+        updateReviewData();
+    }
+    
+    // Step navigation
+    $('.btn-next').on('click', function() {
+        const nextStep = parseInt($(this).data('next'));
+        if (validateCurrentStep()) {
+            showStep(nextStep);
+        }
+    });
+    
+    $('.btn-prev').on('click', function() {
+        const prevStep = parseInt($(this).data('prev'));
+        showStep(prevStep);
+    });
+    
+    // Form validation
+    function validateCurrentStep() {
+        let isValid = true;
+        const currentStepElement = $(`.form-step[data-step="${currentStep}"]`);
+        
+        currentStepElement.find('input[required], select[required], textarea[required]').each(function() {
+            const field = $(this);
+            const value = field.val().trim();
+            const fieldId = field.attr('id');
+            const validation = $(`#${fieldId.replace('contact-', '')}-validation`);
+            
+            if (!value) {
+                validation.text('This field is required').removeClass('valid').addClass('invalid');
+                isValid = false;
+            } else {
+                // Email validation
+                if (field.attr('type') === 'email') {
+                    if (!isValidEmail(value)) {
+                        validation.text('Please enter a valid email address').removeClass('valid').addClass('invalid');
+                        isValid = false;
+                    } else {
+                        validation.text('✓ Valid email').removeClass('invalid').addClass('valid');
+                    }
+                }
+                // Phone validation
+                else if (field.attr('type') === 'tel' && value) {
+                    if (!isValidPhone(value)) {
+                        validation.text('Please enter a valid phone number').removeClass('valid').addClass('invalid');
+                        isValid = false;
+                    } else {
+                        validation.text('✓ Valid phone number').removeClass('invalid').addClass('valid');
+                    }
+                }
+                // Other fields
+                else {
+                    validation.text('✓ Looks good').removeClass('invalid').addClass('valid');
+                }
+            }
+        });
+        
+        return isValid;
+    }
+    
+    // Real-time validation
+    $('#contact-name, #contact-email, #contact-phone, #contact-subject, #contact-message').on('input blur', function() {
+        const field = $(this);
+        const value = field.val().trim();
+        const fieldId = field.attr('id');
+        const validation = $(`#${fieldId.replace('contact-', '')}-validation`);
+        
+        if (!value && field.prop('required')) {
+            validation.text('This field is required').removeClass('valid').addClass('invalid');
+        } else if (value) {
+            if (field.attr('type') === 'email') {
+                if (isValidEmail(value)) {
+                    validation.text('✓ Valid email').removeClass('invalid').addClass('valid');
+                } else {
+                    validation.text('Please enter a valid email address').removeClass('valid').addClass('invalid');
+                }
+            } else if (field.attr('type') === 'tel' && value) {
+                if (isValidPhone(value)) {
+                    validation.text('✓ Valid phone number').removeClass('invalid').addClass('valid');
+                } else {
+                    validation.text('Please enter a valid phone number').removeClass('valid').addClass('invalid');
+                }
+            } else {
+                validation.text('✓ Looks good').removeClass('invalid').addClass('valid');
+            }
+        } else {
+            validation.text('').removeClass('valid invalid');
+        }
+    });
+    
+    // Character counter for message
+    $('#contact-message').on('input', function() {
+        const length = $(this).val().length;
+        const maxLength = 500;
+        $('#char-count').text(length);
+        
+        if (length > maxLength) {
+            $(this).val($(this).val().substring(0, maxLength));
+            $('#char-count').text(maxLength);
+        }
+        
+        const counter = $('.textarea-counter');
+        if (length > maxLength * 0.9) {
+            counter.css('color', '#dc3545');
+        } else if (length > maxLength * 0.7) {
+            counter.css('color', '#ffc107');
+        } else {
+            counter.css('color', '#6c757d');
+        }
+    });
+    
+    // Update review data
+    function updateReviewData() {
+        if (currentStep === 3) {
+            $('#review-name').text($('#contact-name').val() || '-');
+            $('#review-email').text($('#contact-email').val() || '-');
+            $('#review-phone').text($('#contact-phone').val() || 'Not provided');
+            $('#review-subject').text($('#contact-subject').val() || '-');
+            $('#review-budget').text($('#contact-budget').val() || 'Not specified');
+            $('#review-message').text($('#contact-message').val() || '-');
+        }
+    }
+    
+    // Enhanced form submission
+    $('#contact-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        if (!$('#privacy-agreement').is(':checked')) {
+            alert('Please agree to the Privacy Policy and Terms of Service');
+            return;
+        }
+        
+        const submitBtn = $('.btn-submit-fancy');
+        submitBtn.addClass('loading');
+        
+        // Simulate form submission delay
+        setTimeout(() => {
+            // The actual form submission will be handled by PHP
+            this.submit();
+        }, 2000);
+    });
+    
+    // Animated counter for stats
+    function animateCounter() {
+        $('.contact-stat-number[data-count]').each(function() {
+            const $this = $(this);
+            const target = parseInt($this.data('count'));
+            const duration = 2000;
+            const increment = target / (duration / 50);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (target === 100) {
+                    $this.text(Math.floor(current) + '%');
+                } else if (target === 24) {
+                    $this.text(Math.floor(current) + '/7');
+                } else {
+                    $this.text('< ' + Math.floor(current) + 'hr');
+                }
+            }, 50);
+            
+            $this.addClass('counting');
+        });
+    }
+    
+    // Trigger counter animation when stats come into view
+    $(window).on('scroll', function() {
+        const statsSection = $('.contact-stats');
+        if (statsSection.length) {
+            const sectionTop = statsSection.offset().top;
+            const sectionHeight = statsSection.outerHeight();
+            const windowTop = $(window).scrollTop();
+            const windowHeight = $(window).height();
+            
+            if (windowTop + windowHeight > sectionTop && windowTop < sectionTop + sectionHeight) {
+                if (!statsSection.hasClass('animated')) {
+                    statsSection.addClass('animated');
+                    animateCounter();
+                }
+            }
+        }
+    });
+    
+    // Live chat functionality
+    let chatOpen = false;
+    
+    $('#chatToggle').on('click', function() {
+        const chatWindow = $('#chatWindow');
+        const notification = $('#chatNotification');
+        
+        if (chatOpen) {
+            chatWindow.removeClass('active');
+            chatOpen = false;
+        } else {
+            chatWindow.addClass('active');
+            notification.hide();
+            chatOpen = true;
+        }
+    });
+    
+    $('#chatClose').on('click', function() {
+        $('#chatWindow').removeClass('active');
+        chatOpen = false;
+    });
+    
+    // Chat input functionality
+    $('#chatInput').on('keypress', function(e) {
+        if (e.which === 13) { // Enter key
+            sendChatMessage();
+        }
+    });
+    
+    $('#chatSend').on('click', sendChatMessage);
+    
+    $('.quick-option').on('click', function() {
+        const message = $(this).data('message');
+        $('#chatInput').val(message);
+        sendChatMessage();
+    });
+    
+    function sendChatMessage() {
+        const input = $('#chatInput');
+        const message = input.val().trim();
+        
+        if (!message) return;
+        
+        // Add user message
+        const userMessage = $(`
+            <div class="chat-message user-message">
+                <div class="message-content">
+                    <div class="message-text">${message}</div>
+                    <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                </div>
+                <div class="message-avatar">👤</div>
+            </div>
+        `);
+        
+        $('#chatMessages').append(userMessage);
+        input.val('');
+        
+        // Scroll to bottom
+        const chatMessages = $('#chatMessages');
+        chatMessages.scrollTop(chatMessages[0].scrollHeight);
+        
+        // Simulate bot response
+        setTimeout(() => {
+            let botResponse = "Thanks for your message! We'll get back to you shortly. 😊";
+            
+            if (message.toLowerCase().includes('price') || message.toLowerCase().includes('cost')) {
+                botResponse = "I'd be happy to help with pricing information! Please fill out our contact form for a personalized quote. 💰";
+            } else if (message.toLowerCase().includes('service')) {
+                botResponse = "We offer a wide range of event planning and rental services. Check out our services page for more details! 🎉";
+            } else if (message.toLowerCase().includes('book') || message.toLowerCase().includes('consultation')) {
+                botResponse = "Great! I can help you book a consultation. Please provide your contact details through our form and we'll reach out within 2 hours! 📅";
+            }
+            
+            const botMessage = $(`
+                <div class="chat-message agent-message">
+                    <div class="message-avatar">👨‍💼</div>
+                    <div class="message-content">
+                        <div class="message-text">${botResponse}</div>
+                        <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                    </div>
+                </div>
+            `);
+            
+            $('#chatMessages').append(botMessage);
+            chatMessages.scrollTop(chatMessages[0].scrollHeight);
+        }, 1000);
+    }
+    
+    // Show chat notification after 5 seconds
+    setTimeout(() => {
+        if (!chatOpen) {
+            $('#chatNotification').show();
+        }
+    }, 5000);
+    
+    // Enhanced Contact Info Functionality
+    
+    // Copy to clipboard functionality
+    $('.copy-btn').on('click', function() {
+        const textToCopy = $(this).data('copy');
+        const button = $(this);
+        const originalText = button.text();
+        
+        // Create temporary textarea for copying
+        const tempTextarea = $('<textarea>');
+        tempTextarea.val(textToCopy);
+        $('body').append(tempTextarea);
+        tempTextarea.select();
+        
+        try {
+            document.execCommand('copy');
+            button.addClass('copied').text('✓ Copied!');
+            showToast('Copied to clipboard!', 'success');
+            
+            setTimeout(() => {
+                button.removeClass('copied').text(originalText);
+            }, 2000);
+        } catch (err) {
+            showToast('Failed to copy. Please try again.', 'error');
+        }
+        
+        tempTextarea.remove();
+    });
+    
+    // Business hours status update
+    function updateBusinessHours() {
+        const now = new Date();
+        const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+        const currentTime = now.getHours() * 100 + now.getMinutes(); // Convert to HHMM format
+        
+        $('.hours-item').each(function() {
+            const dayText = $(this).find('.day').text().toLowerCase();
+            const statusBadge = $(this).find('.status-badge');
+            let isOpen = false;
+            
+            if (dayText.includes('monday') && dayText.includes('friday')) {
+                // Monday to Friday
+                if (currentDay >= 1 && currentDay <= 5) {
+                    isOpen = currentTime >= 900 && currentTime <= 1800; // 9:00 AM to 6:00 PM
+                }
+            } else if (dayText.includes('saturday')) {
+                // Saturday
+                if (currentDay === 6) {
+                    isOpen = currentTime >= 1000 && currentTime <= 1600; // 10:00 AM to 4:00 PM
+                }
+            } else if (dayText.includes('sunday')) {
+                // Sunday - always closed
+                isOpen = false;
+            }
+            
+            if (isOpen) {
+                statusBadge.removeClass('closed').addClass('open').text('Open Now');
+            } else {
+                statusBadge.removeClass('open').addClass('closed').text('Closed');
+            }
+        });
+    }
+    
+    // Call updateBusinessHours on page load and every minute
+    updateBusinessHours();
+    setInterval(updateBusinessHours, 60000);
+    
+    // Scroll to form function
+    window.scrollToForm = function() {
+        $('html, body').animate({
+            scrollTop: $('.contact-form-card').offset().top - 100
+        }, 800);
+    };
+    
+    // Map functions
+    window.openMapFullscreen = function() {
+        const mapUrl = 'https://www.google.com/maps/search/123+Business+Street,+City,+State+12345,+United+States';
+        window.open(mapUrl, '_blank');
+    };
+    
+    window.getDirections = function() {
+        const address = encodeURIComponent('123 Business Street, City, State 12345, United States');
+        const directionsUrl = `https://www.google.com/maps/dir//${address}`;
+        window.open(directionsUrl, '_blank');
+    };
+    
+    // Social media tracking
+    $('.social-link-fancy').on('click', function(e) {
+        e.preventDefault();
+        const platform = $(this).data('platform');
+        
+        // You can add analytics tracking here
+        console.log(`Social click: ${platform}`);
+        
+        // Add your actual social media URLs here
+        const socialUrls = {
+            'Facebook': 'https://facebook.com/yourpage',
+            'Twitter': 'https://twitter.com/yourhandle',
+            'LinkedIn': 'https://linkedin.com/company/yourcompany',
+            'Instagram': 'https://instagram.com/yourhandle'
+        };
+        
+        if (socialUrls[platform]) {
+            window.open(socialUrls[platform], '_blank');
+        }
+    });
+    
+    // Toast notification function
+    function showToast(message, type = 'success') {
+        // Remove existing toasts
+        $('.toast-notification').remove();
+        
+        const toast = $(`
+            <div class="toast-notification ${type}">
+                ${message}
+            </div>
+        `);
+        
+        $('body').append(toast);
+        
+        setTimeout(() => {
+            toast.fadeOut(300, function() {
+                $(this).remove();
+            });
+        }, 3000);
+    }
+    
+    // Quick action tracking
+    $('.action-btn').on('click', function() {
+        const action = $(this).find('.action-text').text();
+        console.log(`Quick action clicked: ${action}`);
+        
+        // Add analytics tracking here if needed
+        if (action === 'Schedule Call') {
+            // Additional tracking for schedule call
+            showToast('📅 Scroll down to fill out the form for scheduling!', 'success');
+        }
+    });
+    
+    // Enhanced form submission with success message
+    const originalFormSubmit = $('#contact-form').off('submit');
+    $('#contact-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        if (!$('#privacy-agreement').is(':checked')) {
+            showToast('Please agree to the Privacy Policy and Terms of Service', 'error');
+            return;
+        }
+        
+        const submitBtn = $('.btn-submit-fancy');
+        submitBtn.addClass('loading');
+        
+        // Simulate form submission
+        setTimeout(() => {
+            // Create success message
+            const successHtml = `
+                <div class="form-success-overlay">
+                    <div class="success-animation">
+                        <div class="success-icon">✅</div>
+                        <h3>Message Sent Successfully!</h3>
+                        <p>Thank you for reaching out! We'll get back to you within 2 hours.</p>
+                        <div class="success-actions">
+                            <button class="btn-secondary" onclick="resetForm()">Send Another Message</button>
+                            <a href="/" class="btn-primary">Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            $('.contact-form-card').append(successHtml);
+            submitBtn.removeClass('loading');
+            
+            // Auto-hide success message after 10 seconds
+            setTimeout(() => {
+                $('.form-success-overlay').fadeOut();
+            }, 10000);
+            
+        }, 2000);
+    });
+    
+    // Reset form function
+    window.resetForm = function() {
+        $('.form-success-overlay').remove();
+        $('#contact-form')[0].reset();
+        currentStep = 1;
+        showStep(1);
+        $('.input-validation').text('').removeClass('valid invalid');
+    };
+    
+    // Add loading states to action buttons
+    $('.action-btn[href^="tel"], .action-btn[href^="mailto"]').on('click', function() {
+        const btn = $(this);
+        const originalText = btn.find('.action-text').text();
+        const actionText = btn.find('.action-text');
+        
+        actionText.text('Opening...');
+        
+        setTimeout(() => {
+            actionText.text(originalText);
+        }, 1000);
+    });
+    
+    // Parallax effect for hero section
+    $(window).on('scroll', function() {
+        const scrollTop = $(window).scrollTop();
+        const heroSection = $('.contact-hero-section');
+        
+        if (heroSection.length) {
+            const parallaxSpeed = 0.5;
+            heroSection.css('transform', `translateY(${scrollTop * parallaxSpeed}px)`);
+        }
+    });
+    
+    // Initialize tooltips and animations
+    setTimeout(() => {
+        $('.contact-info-item-fancy, .trust-item, .action-btn').each(function(index) {
+            $(this).css('animation-delay', (index * 0.1) + 's');
+            $(this).addClass('animate-fade-in-up');
+        });
+    }, 500);
 });
 
 // Add CSS for animations
@@ -426,6 +721,87 @@ var animationCSS = `
 .social-link:hover {
     background: #f1c40f;
     transform: translateY(-2px);
+}
+
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.toast-notification.success {
+    background-color: #28a745;
+}
+
+.toast-notification.error {
+    background-color: #dc3545;
+}
+
+.hours-item {
+    margin-bottom: 10px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.status-badge.open {
+    background-color: #28a745;
+}
+
+.status-badge.closed {
+    background-color: #dc3545;
+}
+
+.form-success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.success-animation {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    animation: slideIn 0.5s ease;
+}
+
+.success-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 @media (max-width: 768px) {

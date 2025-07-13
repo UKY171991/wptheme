@@ -8,6 +8,10 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <!-- Blog Details Styles -->
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/blog-details-styles.css">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/responsive.css">
+    
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -17,6 +21,8 @@
         <h1 class="site-title">
             <a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
         </h1>
+        
+        <button class="menu-toggle">Menu</button>
         
         <nav class="main-navigation">
             <?php
@@ -40,6 +46,9 @@ function partypro_fallback_menu() {
     $services_page = get_page_by_path('services');
     if ($services_page) {
         echo '<li><a href="' . esc_url(get_permalink($services_page)) . '">Services</a></li>';
+    } else {
+        // Ensure 'Services' menu item is always displayed
+        echo '<li><a href="#">Services (Unavailable)</a></li>';
     }
     
     $pricing_page = get_page_by_path('pricing');
@@ -60,3 +69,6 @@ function partypro_fallback_menu() {
     echo '</ul>';
 }
 ?>
+
+<script src="<?php echo get_template_directory_uri(); ?>/js/submenu.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/menu-toggle.js"></script>

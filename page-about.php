@@ -4,91 +4,124 @@ Template Name: About Page
 */
 get_header(); ?>
 
-<!-- Fancy About Hero Section -->
-<section class="about-hero-section">
-    <div class="about-hero-bg"></div>
+<!-- Enhanced About Hero Section -->
+<section class="hero-section-advanced about-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-particles"></div>
     <div class="container">
-        <div class="about-hero-content">
-            <div class="about-hero-badge">🎉 Our Story</div>
-            <h1 class="about-hero-title">Creating <span class="gradient-text">Unforgettable Moments</span></h1>
-            <p class="about-hero-subtitle">For over a decade, we've been turning ordinary spaces into extraordinary celebrations. Every event tells a story, and we're here to help you tell yours perfectly.</p>
-            <div class="about-hero-stats">
-                <div class="about-stat">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Events Celebrated</div>
-                </div>
-                <div class="about-stat">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="about-stat">
-                    <div class="stat-number">98%</div>
+        <div class="hero-content">
+            <div class="hero-badge">🏢 About Our Service Company</div>
+            <h1 class="hero-title-fancy">Your Complete <span class="gradient-text">Service Solution</span></h1>
+            <p class="hero-subtitle-fancy">From home cleaning to business consulting, we're your trusted partner for over 50+ professional services across 9 specialized categories. Excellence delivered, every time.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="2500">0</div>
                     <div class="stat-label">Happy Clients</div>
                 </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="9">0</div>
+                    <div class="stat-label">Service Categories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-label">+ Services</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="99">0</div>
+                    <div class="stat-label">% Satisfaction</div>
+                </div>
             </div>
+            <div class="hero-buttons">
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-primary-fancy">
+                    <span>Get Started</span>
+                    <i class="arrow-right">→</i>
+                </a>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn-secondary-fancy">
+                    <span>View Services</span>
+                    <i class="services-icon">🛠️</i>
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="floating-card card-1">🎊 Creative</div>
+            <div class="floating-card card-2">💡 Innovative</div>
+            <div class="floating-card card-3">⭐ Premium</div>
+            <div class="floating-card card-4">🏆 Award-Winning</div>
         </div>
     </div>
 </section>
 
-<!-- Mission & Vision Section -->
-<section class="mission-vision-section">
+<!-- Enhanced Company Story Section -->
+<section class="services-section-fancy company-story">
     <div class="container">
-        <div class="mission-vision-grid">
-            <div class="mission-card">
-                <div class="card-icon">🎯</div>
-                <h3>Our Mission</h3>
-                <p>To transform every celebration into an unforgettable experience by providing exceptional party rental equipment and seamless service that exceeds expectations.</p>
-                <div class="card-highlight">Creating memories, one event at a time</div>
+        <div class="section-header-fancy">
+            <div class="section-badge">Our Journey</div>
+            <h2 class="section-title-fancy">Building <span class="gradient-text">Service Excellence</span></h2>
+            <p class="section-subtitle-fancy">From a single service offering to 9 comprehensive categories - our commitment to quality never wavered</p>
+        </div>
+        
+        <div class="story-timeline">
+            <div class="timeline-item" data-year="2019">
+                <div class="timeline-icon">🏠</div>
+                <div class="timeline-content">
+                    <h4>Home Services Foundation</h4>
+                    <p>Started with basic home cleaning and maintenance services, building a reputation for reliability and quality in our local community.</p>
+                    <div class="timeline-metrics">
+                        <span class="metric">5 Services</span>
+                        <span class="metric">50 Clients</span>
+                        <span class="metric">95% Satisfaction</span>
+                    </div>
+                </div>
             </div>
             
-            <div class="vision-card">
-                <div class="card-icon">🌟</div>
-                <h3>Our Vision</h3>
-                <p>To be the most trusted party rental company, known for innovation, quality, and the ability to bring any celebration vision to life with style and sophistication.</p>
-                <div class="card-highlight">Where dreams meet reality</div>
+            <div class="timeline-item" data-year="2020">
+                <div class="timeline-icon">🛠️</div>
+                <div class="timeline-content">
+                    <h4>Expanded Expertise</h4>
+                    <p>Added handyman services, pet care, and personal errands, responding to growing client needs during challenging times.</p>
+                    <div class="timeline-metrics">
+                        <span class="metric">15 Services</span>
+                        <span class="metric">200 Clients</span>
+                        <span class="metric">98% Satisfaction</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Our Story Section -->
-<section class="story-section">
-    <div class="container">
-        <div class="story-content">
-            <div class="story-text">
-                <div class="section-badge">📖 How It Started</div>
-                <h2 class="section-title-fancy">From Small Beginnings to <span class="gradient-text">Big Dreams</span></h2>
-                <div class="story-timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-year">2012</div>
-                        <div class="timeline-content">
-                            <h4>The Beginning</h4>
-                            <p>Started with a simple goal: help friends and family create amazing celebrations without the stress of finding quality equipment.</p>
-                        </div>
+            
+            <div class="timeline-item" data-year="2021">
+                <div class="timeline-icon">💼</div>
+                <div class="timeline-content">
+                    <h4>Professional Services</h4>
+                    <p>Launched business consulting, digital services, and administrative support, serving both residential and commercial clients.</p>
+                    <div class="timeline-metrics">
+                        <span class="metric">25 Services</span>
+                        <span class="metric">500 Clients</span>
+                        <span class="metric">99% Satisfaction</span>
                     </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year">2015</div>
-                        <div class="timeline-content">
-                            <h4>Growing Strong</h4>
-                            <p>Expanded our inventory and team, serving over 100 events per year with a focus on exceptional customer service.</p>
-                        </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-year="2023">
+                <div class="timeline-icon">👥</div>
+                <div class="timeline-content">
+                    <h4>Family & Creative Services</h4>
+                    <p>Introduced family support services, creative solutions, and specialized coaching programs to meet diverse client needs.</p>
+                    <div class="timeline-metrics">
+                        <span class="metric">40 Services</span>
+                        <span class="metric">1500 Clients</span>
+                        <span class="metric">99% Satisfaction</span>
                     </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year">2018</div>
-                        <div class="timeline-content">
-                            <h4>Innovation Focus</h4>
-                            <p>Introduced premium lighting packages, luxury tents, and full-service event coordination to our offerings.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-year">2023</div>
-                        <div class="timeline-content">
-                            <h4>Today & Beyond</h4>
-                            <p>Serving 500+ events annually with cutting-edge equipment and a team passionate about making every celebration perfect.</p>
-                        </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-year="2024">
+                <div class="timeline-icon">🌟</div>
+                <div class="timeline-content">
+                    <h4>Complete Service Platform</h4>
+                    <p>Today, we proudly offer 50+ services across 9 categories, serving thousands of satisfied clients with transparent pricing and exceptional quality.</p>
+                    <div class="timeline-metrics">
+                        <span class="metric">50+ Services</span>
+                        <span class="metric">2500+ Clients</span>
+                        <span class="metric">99% Satisfaction</span>
                     </div>
                 </div>
             </div>
@@ -96,227 +129,354 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- Team Section -->
-<section class="team-section">
+<!-- Enhanced Mission & Vision Section -->
+<section class="featured-blueprints-section mission-vision">
     <div class="container">
-        <div class="team-header">
-            <div class="section-badge">👥 Meet The Team</div>
-            <h2 class="section-title-fancy">The People Behind <span class="gradient-text">Your Perfect Event</span></h2>
-            <p class="section-subtitle-fancy">Our dedicated team of event professionals who make magic happen</p>
+        <div class="blueprints-grid mission-vision-grid">
+            <div class="blueprint-category-card mission-card">
+                <div class="category-icon">🎯</div>
+                <h3>Our Mission</h3>
+                <p>To provide exceptional, reliable services that simplify your life and exceed your expectations, while building lasting relationships with our clients and community.</p>
+                <div class="mission-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">✨</span>
+                        <span>Quality First</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🤝</span>
+                        <span>Trust & Reliability</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">💫</span>
+                        <span>Life Simplified</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="blueprint-category-card vision-card featured">
+                <div class="popular-badge">Our Future</div>
+                <div class="category-icon">🌟</div>
+                <h3>Our Vision</h3>
+                <p>To be the most trusted service provider, known for innovation, transparency, and making every client's life easier through comprehensive, professional solutions.</p>
+                <div class="vision-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🌍</span>
+                        <span>Community Impact</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🌿</span>
+                        <span>Sustainable Practices</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🚀</span>
+                        <span>Service Innovation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced Our Values Section -->
+<section class="how-it-works-section our-values">
+    <div class="container">
+        <div class="section-header-fancy">
+            <div class="section-badge">Core Values</div>
+            <h2 class="section-title-fancy">What <span class="gradient-text">Drives Us</span></h2>
+            <p class="section-subtitle-fancy">The principles that guide every service interaction and shape every client experience</p>
+        </div>
+        
+        <div class="steps-grid values-grid">
+            <div class="step-card value-card">
+                <div class="step-number">💎</div>
+                <h3>Excellence</h3>
+                <p>We deliver exceptional quality in every service, from basic cleaning to complex business consulting. Your satisfaction is our measure of success.</p>
+                <div class="value-examples">
+                    <span class="example-tag">Quality First</span>
+                    <span class="example-tag">Skilled Professionals</span>
+                    <span class="example-tag">Superior Results</span>
+                </div>
+            </div>
+            
+            <div class="step-card value-card">
+                <div class="step-number">🤝</div>
+                <h3>Trust & Reliability</h3>
+                <p>Your home, business, and family deserve trustworthy professionals. We're vetted, insured, and committed to earning your confidence with every service.</p>
+                <div class="value-examples">
+                    <span class="example-tag">Background Checked</span>
+                    <span class="example-tag">Fully Insured</span>
+                    <span class="example-tag">Reliable Service</span>
+                </div>
+            </div>
+            
+            <div class="step-card value-card">
+                <div class="step-number">💰</div>
+                <h3>Transparent Pricing</h3>
+                <p>No hidden fees, no surprises. Our upfront pricing ensures you know exactly what you're paying for, creating trust and peace of mind.</p>
+                <div class="value-examples">
+                    <span class="example-tag">Clear Quotes</span>
+                    <span class="example-tag">No Hidden Fees</span>
+                    <span class="example-tag">Fair Pricing</span>
+                </div>
+            </div>
+            
+            <div class="step-card value-card">
+                <div class="step-number">🌱</div>
+                <h3>Community Care</h3>
+                <p>We're more than a service provider - we're your neighbors. We invest in our community and treat every client like family.</p>
+                <div class="value-examples">
+                    <span class="example-tag">Local Focus</span>
+                    <span class="example-tag">Community Support</span>
+                    <span class="example-tag">Personal Touch</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced Team Section -->
+<section class="services-section-fancy team-section">
+    <div class="container">
+        <div class="section-header-fancy">
+            <div class="section-badge">Our Team</div>
+            <h2 class="section-title-fancy">Meet Our <span class="gradient-text">Expert Team</span></h2>
+            <p class="section-subtitle-fancy">Dedicated professionals committed to delivering exceptional service and exceeding your expectations</p>
         </div>
         
         <div class="team-grid">
-            <div class="team-member">
-                <div class="member-image">
-                    <div class="member-avatar">👨‍💼</div>
-                    <div class="member-overlay">
-                        <div class="member-social">
-                            <a href="#" class="social-link">💼</a>
-                            <a href="#" class="social-link">📧</a>
-                        </div>
-                    </div>
+            <div class="team-member-card">
+                <div class="member-avatar">
+                    <div class="avatar-placeholder">👨‍💼</div>
                 </div>
                 <div class="member-info">
-                    <h4>Michael Rodriguez</h4>
+                    <h4>John Smith</h4>
                     <p class="member-role">Founder & CEO</p>
-                    <p class="member-description">10+ years of event planning experience with a passion for creating unforgettable celebrations.</p>
+                    <p class="member-bio">15+ years of experience in service management and business development.</p>
+                    <div class="member-expertise">
+                        <span class="expertise-tag">Business Strategy</span>
+                        <span class="expertise-tag">Service Quality</span>
+                        <span class="expertise-tag">Team Leadership</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="team-member">
-                <div class="member-image">
-                    <div class="member-avatar">👩‍💼</div>
-                    <div class="member-overlay">
-                        <div class="member-social">
-                            <a href="#" class="social-link">💼</a>
-                            <a href="#" class="social-link">📧</a>
-                        </div>
-                    </div>
+            <div class="team-member-card">
+                <div class="member-avatar">
+                    <div class="avatar-placeholder">👩‍💼</div>
                 </div>
                 <div class="member-info">
                     <h4>Sarah Johnson</h4>
-                    <p class="member-role">Event Coordinator</p>
-                    <p class="member-description">Detail-oriented coordinator who ensures every event runs smoothly from start to finish.</p>
+                    <p class="member-role">Operations Manager</p>
+                    <p class="member-bio">Expert in streamlining operations and ensuring service excellence across all categories.</p>
+                    <div class="member-expertise">
+                        <span class="expertise-tag">Operations</span>
+                        <span class="expertise-tag">Quality Control</span>
+                        <span class="expertise-tag">Process Optimization</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="team-member">
-                <div class="member-image">
-                    <div class="member-avatar">👨‍🔧</div>
-                    <div class="member-overlay">
-                        <div class="member-social">
-                            <a href="#" class="social-link">💼</a>
-                            <a href="#" class="social-link">📧</a>
-                        </div>
-                    </div>
+            <div class="team-member-card">
+                <div class="member-avatar">
+                    <div class="avatar-placeholder">👨‍🔧</div>
                 </div>
                 <div class="member-info">
-                    <h4>David Chen</h4>
-                    <p class="member-role">Setup Supervisor</p>
-                    <p class="member-description">Expert in logistics and setup, ensuring every piece of equipment is perfectly placed.</p>
+                    <h4>Mike Davis</h4>
+                    <p class="member-role">Service Coordinator</p>
+                    <p class="member-bio">Specializes in coordinating complex service requests and ensuring client satisfaction.</p>
+                    <div class="member-expertise">
+                        <span class="expertise-tag">Service Coordination</span>
+                        <span class="expertise-tag">Client Relations</span>
+                        <span class="expertise-tag">Problem Solving</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="team-member">
-                <div class="member-image">
-                    <div class="member-avatar">👩‍💻</div>
-                    <div class="member-overlay">
-                        <div class="member-social">
-                            <a href="#" class="social-link">💼</a>
-                            <a href="#" class="social-link">📧</a>
-                        </div>
-                    </div>
+            <div class="team-member-card">
+                <div class="member-avatar">
+                    <div class="avatar-placeholder">👩‍🎨</div>
                 </div>
                 <div class="member-info">
-                    <h4>Emily Davis</h4>
-                    <p class="member-role">Customer Success</p>
-                    <p class="member-description">Dedicated to ensuring every customer has an amazing experience from inquiry to event day.</p>
+                    <h4>Emily Chen</h4>
+                    <p class="member-role">Creative Services Lead</p>
+                    <p class="member-bio">Passionate about delivering creative solutions that exceed client expectations.</p>
+                    <div class="member-expertise">
+                        <span class="expertise-tag">Creative Design</span>
+                        <span class="expertise-tag">Digital Services</span>
+                        <span class="expertise-tag">Brand Development</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Values Section -->
-<section class="values-section">
+<!-- Enhanced Awards & Recognition Section -->
+<section class="featured-blueprints-section awards-section">
     <div class="container">
-        <div class="values-header">
-            <div class="section-badge">💎 Our Values</div>
-            <h2 class="section-title-fancy">What Drives <span class="gradient-text">Everything We Do</span></h2>
+        <div class="section-header-fancy">
+            <div class="section-badge">Recognition</div>
+            <h2 class="section-title-fancy">Awards & <span class="gradient-text">Recognition</span></h2>
+            <p class="section-subtitle-fancy">Our commitment to excellence has been recognized by industry leaders and satisfied clients</p>
         </div>
         
-        <div class="values-grid">
-            <div class="value-card">
-                <div class="value-icon">🏆</div>
-                <h4>Excellence</h4>
-                <p>We set the highest standards for our equipment and service, ensuring every event is executed flawlessly.</p>
+        <div class="awards-grid">
+            <div class="award-card">
+                <div class="award-icon">🏆</div>
+                <h4>Best Service Provider 2024</h4>
+                <p>Local Business Association</p>
+                <div class="award-year">2024</div>
             </div>
             
-            <div class="value-card">
-                <div class="value-icon">🤝</div>
-                <h4>Reliability</h4>
-                <p>When you choose us, you can trust that we'll deliver on our promises, on time, every time.</p>
+            <div class="award-card">
+                <div class="award-icon">⭐</div>
+                <h4>Excellence in Customer Service</h4>
+                <p>Service Industry Awards</p>
+                <div class="award-year">2023</div>
             </div>
             
-            <div class="value-card">
-                <div class="value-icon">💡</div>
-                <h4>Innovation</h4>
-                <p>We continuously invest in the latest equipment and techniques to bring fresh ideas to your celebrations.</p>
+            <div class="award-card">
+                <div class="award-icon">🌟</div>
+                <h4>Community Choice Award</h4>
+                <p>Local Community Votes</p>
+                <div class="award-year">2023</div>
             </div>
             
-            <div class="value-card">
-                <div class="value-icon">❤️</div>
-                <h4>Passion</h4>
-                <p>We genuinely love what we do and it shows in every interaction and every event we support.</p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-icon">🌟</div>
-                <h4>Customer Focus</h4>
-                <p>Your satisfaction is our success. We go above and beyond to exceed your expectations.</p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-icon">🌱</div>
-                <h4>Sustainability</h4>
-                <p>We're committed to eco-friendly practices and sustainable business operations for a better future.</p>
+            <div class="award-card">
+                <div class="award-icon">💎</div>
+                <h4>Quality Assurance Certified</h4>
+                <p>Service Quality Institute</p>
+                <div class="award-year">2022</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Achievements Section -->
-<section class="achievements-section">
+<!-- Enhanced Call to Action -->
+<section class="cta-section-fancy">
     <div class="container">
-        <div class="achievements-content">
-            <div class="achievements-text">
-                <div class="section-badge">🏅 Our Achievements</div>
-                <h2 class="section-title-fancy">Recognition & <span class="gradient-text">Awards</span></h2>
-                <p class="section-subtitle-fancy">We're proud of the recognition we've received for our commitment to excellence</p>
-            </div>
-            
-            <div class="achievements-grid">
-                <div class="achievement-item">
-                    <div class="achievement-icon">🥇</div>
-                    <h4>Best Party Rental Service</h4>
-                    <p>2023 Local Business Awards</p>
-                </div>
-                
-                <div class="achievement-item">
-                    <div class="achievement-icon">⭐</div>
-                    <h4>5-Star Rating</h4>
-                    <p>Google Reviews & Yelp</p>
-                </div>
-                
-                <div class="achievement-item">
-                    <div class="achievement-icon">🎖️</div>
-                    <h4>Excellence in Service</h4>
-                    <p>BBB Accredited Business</p>
-                </div>
-                
-                <div class="achievement-item">
-                    <div class="achievement-icon">💚</div>
-                    <h4>Eco-Friendly Certified</h4>
-                    <p>Green Business Initiative</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Call to Action -->
-<section class="about-cta-section">
-    <div class="container">
-        <div class="cta-content">
-            <h2>Ready to Start Planning Your <span class="gradient-text">Perfect Event?</span></h2>
-            <p>Let our experienced team help you create memories that will last a lifetime</p>
-            <div class="cta-buttons">
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="cta-btn primary">
-                    <span>Get Your Free Quote</span>
-                    <div class="btn-glow"></div>
+        <div class="cta-content-fancy">
+            <div class="cta-badge">Ready to Experience Excellence?</div>
+            <h2 class="cta-title-fancy">Start Your <span class="gradient-text">Service Journey</span></h2>
+            <p class="cta-subtitle-fancy">Join thousands of satisfied clients who trust us with their service needs.</p>
+            <div class="cta-buttons-fancy">
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-primary-fancy">
+                    <span>Get Started Today</span>
+                    <i class="arrow-right">→</i>
                 </a>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="cta-btn secondary">
-                    <span>View Our Services</span>
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn-secondary-fancy">
+                    <span>Explore Services</span>
+                    <i class="services-icon">🛠️</i>
                 </a>
+            </div>
+            <div class="cta-trust-indicators">
+                <div class="trust-item">
+                    <span class="trust-icon">🆓</span>
+                    <span>Free Consultation</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🔒</span>
+                    <span>Fully Insured</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">💯</span>
+                    <span>Satisfaction Guaranteed</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <script>
-// Animate stats when in view
+// Enhanced JavaScript for about page
 document.addEventListener('DOMContentLoaded', function() {
-    const stats = document.querySelectorAll('.stat-number');
+    // Animate numbers on scroll
+    const statNumbers = document.querySelectorAll('.stat-number[data-count]');
     
-    const animateStats = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const stat = entry.target;
-                const finalValue = parseInt(stat.textContent.replace(/\D/g, ''));
-                const suffix = stat.textContent.replace(/\d/g, '');
-                let currentValue = 0;
-                const increment = finalValue / 50;
-                
-                const timer = setInterval(() => {
-                    currentValue += increment;
-                    if (currentValue >= finalValue) {
-                        stat.textContent = finalValue + suffix;
-                        clearInterval(timer);
-                    } else {
-                        stat.textContent = Math.floor(currentValue) + suffix;
-                    }
-                }, 30);
-                
-                observer.unobserve(stat);
+    const animateNumbers = () => {
+        statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-count'));
+            const current = parseInt(stat.textContent);
+            const increment = target / 100;
+            
+            if (current < target) {
+                stat.textContent = Math.ceil(current + increment);
+                setTimeout(animateNumbers, 20);
+            } else {
+                stat.textContent = target;
             }
         });
     };
     
-    const observer = new IntersectionObserver(animateStats, {
-        threshold: 0.5
+    // Trigger animation when stats are visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateNumbers();
+                observer.unobserve(entry.target);
+            }
+        });
     });
     
-    stats.forEach(stat => observer.observe(stat));
+    const statsSection = document.querySelector('.hero-stats');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+    
+    // Timeline animation
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    });
+    
+    timelineItems.forEach(item => {
+        timelineObserver.observe(item);
+    });
+    
+    // Team member cards hover effect
+    const teamCards = document.querySelectorAll('.team-member-card');
+    teamCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.2)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+        });
+    });
+    
+    // Award cards animation
+    const awardCards = document.querySelectorAll('.award-card');
+    const awardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    });
+    
+    awardCards.forEach(card => {
+        awardObserver.observe(card);
+    });
+    
+    // Value cards interaction
+    const valueCards = document.querySelectorAll('.value-card');
+    valueCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Add click effect
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+    });
 });
 </script>
 

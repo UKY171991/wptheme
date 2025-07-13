@@ -4,695 +4,785 @@ Template Name: Contact Page
 */
 get_header(); ?>
 
-<!-- Contact Hero Section -->
-<section class="contact-hero-section">
+<!-- Enhanced Contact Hero Section -->
+<section class="hero-section-advanced contact-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-particles"></div>
     <div class="container">
-        <div class="contact-hero-content">
-            <div class="contact-hero-badge">
-                <span class="badge-icon">💬</span>
-                <span class="badge-text">Let's Connect</span>
-            </div>
-            <h1 class="contact-hero-title">
-                Ready to Create 
-                <span class="gradient-text">Something Amazing?</span>
-            </h1>
-            <p class="contact-hero-subtitle">Let's turn your vision into an unforgettable celebration. Our expert team is here to make your event dreams come true!</p>
-            
-            <div class="contact-hero-stats">
-                <div class="contact-stat-card">
-                    <div class="stat-icon">🏆</div>
-                    <div class="stat-content">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-text">Events Completed</div>
-                    </div>
+        <div class="hero-content">
+            <div class="hero-badge">📞 Get In Touch</div>
+            <h1 class="hero-title-fancy">Let's Start Your <span class="gradient-text">Service Journey</span></h1>
+            <p class="hero-subtitle-fancy">Ready to make your life easier? Contact us today for a free consultation and personalized service recommendations.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="2">0</div>
+                    <div class="stat-label">Hour Response</div>
                 </div>
-                <div class="contact-stat-card">
-                    <div class="stat-icon">⚡</div>
-                    <div class="stat-content">
-                        <div class="stat-number">&lt; 2hrs</div>
-                        <div class="stat-text">Average Response</div>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="99">0</div>
+                    <div class="stat-label">% Satisfaction</div>
                 </div>
-                <div class="contact-stat-card">
-                    <div class="stat-icon">⭐</div>
-                    <div class="stat-content">
-                        <div class="stat-number">5 Star</div>
-                        <div class="stat-text">Service Rating</div>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-label">+ Services</div>
                 </div>
-            </div>
-            
-            <!-- Quick Action Buttons -->
-            <div class="hero-quick-actions">
-                <a href="#contact-form" class="quick-action-btn primary">
-                    <span class="btn-icon">📝</span>
-                    <span class="btn-text">Get Quote</span>
-                </a>
-                <a href="tel:<?php echo esc_attr(get_theme_mod('contact_phone', '+1 555 123-4567')); ?>" class="quick-action-btn secondary">
-                    <span class="btn-icon">📞</span>
-                    <span class="btn-text">Call Now</span>
-                </a>
-                <a href="https://wa.me/15551234567" class="quick-action-btn whatsapp">
-                    <span class="btn-icon">💬</span>
-                    <span class="btn-text">WhatsApp</span>
-                </a>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="24">0</div>
+                    <div class="stat-label">/7 Support</div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Contact Form & Info Section -->
-<section class="contact-main-section" id="contact-form">
+<!-- Contact Information Section -->
+<section class="services-section-fancy contact-info-section">
     <div class="container">
-        <div class="contact-grid">
-            <!-- Contact Form -->
-            <div class="contact-form-container">
-                <div class="form-header">
-                    <div class="form-icon">📝</div>
-                    <h2 class="form-title">Tell Us About Your Event</h2>
-                    <p class="form-subtitle">Fill out the form below and we'll get back to you within 24 hours with a customized quote!</p>
+        <div class="section-header-fancy">
+            <div class="section-badge">Contact Information</div>
+            <h2 class="section-title-fancy">Multiple Ways to <span class="gradient-text">Reach Us</span></h2>
+            <p class="section-subtitle-fancy">Choose the most convenient way to get in touch with our team</p>
+        </div>
+        
+        <div class="contact-methods-grid">
+            <div class="contact-method-card">
+                <div class="method-icon">📞</div>
+                <h3>Phone Support</h3>
+                <p>Speak directly with our service experts</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-label">Main Office:</span>
+                        <a href="tel:+1-555-123-4567" class="contact-value">+1 (555) 123-4567</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Emergency:</span>
+                        <a href="tel:+1-555-999-8888" class="contact-value">+1 (555) 999-8888</a>
+                    </div>
+                </div>
+                <div class="method-features">
+                    <span class="feature-tag">24/7 Available</span>
+                    <span class="feature-tag">Quick Response</span>
+                    <span class="feature-tag">Expert Support</span>
+                </div>
+            </div>
+            
+            <div class="contact-method-card featured">
+                <div class="popular-badge">Recommended</div>
+                <div class="method-icon">📧</div>
+                <h3>Email Support</h3>
+                <p>Send us a detailed message for comprehensive assistance</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-label">General Inquiries:</span>
+                        <a href="mailto:info@servicecompany.com" class="contact-value">info@servicecompany.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Support:</span>
+                        <a href="mailto:support@servicecompany.com" class="contact-value">support@servicecompany.com</a>
+                    </div>
+                </div>
+                <div class="method-features">
+                    <span class="feature-tag">Detailed Responses</span>
+                    <span class="feature-tag">File Attachments</span>
+                    <span class="feature-tag">Documentation</span>
+                </div>
+            </div>
+            
+            <div class="contact-method-card">
+                <div class="method-icon">💬</div>
+                <h3>Live Chat</h3>
+                <p>Get instant answers from our online support team</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-label">Available:</span>
+                        <span class="contact-value">Mon-Fri 8AM-8PM</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">Response:</span>
+                        <span class="contact-value">Under 2 minutes</span>
+                    </div>
+                </div>
+                <div class="method-features">
+                    <span class="feature-tag">Instant Chat</span>
+                    <span class="feature-tag">Quick Answers</span>
+                    <span class="feature-tag">Real-time Support</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced Contact Form Section -->
+<section class="featured-blueprints-section contact-form-section">
+    <div class="container">
+        <div class="contact-form-wrapper">
+            <div class="form-content">
+                <div class="section-header-fancy">
+                    <div class="section-badge">Send Message</div>
+                    <h2 class="section-title-fancy">Tell Us About Your <span class="gradient-text">Service Needs</span></h2>
+                    <p class="section-subtitle-fancy">Fill out the form below and we'll get back to you within 2 hours with a personalized service plan.</p>
                 </div>
                 
-                <form class="contact-form single-line-form" method="post" action="">
-                    <?php wp_nonce_field('contact_form_nonce', 'contact_nonce'); ?>
+                <div class="form-benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">⚡</span>
+                        <span>2-hour response time</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🎯</span>
+                        <span>Personalized recommendations</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">💰</span>
+                        <span>Free consultation</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">📋</span>
+                        <span>Detailed service quotes</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form-fancy">
+                <form id="contact-form" class="enhanced-form">
+                    <div class="form-progress-bar">
+                        <div class="progress-step active" data-step="1">
+                            <div class="step-icon">👤</div>
+                            <div class="step-label">Personal Info</div>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                            <div class="step-icon">🛠️</div>
+                            <div class="step-label">Service Needs</div>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                            <div class="step-icon">📅</div>
+                            <div class="step-label">Schedule</div>
+                        </div>
+                        <div class="progress-step" data-step="4">
+                            <div class="step-icon">✅</div>
+                            <div class="step-label">Review</div>
+                        </div>
+                        <div class="progress-line">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
                     
-                    <div class="single-field-container">
-                        <div class="field-wrapper">
-                            <span class="field-icon">💬</span>
-                            <input type="text" 
-                                   id="quick_message" 
-                                   name="quick_message" 
-                                   placeholder="Tell us about your event - include your name, contact, and party details..." 
-                                   class="single-field-input"
-                                   required>
-                            <button type="submit" class="single-field-submit">
-                                <span class="submit-icon">🚀</span>
-                                <span class="submit-text">Send</span>
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step active" data-step="1">
+                        <div class="step-header">
+                            <h4>Personal Information</h4>
+                            <p>Let us know who you are and how to reach you</p>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group-fancy">
+                                <label for="first_name">First Name *</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">👤</span>
+                                    <input type="text" id="first_name" name="first_name" required>
+                                </div>
+                            </div>
+                            <div class="form-group-fancy">
+                                <label for="last_name">Last Name *</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">👤</span>
+                                    <input type="text" id="last_name" name="last_name" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group-fancy">
+                                <label for="email">Email Address *</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">📧</span>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group-fancy">
+                                <label for="phone">Phone Number *</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">📞</span>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group-fancy">
+                            <label for="address">Service Address</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">📍</span>
+                                <input type="text" id="address" name="address" placeholder="Enter your service address">
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <div></div>
+                            <button type="button" class="btn-next" data-next="2">
+                                <span>Next Step</span>
+                                <i class="arrow-right">→</i>
                             </button>
                         </div>
-                        <div class="field-hint">
-                            <span class="hint-icon">💡</span>
-                            <span class="hint-text">Example: "Hi! I'm Sarah, planning a birthday party for 50 guests on July 20th. Need tables, chairs, and a bounce house. Call me at (555) 123-4567"</span>
+                    </div>
+                    
+                    <!-- Step 2: Service Needs -->
+                    <div class="form-step" data-step="2">
+                        <div class="step-header">
+                            <h4>Service Requirements</h4>
+                            <p>Tell us what services you need and any specific requirements</p>
+                        </div>
+                        
+                        <div class="form-group-fancy">
+                            <label for="service_category">Primary Service Category *</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">🛠️</span>
+                                <select id="service_category" name="service_category" required>
+                                    <option value="">Select a service category</option>
+                                    <option value="home-cleaning">Home & Cleaning</option>
+                                    <option value="property-maintenance">Property Maintenance</option>
+                                    <option value="personal-errands">Personal Errands</option>
+                                    <option value="pet-services">Pet Services</option>
+                                    <option value="family-support">Family Support</option>
+                                    <option value="creative-digital">Creative & Digital</option>
+                                    <option value="coaching-consulting">Coaching & Consulting</option>
+                                    <option value="office-admin">Office & Admin</option>
+                                    <option value="selling-setup">Selling & Setup</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group-fancy">
+                            <label for="specific_services">Specific Services Needed</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">📋</span>
+                                <textarea id="specific_services" name="specific_services" rows="3" placeholder="List the specific services you need (e.g., deep cleaning, pet sitting, handyman work)"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group-fancy">
+                            <label for="urgency">Urgency Level</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">⏰</span>
+                                <select id="urgency" name="urgency">
+                                    <option value="not-urgent">Not Urgent (Within a week)</option>
+                                    <option value="moderate">Moderate (Within 3 days)</option>
+                                    <option value="urgent">Urgent (Within 24 hours)</option>
+                                    <option value="emergency">Emergency (Same day)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn-prev" data-prev="1">
+                                <i class="arrow-left">←</i>
+                                <span>Previous</span>
+                            </button>
+                            <button type="button" class="btn-next" data-next="3">
+                                <span>Next Step</span>
+                                <i class="arrow-right">→</i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Schedule -->
+                    <div class="form-step" data-step="3">
+                        <div class="step-header">
+                            <h4>Preferred Schedule</h4>
+                            <p>Let us know when you'd like the service to be performed</p>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group-fancy">
+                                <label for="preferred_date">Preferred Date</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">📅</span>
+                                    <input type="date" id="preferred_date" name="preferred_date">
+                                </div>
+                            </div>
+                            <div class="form-group-fancy">
+                                <label for="preferred_time">Preferred Time</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">🕐</span>
+                                    <select id="preferred_time" name="preferred_time">
+                                        <option value="">Any time</option>
+                                        <option value="morning">Morning (8AM-12PM)</option>
+                                        <option value="afternoon">Afternoon (12PM-4PM)</option>
+                                        <option value="evening">Evening (4PM-8PM)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group-fancy">
+                            <label for="budget_range">Budget Range</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">💰</span>
+                                <select id="budget_range" name="budget_range">
+                                    <option value="">No specific budget</option>
+                                    <option value="under-100">Under $100</option>
+                                    <option value="100-300">$100 - $300</option>
+                                    <option value="300-500">$300 - $500</option>
+                                    <option value="500-1000">$500 - $1,000</option>
+                                    <option value="over-1000">Over $1,000</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn-prev" data-prev="2">
+                                <i class="arrow-left">←</i>
+                                <span>Previous</span>
+                            </button>
+                            <button type="button" class="btn-next" data-next="4">
+                                <span>Next Step</span>
+                                <i class="arrow-right">→</i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Review & Submit -->
+                    <div class="form-step" data-step="4">
+                        <div class="step-header">
+                            <h4>Review & Submit</h4>
+                            <p>Review your information and submit your request</p>
+                        </div>
+                        
+                        <div class="form-summary">
+                            <div class="summary-section">
+                                <h5>Personal Information</h5>
+                                <div class="summary-content" id="personal-summary"></div>
+                            </div>
+                            <div class="summary-section">
+                                <h5>Service Requirements</h5>
+                                <div class="summary-content" id="service-summary"></div>
+                            </div>
+                            <div class="summary-section">
+                                <h5>Schedule & Budget</h5>
+                                <div class="summary-content" id="schedule-summary"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group-fancy">
+                            <label for="additional_notes">Additional Notes</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">📝</span>
+                                <textarea id="additional_notes" name="additional_notes" rows="4" placeholder="Any additional information or special requirements..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group-fancy">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="newsletter" value="1">
+                                <span class="checkmark"></span>
+                                Subscribe to our newsletter for service updates and special offers
+                            </label>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn-prev" data-prev="3">
+                                <i class="arrow-left">←</i>
+                                <span>Previous</span>
+                            </button>
+                            <button type="submit" class="btn-submit">
+                                <span>Submit Request</span>
+                                <i class="submit-icon">📤</i>
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Live Chat Widget -->
+<div class="live-chat-widget" id="chatWindow">
+    <div class="chat-header">
+        <div class="chat-title">
+            <span class="chat-icon">💬</span>
+            <span>Live Chat Support</span>
+        </div>
+        <button class="chat-close" id="chatClose">×</button>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages">
+        <div class="chat-message agent-message">
+            <div class="message-avatar">👨‍💼</div>
+            <div class="message-content">
+                <div class="message-text">Hi! I'm here to help you find the perfect services. How can I assist you today?</div>
+                <div class="message-time">Just now</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="quick-options">
+        <button class="quick-option" data-message="I need home cleaning services">🏠 Home Cleaning</button>
+        <button class="quick-option" data-message="I need handyman services">🔧 Handyman</button>
+        <button class="quick-option" data-message="I need pet care services">🐕 Pet Care</button>
+        <button class="quick-option" data-message="I need business consulting">💼 Business Help</button>
+    </div>
+    
+    <div class="chat-input">
+        <input type="text" placeholder="Type your message..." id="chatInput">
+        <button class="send-btn" id="sendBtn">📤</button>
+    </div>
+</div>
+
+<!-- Chat Toggle Button -->
+<div class="chat-toggle" id="chatToggle">
+    <div class="chat-icon">💬</div>
+    <div class="chat-notification" id="chatNotification">1</div>
+</div>
+
+<!-- Office Location Section -->
+<section class="services-section-fancy office-section">
+    <div class="container">
+        <div class="section-header-fancy">
+            <div class="section-badge">Visit Us</div>
+            <h2 class="section-title-fancy">Our <span class="gradient-text">Office Location</span></h2>
+            <p class="section-subtitle-fancy">Stop by our office for a face-to-face consultation</p>
+        </div>
+        
+        <div class="office-info-grid">
+            <div class="office-details">
+                <div class="office-card">
+                    <div class="office-icon">🏢</div>
+                    <h3>Main Office</h3>
+                    <div class="office-address">
+                        <p><strong>123 Service Street</strong></p>
+                        <p>Suite 100</p>
+                        <p>City, State 12345</p>
+                    </div>
+                    <div class="office-hours">
+                        <h4>Office Hours</h4>
+                        <div class="hours-grid">
+                            <div class="hours-item">
+                                <span class="day">Monday - Friday</span>
+                                <span class="time">8:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="hours-item">
+                                <span class="day">Saturday</span>
+                                <span class="time">9:00 AM - 4:00 PM</span>
+                            </div>
+                            <div class="hours-item">
+                                <span class="day">Sunday</span>
+                                <span class="time">Closed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="office-features">
+                        <span class="feature-tag">Free Parking</span>
+                        <span class="feature-tag">Wheelchair Accessible</span>
+                        <span class="feature-tag">Meeting Rooms</span>
+                    </div>
+                </div>
+            </div>
             
-            <!-- Contact Information -->
-            <div class="contact-info-container">
-                <!-- Main Contact Card -->
-                <div class="contact-card-main">
-                    <div class="contact-card-header">
-                        <div class="header-icon">🏢</div>
-                        <h3>Get In Touch</h3>
-                        <p>Multiple ways to reach our team</p>
-                    </div>
-                    
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div class="method-icon">📞</div>
-                            <div class="method-content">
-                                <h4>Call Us</h4>
-                                <p class="method-value"><?php echo esc_html(get_theme_mod('contact_phone', '(555) 123-4567')); ?></p>
-                                <p class="method-description">Speak directly with our team</p>
-                                <a href="tel:<?php echo esc_attr(get_theme_mod('contact_phone', '+15551234567')); ?>" class="method-action-btn">
-                                    Call Now
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-method">
-                            <div class="method-icon">📧</div>
-                            <div class="method-content">
-                                <h4>Email Us</h4>
-                                <p class="method-value"><?php echo esc_html(get_theme_mod('contact_email', 'hello@partyrentals.com')); ?></p>
-                                <p class="method-description">Send us your questions</p>
-                                <a href="mailto:<?php echo esc_attr(get_theme_mod('contact_email', 'hello@partyrentals.com')); ?>" class="method-action-btn">
-                                    Send Email
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-method">
-                            <div class="method-icon">💬</div>
-                            <div class="method-content">
-                                <h4>WhatsApp</h4>
-                                <p class="method-value"><?php echo esc_html(get_theme_mod('whatsapp_number', '+1 (555) 123-4567')); ?></p>
-                                <p class="method-description">Quick responses guaranteed</p>
-                                <a href="https://wa.me/<?php echo esc_attr(str_replace(['+', ' ', '(', ')', '-'], '', get_theme_mod('whatsapp_number', '15551234567'))); ?>" class="method-action-btn">
-                                    Chat Now
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-method">
-                            <div class="method-icon">📍</div>
-                            <div class="method-content">
-                                <h4>Visit Us</h4>
-                                <p class="method-value"><?php echo esc_html(get_theme_mod('business_address', '123 Party Street')); ?></p>
-                                <p class="method-description"><?php echo esc_html(get_theme_mod('business_city', 'Event City, EC 12345')); ?></p>
-                                <a href="https://maps.google.com/?q=<?php echo urlencode(get_theme_mod('business_address', '123 Party Street') . ' ' . get_theme_mod('business_city', 'Event City')); ?>" class="method-action-btn">
-                                    Get Directions
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Response Promise Card -->
-                <div class="response-promise">
-                    <div class="promise-icon">⚡</div>
-                    <div class="promise-content">
-                        <h4>Lightning Fast Response</h4>
-                        <p>We respond to all inquiries within 24 hours. Urgent requests get priority treatment!</p>
-                        <div class="response-stats">
-                            <div class="response-stat">
-                                <span class="stat-number">&lt; 2hrs</span>
-                                <span class="stat-label">Average Response</span>
-                            </div>
-                            <div class="response-stat">
-                                <span class="stat-number">24/7</span>
-                                <span class="stat-label">Emergency Line</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Business Hours Card -->
-                <div class="business-hours">
-                    <div class="hours-header">
-                        <div class="hours-icon">🕒</div>
-                        <h4>Business Hours</h4>
-                    </div>
-                    
-                    <div class="hours-list">
-                        <div class="hours-item">
-                            <span class="day">Monday - Friday</span>
-                            <span class="time">8:00 AM - 8:00 PM</span>
-                        </div>
-                        <div class="hours-item">
-                            <span class="day">Saturday</span>
-                            <span class="time">9:00 AM - 6:00 PM</span>
-                        </div>
-                        <div class="hours-item">
-                            <span class="day">Sunday</span>
-                            <span class="time">10:00 AM - 4:00 PM</span>
-                        </div>
-                        <div class="hours-item emergency">
-                            <span class="day">24/7 Emergency</span>
-                            <span class="time"><?php echo esc_html(get_theme_mod('emergency_phone', '(555) 999-HELP')); ?></span>
-                        </div>
-                    </div>
-                    
-                    <div class="current-status">
-                        <div class="status-indicator"></div>
-                        <span class="status-text" id="business-status">Checking hours...</span>
-                    </div>
-                </div>
-                
-                <!-- Testimonial Card -->
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <h4>🌟 What Our Clients Say</h4>
-                    </div>
-                    <div class="testimonial-content">
-                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Absolutely incredible service! They made our wedding perfect."</p>
-                        <div class="testimonial-author">- Sarah & Mike</div>
-                    </div>
+            <div class="office-map">
+                <div class="map-placeholder">
+                    <div class="map-icon">🗺️</div>
+                    <h4>Interactive Map</h4>
+                    <p>Click to view our location on Google Maps</p>
+                    <a href="https://maps.google.com" target="_blank" class="map-link">
+                        <span>View on Google Maps</span>
+                        <i class="external-icon">↗</i>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- FAQ Section -->
-<section class="contact-faq-section">
+<!-- Enhanced Call to Action -->
+<section class="cta-section-fancy">
     <div class="container">
-        <div class="faq-header">
-            <h2>💡 Frequently Asked Questions</h2>
-            <p>Quick answers to common questions</p>
-        </div>
-        
-        <div class="faq-grid">
-            <div class="faq-item">
-                <div class="faq-question">How far in advance should I book?</div>
-                <div class="faq-answer">We recommend booking 2-4 weeks in advance, especially for weekend events. Popular dates fill up quickly!</div>
+        <div class="cta-content-fancy">
+            <div class="cta-badge">Ready to Get Started?</div>
+            <h2 class="cta-title-fancy">Let's Make Your Life <span class="gradient-text">Easier Today</span></h2>
+            <p class="cta-subtitle-fancy">Join thousands of satisfied clients who trust us with their service needs.</p>
+            <div class="cta-buttons-fancy">
+                <a href="tel:+1-555-123-4567" class="btn-primary-fancy">
+                    <span>Call Now</span>
+                    <i class="phone-icon">📞</i>
+                </a>
+                <a href="mailto:info@servicecompany.com" class="btn-secondary-fancy">
+                    <span>Send Email</span>
+                    <i class="email-icon">📧</i>
+                </a>
             </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Do you deliver and set up?</div>
-                <div class="faq-answer">Yes! All our packages include professional delivery, setup, and breakdown. You just focus on enjoying your event.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">What's your service area?</div>
-                <div class="faq-answer">We serve within a 50-mile radius. Extended delivery is available for an additional fee.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Do you have backup equipment?</div>
-                <div class="faq-answer">Absolutely! We always bring backup equipment to ensure your event goes smoothly, no matter what.</div>
+            <div class="cta-trust-indicators">
+                <div class="trust-item">
+                    <span class="trust-icon">⚡</span>
+                    <span>2-Hour Response</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🔒</span>
+                    <span>Fully Insured</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">💯</span>
+                    <span>Satisfaction Guaranteed</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <script>
-// Fancy Contact Form JavaScript
+// Enhanced Contact Page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     
-    let currentSection = 1;
-    const totalSections = 4;
+    // Multi-step form functionality
+    const formSteps = document.querySelectorAll('.form-step');
+    const progressSteps = document.querySelectorAll('.progress-step');
+    const progressFill = document.querySelector('.progress-fill');
     
-    // Initialize form
-    initializeFancyForm();
-    
-    function initializeFancyForm() {
-        updateProgressBar();
-        setupFormValidation();
-        setupStepNavigation();
-        setupFancyInputs();
-        setupBudgetSlider();
-        setupServiceCards();
-        setupFormSubmission();
+    function showStep(stepNumber) {
+        formSteps.forEach(step => step.classList.remove('active'));
+        progressSteps.forEach(step => step.classList.remove('active'));
+        
+        document.querySelector(`[data-step="${stepNumber}"]`).classList.add('active');
+        progressSteps[stepNumber - 1].classList.add('active');
+        
+        // Update progress bar
+        const progress = ((stepNumber - 1) / (progressSteps.length - 1)) * 100;
+        if (progressFill) {
+            progressFill.style.width = progress + '%';
+        }
     }
     
-    // Progress Bar Management
-    function updateProgressBar() {
-        const progressFill = document.querySelector('.progress-fill');
-        const steps = document.querySelectorAll('.progress-steps .step');
-        const progress = (currentSection / totalSections) * 100;
-        
-        progressFill.style.width = progress + '%';
-        
-        steps.forEach((step, index) => {
-            const stepNumber = index + 1;
-            if (stepNumber <= currentSection) {
-                step.classList.add('active');
-                step.classList.add('completed');
-            } else {
-                step.classList.remove('active', 'completed');
-            }
-        });
-    }
-    
-    // Step Navigation
-    function setupStepNavigation() {
-        document.querySelectorAll('.btn-next').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const nextSection = parseInt(this.dataset.next);
-                if (validateCurrentSection() && nextSection <= totalSections) {
-                    showSection(nextSection);
-                }
-            });
-        });
-        
-        document.querySelectorAll('.btn-prev').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const prevSection = parseInt(this.dataset.prev);
-                if (prevSection >= 1) {
-                    showSection(prevSection);
-                }
-            });
-        });
-    }
-    
-    function showSection(sectionNumber) {
-        // Hide current section
-        document.querySelectorAll('.form-section').forEach(section => {
-            section.classList.remove('active');
-            section.style.opacity = '0';
-            section.style.transform = 'translateX(-30px)';
-        });
-        
-        setTimeout(() => {
-            currentSection = sectionNumber;
-            updateProgressBar();
+    // Next button functionality
+    document.querySelectorAll('.btn-next').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const currentStep = parseInt(this.closest('.form-step').dataset.step);
+            const nextStep = parseInt(this.dataset.next);
             
-            // Show new section
-            const targetSection = document.querySelector(`[data-section="${sectionNumber}"]`);
-            if (targetSection) {
-                targetSection.classList.add('active');
-                targetSection.style.opacity = '1';
-                targetSection.style.transform = 'translateX(0)';
-                
-                // Animate section elements
-                const elements = targetSection.querySelectorAll('.form-group, .section-title');
-                elements.forEach((el, index) => {
-                    setTimeout(() => {
-                        el.style.animation = 'slideInUp 0.6s ease forwards';
-                    }, index * 100);
-                });
-            }
-        }, 300);
-    }
-    
-    // Fancy Input Animations
-    function setupFancyInputs() {
-        // Handle input focus/blur
-        document.querySelectorAll('.fancy-input input, .fancy-select select, .fancy-textarea textarea').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.closest('.input-container, .select-container, .textarea-container').classList.add('focused');
-            });
-            
-            input.addEventListener('blur', function() {
-                const container = this.closest('.input-container, .select-container, .textarea-container');
-                if (!this.value.trim()) {
-                    container.classList.remove('focused');
-                }
-                container.classList.remove('error');
-            });
-            
-            // Check if input has value on load
-            if (input.value.trim()) {
-                input.closest('.input-container, .select-container, .textarea-container').classList.add('focused');
-            }
-        });
-        
-        // Button ripple effect
-        document.querySelectorAll('.fancy-btn, .fancy-submit').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const ripple = this.querySelector('.btn-ripple');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                ripple.classList.add('active');
-                
-                setTimeout(() => ripple.classList.remove('active'), 600);
-            });
-        });
-    }
-    
-    // Budget Slider Enhancement
-    function setupBudgetSlider() {
-        const slider = document.getElementById('budget_range');
-        const valueDisplay = document.getElementById('budget_value');
-        const sliderFill = document.querySelector('.slider-fill');
-        const sliderThumb = document.querySelector('.slider-thumb');
-        
-        if (slider && valueDisplay) {
-            function updateSlider() {
-                const value = parseInt(slider.value);
-                const min = parseInt(slider.min);
-                const max = parseInt(slider.max);
-                const percentage = ((value - min) / (max - min)) * 100;
-                
-                valueDisplay.textContent = '$' + value.toLocaleString();
-                
-                if (sliderFill) {
-                    sliderFill.style.width = percentage + '%';
-                }
-                
-                if (sliderThumb) {
-                    sliderThumb.style.left = percentage + '%';
-                }
-                
-                // Add pulse animation on change
-                valueDisplay.style.animation = 'pulse 0.3s ease';
-                setTimeout(() => {
-                    valueDisplay.style.animation = '';
-                }, 300);
-            }
-            
-            slider.addEventListener('input', updateSlider);
-            updateSlider(); // Initialize
-        }
-    }
-    
-    // Service Cards Animation
-    function setupServiceCards() {
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const checkbox = this.querySelector('input[type="checkbox"]');
-                const isChecked = !checkbox.checked;
-                checkbox.checked = isChecked;
-                
-                if (isChecked) {
-                    this.classList.add('selected');
-                    this.style.transform = 'scale(1.05)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                    }, 200);
-                } else {
-                    this.classList.remove('selected');
-                }
-                
-                // Trigger selection animation
-                const checkIndicator = this.querySelector('.check-indicator');
-                if (checkIndicator) {
-                    checkIndicator.style.animation = isChecked ? 'checkPop 0.4s ease' : '';
-                }
-            });
-        });
-    }
-    
-    // Form Validation
-    function setupFormValidation() {
-        // Real-time validation
-        document.querySelectorAll('input[required], select[required]').forEach(field => {
-            field.addEventListener('input', () => validateField(field));
-            field.addEventListener('blur', () => validateField(field));
-        });
-        
-        // Phone formatting
-        const phoneInput = document.getElementById('contact_phone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                let formatted = '';
-                
-                if (value.length > 0) {
-                    formatted = '(' + value.substring(0, 3);
-                }
-                if (value.length >= 4) {
-                    formatted += ') ' + value.substring(3, 6);
-                }
-                if (value.length >= 7) {
-                    formatted += '-' + value.substring(6, 10);
-                }
-                
-                e.target.value = formatted;
-            });
-        }
-        
-        // Character counter
-        const textarea = document.getElementById('special_requests');
-        const charCount = document.getElementById('char_count');
-        
-        if (textarea && charCount) {
-            textarea.addEventListener('input', function() {
-                const count = this.value.length;
-                charCount.textContent = count;
-                
-                const container = this.closest('.textarea-container');
-                if (count > 450) {
-                    container.classList.add('warning');
-                } else {
-                    container.classList.remove('warning');
-                }
-            });
-        }
-    }
-    
-    function validateField(field) {
-        const container = field.closest('.input-container, .select-container');
-        const validation = container?.parentElement.querySelector('.field-validation');
-        
-        container?.classList.remove('error', 'success');
-        
-        if (field.hasAttribute('required') && !field.value.trim()) {
-            container?.classList.add('error');
-            if (validation) {
-                validation.querySelector('.validation-message').textContent = 'This field is required';
-            }
-            return false;
-        }
-        
-        // Email validation
-        if (field.type === 'email' && field.value) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(field.value)) {
-                container?.classList.add('error');
-                if (validation) {
-                    validation.querySelector('.validation-message').textContent = 'Please enter a valid email';
-                }
-                return false;
-            }
-        }
-        
-        if (field.value.trim()) {
-            container?.classList.add('success');
-            if (validation) {
-                validation.querySelector('.validation-message').textContent = '';
-            }
-        }
-        
-        return true;
-    }
-    
-    function validateCurrentSection() {
-        const currentSectionEl = document.querySelector(`[data-section="${currentSection}"]`);
-        const requiredFields = currentSectionEl.querySelectorAll('input[required], select[required]');
-        let isValid = true;
-        
-        requiredFields.forEach(field => {
-            if (!validateField(field)) {
-                isValid = false;
-            }
-        });
-        
-        if (!isValid) {
-            // Shake animation for errors
-            currentSectionEl.style.animation = 'shake 0.5s ease';
-            setTimeout(() => {
-                currentSectionEl.style.animation = '';
-            }, 500);
-        }
-        
-        return isValid;
-    }
-    
-    // Form Submission
-    function setupFormSubmission() {
-        const form = document.querySelector('.fancy-form');
-        const submitBtn = document.querySelector('.fancy-submit');
-        
-        if (form && submitBtn) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                if (!validateCurrentSection()) {
-                    return;
-                }
-                
-                // Show loading state
-                submitBtn.classList.add('loading');
-                submitBtn.querySelector('.btn-text').textContent = 'Sending...';
-                
-                // Simulate form submission
-                setTimeout(() => {
-                    submitBtn.classList.remove('loading');
-                    submitBtn.classList.add('success');
-                    submitBtn.querySelector('.btn-text').textContent = '✓ Request Sent!';
-                    
-                    // Show success animation
-                    showSuccessAnimation();
-                    
-                    // Reset form after delay
-                    setTimeout(() => {
-                        resetForm();
-                    }, 3000);
-                }, 2000);
-            });
-        }
-    }
-    
-    function showSuccessAnimation() {
-        const successOverlay = document.createElement('div');
-        successOverlay.className = 'success-overlay';
-        successOverlay.innerHTML = `
-            <div class="success-content">
-                <div class="success-icon">🎉</div>
-                <h3>Thank You!</h3>
-                <p>We've received your request and will get back to you within 24 hours with a customized quote!</p>
-            </div>
-        `;
-        
-        document.body.appendChild(successOverlay);
-        
-        setTimeout(() => {
-            successOverlay.classList.add('show');
-        }, 100);
-        
-        setTimeout(() => {
-            successOverlay.classList.remove('show');
-            setTimeout(() => {
-                document.body.removeChild(successOverlay);
-            }, 300);
-        }, 2500);
-    }
-    
-    function resetForm() {
-        const form = document.querySelector('.fancy-form');
-        const submitBtn = document.querySelector('.fancy-submit');
-        
-        form.reset();
-        currentSection = 1;
-        showSection(1);
-        
-        submitBtn.classList.remove('success');
-        submitBtn.querySelector('.btn-text').textContent = 'Send My Request';
-        
-        // Reset all form states
-        document.querySelectorAll('.input-container, .select-container, .textarea-container').forEach(container => {
-            container.classList.remove('focused', 'error', 'success');
-        });
-        
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.classList.remove('selected');
-        });
-        
-        // Reset budget slider
-        const budgetSlider = document.getElementById('budget_range');
-        if (budgetSlider) {
-            budgetSlider.value = 2000;
-            budgetSlider.dispatchEvent(new Event('input'));
-        }
-    }
-    
-    // Smooth scroll for quick action buttons
-    document.querySelectorAll('.quick-action-btn[href^="#"]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            if (validateStep(currentStep)) {
+                showStep(nextStep);
+                updateFormSummary();
             }
         });
     });
     
-    // Business hours status (keeping from original)
-    function updateBusinessStatus() {
-        const now = new Date();
-        const hour = now.getHours();
-        const day = now.getDay();
-        const statusIndicator = document.querySelector('.status-indicator');
-        const statusText = document.getElementById('business-status');
+    // Previous button functionality
+    document.querySelectorAll('.btn-prev').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const currentStep = parseInt(this.closest('.form-step').dataset.step);
+            const prevStep = parseInt(this.dataset.prev);
+            showStep(prevStep);
+        });
+    });
+    
+    // Form validation
+    function validateStep(step) {
+        const currentStepElement = document.querySelector(`[data-step="${step}"]`);
+        const requiredFields = currentStepElement.querySelectorAll('[required]');
+        let isValid = true;
         
-        if (statusIndicator && statusText) {
-            let isOpen = false;
-            
-            if (day >= 1 && day <= 5) {
-                isOpen = hour >= 8 && hour < 20;
-            } else if (day === 6) {
-                isOpen = hour >= 9 && hour < 18;
-            } else if (day === 0) {
-                isOpen = hour >= 10 && hour < 16;
-            }
-            
-            if (isOpen) {
-                statusIndicator.classList.add('open');
-                statusIndicator.classList.remove('closed');
-                statusText.textContent = "We're Open Now!";
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                field.classList.add('error');
+                isValid = false;
             } else {
-                statusIndicator.classList.add('closed');
-                statusIndicator.classList.remove('open');
-                statusText.textContent = "Currently Closed";
+                field.classList.remove('error');
             }
+        });
+        
+        return isValid;
+    }
+    
+    // Update form summary
+    function updateFormSummary() {
+        const personalSummary = document.getElementById('personal-summary');
+        const serviceSummary = document.getElementById('service-summary');
+        const scheduleSummary = document.getElementById('schedule-summary');
+        
+        if (personalSummary) {
+            const firstName = document.getElementById('first_name').value || 'Not provided';
+            const lastName = document.getElementById('last_name').value || 'Not provided';
+            const email = document.getElementById('email').value || 'Not provided';
+            const phone = document.getElementById('phone').value || 'Not provided';
+            
+            personalSummary.innerHTML = `
+                <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+            `;
+        }
+        
+        if (serviceSummary) {
+            const category = document.getElementById('service_category').value || 'Not selected';
+            const services = document.getElementById('specific_services').value || 'Not specified';
+            const urgency = document.getElementById('urgency').value || 'Not specified';
+            
+            serviceSummary.innerHTML = `
+                <p><strong>Category:</strong> ${category}</p>
+                <p><strong>Services:</strong> ${services}</p>
+                <p><strong>Urgency:</strong> ${urgency}</p>
+            `;
+        }
+        
+        if (scheduleSummary) {
+            const date = document.getElementById('preferred_date').value || 'Not specified';
+            const time = document.getElementById('preferred_time').value || 'Not specified';
+            const budget = document.getElementById('budget_range').value || 'Not specified';
+            
+            scheduleSummary.innerHTML = `
+                <p><strong>Date:</strong> ${date}</p>
+                <p><strong>Time:</strong> ${time}</p>
+                <p><strong>Budget:</strong> ${budget}</p>
+            `;
         }
     }
     
-    updateBusinessStatus();
-    setInterval(updateBusinessStatus, 60000);
+    // Form submission
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<span>Sending...</span><span class="btn-icon">⏳</span>';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission
+        setTimeout(() => {
+            document.querySelector('.contact-form-fancy').innerHTML = `
+                <div class="form-success">
+                    <div class="success-icon">✅</div>
+                    <h3>Message Sent Successfully!</h3>
+                    <p>Thank you for contacting us. We'll get back to you within 2 hours with a personalized service plan.</p>
+                    <div class="success-details">
+                        <p><strong>Reference Number:</strong> #${Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
+                        <p><strong>Response Time:</strong> Within 2 hours</p>
+                    </div>
+                    <button onclick="location.reload()" class="btn-primary-fancy">
+                        <span>Send Another Message</span>
+                        <i class="arrow-right">→</i>
+                    </button>
+                </div>
+            `;
+        }, 2000);
+    });
+    
+    // Live chat functionality
+    const chatToggle = document.getElementById('chatToggle');
+    const chatWindow = document.getElementById('chatWindow');
+    const chatClose = document.getElementById('chatClose');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    
+    if (chatToggle && chatWindow) {
+        chatToggle.addEventListener('click', function() {
+            chatWindow.classList.toggle('active');
+            document.getElementById('chatNotification').style.display = 'none';
+        });
+    }
+    
+    if (chatClose) {
+        chatClose.addEventListener('click', function() {
+            chatWindow.classList.remove('active');
+        });
+    }
+    
+    // Quick options in chat
+    document.querySelectorAll('.quick-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const message = this.dataset.message;
+            addMessage(message, 'user');
+            
+            // Simulate auto-response
+            setTimeout(() => {
+                addMessage('Thanks for your interest! I\'ll connect you with the right team member.', 'agent');
+            }, 1000);
+        });
+    });
+    
+    // Send message functionality
+    function addMessage(text, sender) {
+        const messagesContainer = document.getElementById('chatMessages');
+        if (!messagesContainer) return;
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${sender}-message`;
+        
+        messageDiv.innerHTML = `
+            <div class="message-avatar">${sender === 'agent' ? '👨‍💼' : '👤'}</div>
+            <div class="message-content">
+                <div class="message-text">${text}</div>
+                <div class="message-time">${new Date().toLocaleTimeString()}</div>
+            </div>
+        `;
+        
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    // Send button functionality
+    if (sendBtn && chatInput) {
+        sendBtn.addEventListener('click', function() {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessage(message, 'user');
+                chatInput.value = '';
+                
+                // Simulate response
+                setTimeout(() => {
+                    addMessage('Thank you for your message. I\'ll get back to you shortly.', 'agent');
+                }, 1500);
+            }
+        });
+        
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
+    }
+    
+    // Real-time validation
+    document.querySelectorAll('input, select, textarea').forEach(field => {
+        field.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+                this.classList.add('error');
+            } else {
+                this.classList.remove('error');
+            }
+        });
+    });
+    
+    // Animate numbers on scroll
+    const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+    
+    const animateNumbers = () => {
+        statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-count'));
+            const current = parseInt(stat.textContent);
+            const increment = target / 100;
+            
+            if (current < target) {
+                stat.textContent = Math.ceil(current + increment);
+                setTimeout(animateNumbers, 20);
+            } else {
+                stat.textContent = target;
+            }
+        });
+    };
+    
+    // Trigger animation when stats are visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateNumbers();
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+    
+    const statsSection = document.querySelector('.hero-stats');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
 });
 </script>
 
