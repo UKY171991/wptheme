@@ -2,88 +2,54 @@
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php bloginfo('name'); ?> | <?php bloginfo('description'); ?></title>
-    
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Blog Details Styles -->
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/blog-details-styles.css">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/responsive.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 
 <header class="site-header">
-    <div class="container">
-        <div class="header-container">
-            <div class="site-branding">
-                <?php if (has_custom_logo()) : ?>
-                    <?php the_custom_logo(); ?>
-                <?php else : ?>
-                    <h1 class="site-title">
-                        <a href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
-                    </h1>
-                    <p class="site-description"><?php bloginfo('description'); ?></p>
-                <?php endif; ?>
-            </div>
-
-            <nav class="main-navigation">
-                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-                    <span class="screen-reader-text">Toggle Menu</span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <div class="menu-overlay"></div>
-                <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'primary',
-                    'container' => false,
-                    'menu_class' => 'nav-menu',
-                    'fallback_cb' => 'partypro_fallback_menu'
-                ));
+    <div class="container header-container">
+        <div class="site-branding">
+            <?php
+            if (has_custom_logo()) {
+                the_custom_logo();
+            } else {
                 ?>
-            </nav>
+                <h1 class="site-title">
+                    <a href="<?php echo esc_url(home_url('/')); ?>">
+                        <?php bloginfo('name'); ?>
+                    </a>
+                </h1>
+                <?php
+            }
+            ?>
         </div>
+
+        <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', 'blueprint'); ?>">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                <span class="screen-reader-text"><?php esc_html_e('Menu', 'blueprint'); ?></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <?php
+            wp_nav_menu(array(
+                'theme_location' => 'primary-menu',
+                'menu_class' => 'nav-menu',
+                'container' => false,
+                'fallback_cb' => 'blueprint_fallback_menu',
+                'items_wrap' => '<ul id="primary-menu" class="%2$s">%3$s</ul>'
+            ));
+            ?>
+        </nav>
     </div>
 </header>
 
 <?php
-// Fallback menu if no menu is assigned
-function partypro_fallback_menu() {
-    echo '<ul>';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    
-    // Get pages dynamically
-    $services_page = get_page_by_path('services');
-    if ($services_page) {
-        echo '<li><a href="' . esc_url(get_permalink($services_page)) . '">Services</a></li>';
-    } else {
-        // Ensure 'Services' menu item is always displayed
-        echo '<li><a href="#">Services (Unavailable)</a></li>';
-    }
-    
-    $pricing_page = get_page_by_path('pricing');
-    if ($pricing_page) {
-        echo '<li><a href="' . esc_url(get_permalink($pricing_page)) . '">Pricing</a></li>';
-    }
-    
-    $about_page = get_page_by_path('about');
-    if ($about_page) {
-        echo '<li><a href="' . esc_url(get_permalink($about_page)) . '">About</a></li>';
-    }
-    
-    $contact_page = get_page_by_path('contact');
-    if ($contact_page) {
-        echo '<li><a href="' . esc_url(get_permalink($contact_page)) . '">Contact</a></li>';
-    }
-    
-    echo '</ul>';
-}
+wp_footer();
 ?>
+</body>
+</html>
 
-<script src="<?php echo get_template_directory_uri(); ?>/js/submenu.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/menu-toggle.js"></script>
+

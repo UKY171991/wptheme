@@ -773,9 +773,77 @@ function partypro_create_blog_page() {
 }
 add_action('after_setup_theme', 'partypro_create_blog_page');
 
-// Enqueue scripts in the header
-function partypro_enqueue_scripts() {
-    // Header scripts
-    wp_enqueue_script('partypro-header', get_template_directory_uri() . '/js/header.js', array(), '1.0', true);
+// Include custom walker class
+require_once get_template_directory() . '/inc/class-blueprint-walker-nav-menu.php';
+
+/**
+ * Theme Setup
+ */
+function blueprint_theme_setup() {
+    // Add theme support
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_theme_support('html5', array(
+        'search-form',
+        'comment-form',
+        'comment-list',
+        'gallery',
+        'caption',
+        'style',
+        'script'
+    ));
+    add_theme_support('custom-logo', array(
+        'height'      => 100,
+        'width'       => 400,
+        'flex-width'  => true,
+        'flex-height' => true
+    ));
+
+    // Register Navigation Menus
+    register_nav_menus(array(
+        'primary-menu' => esc_html__('Primary Menu', 'blueprint'),
+        'footer-menu'  => esc_html__('Footer Menu', 'blueprint')
+    ));
 }
-add_action('wp_enqueue_scripts', 'partypro_enqueue_scripts');
+add_action('after_setup_theme', 'blueprint_theme_setup');
+
+/**
+ * Enqueue scripts and styles
+ */
+function blueprint_scripts() {
+    // Styles
+    wp_enqueue_style('blueprint-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version'));
+    wp_enqueue_style('blueprint-responsive', get_template_directory_uri() . '/responsive.css', array(), '1.0.0');
+    wp_enqueue_style('blueprint-menu', get_template_directory_uri() . '/css/menu.css', array(), '1.0.0');
+
+    // Scripts
+    wp_enqueue_script('blueprint-navigation', get_template_directory_uri() . '/js/menu-toggle.js', array('jquery'), '1.0.0', true);
+}
+add_action('wp_enqueue_scripts', 'blueprint_scripts');
+
+/**
+ * Register widget areas
+ */
+function blueprint_widgets_init() {
+    register_sidebar(array(
+        'name'          => esc_html__('Sidebar', 'blueprint'),
+        'id'            => 'sidebar-1',
+        'description'   => esc_html__('Add widgets here.', 'blueprint'),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ));
+}
+add_action('widgets_init', 'blueprint_widgets_init');
+
+/**
+ * Simple fallback menu if no menu is assigned
+ */
+function blueprint_fallback_menu() {
+    wp_page_menu(array(
+        'menu_class' => 'nav-menu',
+        'container' => false,
+        'show_home' => true,
+    ));
+}

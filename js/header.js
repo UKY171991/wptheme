@@ -22,6 +22,44 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = 'hidden';
     }
     
+    if (menuToggle && mainNav && menuOverlay) {
+        // Toggle menu on button click
+        menuToggle.addEventListener('click', function() {
+            if (mainNav.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+        
+        // Close menu when clicking overlay
+        menuOverlay.addEventListener('click', closeMenu);
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+        
+        // Handle submenu toggles on mobile
+        if (subMenuParents) {
+            subMenuParents.forEach(function(parent) {
+                const link = parent.querySelector('a');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 768) {
+                            e.preventDefault();
+                            parent.classList.toggle('show-submenu');
+                        }
+                    });
+                }
+            });
+        }
+    }
+});
+        });
+    
     if (menuToggle && mainNav) {
         // Toggle menu on button click
         menuToggle.addEventListener('click', function() {
