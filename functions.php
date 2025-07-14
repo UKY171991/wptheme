@@ -233,6 +233,31 @@ function partypro_scripts() {
 }
 add_action('wp_enqueue_scripts', 'partypro_scripts');
 
+// Enqueue theme styles and scripts
+function partypro_enqueue_styles() {
+    // Main stylesheet
+    wp_enqueue_style('partypro-style', get_stylesheet_uri());
+    
+    // Responsive styles
+    wp_enqueue_style('partypro-responsive', get_template_directory_uri() . '/responsive.css', array(), '1.0');
+    
+    // Responsive utilities
+    wp_enqueue_style('partypro-responsive-utilities', get_template_directory_uri() . '/responsive-utilities.css', array(), '1.0');
+    
+    // Enhanced pages styles
+    wp_enqueue_style('partypro-enhanced-pages', get_template_directory_uri() . '/enhanced-pages.css', array(), '1.0');
+    
+    // Blog details styles
+    wp_enqueue_style('partypro-blog-details', get_template_directory_uri() . '/blog-details-styles.css', array(), '1.0');
+    
+    // Single post styles
+    wp_enqueue_style('partypro-single-post', get_template_directory_uri() . '/single-post-styles.css', array(), '1.0');
+    
+    // Pricing styles
+    wp_enqueue_style('partypro-pricing', get_template_directory_uri() . '/pricing-styles.css', array(), '1.0');
+}
+add_action('wp_enqueue_scripts', 'partypro_enqueue_styles');
+
 // Register widget areas
 function partypro_widgets_init() {
     register_sidebar(array(
@@ -747,3 +772,10 @@ function partypro_create_blog_page() {
     }
 }
 add_action('after_setup_theme', 'partypro_create_blog_page');
+
+// Enqueue scripts in the header
+function partypro_enqueue_scripts() {
+    // Header scripts
+    wp_enqueue_script('partypro-header', get_template_directory_uri() . '/js/header.js', array(), '1.0', true);
+}
+add_action('wp_enqueue_scripts', 'partypro_enqueue_scripts');

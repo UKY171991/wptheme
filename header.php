@@ -17,22 +17,37 @@
 <body <?php body_class(); ?>>
 
 <header class="site-header">
-    <div class="header-container">
-        <h1 class="site-title">
-            <a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a>
-        </h1>
-        
-        <button class="menu-toggle">Menu</button>
-        
-        <nav class="main-navigation">
-            <?php
-            wp_nav_menu(array(
-                'theme_location' => 'primary',
-                'container' => false,
-                'fallback_cb' => 'partypro_fallback_menu'
-            ));
-            ?>
-        </nav>
+    <div class="container">
+        <div class="header-container">
+            <div class="site-branding">
+                <?php if (has_custom_logo()) : ?>
+                    <?php the_custom_logo(); ?>
+                <?php else : ?>
+                    <h1 class="site-title">
+                        <a href="<?php echo esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
+                    </h1>
+                    <p class="site-description"><?php bloginfo('description'); ?></p>
+                <?php endif; ?>
+            </div>
+
+            <nav class="main-navigation">
+                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                    <span class="screen-reader-text">Toggle Menu</span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="menu-overlay"></div>
+                <?php
+                wp_nav_menu(array(
+                    'theme_location' => 'primary',
+                    'container' => false,
+                    'menu_class' => 'nav-menu',
+                    'fallback_cb' => 'partypro_fallback_menu'
+                ));
+                ?>
+            </nav>
+        </div>
     </div>
 </header>
 
