@@ -1,8 +1,9 @@
-﻿Cannot index into a null array.
-At line:1 char:1
-+ (Get-Content 'c:\git\wptheme\page-pricing.php' | Select-String -Patte ...
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
-    + FullyQualifiedErrorId : NullArray
- 
+<?php
+/*
+Template Name: Pricing Clean Page
+*/
+get_header(); ?>
+
+<!-- Add your clean pricing page content here -->
+
 <?php get_footer(); ?>
