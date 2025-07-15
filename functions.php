@@ -225,6 +225,14 @@ function partypro_scripts() {
     // Enqueue enhanced pages JavaScript
     wp_enqueue_script('partypro-enhanced-pages', get_template_directory_uri() . '/js/enhanced-pages.js', array('jquery'), '1.0.0', true);
     
+    // Enqueue responsive JavaScript
+    wp_enqueue_script('partypro-responsive', get_template_directory_uri() . '/js/responsive.js', array('jquery'), '1.0.0', true);
+    
+    // Enqueue service latest JavaScript (only on services page)
+    if (is_page_template('page-services.php') || is_page('services')) {
+        wp_enqueue_script('partypro-service-latest', get_template_directory_uri() . '/js/service-latest.js', array('jquery'), '1.0.0', true);
+    }
+    
     // Localize script for AJAX
     wp_localize_script('partypro-main', 'partypro_ajax', array(
         'ajax_url' => admin_url('admin-ajax.php'),
@@ -255,6 +263,11 @@ function partypro_enqueue_styles() {
     
     // Pricing styles
     wp_enqueue_style('partypro-pricing', get_template_directory_uri() . '/pricing-styles.css', array(), '1.0');
+    
+    // Service latest styles (only on services page)
+    if (is_page_template('page-services.php') || is_page('services')) {
+        wp_enqueue_style('partypro-service-latest', get_template_directory_uri() . '/service-latest-styles.css', array(), '1.0');
+    }
 }
 add_action('wp_enqueue_scripts', 'partypro_enqueue_styles');
 
@@ -846,4 +859,113 @@ function blueprint_fallback_menu() {
         'container' => false,
         'show_home' => true,
     ));
+}
+
+/**
+ * Add responsive support and enhancements
+ */
+function partypro_responsive_setup() {
+    // Add responsive embeds support
+    add_theme_support('responsive-embeds');
+    
+    // Add editor styles for responsive design
+    add_theme_support('editor-styles');
+    add_editor_style('enhanced-pages.css');
+    
+    // Add wide and full alignment support
+    add_theme_support('align-wide');
+    
+    // Add support for editor color palette
+    add_theme_support('editor-color-palette', array(
+        array(
+            'name'  => __('Primary Color', 'partypro'),
+            'slug'  => 'primary',
+            'color' => '#667eea',
+        ),
+        array(
+            'name'  => __('Secondary Color', 'partypro'),
+            'slug'  => 'secondary',
+            'color' => '#764ba2',
+        ),
+        array(
+            'name'  => __('Light Color', 'partypro'),
+            'slug'  => 'light',
+            'color' => '#f8f9fa',
+        ),
+    ));
+}
+add_action('after_setup_theme', 'partypro_responsive_setup');
+
+// Add responsive image support
+function partypro_responsive_images() {
+    // Add responsive image sizes
+    add_image_size('mobile-featured', 480, 320, true);
+    add_image_size('tablet-featured', 768, 512, true);
+    add_image_size('desktop-featured', 1200, 800, true);
+    
+    // Add srcset support for custom image sizes
+    add_filter('wp_calculate_image_srcset_meta', 'partypro_custom_srcset', 10, 4);
+}
+add_action('after_setup_theme', 'partypro_responsive_images');
+
+// Custom srcset for responsive images
+function partypro_custom_srcset($image_meta, $size_array, $image_src, $attachment_id) {
+    // Add custom logic for responsive images if needed
+    return $image_meta;
+}
+
+// Add responsive body classes
+function partypro_responsive_body_class($classes) {
+    // Add user agent classes for better responsive control
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    
+    if (strpos($user_agent, 'Mobile') !== false) {
+        $classes[] = 'mobile-device';
+    }
+    
+    if (strpos($user_agent, 'Tablet') !== false || strpos($user_agent, 'iPad') !== false) {
+        $classes[] = 'tablet-device';
+    }
+    
+    // Add touch device class
+    $classes[] = 'touch-enabled';
+    
+    return $classes;
+}
+add_filter('body_class', 'partypro_responsive_body_class');
+
+// Add responsive menu walker
+class Partypro_Responsive_Menu_Walker extends Walker_Nav_Menu {
+    function start_lvl(&$output, $depth = 0, $args = array()) {
+        $output .= '<ul class="sub-menu">';
+    }
+    
+    function end_lvl(&$output, $depth = 0, $args = array()) {
+        $output .= '</ul>';
+    }
+    
+    function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
+        $classes = empty($item->classes) ? array() : (array) $item->classes;
+        $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item));
+        $class_names = ' class="' . esc_attr($class_names) . '"';
+        
+        $output .= '<li' . $class_names . '>';
+        
+        $attributes = ! empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
+        $attributes .= ! empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+        $attributes .= ! empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+        $attributes .= ! empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
+        
+        $item_output = isset($args->before) ? $args->before : '';
+        $item_output .= '<a' . $attributes . '>';
+        $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
+        $item_output .= '</a>';
+        $item_output .= isset($args->after) ? $args->after : '';
+        
+        $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+    }
+    
+    function end_el(&$output, $item, $depth = 0, $args = array()) {
+        $output .= '</li>';
+    }
 }

@@ -1,0 +1,567 @@
+/* Latest Service Badges & New Service Labels */
+.latest-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    z-index: 10;
+    animation: pulse-badge 2s infinite;
+}
+
+@keyframes pulse-badge {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    }
+}
+
+.service-new {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 3px 10px rgba(78, 205, 196, 0.3);
+}
+
+.service-new i {
+    font-size: 0.6rem;
+    animation: sparkle 1.5s infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0.8;
+    }
+}
+
+.post-thumbnail.no-image {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.placeholder-icon {
+    color: white;
+    font-size: 3rem;
+    opacity: 0.8;
+}
+
+.post-thumbnail.no-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.1) 10px,
+        rgba(255,255,255,0.1) 20px
+    );
+}
+
+/* Service Post Card Enhancements for Latest Services */
+.service-post-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-post-card .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.service-post-card .post-meta span {
+    background: rgba(102, 126, 234, 0.1);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #667eea;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.service-post-card .post-meta span i {
+    font-size: 0.7rem;
+}
+
+/* Enhanced grid for latest services */
+.all-services-posts .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Latest Services Summary */
+.latest-services-summary {
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.summary-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.summary-item {
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    min-width: 120px;
+    transition: all 0.3s ease;
+}
+
+.summary-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.summary-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #667eea;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.summary-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+}
+
+.summary-item.new .summary-badge {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    box-shadow: 0 3px 10px rgba(78, 205, 196, 0.3);
+}
+
+.summary-item.latest .summary-number {
+    color: #ff6b6b;
+}
+
+.summary-item.new .summary-number {
+    color: #4ecdc4;
+}
+
+/* Latest Services Highlight Section */
+.latest-services-highlight {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e3f2fd 100%);
+}
+
+.latest-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.latest-service-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.latest-service-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+.latest-service-image {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.latest-service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.latest-service-card:hover .latest-service-image img {
+    transform: scale(1.1);
+}
+
+.latest-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.latest-service-card:hover .latest-overlay {
+    opacity: 1;
+}
+
+.days-ago {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+.latest-service-content {
+    padding: 25px;
+}
+
+.latest-service-title {
+    margin: 0 0 15px 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.latest-service-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.latest-service-title a:hover {
+    color: #667eea;
+}
+
+.latest-service-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.latest-service-meta span {
+    font-size: 0.8rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.latest-service-meta i {
+    color: #667eea;
+    font-size: 0.7rem;
+}
+
+.latest-service-excerpt {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.latest-service-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.latest-service-btn:hover {
+    transform: translateX(5px);
+    background: linear-gradient(45deg, #764ba2, #667eea);
+    color: white;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* Enhanced Pagination Styles */
+.pagination-enhanced {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0 40px 0;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagination-enhanced .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+    height: 45px;
+    padding: 8px 15px;
+    background: white;
+    color: #667eea;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.pagination-enhanced .page-numbers:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.pagination-enhanced .page-numbers.current {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    transform: scale(1.05);
+}
+
+.pagination-enhanced .page-numbers.prev,
+.pagination-enhanced .page-numbers.next {
+    padding: 8px 20px;
+    font-weight: 700;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.pagination-enhanced .page-numbers.prev:hover,
+.pagination-enhanced .page-numbers.next:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    transform: translateY(-2px) scale(1.02);
+}
+
+.pagination-enhanced .page-numbers.dots {
+    background: transparent;
+    border: none;
+    color: #999;
+    cursor: default;
+    box-shadow: none;
+}
+
+.pagination-enhanced .page-numbers.dots:hover {
+    background: transparent;
+    color: #999;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Pagination Info */
+.pagination-info {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+    font-size: 0.9rem;
+    background: rgba(102, 126, 234, 0.05);
+    padding: 15px 25px;
+    border-radius: 25px;
+    display: inline-block;
+    margin: 0 auto 30px auto;
+}
+
+.pagination-info strong {
+    color: #667eea;
+    font-weight: 700;
+}
+
+.all-services-posts .post-card {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.all-services-posts .post-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+/* Responsive adjustments for latest badges */
+@media (max-width: 768px) {
+    .latest-badge {
+        top: 10px;
+        right: 10px;
+        font-size: 0.65rem;
+        padding: 4px 8px;
+    }
+    
+    .service-new {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+    }
+    
+    .placeholder-icon {
+        font-size: 2rem;
+    }
+    
+    .post-thumbnail.no-image {
+        height: 150px;
+    }
+    
+    .all-services-posts .posts-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .summary-stats {
+        gap: 20px;
+    }
+    
+    .summary-item {
+        min-width: 100px;
+        padding: 15px;
+    }
+    
+    .summary-number {
+        font-size: 2rem;
+    }
+    
+    .summary-label {
+        font-size: 0.8rem;
+    }
+    
+    .latest-services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .latest-service-content {
+        padding: 20px;
+    }
+    
+    .latest-service-title {
+        font-size: 1.2rem;
+    }
+    
+    .pagination-enhanced {
+        margin: 40px 0 30px 0;
+        gap: 8px;
+    }
+    
+    .pagination-enhanced .page-numbers {
+        min-width: 40px;
+        height: 40px;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .pagination-enhanced .page-numbers.prev,
+    .pagination-enhanced .page-numbers.next {
+        padding: 6px 15px;
+    }
+    
+    .pagination-info {
+        font-size: 0.8rem;
+        padding: 12px 20px;
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .latest-badge {
+        font-size: 0.6rem;
+        padding: 3px 6px;
+    }
+    
+    .pagination-enhanced {
+        margin: 30px 0 20px 0;
+        gap: 6px;
+    }
+    
+    .pagination-enhanced .page-numbers {
+        min-width: 35px;
+        height: 35px;
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .pagination-enhanced .page-numbers.prev,
+    .pagination-enhanced .page-numbers.next {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .pagination-info {
+        font-size: 0.75rem;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+    }
+}
