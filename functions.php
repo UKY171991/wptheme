@@ -5,8 +5,6 @@
  * This file contains all the theme setup and functionality
  */
 
-// Include dynamic menu system
-require_once get_template_directory() . '/dynamic-menu-system.php';
 
 // Theme setup
 function blueprint_theme_setup() {
@@ -37,11 +35,6 @@ function blueprint_theme_setup() {
         update_option('blueprint_pages_created', 'yes');
     }
     
-    // Set default menu on theme activation - DYNAMIC SYSTEM
-    if (get_option('blueprint_menu_created') !== 'yes') {
-        blueprint_create_truly_dynamic_menu();
-        update_option('blueprint_menu_created', 'yes');
-    }
 }
 add_action('after_setup_theme', 'blueprint_theme_setup');
 
@@ -283,6 +276,7 @@ function partypro_scripts() {
     // Enqueue service latest JavaScript (only on services page)
     if (is_page_template('page-services.php') || is_page('services')) {
         wp_enqueue_script('partypro-service-latest', get_template_directory_uri() . '/js/service-latest.js', array('jquery'), '1.0.0', true);
+        wp_enqueue_script('partypro-service-filter', get_template_directory_uri() . '/js/service-filter.js', array(), '1.0.0', true);
     }
     
     // Localize script for AJAX

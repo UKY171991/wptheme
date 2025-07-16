@@ -34,16 +34,14 @@
                 <span></span>
                 <span></span>
             </button>
-            <?php
-            wp_nav_menu(array(
+            <?php wp_nav_menu(array(
                 'theme_location' => 'primary-menu',
-                'menu_class' => 'nav-menu',
-                'container' => false,
-                'fallback_cb' => 'blueprint_fallback_menu',
-                'walker' => new Blueprint_Walker_Nav_Menu(),
-                'items_wrap' => '<ul id="primary-menu" class="%2$s">%3$s</ul>'
-            ));
-            ?>
+                'menu_class'     => 'nav-menu',
+                'menu_id'        => 'primary-menu',
+                'container'      => false,
+                'fallback_cb'    => 'wp_page_menu',
+                'depth'          => 0,
+            )); ?>
         </nav>
     </div>
     

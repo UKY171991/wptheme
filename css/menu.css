@@ -2,17 +2,8 @@
 .nav-menu .sub-menu {
     display: none !important;
 }
-.nav-menu > li:hover > .sub-menu {
+.nav-menu li:hover > .sub-menu {
     display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-}
-.nav-menu .sub-menu li:hover > .sub-menu {
-    display: block !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 100% !important;
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
