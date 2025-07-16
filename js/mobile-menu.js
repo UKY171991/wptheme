@@ -47,27 +47,70 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Handle submenu toggles on mobile
+        // Handle submenu toggles on mobile - simplified without arrows
         if (window.innerWidth <= 768) {
             subMenuParents.forEach(function(parent) {
                 const link = parent.querySelector('a');
-                const submenu = parent.querySelector('.submenu');
+                const submenu = parent.querySelector('.sub-menu, .submenu');
                 
                 if (link && submenu) {
-                    link.addEventListener('click', function(e) {
+                    // Create a simple toggle indicator
+                    const toggleIndicator = document.createElement('span');
+                    toggleIndicator.className = 'submenu-toggle';
+                    toggleIndicator.textContent = '+';
+                    toggleIndicator.style.cssText = `
+                        position: absolute;
+                        right: 15px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-weight: bold;
+                        font-size: 1.2rem;
+                        cursor: pointer;
+                        transition: transform 0.3s ease;
+                    `;
+                    
+                    // Add position relative to parent link
+                    link.style.position = 'relative';
+                    link.appendChild(toggleIndicator);
+                    
+                    toggleIndicator.addEventListener('click', function(e) {
                         e.preventDefault();
+                        e.stopPropagation();
+                        
                         const isOpen = submenu.style.display === 'block';
                         
                         // Close all other submenus
                         subMenuParents.forEach(function(otherParent) {
-                            const otherSubmenu = otherParent.querySelector('.submenu');
+                            const otherSubmenu = otherParent.querySelector('.sub-menu, .submenu');
+                            const otherToggle = otherParent.querySelector('.submenu-toggle');
                             if (otherSubmenu && otherSubmenu !== submenu) {
                                 otherSubmenu.style.display = 'none';
+                                if (otherToggle) {
+                                    otherToggle.textContent = '+';
+                                    otherToggle.style.transform = 'translateY(-50%) rotate(0deg)';
+                                }
                             }
                         });
                         
                         // Toggle current submenu
-                        submenu.style.display = isOpen ? 'none' : 'block';
+                        if (isOpen) {
+                            submenu.style.display = 'none';
+                            toggleIndicator.textContent = '+';
+                            toggleIndicator.style.transform = 'translateY(-50%) rotate(0deg)';
+                        } else {
+                            submenu.style.display = 'block';
+                            toggleIndicator.textContent = '−';
+                            toggleIndicator.style.transform = 'translateY(-50%) rotate(180deg)';
+                        }
+                        
+                        console.log('Submenu toggled:', isOpen ? 'closed' : 'opened');
+                    });
+                    
+                    // Prevent link navigation on touch devices when submenu exists
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 768) {
+                            e.preventDefault();
+                        }
                     });
                 }
             });

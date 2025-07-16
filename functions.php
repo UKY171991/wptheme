@@ -6,7 +6,7 @@
  */
 
 // Theme setup
-function partypro_theme_setup() {
+function blueprint_theme_setup() {
     // Add theme support for various features
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
@@ -20,29 +20,29 @@ function partypro_theme_setup() {
     
     // Register navigation menus
     register_nav_menus(array(
-        'primary' => __('Main Menu', 'partypro'),
-        'footer' => __('Footer Menu', 'partypro'),
+        'primary-menu' => __('Primary Menu', 'blueprint'),
+        'footer' => __('Footer Menu', 'blueprint'),
     ));
     
     // Add custom image sizes
-    add_image_size('service-thumbnail', 300, 200, true);
+    add_image_size('blueprint-thumbnail', 300, 200, true);
     add_image_size('hero-image', 1920, 1080, true);
     
     // Set default pages on theme activation
-    if (get_option('partypro_pages_created') !== 'yes') {
-        partypro_create_default_pages();
-        update_option('partypro_pages_created', 'yes');
+    if (get_option('blueprint_pages_created') !== 'yes') {
+        blueprint_create_default_pages();
+        update_option('blueprint_pages_created', 'yes');
     }
 }
-add_action('after_setup_theme', 'partypro_theme_setup');
+add_action('after_setup_theme', 'blueprint_theme_setup');
 
 // Create default pages
-function partypro_create_default_pages() {
+function blueprint_create_default_pages() {
     // Only create pages if they don't exist
     if (!get_page_by_path('home')) {
         $home_page = array(
             'post_title'    => 'Home',
-            'post_content'  => 'Welcome to our party rental business!',
+            'post_content'  => 'Welcome to Blueprint - Your source for proven business blueprints!',
             'post_status'   => 'publish',
             'post_type'     => 'page',
             'post_name'     => 'home'
@@ -56,11 +56,11 @@ function partypro_create_default_pages() {
         }
     }
     
-    // Create Services page
+    // Create Services page (now All Blueprints)
     if (!get_page_by_path('services')) {
         $services_page = array(
-            'post_title'    => 'Services',
-            'post_content'  => 'Our comprehensive party rental services to make your event perfect.',
+            'post_title'    => 'All Blueprints',
+            'post_content'  => 'Browse our comprehensive collection of 75 proven business blueprints.',
             'post_status'   => 'publish',
             'post_type'     => 'page',
             'post_name'     => 'services'
@@ -75,7 +75,7 @@ function partypro_create_default_pages() {
     if (!get_page_by_path('pricing')) {
         $pricing_page = array(
             'post_title'    => 'Pricing',
-            'post_content'  => 'Our competitive pricing packages for all event sizes.',
+            'post_content'  => 'Affordable pricing for all business blueprints and startup guides.',
             'post_status'   => 'publish',
             'post_type'     => 'page',
             'post_name'     => 'pricing'
@@ -90,7 +90,7 @@ function partypro_create_default_pages() {
     if (!get_page_by_path('about')) {
         $about_page = array(
             'post_title'    => 'About',
-            'post_content'  => 'Learn more about our party rental business and our commitment to excellence.',
+            'post_content'  => 'Learn about our mission to help entrepreneurs succeed with proven business blueprints.',
             'post_status'   => 'publish',
             'post_type'     => 'page',
             'post_name'     => 'about'
@@ -113,6 +113,49 @@ function partypro_create_default_pages() {
         $contact_id = wp_insert_post($contact_page);
         if ($contact_id) {
             update_post_meta($contact_id, '_wp_page_template', 'page-contact.php');
+        }
+    }
+}
+
+// Create blueprint category pages
+function blueprint_create_category_pages() {
+    $categories = array(
+        'online-digital-blueprints' => array(
+            'title' => 'Online & Digital Blueprints',
+            'content' => 'Discover 15 online and digital business blueprints with startup costs ranging from $500 - $5,000.'
+        ),
+        'service-based-blueprints' => array(
+            'title' => 'Service-Based Blueprints',
+            'content' => 'Explore 20 service-based business blueprints with startup costs ranging from $1,000 - $10,000.'
+        ),
+        'ecommerce-retail-blueprints' => array(
+            'title' => 'E-commerce & Retail Blueprints',
+            'content' => 'Browse 12 e-commerce and retail business blueprints with startup costs ranging from $2,000 - $15,000.'
+        ),
+        'food-beverage-blueprints' => array(
+            'title' => 'Food & Beverage Blueprints',
+            'content' => 'Check out 10 food and beverage business blueprints with startup costs ranging from $5,000 - $25,000.'
+        ),
+        'health-wellness-blueprints' => array(
+            'title' => 'Health & Wellness Blueprints',
+            'content' => 'View 8 health and wellness business blueprints with startup costs ranging from $3,000 - $20,000.'
+        ),
+        'creative-entertainment-blueprints' => array(
+            'title' => 'Creative & Entertainment Blueprints',
+            'content' => 'See 10 creative and entertainment business blueprints with startup costs ranging from $1,500 - $12,000.'
+        )
+    );
+    
+    foreach ($categories as $slug => $data) {
+        if (!get_page_by_path($slug)) {
+            $page = array(
+                'post_title'    => $data['title'],
+                'post_content'  => $data['content'],
+                'post_status'   => 'publish',
+                'post_type'     => 'page',
+                'post_name'     => $slug
+            );
+            wp_insert_post($page);
         }
     }
 }
@@ -246,10 +289,28 @@ function partypro_enqueue_styles() {
     // Main stylesheet
     wp_enqueue_style('partypro-style', get_stylesheet_uri());
     
+    // Critical QA fixes - HIGHEST PRIORITY
+    wp_enqueue_style('partypro-critical-qa-fixes', get_template_directory_uri() . '/critical-qa-fixes.css', array('partypro-style'), '1.0');
+    
+    // General design fixes - HIGH PRIORITY
+    wp_enqueue_style('partypro-general-fixes', get_template_directory_uri() . '/general-design-fixes.css', array('partypro-critical-qa-fixes'), '1.0');
+    
+    // Layout improvements - High priority
+    wp_enqueue_style('partypro-layout-improvements', get_template_directory_uri() . '/layout-improvements.css', array('partypro-general-fixes'), '1.0');
+    
+    // Blueprint specific fixes
+    wp_enqueue_style('blueprint-fixes', get_template_directory_uri() . '/blueprint-fixes.css', array('partypro-style'), '1.0');
+    
+    // Page-specific fixes for colors, spacing, and navigation
+    wp_enqueue_style('blueprint-page-fixes', get_template_directory_uri() . '/page-specific-fixes.css', array('partypro-layout-improvements'), '1.0');
+    
+    // Submenu and comprehensive responsive fixes - HIGHEST PRIORITY
+    wp_enqueue_style('blueprint-submenu-responsive-fixes', get_template_directory_uri() . '/submenu-responsive-fixes.css', array('blueprint-page-fixes'), '1.1');
+    
     // Responsive styles
     wp_enqueue_style('partypro-responsive', get_template_directory_uri() . '/responsive.css', array(), '1.0');
     
-    // Responsive utilities
+    // Enhanced responsive utilities
     wp_enqueue_style('partypro-responsive-utilities', get_template_directory_uri() . '/responsive-utilities.css', array(), '1.0');
     
     // Enhanced pages styles
@@ -267,6 +328,25 @@ function partypro_enqueue_styles() {
     // Service latest styles (only on services page)
     if (is_page_template('page-services.php') || is_page('services')) {
         wp_enqueue_style('partypro-service-latest', get_template_directory_uri() . '/service-latest-styles.css', array(), '1.0');
+    }
+    
+    // Contact page improvements (only on contact page)
+    if (is_page_template('page-contact.php') || is_page('contact')) {
+        wp_enqueue_style('partypro-contact-improvements', get_template_directory_uri() . '/contact-page-improvements.css', array(), '1.0');
+    }
+    
+    // Enhanced JavaScript for layout improvements
+    wp_enqueue_script('partypro-layout-enhancements', get_template_directory_uri() . '/js/layout-enhancements.js', array('jquery'), '1.0', true);
+    
+    // Enhanced mobile menu and submenu functionality
+    wp_enqueue_script('blueprint-enhanced-mobile-menu', get_template_directory_uri() . '/js/enhanced-mobile-menu.js', array('jquery'), '1.1', true);
+    
+    // FAQ functionality fix
+    wp_enqueue_script('partypro-faq-fix', get_template_directory_uri() . '/js/faq-fix.js', array(), '1.0', true);
+    
+    // Contact page enhancements (only on contact page)
+    if (is_page_template('page-contact.php') || is_page('contact')) {
+        wp_enqueue_script('partypro-contact-enhancements', get_template_directory_uri() . '/js/contact-enhancements.js', array(), '1.0', true);
     }
 }
 add_action('wp_enqueue_scripts', 'partypro_enqueue_styles');
@@ -790,37 +870,6 @@ add_action('after_setup_theme', 'partypro_create_blog_page');
 require_once get_template_directory() . '/inc/class-blueprint-walker-nav-menu.php';
 
 /**
- * Theme Setup
- */
-function blueprint_theme_setup() {
-    // Add theme support
-    add_theme_support('title-tag');
-    add_theme_support('post-thumbnails');
-    add_theme_support('html5', array(
-        'search-form',
-        'comment-form',
-        'comment-list',
-        'gallery',
-        'caption',
-        'style',
-        'script'
-    ));
-    add_theme_support('custom-logo', array(
-        'height'      => 100,
-        'width'       => 400,
-        'flex-width'  => true,
-        'flex-height' => true
-    ));
-
-    // Register Navigation Menus
-    register_nav_menus(array(
-        'primary-menu' => esc_html__('Primary Menu', 'blueprint'),
-        'footer-menu'  => esc_html__('Footer Menu', 'blueprint')
-    ));
-}
-add_action('after_setup_theme', 'blueprint_theme_setup');
-
-/**
  * Enqueue scripts and styles
  */
 function blueprint_scripts() {
@@ -829,8 +878,8 @@ function blueprint_scripts() {
     wp_enqueue_style('blueprint-responsive', get_template_directory_uri() . '/responsive.css', array(), '1.0.0');
     wp_enqueue_style('blueprint-menu', get_template_directory_uri() . '/css/menu.css', array(), '1.0.0');
 
-    // Scripts
-    wp_enqueue_script('blueprint-navigation', get_template_directory_uri() . '/js/menu-toggle.js', array('jquery'), '1.0.0', true);
+    // Scripts - Old menu toggle disabled to prevent conflicts with enhanced version
+    // wp_enqueue_script('blueprint-navigation', get_template_directory_uri() . '/js/menu-toggle.js', array('jquery'), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'blueprint_scripts');
 
@@ -854,11 +903,13 @@ add_action('widgets_init', 'blueprint_widgets_init');
  * Simple fallback menu if no menu is assigned
  */
 function blueprint_fallback_menu() {
-    wp_page_menu(array(
-        'menu_class' => 'nav-menu',
-        'container' => false,
-        'show_home' => true,
-    ));
+    echo '<ul id="primary-menu" class="nav-menu">';
+    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
+    echo '<li><a href="' . esc_url(get_permalink(get_page_by_path('services'))) . '">All Blueprints</a></li>';
+    echo '<li><a href="' . esc_url(get_permalink(get_page_by_path('pricing'))) . '">Pricing</a></li>';
+    echo '<li><a href="' . esc_url(get_permalink(get_page_by_path('about'))) . '">About</a></li>';
+    echo '<li><a href="' . esc_url(get_permalink(get_page_by_path('contact'))) . '">Contact</a></li>';
+    echo '</ul>';
 }
 
 /**

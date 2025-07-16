@@ -284,6 +284,16 @@ if ($latest_services->have_posts()) :
             <!-- Latest Services Summary -->
             <div class="latest-services-summary">
                 <?php
+                // Get total services count first
+                $total_services_query = new WP_Query(array(
+                    'post_type' => 'service',
+                    'posts_per_page' => -1,
+                    'post_status' => 'publish',
+                    'fields' => 'ids'
+                ));
+                $total_services = $total_services_query->found_posts;
+                wp_reset_postdata();
+                
                 $recent_services_count = get_posts(array(
                     'post_type' => 'service',
                     'posts_per_page' => -1,
@@ -310,7 +320,7 @@ if ($latest_services->have_posts()) :
                 ?>
                 <div class="summary-stats">
                     <div class="summary-item">
-                        <span class="summary-number"><?php echo $service_query->found_posts; ?></span>
+                        <span class="summary-number"><?php echo $total_services; ?></span>
                         <span class="summary-label">Total Services</span>
                     </div>
                     <?php if ($recent_count > 0) : ?>
@@ -352,27 +362,137 @@ if ($latest_services->have_posts()) :
                 'post_type'      => 'service',
                 'posts_per_page' => 12,
                 'paged'          => $paged,
-                'orderby'        => array(
-                    'date' => 'DESC',
-                    'modified' => 'DESC'
-                ),
+                'orderby'        => 'date',
                 'order'          => 'DESC',
-                'post_status'    => 'publish',
-                'meta_query'     => array(
-                    'relation' => 'OR',
+                'post_status'    => 'publish'
+            ) );
+            
+            // If no services found, create some demo content for testing
+            if ( !$service_query->have_posts() ) :
+                $demo_services = array(
                     array(
-                        'key'     => '_is_latest',
-                        'value'   => 'yes',
-                        'compare' => '='
+                        'title' => 'Professional House Cleaning',
+                        'excerpt' => 'Complete home cleaning service with eco-friendly products and professional staff.',
+                        'price' => '$99',
+                        'duration' => '2-3 hours',
+                        'category' => 'Home Cleaning'
                     ),
                     array(
-                        'key'     => '_is_latest',
-                        'compare' => 'NOT EXISTS'
+                        'title' => 'Business Consultation',
+                        'excerpt' => 'Strategic business advice to help your company grow and succeed in competitive markets.',
+                        'price' => '$150/hour',
+                        'duration' => '1-2 hours',
+                        'category' => 'Consulting'
+                    ),
+                    array(
+                        'title' => 'IT Support & Maintenance',
+                        'excerpt' => 'Professional IT support for small businesses including network setup and maintenance.',
+                        'price' => '$120/hour',
+                        'duration' => '1-4 hours',
+                        'category' => 'Technology'
+                    ),
+                    array(
+                        'title' => 'Garden Landscaping',
+                        'excerpt' => 'Transform your outdoor space with professional landscaping and garden design services.',
+                        'price' => '$200',
+                        'duration' => '1 day',
+                        'category' => 'Landscaping'
+                    ),
+                    array(
+                        'title' => 'Web Design & Development',
+                        'excerpt' => 'Modern, responsive websites that help your business stand out and attract customers.',
+                        'price' => '$500+',
+                        'duration' => '1-2 weeks',
+                        'category' => 'Design'
+                    ),
+                    array(
+                        'title' => 'Marketing Strategy',
+                        'excerpt' => 'Comprehensive marketing plans to boost your brand visibility and customer engagement.',
+                        'price' => '$300',
+                        'duration' => '2-4 hours',
+                        'category' => 'Marketing'
                     )
-                )
-            ) );
-            if ( $service_query->have_posts() ) :
-                while ( $service_query->have_posts() ) : $service_query->the_post();
+                );
+                
+                foreach ($demo_services as $index => $demo_service) :
+                    $is_recent = $index < 2; // First 2 are recent
+                    $is_new = $index < 1; // First 1 is new
+            ?>
+                <article class="post-card service-post-card demo-service" 
+                         data-category="<?php echo $demo_service['category']; ?>"
+                         data-post-date="<?php echo date('Y-m-d', strtotime('-' . $index . ' days')); ?>"
+                         data-recent="<?php echo $is_recent ? 'true' : 'false'; ?>"
+                         data-new="<?php echo $is_new ? 'true' : 'false'; ?>">
+                    <div class="post-thumbnail no-image">
+                        <div class="placeholder-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <?php if ($is_recent) : ?>
+                            <span class="latest-badge">Latest</span>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="service-price">
+                                <i class="fas fa-dollar-sign"></i>
+                                <?php echo $demo_service['price']; ?>
+                            </span>
+                            <span class="service-duration">
+                                <i class="fas fa-clock"></i>
+                                <?php echo $demo_service['duration']; ?>
+                            </span>
+                            <?php if ($is_new) : ?>
+                                <span class="service-new">
+                                    <i class="fas fa-star"></i>
+                                    New Service
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <h3 class="post-title">
+                            <a href="#"><?php echo $demo_service['title']; ?></a>
+                        </h3>
+                        
+                        <div class="post-excerpt">
+                            <?php echo $demo_service['excerpt']; ?>
+                        </div>
+                        
+                        <div class="post-footer">
+                            <a href="#" class="read-more-btn">
+                                <span>View Details</span>
+                                <i class="arrow-right" aria-hidden="true">→</i>
+                            </a>
+                            <div class="post-stats">
+                                <span class="stat">
+                                    <i class="fas fa-star"></i>
+                                    4.8/5
+                                </span>
+                                <span class="stat">
+                                    <i class="fas fa-check"></i>
+                                    Available
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+                
+                <!-- Demo Pagination -->
+                <div class="pagination-wrapper">
+                    <div class="pagination-info">
+                        Showing <strong>1-6</strong> of <strong>6</strong> demo services
+                    </div>
+                    <div class="pagination-enhanced">
+                        <span class="page-numbers current">1</span>
+                        <a href="#" class="page-numbers">2</a>
+                        <a href="#" class="page-numbers">3</a>
+                        <a href="#" class="page-numbers next">Next <i class="fas fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                
+            <?php else: ?>
+                <?php while ( $service_query->have_posts() ) : $service_query->the_post();
                     // Calculate if post is recent
                     $post_date = get_the_date('U');
                     $current_date = current_time('timestamp');
@@ -469,40 +589,56 @@ if ($latest_services->have_posts()) :
                         </div>
                     </div>
                 </article>
-            <?php endwhile; else: ?>
-                <div class="no-services-message">
-                    <h3>No Services Available</h3>
-                    <p>We're currently updating our service offerings. Please check back soon or contact us directly for assistance.</p>
-                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>" class="btn-primary-fancy">
-                        <span>Contact Us</span>
-                        <i class="arrow-right" aria-hidden="true">→</i>
-                    </a>
-                </div>
+            <?php endwhile; ?>
+                
+                <!-- Pagination -->
+                <?php
+                if ( $service_query->max_num_pages > 1 ) :
+                    $current_page = max( 1, $paged );
+                    $total_pages = $service_query->max_num_pages;
+                    $total_posts = $service_query->found_posts;
+                    $posts_per_page = $service_query->query_vars['posts_per_page'];
+                    $start_post = ( $current_page - 1 ) * $posts_per_page + 1;
+                    $end_post = min( $current_page * $posts_per_page, $total_posts );
+                ?>
+                    <div class="pagination-wrapper">
+                        <!-- Pagination Info -->
+                        <div class="pagination-info">
+                            Showing <strong><?php echo $start_post; ?>-<?php echo $end_post; ?></strong> of <strong><?php echo $total_posts; ?></strong> services
+                        </div>
+                        
+                        <?php
+                        $big = 999999999; // need an unlikely integer
+                        $pagination_links = paginate_links( array(
+                            'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                            'format'    => '?paged=%#%',
+                            'current'   => $current_page,
+                            'total'     => $total_pages,
+                            'prev_text' => '<i class="fas fa-chevron-left" aria-hidden="true"></i> Previous',
+                            'next_text' => 'Next <i class="fas fa-chevron-right" aria-hidden="true"></i>',
+                            'mid_size'  => 2,
+                            'end_size'  => 1,
+                            'type'      => 'array',
+                            'add_args'  => false,
+                        ) );
+                        if ( $pagination_links ) {
+                            echo '<div class="pagination-enhanced">';
+                            foreach ( $pagination_links as $link ) {
+                                // Add custom classes for better styling
+                                $link = str_replace( 'page-numbers', 'page-numbers', $link );
+                                $link = str_replace( 'prev page-numbers', 'page-numbers prev', $link );
+                                $link = str_replace( 'next page-numbers', 'page-numbers next', $link );
+                                $link = str_replace( 'dots', 'page-numbers dots', $link );
+                                echo $link;
+                            }
+                            echo '</div>';
+                        }
+                        ?>
+                    </div>
+                <?php endif; ?>
+                
             <?php endif; wp_reset_postdata(); ?>
         </div>
-        
-        <!-- Pagination -->
-        <?php
-        if ( $service_query->max_num_pages > 1 ) :
-            $big = 999999999; // need an unlikely integer
-            $pagination_links = paginate_links( array(
-                'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-                'format'    => '?paged=%#%',
-                'current'   => max( 1, $paged ),
-                'total'     => $service_query->max_num_pages,
-                'prev_text' => '<i class="fas fa-chevron-left" aria-hidden="true"></i> Previous',
-                'next_text' => 'Next <i class="fas fa-chevron-right" aria-hidden="true"></i>',
-                'type'      => 'array',
-            ) );
-            if ( $pagination_links ) {
-                echo '<div class="pagination-enhanced">';
-                foreach ( $pagination_links as $link ) {
-                    echo $link;
-                }
-                echo '</div>';
-            }
-        endif;
-        ?>
     </div>
 </section>
 

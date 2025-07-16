@@ -78,64 +78,48 @@
     position: relative;
 }
 
+/* Submenu links - remove arrows */
 .nav-menu .sub-menu a {
     color: #333333;
-    padding: 10px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 12px 24px;
+    display: block;
     font-size: 14px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     text-decoration: none;
     border: none;
     position: relative;
     white-space: nowrap;
 }
 
+/* Remove all arrow content from submenu items */
 .nav-menu .sub-menu .menu-item-has-children > a::after {
-    content: '';
-    border: solid #333333;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(-45deg);
-    margin-left: 10px;
-    transition: all 0.2s ease;
+    display: none;
 }
 
 .nav-menu .sub-menu a:hover {
-    background: rgba(0, 0, 0, 0.03);
+    background: rgba(0, 0, 0, 0.05);
     color: #007bff;
-    padding-left: 28px;
+    transform: translateX(5px);
     border: none;
     outline: none;
 }
 
+/* Remove hover arrow effects */
 .nav-menu .sub-menu .menu-item-has-children > a:hover::after {
-    border-color: #007bff;
+    display: none;
 }
 
-/* Dropdown Arrow */
+/* Remove dropdown arrows */
 .dropdown-arrow {
-    border: solid #ffffff;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 3px;
-    margin-left: 8px;
-    transform: rotate(45deg);
-    transition: transform 0.3s ease;
+    display: none !important;
 }
 
 .nav-menu .menu-item-has-children:hover > a .dropdown-arrow {
-    transform: rotate(-135deg);
+    display: none !important;
 }
 
 .nav-menu .sub-menu .dropdown-arrow {
-    border-color: #333333;
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    margin-top: -4px;
+    display: none !important;
 }
 
 /* Mobile Menu Styles */
@@ -216,25 +200,16 @@
         padding-left: 52px;
     }
 
-    /* Mobile dropdown arrows */
+    /* Remove mobile dropdown arrows */
     .nav-menu .menu-item-has-children > a::after {
-        content: '';
-        border: solid #333333;
-        border-width: 0 2px 2px 0;
-        display: inline-block;
-        padding: 3px;
-        position: absolute;
-        right: 24px;
-        top: 50%;
-        transform: translateY(-50%) rotate(45deg);
-        transition: transform 0.3s ease;
+        display: none !important;
     }
 
     .nav-menu .menu-item-has-children.active > a::after {
-        transform: translateY(-50%) rotate(-135deg);
+        display: none !important;
     }
 
     .nav-menu .sub-menu .menu-item-has-children > a::after {
-        right: 24px;
+        display: none !important;
     }
 }

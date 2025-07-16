@@ -657,6 +657,60 @@ jQuery(document).ready(function($) {
     }, 500);
 });
 
+// Ultra Small Screen Fixes
+function initUltraSmallScreenFixes() {
+    const isUltraSmall = window.innerWidth <= 375;
+    const isVerySmall = window.innerWidth <= 320;
+    
+    if (isUltraSmall) {
+        // Fix overflow issues
+        $('html, body').css('overflow-x', 'hidden');
+        
+        // Adjust summary stats layout
+        $('.summary-stats').css({
+            'flex-direction': 'column',
+            'align-items': 'center',
+            'gap': '15px'
+        });
+        
+        // Ensure newsletter form is properly sized
+        $('.newsletter-form .form-group').css({
+            'flex-direction': 'column',
+            'width': '100%'
+        });
+        
+        $('.newsletter-form input[type="email"]').css({
+            'width': '100%',
+            'min-width': 'auto'
+        });
+        
+        // Fix hero stats for very small screens
+        if (isVerySmall) {
+            $('.hero-stats').css({
+                'grid-template-columns': '1fr',
+                'max-width': '240px'
+            });
+        }
+    }
+}
+
+// Viewport height fix for mobile browsers
+function setVHProperty() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Initialize on load and resize
+$(document).ready(function() {
+    initUltraSmallScreenFixes();
+    setVHProperty();
+});
+
+$(window).on('resize orientationchange', function() {
+    initUltraSmallScreenFixes();
+    setVHProperty();
+});
+
 // Add CSS for animations
 var animationCSS = `
 <style>

@@ -183,15 +183,15 @@
     position: absolute;
     top: -8px;
     right: -8px;
-    background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-    color: white;
+    background: #ffd700;
+    color: #333;
     padding: 4px 10px;
     border-radius: 12px;
     font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
+    font-weight: 700;
     letter-spacing: 0.3px;
-    box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
 }
 
 .summary-item.new .summary-badge {
@@ -441,6 +441,123 @@
     font-weight: 700;
 }
 
+/* Pagination Loading Animation */
+.pagination-loading {
+    animation: fadeInScale 0.3s ease forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Pagination Hover Effects */
+.pagination-enhanced .page-numbers::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+.pagination-enhanced .page-numbers {
+    position: relative;
+    overflow: hidden;
+}
+
+.pagination-enhanced .page-numbers:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.pagination-enhanced .page-numbers.current::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Pagination Wrapper */
+.pagination-wrapper {
+    background: rgba(248, 250, 252, 0.8);
+    padding: 40px 20px;
+    border-radius: 25px;
+    margin-top: 50px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+/* Fallback pagination styles for WordPress default */
+.page-links {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.page-links a,
+.page-links > span {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 0 5px;
+    background: white;
+    color: #667eea;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.page-links a:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.page-links .current {
+    background: #667eea;
+    color: white;
+}
+
+/* Ensure pagination is visible */
+.pagination-enhanced,
+.pagination-wrapper {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Demo service styles */
+.demo-service {
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.02) 0%, rgba(118, 75, 162, 0.02) 100%);
+}
+
+.demo-service::before {
+    content: 'Demo';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(102, 126, 234, 0.9);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    z-index: 5;
+}
+
 .all-services-posts .post-card {
     border-radius: 20px;
     overflow: hidden;
@@ -563,5 +680,188 @@
         font-size: 0.75rem;
         padding: 10px 15px;
         margin-bottom: 20px;
+    }
+}
+
+/* Ultra small screens (iPhone SE and similar) */
+@media (max-width: 375px) {
+    .latest-services-summary {
+        margin: 20px 0;
+        padding: 20px 15px;
+        border-radius: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 10px 30px rgba(102,126,234,0.2);
+    }
+    
+    .summary-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .summary-item {
+        min-width: 100px;
+        padding: 20px 15px;
+        width: 100%;
+        max-width: 280px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        color: white;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .summary-item:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .summary-number {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: block;
+    }
+    
+    .summary-label {
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        opacity: 0.9;
+        font-weight: 500;
+    }
+    
+    .summary-badge {
+        top: -6px;
+        right: -6px;
+        padding: 3px 8px;
+        font-size: 0.55rem;
+        border-radius: 10px;
+    }
+    
+    .latest-badge {
+        top: 8px;
+        right: 8px;
+        font-size: 0.55rem;
+        padding: 2px 5px;
+        border-radius: 15px;
+    }
+    
+    .service-new {
+        font-size: 0.6rem;
+        padding: 2px 6px;
+        border-radius: 12px;
+    }
+    
+    .post-thumbnail.no-image {
+        height: 130px;
+    }
+    
+    .placeholder-icon {
+        font-size: 1.5rem;
+    }
+    
+    .latest-service-content {
+        padding: 15px;
+    }
+    
+    .latest-service-title {
+        font-size: 1rem;
+        line-height: 1.3;
+    }
+    
+    .pagination-enhanced {
+        margin: 25px 0 15px 0;
+        gap: 4px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .pagination-enhanced .page-numbers {
+        min-width: 30px;
+        height: 30px;
+        padding: 2px 6px;
+        font-size: 0.75rem;
+    }
+    
+    .pagination-enhanced .page-numbers.prev,
+    .pagination-enhanced .page-numbers.next {
+        padding: 2px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .pagination-info {
+        font-size: 0.7rem;
+        padding: 8px 12px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    /* Ensure container has proper padding on very small screens */
+    .container {
+        padding: 0 10px;
+    }
+    
+    /* Section padding adjustments */
+    .services-section-fancy {
+        padding: 60px 0;
+    }
+    
+    .section-header-fancy {
+        padding: 0 5px;
+        text-align: center;
+    }
+    
+    .section-title-fancy {
+        font-size: 1.5rem;
+        line-height: 1.2;
+    }
+    
+    .section-subtitle-fancy {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-top: 10px;
+    }
+}
+
+/* Even smaller screens (iPhone SE landscape or very small devices) */
+@media (max-width: 320px) {
+    .container {
+        padding: 0 8px;
+    }
+    
+    .latest-services-summary {
+        margin: 15px 0;
+        padding: 12px;
+    }
+    
+    .summary-stats {
+        gap: 12px;
+    }
+    
+    .summary-item {
+        min-width: 80px;
+        padding: 12px;
+        max-width: 260px;
+    }
+    
+    .summary-number {
+        font-size: 1.5rem;
+    }
+    
+    .summary-label {
+        font-size: 0.7rem;
+    }
+    
+    .section-title-fancy {
+        font-size: 1.3rem;
+    }
+    
+    .section-subtitle-fancy {
+        font-size: 0.85rem;
     }
 }

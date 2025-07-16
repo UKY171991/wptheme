@@ -224,65 +224,150 @@
 </section>
 
 <!-- Success Stories -->
-<section class="testimonials-section">
+<section class="testimonials-section-enhanced">
+    <div class="testimonials-bg-pattern"></div>
     <div class="container">
         <div class="section-header-fancy">
-            <div class="section-badge">Success Stories</div>
+            <div class="section-badge">💬 Success Stories</div>
             <h2 class="section-title-fancy">Real Results from <span class="gradient-text">Our Blueprints</span></h2>
+            <p class="section-subtitle-fancy">See how entrepreneurs transformed their lives with our proven business blueprints</p>
         </div>
         
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                <div class="testimonial-text">"The Social Media Agency blueprint helped me build a $15K/month business in just 6 months. The step-by-step guide was incredibly detailed!"</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">👩‍💼</div>
-                    <div class="author-info">
+        <!-- Featured Success Metrics -->
+        <div class="success-metrics-row">
+            <div class="success-metric">
+                <div class="metric-icon">💰</div>
+                <div class="metric-number">$2.3M+</div>
+                <div class="metric-label">Total Revenue Generated</div>
+            </div>
+            <div class="success-metric">
+                <div class="metric-icon">🚀</div>
+                <div class="metric-number">150+</div>
+                <div class="metric-label">Businesses Launched</div>
+            </div>
+            <div class="success-metric">
+                <div class="metric-icon">⭐</div>
+                <div class="metric-number">4.9/5</div>
+                <div class="metric-label">Average Rating</div>
+            </div>
+            <div class="success-metric">
+                <div class="metric-icon">📈</div>
+                <div class="metric-number">89%</div>
+                <div class="metric-label">Success Rate</div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Testimonials Grid -->
+        <div class="testimonials-showcase">
+            <div class="testimonial-card-enhanced featured-testimonial">
+                <div class="testimonial-header">
+                    <div class="testimonial-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">5.0 out of 5</span>
+                    </div>
+                    <div class="revenue-badge">$15K/month</div>
+                </div>
+                <div class="testimonial-content">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">"The Social Media Agency blueprint completely changed my life. In just 6 months, I went from unemployed to running a $15K/month business. The step-by-step guide was incredibly detailed and the support was amazing!"</p>
+                </div>
+                <div class="testimonial-author-enhanced">
+                    <div class="author-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23667eea'/%3E%3Ctext x='30' y='40' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3ESM%3C/text%3E%3C/svg%3E" alt="Sarah Martinez" />
+                    </div>
+                    <div class="author-details">
                         <div class="author-name">Sarah Martinez</div>
                         <div class="author-business">Digital Marketing Agency Owner</div>
+                        <div class="business-timeline">Started: March 2024</div>
                     </div>
+                    <div class="verification-badge">✅ Verified</div>
                 </div>
             </div>
             
-            <div class="testimonial-card">
-                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                <div class="testimonial-text">"I started my cleaning service with their blueprint and now have 50+ recurring clients. The profit projections were spot on!"</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">👨‍💼</div>
-                    <div class="author-info">
+            <div class="testimonial-card-enhanced">
+                <div class="testimonial-header">
+                    <div class="testimonial-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">5.0 out of 5</span>
+                    </div>
+                    <div class="revenue-badge">$12K/month</div>
+                </div>
+                <div class="testimonial-content">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">"I started my cleaning service with their blueprint and now have 50+ recurring clients. The profit projections were spot on and the business model is incredibly solid!"</p>
+                </div>
+                <div class="testimonial-author-enhanced">
+                    <div class="author-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%2328a745'/%3E%3Ctext x='30' y='40' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EMJ%3C/text%3E%3C/svg%3E" alt="Mike Johnson" />
+                    </div>
+                    <div class="author-details">
                         <div class="author-name">Mike Johnson</div>
                         <div class="author-business">Cleaning Service Owner</div>
+                        <div class="business-timeline">Started: January 2024</div>
                     </div>
+                    <div class="verification-badge">✅ Verified</div>
                 </div>
             </div>
             
-            <div class="testimonial-card">
-                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                <div class="testimonial-text">"The food truck blueprint guided me through every step. I'm now running three trucks and planning expansion!"</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">👩‍🍳</div>
-                    <div class="author-info">
+            <div class="testimonial-card-enhanced">
+                <div class="testimonial-header">
+                    <div class="testimonial-rating">
+                        <span class="stars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-text">5.0 out of 5</span>
+                    </div>
+                    <div class="revenue-badge">3 Trucks</div>
+                </div>
+                <div class="testimonial-content">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">"The food truck blueprint guided me through every step. I'm now running three trucks and planning expansion to two more cities. This changed everything for my family!"</p>
+                </div>
+                <div class="testimonial-author-enhanced">
+                    <div class="author-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23ff6b6b'/%3E%3Ctext x='30' y='40' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E" alt="Maria Rodriguez" />
+                    </div>
+                    <div class="author-details">
                         <div class="author-name">Maria Rodriguez</div>
                         <div class="author-business">Food Truck Owner</div>
+                        <div class="business-timeline">Started: June 2023</div>
                     </div>
+                    <div class="verification-badge">✅ Verified</div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Trust Indicators -->
+        <div class="trust-indicators">
+            <div class="trust-item">
+                <div class="trust-icon">🏆</div>
+                <div class="trust-text">Award-Winning Blueprints</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🛡️</div>
+                <div class="trust-text">Money-Back Guarantee</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">👥</div>
+                <div class="trust-text">1000+ Success Stories</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">⚡</div>
+                <div class="trust-text">Fast Implementation</div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="cta-section-fancy enhanced-cta-section">
-    <div class="cta-gradient-bg"></div>
+<section class="cta-section-fancy">
+    <div class="cta-background-pattern"></div>
     <div class="container">
-        <div class="cta-content-fancy cta-glass-card animate-fade-in-up">
+        <div class="cta-content-fancy">
             <div class="cta-icon">🚀</div>
             <h2 class="cta-title-fancy">Ready to Start Your <span class="gradient-text">Business Journey?</span></h2>
-            <p class="cta-subtitle-fancy">Join thousands of successful entrepreneurs who started with our proven business blueprints and enjoy expert support every step of the way.</p>
+            <p class="cta-subtitle-fancy">Join thousands of successful entrepreneurs who started with our proven business blueprints</p>
             <div class="cta-buttons-fancy">
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('all-blueprints'))); ?>" class="cta-btn-primary shine-on-hover">
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('all-blueprints'))); ?>" class="cta-btn-primary">
                     <span>Browse All 75 Blueprints</span>
-                    <i class="fas fa-arrow-right"></i>
                     <div class="btn-shine"></div>
                 </a>
                 <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="cta-btn-secondary">
@@ -293,11 +378,292 @@
                 <div class="trust-badge">✅ Proven Profitable</div>
                 <div class="trust-badge">✅ Step-by-Step Guides</div>
                 <div class="trust-badge">✅ Real Success Stories</div>
-                <div class="trust-badge">💸 Money-Back Guarantee</div>
-                <div class="trust-badge">🕑 24/7 Support</div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Enhanced Interactive JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const fadeInObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                }, index * 150); // Staggered animation
+            }
+        });
+    }, observerOptions);
+
+    // Animate blueprint cards
+    const blueprintCards = document.querySelectorAll('.blueprint-category-card');
+    blueprintCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px) scale(0.9)';
+        card.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        fadeInObserver.observe(card);
+    });
+
+    // Animate step items
+    const stepItems = document.querySelectorAll('.step-item');
+    stepItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = `all 0.6s ease ${index * 0.2}s`;
+        fadeInObserver.observe(item);
+    });
+
+    // Animate featured blueprints
+    const featuredCards = document.querySelectorAll('.featured-blueprint-card');
+    featuredCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(40px)';
+        card.style.transition = `all 0.7s ease ${index * 0.15}s`;
+        fadeInObserver.observe(card);
+    });
+
+    // Animate testimonials
+    const testimonialCards = document.querySelectorAll('.testimonial-card-enhanced');
+    testimonialCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px) scale(0.95)';
+        card.style.transition = `all 0.8s ease ${index * 0.2}s`;
+        fadeInObserver.observe(card);
+    });
+    
+    // Animate success metrics
+    const successMetrics = document.querySelectorAll('.success-metric');
+    successMetrics.forEach((metric, index) => {
+        metric.style.opacity = '0';
+        metric.style.transform = 'translateY(30px)';
+        metric.style.transition = `all 0.6s ease ${index * 0.15}s`;
+        fadeInObserver.observe(metric);
+    });
+    
+    // Animate trust indicators
+    const trustItems = document.querySelectorAll('.trust-item');
+    trustItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
+        item.style.transition = `all 0.5s ease ${index * 0.1}s`;
+        fadeInObserver.observe(item);
+    });
+
+    // Enhanced parallax effect for hero section
+    const heroSection = document.querySelector('.hero-section-advanced');
+    const heroParticles = document.querySelector('.hero-particles');
+    
+    if (heroSection && heroParticles) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = scrolled * 0.5;
+            
+            heroParticles.style.transform = `translateY(${parallax}px)`;
+        });
+    }
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Interactive category cards hover effects
+    blueprintCards.forEach(card => {
+        const icon = card.querySelector('.category-icon');
+        const button = card.querySelector('.category-btn');
+        
+        card.addEventListener('mouseenter', () => {
+            if (icon) {
+                icon.style.transform = 'scale(1.15) rotate(10deg)';
+            }
+            if (button) {
+                button.style.transform = 'translateY(-3px)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            if (icon) {
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            }
+            if (button) {
+                button.style.transform = 'translateY(0)';
+            }
+        });
+    });
+
+    // Counter animation for hero stats
+    const counters = document.querySelectorAll('.stat-number');
+    const animateCounters = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = counter.textContent;
+                const isNumber = /^\d+$/.test(target);
+                
+                if (isNumber) {
+                    const targetNumber = parseInt(target);
+                    let current = 0;
+                    const increment = targetNumber / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= targetNumber) {
+                            counter.textContent = targetNumber;
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(current);
+                        }
+                    }, 40);
+                }
+            }
+        });
+    };
+
+    const counterObserver = new IntersectionObserver(animateCounters, {
+        threshold: 0.5
+    });
+
+    counters.forEach(counter => {
+        counterObserver.observe(counter);
+    });
+
+    // Enhanced floating animation for hero cards
+    const floatingCards = document.querySelectorAll('.floating-card');
+    floatingCards.forEach((card, index) => {
+        const delay = index * 0.5;
+        const duration = 3 + (index * 0.5);
+        
+        card.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+    });
+
+    // Dynamic background color change on scroll
+    let lastScrollY = window.scrollY;
+    const header = document.querySelector('header');
+    
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        
+        if (header) {
+            if (currentScrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'transparent';
+                header.style.backdropFilter = 'none';
+                header.style.boxShadow = 'none';
+            }
+        }
+        
+        lastScrollY = currentScrollY;
+    });
+
+    // Add loading states for better UX
+    const addLoadingStates = () => {
+        const buttons = document.querySelectorAll('.category-btn, .cta-btn-primary, .cta-btn-secondary');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.href && this.href.includes('#')) return; // Don't add loading for anchor links
+                
+                const originalText = this.innerHTML;
+                this.innerHTML = '<span style="opacity: 0.7;">Loading...</span>';
+                this.style.pointerEvents = 'none';
+                
+                // Reset after 2 seconds (in case page doesn't load)
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.pointerEvents = 'auto';
+                }, 2000);
+            });
+        });
+    };
+
+    addLoadingStates();
+
+    // Add tilt effect to cards
+    const addTiltEffect = () => {
+        const cards = document.querySelectorAll('.blueprint-category-card, .featured-blueprint-card, .testimonial-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const mouseX = e.clientX - centerX;
+                const mouseY = e.clientY - centerY;
+                
+                const rotateX = (mouseY / rect.height) * -10;
+                const rotateY = (mouseX / rect.width) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+    };
+
+    addTiltEffect();
+
+    console.log('🎨 Enhanced layout animations loaded successfully!');
+});
+
+// Add CSS for smooth transitions
+const style = document.createElement('style');
+style.textContent = `
+    .blueprint-category-card,
+    .featured-blueprint-card,
+    .testimonial-card {
+        transition: transform 0.3s ease !important;
+    }
+    
+    .category-icon {
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+    
+    .category-btn {
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+    
+    header {
+        transition: all 0.3s ease !important;
+    }
+    
+    /* Enhanced floating animation */
+    @keyframes float {
+        0%, 100% { 
+            transform: translateY(0px) rotate(0deg); 
+        }
+        25% { 
+            transform: translateY(-20px) rotate(2deg); 
+        }
+        50% { 
+            transform: translateY(-15px) rotate(0deg); 
+        }
+        75% { 
+            transform: translateY(-25px) rotate(-2deg); 
+        }
+    }
+`;
+document.head.appendChild(style);
+</script>
 
 <?php get_footer(); ?>

@@ -10,43 +10,43 @@ get_header(); ?>
     <div class="hero-particles"></div>
     <div class="container">
         <div class="hero-content">
-            <div class="hero-badge">🏢 About Our Service Company</div>
-            <h1 class="hero-title-fancy">Your Complete <span class="gradient-text">Service Solution</span></h1>
-            <p class="hero-subtitle-fancy">From home cleaning to business consulting, we're your trusted partner for over 50+ professional services across 9 specialized categories. Excellence delivered, every time.</p>
+            <div class="hero-badge">🚀 About BluePrint Business Solutions</div>
+            <h1 class="hero-title-fancy">Your <span class="gradient-text">Business Blueprint</span> Experts</h1>
+            <p class="hero-subtitle-fancy">Empowering entrepreneurs with proven business blueprints, step-by-step implementation guides, and expert mentorship to turn ideas into profitable ventures.</p>
             <div class="hero-stats">
                 <div class="stat-item">
+                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-label">Business Blueprints</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="12">0</div>
+                    <div class="stat-label">Industry Categories</div>
+                </div>
+                <div class="stat-item">
                     <div class="stat-number" data-count="2500">0</div>
-                    <div class="stat-label">Happy Clients</div>
+                    <div class="stat-label">+ Success Stories</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-count="9">0</div>
-                    <div class="stat-label">Service Categories</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-count="50">0</div>
-                    <div class="stat-label">+ Services</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-count="99">0</div>
-                    <div class="stat-label">% Satisfaction</div>
+                    <div class="stat-number" data-count="95">0</div>
+                    <div class="stat-label">% Launch Rate</div>
                 </div>
             </div>
             <div class="hero-buttons">
                 <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-primary-fancy">
-                    <span>Get Started</span>
+                    <span>Get Your Blueprint</span>
                     <i class="arrow-right">→</i>
                 </a>
                 <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn-secondary-fancy">
-                    <span>View Services</span>
-                    <i class="services-icon">🛠️</i>
+                    <span>Browse Blueprints</span>
+                    <i class="services-icon">�</i>
                 </a>
             </div>
         </div>
         <div class="hero-image">
-            <div class="floating-card card-1">🎊 Creative</div>
-            <div class="floating-card card-2">💡 Innovative</div>
-            <div class="floating-card card-3">⭐ Premium</div>
-            <div class="floating-card card-4">🏆 Award-Winning</div>
+            <div class="floating-card card-1">💡 Innovative</div>
+            <div class="floating-card card-2">🎯 Proven</div>
+            <div class="floating-card card-3">⭐ Expert-Backed</div>
+            <div class="floating-card card-4">🚀 Launch-Ready</div>
         </div>
     </div>
 </section>
@@ -56,59 +56,59 @@ get_header(); ?>
     <div class="container">
         <div class="section-header-fancy">
             <div class="section-badge">Our Journey</div>
-            <h2 class="section-title-fancy">Building <span class="gradient-text">Service Excellence</span></h2>
-            <p class="section-subtitle-fancy">From a single service offering to 9 comprehensive categories - our commitment to quality never wavered</p>
+            <h2 class="section-title-fancy">Building <span class="gradient-text">Blueprint Excellence</span></h2>
+            <p class="section-subtitle-fancy">From a single business idea to 500+ proven blueprints - our mission to empower entrepreneurs never wavered</p>
         </div>
         
         <div class="story-timeline">
             <div class="timeline-item" data-year="2019">
-                <div class="timeline-icon">🏠</div>
+                <div class="timeline-icon">💡</div>
                 <div class="timeline-content">
-                    <h4>Home Services Foundation</h4>
-                    <p>Started with basic home cleaning and maintenance services, building a reputation for reliability and quality in our local community.</p>
+                    <h4>The Blueprint Vision</h4>
+                    <p>Started with the belief that every entrepreneur deserves access to proven business blueprints. Created our first 10 comprehensive business guides.</p>
                     <div class="timeline-metrics">
-                        <span class="metric">5 Services</span>
-                        <span class="metric">50 Clients</span>
-                        <span class="metric">95% Satisfaction</span>
+                        <span class="metric">10 Blueprints</span>
+                        <span class="metric">50 Entrepreneurs</span>
+                        <span class="metric">80% Success Rate</span>
                     </div>
                 </div>
             </div>
             
             <div class="timeline-item" data-year="2020">
-                <div class="timeline-icon">🛠️</div>
+                <div class="timeline-icon">�</div>
                 <div class="timeline-content">
-                    <h4>Expanded Expertise</h4>
-                    <p>Added handyman services, pet care, and personal errands, responding to growing client needs during challenging times.</p>
+                    <h4>Industry Expansion</h4>
+                    <p>Expanded to cover multiple industries including tech, retail, and services. Added detailed cost analysis and market research to each blueprint.</p>
                     <div class="timeline-metrics">
-                        <span class="metric">15 Services</span>
-                        <span class="metric">200 Clients</span>
-                        <span class="metric">98% Satisfaction</span>
+                        <span class="metric">50 Blueprints</span>
+                        <span class="metric">300 Entrepreneurs</span>
+                        <span class="metric">85% Success Rate</span>
                     </div>
                 </div>
             </div>
             
             <div class="timeline-item" data-year="2021">
-                <div class="timeline-icon">💼</div>
+                <div class="timeline-icon">🎯</div>
                 <div class="timeline-content">
-                    <h4>Professional Services</h4>
-                    <p>Launched business consulting, digital services, and administrative support, serving both residential and commercial clients.</p>
+                    <h4>Expert Mentorship Program</h4>
+                    <p>Launched one-on-one mentorship program connecting entrepreneurs with industry experts who have successfully implemented our blueprints.</p>
                     <div class="timeline-metrics">
-                        <span class="metric">25 Services</span>
-                        <span class="metric">500 Clients</span>
-                        <span class="metric">99% Satisfaction</span>
+                        <span class="metric">150 Blueprints</span>
+                        <span class="metric">800 Entrepreneurs</span>
+                        <span class="metric">90% Success Rate</span>
                     </div>
                 </div>
             </div>
             
             <div class="timeline-item" data-year="2023">
-                <div class="timeline-icon">👥</div>
+                <div class="timeline-icon">�</div>
                 <div class="timeline-content">
-                    <h4>Family & Creative Services</h4>
-                    <p>Introduced family support services, creative solutions, and specialized coaching programs to meet diverse client needs.</p>
+                    <h4>AI-Powered Customization</h4>
+                    <p>Introduced AI-powered blueprint customization, allowing entrepreneurs to tailor each plan to their specific market, budget, and goals.</p>
                     <div class="timeline-metrics">
-                        <span class="metric">40 Services</span>
-                        <span class="metric">1500 Clients</span>
-                        <span class="metric">99% Satisfaction</span>
+                        <span class="metric">300 Blueprints</span>
+                        <span class="metric">1500 Entrepreneurs</span>
+                        <span class="metric">92% Success Rate</span>
                     </div>
                 </div>
             </div>
@@ -116,12 +116,12 @@ get_header(); ?>
             <div class="timeline-item" data-year="2024">
                 <div class="timeline-icon">🌟</div>
                 <div class="timeline-content">
-                    <h4>Complete Service Platform</h4>
-                    <p>Today, we proudly offer 50+ services across 9 categories, serving thousands of satisfied clients with transparent pricing and exceptional quality.</p>
+                    <h4>Complete Business Ecosystem</h4>
+                    <p>Today, we offer 500+ blueprints across 12 industries, complete with implementation support, funding guidance, and ongoing business coaching.</p>
                     <div class="timeline-metrics">
-                        <span class="metric">50+ Services</span>
-                        <span class="metric">2500+ Clients</span>
-                        <span class="metric">99% Satisfaction</span>
+                        <span class="metric">500+ Blueprints</span>
+                        <span class="metric">2500+ Entrepreneurs</span>
+                        <span class="metric">95% Success Rate</span>
                     </div>
                 </div>
             </div>
@@ -136,19 +136,19 @@ get_header(); ?>
             <div class="blueprint-category-card mission-card">
                 <div class="category-icon">🎯</div>
                 <h3>Our Mission</h3>
-                <p>To provide exceptional, reliable services that simplify your life and exceed your expectations, while building lasting relationships with our clients and community.</p>
+                <p>To democratize entrepreneurship by providing proven business blueprints, expert guidance, and implementation support that transforms innovative ideas into thriving businesses.</p>
                 <div class="mission-highlights">
                     <div class="highlight-item">
                         <span class="highlight-icon">✨</span>
-                        <span>Quality First</span>
+                        <span>Proven Blueprints</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-icon">🤝</span>
-                        <span>Trust & Reliability</span>
+                        <span>Expert Mentorship</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-icon">💫</span>
-                        <span>Life Simplified</span>
+                        <span>Business Success</span>
                     </div>
                 </div>
             </div>
@@ -157,19 +157,19 @@ get_header(); ?>
                 <div class="popular-badge">Our Future</div>
                 <div class="category-icon">🌟</div>
                 <h3>Our Vision</h3>
-                <p>To be the most trusted service provider, known for innovation, transparency, and making every client's life easier through comprehensive, professional solutions.</p>
+                <p>To be the world's most trusted platform for business blueprints, empowering millions of entrepreneurs to build successful, sustainable businesses with confidence and clarity.</p>
                 <div class="vision-highlights">
                     <div class="highlight-item">
                         <span class="highlight-icon">🌍</span>
-                        <span>Community Impact</span>
+                        <span>Global Impact</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-icon">🌿</span>
-                        <span>Sustainable Practices</span>
+                        <span>Sustainable Growth</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-icon">🚀</span>
-                        <span>Service Innovation</span>
+                        <span>Innovation Leadership</span>
                     </div>
                 </div>
             </div>
@@ -189,45 +189,45 @@ get_header(); ?>
         <div class="steps-grid values-grid">
             <div class="step-card value-card">
                 <div class="step-number">💎</div>
-                <h3>Excellence</h3>
-                <p>We deliver exceptional quality in every service, from basic cleaning to complex business consulting. Your satisfaction is our measure of success.</p>
+                <h3>Proven Results</h3>
+                <p>Every blueprint in our library has been tested and refined through real-world implementation. We only share strategies that have proven successful for actual entrepreneurs.</p>
                 <div class="value-examples">
-                    <span class="example-tag">Quality First</span>
-                    <span class="example-tag">Skilled Professionals</span>
-                    <span class="example-tag">Superior Results</span>
+                    <span class="example-tag">Market Tested</span>
+                    <span class="example-tag">Expert Vetted</span>
+                    <span class="example-tag">Success Proven</span>
                 </div>
             </div>
             
             <div class="step-card value-card">
                 <div class="step-number">🤝</div>
-                <h3>Trust & Reliability</h3>
-                <p>Your home, business, and family deserve trustworthy professionals. We're vetted, insured, and committed to earning your confidence with every service.</p>
+                <h3>Expert Guidance</h3>
+                <p>Our team of successful entrepreneurs and industry experts provides ongoing support, ensuring you have the knowledge and confidence to execute your chosen blueprint.</p>
                 <div class="value-examples">
-                    <span class="example-tag">Background Checked</span>
-                    <span class="example-tag">Fully Insured</span>
-                    <span class="example-tag">Reliable Service</span>
+                    <span class="example-tag">1-on-1 Mentorship</span>
+                    <span class="example-tag">Industry Experts</span>
+                    <span class="example-tag">Ongoing Support</span>
                 </div>
             </div>
             
             <div class="step-card value-card">
                 <div class="step-number">💰</div>
-                <h3>Transparent Pricing</h3>
-                <p>No hidden fees, no surprises. Our upfront pricing ensures you know exactly what you're paying for, creating trust and peace of mind.</p>
+                <h3>Transparent Insights</h3>
+                <p>Every blueprint includes detailed cost breakdowns, revenue projections, and realistic timelines. No hidden complexities, no unrealistic promises - just honest, actionable business plans.</p>
                 <div class="value-examples">
-                    <span class="example-tag">Clear Quotes</span>
-                    <span class="example-tag">No Hidden Fees</span>
-                    <span class="example-tag">Fair Pricing</span>
+                    <span class="example-tag">Clear Costs</span>
+                    <span class="example-tag">Realistic Projections</span>
+                    <span class="example-tag">Honest Guidance</span>
                 </div>
             </div>
             
             <div class="step-card value-card">
                 <div class="step-number">🌱</div>
-                <h3>Community Care</h3>
-                <p>We're more than a service provider - we're your neighbors. We invest in our community and treat every client like family.</p>
+                <h3>Community Driven</h3>
+                <p>Join a thriving community of entrepreneurs who share insights, celebrate successes, and support each other through the challenges of building a business.</p>
                 <div class="value-examples">
-                    <span class="example-tag">Local Focus</span>
-                    <span class="example-tag">Community Support</span>
-                    <span class="example-tag">Personal Touch</span>
+                    <span class="example-tag">Peer Network</span>
+                    <span class="example-tag">Success Stories</span>
+                    <span class="example-tag">Shared Learning</span>
                 </div>
             </div>
         </div>
@@ -239,8 +239,8 @@ get_header(); ?>
     <div class="container">
         <div class="section-header-fancy">
             <div class="section-badge">Our Team</div>
-            <h2 class="section-title-fancy">Meet Our <span class="gradient-text">Expert Team</span></h2>
-            <p class="section-subtitle-fancy">Dedicated professionals committed to delivering exceptional service and exceeding your expectations</p>
+            <h2 class="section-title-fancy">Meet Our <span class="gradient-text">Blueprint Experts</span></h2>
+            <p class="section-subtitle-fancy">Successful entrepreneurs and industry experts dedicated to helping you turn your business ideas into profitable ventures</p>
         </div>
         
         <div class="team-grid">
@@ -249,13 +249,13 @@ get_header(); ?>
                     <div class="avatar-placeholder">👨‍💼</div>
                 </div>
                 <div class="member-info">
-                    <h4>John Smith</h4>
-                    <p class="member-role">Founder & CEO</p>
-                    <p class="member-bio">15+ years of experience in service management and business development.</p>
+                    <h4>David Rodriguez</h4>
+                    <p class="member-role">Founder & Chief Blueprint Strategist</p>
+                    <p class="member-bio">Serial entrepreneur with 15+ years building successful businesses. Created 100+ proven blueprints across multiple industries.</p>
                     <div class="member-expertise">
                         <span class="expertise-tag">Business Strategy</span>
-                        <span class="expertise-tag">Service Quality</span>
-                        <span class="expertise-tag">Team Leadership</span>
+                        <span class="expertise-tag">Startup Blueprints</span>
+                        <span class="expertise-tag">Market Research</span>
                     </div>
                 </div>
             </div>
@@ -265,13 +265,13 @@ get_header(); ?>
                     <div class="avatar-placeholder">👩‍💼</div>
                 </div>
                 <div class="member-info">
-                    <h4>Sarah Johnson</h4>
-                    <p class="member-role">Operations Manager</p>
-                    <p class="member-bio">Expert in streamlining operations and ensuring service excellence across all categories.</p>
+                    <h4>Sarah Mitchell</h4>
+                    <p class="member-role">Head of Blueprint Development</p>
+                    <p class="member-bio">Expert in translating successful business models into actionable blueprints. Specializes in tech and e-commerce strategies.</p>
                     <div class="member-expertise">
-                        <span class="expertise-tag">Operations</span>
-                        <span class="expertise-tag">Quality Control</span>
-                        <span class="expertise-tag">Process Optimization</span>
+                        <span class="expertise-tag">E-commerce</span>
+                        <span class="expertise-tag">Tech Startups</span>
+                        <span class="expertise-tag">Digital Marketing</span>
                     </div>
                 </div>
             </div>
@@ -281,13 +281,13 @@ get_header(); ?>
                     <div class="avatar-placeholder">👨‍🔧</div>
                 </div>
                 <div class="member-info">
-                    <h4>Mike Davis</h4>
-                    <p class="member-role">Service Coordinator</p>
-                    <p class="member-bio">Specializes in coordinating complex service requests and ensuring client satisfaction.</p>
+                    <h4>Marcus Thompson</h4>
+                    <p class="member-role">Implementation Specialist</p>
+                    <p class="member-bio">Guides entrepreneurs through blueprint execution with hands-on mentorship and practical implementation strategies.</p>
                     <div class="member-expertise">
-                        <span class="expertise-tag">Service Coordination</span>
-                        <span class="expertise-tag">Client Relations</span>
-                        <span class="expertise-tag">Problem Solving</span>
+                        <span class="expertise-tag">Business Implementation</span>
+                        <span class="expertise-tag">Operations Setup</span>
+                        <span class="expertise-tag">Process Optimization</span>
                     </div>
                 </div>
             </div>
@@ -297,13 +297,13 @@ get_header(); ?>
                     <div class="avatar-placeholder">👩‍🎨</div>
                 </div>
                 <div class="member-info">
-                    <h4>Emily Chen</h4>
-                    <p class="member-role">Creative Services Lead</p>
-                    <p class="member-bio">Passionate about delivering creative solutions that exceed client expectations.</p>
+                    <h4>Lisa Wang</h4>
+                    <p class="member-role">Creative Industries Expert</p>
+                    <p class="member-bio">Specializes in creative business blueprints including design agencies, content creation, and creative services ventures.</p>
                     <div class="member-expertise">
-                        <span class="expertise-tag">Creative Design</span>
-                        <span class="expertise-tag">Digital Services</span>
+                        <span class="expertise-tag">Creative Businesses</span>
                         <span class="expertise-tag">Brand Development</span>
+                        <span class="expertise-tag">Content Strategy</span>
                     </div>
                 </div>
             </div>
@@ -317,35 +317,35 @@ get_header(); ?>
         <div class="section-header-fancy">
             <div class="section-badge">Recognition</div>
             <h2 class="section-title-fancy">Awards & <span class="gradient-text">Recognition</span></h2>
-            <p class="section-subtitle-fancy">Our commitment to excellence has been recognized by industry leaders and satisfied clients</p>
+            <p class="section-subtitle-fancy">Our blueprint expertise and entrepreneur success stories have earned industry recognition</p>
         </div>
         
         <div class="awards-grid">
             <div class="award-card">
                 <div class="award-icon">🏆</div>
-                <h4>Best Service Provider 2024</h4>
-                <p>Local Business Association</p>
+                <h4>Best Business Blueprint Platform 2024</h4>
+                <p>Entrepreneurship Excellence Awards</p>
                 <div class="award-year">2024</div>
             </div>
             
             <div class="award-card">
                 <div class="award-icon">⭐</div>
-                <h4>Excellence in Customer Service</h4>
-                <p>Service Industry Awards</p>
+                <h4>Top Startup Mentor Program</h4>
+                <p>Business Coaching Institute</p>
                 <div class="award-year">2023</div>
             </div>
             
             <div class="award-card">
                 <div class="award-icon">🌟</div>
-                <h4>Community Choice Award</h4>
-                <p>Local Community Votes</p>
+                <h4>Entrepreneur's Choice Award</h4>
+                <p>Small Business Community</p>
                 <div class="award-year">2023</div>
             </div>
             
             <div class="award-card">
                 <div class="award-icon">💎</div>
-                <h4>Quality Assurance Certified</h4>
-                <p>Service Quality Institute</p>
+                <h4>Business Excellence Certified</h4>
+                <p>Startup Success Institute</p>
                 <div class="award-year">2022</div>
             </div>
         </div>

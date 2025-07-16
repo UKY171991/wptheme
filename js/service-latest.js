@@ -114,6 +114,59 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
     
+    // Enhanced pagination functionality
+    const paginationLinks = document.querySelectorAll('.pagination-enhanced .page-numbers');
+    paginationLinks.forEach(link => {
+        if (!link.classList.contains('dots') && !link.classList.contains('current')) {
+            link.addEventListener('click', function(e) {
+                // Add loading effect
+                const container = document.getElementById('services-posts-container');
+                if (container) {
+                    container.style.opacity = '0.6';
+                    container.style.transition = 'opacity 0.3s ease';
+                    
+                    // Create loading spinner
+                    const spinner = document.createElement('div');
+                    spinner.className = 'pagination-loading';
+                    spinner.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                    spinner.style.cssText = `
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: rgba(102, 126, 234, 0.9);
+                        color: white;
+                        padding: 15px 25px;
+                        border-radius: 25px;
+                        font-weight: 600;
+                        z-index: 1000;
+                        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                    `;
+                    
+                    container.style.position = 'relative';
+                    container.appendChild(spinner);
+                }
+            });
+        }
+    });
+    
+    // Smooth scroll to services section when pagination is clicked
+    paginationLinks.forEach(link => {
+        if (!link.classList.contains('dots') && !link.classList.contains('current')) {
+            link.addEventListener('click', function(e) {
+                setTimeout(() => {
+                    const servicesSection = document.getElementById('all-services');
+                    if (servicesSection) {
+                        servicesSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }, 100);
+            });
+        }
+    });
+    
     // Add loading animation for service grid
     const serviceGrid = document.getElementById('services-posts-container');
     if (serviceGrid) {
