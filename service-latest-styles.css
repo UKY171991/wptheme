@@ -3,63 +3,66 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 36px;
-  background: #fff;
-  border-radius: 22px;
-  box-shadow: 0 2px 18px rgba(79,140,255,0.07);
-  padding: 32px 18px;
-  margin: 0 auto 40px auto;
-  max-width: 900px;
+  gap: 44px;
+  background: linear-gradient(120deg, #f8fafc 0%, #e3f2fd 100%);
+  border-radius: 32px;
+  box-shadow: 0 6px 32px rgba(79,140,255,0.10);
+  padding: 44px 32px;
+  margin: 0 auto 56px auto;
+  max-width: 1100px;
   position: relative;
   z-index: 2;
+  border: 1.5px solid #e0e7ef;
 }
 .about-feature-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-width: 120px;
-  max-width: 180px;
-  flex: 1 1 120px;
-  padding: 0 10px;
+  max-width: 200px;
+  flex: 1 1 140px;
+  padding: 0 16px;
 }
 .about-feature-icon {
-  font-size: 2.3rem;
-  margin-bottom: 10px;
-  color: #4f8cff;
-  background: linear-gradient(120deg, #e0fdf5 0%, #f0f7ff 100%);
+  font-size: 2.7rem;
+  margin-bottom: 14px;
+  color: #2563eb;
+  background: linear-gradient(135deg, #e0fdf5 0%, #f0f7ff 100%);
   border-radius: 50%;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(79,140,255,0.10);
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2.5px solid #4f8cff22;
 }
 .about-feature-label {
   color: #222;
-  font-size: 1.08rem;
-  font-weight: 600;
+  font-size: 1.13rem;
+  font-weight: 700;
   text-align: center;
-  margin-top: 2px;
-  letter-spacing: 0.2px;
+  margin-top: 4px;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 0 #fff;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .about-feature-list {
-    flex-direction: column;
-    gap: 18px;
-    padding: 18px 6px;
+    gap: 22px;
+    padding: 22px 8px;
+    border-radius: 18px;
   }
   .about-feature-item {
     max-width: 100%;
     min-width: 0;
-    padding: 0 2px;
+    padding: 0 4px;
   }
   .about-feature-icon {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     padding: 10px;
   }
   .about-feature-label {
-    font-size: 0.98rem;
+    font-size: 1rem;
   }
 }
 /* --- Fancy Section Layouts for About Page --- */
