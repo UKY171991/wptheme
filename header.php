@@ -40,6 +40,7 @@
                 'menu_class' => 'nav-menu',
                 'container' => false,
                 'fallback_cb' => 'blueprint_fallback_menu',
+                'walker' => new Blueprint_Walker_Nav_Menu(),
                 'items_wrap' => '<ul id="primary-menu" class="%2$s">%3$s</ul>'
             ));
             ?>

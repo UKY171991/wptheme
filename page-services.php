@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Services Page
+Template Name: All Blueprints Page
 */
 get_header(); ?>
 
@@ -10,34 +10,34 @@ get_header(); ?>
     <div class="hero-particles"></div>
     <div class="container">
         <div class="hero-content">
-            <div class="hero-badge">🛠️ Our Services</div>
-            <h1 class="hero-title-fancy">Professional <span class="gradient-text">Services</span></h1>
-            <p class="hero-subtitle-fancy">Discover our comprehensive range of professional services designed to make your life easier and your business more successful.</p>
+            <div class="hero-badge">� Business Blueprints</div>
+            <h1 class="hero-title-fancy">75 Proven <span class="gradient-text">Business Blueprints</span></h1>
+            <p class="hero-subtitle-fancy">Discover profitable business opportunities with detailed startup guides, cost analysis, and step-by-step implementation plans for each blueprint.</p>
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number" data-count="50">0</div>
-                    <div class="stat-label">+ Services</div>
+                    <div class="stat-number" data-count="75">0</div>
+                    <div class="stat-label">Business Blueprints</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-count="9">0</div>
-                    <div class="stat-label">Categories</div>
+                    <div class="stat-number" data-count="12">0</div>
+                    <div class="stat-label">Industry Categories</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number" data-count="2500">0</div>
-                    <div class="stat-label">Happy Clients</div>
+                    <div class="stat-label">Success Stories</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-count="99">0</div>
-                    <div class="stat-label">% Satisfaction</div>
+                    <div class="stat-number" data-count="95">0</div>
+                    <div class="stat-label">% Success Rate</div>
                 </div>
             </div>
             <div class="hero-buttons">
-                <a href="#featured-services" class="btn-primary-fancy">
-                    <span>Explore Services</span>
+                <a href="#featured-blueprints" class="btn-primary-fancy">
+                    <span>Browse Blueprints</span>
                     <i class="arrow-right">→</i>
                 </a>
                 <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-secondary-fancy">
-                    <span>Get Quote</span>
+                    <span>Get Consultation</span>
                     <i class="phone-icon">📞</i>
                 </a>
             </div>

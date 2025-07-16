@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multi-Level Menu Status Check</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .status { padding: 15px; margin: 10px 0; border-radius: 6px; }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .warning { background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; }
+        .error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+        pre { background: #f8f9fa; padding: 15px; border-radius: 4px; overflow-x: auto; }
+        .test-item { padding: 10px; margin: 5px 0; border-left: 4px solid #007bff; background: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Multi-Level Menu Status Check</h1>
+        <p>This page checks if your multi-level submenu fixes are working correctly.</p>
+        
+        <div class="info status">
+            <strong>📋 Quick Test Checklist:</strong>
+            <ol>
+                <li>Go to your website homepage</li>
+                <li>Hover over "All Blueprints" (desktop) or tap it (mobile)</li>
+                <li>Look for categories like "Online & Digital"</li>
+                <li>Hover/tap on a category to see subcategories</li>
+                <li>Verify 3 levels of navigation work</li>
+            </ol>
+        </div>
+
+        <h2>🧪 JavaScript Test</h2>
+        <div class="test-item">
+            <strong>jQuery Check:</strong> <span id="jquery-check">Testing...</span>
+        </div>
+        <div class="test-item">
+            <strong>Menu System JS:</strong> <span id="menu-js-check">Testing...</span>
+        </div>
+        <div class="test-item">
+            <strong>Menu Structure:</strong> <span id="menu-structure-check">Testing...</span>
+        </div>
+        <div class="test-item">
+            <strong>Multi-Level Detection:</strong> <span id="multilevel-check">Testing...</span>
+        </div>
+
+        <h2>📱 Mobile Test</h2>
+        <div class="test-item">
+            <strong>Viewport Detection:</strong> <span id="viewport-check">Testing...</span>
+        </div>
+        <div class="test-item">
+            <strong>Touch Events:</strong> <span id="touch-check">Testing...</span>
+        </div>
+
+        <h2>🎨 CSS Test</h2>
+        <div class="test-item">
+            <strong>Menu CSS:</strong> <span id="css-check">Testing...</span>
+        </div>
+        <div class="test-item">
+            <strong>Responsive Styles:</strong> <span id="responsive-check">Testing...</span>
+        </div>
+
+        <h2>📊 Results Summary</h2>
+        <div id="results-summary" class="status info">
+            <p>Running tests...</p>
+        </div>
+
+        <h2>🛠️ Next Steps</h2>
+        <div class="info status">
+            <p><strong>If tests pass:</strong> Your multi-level menu should be working! Test it on the actual website.</p>
+            <p><strong>If tests fail:</strong> Check the browser console for JavaScript errors and verify file paths.</p>
+        </div>
+    </div>
+
+    <script>
+        // jQuery check
+        setTimeout(() => {
+            if (typeof jQuery !== 'undefined') {
+                document.getElementById('jquery-check').innerHTML = '<span style="color: green;">✅ jQuery loaded</span>';
+                
+                // Menu system check
+                if (typeof window.blueprintMenu !== 'undefined') {
+                    document.getElementById('menu-js-check').innerHTML = '<span style="color: green;">✅ Menu system active</span>';
+                } else {
+                    document.getElementById('menu-js-check').innerHTML = '<span style="color: orange;">⚠️ Menu system not detected</span>';
+                }
+                
+                // Menu structure check
+                const menuItems = jQuery('.menu-item-has-children');
+                if (menuItems.length > 0) {
+                    document.getElementById('menu-structure-check').innerHTML = `<span style="color: green;">✅ Found ${menuItems.length} dropdown items</span>`;
+                    
+                    // Multi-level check
+                    const nestedItems = jQuery('.sub-menu .menu-item-has-children, .submenu .menu-item-has-children');
+                    if (nestedItems.length > 0) {
+                        document.getElementById('multilevel-check').innerHTML = `<span style="color: green;">✅ Found ${nestedItems.length} nested items (3+ levels)</span>`;
+                    } else {
+                        document.getElementById('multilevel-check').innerHTML = '<span style="color: orange;">⚠️ No nested items found (only 2 levels)</span>';
+                    }
+                } else {
+                    document.getElementById('menu-structure-check').innerHTML = '<span style="color: red;">❌ No dropdown menu items found</span>';
+                    document.getElementById('multilevel-check').innerHTML = '<span style="color: red;">❌ No multi-level menu detected</span>';
+                }
+                
+                // Viewport check
+                const isMobile = window.innerWidth <= 768;
+                document.getElementById('viewport-check').innerHTML = `<span style="color: blue;">📱 ${isMobile ? 'Mobile' : 'Desktop'} (${window.innerWidth}px)</span>`;
+                
+                // Touch events check
+                const hasTouch = 'ontouchstart' in window;
+                document.getElementById('touch-check').innerHTML = `<span style="color: ${hasTouch ? 'green' : 'blue'};">${hasTouch ? '✅ Touch' : '🖱️ Mouse'} events detected</span>`;
+                
+                // CSS check
+                const menuElement = jQuery('.main-navigation');
+                if (menuElement.length > 0) {
+                    const zIndex = menuElement.css('z-index');
+                    document.getElementById('css-check').innerHTML = `<span style="color: green;">✅ Menu CSS loaded (z-index: ${zIndex})</span>`;
+                } else {
+                    document.getElementById('css-check').innerHTML = '<span style="color: red;">❌ Menu CSS not found</span>';
+                }
+                
+                // Responsive check
+                const mediaQuery = window.matchMedia('(max-width: 768px)');
+                document.getElementById('responsive-check').innerHTML = `<span style="color: green;">✅ Responsive breakpoint: ${mediaQuery.matches ? 'Mobile' : 'Desktop'}</span>`;
+                
+                // Summary
+                const passed = document.querySelectorAll('span[style*="green"]').length;
+                const total = 8;
+                const percentage = Math.round((passed / total) * 100);
+                
+                let summaryClass = 'success';
+                let summaryText = '';
+                
+                if (percentage >= 90) {
+                    summaryClass = 'success';
+                    summaryText = '🎉 Excellent! Multi-level menu should be working perfectly.';
+                } else if (percentage >= 70) {
+                    summaryClass = 'warning';
+                    summaryText = '⚠️ Good! Minor issues may exist but menu should mostly work.';
+                } else {
+                    summaryClass = 'error';
+                    summaryText = '❌ Issues detected. Menu may not work properly.';
+                }
+                
+                document.getElementById('results-summary').className = `status ${summaryClass}`;
+                document.getElementById('results-summary').innerHTML = `
+                    <p><strong>Test Results: ${passed}/${total} passed (${percentage}%)</strong></p>
+                    <p>${summaryText}</p>
+                `;
+                
+            } else {
+                document.getElementById('jquery-check').innerHTML = '<span style="color: red;">❌ jQuery not loaded</span>';
+                document.getElementById('menu-js-check').innerHTML = '<span style="color: red;">❌ Cannot test without jQuery</span>';
+                document.getElementById('menu-structure-check').innerHTML = '<span style="color: red;">❌ Cannot test without jQuery</span>';
+                document.getElementById('multilevel-check').innerHTML = '<span style="color: red;">❌ Cannot test without jQuery</span>';
+                document.getElementById('css-check').innerHTML = '<span style="color: red;">❌ Cannot test without jQuery</span>';
+                document.getElementById('responsive-check').innerHTML = '<span style="color: blue;">📱 Basic responsive test passed</span>';
+                
+                document.getElementById('results-summary').className = 'status error';
+                document.getElementById('results-summary').innerHTML = '<p><strong>❌ Critical Error:</strong> jQuery is required for the menu system to work.</p>';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -8,7 +8,8 @@ class Blueprint_Walker_Nav_Menu extends Walker_Nav_Menu {
      */
     public function start_lvl(&$output, $depth = 0, $args = array()) {
         $indent = str_repeat("\t", $depth);
-        $output .= "\n$indent<ul class=\"submenu\">\n";
+        $role = ($depth === 0) ? ' role="menu"' : ' role="menu"';
+        $output .= "\n$indent<ul class=\"sub-menu\"$role>\n";
     }
 
     /**
@@ -23,7 +24,13 @@ class Blueprint_Walker_Nav_Menu extends Walker_Nav_Menu {
         // Add has-children class if the item has children
         if (in_array('menu-item-has-children', $classes)) {
             $classes[] = 'has-children';
+            if ($depth > 0) {
+                $classes[] = 'has-nested-children';
+            }
         }
+
+        // Add depth class for styling
+        $classes[] = 'menu-depth-' . $depth;
 
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args, $depth));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
@@ -49,11 +56,24 @@ class Blueprint_Walker_Nav_Menu extends Walker_Nav_Menu {
             }
         }
 
-        $item_output = $args->before;
+        $item_output = $args->before ?? '';
         $item_output .= '<a' . $attributes . '>';
-        $item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
+        $item_output .= ($args->link_before ?? '') . apply_filters('the_title', $item->title, $item->ID) . ($args->link_after ?? '');
+        
+        // Add dropdown indicator for items with children
+        if (in_array('menu-item-has-children', $classes)) {
+            // Add ARIA attributes for accessibility
+            $item_output = str_replace('<a' . $attributes . '>', '<a' . $attributes . ' aria-haspopup="true" aria-expanded="false">', $item_output);
+            
+            if ($depth === 0) {
+                $item_output .= '<span class="dropdown-indicator" aria-hidden="true"><i class="arrow">▼</i></span>';
+            } else {
+                $item_output .= '<span class="dropdown-indicator nested" aria-hidden="true"><i class="arrow">▶</i></span>';
+            }
+        }
+        
         $item_output .= '</a>';
-        $item_output .= $args->after;
+        $item_output .= $args->after ?? '';
 
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
     }

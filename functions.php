@@ -5,6 +5,9 @@
  * This file contains all the theme setup and functionality
  */
 
+// Include dynamic menu system
+require_once get_template_directory() . '/dynamic-menu-system.php';
+
 // Theme setup
 function blueprint_theme_setup() {
     // Add theme support for various features
@@ -32,6 +35,12 @@ function blueprint_theme_setup() {
     if (get_option('blueprint_pages_created') !== 'yes') {
         blueprint_create_default_pages();
         update_option('blueprint_pages_created', 'yes');
+    }
+    
+    // Set default menu on theme activation - DYNAMIC SYSTEM
+    if (get_option('blueprint_menu_created') !== 'yes') {
+        blueprint_create_truly_dynamic_menu();
+        update_option('blueprint_menu_created', 'yes');
     }
 }
 add_action('after_setup_theme', 'blueprint_theme_setup');
@@ -338,8 +347,8 @@ function partypro_enqueue_styles() {
     // Enhanced JavaScript for layout improvements
     wp_enqueue_script('partypro-layout-enhancements', get_template_directory_uri() . '/js/layout-enhancements.js', array('jquery'), '1.0', true);
     
-    // Enhanced mobile menu and submenu functionality
-    wp_enqueue_script('blueprint-enhanced-mobile-menu', get_template_directory_uri() . '/js/enhanced-mobile-menu.js', array('jquery'), '1.1', true);
+    // Enhanced mobile menu and submenu functionality - DISABLED in favor of menu-system.js
+    // wp_enqueue_script('blueprint-enhanced-mobile-menu', get_template_directory_uri() . '/js/enhanced-mobile-menu.js', array('jquery'), '1.1', true);
     
     // FAQ functionality fix
     wp_enqueue_script('partypro-faq-fix', get_template_directory_uri() . '/js/faq-fix.js', array(), '1.0', true);
@@ -880,6 +889,7 @@ function blueprint_scripts() {
 
     // Scripts - Old menu toggle disabled to prevent conflicts with enhanced version
     // wp_enqueue_script('blueprint-navigation', get_template_directory_uri() . '/js/menu-toggle.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('blueprint-menu-system', get_template_directory_uri() . '/js/menu-system.js', array('jquery'), '1.2.0', true);
 }
 add_action('wp_enqueue_scripts', 'blueprint_scripts');
 
@@ -1020,3 +1030,62 @@ class Partypro_Responsive_Menu_Walker extends Walker_Nav_Menu {
         $output .= '</li>';
     }
 }
+
+// Create default menu with blueprint categories
+function blueprint_create_dynamic_menu() {
+    // Check if menu already exists
+    $menu_name = 'Primary Navigation';
+    $menu_exists = wp_get_nav_menu_object($menu_name);
+    
+    if (!$menu_exists) {
+        // Create the menu
+        $menu_id = wp_create_nav_menu($menu_name);
+        
+        if (!is_wp_error($menu_id)) {
+            // Add Home
+            wp_update_nav_menu_item($menu_id, 0, array(
+                'menu-item-title' => 'Home',
+                'menu-item-url' => home_url('/'),
+                'menu-item-status' => 'publish'
+            ));
+            
+            // Dynamically add existing pages
+            $pages = get_pages(array(
+                'meta_key' => '_wp_page_template',
+                'hierarchical' => false,
+                'sort_column' => 'menu_order'
+            ));
+            
+            foreach ($pages as $page) {
+                $template = get_page_template_slug($page->ID);
+                $page_title = $page->post_title;
+                $page_url = get_permalink($page->ID);
+                
+                // Skip certain pages or customize titles
+                if (in_array($page->post_name, array('home', 'front-page'))) {
+                    continue;
+                }
+                
+                // Add main pages
+                wp_update_nav_menu_item($menu_id, 0, array(
+                    'menu-item-title' => $page_title,
+                    'menu-item-object-id' => $page->ID,
+                    'menu-item-object' => 'page',
+                    'menu-item-type' => 'post_type',
+                    'menu-item-status' => 'publish'
+                ));
+            }
+            
+            // Set this menu to primary location
+            $locations = get_theme_mod('nav_menu_locations');
+            $locations['primary-menu'] = $menu_id;
+            set_theme_mod('nav_menu_locations', $locations);
+        }
+    }
+}
+
+// Force menu creation on theme switch/activation - DYNAMIC SYSTEM
+function blueprint_force_menu_creation() {
+    blueprint_create_truly_dynamic_menu();
+}
+add_action('after_switch_theme', 'blueprint_force_menu_creation');
