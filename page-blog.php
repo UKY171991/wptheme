@@ -2,51 +2,19 @@
 /*
 Template Name: Blog Page
 */
-get_header(); ?>
+get_header(); 
+
+// Enqueue blog layout fixes CSS
+wp_enqueue_style('blog-layout-fixes', get_template_directory_uri() . '/blog-layout-fixes.css');
+?>
 
 <!-- Enhanced Blog Hero Section -->
-<section class="hero-section-advanced blog-hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-particles"></div>
-    <div class="container">
-        <div class="hero-content">
-            <div class="hero-badge">📝 Our Blog</div>
-            <h1 class="hero-title-fancy">Insights & <span class="gradient-text">Inspiration</span></h1>
-            <p class="hero-subtitle-fancy">Discover expert tips, industry insights, and behind-the-scenes stories from our service professionals. Stay updated with the latest trends and best practices.</p>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number" data-count="150">0</div>
-                    <div class="stat-label">Articles Published</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-count="25">0</div>
-                    <div class="stat-label">Expert Authors</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-count="50">0</div>
-                    <div class="stat-label">Categories</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-count="10000">0</div>
-                    <div class="stat-label">Monthly Readers</div>
-                </div>
-            </div>
-            <div class="hero-buttons">
-                <a href="#featured-posts" class="btn-primary-fancy">
-                    <span>Explore Articles</span>
-                    <i class="arrow-right">→</i>
-                </a>
-                <a href="#newsletter" class="btn-secondary-fancy">
-                    <span>Subscribe</span>
-                    <i class="newsletter-icon">📧</i>
-                </a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <div class="floating-card card-1">💡 Tips & Tricks</div>
-            <div class="floating-card card-2">📊 Industry Insights</div>
-            <div class="floating-card card-3">🎯 Expert Advice</div>
-            <div class="floating-card card-4">🌟 Success Stories</div>
+<section class="hero-section-advanced blog-hero" style="background:linear-gradient(120deg,#5a7cff 0%,#4F8EF7 50%,#6a82fb 100%);padding:4.5rem 0 3.5rem 0;position:relative;overflow:hidden;">
+    <div class="container" style="position:relative;z-index:2;">
+        <div class="blog-archive-header" style="max-width:800px;margin:auto;text-align:center;color:#fff;">
+            <div class="blog-archive-badge" style="display:inline-block;background:#fff;color:#4F8EF7;padding:0.7rem 2.2rem;border-radius:2rem;font-weight:700;margin-bottom:2.2rem;box-shadow:0 4px 24px rgba(79,142,247,0.13);letter-spacing:0.5px;font-size:1.08rem;">Complete Blog Archive</div>
+            <h1 class="blog-archive-title" style="font-size:2.7rem;font-weight:900;line-height:1.1;margin-bottom:1.2rem;letter-spacing:-1px;">Complete <span class="gradient-text" style="background:linear-gradient(90deg,#fff,#e0e7ff 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Blog Archive</span></h1>
+            <p class="blog-archive-subtitle" style="font-size:1.22rem;margin-bottom:2.5rem;color:rgba(255,255,255,0.96);font-weight:500;text-shadow:0 2px 8px rgba(79,142,247,0.10);">Browse through all our articles, tips, and insights</p>
         </div>
     </div>
 </section>
@@ -135,18 +103,18 @@ get_header(); ?>
             if ($featured_posts->have_posts()) :
                 while ($featured_posts->have_posts()) : $featured_posts->the_post();
             ?>
-                <article class="blog-post-card <?php echo ($featured_posts->current_post === 0) ? 'featured' : ''; ?>">
+                <article class="blog-post-card <?php echo ($featured_posts->current_post === 0) ? 'featured' : ''; ?>" style="background:#fff;border-radius:1.25rem;box-shadow:0 8px 32px rgba(79,142,247,0.10);padding:2.25rem 1.75rem;display:flex;flex-direction:column;justify-content:space-between;min-height:420px;overflow:hidden;">
                     <?php if (has_post_thumbnail()) : ?>
-                        <div class="post-thumbnail">
-                            <a href="<?php the_permalink(); ?>">
-                                <?php the_post_thumbnail('medium_large'); ?>
+                        <div class="post-thumbnail" style="width:100%;height:220px;overflow:hidden;border-radius:1rem 1rem 0 0;margin-bottom:1.2rem;background:#f8fafd;display:flex;align-items:center;justify-content:center;">
+                            <a href="<?php the_permalink(); ?>" style="display:block;width:100%;height:100%;">
+                                <?php the_post_thumbnail('medium_large', array('style'=>'width:100%;height:100%;object-fit:cover;object-position:center;')); ?>
                             </a>
                             <div class="post-overlay"></div>
                         </div>
                     <?php endif; ?>
                     
-                    <div class="post-content">
-                        <div class="post-meta">
+                    <div class="post-content" style="flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+                        <div class="post-meta" style="font-size:0.98rem;color:#4F8EF7;margin-bottom:0.7rem;display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;">
                             <span class="post-date">
                                 <i class="fas fa-calendar"></i>
                                 <?php echo get_the_date(); ?>
@@ -163,20 +131,20 @@ get_header(); ?>
                             <?php endif; ?>
                         </div>
                         
-                        <h3 class="post-title">
-                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        <h3 class="post-title" style="font-size:1.35rem;font-weight:700;margin:0.5rem 0 0.7rem 0;line-height:1.3;">
+                            <a href="<?php the_permalink(); ?>" style="color:#222;text-decoration:none;transition:color 0.2s;"><?php the_title(); ?></a>
                         </h3>
                         
-                        <div class="post-excerpt">
+                        <div class="post-excerpt" style="color:#555;font-size:1.05rem;line-height:1.7;margin-bottom:1.1rem;">
                             <?php the_excerpt(); ?>
                         </div>
                         
-                        <div class="post-footer">
-                            <a href="<?php the_permalink(); ?>" class="read-more-btn">
+                        <div class="post-footer" style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;">
+                            <a href="<?php the_permalink(); ?>" class="read-more-btn" style="color:#4F8EF7;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:0.3rem;transition:color 0.2s;">
                                 <span>Read More</span>
                                 <i class="arrow-right">→</i>
                             </a>
-                            <div class="post-stats">
+                            <div class="post-stats" style="display:flex;gap:1.1rem;font-size:0.98rem;color:#888;">
                                 <span class="stat">
                                     <i class="fas fa-eye"></i>
                                     <?php echo get_post_views(get_the_ID()); ?>

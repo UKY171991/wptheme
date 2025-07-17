@@ -65,6 +65,7 @@
                     <button class="filter-btn active" data-filter="all">All Posts</button>
                     <button class="filter-btn" data-filter="recent">Recent</button>
                     <button class="filter-btn" data-filter="popular">Popular</button>
+                    <button class="filter-btn" data-filter="featured">Featured</button>
                 </div>
                 
                 <div class="search-box">
@@ -74,8 +75,10 @@
             </div>
             
             <div class="posts-grid" id="archive-posts-container">
-                <?php while (have_posts()) : the_post(); ?>
-                    <article class="post-card" data-category="<?php echo get_the_category_list(',', '', get_the_ID()); ?>">
+                <?php while (have_posts()) : the_post();
+                    $is_featured = get_post_meta(get_the_ID(), '_is_featured', true) === 'yes';
+                ?>
+                    <article class="post-card <?php echo $is_featured ? 'featured' : ''; ?>" data-category="<?php echo get_the_category_list(',', '', get_the_ID()); ?>">
                         <?php if (has_post_thumbnail()) : ?>
                             <div class="post-thumbnail">
                                 <a href="<?php the_permalink(); ?>">

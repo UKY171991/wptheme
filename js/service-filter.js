@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'all':
                 return true;
             case 'popular':
-                return card.classList.contains('featured') || 
+                return card.classList.contains('popular') || 
                        card.querySelector('.service-rating')?.textContent.includes('4.9');
             case 'recent':
                 return card.getAttribute('data-recent') === 'true' ||
