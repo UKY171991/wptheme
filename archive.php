@@ -74,73 +74,32 @@
                 </div>
             </div>
             
-            <div class="posts-grid" id="archive-posts-container">
-                <?php while (have_posts()) : the_post();
-                    $is_featured = get_post_meta(get_the_ID(), '_is_featured', true) === 'yes';
-                ?>
-                    <article class="post-card <?php echo $is_featured ? 'featured' : ''; ?>" data-category="<?php echo get_the_category_list(',', '', get_the_ID()); ?>">
-                        <?php if (has_post_thumbnail()) : ?>
-                            <div class="post-thumbnail">
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('medium'); ?>
-                                </a>
-                                <div class="post-overlay"></div>
-                            </div>
-                        <?php endif; ?>
-                        
-                        <div class="post-content">
-                            <div class="post-meta">
-                                <span class="post-date">
-                                    <i class="fas fa-calendar"></i>
-                                    <?php echo get_the_date(); ?>
-                                </span>
-                                <?php if (get_the_category()) : ?>
-                                    <span class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        <?php the_category(', '); ?>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                            </h3>
-                            
-                            <div class="post-excerpt">
-                                <?php the_excerpt(); ?>
-                            </div>
-                            
-                            <div class="post-footer">
-                                <a href="<?php the_permalink(); ?>" class="read-more-btn">
-                                    <span>Read More</span>
-                                    <i class="arrow-right">→</i>
-                                </a>
-                                <div class="post-stats">
-                                    <span class="stat">
-                                        <i class="fas fa-eye"></i>
-                                        <?php echo get_post_views(get_the_ID()); ?>
-                                    </span>
-                                    <span class="stat">
-                                        <i class="fas fa-comment"></i>
-                                        <?php echo get_comments_number(); ?>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+            <div class="row" id="archive-posts-container">
+                <?php while (have_posts()) : the_post(); ?>
+                    <div class="col-md-6 col-lg-4 d-flex">
+                        <?php get_template_part('content-archive-card'); ?>
+                    </div>
                 <?php endwhile; ?>
             </div>
             
             <!-- Enhanced Pagination -->
-            <div class="pagination-enhanced">
+            <nav class="pagination-enhanced" aria-label="Blog Pagination">
+                <ul class="pagination justify-content-center">
                 <?php
-                echo paginate_links(array(
+                $links = paginate_links(array(
                     'prev_text' => '<i class="fas fa-chevron-left"></i> Previous',
                     'next_text' => 'Next <i class="fas fa-chevron-right"></i>',
-                    'type' => 'array'
+                    'type' => 'array',
+                    'before_page_number' => '<span class="sr-only">Page </span>'
                 ));
+                if ($links) {
+                    foreach ($links as $link) {
+                        echo '<li class="page-item">' . str_replace('page-numbers', 'page-link', $link) . '</li>';
+                    }
+                }
                 ?>
-            </div>
+                </ul>
+            </nav>
             
         <?php else : ?>
             <div class="no-posts">

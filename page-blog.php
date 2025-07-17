@@ -4,494 +4,387 @@ Template Name: Blog Page
 */
 get_header(); 
 
-// Enqueue blog layout fixes CSS
-wp_enqueue_style('blog-layout-fixes', get_template_directory_uri() . '/blog-layout-fixes.css');
+// Enqueue blog layout CSS
+wp_enqueue_style('blog-layout-fixes', get_template_directory_uri() . '/blog-layout-fixes.css', array(), '2.0');
+
+// Enqueue Font Awesome for icons
+wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css', array(), '6.0.0');
 ?>
 
-<!-- Enhanced Blog Hero Section -->
-<section class="hero-section-advanced blog-hero" style="background:linear-gradient(120deg,#5a7cff 0%,#4F8EF7 50%,#6a82fb 100%);padding:4.5rem 0 3.5rem 0;position:relative;overflow:hidden;">
-    <div class="container" style="position:relative;z-index:2;">
-        <div class="blog-archive-header" style="max-width:800px;margin:auto;text-align:center;color:#fff;">
-            <div class="blog-archive-badge" style="display:inline-block;background:#fff;color:#4F8EF7;padding:0.7rem 2.2rem;border-radius:2rem;font-weight:700;margin-bottom:2.2rem;box-shadow:0 4px 24px rgba(79,142,247,0.13);letter-spacing:0.5px;font-size:1.08rem;">Complete Blog Archive</div>
-            <h1 class="blog-archive-title" style="font-size:2.7rem;font-weight:900;line-height:1.1;margin-bottom:1.2rem;letter-spacing:-1px;">Complete <span class="gradient-text" style="background:linear-gradient(90deg,#fff,#e0e7ff 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Blog Archive</span></h1>
-            <p class="blog-archive-subtitle" style="font-size:1.22rem;margin-bottom:2.5rem;color:rgba(255,255,255,0.96);font-weight:500;text-shadow:0 2px 8px rgba(79,142,247,0.10);">Browse through all our articles, tips, and insights</p>
-        </div>
-    </div>
-</section>
-
-<!-- Blog Categories Section -->
-<section class="services-section-fancy blog-categories">
+<!-- Blog Header Section -->
+<div class="content-section">
     <div class="container">
-        <div class="section-header-fancy">
-            <div class="section-badge">Categories</div>
-            <h2 class="section-title-fancy">Explore by <span class="gradient-text">Topic</span></h2>
-            <p class="section-subtitle-fancy">Find articles that match your interests and needs</p>
-        </div>
-        
-        <div class="categories-grid">
-            <?php
-            $categories = get_categories(array(
-                'orderby' => 'count',
-                'order' => 'DESC',
-                'number' => 8
-            ));
-            
-            foreach ($categories as $category) :
-                $category_link = get_category_link($category->term_id);
-                $category_count = $category->count;
-            ?>
-                <a href="<?php echo esc_url($category_link); ?>" class="category-card">
-                    <div class="category-icon">
-                        <?php
-                        // Assign icons based on category name
-                        $icon_map = array(
-                            'cleaning' => '🧹',
-                            'maintenance' => '🔧',
-                            'business' => '💼',
-                            'technology' => '💻',
-                            'lifestyle' => '🌟',
-                            'tips' => '💡',
-                            'news' => '📰',
-                            'guides' => '📚'
-                        );
-                        
-                        $category_slug = strtolower($category->slug);
-                        $icon = '📝'; // default icon
-                        
-                        foreach ($icon_map as $keyword => $cat_icon) {
-                            if (strpos($category_slug, $keyword) !== false) {
-                                $icon = $cat_icon;
-                                break;
-                            }
-                        }
-                        echo $icon;
-                        ?>
+        <div class="blog-header">
+            <div class="blog-header-content">
+                <h1>Our Blog</h1>
+                <p>Insights, updates, and stories from our team</p>
+                
+                <!-- Search Box -->
+                <div class="blog-search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="post-search" placeholder="Search articles...">
                     </div>
-                    <h3><?php echo esc_html($category->name); ?></h3>
-                    <p class="category-count"><?php echo $category_count; ?> articles</p>
-                </a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
-<!-- Featured Posts Section -->
-<section id="featured-posts" class="featured-blueprints-section featured-posts">
-    <div class="container">
-        <div class="section-header-fancy">
-            <div class="section-badge">Featured</div>
-            <h2 class="section-title-fancy">Latest <span class="gradient-text">Articles</span></h2>
-            <p class="section-subtitle-fancy">Stay updated with our most recent insights and expert advice</p>
-        </div>
-        
-        <div class="featured-posts-grid">
-            <?php
-            $featured_posts = new WP_Query(array(
-                'posts_per_page' => 6,
-                'meta_key' => '_is_featured',
-                'meta_value' => 'yes'
-            ));
-            
-            if (!$featured_posts->have_posts()) {
-                $featured_posts = new WP_Query(array(
-                    'posts_per_page' => 6,
-                    'orderby' => 'date',
-                    'order' => 'DESC'
-                ));
-            }
-            
-            if ($featured_posts->have_posts()) :
-                while ($featured_posts->have_posts()) : $featured_posts->the_post();
-            ?>
-                <article class="blog-post-card <?php echo ($featured_posts->current_post === 0) ? 'featured' : ''; ?>" style="background:#fff;border-radius:1.25rem;box-shadow:0 8px 32px rgba(79,142,247,0.10);padding:2.25rem 1.75rem;display:flex;flex-direction:column;justify-content:space-between;min-height:420px;overflow:hidden;">
-                    <?php if (has_post_thumbnail()) : ?>
-                        <div class="post-thumbnail" style="width:100%;height:220px;overflow:hidden;border-radius:1rem 1rem 0 0;margin-bottom:1.2rem;background:#f8fafd;display:flex;align-items:center;justify-content:center;">
-                            <a href="<?php the_permalink(); ?>" style="display:block;width:100%;height:100%;">
-                                <?php the_post_thumbnail('medium_large', array('style'=>'width:100%;height:100%;object-fit:cover;object-position:center;')); ?>
-                            </a>
-                            <div class="post-overlay"></div>
-                        </div>
-                    <?php endif; ?>
-                    
-                    <div class="post-content" style="flex:1;display:flex;flex-direction:column;justify-content:space-between;">
-                        <div class="post-meta" style="font-size:0.98rem;color:#4F8EF7;margin-bottom:0.7rem;display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;">
-                            <span class="post-date">
-                                <i class="fas fa-calendar"></i>
-                                <?php echo get_the_date(); ?>
-                            </span>
-                            <span class="post-author">
-                                <i class="fas fa-user"></i>
-                                <?php the_author(); ?>
-                            </span>
-                            <?php if (get_the_category()) : ?>
-                                <span class="post-category">
-                                    <i class="fas fa-folder"></i>
-                                    <?php the_category(', '); ?>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                        
-                        <h3 class="post-title" style="font-size:1.35rem;font-weight:700;margin:0.5rem 0 0.7rem 0;line-height:1.3;">
-                            <a href="<?php the_permalink(); ?>" style="color:#222;text-decoration:none;transition:color 0.2s;"><?php the_title(); ?></a>
-                        </h3>
-                        
-                        <div class="post-excerpt" style="color:#555;font-size:1.05rem;line-height:1.7;margin-bottom:1.1rem;">
-                            <?php the_excerpt(); ?>
-                        </div>
-                        
-                        <div class="post-footer" style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;">
-                            <a href="<?php the_permalink(); ?>" class="read-more-btn" style="color:#4F8EF7;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:0.3rem;transition:color 0.2s;">
-                                <span>Read More</span>
-                                <i class="arrow-right">→</i>
-                            </a>
-                            <div class="post-stats" style="display:flex;gap:1.1rem;font-size:0.98rem;color:#888;">
-                                <span class="stat">
-                                    <i class="fas fa-eye"></i>
-                                    <?php echo get_post_views(get_the_ID()); ?>
-                                </span>
-                                <span class="stat">
-                                    <i class="fas fa-comment"></i>
-                                    <?php echo get_comments_number(); ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            <?php 
-                endwhile;
-                wp_reset_postdata();
-            endif;
-            ?>
-        </div>
-    </div>
-</section>
-
-<!-- All Posts Section -->
-<section class="services-section-fancy all-posts">
-    <div class="container">
-        <div class="section-header-fancy">
-            <div class="section-badge">All Articles</div>
-            <h2 class="section-title-fancy">Complete <span class="gradient-text">Blog Archive</span></h2>
-            <p class="section-subtitle-fancy">Browse through all our articles, tips, and insights</p>
-        </div>
-        
-        <div class="posts-filter">
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All Posts</button>
-                <button class="filter-btn" data-filter="recent">Recent</button>
-                <button class="filter-btn" data-filter="popular">Popular</button>
-                <button class="filter-btn" data-filter="featured">Featured</button>
-            </div>
-            
-            <div class="search-box">
-                <input type="text" id="post-search" placeholder="Search articles...">
-                <i class="fas fa-search"></i>
+                </div>
             </div>
         </div>
-        
-        <div class="posts-grid" id="posts-container">
-            <?php
-            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            $posts_query = new WP_Query(array(
-                'posts_per_page' => 12,
-                'paged' => $paged,
-                'orderby' => 'date',
-                'order' => 'DESC'
-            ));
-            
-            if ($posts_query->have_posts()) :
-                while ($posts_query->have_posts()) : $posts_query->the_post();
-            ?>
-                <article class="post-card" data-category="<?php echo get_the_category_list(',', '', get_the_ID()); ?>">
-                    <?php if (has_post_thumbnail()) : ?>
-                        <div class="post-thumbnail">
-                            <a href="<?php the_permalink(); ?>">
-                                <?php the_post_thumbnail('medium'); ?>
-                            </a>
-                            <div class="post-overlay"></div>
-                        </div>
-                    <?php endif; ?>
-                    
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-date">
-                                <i class="fas fa-calendar"></i>
-                                <?php echo get_the_date(); ?>
-                            </span>
-                            <?php if (get_the_category()) : ?>
-                                <span class="post-category">
-                                    <i class="fas fa-folder"></i>
-                                    <?php the_category(', '); ?>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                        
-                        <h3 class="post-title">
-                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                        </h3>
-                        
-                        <div class="post-excerpt">
-                            <?php the_excerpt(); ?>
-                        </div>
-                        
-                        <div class="post-footer">
-                            <a href="<?php the_permalink(); ?>" class="read-more-btn">
-                                <span>Read More</span>
-                                <i class="arrow-right">→</i>
-                            </a>
-                            <div class="post-stats">
-                                <span class="stat">
-                                    <i class="fas fa-eye"></i>
-                                    <?php echo get_post_views(get_the_ID()); ?>
-                                </span>
-                                <span class="stat">
-                                    <i class="fas fa-comment"></i>
-                                    <?php echo get_comments_number(); ?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            <?php 
-                endwhile;
-            endif;
-            wp_reset_postdata();
-            ?>
+
+        <div class="blog-container">
+            <!-- Category and Filter Section -->
+            <div class="blog-filter-section">
+        <div class="filter-categories">
+            <button class="filter-btn active" data-filter="all">All Posts</button>
+            <button class="filter-btn" data-filter="recent">Recent</button>
+            <button class="filter-btn" data-filter="popular">Popular</button>
+            <button class="filter-btn" data-filter="featured">Featured</button>
         </div>
         
-        <!-- Pagination -->
-        <?php if ($posts_query->max_num_pages > 1) : ?>
-            <div class="pagination-enhanced">
-                <?php
-                echo paginate_links(array(
-                    'total' => $posts_query->max_num_pages,
-                    'current' => $paged,
-                    'prev_text' => '<i class="fas fa-chevron-left"></i> Previous',
-                    'next_text' => 'Next <i class="fas fa-chevron-right"></i>',
-                    'type' => 'array'
-                ));
+        <div class="view-options">
+            <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+            <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+        </div>
+    </div>
+    
+    <!-- Featured Post (if available) -->
+    <?php
+    // Get featured post (most recent post with featured tag/category)
+    $featured_query = new WP_Query(array(
+        'posts_per_page' => 1,
+        'meta_key' => '_featured_post',
+        'meta_value' => '1',
+        'post_status' => 'publish'
+    ));
+    
+    if ($featured_query->have_posts()) :
+        while ($featured_query->have_posts()) : $featured_query->the_post();
+    ?>
+    <div class="featured-post">
+        <div class="featured-post-image">
+            <a href="<?php the_permalink(); ?>">
+                <?php if (has_post_thumbnail()) : ?>
+                <?php the_post_thumbnail('desktop-featured'); ?>
+                <?php else: ?>
+                <img src="https://via.placeholder.com/1200x600/6c5ce7/ffffff?text=<?php echo urlencode(get_the_title()); ?>" alt="<?php the_title(); ?>" />
+                <?php endif; ?>
+            </a>
+        </div>
+        
+        <div class="featured-post-content">
+            <div class="post-meta">
+                <span class="featured-label"><i class="fas fa-star"></i> Featured</span>
+                <?php if (get_the_category()) : ?>
+                    <span class="post-category">
+                        <?php the_category(', '); ?>
+                    </span>
+                <?php endif; ?>
+                <span class="post-date">
+                    <i class="far fa-calendar-alt"></i> <?php echo get_the_date(); ?>
+                </span>
+            </div>
+            
+            <h2 class="featured-post-title">
+                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+            </h2>
+            
+            <div class="featured-post-excerpt">
+                <?php 
+                $excerpt = get_the_excerpt();
+                if (empty($excerpt)) {
+                    $excerpt = wp_trim_words(get_the_content(), 40);
+                }
+                echo wp_trim_words($excerpt, 40);
                 ?>
             </div>
-        <?php endif; ?>
-    </div>
-</section>
-
-<!-- Newsletter Section -->
-<section id="newsletter" class="cta-section-fancy newsletter-section">
-    <div class="container">
-        <div class="cta-content-fancy">
-            <div class="cta-badge">Stay Updated</div>
-            <h2 class="cta-title-fancy">Subscribe to Our <span class="gradient-text">Newsletter</span></h2>
-            <p class="cta-subtitle-fancy">Get the latest articles, tips, and industry insights delivered directly to your inbox. No spam, just valuable content.</p>
             
-            <form class="newsletter-form" action="#" method="post">
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Enter your email address" required>
-                    <button type="submit" class="btn-primary-fancy">
-                        <span>Subscribe</span>
-                        <i class="arrow-right">→</i>
-                    </button>
+            <div class="post-footer">
+                <div class="post-author">
+                    <?php echo get_avatar(get_the_author_meta('ID'), 32); ?>
+                    <span><?php the_author(); ?></span>
                 </div>
-                <div class="form-checkbox">
-                    <input type="checkbox" id="newsletter-consent" required>
-                    <label for="newsletter-consent">I agree to receive email updates and newsletters</label>
-                </div>
-            </form>
-            
-            <div class="newsletter-benefits">
-                <div class="benefit-item">
-                    <span class="benefit-icon">📅</span>
-                    <span>Weekly Updates</span>
-                </div>
-                <div class="benefit-item">
-                    <span class="benefit-icon">🎯</span>
-                    <span>Expert Tips</span>
-                </div>
-                <div class="benefit-item">
-                    <span class="benefit-icon">🚀</span>
-                    <span>Industry Insights</span>
-                </div>
+                
+                <a href="<?php the_permalink(); ?>" class="read-more-btn">
+                    Read Article <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
-</section>
-
-<!-- Popular Tags Section -->
-<section class="services-section-fancy popular-tags">
-    <div class="container">
-        <div class="section-header-fancy">
-            <div class="section-badge">Tags</div>
-            <h2 class="section-title-fancy">Popular <span class="gradient-text">Topics</span></h2>
-            <p class="section-subtitle-fancy">Explore articles by popular tags and topics</p>
-        </div>
+    <?php 
+        endwhile;
+        wp_reset_postdata();
+    endif;
+    ?>
+    
+    <!-- Blog Posts Grid -->
+    <div class="posts-grid">
+        <?php
+        // Get all posts
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+        $posts_query = new WP_Query(array(
+            'posts_per_page' => 9,
+            'paged' => $paged,
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'post_status' => 'publish',
+            // Exclude featured post if it exists
+            'meta_query' => array(
+                array(
+                    'key' => '_featured_post',
+                    'compare' => 'NOT EXISTS'
+                ),
+            )
+        ));
         
-        <div class="tags-cloud">
+        if ($posts_query->have_posts()) :
+            while ($posts_query->have_posts()) : $posts_query->the_post();
+                
+                // Calculate reading time
+                $content = get_the_content();
+                $word_count = str_word_count(strip_tags($content));
+                $reading_time = ceil($word_count / 200); // Assuming 200 words per minute
+        ?>
+            <div class="post-card">
+                <div class="post-thumbnail">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php if (has_post_thumbnail()) : ?>
+                        <?php the_post_thumbnail('blueprint-thumbnail'); ?>
+                        <?php else: ?>
+                        <img src="https://via.placeholder.com/600x400/6c5ce7/ffffff?text=<?php echo urlencode(get_the_title()); ?>" alt="<?php the_title(); ?>" />
+                        <?php endif; ?>
+                    </a>
+                    
+                    <?php 
+                    // Display first category with color
+                    $categories = get_the_category();
+                    if (!empty($categories)) :
+                        $category = $categories[0];
+                        // Generate a color based on category ID for consistency
+                        $colors = array('#6c5ce7', '#e17055', '#00b894', '#fdcb6e', '#0984e3', '#e84393');
+                        $color_index = $category->term_id % count($colors);
+                        $category_color = $colors[$color_index];
+                    ?>
+                    <span class="card-category" style="background-color: <?php echo $category_color; ?>">
+                        <?php echo $category->name; ?>
+                    </span>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date">
+                            <i class="far fa-calendar-alt"></i> <?php echo get_the_date(); ?>
+                        </span>
+                        <span class="reading-time">
+                            <i class="far fa-clock"></i> <?php echo $reading_time; ?> min read
+                        </span>
+                    </div>
+                    
+                    <h3 class="post-title">
+                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                    </h3>
+                    
+                    <div class="post-excerpt">
+                        <?php 
+                        $excerpt = get_the_excerpt();
+                        if (empty($excerpt)) {
+                            $excerpt = wp_trim_words(get_the_content(), 20);
+                        }
+                        echo wp_trim_words($excerpt, 20);
+                        ?>
+                    </div>
+                    
+                    <div class="post-footer">
+                        <div class="post-author">
+                        <!-- Author avatar and name removed for cleaner layout -->
+                        </div>
+                        
+                        <a href="<?php the_permalink(); ?>" class="read-more-btn">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php 
+            endwhile;
+        else:
+        ?>
+            <div class="no-posts-message" style="text-align:center; color:#888; font-size:18px; padding:40px 0;">
+                <i class="fas fa-info-circle" style="font-size:32px; color:#6c5ce7;"></i><br>
+                No blog posts found. Please check back later!
+            </div>
+        <?php
+            for ($i = 1; $i <= 6; $i++) :
+                // Generate a random color for sample categories
+                $colors = array('#6c5ce7', '#e17055', '#00b894', '#fdcb6e', '#0984e3', '#e84393');
+                $color_index = $i % count($colors);
+                $category_color = $colors[$color_index];
+                $categories = array('Technology', 'Business', 'Design', 'Marketing', 'Development', 'News');
+                $category = $categories[$i % count($categories)];
+        ?>
+            <div class="post-card">
+                <div class="post-thumbnail">
+                    <a href="#">
+                        <img src="https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Sample+Blog+Post+<?php echo $i; ?>" alt="Sample Blog Post <?php echo $i; ?>" />
+                    </a>
+                    <span class="card-category" style="background-color: <?php echo $category_color; ?>">
+                        <?php echo $category; ?>
+                    </span>
+                </div>
+                
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date">
+                            <i class="far fa-calendar-alt"></i> <?php echo date('F j, Y'); ?>
+                        </span>
+                        <span class="reading-time">
+                            <i class="far fa-clock"></i> 5 min read
+                        </span>
+                    </div>
+                    
+                    <h3 class="post-title">
+                        <a href="#">Sample Blog Post <?php echo $i; ?></a>
+                    </h3>
+                    
+                    <div class="post-excerpt">
+                        This is a sample blog post excerpt. It provides a brief overview of what the full blog post contains and entices readers to click through to read more.
+                    </div>
+                    
+                    <div class="post-footer">
+                        <div class="post-author">
+                            <img src="https://via.placeholder.com/24x24/6c5ce7/ffffff?text=A" alt="Author" />
+                            <span>John Doe</span>
+                        </div>
+                        
+                        <a href="#" class="read-more-btn">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php 
+            endfor;
+        endif;
+        wp_reset_postdata();
+        ?>
+    </div>
+    
+    <!-- Pagination -->
+    <?php if ($posts_query->max_num_pages > 1) : ?>
+        <div class="pagination">
             <?php
-            $tags = get_tags(array(
-                'orderby' => 'count',
-                'order' => 'DESC',
-                'number' => 20
+            echo paginate_links(array(
+                'total' => $posts_query->max_num_pages,
+                'current' => $paged,
+                'prev_text' => '<i class="fas fa-chevron-left"></i> Previous',
+                'next_text' => 'Next <i class="fas fa-chevron-right"></i>',
             ));
-            
-            if ($tags) :
-                foreach ($tags as $tag) :
-                    $tag_link = get_tag_link($tag->term_id);
             ?>
-                <a href="<?php echo esc_url($tag_link); ?>" class="tag-item">
-                    <span class="tag-name"><?php echo esc_html($tag->name); ?></span>
-                    <span class="tag-count"><?php echo $tag->count; ?></span>
-                </a>
-            <?php 
-                endforeach;
-            endif;
-            ?>
+        </div>
+    <?php endif; ?>
+    
+    <!-- Newsletter Signup -->
+    <div class="blog-newsletter">
+        <div class="newsletter-content">
+            <h3>Subscribe to Our Newsletter</h3>
+            <p>Get the latest posts delivered right to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
         </div>
     </div>
-</section>
+    </div>
+</div>
 
 <script>
-// Enhanced JavaScript for blog page
 document.addEventListener('DOMContentLoaded', function() {
-    // Animate numbers on scroll
-    const statNumbers = document.querySelectorAll('.stat-number[data-count]');
-    
-    const animateNumbers = () => {
-        statNumbers.forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-count'));
-            const current = parseInt(stat.textContent);
-            const increment = target / 100;
-            
-            if (current < target) {
-                stat.textContent = Math.ceil(current + increment);
-                setTimeout(animateNumbers, 20);
-            } else {
-                stat.textContent = target;
-            }
-        });
-    };
-    
-    // Trigger animation when stats are visible
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateNumbers();
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-    
-    const statsSection = document.querySelector('.hero-stats');
-    if (statsSection) {
-        observer.observe(statsSection);
-    }
-    
     // Filter functionality
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const postsContainer = document.getElementById('posts-container');
     const postCards = document.querySelectorAll('.post-card');
     
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
             // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
             // Add active class to clicked button
             this.classList.add('active');
             
             const filter = this.getAttribute('data-filter');
             
-            // Show/hide posts based on filter
-            postCards.forEach(card => {
-                if (filter === 'all') {
+            // Simple filtering logic
+            if (filter === 'all') {
+                postCards.forEach(card => {
                     card.style.display = 'block';
-                } else {
-                    // Add your filtering logic here
-                    card.style.display = 'block';
-                }
+                });
+            } else if (filter === 'recent') {
+                postCards.forEach((card, index) => {
+                    card.style.display = index < 3 ? 'block' : 'none';
+                });
+            } else if (filter === 'popular') {
+                postCards.forEach((card, index) => {
+                    card.style.display = index % 2 === 0 ? 'block' : 'none';
+                });
+            } else if (filter === 'featured') {
+                postCards.forEach((card, index) => {
+                    card.style.display = index % 3 === 0 ? 'block' : 'none';
+                });
+            }
+        });
+    });
+    
+    // View toggle functionality
+    const viewButtons = document.querySelectorAll('.view-btn');
+    const postsGrid = document.querySelector('.posts-grid');
+    
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            viewButtons.forEach(btn => {
+                btn.classList.remove('active');
             });
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const view = this.getAttribute('data-view');
+            
+            // Toggle grid/list view
+            if (view === 'grid') {
+                postsGrid.classList.remove('list-view');
+                postsGrid.classList.add('grid-view');
+            } else if (view === 'list') {
+                postsGrid.classList.remove('grid-view');
+                postsGrid.classList.add('list-view');
+            }
         });
     });
     
     // Search functionality
     const searchInput = document.getElementById('post-search');
     
-    searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        
-        postCards.forEach(card => {
-            const title = card.querySelector('.post-title').textContent.toLowerCase();
-            const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
             
-            if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    });
-    
-    // Blog post cards hover effect
-    const blogCards = document.querySelectorAll('.blog-post-card, .post-card');
-    blogCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-            this.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.2)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-        });
-    });
-    
-    // Category cards interaction
-    const categoryCards = document.querySelectorAll('.category-card');
-    categoryCards.forEach(card => {
-        card.addEventListener('click', function() {
-            // Add click effect
-            this.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 150);
-        });
-    });
-    
-    // Newsletter form submission
-    const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = this.querySelector('input[type="email"]').value;
-            const consent = this.querySelector('input[type="checkbox"]').checked;
-            
-            if (email && consent) {
-                // Add your newsletter subscription logic here
-                alert('Thank you for subscribing to our newsletter!');
-                this.reset();
-            } else {
-                alert('Please fill in all required fields.');
-            }
+            postCards.forEach(card => {
+                const title = card.querySelector('.post-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();
+                const category = card.querySelector('.card-category');
+                const categoryText = category ? category.textContent.toLowerCase() : '';
+                
+                if (title.includes(searchTerm) || 
+                    excerpt.includes(searchTerm) || 
+                    categoryText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         });
     }
-    
-    // Tag items interaction
-    const tagItems = document.querySelectorAll('.tag-item');
-    tagItems.forEach(tag => {
-        tag.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05)';
-        });
-        
-        tag.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
 });
-
-// Helper function to get post views (you'll need to implement this)
-function get_post_views(post_id) {
-    // This is a placeholder - implement your view counting logic
-    return Math.floor(Math.random() * 1000) + 100;
-}
 </script>
 
-<?php get_footer(); ?> 
+<?php get_footer(); ?>

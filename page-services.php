@@ -61,54 +61,24 @@ get_header(); ?>
         </div>
         <div class="categories-grid redesigned-categories-grid">
             <?php
-            $service_categories = array(
-                array(
-                    'name' => 'Home Cleaning',
-                    'icon' => '<svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="16" rx="4" fill="#4F8EF7"/><path d="M8 20h16v2H8v-2z" fill="#fff"/></svg>',
-                    'count' => '12',
-                    'description' => 'Professional home cleaning services'
-                ),
-                array(
-                    'name' => 'Business Consulting',
-                    'icon' => '<svg width="32" height="32" fill="none" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="#F7B32B"/><path d="M12 20h8v2h-8v-2z" fill="#fff"/></svg>',
-                    'count' => '8',
-                    'description' => 'Strategic business advice and consulting'
-                ),
-                array(
-                    'name' => 'IT Support',
-                    'icon' => '<svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="6" y="10" width="20" height="12" rx="3" fill="#4FC3F7"/><path d="M10 22h12v2H10v-2z" fill="#fff"/></svg>',
-                    'count' => '15',
-                    'description' => 'Technology solutions and support'
-                ),
-                array(
-                    'name' => 'Maintenance',
-                    'icon' => '<svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16" rx="4" fill="#81C784"/><path d="M12 20h8v2h-8v-2z" fill="#fff"/></svg>',
-                    'count' => '10',
-                    'description' => 'Property and equipment maintenance'
-                ),
-                array(
-                    'name' => 'Marketing',
-                    'icon' => '<svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="6" y="12" width="20" height="8" rx="4" fill="#FF8A65"/><path d="M10 20h12v2H10v-2z" fill="#fff"/></svg>',
-                    'count' => '6',
-                    'description' => 'Digital marketing and promotion'
-                ),
-                array(
-                    'name' => 'Design',
-                    'icon' => '<svg width="32" height="32" fill="none" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="#BA68C8"/><path d="M12 20h8v2h-8v-2z" fill="#fff"/></svg>',
-                    'count' => '9',
-                    'description' => 'Creative design and branding'
-                )
-            );
-            foreach ($service_categories as $category) :
+            $service_categories = get_terms( array(
+                'taxonomy'   => 'service_category',
+                'hide_empty' => false,
+            ) );
+
+            if ( ! empty( $service_categories ) && ! is_wp_error( $service_categories ) ) :
+                foreach ($service_categories as $category) :
+                    // Default icon, you can add a custom field for this later using ACF or similar
+                    $icon = '<svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="16" rx="4" fill="#4F8EF7"/><path d="M8 20h16v2H8v-2z" fill="#fff"/></svg>';
             ?>
-                <a href="#all-services" class="category-card redesigned-category-card" title="<?php echo esc_attr($category['description']); ?>">
+                <a href="<?php echo esc_url( get_term_link( $category ) ); ?>" class="category-card redesigned-category-card" title="<?php echo esc_attr($category->description); ?>">
                     <div class="category-icon" aria-hidden="true">
-                        <?php echo $category['icon']; ?>
+                        <?php echo $icon; ?>
                     </div>
-                    <h3><?php echo esc_html($category['name']); ?></h3>
-                    <p class="category-count"><?php echo $category['count']; ?> services</p>
+                    <h3><?php echo esc_html($category->name); ?></h3>
+                    <p class="category-count"><?php echo $category->count; ?> blueprints</p>
                 </a>
-            <?php endforeach; ?>
+            <?php endforeach; endif; ?>
         </div>
     </div>
 </section>
@@ -190,36 +160,30 @@ if ($latest_services->have_posts()) :
             <!-- Latest Services Summary -->
             <div class="latest-services-summary redesigned-summary-stats">
                 <?php
-                $total_services_query = new WP_Query(array(
+                // Optimized Query: Get all published services and their dates in one go.
+                $all_services_query = new WP_Query(array(
                     'post_type' => 'service',
                     'posts_per_page' => -1,
                     'post_status' => 'publish',
-                    'fields' => 'ids'
+                    'fields' => 'ID,post_date'
                 ));
-                $total_services = $total_services_query->found_posts;
-                wp_reset_postdata();
-                $recent_services_count = get_posts(array(
-                    'post_type' => 'service',
-                    'posts_per_page' => -1,
-                    'date_query' => array(
-                        array(
-                            'after' => '30 days ago'
-                        )
-                    ),
-                    'fields' => 'ids'
-                ));
-                $recent_count = count($recent_services_count);
-                $new_services_count = get_posts(array(
-                    'post_type' => 'service',
-                    'posts_per_page' => -1,
-                    'date_query' => array(
-                        array(
-                            'after' => '7 days ago'
-                        )
-                    ),
-                    'fields' => 'ids'
-                ));
-                $new_count = count($new_services_count);
+
+                $total_services = 0;
+                $recent_count = 0;
+                $new_count = 0;
+                $current_time = current_time('timestamp');
+                $thirty_days_ago = strtotime('-30 days', $current_time);
+                $seven_days_ago = strtotime('-7 days', $current_time);
+
+                if ($all_services_query->have_posts()) {
+                    $total_services = $all_services_query->found_posts;
+                    foreach ($all_services_query->posts as $service_post) {
+                        $post_timestamp = strtotime($service_post->post_date);
+                        if ($post_timestamp >= $thirty_days_ago) $recent_count++;
+                        if ($post_timestamp >= $seven_days_ago) $new_count++;
+                    }
+                }
+                wp_reset_postdata(); 
                 ?>
                 <div class="summary-stats redesigned-summary-stats">
                     <div class="summary-item">

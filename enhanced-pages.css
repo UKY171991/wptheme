@@ -1324,6 +1324,13 @@ body {
   border: 1px solid var(--border-color);
 }
 
+/* ===== ALL SERVICES POSTS GRID ===== */
+.all-services-posts .posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from {
@@ -1396,11 +1403,6 @@ body {
   
   .mission-vision-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .all-services-posts .posts-grid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
   }
 }
 
