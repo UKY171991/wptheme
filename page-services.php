@@ -2,7 +2,11 @@
 /*
 Template Name: All Blueprints Page
 */
-get_header(); ?>
+get_header(); 
+
+// Enqueue page-services-inline CSS
+wp_enqueue_style('page-services-inline', get_template_directory_uri() . '/css/page-services-inline.css', array(), '1.0');
+?>
 
 <!-- ================= HERO SECTION ================= -->
 <section class="hero-section-advanced services-hero redesigned-hero">

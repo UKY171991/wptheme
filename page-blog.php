@@ -5,7 +5,10 @@ Template Name: Blog Page
 get_header(); 
 
 // Enqueue blog layout CSS
-wp_enqueue_style('blog-layout-fixes', get_template_directory_uri() . '/blog-layout-fixes.css', array(), '2.0');
+wp_enqueue_style('blog-layout-fixes', get_template_directory_uri() . '/css/blog-layout-fixes.css', array(), '2.0');
+
+// Enqueue blog inline styles
+wp_enqueue_style('page-blog-inline', get_template_directory_uri() . '/css/page-blog-inline.css', array(), '1.0');
 
 // Enqueue Font Awesome for icons
 wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css', array(), '6.0.0');
@@ -162,7 +165,7 @@ wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-aw
                         $color_index = $category->term_id % count($colors);
                         $category_color = $colors[$color_index];
                     ?>
-                    <span class="card-category" style="background-color: <?php echo $category_color; ?>">
+                    <span class="card-category" data-color="<?php echo $category_color; ?>">
                         <?php echo $category->name; ?>
                     </span>
                     <?php endif; ?>
@@ -207,8 +210,8 @@ wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-aw
             endwhile;
         else:
         ?>
-            <div class="no-posts-message" style="text-align:center; color:#888; font-size:18px; padding:40px 0;">
-                <i class="fas fa-info-circle" style="font-size:32px; color:#6c5ce7;"></i><br>
+            <div class="no-posts-message">
+                <i class="fas fa-info-circle"></i><br>
                 No blog posts found. Please check back later!
             </div>
         <?php
@@ -225,7 +228,7 @@ wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-aw
                     <a href="#">
                         <img src="https://via.placeholder.com/600x400/6c5ce7/ffffff?text=Sample+Blog+Post+<?php echo $i; ?>" alt="Sample Blog Post <?php echo $i; ?>" />
                     </a>
-                    <span class="card-category" style="background-color: <?php echo $category_color; ?>">
+                    <span class="card-category" data-color="<?php echo $category_color; ?>">
                         <?php echo $category; ?>
                     </span>
                 </div>

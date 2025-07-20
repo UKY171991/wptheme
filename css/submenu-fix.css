@@ -1,0 +1,190 @@
+/**
+ * Submenu Fix
+ * This file fixes submenu and nested submenu issues
+ */
+
+/* First level submenu */
+.nav-menu .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 220px;
+    padding: var(--spacing-sm) 0;
+    margin: 0;
+    list-style: none;
+    background-color: #fff;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.nav-menu li:hover > .sub-menu,
+.nav-menu li:focus-within > .sub-menu,
+.nav-menu .sub-menu.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-menu .sub-menu li {
+    margin: 0;
+    position: relative;
+    width: 100%;
+}
+
+.nav-menu .sub-menu a {
+    padding: 0.75rem 1.5rem;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    color: var(--gray-800);
+    font-weight: 400;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-menu .sub-menu a:hover,
+.nav-menu .sub-menu a:focus {
+    background-color: rgba(67, 97, 238, 0.05);
+    color: var(--primary);
+    border-left-color: var(--primary);
+}
+
+/* Second level submenu (nested) */
+.nav-menu .sub-menu .sub-menu {
+    top: 0;
+    left: 100%;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+/* Add arrow indicator for items with submenus */
+.nav-menu .menu-item-has-children > a {
+    position: relative;
+    padding-right: 1.5rem;
+}
+
+.nav-menu > li.menu-item-has-children > a::after {
+    content: "";
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-50%) rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.nav-menu > li.menu-item-has-children:hover > a::after {
+    transform: translateY(-50%) rotate(-135deg);
+}
+
+/* Arrow for submenu items with children */
+.nav-menu .sub-menu .menu-item-has-children > a::after {
+    content: "";
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Mobile menu adjustments */
+@media (max-width: 992px) {
+    .nav-menu .sub-menu {
+        position: static;
+        display: none;
+        width: 100%;
+        opacity: 1;
+        transform: none;
+        box-shadow: none;
+        background-color: rgba(67, 97, 238, 0.05);
+        border-radius: 0;
+        padding: 0;
+        margin-left: 1rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .nav-menu .menu-item-has-children.active > .sub-menu {
+        display: block;
+        max-height: 1000px;
+    }
+    
+    .nav-menu > li.menu-item-has-children > a::after,
+    .nav-menu .sub-menu .menu-item-has-children > a::after {
+        display: none;
+    }
+    
+    .nav-menu .sub-menu a {
+        padding: 0.75rem 1rem;
+        border-left: none;
+        border-left: 3px solid transparent;
+    }
+    
+    .nav-menu .sub-menu .sub-menu {
+        left: 0;
+        margin-left: 1rem;
+        background-color: rgba(67, 97, 238, 0.03);
+    }
+    
+    /* Custom submenu toggle button */
+    .submenu-toggle {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 40px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+    }
+    
+    .submenu-toggle::before {
+        content: "+";
+        font-size: 1.2rem;
+        color: var(--gray-600);
+        transition: transform 0.3s ease;
+    }
+    
+    .menu-item-has-children.active > .submenu-toggle::before {
+        content: "−";
+        color: var(--primary);
+    }
+}
+
+/* Fix for any existing submenu issues */
+.nav-menu li:hover > .sub-menu li:hover > .sub-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ensure submenus don't go off-screen */
+@media (min-width: 993px) {
+    .nav-menu > li:last-child > .sub-menu,
+    .nav-menu > li:nth-last-child(2) > .sub-menu {
+        left: auto;
+        right: 0;
+    }
+    
+    .nav-menu > li:last-child > .sub-menu .sub-menu,
+    .nav-menu > li:nth-last-child(2) > .sub-menu .sub-menu {
+        left: auto;
+        right: 100%;
+    }
+}

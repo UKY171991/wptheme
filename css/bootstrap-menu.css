@@ -1,0 +1,346 @@
+/* =============================================================================
+   BOOTSTRAP MENU SYSTEM - MULTILEVEL DROPDOWN SUPPORT
+   ============================================================================= */
+
+/* Custom styling for Bootstrap navbar */
+.navbar-blueprint {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+}
+
+/* Brand/logo styling */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.navbar-brand img {
+    max-height: 50px;
+    width: auto;
+}
+
+/* Main navigation links */
+.navbar-nav .nav-link {
+    color: #333;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #667eea;
+}
+
+.navbar-nav .nav-item.active .nav-link {
+    color: #667eea;
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0;
+    margin-top: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.dropdown-item {
+    color: #fff;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background: rgba(255, 255, 255, 0.15);
+    color: #f1c40f;
+    transform: translateX(5px);
+}
+
+/* Multilevel dropdown support */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -0.5rem;
+    margin-left: 0.125rem;
+}
+
+/* Arrow indicators for dropdowns */
+.dropdown-toggle::after {
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.dropdown-submenu > a::after {
+    display: inline-block;
+    margin-left: 0.5rem;
+    content: "";
+    border-top: 0.3em solid transparent;
+    border-right: 0;
+    border-bottom: 0.3em solid transparent;
+    border-left: 0.3em solid;
+    vertical-align: middle;
+}
+
+/* Mobile menu toggle button */
+.navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+    width: 45px;
+    height: 45px;
+    position: relative;
+    background: #f1c40f;
+    border-radius: 8px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.25rem rgba(241, 196, 15, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: none !important;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    position: relative;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after,
+.navbar-toggler-icon span {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #764ba2;
+    position: absolute;
+    left: 50%;
+    margin-left: -12px;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler-icon::before {
+    top: 6px;
+}
+
+.navbar-toggler-icon span {
+    top: 14px;
+}
+
+.navbar-toggler-icon::after {
+    top: 22px;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: rotate(45deg);
+    top: 14px;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon span {
+    opacity: 0;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: rotate(-45deg);
+    top: 14px;
+}
+
+/* Header actions (search, CTA) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.search-toggle {
+    background: transparent;
+    border: none;
+    color: #333;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-toggle:hover,
+.search-toggle:focus {
+    color: #667eea;
+    transform: scale(1.1);
+}
+
+.header-cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.header-cta:hover,
+.header-cta:focus {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        padding: 1rem;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem;
+    }
+    
+    /* Mobile dropdown styling */
+    .dropdown-menu {
+        background: #f8f9fa;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .dropdown-item {
+        color: #333;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        background: rgba(102, 126, 234, 0.1);
+        color: #667eea;
+    }
+    
+    /* Multilevel dropdown on mobile */
+    .dropdown-submenu > .dropdown-menu {
+        left: 0;
+        margin-left: 1rem;
+        margin-top: 0;
+        padding-left: 1rem;
+        border-left: 2px solid #667eea;
+    }
+    
+    /* Header actions on mobile */
+    .header-actions {
+        margin-top: 1rem;
+        margin-left: 0;
+        justify-content: center;
+    }
+}
+
+/* Accessibility improvements */
+.nav-link:focus,
+.dropdown-item:focus,
+.navbar-toggler:focus,
+.search-toggle:focus,
+.header-cta:focus {
+    outline: 2px solid #f1c40f;
+    outline-offset: 2px;
+}
+
+/* Screen reader text */
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+/* Skip link */
+.skip-link {
+    background-color: #f1c40f;
+    color: #333;
+    font-weight: 700;
+    left: 50%;
+    padding: 10px;
+    position: absolute;
+    transform: translateY(-100%);
+    transition: transform 0.3s;
+    z-index: 100000;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* Search container */
+.search-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+}
+
+.search-container.active {
+    display: block;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-field {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px 0 0 8px;
+    font-size: 1rem;
+}
+
+.search-submit {
+    padding: 0.75rem 1rem;
+    background: #667eea;
+    color: #fff;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+
+.search-close {
+    background: transparent;
+    border: none;
+    color: #333;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

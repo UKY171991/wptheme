@@ -1,0 +1,459 @@
+/* Extracted inline styles from page-about.php */
+
+/* Hero section styles */
+.hero-section-advanced.about-hero.redesigned-hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, #4F8EF7 0%, #6a82fb 100%);
+    opacity: 0.08;
+    z-index: 1;
+}
+
+.hero-section-advanced .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #f0f4fa;
+    padding: 0.5rem 1.25rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-badge svg {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.hero-title-fancy {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #4F8EF7, #6a82fb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle-fancy {
+    font-size: 1.25rem;
+    color: #444;
+    margin-bottom: 2rem;
+}
+
+.hero-stats.redesigned-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons.redesigned-hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.hero-image.redesigned-hero-image {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.floating-card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(79, 142, 247, 0.10);
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Timeline section styles */
+.services-section-fancy.company-story.redesigned-timeline {
+    background: #f8fafd;
+    padding: 4rem 0;
+}
+
+.story-timeline.redesigned-story-timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-item {
+    background: #fff;
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 32px rgba(79, 142, 247, 0.10);
+    padding: 2.25rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Mission & Vision section styles */
+.featured-blueprints-section.mission-vision.redesigned-mission-vision {
+    padding: 4rem 0;
+    background: #fff;
+}
+
+.blueprints-grid.mission-vision-grid.redesigned-mission-vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    align-items: stretch;
+}
+
+.blueprint-category-card.mission-card.redesigned-mission-card,
+.blueprint-category-card.vision-card.featured.redesigned-vision-card {
+    background: #f8fafd;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(79, 142, 247, 0.07);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Values section styles */
+.how-it-works-section.our-values.redesigned-values {
+    background: #f8fafd;
+    padding: 4rem 0;
+}
+
+/* About drives section styles */
+.about-drives-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.about-drives-item {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(79, 142, 247, 0.07);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about-drives-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-drives-item h3 {
+    margin-bottom: 0.5rem;
+}
+
+.about-drives-item p {
+    color: #555;
+}
+
+/* Team section styles */
+.services-section-fancy.team-section.redesigned-team {
+    background: #fff;
+    padding: 4rem 0;
+}
+
+.team-grid.redesigned-team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-member-card.redesigned-team-card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.team-member-card.hovered {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+}
+
+.team-member-card .member-avatar {
+    margin-bottom: 1rem;
+}
+
+.team-member-card .avatar-placeholder {
+    font-size: 3rem;
+}
+
+.team-member-card .member-info h4 {
+    margin: 0.5rem 0 0.25rem 0;
+}
+
+.team-member-card .member-role {
+    font-size: 0.95rem;
+    color: #4F8EF7;
+    margin-bottom: 0.5rem;
+}
+
+.team-member-card .member-bio {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.team-member-card .member-expertise {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.team-member-card .expertise-tag {
+    background: #f0f4fa;
+    color: #4F8EF7;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+/* Awards section styles */
+.featured-blueprints-section.awards-section.redesigned-awards {
+    background: #f8fafd;
+    padding: 4rem 0;
+}
+
+.awards-grid.redesigned-awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.award-card.redesigned-award-card {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(79, 142, 247, 0.07);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CTA section styles */
+.cta-section-fancy.redesigned-cta-section {
+    background: linear-gradient(120deg, #5a7cff 0%, #4F8EF7 50%, #6a82fb 100%);
+    padding: 5rem 0 3.5rem 0;
+}
+
+.cta-content-fancy.redesigned-cta-content {
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+}
+
+.cta-badge {
+    display: inline-block;
+    background: #fff;
+    color: #4F8EF7;
+    padding: 0.7rem 2.2rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    margin-bottom: 2.2rem;
+    box-shadow: 0 4px 24px rgba(79, 142, 247, 0.13);
+    letter-spacing: 0.5px;
+    font-size: 1.08rem;
+}
+
+.cta-title-fancy {
+    font-size: 2.6rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    letter-spacing: -1px;
+}
+
+.cta-gradient-text {
+    background: linear-gradient(90deg, #fff, #e0e7ff 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cta-subtitle-fancy {
+    font-size: 1.22rem;
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.96);
+    font-weight: 500;
+    text-shadow: 0 2px 8px rgba(79, 142, 247, 0.10);
+}
+
+.cta-buttons-fancy.redesigned-cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2.7rem;
+    flex-wrap: wrap;
+}
+
+.cta-buttons-fancy .btn-primary-fancy {
+    background: #fff;
+    color: #4F8EF7;
+    font-weight: 700;
+    padding: 0.9rem 2.2rem;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 12px rgba(79, 142, 247, 0.10);
+    transition: background 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cta-buttons-fancy .btn-primary-fancy span,
+.cta-buttons-fancy .btn-secondary-fancy span {
+    font-size: 1.3em;
+}
+
+.cta-buttons-fancy .btn-secondary-fancy {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.9rem 2.2rem;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 12px rgba(79, 142, 247, 0.10);
+    transition: background 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(2px);
+}
+
+.cta-trust-indicators.redesigned-cta-trust {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.trust-item {
+    background: #fff;
+    color: #4F8EF7;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1.1rem 2rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 6px 32px rgba(79, 142, 247, 0.13);
+    font-weight: 700;
+    font-size: 1.13rem;
+    min-width: 180px;
+    justify-content: center;
+}
+
+.trust-icon {
+    font-size: 1.5rem;
+}
+
+/* Animation classes */
+.timeline-item.animate {
+    animation: fadeInRight 0.6s ease-out forwards;
+}
+
+.award-card.animate {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.value-card.clicked {
+    transform: scale(0.98);
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Button icon styles */
+.btn-icon {
+    font-size: 1.3em;
+}
+
+/* Responsive styles for timeline */
+@media (max-width: 900px) {
+    .story-timeline.redesigned-story-timeline {
+        grid-template-columns: 1fr;
+        overflow-x: auto;
+        gap: 1.5rem;
+    }
+    .timeline-item {
+        min-width: 90vw;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .timeline-item {
+        padding: 1.25rem 0.75rem !important;
+        min-width: 98vw;
+    }
+}

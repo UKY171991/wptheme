@@ -1,11 +1,18 @@
 <?php
 /**
- * Custom Walker Class for WordPress Navigation Menu
- * Enhances menu with proper ARIA attributes and multilevel support
+ * WP Bootstrap Navwalker
+ *
+ * A custom WordPress nav walker class to implement the Bootstrap 5 navigation style
+ * in a custom theme using the WordPress built in menu manager.
  */
 
-if (!class_exists('Blueprint_Walker_Nav_Menu')) {
-    class Blueprint_Walker_Nav_Menu extends Walker_Nav_Menu {
+if (!class_exists('WP_Bootstrap_Navwalker')) {
+    class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
+        /**
+         * Current item ID for aria-labelledby attribute
+         */
+        private $current_item_id;
+
         /**
          * Starts the list before the elements are added.
          *
@@ -24,7 +31,7 @@ if (!class_exists('Blueprint_Walker_Nav_Menu')) {
             $indent = str_repeat($t, $depth);
 
             // Default class.
-            $classes = array('sub-menu');
+            $classes = array('sub-menu', 'dropdown-menu');
 
             /**
              * Filters the CSS class(es) applied to a menu list element.
@@ -36,8 +43,13 @@ if (!class_exists('Blueprint_Walker_Nav_Menu')) {
             $class_names = implode(' ', apply_filters('nav_menu_submenu_css_class', $classes, $args, $depth));
             $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
 
-            // Add ARIA role for accessibility
-            $output .= "{$n}{$indent}<ul{$class_names} role=\"menu\">{$n}";
+            // Add aria-labelledby attribute to dropdown menu
+            $labelledby = '';
+            if (isset($this->current_item_id)) {
+                $labelledby = ' aria-labelledby="dropdown-' . $this->current_item_id . '"';
+            }
+
+            $output .= "{$n}{$indent}<ul{$class_names}{$labelledby}>{$n}";
         }
 
         /**
@@ -59,11 +71,30 @@ if (!class_exists('Blueprint_Walker_Nav_Menu')) {
             }
             $indent = ($depth) ? str_repeat($t, $depth) : '';
 
-            $classes   = empty($item->classes) ? array() : (array) $item->classes;
-            $classes[] = 'menu-item-' . $item->ID;
+            $classes = empty($item->classes) ? array() : (array) $item->classes;
+            
+            // Store current item ID for use in start_lvl()
+            $this->current_item_id = $item->ID;
             
             // Check if item has children
             $has_children = in_array('menu-item-has-children', $classes);
+
+            // Add .dropdown or .dropdown-submenu class to items with children
+            if ($has_children) {
+                if ($depth === 0) {
+                    $classes[] = 'dropdown';
+                } else {
+                    $classes[] = 'dropdown-submenu';
+                }
+            }
+
+            // Add active class if current
+            if (in_array('current-menu-item', $classes) || in_array('current-menu-parent', $classes)) {
+                $classes[] = 'active';
+            }
+
+            // Add nav-item class to all items
+            $classes[] = 'nav-item';
 
             /**
              * Filters the arguments for a single nav menu item.
@@ -96,26 +127,42 @@ if (!class_exists('Blueprint_Walker_Nav_Menu')) {
             $id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth);
             $id = $id ? ' id="' . esc_attr($id) . '"' : '';
 
-            $output .= $indent . '<li' . $id . $class_names . ' role="none">';
+            $output .= $indent . '<li' . $id . $class_names . '>';
 
-            $atts           = array();
+            $atts = array();
             $atts['title']  = !empty($item->attr_title) ? $item->attr_title : '';
             $atts['target'] = !empty($item->target) ? $item->target : '';
             if ('_blank' === $item->target && empty($item->xfn)) {
-                $atts['rel'] = 'noopener';
+                $atts['rel'] = 'noopener noreferrer';
             } else {
                 $atts['rel'] = $item->xfn;
             }
-            $atts['href']         = !empty($item->url) ? $item->url : '';
+            $atts['href']         = !empty($item->url) ? $item->url : '#';
             $atts['aria-current'] = $item->current ? 'page' : '';
-            
-            // Add role for accessibility
-            $atts['role'] = 'menuitem';
-            
-            // Add aria-haspopup for items with children
+
+            // Add .nav-link class to all links
+            $atts['class'] = 'nav-link';
+
+            // If item has children, add dropdown toggle attributes
             if ($has_children) {
-                $atts['aria-haspopup'] = 'true';
-                $atts['aria-expanded'] = 'false';
+                if ($depth === 0) {
+                    $atts['class'] .= ' dropdown-toggle';
+                    $atts['data-bs-toggle'] = 'dropdown';
+                    $atts['aria-expanded'] = 'false';
+                    $atts['id'] = 'dropdown-' . $item->ID;
+                    $atts['role'] = 'button';
+                } else {
+                    // For nested dropdowns, don't add data-bs-toggle
+                    $atts['class'] = 'dropdown-item';
+                }
+            } else if ($depth > 0) {
+                // Add .dropdown-item class to submenu items
+                $atts['class'] = 'dropdown-item';
+            }
+
+            // Add active class to active items
+            if (in_array('current-menu-item', $classes) || in_array('current-menu-parent', $classes)) {
+                $atts['class'] .= ' active';
             }
 
             /**
@@ -162,12 +209,8 @@ if (!class_exists('Blueprint_Walker_Nav_Menu')) {
             $item_output .= $args->link_before . $title . $args->link_after;
             
             // Add dropdown indicator for items with children
-            if ($has_children) {
-                if ($depth === 0) {
-                    $item_output .= '<span class="dropdown-indicator" aria-hidden="true">▼</span>';
-                } else {
-                    $item_output .= '<span class="dropdown-indicator" aria-hidden="true">▶</span>';
-                }
+            if ($has_children && $depth > 0) {
+                $item_output .= ' <span class="dropdown-indicator"><i class="arrow"></i></span>';
             }
             
             $item_output .= '</a>';
@@ -187,7 +230,7 @@ if (!class_exists('Blueprint_Walker_Nav_Menu')) {
              */
             $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
         }
-        
+
         /**
          * Ends the element output, if needed.
          *
@@ -205,6 +248,25 @@ if (!class_exists('Blueprint_Walker_Nav_Menu')) {
                 $n = "\n";
             }
             $output .= "</li>{$n}";
+        }
+
+        /**
+         * Menu Fallback
+         * 
+         * If no menu is assigned to a theme location, this will be displayed.
+         * 
+         * @param array $args passed from the wp_nav_menu function.
+         */
+        public static function fallback($args) {
+            if (current_user_can('edit_theme_options')) {
+                $output = '<li class="nav-item"><a class="nav-link" href="' . esc_url(admin_url('nav-menus.php')) . '">' . esc_html__('Add a menu', 'blueprint') . '</a></li>';
+                
+                if (isset($args['container']) && $args['container']) {
+                    $output = '<' . esc_attr($args['container']) . ' id="' . esc_attr($args['container_id']) . '" class="' . esc_attr($args['container_class']) . '">' . $output . '</' . esc_attr($args['container']) . '>';
+                }
+                
+                echo $output;
+            }
         }
     }
 }

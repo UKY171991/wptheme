@@ -1,0 +1,14 @@
+/* Extracted inline styles from page-services.php */
+
+/* Hero badge icon */
+.hero-badge svg {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* Edit link styling */
+.edit-link {
+    margin-left: 10px;
+    color: #d35400;
+    font-weight: bold;
+}
