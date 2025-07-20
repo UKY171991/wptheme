@@ -106,5 +106,5 @@
 </header>
 
 <main id="main" class="site-main" role="main">
-    <div id="content" class="site-content"
+    <div id="content" class="site-content">
 
