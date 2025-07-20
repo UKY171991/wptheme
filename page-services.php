@@ -1,513 +1,450 @@
 <?php
-/*
-Template Name: All Blueprints Page
-*/
+/**
+ * Template Name: Services Page
+ * 
+ * The template for displaying all services with categories
+ *
+ * @package Blueprint
+ */
+
 get_header(); 
 
 // Enqueue page-services-inline CSS
 wp_enqueue_style('page-services-inline', get_template_directory_uri() . '/css/page-services-inline.css', array(), '1.0');
 ?>
 
-<!-- ================= HERO SECTION ================= -->
-<section class="hero-section-advanced services-hero redesigned-hero">
-    <div class="hero-overlay"></div>
-    <div class="container">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle;margin-right:8px;"><rect x="3" y="3" width="18" height="18" rx="4" fill="#4F8EF7"/><path d="M7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h6v2H7v-2z" fill="#fff"/></svg>
-                <span>Business Blueprints</span>
-            </div>
-            <h1 class="hero-title-fancy">75 Proven <span class="gradient-text">Business Blueprints</span></h1>
-            <p class="hero-subtitle-fancy">Discover profitable business opportunities with detailed startup guides, cost analysis, and step-by-step implementation plans for each blueprint.</p>
-            <div class="hero-stats redesigned-hero-stats">
-                <div class="stat-item">
-                    <span class="stat-icon" aria-hidden="true">📘</span>
-                    <div class="stat-number" data-count="75">75</div>
-                    <div class="stat-label">Business Blueprints</div>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-icon" aria-hidden="true">🏷️</span>
-                    <div class="stat-number" data-count="12">12</div>
-                    <div class="stat-label">Industry Categories</div>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-icon" aria-hidden="true">⭐</span>
-                    <div class="stat-number" data-count="2500">2500+</div>
-                    <div class="stat-label">Success Stories</div>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-icon" aria-hidden="true">🎯</span>
-                    <div class="stat-number" data-count="95">95%</div>
-                    <div class="stat-label">% Success Rate</div>
-                </div>
-            </div>
-            <div class="hero-buttons redesigned-hero-buttons">
-                <a href="#featured-blueprints" class="btn-primary-fancy">
-                    <span>Browse Blueprints</span>
-                    <i class="arrow-right">→</i>
-                </a>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-secondary-fancy">
-                    <span>Get Consultation</span>
-                    <i class="phone-icon" aria-hidden="true">📞</i>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Service Categories Section -->
-<section class="services-section-fancy blog-categories service-categories redesigned-categories">
-    <div class="container">
-        <div class="section-header-fancy">
-            <div class="section-badge">Categories</div>
-            <h2 class="section-title-fancy">Service <span class="gradient-text">Categories</span></h2>
-            <p class="section-subtitle-fancy">Browse our services by category to find exactly what you need</p>
-        </div>
-        <div class="categories-grid redesigned-categories-grid">
-            <?php
-            $service_categories = get_terms( array(
-                'taxonomy'   => 'service_category',
-                'hide_empty' => false,
-            ) );
-
-            if ( ! empty( $service_categories ) && ! is_wp_error( $service_categories ) ) :
-                foreach ($service_categories as $category) :
-                    // Default icon, you can add a custom field for this later using ACF or similar
-                    $icon = '<svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="16" rx="4" fill="#4F8EF7"/><path d="M8 20h16v2H8v-2z" fill="#fff"/></svg>';
-            ?>
-                <a href="<?php echo esc_url( get_term_link( $category ) ); ?>" class="category-card redesigned-category-card" title="<?php echo esc_attr($category->description); ?>">
-                    <div class="category-icon" aria-hidden="true">
-                        <?php echo $icon; ?>
-                    </div>
-                    <h3><?php echo esc_html($category->name); ?></h3>
-                    <p class="category-count"><?php echo $category->count; ?> blueprints</p>
-                </a>
-            <?php endforeach; endif; ?>
-        </div>
-    </div>
-</section>
-
-<!-- Latest Services Highlight Section -->
-<?php
-$latest_services = new WP_Query(array(
-    'post_type' => 'service',
-    'posts_per_page' => 3,
-    'orderby' => 'date',
-    'order' => 'DESC',
-    'date_query' => array(
-        array(
-            'after' => '30 days ago'
-        )
-    )
-));
-if ($latest_services->have_posts()) :
-?>
-<section class="latest-services-highlight redesigned-latest-services">
-    <div class="container">
-        <div class="section-header-fancy">
-            <div class="section-badge">🔥 Just Added</div>
-            <h2 class="section-title-fancy">Latest <span class="gradient-text">Services</span></h2>
-            <p class="section-subtitle-fancy">Check out our newest service offerings added this month</p>
-        </div>
-        <div class="latest-services-grid redesigned-latest-services-grid">
-            <?php while ($latest_services->have_posts()) : $latest_services->the_post(); 
-                $post_date = get_the_date('U');
-                $current_date = current_time('timestamp');
-                $days_diff = ($current_date - $post_date) / (60 * 60 * 24);
-            ?>
-                <article class="latest-service-card redesigned-latest-service-card">
-                    <?php if (has_post_thumbnail()) : ?>
-                        <div class="latest-service-image">
-                            <a href="<?php the_permalink(); ?>">
-                                <?php the_post_thumbnail('medium_large'); ?>
-                            </a>
-                            <div class="latest-overlay"></div>
-                            <span class="days-ago">Added <?php echo ceil($days_diff); ?> days ago</span>
-                        </div>
-                    <?php endif; ?>
-                    <div class="latest-service-content">
-                        <h3 class="latest-service-title">
-                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                        </h3>
-                        <div class="latest-service-meta">
-                            <span class="service-price badge-pill">
-                                <i class="fas fa-tag"></i>
-                                <?php echo get_post_meta(get_the_ID(), 'service_price', true) ?: 'Quote on request'; ?>
-                            </span>
-                            <span class="service-category badge-pill">
-                                <i class="fas fa-folder"></i>
-                                <?php echo get_post_meta(get_the_ID(), 'service_category', true) ?: 'General'; ?>
+<div class="services-page-wrapper">
+    <!-- Hero Section -->
+    <section class="services-hero py-5 bg-gradient-primary">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <div class="hero-content text-white">
+                        <div class="hero-badge mb-3">
+                            <span class="badge bg-white text-primary px-3 py-2 rounded-pill fs-6">
+                                <i class="bi bi-tools me-2"></i>
+                                <?php esc_html_e('Our Services', 'blueprint'); ?>
                             </span>
                         </div>
-                        <div class="latest-service-excerpt">
-                            <?php the_excerpt(); ?>
-                        </div>
-                        <a href="<?php the_permalink(); ?>" class="latest-service-btn btn-primary-fancy">
-                            <span>Learn More</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
+                        <h1 class="display-4 fw-bold mb-4">
+                            <?php esc_html_e('Professional Services for Every Need', 'blueprint'); ?>
+                        </h1>
+                        <p class="lead mb-4">
+                            <?php esc_html_e('From home cleaning to digital services, we provide comprehensive solutions to make your life easier and your business more successful.', 'blueprint'); ?>
+                        </p>
                     </div>
-                </article>
-            <?php endwhile; wp_reset_postdata(); ?>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
-
-<!-- ============== ALL SERVICES SECTION ============== -->
-<section id="all-services" class="services-section-fancy all-posts all-services-posts redesigned-all-services">
-    <div class="container">
-        <div class="section-header-fancy">
-            <div class="section-badge">All Services</div>
-            <h2 class="section-title-fancy">Complete <span class="gradient-text">Service Directory</span></h2>
-            <p class="section-subtitle-fancy">Browse through all our professional services and find the perfect solution for your needs</p>
-            <!-- Latest Services Summary -->
-            <div class="latest-services-summary redesigned-summary-stats">
-                <?php
-                // Optimized Query: Get all published services and their dates in one go.
-                $all_services_query = new WP_Query(array(
-                    'post_type' => 'service',
-                    'posts_per_page' => -1,
-                    'post_status' => 'publish',
-                    'fields' => 'ID,post_date'
-                ));
-
-                $total_services = 0;
-                $recent_count = 0;
-                $new_count = 0;
-                $current_time = current_time('timestamp');
-                $thirty_days_ago = strtotime('-30 days', $current_time);
-                $seven_days_ago = strtotime('-7 days', $current_time);
-
-                if ($all_services_query->have_posts()) {
-                    $total_services = $all_services_query->found_posts;
-                    foreach ($all_services_query->posts as $service_post) {
-                        $post_timestamp = strtotime($service_post->post_date);
-                        if ($post_timestamp >= $thirty_days_ago) $recent_count++;
-                        if ($post_timestamp >= $seven_days_ago) $new_count++;
-                    }
-                }
-                wp_reset_postdata(); 
-                ?>
-                <div class="summary-stats redesigned-summary-stats">
-                    <div class="summary-item">
-                        <span class="summary-icon" aria-hidden="true">📋</span>
-                        <span class="summary-number"><?php echo $total_services; ?></span>
-                        <span class="summary-label">Total Services</span>
-                    </div>
-                    <?php if ($recent_count > 0) : ?>
-                    <div class="summary-item latest">
-                        <span class="summary-icon" aria-hidden="true">🆕</span>
-                        <span class="summary-number"><?php echo $recent_count; ?></span>
-                        <span class="summary-label">Latest Services</span>
-                        <span class="summary-badge">Recent</span>
-                    </div>
-                    <?php endif; ?>
-                    <?php if ($new_count > 0) : ?>
-                    <div class="summary-item new">
-                        <span class="summary-icon" aria-hidden="true">✨</span>
-                        <span class="summary-number"><?php echo $new_count; ?></span>
-                        <span class="summary-label">New This Week</span>
-                        <span class="summary-badge">New</span>
-                    </div>
-                    <?php endif; ?>
                 </div>
             </div>
         </div>
-        <div class="posts-filter redesigned-posts-filter">
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All Services</button>
-                <button class="filter-btn" data-filter="popular">Popular</button>
-                <button class="filter-btn" data-filter="recent">New</button>
-                <button class="filter-btn" data-filter="featured">Featured</button>
-            </div>
-            <div class="search-box">
-                <input type="text" id="service-search" placeholder="Search services...">
-                <i class="fas fa-search search-icon" aria-hidden="true"></i>
-            </div>
-        </div>
-        <div class="posts-grid redesigned-posts-grid" id="services-posts-container">
-            <?php
-            $paged = max( 1, get_query_var( 'paged' ) ? get_query_var( 'paged' ) : get_query_var( 'page' ) );
-            $service_query = new WP_Query( array(
-                'post_type'      => 'service',
-                'posts_per_page' => 12,
-                'paged'          => $paged,
-                'orderby'        => 'date',
-                'order'          => 'DESC',
-                'post_status'    => 'publish'
-            ) );
-            if ( !$service_query->have_posts() ) :
-                $demo_services = array(
-                    array(
-                        'title' => 'Professional House Cleaning',
-                        'excerpt' => 'Complete home cleaning service with eco-friendly products and professional staff.',
-                        'price' => '$99',
-                        'duration' => '2-3 hours',
-                        'category' => 'Home Cleaning'
-                    ),
-                    array(
-                        'title' => 'Business Consultation',
-                        'excerpt' => 'Strategic business advice to help your company grow and succeed in competitive markets.',
-                        'price' => '$150/hour',
-                        'duration' => '1-2 hours',
-                        'category' => 'Consulting'
-                    ),
-                    array(
-                        'title' => 'IT Support & Maintenance',
-                        'excerpt' => 'Professional IT support for small businesses including network setup and maintenance.',
-                        'price' => '$120/hour',
-                        'duration' => '1-4 hours',
-                        'category' => 'Technology'
-                    ),
-                    array(
-                        'title' => 'Garden Landscaping',
-                        'excerpt' => 'Transform your outdoor space with professional landscaping and garden design services.',
-                        'price' => '$200',
-                        'duration' => '1 day',
-                        'category' => 'Landscaping'
-                    ),
-                    array(
-                        'title' => 'Web Design & Development',
-                        'excerpt' => 'Modern, responsive websites that help your business stand out and attract customers.',
-                        'price' => '$500+',
-                        'duration' => '1-2 weeks',
-                        'category' => 'Design'
-                    ),
-                    array(
-                        'title' => 'Marketing Strategy',
-                        'excerpt' => 'Comprehensive marketing plans to boost your brand visibility and customer engagement.',
-                        'price' => '$300',
-                        'duration' => '2-4 hours',
-                        'category' => 'Marketing'
-                    )
-                );
-                foreach ($demo_services as $index => $demo_service) :
-                    $is_recent = $index < 2;
-                    $is_new = $index < 1;
-            ?>
-                <article class="post-card service-post-card demo-service redesigned-service-card" 
-                         data-category="<?php echo $demo_service['category']; ?>"
-                         data-post-date="<?php echo date('Y-m-d', strtotime('-' . $index . ' days')); ?>"
-                         data-recent="<?php echo $is_recent ? 'true' : 'false'; ?>"
-                         data-new="<?php echo $is_new ? 'true' : 'false'; ?>">
-                    <div class="post-thumbnail no-image">
-                        <div class="placeholder-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <?php if ($is_recent) : ?>
-                            <span class="latest-badge">Latest</span>
-                        <?php endif; ?>
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="service-price badge-pill">
-                                <i class="fas fa-dollar-sign"></i>
-                                <?php echo $demo_service['price']; ?>
-                            </span>
-                            <span class="service-duration badge-pill">
-                                <i class="fas fa-clock"></i>
-                                <?php echo $demo_service['duration']; ?>
-                            </span>
-                            <?php if ($is_new) : ?>
-                                <span class="service-new">
-                                    <i class="fas fa-star"></i>
-                                    New Service
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                        <h3 class="post-title">
-                            <a href="#"><?php echo $demo_service['title']; ?></a>
-                        </h3>
-                        <div class="post-excerpt">
-                            <?php echo $demo_service['excerpt']; ?>
-                        </div>
-                        <div class="post-footer">
-                            <a href="#" class="read-more-btn btn-primary-fancy">
-                                <span>View Details</span>
-                                <i class="arrow-right" aria-hidden="true">→</i>
-                            </a>
-                            <div class="post-stats">
-                                <span class="stat">
-                                    <i class="fas fa-star"></i>
-                                    4.8/5
-                                </span>
-                                <span class="stat">
-                                    <i class="fas fa-check"></i>
-                                    Available
-                                </span>
+    </section>
+
+    <!-- Services Categories -->
+    <section class="services-categories py-5">
+        <div class="container">
+            <!-- Home & Cleaning Services -->
+            <div class="service-category mb-5">
+                <div class="category-header text-center mb-4">
+                    <h2 class="display-5 fw-bold mb-3">
+                        <i class="bi bi-house-heart text-primary me-3"></i>
+                        <?php esc_html_e('🧹 Home & Cleaning Services', 'blueprint'); ?>
+                    </h2>
+                    <p class="lead text-muted">
+                        <?php esc_html_e('Professional cleaning and home maintenance services', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <?php 
+                    $cleaning_services = array(
+                        'house-cleaning' => 'House Cleaning',
+                        'move-in-out-cleaning' => 'Move-in/Move-out Cleaning',
+                        'pressure-washing' => 'Pressure Washing',
+                        'gutter-cleaning' => 'Gutter Cleaning',
+                        'window-cleaning' => 'Window Cleaning',
+                        'carpet-shampooing' => 'Carpet Shampooing',
+                        'garage-attic-organization' => 'Garage/Attic Organization',
+                        'trash-hauling-junk-removal' => 'Trash Hauling & Junk Removal',
+                        'airbnb-cleaning-reset' => 'Airbnb Cleaning & Reset Services',
+                        'lawn-mowing-yard-maintenance' => 'Lawn Mowing and Yard Maintenance'
+                    );
+                    
+                    foreach ($cleaning_services as $slug => $title) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card bg-white rounded-4 shadow-sm p-4 h-100">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-house-check text-primary fs-2"></i>
                             </div>
+                            <h5 class="fw-bold mb-3"><?php echo esc_html($title); ?></h5>
+                            <p class="text-muted mb-4">Professional <?php echo strtolower($title); ?> services to keep your home spotless and organized.</p>
+                            <a href="<?php echo esc_url(home_url('/services/' . $slug . '/')); ?>" class="btn btn-outline-primary">
+                                <?php esc_html_e('Learn More', 'blueprint'); ?>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
                         </div>
                     </div>
-                </article>
-            <?php endforeach; ?>
-                <div class="pagination-wrapper redesigned-pagination">
-                    <div class="pagination-info">
-                        Showing <strong>1-6</strong> of <strong>6</strong> demo services
-                    </div>
-                    <div class="pagination-enhanced">
-                        <span class="page-numbers current">1</span>
-                        <a href="#" class="page-numbers">2</a>
-                        <a href="#" class="page-numbers">3</a>
-                        <a href="#" class="page-numbers next">Next <i class="fas fa-chevron-right" aria-hidden="true"></i></a>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php else: ?>
-                <?php while ( $service_query->have_posts() ) : $service_query->the_post();
-                    $post_date = get_the_date('U');
-                    $current_date = current_time('timestamp');
-                    $days_diff = ($current_date - $post_date) / (60 * 60 * 24);
-                    $is_recent = $days_diff <= 30;
-                    $is_new = $days_diff <= 7;
-            ?>
-                <article class="post-card service-post-card redesigned-service-card" 
-                         data-category="<?php echo get_post_meta(get_the_ID(), 'service_category', true); ?>"
-                         data-post-date="<?php echo get_the_date('Y-m-d'); ?>"
-                         data-recent="<?php echo $is_recent ? 'true' : 'false'; ?>"
-                         data-new="<?php echo $is_new ? 'true' : 'false'; ?>">
-                    <?php if ( has_post_thumbnail() ) : ?>
-                        <div class="post-thumbnail">
-                            <a href="<?php the_permalink(); ?>">
-                                <?php the_post_thumbnail( 'medium', array( 'alt' => esc_attr( get_the_title() ) ) ); ?>
-                            </a>
-                            <div class="post-overlay"></div>
-                            <?php if ($days_diff <= 30) : ?>
-                                <span class="latest-badge">Latest</span>
-                            <?php endif; ?>
-                        </div>
-                    <?php else: ?>
-                        <div class="post-thumbnail no-image">
-                            <div class="placeholder-icon">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <?php if ($days_diff <= 30) : ?>
-                                <span class="latest-badge">Latest</span>
-                            <?php endif; ?>
-                        </div>
-                    <?php endif; ?>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="service-price badge-pill">
-                                <i class="fas fa-dollar-sign"></i>
-                                <?php echo get_post_meta(get_the_ID(), 'service_price', true) ?: 'Contact for quote'; ?>
-                            </span>
-                            <span class="service-duration badge-pill">
-                                <i class="fas fa-clock"></i>
-                                <?php echo get_post_meta(get_the_ID(), 'service_duration', true) ?: '1-2 hours'; ?>
-                            </span>
-                            <?php if ($days_diff <= 7) : ?>
-                                <span class="service-new">
-                                    <i class="fas fa-star"></i>
-                                    New Service
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                        <h3 class="post-title">
-                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                        </h3>
-                        <div class="post-excerpt">
-                            <?php the_excerpt(); ?>
-                        </div>
-                        <div class="post-footer">
-                            <a href="<?php the_permalink(); ?>" class="read-more-btn btn-primary-fancy">
-                                <span>View Details</span>
-                                <i class="arrow-right" aria-hidden="true">→</i>
-                            </a>
-                            <div class="post-stats">
-                                <span class="stat">
-                                    <i class="fas fa-star"></i>
-                                    4.8/5
-                                </span>
-                                <span class="stat">
-                                    <i class="fas fa-check"></i>
-                                    Available
-                                </span>
-                            </div>
-                            <?php edit_post_link( 'Edit Service', '<span class="edit-link" style="margin-left:10px; color:#d35400; font-weight:bold;">', '</span>' ); ?>
-                        </div>
-                    </div>
-                </article>
-            <?php endwhile; ?>
-                <?php
-                if ( $service_query->max_num_pages > 1 ) :
-                    $current_page = max( 1, $paged );
-                    $total_pages = $service_query->max_num_pages;
-                    $total_posts = $service_query->found_posts;
-                    $posts_per_page = $service_query->query_vars['posts_per_page'];
-                    $start_post = ( $current_page - 1 ) * $posts_per_page + 1;
-                    $end_post = min( $current_page * $posts_per_page, $total_posts );
-                ?>
-                    <div class="pagination-wrapper redesigned-pagination">
-                        <div class="pagination-info">
-                            Showing <strong><?php echo $start_post; ?>-<?php echo $end_post; ?></strong> of <strong><?php echo $total_posts; ?></strong> services
-                        </div>
-                        <?php
-                        $big = 999999999;
-                        $pagination_links = paginate_links( array(
-                            'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-                            'format'    => '?paged=%#%',
-                            'current'   => $current_page,
-                            'total'     => $total_pages,
-                            'prev_text' => '<i class="fas fa-chevron-left" aria-hidden="true"></i> Previous',
-                            'next_text' => 'Next <i class="fas fa-chevron-right" aria-hidden="true"></i>',
-                            'mid_size'  => 2,
-                            'end_size'  => 1,
-                            'type'      => 'array',
-                            'add_args'  => false,
-                        ) );
-                        if ( $pagination_links ) {
-                            echo '<div class="pagination-enhanced">';
-                            foreach ( $pagination_links as $link ) {
-                                $link = str_replace( 'page-numbers', 'page-numbers', $link );
-                                $link = str_replace( 'prev page-numbers', 'page-numbers prev', $link );
-                                $link = str_replace( 'next page-numbers', 'page-numbers next', $link );
-                                $link = str_replace( 'dots', 'page-numbers dots', $link );
-                                echo $link;
-                            }
-                            echo '</div>';
-                        }
-                        ?>
-                    </div>
-                <?php endif; ?>
-            <?php endif; wp_reset_postdata(); ?>
-        </div>
-    </div>
-</section>
+            </div>
 
-<!-- ============== CTA / AWARDS SECTION ============== -->
-<section class="cta-awards-section redesigned-cta-awards">
-    <div class="container">
-        <div class="cta-awards-content">
-            <div class="cta-block">
-                <h2 class="cta-title">Ready to Experience Excellence?</h2>
-                <p class="cta-desc">Join thousands of satisfied clients who trust us with their service needs. Get started with a free consultation or explore our award-winning blueprints.</p>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-primary-fancy cta-btn">
-                    <span>Get Your Free Consultation</span>
-                    <i class="arrow-right">→</i>
-                </a>
+            <!-- Home & Property Maintenance -->
+            <div class="service-category mb-5">
+                <div class="category-header text-center mb-4">
+                    <h2 class="display-5 fw-bold mb-3">
+                        <i class="bi bi-tools text-warning me-3"></i>
+                        <?php esc_html_e('🧰 Home & Property Maintenance', 'blueprint'); ?>
+                    </h2>
+                    <p class="lead text-muted">
+                        <?php esc_html_e('Expert maintenance and repair services for your property', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <?php 
+                    $maintenance_services = array(
+                        'furniture-assembly' => 'Furniture Assembly',
+                        'tv-mounting' => 'TV Mounting',
+                        'handyman-services' => 'Handyman Services',
+                        'fence-painting' => 'Fence Painting',
+                        'light-bulb-fixture-installation' => 'Light Bulb/Fixture Installation',
+                        'basic-drywall-patching' => 'Basic Drywall Patching',
+                        'mailbox-installation' => 'Mailbox Installation',
+                        'holiday-light-hanging' => 'Holiday Light Hanging',
+                        'lockout-assistance' => 'Lockout Assistance',
+                        'pool-cleaning' => 'Pool Cleaning'
+                    );
+                    
+                    foreach ($maintenance_services as $slug => $title) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card bg-white rounded-4 shadow-sm p-4 h-100">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-wrench text-warning fs-2"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3"><?php echo esc_html($title); ?></h5>
+                            <p class="text-muted mb-4">Professional <?php echo strtolower($title); ?> services for your home and property needs.</p>
+                            <a href="<?php echo esc_url(home_url('/services/' . $slug . '/')); ?>" class="btn btn-outline-warning">
+                                <?php esc_html_e('Learn More', 'blueprint'); ?>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
-            <div class="awards-block">
-                <div class="awards-list">
-                    <div class="award-item">
-                        <span class="award-icon" aria-hidden="true">🏆</span>
-                        <span class="award-title">Best Business Blueprint Platform 2024</span>
+
+            <!-- Personal Errands & Concierge -->
+            <div class="service-category mb-5">
+                <div class="category-header text-center mb-4">
+                    <h2 class="display-5 fw-bold mb-3">
+                        <i class="bi bi-bag-check text-success me-3"></i>
+                        <?php esc_html_e('🛍️ Personal Errands & Concierge', 'blueprint'); ?>
+                    </h2>
+                    <p class="lead text-muted">
+                        <?php esc_html_e('Personal assistance and concierge services to save you time', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <?php 
+                    $errand_services = array(
+                        'grocery-shopping-delivery' => 'Grocery Shopping/Delivery',
+                        'prescription-pickup' => 'Prescription Pickup',
+                        'waiting-in-line-service' => 'Waiting-in-line Service',
+                        'personal-assistant-service' => 'Personal Assistant Service',
+                        'moving-assistance' => 'Moving Assistance',
+                        'courier-delivery-services' => 'Courier/Delivery Services',
+                        'dog-waste-cleanup' => 'Dog Waste Cleanup',
+                        'packing-unpacking-service' => 'Packing/Unpacking Service',
+                        'decluttering-service' => 'Decluttering Service',
+                        'plant-watering' => 'Plant Watering'
+                    );
+                    
+                    foreach ($errand_services as $slug => $title) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card bg-white rounded-4 shadow-sm p-4 h-100">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-person-check text-success fs-2"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3"><?php echo esc_html($title); ?></h5>
+                            <p class="text-muted mb-4">Reliable <?php echo strtolower($title); ?> services to help manage your daily tasks.</p>
+                            <a href="<?php echo esc_url(home_url('/services/' . $slug . '/')); ?>" class="btn btn-outline-success">
+                                <?php esc_html_e('Learn More', 'blueprint'); ?>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="award-item">
-                        <span class="award-icon" aria-hidden="true">⭐</span>
-                        <span class="award-title">Top Startup Mentor Program 2023</span>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- Pet & Animal Services -->
+            <div class="service-category mb-5">
+                <div class="category-header text-center mb-4">
+                    <h2 class="display-5 fw-bold mb-3">
+                        <i class="bi bi-heart text-danger me-3"></i>
+                        <?php esc_html_e('🐶 Pet & Animal Services', 'blueprint'); ?>
+                    </h2>
+                    <p class="lead text-muted">
+                        <?php esc_html_e('Caring and professional pet services for your furry friends', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <?php 
+                    $pet_services = array(
+                        'dog-walking' => 'Dog Walking',
+                        'pet-sitting' => 'Pet Sitting',
+                        'mobile-pet-grooming' => 'Mobile Pet Grooming',
+                        'pet-poop-scooping' => 'Pet Poop Scooping Service',
+                        'pet-taxi' => 'Pet Taxi',
+                        'aquarium-cleaning' => 'Aquarium Cleaning',
+                        'pet-yard-deodorizing' => 'Pet Yard Deodorizing'
+                    );
+                    
+                    foreach ($pet_services as $slug => $title) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card bg-white rounded-4 shadow-sm p-4 h-100">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-heart-fill text-danger fs-2"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3"><?php echo esc_html($title); ?></h5>
+                            <p class="text-muted mb-4">Professional <?php echo strtolower($title); ?> services with care and attention to your pets.</p>
+                            <a href="<?php echo esc_url(home_url('/services/' . $slug . '/')); ?>" class="btn btn-outline-danger">
+                                <?php esc_html_e('Learn More', 'blueprint'); ?>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="award-item">
-                        <span class="award-icon" aria-hidden="true">🌟</span>
-                        <span class="award-title">Entrepreneur's Choice Award 2023</span>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- Child & Family Support -->
+            <div class="service-category mb-5">
+                <div class="category-header text-center mb-4">
+                    <h2 class="display-5 fw-bold mb-3">
+                        <i class="bi bi-people text-info me-3"></i>
+                        <?php esc_html_e('👶 Child & Family Support', 'blueprint'); ?>
+                    </h2>
+                    <p class="lead text-muted">
+                        <?php esc_html_e('Supporting families with childcare and family assistance services', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <?php 
+                    $family_services = array(
+                        'parent-helper-mothers-helper' => 'Parent Helper/Mother\'s Helper',
+                        'babysitting' => 'Babysitting',
+                        'toy-organization' => 'Toy Organization Service',
+                        'home-safety-baby-proofing' => 'Home Safety Baby-proofing',
+                        'birthday-party-setup' => 'Birthday Party Setup & Hosting'
+                    );
+                    
+                    foreach ($family_services as $slug => $title) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card bg-white rounded-4 shadow-sm p-4 h-100">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-people-fill text-info fs-2"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3"><?php echo esc_html($title); ?></h5>
+                            <p class="text-muted mb-4">Trusted <?php echo strtolower($title); ?> services to support your family needs.</p>
+                            <a href="<?php echo esc_url(home_url('/services/' . $slug . '/')); ?>" class="btn btn-outline-info">
+                                <?php esc_html_e('Learn More', 'blueprint'); ?>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="award-item">
-                        <span class="award-icon" aria-hidden="true">💎</span>
-                        <span class="award-title">Business Excellence Certified 2022</span>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- Creative & Digital Services -->
+            <div class="service-category mb-5">
+                <div class="category-header text-center mb-4">
+                    <h2 class="display-5 fw-bold mb-3">
+                        <i class="bi bi-palette text-purple me-3"></i>
+                        <?php esc_html_e('🎨 Creative & Digital Services', 'blueprint'); ?>
+                    </h2>
+                    <p class="lead text-muted">
+                        <?php esc_html_e('Creative and digital solutions for your business and personal needs', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <?php 
+                    $creative_services = array(
+                        'graphic-design' => 'Graphic Design',
+                        'social-media-management' => 'Social Media Management',
+                        'content-writing-blogging' => 'Content Writing/Blogging',
+                        'photography' => 'Photography',
+                        'videography-events' => 'Videography for Events',
+                        'logo-design' => 'Logo Design',
+                        'resume-writing' => 'Resume Writing',
+                        'voiceover-work' => 'Voiceover Work',
+                        'tshirt-merch-design' => 'T-shirt & Merch Design',
+                        'basic-website-setup' => 'Basic Website Setup'
+                    );
+                    
+                    foreach ($creative_services as $slug => $title) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card bg-white rounded-4 shadow-sm p-4 h-100">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-brush text-purple fs-2"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3"><?php echo esc_html($title); ?></h5>
+                            <p class="text-muted mb-4">Creative <?php echo strtolower($title); ?> services to bring your vision to life.</p>
+                            <a href="<?php echo esc_url(home_url('/services/' . $slug . '/')); ?>" class="btn btn-outline-dark">
+                                <?php esc_html_e('Learn More', 'blueprint'); ?>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
                     </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- Coaching & Consulting -->
+            <div class="service-category mb-5">
+                <div class="category-header text-center mb-4">
+                    <h2 class="display-5 fw-bold mb-3">
+                        <i class="bi bi-mortarboard text-secondary me-3"></i>
+                        <?php esc_html_e('🎓 Coaching & Consulting', 'blueprint'); ?>
+                    </h2>
+                    <p class="lead text-muted">
+                        <?php esc_html_e('Professional coaching and consulting services for personal and business growth', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <?php 
+                    $coaching_services = array(
+                        'business-coaching' => 'Business Coaching',
+                        'life-coaching' => 'Life Coaching',
+                        'marketing-consulting' => 'Marketing Consulting',
+                        'social-media-consulting' => 'Social Media Consulting',
+                        'relationship-coaching' => 'Relationship Coaching',
+                        'productivity-time-management' => 'Productivity/Time Management Coaching',
+                        'accountability-coaching' => 'Accountability Coaching',
+                        'confidence-public-speaking' => 'Confidence or Public Speaking Coaching'
+                    );
+                    
+                    foreach ($coaching_services as $slug => $title) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card bg-white rounded-4 shadow-sm p-4 h-100">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-person-workspace text-secondary fs-2"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3"><?php echo esc_html($title); ?></h5>
+                            <p class="text-muted mb-4">Expert <?php echo strtolower($title); ?> services to help you achieve your goals.</p>
+                            <a href="<?php echo esc_url(home_url('/services/' . $slug . '/')); ?>" class="btn btn-outline-secondary">
+                                <?php esc_html_e('Learn More', 'blueprint'); ?>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- Office & Admin Services -->
+            <div class="service-category mb-5">
+                <div class="category-header text-center mb-4">
+                    <h2 class="display-5 fw-bold mb-3">
+                        <i class="bi bi-briefcase text-primary me-3"></i>
+                        <?php esc_html_e('💼 Office & Admin Services', 'blueprint'); ?>
+                    </h2>
+                    <p class="lead text-muted">
+                        <?php esc_html_e('Administrative and office support services for your business', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <?php 
+                    $admin_services = array(
+                        'virtual-assistant' => 'Virtual Assistant',
+                        'data-entry' => 'Data Entry',
+                        'email-inbox-management' => 'Email Inbox Management',
+                        'transcription-services' => 'Transcription Services',
+                        'online-research-assistant' => 'Online Research Assistant',
+                        'bookkeeping' => 'Bookkeeping',
+                        'crm-data-organization' => 'CRM/Data Organization Setup',
+                        'cold-calling-appointment-setting' => 'Cold Calling or Appointment Setting',
+                        'customer-service-outsourcing' => 'Customer Service Outsourcing',
+                        'print-on-demand-order-management' => 'Print-on-demand Order Management'
+                    );
+                    
+                    foreach ($admin_services as $slug => $title) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card bg-white rounded-4 shadow-sm p-4 h-100">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-laptop text-primary fs-2"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3"><?php echo esc_html($title); ?></h5>
+                            <p class="text-muted mb-4">Professional <?php echo strtolower($title); ?> services for your business operations.</p>
+                            <a href="<?php echo esc_url(home_url('/services/' . $slug . '/')); ?>" class="btn btn-outline-primary">
+                                <?php esc_html_e('Learn More', 'blueprint'); ?>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- Selling, Flipping & Setup -->
+            <div class="service-category mb-5">
+                <div class="category-header text-center mb-4">
+                    <h2 class="display-5 fw-bold mb-3">
+                        <i class="bi bi-box text-warning me-3"></i>
+                        <?php esc_html_e('📦 Selling, Flipping & Setup', 'blueprint'); ?>
+                    </h2>
+                    <p class="lead text-muted">
+                        <?php esc_html_e('Product sourcing, selling, and setup services for entrepreneurs', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <?php 
+                    $selling_services = array(
+                        'furniture-flipping' => 'Furniture Flipping',
+                        'product-sourcing' => 'Product Sourcing for Others',
+                        'drop-off-ebay-amazon-seller' => 'Drop-off eBay/Amazon Seller',
+                        'home-office-gaming-setup' => 'Home Office or Gaming Setup Installer',
+                        'party-rental-setup' => 'Party Rental Setup'
+                    );
+                    
+                    foreach ($selling_services as $slug => $title) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card bg-white rounded-4 shadow-sm p-4 h-100">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-cart text-warning fs-2"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3"><?php echo esc_html($title); ?></h5>
+                            <p class="text-muted mb-4">Professional <?php echo strtolower($title); ?> services for your selling and setup needs.</p>
+                            <a href="<?php echo esc_url(home_url('/services/' . $slug . '/')); ?>" class="btn btn-outline-warning">
+                                <?php esc_html_e('Learn More', 'blueprint'); ?>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h3 class="display-6 fw-bold mb-3">
+                        <?php esc_html_e('Ready to Get Started?', 'blueprint'); ?>
+                    </h3>
+                    <p class="lead mb-0">
+                        <?php esc_html_e('Contact us today to discuss your service needs and get a customized solution.', 'blueprint'); ?>
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn btn-light btn-lg px-4">
+                        <i class="bi bi-telephone me-2"></i>
+                        <?php esc_html_e('Contact Us Today', 'blueprint'); ?>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
 <?php get_footer(); ?>

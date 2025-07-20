@@ -67,6 +67,9 @@ function blueprint_theme_setup() {
     register_nav_menus(array(
         'primary' => __('Primary Menu', 'blueprint'),
         'footer'  => __('Footer Menu', 'blueprint'),
+        'footer-primary' => __('Footer Primary Links', 'blueprint'),
+        'footer-services' => __('Footer Services Menu', 'blueprint'),
+        'footer-legal' => __('Footer Legal Menu', 'blueprint'),
         'footer-secondary' => __('Footer Secondary Menu', 'blueprint'),
     ));
     
@@ -124,6 +127,10 @@ function blueprint_scripts() {
         'blueprint-menu' => '/css/bootstrap-menu-ml.css',
         'blueprint-responsive' => '/css/responsive-enhancements.css',
         'blueprint-theme-fixes' => '/css/theme-layout-fixes.css',
+        'blueprint-header-enhanced' => '/css/enhanced-header-design.css',
+        'blueprint-footer-enhanced' => '/css/enhanced-footer-design.css',
+        'blueprint-about-enhanced' => '/css/enhanced-about-page.css',
+        'blueprint-service-pages' => '/css/service-pages-enhanced.css',
     );
     
     foreach ($css_files as $handle => $file) {
@@ -150,6 +157,7 @@ function blueprint_scripts() {
     $js_files = array(
         'blueprint-main' => '/js/main.js',
         'blueprint-menu' => '/js/bootstrap-menu.js',
+        'blueprint-header-footer' => '/js/enhanced-header-footer.js',
     );
     
     foreach ($js_files as $handle => $file) {

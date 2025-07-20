@@ -1,0 +1,722 @@
+/* ===================================================================
+   SERVICE PAGES ENHANCED STYLING
+   Comprehensive styling for all service category pages
+   =================================================================== */
+
+/* Service Page Variables */
+:root {
+    --service-primary: #667eea;
+    --service-secondary: #764ba2;
+    --service-success: #28a745;
+    --service-warning: #ffc107;
+    --service-danger: #dc3545;
+    --service-info: #17a2b8;
+    --service-light: #f8f9fa;
+    --service-dark: #1e293b;
+    --service-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --service-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --service-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+/* Service Page Wrapper */
+.service-page-wrapper {
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.service-hero {
+    background: var(--service-gradient);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+}
+
+.service-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.service-badge .badge {
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: var(--service-shadow);
+}
+
+.service-features {
+    margin-top: 2rem;
+}
+
+.feature-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.feature-tag:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Service Booking Card */
+.service-booking-card {
+    position: sticky;
+    top: 2rem;
+    border: none;
+    box-shadow: var(--service-shadow-lg);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.service-booking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+}
+
+.price-display {
+    text-align: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+    border-radius: 1rem;
+    border: 1px solid #e9ecef;
+}
+
+.price-from {
+    font-size: 0.875rem;
+    color: #6c757d;
+    display: block;
+}
+
+.price-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--service-primary);
+    display: block;
+    line-height: 1;
+}
+
+.price-period {
+    font-size: 0.875rem;
+    color: #6c757d;
+    display: block;
+}
+
+.service-includes {
+    padding-left: 0;
+}
+
+.service-includes li {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.service-includes li:last-child {
+    border-bottom: none;
+}
+
+/* Service Details Section */
+.service-details {
+    background: #fff;
+}
+
+.section-title {
+    font-weight: 700;
+    color: var(--service-dark);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 4rem;
+    height: 3px;
+    background: var(--service-gradient);
+    border-radius: 2px;
+}
+
+/* Service Cards */
+.service-card,
+.area-card,
+.feature-card {
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    height: 100%;
+}
+
+.service-card:hover,
+.area-card:hover,
+.feature-card:hover {
+    border-color: var(--service-primary);
+    transform: translateY(-5px);
+    box-shadow: var(--service-shadow-lg);
+}
+
+.service-card h5,
+.area-card h5,
+.feature-card h5 {
+    color: var(--service-dark);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.service-card ul li,
+.area-card ul li,
+.feature-card ul li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Benefits Grid */
+.benefits-grid .benefit-item {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.benefit-icon {
+    margin-bottom: 1rem;
+}
+
+.benefit-item h5 {
+    font-weight: 600;
+    color: var(--service-dark);
+    margin-bottom: 1rem;
+}
+
+.benefit-item p {
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+/* Process Steps */
+.process-steps {
+    background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+    padding: 3rem 0;
+    border-radius: 2rem;
+    margin: 2rem 0;
+}
+
+.process-step {
+    text-align: center;
+    padding: 1rem;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: var(--service-gradient);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+    box-shadow: var(--service-shadow);
+    transition: all 0.3s ease;
+}
+
+.process-step:hover .step-number {
+    transform: scale(1.1);
+    box-shadow: var(--service-shadow-lg);
+}
+
+.process-step h5 {
+    font-weight: 600;
+    color: var(--service-dark);
+    margin-bottom: 1rem;
+}
+
+.process-step p {
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Pricing Cards */
+.pricing-table {
+    margin: 2rem 0;
+}
+
+.pricing-card {
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    position: relative;
+    height: 100%;
+}
+
+.pricing-card:hover {
+    border-color: var(--service-primary);
+    transform: translateY(-5px);
+    box-shadow: var(--service-shadow-lg);
+}
+
+.pricing-card.featured {
+    border-color: var(--service-primary);
+    background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+    transform: scale(1.05);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--service-gradient);
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    box-shadow: var(--service-shadow);
+}
+
+.pricing-card h5 {
+    font-weight: 700;
+    color: var(--service-dark);
+    margin-bottom: 1rem;
+}
+
+.pricing-card .price {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.pricing-card .amount {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--service-primary);
+}
+
+.pricing-card .period {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.pricing-card ul {
+    padding-left: 0;
+}
+
+.pricing-card ul li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f1f3f4;
+    font-size: 0.9rem;
+}
+
+.pricing-card ul li:last-child {
+    border-bottom: none;
+}
+
+/* FAQ Section */
+.faq-section {
+    margin-top: 3rem;
+}
+
+.accordion-item {
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background: #fff;
+    border: none;
+    font-weight: 600;
+    color: var(--service-dark);
+    padding: 1rem 1.5rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+    color: var(--service-primary);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: var(--service-primary);
+}
+
+.accordion-body {
+    background: #fff;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+/* Service Sidebar */
+.service-sidebar .contact-widget,
+.service-sidebar .related-services,
+.service-sidebar .skills-widget,
+.service-sidebar .portfolio-widget {
+    background: var(--service-light);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.contact-info .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.contact-info .contact-item a {
+    color: var(--service-dark);
+    text-decoration: none;
+}
+
+.contact-info .contact-item a:hover {
+    color: var(--service-primary);
+}
+
+.related-services ul {
+    padding-left: 0;
+}
+
+.related-services ul li {
+    margin-bottom: 0.75rem;
+}
+
+.related-services ul li a {
+    color: var(--service-dark);
+    transition: all 0.3s ease;
+}
+
+.related-services ul li a:hover {
+    color: var(--service-primary);
+    padding-left: 0.5rem;
+}
+
+/* Skills Widget */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background: var(--service-primary);
+    color: white;
+    border-color: var(--service-primary);
+}
+
+/* Testimonials Section */
+.testimonials {
+    background: var(--service-light);
+}
+
+.testimonial-card {
+    border: none;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--service-shadow);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--service-shadow-lg);
+}
+
+.stars {
+    margin-bottom: 1rem;
+}
+
+.customer-info {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.customer-info strong {
+    color: var(--service-dark);
+    font-weight: 600;
+}
+
+.customer-info .text-muted {
+    font-size: 0.875rem;
+}
+
+/* CTA Section */
+.service-cta {
+    background: var(--service-gradient);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+}
+
+.cta-buttons {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-buttons .btn {
+    margin: 0.5rem;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 2rem;
+    transition: all 0.3s ease;
+}
+
+.cta-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--service-shadow-lg);
+}
+
+/* Hashtags Section */
+.hashtags {
+    background: var(--service-light);
+    border-top: 1px solid #e9ecef;
+}
+
+.hashtags-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hashtag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.hashtag {
+    display: inline-block;
+    background: var(--service-gradient);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.hashtag:hover {
+    background: white;
+    color: var(--service-primary);
+    border-color: var(--service-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--service-shadow);
+}
+
+/* Categories Grid (for main services page) */
+.services-categories {
+    background: #fff;
+}
+
+.service-category {
+    margin-bottom: 4rem;
+}
+
+.category-header {
+    margin-bottom: 3rem;
+}
+
+.category-header h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.category-header .lead {
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+.service-card {
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    height: 100%;
+    text-align: center;
+}
+
+.service-card:hover {
+    border-color: var(--service-primary);
+    transform: translateY(-5px);
+    box-shadow: var(--service-shadow-lg);
+}
+
+.service-icon {
+    margin-bottom: 1.5rem;
+}
+
+.service-card h5 {
+    font-weight: 600;
+    color: var(--service-dark);
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.service-card .btn {
+    border-radius: 2rem;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.service-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--service-shadow);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .service-hero {
+        text-align: center;
+    }
+    
+    .service-booking-card {
+        position: relative;
+        top: auto;
+        margin-top: 2rem;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+    }
+    
+    .process-steps {
+        padding: 2rem 1rem;
+    }
+    
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+    
+    .cta-buttons .btn {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+    
+    .hashtag-list {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 576px) {
+    .service-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .price-amount {
+        font-size: 2rem;
+    }
+    
+    .service-card,
+    .pricing-card,
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+    
+    .process-steps {
+        padding: 1.5rem 0.5rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .service-hero,
+    .service-cta,
+    .hashtags,
+    .service-sidebar {
+        display: none;
+    }
+    
+    .service-page-wrapper {
+        background: white;
+    }
+    
+    .service-card,
+    .pricing-card {
+        border: 1px solid #ddd;
+        break-inside: avoid;
+    }
+}
