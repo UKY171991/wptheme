@@ -188,42 +188,25 @@
                     </div>
                 </div>
                 
-                <!-- Newsletter & Social -->
+                <!-- Stay Connected -->
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-section">
                         <h5 class="footer-heading text-white mb-4"><?php esc_html_e('Stay Connected', 'blueprint'); ?></h5>
                         
-                        <!-- Newsletter Signup -->
-                        <div class="newsletter-signup mb-4">
-                            <p class="text-light-emphasis mb-3"><?php esc_html_e('Subscribe to our newsletter for updates and insights.', 'blueprint'); ?></p>
-                            <form class="newsletter-form" action="<?php echo esc_url(home_url('/')); ?>" method="post">
-                                <div class="input-group mb-3">
-                                    <input type="email" class="form-control" placeholder="<?php esc_attr_e('Your email address', 'blueprint'); ?>" aria-label="<?php esc_attr_e('Email address for newsletter', 'blueprint'); ?>" required>
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="bi bi-send"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <!-- Social Media Links -->
+                        <!-- Simple Social Media Links -->
                         <div class="social-media">
-                            <h6 class="text-white mb-3"><?php esc_html_e('Follow Us', 'blueprint'); ?></h6>
-                            <div class="social-links d-flex gap-2">
-                                <a href="#" class="social-link btn btn-outline-primary btn-sm" aria-label="<?php esc_attr_e('Follow us on Facebook', 'blueprint'); ?>">
+                            <div class="social-links d-flex gap-3">
+                                <a href="#" class="text-light fs-4" aria-label="<?php esc_attr_e('Follow us on Facebook', 'blueprint'); ?>">
                                     <i class="bi bi-facebook"></i>
                                 </a>
-                                <a href="#" class="social-link btn btn-outline-primary btn-sm" aria-label="<?php esc_attr_e('Follow us on Twitter', 'blueprint'); ?>">
+                                <a href="#" class="text-light fs-4" aria-label="<?php esc_attr_e('Follow us on Twitter', 'blueprint'); ?>">
                                     <i class="bi bi-twitter"></i>
                                 </a>
-                                <a href="#" class="social-link btn btn-outline-primary btn-sm" aria-label="<?php esc_attr_e('Follow us on LinkedIn', 'blueprint'); ?>">
+                                <a href="#" class="text-light fs-4" aria-label="<?php esc_attr_e('Follow us on LinkedIn', 'blueprint'); ?>">
                                     <i class="bi bi-linkedin"></i>
                                 </a>
-                                <a href="#" class="social-link btn btn-outline-primary btn-sm" aria-label="<?php esc_attr_e('Follow us on Instagram', 'blueprint'); ?>">
+                                <a href="#" class="text-light fs-4" aria-label="<?php esc_attr_e('Follow us on Instagram', 'blueprint'); ?>">
                                     <i class="bi bi-instagram"></i>
-                                </a>
-                                <a href="#" class="social-link btn btn-outline-primary btn-sm" aria-label="<?php esc_attr_e('Follow us on YouTube', 'blueprint'); ?>">
-                                    <i class="bi bi-youtube"></i>
                                 </a>
                             </div>
                         </div>
@@ -234,7 +217,7 @@
     </div>
     
     <!-- Footer Bottom -->
-    <div class="footer-bottom bg-darker text-light py-3">
+    <div class="footer-bottom bg-darker text-light py-2">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">

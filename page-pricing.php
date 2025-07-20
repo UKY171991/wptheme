@@ -269,65 +269,121 @@ get_header(); ?>
         </div>
         
         <div class="faq-grid">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>How do you determine pricing for each service?</h4>
-                    <span class="faq-toggle">+</span>
+            <?php
+            // Query Pricing FAQ posts
+            $pricing_faq_query = new WP_Query(array(
+                'post_type' => 'pricing-faq',
+                'posts_per_page' => -1,
+                'post_status' => 'publish',
+                'orderby' => 'menu_order',
+                'order' => 'ASC',
+                'meta_query' => array(
+                    'relation' => 'OR',
+                    array(
+                        'key' => 'pricing_faq_category',
+                        'value' => 'pricing',
+                        'compare' => 'LIKE'
+                    ),
+                    array(
+                        'key' => 'pricing_faq_category',
+                        'value' => 'payment',
+                        'compare' => 'LIKE'
+                    ),
+                    array(
+                        'key' => 'pricing_faq_category',
+                        'compare' => 'NOT EXISTS'
+                    )
+                )
+            ));
+
+            if ($pricing_faq_query->have_posts()) :
+                while ($pricing_faq_query->have_posts()) : $pricing_faq_query->the_post(); ?>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4><?php the_title(); ?></h4>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <?php the_content(); ?>
+                        </div>
+                    </div>
+                <?php endwhile;
+            else : ?>
+                <!-- Fallback FAQ content if no Pricing FAQ posts exist -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How do you determine pricing for each service?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our pricing is based on factors like service complexity, time required, materials needed, and market rates. We provide transparent quotes before any work begins.</p>
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    <p>Our pricing is based on factors like service complexity, time required, materials needed, and market rates. We provide transparent quotes before any work begins.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Are there any hidden fees?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, we believe in complete transparency. All costs are clearly outlined in your quote, including any travel fees, materials, or additional charges.</p>
+                    </div>
                 </div>
-            </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Do you offer package deals or discounts?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer discounts for recurring services, multiple service bookings, and seasonal promotions. Contact us to learn about current offers.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What payment methods do you accept?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept cash, credit cards, debit cards, and digital payments like Venmo, PayPal, and Zelle for your convenience.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Is there a minimum service charge?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Some services have minimum charges to cover travel time and setup. These are clearly communicated during the quote process.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Can I get a custom quote for services not listed?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We're happy to provide custom quotes for unique services or special requests. Just contact us with your specific needs.</p>
+                    </div>
+                </div>
+
+                <!-- Admin notice for Pricing FAQ management -->
+                <?php if (current_user_can('manage_options')) : ?>
+                    <div class="col-12">
+                        <div class="alert alert-info mt-4" role="alert">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <strong>Admin Notice:</strong>
+                            No Pricing FAQ posts found. You can add pricing FAQ content from the
+                            <a href="<?php echo admin_url('edit.php?post_type=pricing-faq'); ?>" class="alert-link">Pricing FAQ admin panel</a>.
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>Are there any hidden fees?</h4>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>No, we believe in complete transparency. All costs are clearly outlined in your quote, including any travel fees, materials, or additional charges.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>Do you offer package deals or discounts?</h4>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes! We offer discounts for recurring services, multiple service bookings, and seasonal promotions. Contact us to learn about current offers.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>What payment methods do you accept?</h4>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>We accept cash, credit cards, debit cards, and digital payments like Venmo, PayPal, and Zelle for your convenience.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>Is there a minimum service charge?</h4>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Some services have minimum charges to cover travel time and setup. These are clearly communicated during the quote process.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h4>Can I get a custom quote for services not listed?</h4>
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    <p>Absolutely! We're happy to provide custom quotes for unique services or special requests. Just contact us with your specific needs.</p>
-                </div>
-            </div>
+            <?php wp_reset_postdata(); ?>
         </div>
     </div>
 </section>

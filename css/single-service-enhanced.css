@@ -1,0 +1,335 @@
+/* Enhanced Single Service Page Styles */
+
+/* Hero Section */
+.single-service-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    min-height: 60vh;
+    overflow: hidden;
+}
+
+.single-service-hero .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.single-service-hero .hero-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="80" r="1.2" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.8" fill="rgba(255,255,255,0.1)"/></svg>');
+    animation: float 20s ease-in-out infinite;
+}
+
+.single-service-hero .hero-gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+}
+
+.text-shadow {
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.hover-opacity-100:hover {
+    opacity: 1 !important;
+}
+
+/* Service Features Section */
+.service-features .feature-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-features .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+    z-index: 1;
+}
+
+.service-features .feature-card:hover::before {
+    left: 100%;
+}
+
+.service-features .feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.service-features .icon-wrapper {
+    transition: all 0.3s ease;
+}
+
+.service-features .feature-card:hover .icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Info Cards */
+.info-card {
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+/* Contact Form */
+.contact-form-wrapper {
+    transition: all 0.3s ease;
+}
+
+.contact-form-wrapper:hover {
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+.contact-form-wrapper .form-control:focus,
+.contact-form-wrapper .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.15);
+}
+
+/* Contact Method Cards */
+.contact-method-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.contact-method-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.contact-method-card .icon-wrapper {
+    transition: all 0.3s ease;
+}
+
+.contact-method-card:hover .icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Related Services */
+.related-services .service-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.related-services .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+    z-index: 1;
+}
+
+.related-services .service-card:hover::before {
+    left: 100%;
+}
+
+.related-services .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.related-services .service-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.related-services .service-card:hover .service-card-overlay {
+    opacity: 1;
+}
+
+.related-services .image-overlay {
+    transition: opacity 0.3s ease;
+}
+
+.related-services .service-card:hover .image-overlay {
+    opacity: 0.5;
+}
+
+/* Button Enhancements */
+.btn {
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.4);
+}
+
+.btn-outline-primary:hover {
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+.btn-success:hover {
+    box-shadow: 0 4px 15px rgba(25, 135, 84, 0.4);
+}
+
+.btn-outline-success:hover {
+    box-shadow: 0 4px 15px rgba(25, 135, 84, 0.3);
+}
+
+.btn-info:hover {
+    box-shadow: 0 4px 15px rgba(13, 202, 240, 0.4);
+}
+
+.btn-outline-info:hover {
+    box-shadow: 0 4px 15px rgba(13, 202, 240, 0.3);
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(1deg); }
+    66% { transform: translateY(5px) rotate(-1deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Section Spacing */
+.py-5 {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .single-service-hero {
+        min-height: 50vh;
+    }
+    
+    .single-service-hero h1 {
+        font-size: 2.5rem !important;
+    }
+    
+    .service-actions .btn {
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .service-meta {
+        justify-content: center;
+    }
+    
+    .service-meta .badge {
+        margin-bottom: 10px;
+    }
+    
+    .py-5 {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .single-service-hero h1 {
+        font-size: 2rem !important;
+    }
+    
+    .service-breadcrumb {
+        font-size: 0.9rem;
+    }
+    
+    .service-features .feature-card,
+    .info-card,
+    .contact-method-card {
+        margin-bottom: 20px;
+    }
+    
+    .contact-form-wrapper {
+        padding: 2rem !important;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .feature-card,
+    .info-card,
+    .contact-method-card,
+    .contact-form-wrapper {
+        background: #1a1a1a !important;
+        border-color: rgba(255,255,255,0.1);
+    }
+    
+    .feature-card:hover,
+    .info-card:hover,
+    .contact-method-card:hover {
+        border-color: rgba(102, 126, 234, 0.3);
+    }
+    
+    .service-features {
+        background: #1a1a1a !important;
+    }
+    
+    .service-contact-form {
+        background: #1a1a1a !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .single-service-hero,
+    .service-actions,
+    .service-contact-form,
+    .related-services {
+        display: none !important;
+    }
+    
+    .service-features,
+    .service-content {
+        background: white !important;
+        box-shadow: none !important;
+    }
+    
+    .feature-card,
+    .info-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+}

@@ -59,7 +59,7 @@
     </div>
 
     <!-- Main Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', 'blueprint'); ?>">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', 'blueprint'); ?>">
         <div class="container">
             <!-- Brand/Logo -->
             <div class="navbar-brand-wrapper">
@@ -89,7 +89,7 @@
                         'theme_location'  => 'primary',
                         'depth'          => 3,
                         'container'      => false,
-                        'menu_class'     => 'navbar-nav mx-auto mb-2 mb-lg-0',
+                        'menu_class'     => 'navbar-nav ms-auto mb-2 mb-lg-0',
                         'fallback_cb'    => 'blueprint_fallback_menu',
                         'walker'         => new WP_Bootstrap_Navwalker(),
                     ));
@@ -97,47 +97,9 @@
                     blueprint_fallback_menu();
                 }
                 ?>
-                
-                <!-- Header Actions -->
-                <div class="navbar-actions d-flex align-items-center">
-                    <!-- Search Toggle -->
-                    <button class="btn btn-outline-primary me-3 search-toggle" type="button" aria-expanded="false" aria-controls="search-container" aria-label="<?php esc_attr_e('Toggle Search', 'blueprint'); ?>">
-                        <i class="bi bi-search me-2"></i>
-                        <span class="d-none d-sm-inline"><?php esc_html_e('Search', 'blueprint'); ?></span>
-                    </button>
-                    
-                    <!-- CTA Button -->
-                    <?php 
-                    $contact_page = get_page_by_path('contact');
-                    if ($contact_page) :
-                    ?>
-                    <a href="<?php echo esc_url(get_permalink($contact_page)); ?>" class="btn btn-primary btn-lg">
-                        <i class="bi bi-rocket-takeoff me-2"></i>
-                        <?php esc_html_e('Get Started', 'blueprint'); ?>
-                    </a>
-                    <?php endif; ?>
-                </div>
             </div>
         </div>
     </nav>
-    
-    <!-- Search Container -->
-    <div id="search-container" class="search-container bg-light py-4 shadow-sm" style="display: none;" role="search">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <form method="get" class="search-form position-relative" action="<?php echo esc_url(home_url('/')); ?>" role="search">
-                        <label for="search-field" class="visually-hidden"><?php esc_html_e('Search for:', 'blueprint'); ?></label>
-                        <input type="search" id="search-field" class="form-control form-control-lg search-field pe-5" placeholder="<?php esc_attr_e('Search blueprints, guides, and more...', 'blueprint'); ?>" value="<?php echo get_search_query(); ?>" name="s" required>
-                        <button type="submit" class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-2 search-submit">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <button type="button" class="btn-close search-close position-absolute top-0 end-0 m-3" aria-label="<?php esc_attr_e('Close search', 'blueprint'); ?>"></button>
-        </div>
-    </div>
 </header>
 
 <main id="main" class="site-main" role="main">

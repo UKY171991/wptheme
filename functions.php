@@ -132,6 +132,8 @@ function blueprint_scripts() {
         'blueprint-footer-enhanced' => '/css/enhanced-footer-design.css',
         'blueprint-about-enhanced' => '/css/enhanced-about-page.css',
         'blueprint-service-pages' => '/css/service-pages-enhanced.css',
+        'blueprint-services-page' => '/css/page-services-enhanced.css',
+        'blueprint-single-service' => '/css/single-service-enhanced.css',
     );
     
     foreach ($css_files as $handle => $file) {
@@ -361,23 +363,28 @@ function blueprint_create_default_pages() {
     if (get_option('blueprint_pages_created') !== 'yes') {
         $pages = array(
             'services' => array(
-                'title' => 'All Blueprints',
-                'content' => 'Browse our comprehensive collection of 75 proven business blueprints.',
+                'title' => 'All Services',
+                'content' => 'Browse our comprehensive collection of professional services designed to make your life easier.',
                 'template' => 'page-services.php'
+            ),
+            'service' => array(
+                'title' => 'Service Redirect',
+                'content' => 'This page handles service redirects.',
+                'template' => 'page-service.php'
             ),
             'pricing' => array(
                 'title' => 'Pricing',
-                'content' => 'Affordable pricing for all business blueprints and startup guides.',
+                'content' => 'Affordable pricing for all services with transparent costs and no hidden fees.',
                 'template' => 'page-pricing.php'
             ),
             'about' => array(
                 'title' => 'About',
-                'content' => 'Learn about our mission to help entrepreneurs succeed with proven business blueprints.',
+                'content' => 'Learn about our mission to provide exceptional services and customer satisfaction.',
                 'template' => 'page-about.php'
             ),
             'contact' => array(
                 'title' => 'Contact',
-                'content' => 'Get in touch with us to plan your perfect business strategy.',
+                'content' => 'Get in touch with us to discuss your service needs and request a quote.',
                 'template' => 'page-contact.php'
             ),
         );
@@ -398,7 +405,65 @@ function blueprint_create_default_pages() {
             }
         }
         
+        // Create some sample service posts
+        blueprint_create_sample_services();
+        
         update_option('blueprint_pages_created', 'yes');
+    }
+}
+add_action('after_setup_theme', 'blueprint_create_default_pages');
+
+/**
+ * Create sample service posts
+ */
+function blueprint_create_sample_services() {
+    $sample_services = array(
+        'house-cleaning' => array(
+            'title' => 'House Cleaning',
+            'content' => 'Professional house cleaning services to keep your home spotless and organized.',
+            'price' => '$80-150',
+            'duration' => '2-4 hours',
+            'category' => 'cleaning'
+        ),
+        'dog-walking' => array(
+            'title' => 'Dog Walking',
+            'content' => 'Reliable dog walking services to keep your furry friends happy and healthy.',
+            'price' => '$25-40',
+            'duration' => '30-60 minutes',
+            'category' => 'pets'
+        ),
+        'virtual-assistant' => array(
+            'title' => 'Virtual Assistant',
+            'content' => 'Professional virtual assistant services for administrative tasks and business support.',
+            'price' => '$25-50/hour',
+            'duration' => 'Flexible',
+            'category' => 'digital'
+        ),
+        'graphic-design' => array(
+            'title' => 'Graphic Design',
+            'content' => 'Creative graphic design services for logos, branding, and marketing materials.',
+            'price' => '$50-200',
+            'duration' => '1-7 days',
+            'category' => 'digital'
+        )
+    );
+    
+    foreach ($sample_services as $slug => $service_data) {
+        if (!get_page_by_path($slug, OBJECT, 'service')) {
+            $post_id = wp_insert_post(array(
+                'post_title'   => $service_data['title'],
+                'post_content' => $service_data['content'],
+                'post_status'  => 'publish',
+                'post_type'    => 'service',
+                'post_name'    => $slug
+            ));
+            
+            if ($post_id) {
+                update_post_meta($post_id, 'service_price', $service_data['price']);
+                update_post_meta($post_id, 'service_duration', $service_data['duration']);
+                update_post_meta($post_id, 'service_category', $service_data['category']);
+            }
+        }
     }
 }
 add_action('after_setup_theme', 'blueprint_create_default_pages');
@@ -541,6 +606,21 @@ function blueprint_editor_color_palette() {
             'color' => '#764ba2',
         ),
         array(
+            'name'  => __('Success Green', 'blueprint'),
+            'slug'  => 'success-green',
+            'color' => '#198754',
+        ),
+        array(
+            'name'  => __('Warning Yellow', 'blueprint'),
+            'slug'  => 'warning-yellow',
+            'color' => '#ffc107',
+        ),
+        array(
+            'name'  => __('Danger Red', 'blueprint'),
+            'slug'  => 'danger-red',
+            'color' => '#dc3545',
+        ),
+        array(
             'name'  => __('Dark Gray', 'blueprint'),
             'slug'  => 'dark-gray',
             'color' => '#1e293b',
@@ -553,6 +633,92 @@ function blueprint_editor_color_palette() {
     ));
 }
 add_action('after_setup_theme', 'blueprint_editor_color_palette');
+
+/**
+ * Add custom meta boxes for service posts
+ */
+function blueprint_add_service_meta_boxes() {
+    add_meta_box(
+        'service-details',
+        'Service Details',
+        'blueprint_service_details_callback',
+        'service',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'blueprint_add_service_meta_boxes');
+
+/**
+ * Service details meta box callback
+ */
+function blueprint_service_details_callback($post) {
+    wp_nonce_field('blueprint_service_meta', 'blueprint_service_meta_nonce');
+    
+    $price = get_post_meta($post->ID, 'service_price', true);
+    $duration = get_post_meta($post->ID, 'service_duration', true);
+    $category = get_post_meta($post->ID, 'service_category', true);
+    ?>
+    <table class="form-table">
+        <tr>
+            <th><label for="service_price">Service Price</label></th>
+            <td><input type="text" id="service_price" name="service_price" value="<?php echo esc_attr($price); ?>" class="regular-text" placeholder="e.g., $50-100 or $25/hour" /></td>
+        </tr>
+        <tr>
+            <th><label for="service_duration">Duration</label></th>
+            <td><input type="text" id="service_duration" name="service_duration" value="<?php echo esc_attr($duration); ?>" class="regular-text" placeholder="e.g., 2-3 hours or 1 day" /></td>
+        </tr>
+        <tr>
+            <th><label for="service_category">Category</label></th>
+            <td>
+                <select id="service_category" name="service_category">
+                    <option value="">Select Category</option>
+                    <option value="cleaning" <?php selected($category, 'cleaning'); ?>>Cleaning</option>
+                    <option value="maintenance" <?php selected($category, 'maintenance'); ?>>Maintenance</option>
+                    <option value="personal" <?php selected($category, 'personal'); ?>>Personal</option>
+                    <option value="pets" <?php selected($category, 'pets'); ?>>Pets</option>
+                    <option value="family" <?php selected($category, 'family'); ?>>Family</option>
+                    <option value="digital" <?php selected($category, 'digital'); ?>>Digital</option>
+                    <option value="coaching" <?php selected($category, 'coaching'); ?>>Coaching</option>
+                    <option value="admin" <?php selected($category, 'admin'); ?>>Admin</option>
+                    <option value="selling" <?php selected($category, 'selling'); ?>>Selling</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <?php
+}
+
+/**
+ * Save service meta data
+ */
+function blueprint_save_service_meta($post_id) {
+    if (!isset($_POST['blueprint_service_meta_nonce']) || 
+        !wp_verify_nonce($_POST['blueprint_service_meta_nonce'], 'blueprint_service_meta')) {
+        return;
+    }
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    if (isset($_POST['service_price'])) {
+        update_post_meta($post_id, 'service_price', sanitize_text_field($_POST['service_price']));
+    }
+
+    if (isset($_POST['service_duration'])) {
+        update_post_meta($post_id, 'service_duration', sanitize_text_field($_POST['service_duration']));
+    }
+
+    if (isset($_POST['service_category'])) {
+        update_post_meta($post_id, 'service_category', sanitize_text_field($_POST['service_category']));
+    }
+}
+add_action('save_post', 'blueprint_save_service_meta');
 
 /**
  * Security enhancements
@@ -597,3 +763,233 @@ function blueprint_excerpt_more($more) {
     return '...';
 }
 add_filter('excerpt_more', 'blueprint_excerpt_more');
+
+/**
+ * Register FAQ Custom Post Type
+ */
+function blueprint_register_faq_post_type() {
+    $labels = array(
+        'name'                  => 'General FAQs',
+        'singular_name'         => 'FAQ',
+        'menu_name'             => 'General FAQs',
+        'name_admin_bar'        => 'FAQ',
+        'archives'              => 'FAQ Archives',
+        'attributes'            => 'FAQ Attributes',
+        'parent_item_colon'     => 'Parent FAQ:',
+        'all_items'             => 'All FAQs',
+        'add_new_item'          => 'Add New FAQ',
+        'add_new'               => 'Add New',
+        'new_item'              => 'New FAQ',
+        'edit_item'             => 'Edit FAQ',
+        'update_item'           => 'Update FAQ',
+        'view_item'             => 'View FAQ',
+        'view_items'            => 'View FAQs',
+        'search_items'          => 'Search FAQs',
+        'not_found'             => 'Not found',
+        'not_found_in_trash'    => 'Not found in Trash',
+    );
+    
+    $args = array(
+        'label'                 => 'FAQ',
+        'description'           => 'General FAQ items for contact page',
+        'labels'                => $labels,
+        'supports'              => array('title', 'editor', 'page-attributes'),
+        'hierarchical'          => false,
+        'public'                => false,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 25,
+        'menu_icon'             => 'dashicons-editor-help',
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => false,
+        'can_export'            => true,
+        'has_archive'           => false,
+        'exclude_from_search'   => true,
+        'publicly_queryable'    => false,
+        'capability_type'       => 'post',
+        'show_in_rest'          => true,
+    );
+    
+    register_post_type('faq', $args);
+}
+add_action('init', 'blueprint_register_faq_post_type', 0);
+
+/**
+ * Register Pricing FAQ Custom Post Type
+ */
+function blueprint_register_pricing_faq_post_type() {
+    $labels = array(
+        'name'                  => 'Pricing FAQs',
+        'singular_name'         => 'Pricing FAQ',
+        'menu_name'             => 'Pricing FAQs',
+        'name_admin_bar'        => 'Pricing FAQ',
+        'archives'              => 'Pricing FAQ Archives',
+        'attributes'            => 'Pricing FAQ Attributes',
+        'parent_item_colon'     => 'Parent Pricing FAQ:',
+        'all_items'             => 'All Pricing FAQs',
+        'add_new_item'          => 'Add New Pricing FAQ',
+        'add_new'               => 'Add New',
+        'new_item'              => 'New Pricing FAQ',
+        'edit_item'             => 'Edit Pricing FAQ',
+        'update_item'           => 'Update Pricing FAQ',
+        'view_item'             => 'View Pricing FAQ',
+        'view_items'            => 'View Pricing FAQs',
+        'search_items'          => 'Search Pricing FAQs',
+        'not_found'             => 'Not found',
+        'not_found_in_trash'    => 'Not found in Trash',
+    );
+    
+    $args = array(
+        'label'                 => 'Pricing FAQ',
+        'description'           => 'Pricing FAQ items for pricing page',
+        'labels'                => $labels,
+        'supports'              => array('title', 'editor', 'page-attributes'),
+        'hierarchical'          => false,
+        'public'                => false,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 26,
+        'menu_icon'             => 'dashicons-money-alt',
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => false,
+        'can_export'            => true,
+        'has_archive'           => false,
+        'exclude_from_search'   => true,
+        'publicly_queryable'    => false,
+        'capability_type'       => 'post',
+        'show_in_rest'          => true,
+    );
+    
+    register_post_type('pricing_faq', $args);
+}
+add_action('init', 'blueprint_register_pricing_faq_post_type', 0);
+
+/**
+ * Create sample FAQ posts
+ */
+function blueprint_create_sample_faqs() {
+    if (get_option('blueprint_faqs_created') !== 'yes') {
+        // General FAQs
+        $general_faqs = array(
+            array(
+                'title' => 'How do I get started?',
+                'content' => 'Getting started is easy! Simply browse our services, select what you need, and contact us for a free consultation. We\'ll discuss your requirements and provide a detailed quote.'
+            ),
+            array(
+                'title' => 'Are your services insured?',
+                'content' => 'Yes, all our services are fully insured and bonded. We maintain comprehensive liability insurance to protect both our clients and service providers.'
+            ),
+            array(
+                'title' => 'What areas do you serve?',
+                'content' => 'We currently serve the greater metropolitan area and surrounding suburbs. Contact us to confirm service availability in your specific location.'
+            ),
+            array(
+                'title' => 'Can I schedule recurring services?',
+                'content' => 'Absolutely! Many of our services can be scheduled on a recurring basis - weekly, bi-weekly, monthly, or custom schedules to fit your needs.'
+            ),
+            array(
+                'title' => 'What if I\'m not satisfied?',
+                'content' => 'We offer a 100% satisfaction guarantee. If you\'re not completely happy with our service, we\'ll make it right or provide a full refund.'
+            )
+        );
+        
+        foreach ($general_faqs as $faq) {
+            wp_insert_post(array(
+                'post_title'   => $faq['title'],
+                'post_content' => $faq['content'],
+                'post_status'  => 'publish',
+                'post_type'    => 'faq',
+                'menu_order'   => 0
+            ));
+        }
+        
+        // Pricing FAQs
+        $pricing_faqs = array(
+            array(
+                'title' => 'How is pricing determined?',
+                'content' => 'Our pricing is based on the type of service, duration, complexity, and any special requirements. We provide transparent, upfront pricing with no hidden fees.'
+            ),
+            array(
+                'title' => 'Do you offer package deals?',
+                'content' => 'Yes! We offer discounted package deals for multiple services and recurring customers. Contact us to learn about current promotions and bundle options.'
+            ),
+            array(
+                'title' => 'What payment methods do you accept?',
+                'content' => 'We accept all major credit cards, debit cards, bank transfers, and cash payments. Payment is typically due upon completion of service.'
+            ),
+            array(
+                'title' => 'Are there any additional fees?',
+                'content' => 'Our quoted prices include everything needed to complete the service. Any additional fees (such as rush service or special materials) will be discussed and approved before work begins.'
+            ),
+            array(
+                'title' => 'Can I get a custom quote?',
+                'content' => 'Absolutely! Every project is unique, and we\'re happy to provide custom quotes based on your specific needs and requirements. Contact us for a free consultation.'
+            )
+        );
+        
+        foreach ($pricing_faqs as $faq) {
+            wp_insert_post(array(
+                'post_title'   => $faq['title'],
+                'post_content' => $faq['content'],
+                'post_status'  => 'publish',
+                'post_type'    => 'pricing_faq',
+                'menu_order'   => 0
+            ));
+        }
+        
+        update_option('blueprint_faqs_created', 'yes');
+    }
+}
+add_action('after_setup_theme', 'blueprint_create_sample_faqs');
+
+/**
+ * Add CSS for clickable category cards
+ */
+function blueprint_add_category_card_styles() {
+    ?>
+    <style>
+    .category-card-hover {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .category-card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    .category-card-hover .category-arrow {
+        transition: transform 0.3s ease;
+    }
+    
+    .category-card-hover:hover .category-arrow {
+        transform: translateX(5px);
+    }
+    
+    .category-card-hover::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: left 0.5s;
+        z-index: 1;
+    }
+    
+    .category-card-hover:hover::before {
+        left: 100%;
+    }
+    
+    .social-links a:hover {
+        color: #667eea !important;
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+    }
+    </style>
+    <?php
+}
+add_action('wp_head', 'blueprint_add_category_card_styles');

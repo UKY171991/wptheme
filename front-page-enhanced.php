@@ -201,69 +201,69 @@ get_header();
                     'title' => 'Home & Cleaning Services',
                     'description' => 'Professional cleaning and home maintenance services',
                     'count' => '10 Services',
-                    'url' => home_url('/services/?filter=cleaning'),
-                    'color' => 'primary'
+                    'link' => home_url('/services/?category=home-cleaning'),
+                    'slug' => 'home-cleaning'
                 ),
                 array(
                     'icon' => 'bi-palette',
                     'title' => 'Creative & Digital Services',
                     'description' => 'Creative and digital solutions for businesses',
                     'count' => '10 Services',
-                    'url' => home_url('/services/?filter=digital'),
-                    'color' => 'success'
+                    'link' => home_url('/services/?category=creative-digital'),
+                    'slug' => 'creative-digital'
                 ),
                 array(
                     'icon' => 'bi-briefcase',
                     'title' => 'Office & Admin Services',
                     'description' => 'Administrative and office support services',
                     'count' => '10 Services',
-                    'url' => home_url('/services/?filter=office'),
-                    'color' => 'info'
+                    'link' => home_url('/services/?category=office-admin'),
+                    'slug' => 'office-admin'
                 ),
                 array(
                     'icon' => 'bi-heart',
                     'title' => 'Child & Family Support',
                     'description' => 'Supporting families with childcare services',
                     'count' => '5 Services',
-                    'url' => home_url('/services/?filter=family'),
-                    'color' => 'warning'
+                    'link' => home_url('/services/?category=family-support'),
+                    'slug' => 'family-support'
                 ),
                 array(
                     'icon' => 'bi-mortarboard',
                     'title' => 'Coaching & Consulting',
                     'description' => 'Professional coaching and consulting services',
                     'count' => '8 Services',
-                    'url' => home_url('/services/?filter=coaching'),
-                    'color' => 'secondary'
+                    'link' => home_url('/services/?category=coaching-consulting'),
+                    'slug' => 'coaching-consulting'
                 ),
                 array(
                     'icon' => 'bi-paw',
                     'title' => 'Pet & Animal Services',
                     'description' => 'Caring and professional pet services',
                     'count' => '7 Services',
-                    'url' => home_url('/services/?filter=pets'),
-                    'color' => 'danger'
+                    'link' => home_url('/services/?category=pet-services'),
+                    'slug' => 'pet-services'
                 )
             );
 
             foreach ($popular_categories as $category) :
             ?>
             <div class="col-lg-4 col-md-6">
-                <a href="<?php echo esc_url($category['url']); ?>" class="text-decoration-none">
-                    <div class="service-preview-card bg-white border-radius-custom shadow-custom p-4 h-100 category-card-hover">
+                <a href="<?php echo esc_url($category['link']); ?>" class="text-decoration-none category-link" data-category="<?php echo esc_attr($category['slug']); ?>">
+                    <div class="service-preview-card bg-white border-radius-custom shadow-custom p-4 h-100 category-card">
                         <div class="d-flex align-items-start">
                             <div class="service-icon me-3">
-                                <div class="icon-wrapper bg-<?php echo esc_attr($category['color']); ?> bg-opacity-10 text-<?php echo esc_attr($category['color']); ?> d-flex align-items-center justify-content-center rounded-circle" style="width: 50px; height: 50px;">
+                                <div class="icon-wrapper bg-gradient-primary text-white d-flex align-items-center justify-content-center rounded-circle" style="width: 50px; height: 50px;">
                                     <i class="<?php echo esc_attr($category['icon']); ?> fs-5"></i>
                                 </div>
                             </div>
                             <div class="service-content flex-grow-1">
                                 <h5 class="fw-bold mb-2 text-dark"><?php echo esc_html($category['title']); ?></h5>
                                 <p class="text-muted mb-2"><?php echo esc_html($category['description']); ?></p>
-                                <span class="badge bg-<?php echo esc_attr($category['color']); ?> bg-opacity-10 text-<?php echo esc_attr($category['color']); ?>"><?php echo esc_html($category['count']); ?></span>
+                                <span class="badge bg-light text-primary"><?php echo esc_html($category['count']); ?></span>
                             </div>
-                            <div class="category-arrow">
-                                <i class="bi bi-arrow-right text-<?php echo esc_attr($category['color']); ?>"></i>
+                            <div class="service-arrow">
+                                <i class="bi bi-arrow-right text-primary"></i>
                             </div>
                         </div>
                     </div>
