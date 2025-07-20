@@ -124,6 +124,7 @@ function blueprint_scripts() {
     // Enqueue theme-specific CSS files (only essential ones)
     $css_files = array(
         'blueprint-layout' => '/css/layout-improvements.css',
+        'blueprint-enhanced-layouts' => '/css/enhanced-layouts.css',
         'blueprint-menu' => '/css/bootstrap-menu-ml.css',
         'blueprint-responsive' => '/css/responsive-enhancements.css',
         'blueprint-theme-fixes' => '/css/theme-layout-fixes.css',
@@ -401,6 +402,128 @@ function blueprint_create_default_pages() {
     }
 }
 add_action('after_setup_theme', 'blueprint_create_default_pages');
+
+/**
+ * Register Service Custom Post Type
+ */
+function blueprint_register_service_post_type() {
+    $labels = array(
+        'name'                  => 'Services',
+        'singular_name'         => 'Service',
+        'menu_name'             => 'Services',
+        'name_admin_bar'        => 'Service',
+        'archives'              => 'Service Archives',
+        'attributes'            => 'Service Attributes',
+        'parent_item_colon'     => 'Parent Service:',
+        'all_items'             => 'All Services',
+        'add_new_item'          => 'Add New Service',
+        'add_new'               => 'Add New',
+        'new_item'              => 'New Service',
+        'edit_item'             => 'Edit Service',
+        'update_item'           => 'Update Service',
+        'view_item'             => 'View Service',
+        'view_items'            => 'View Services',
+        'search_items'          => 'Search Services',
+        'not_found'             => 'Not found',
+        'not_found_in_trash'    => 'Not found in Trash',
+    );
+    
+    $args = array(
+        'label'                 => 'Service',
+        'description'           => 'Service pages for the website',
+        'labels'                => $labels,
+        'supports'              => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields'),
+        'hierarchical'          => false,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 20,
+        'menu_icon'             => 'dashicons-admin-tools',
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => false,
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'rewrite'               => array(
+            'slug'                  => 'services',
+            'with_front'            => false,
+        ),
+        'capability_type'       => 'post',
+        'show_in_rest'          => true,
+    );
+    
+    register_post_type('service', $args);
+}
+add_action('init', 'blueprint_register_service_post_type', 0);
+
+/**
+ * Add custom rewrite rules for service pages
+ */
+function blueprint_custom_rewrite_rules() {
+    add_rewrite_rule('^service/([^/]*)/.*$', 'index.php?service=$matches[1]', 'top');
+    add_rewrite_rule('^service/([^/]*)/?$', 'index.php?service=$matches[1]', 'top');
+}
+add_action('init', 'blueprint_custom_rewrite_rules');
+
+/**
+ * Add query vars for custom post types
+ */
+function blueprint_query_vars($vars) {
+    $vars[] = 'service';
+    return $vars;
+}
+add_filter('query_vars', 'blueprint_query_vars');
+
+/**
+ * Custom template redirect for service pages
+ */
+function blueprint_template_redirect() {
+    global $wp_query;
+    
+    if (get_query_var('service')) {
+        $service_slug = get_query_var('service');
+        
+        // Check if it's a custom service page template
+        $template_file = get_template_directory() . '/single-' . $service_slug . '.php';
+        if (file_exists($template_file)) {
+            include($template_file);
+            exit;
+        }
+        
+        // Check if it's a service post
+        $service_post = get_page_by_path($service_slug, OBJECT, 'service');
+        if ($service_post) {
+            global $post;
+            $post = $service_post;
+            setup_postdata($post);
+            
+            // Load single-service.php if it exists, otherwise single.php
+            $template = locate_template(array('single-service.php', 'single.php'));
+            if ($template) {
+                include($template);
+                exit;
+            }
+        }
+        
+        // If no template found, show 404
+        global $wp_query;
+        $wp_query->set_404();
+        status_header(404);
+        include(get_404_template());
+        exit;
+    }
+}
+add_action('template_redirect', 'blueprint_template_redirect');
+
+/**
+ * Flush rewrite rules on theme activation
+ */
+function blueprint_flush_rewrite_rules() {
+    blueprint_register_service_post_type();
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'blueprint_flush_rewrite_rules');
 
 /**
  * Add theme support for editor color palette

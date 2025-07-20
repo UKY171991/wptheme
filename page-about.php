@@ -7,15 +7,6 @@
  * @package Blueprint
  */
 
-<?php
-/**
- * Template Name: About Page
- * 
- * The template for displaying the about page with enhanced design
- *
- * @package Blueprint
- */
-
 get_header(); ?>
 
 <div class="about-page-wrapper">
