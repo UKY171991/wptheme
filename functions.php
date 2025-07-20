@@ -123,6 +123,7 @@ function blueprint_scripts() {
         'blueprint-layout' => '/css/layout-improvements.css',
         'blueprint-menu' => '/css/bootstrap-menu-ml.css',
         'blueprint-responsive' => '/css/responsive-enhancements.css',
+        'blueprint-theme-fixes' => '/css/theme-layout-fixes.css',
     );
     
     foreach ($css_files as $handle => $file) {
@@ -242,10 +243,51 @@ add_action('widgets_init', 'blueprint_widgets_init');
  * Customizer additions
  */
 function blueprint_customize_register($wp_customize) {
+    // Add Hero Section
+    $wp_customize->add_section('blueprint_hero', array(
+        'title'    => __('Hero Section', 'blueprint'),
+        'priority' => 30,
+    ));
+    
+    // Hero Title
+    $wp_customize->add_setting('hero_title', array(
+        'default'           => '75 Proven Business Blueprints',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    
+    $wp_customize->add_control('hero_title', array(
+        'label'   => __('Hero Title', 'blueprint'),
+        'section' => 'blueprint_hero',
+        'type'    => 'text',
+    ));
+    
+    // Hero Subtitle
+    $wp_customize->add_setting('hero_subtitle', array(
+        'default'           => 'Discover profitable business opportunities with detailed startup guides, cost analysis, and step-by-step implementation plans.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    
+    $wp_customize->add_control('hero_subtitle', array(
+        'label'   => __('Hero Subtitle', 'blueprint'),
+        'section' => 'blueprint_hero',
+        'type'    => 'textarea',
+    ));
+    
+    // Hero Image
+    $wp_customize->add_setting('hero_image', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'hero_image', array(
+        'label'   => __('Hero Image', 'blueprint'),
+        'section' => 'blueprint_hero',
+    )));
+    
     // Add contact information section
     $wp_customize->add_section('blueprint_contact', array(
         'title'    => __('Contact Information', 'blueprint'),
-        'priority' => 30,
+        'priority' => 35,
     ));
     
     // Contact Phone
