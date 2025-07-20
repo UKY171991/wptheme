@@ -56,3 +56,30 @@ get_header(); ?>
 
 <?php
 get_footer();
+                                echo '<p>Welcome to our Services page. We offer comprehensive party rental services.</p>';
+                                break;
+                            case 'pricing':
+                                echo '<p>Check out our competitive pricing packages for all event sizes.</p>';
+                                break;
+                            case 'contact':
+                                echo '<p>Get in touch with us to plan your perfect event.</p>';
+                                break;
+                            case 'about':
+                                echo '<p>Learn more about our party rental business.</p>';
+                                break;
+                            default:
+                                echo '<p>Welcome to ' . get_the_title() . '</p>';
+                        }
+                    }
+                    ?>
+                </div>
+            <?php endwhile; ?>
+            
+        <?php else : ?>
+            <h1>Page not found</h1>
+            <p>Sorry, the page you are looking for could not be found.</p>
+        <?php endif; ?>
+    </div>
+</div>
+
+<?php get_footer(); ?>
