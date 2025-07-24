@@ -445,124 +445,6 @@ function services_pro_display_menu_items_without_categories($posts_per_page = -1
 }
 
 /**
- * Display services with categories
- */
-function services_pro_display_services($posts_per_page = -1) {
-    $services = new WP_Query(array(
-        'post_type' => 'service',
-        'posts_per_page' => $posts_per_page,
-        'post_status' => 'publish',
-        'orderby' => 'menu_order',
-        'order' => 'ASC'
-    ));
-    
-    if (!$services->have_posts()) {
-        echo '<p class="text-muted">No services found.</p>';
-        return;
-    }
-    
-    ob_start();
-    ?>
-    <div class="row g-4">
-        <?php while ($services->have_posts()): $services->the_post(); ?>
-            <div class="col-lg-4 col-md-6">
-                <div class="service-card h-100 p-4 bg-white rounded shadow-sm border">
-                    <?php if (has_post_thumbnail()): ?>
-                        <div class="service-image mb-3">
-                            <?php the_post_thumbnail('service-thumbnail', array('class' => 'rounded w-100')); ?>
-                        </div>
-                    <?php endif; ?>
-                    
-                    <h3 class="h5 mb-3 text-primary-dark"><?php the_title(); ?></h3>
-                    
-                    <p class="text-muted mb-3"><?php echo wp_trim_words(get_the_excerpt(), 15); ?></p>
-                    
-                    <a href="<?php the_permalink(); ?>" class="btn btn-outline-accent btn-sm">
-                        Learn More <i class="fas fa-arrow-right ms-1"></i>
-                    </a>
-                </div>
-            </div>
-        <?php endwhile; wp_reset_postdata(); ?>
-    </div>
-    <?php
-    echo ob_get_clean();
-}
-
-/**
- * Display FAQs with categories
- */
-function services_pro_display_faqs($posts_per_page = -1) {
-    // Get all FAQ categories
-    $categories = get_terms(array(
-        'taxonomy' => 'faq_category',
-        'hide_empty' => true,
-        'orderby' => 'name',
-        'order' => 'ASC'
-    ));
-    
-    if (empty($categories) || is_wp_error($categories)) {
-        // If no categories, show all FAQs
-        services_pro_display_faqs_without_categories($posts_per_page);
-        return;
-    }
-    
-    ob_start();
-    ?>
-    <div class="faq-display">
-        <?php foreach ($categories as $category): ?>
-            <div class="faq-category-section mb-5">
-                <h3 class="h4 text-accent mb-4 border-bottom pb-2">
-                    <i class="fas fa-question-circle me-2"></i><?php echo esc_html($category->name); ?>
-                </h3>
-                
-                <div class="accordion" id="faq-category-<?php echo $category->term_id; ?>">
-                    <?php
-                    $faqs = new WP_Query(array(
-                        'post_type' => 'faq',
-                        'posts_per_page' => $posts_per_page,
-                        'post_status' => 'publish',
-                        'tax_query' => array(
-                            array(
-                                'taxonomy' => 'faq_category',
-                                'field' => 'term_id',
-                                'terms' => $category->term_id,
-                            ),
-                        ),
-                        'orderby' => 'menu_order',
-                        'order' => 'ASC'
-                    ));
-                    
-                    if ($faqs->have_posts()):
-                        $faq_count = 0;
-                        while ($faqs->have_posts()): $faqs->the_post();
-                            $faq_count++;
-                            $accordion_id = 'faq-' . $category->term_id . '-' . $faq_count;
-                            ?>
-                            <div class="accordion-item">
-                                <h4 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $accordion_id; ?>" aria-expanded="false">
-                                        <?php the_title(); ?>
-                                    </button>
-                                </h4>
-                                <div id="<?php echo $accordion_id; ?>" class="accordion-collapse collapse" data-bs-parent="#faq-category-<?php echo $category->term_id; ?>">
-                                    <div class="accordion-body">
-                                        <?php the_content(); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                        endwhile;
-                        wp_reset_postdata();
-                    endif; ?>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-    <?php
-    echo ob_get_clean();
-}
-
-/**
  * Display FAQs without categories
  */
 function services_pro_display_faqs_without_categories($posts_per_page = -1) {
@@ -601,6 +483,97 @@ function services_pro_display_faqs_without_categories($posts_per_page = -1) {
                 </div>
             </div>
         <?php endwhile; wp_reset_postdata(); ?>
+    </div>
+    <?php
+    echo ob_get_clean();
+}
+
+/**
+ * Display service categories in grid format
+ */
+function services_pro_display_service_categories($posts_per_page = -1) {
+    // Get all service categories
+    $categories = get_terms(array(
+        'taxonomy' => 'service_category',
+        'hide_empty' => true,
+        'orderby' => 'name',
+        'order' => 'ASC'
+    ));
+    
+    if (empty($categories) || is_wp_error($categories)) {
+        echo '<p class="text-muted">No service categories found.</p>';
+        return;
+    }
+    
+    ob_start();
+    ?>
+    <div class="row g-4">
+        <?php foreach ($categories as $category): ?>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-category-card h-100 bg-white rounded-3 shadow-sm border-0 overflow-hidden position-relative">
+                    <?php
+                    // Get category image (if using ACF or custom fields)
+                    $category_image = get_term_meta($category->term_id, 'category_image', true);
+                    if (!$category_image) {
+                        // Fallback icons based on category name
+                        $icons = array(
+                            'cleaning' => 'fas fa-broom',
+                            'maintenance' => 'fas fa-tools',
+                            'plumbing' => 'fas fa-wrench',
+                            'electrical' => 'fas fa-bolt',
+                            'gardening' => 'fas fa-seedling',
+                            'painting' => 'fas fa-paint-roller',
+                            'repair' => 'fas fa-hammer',
+                            'installation' => 'fas fa-cogs',
+                            'default' => 'fas fa-home'
+                        );
+                        
+                        $category_slug = $category->slug;
+                        $icon_class = 'fas fa-home'; // default
+                        
+                        foreach ($icons as $key => $icon) {
+                            if (strpos($category_slug, $key) !== false) {
+                                $icon_class = $icon;
+                                break;
+                            }
+                        }
+                    }
+                    ?>
+                    
+                    <?php if ($category_image): ?>
+                        <div class="category-image">
+                            <img src="<?php echo esc_url($category_image); ?>" alt="<?php echo esc_attr($category->name); ?>" class="w-100" style="height: 200px; object-fit: cover;">
+                        </div>
+                    <?php else: ?>
+                        <div class="category-icon-header bg-accent-light p-4 text-center">
+                            <i class="<?php echo esc_attr($icon_class); ?> text-accent" style="font-size: 3rem;"></i>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <div class="card-body p-4">
+                        <h3 class="h5 mb-3 text-primary-dark">
+                            <a href="<?php echo esc_url(get_term_link($category)); ?>" class="text-decoration-none text-primary-dark stretched-link">
+                                <?php echo esc_html($category->name); ?>
+                            </a>
+                        </h3>
+                        
+                        <?php if ($category->description): ?>
+                            <p class="text-muted mb-3"><?php echo esc_html($category->description); ?></p>
+                        <?php endif; ?>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-accent fw-bold small">
+                                <?php echo esc_html($category->count); ?> 
+                                <?php echo _n('Service', 'Services', $category->count, 'services-pro'); ?>
+                            </span>
+                            <span class="text-accent">
+                                <i class="fas fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
     <?php
     echo ob_get_clean();

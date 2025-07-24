@@ -14,17 +14,38 @@ get_header(); ?>
     );
     ?>
 
-    <!-- Services Grid Section -->
-    <section id="services-grid" class="section">
+    <!-- Services Categories Section -->
+    <section id="services-categories" class="section">
         <div class="container">
             <?php echo services_pro_get_section_heading(
-                'Professional Services',
-                'Choose from our comprehensive range of home services'
+                'Service Categories',
+                'Explore our comprehensive range of professional home services'
+            ); ?>
+            
+            <!-- Service Categories Display -->
+            <div class="service-categories-content">
+                <?php services_pro_display_service_categories(); ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- Individual Services Section -->
+    <section id="services-grid" class="section bg-light">
+        <div class="container">
+            <?php echo services_pro_get_section_heading(
+                'Featured Services',
+                'Our most popular professional services'
             ); ?>
             
             <!-- Services Display -->
             <div class="services-content">
-                <?php services_pro_display_services(); ?>
+                <?php services_pro_display_services(6); ?>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>" class="btn btn-accent btn-lg px-5">
+                    <i class="fas fa-list me-2"></i>View All Services
+                </a>
             </div>
         </div>
     </section>
@@ -107,7 +128,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-    <?php endif; ?>
 
     <!-- Process Section -->
     <section class="section">

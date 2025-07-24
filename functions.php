@@ -461,66 +461,6 @@ function services_pro_display_faqs($limit = -1, $category = '') {
 }
 
 /**
- * Display menu items by category
- */
-function services_pro_display_menu_items($category = '', $limit = -1) {
-    $args = array(
-        'post_type' => 'menu_item',
-        'posts_per_page' => $limit,
-        'post_status' => 'publish'
-    );
-    
-    if (!empty($category)) {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => 'menu_category',
-                'field'    => 'slug',
-                'terms'    => $category,
-            ),
-        );
-    }
-    
-    $menu_items = new WP_Query($args);
-    
-    if ($menu_items->have_posts()) :
-        ?>
-        <div class="row g-4">
-            <?php while ($menu_items->have_posts()) : $menu_items->the_post(); ?>
-                <div class="col-lg-6">
-                    <div class="menu-item d-flex align-items-start p-3 border rounded bg-white shadow-sm">
-                        <?php if (has_post_thumbnail()) : ?>
-                            <div class="menu-item-image me-3 flex-shrink-0">
-                                <?php the_post_thumbnail('thumbnail', array('class' => 'rounded', 'style' => 'width: 80px; height: 80px; object-fit: cover;')); ?>
-                            </div>
-                        <?php endif; ?>
-                        
-                        <div class="menu-item-content flex-grow-1">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h4 class="h6 mb-0 text-dark">
-                                    <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
-                                        <?php the_title(); ?>
-                                    </a>
-                                </h4>
-                                <?php
-                                $price = get_post_meta(get_the_ID(), 'menu_item_price', true);
-                                if ($price) :
-                                ?>
-                                    <span class="price fw-bold text-accent">$<?php echo esc_html($price); ?></span>
-                                <?php endif; ?>
-                            </div>
-                            
-                            <p class="text-muted small mb-0"><?php echo wp_trim_words(get_the_excerpt(), 12); ?></p>
-                        </div>
-                    </div>
-                </div>
-            <?php endwhile; ?>
-        </div>
-        <?php
-    endif;
-    wp_reset_postdata();
-}
-
-/**
  * Enqueue scripts and styles
  */
 function services_pro_scripts() {

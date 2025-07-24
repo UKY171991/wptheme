@@ -8,26 +8,172 @@ get_header(); ?>
 <main id="main" class="site-main">
     <?php while (have_posts()) : the_post(); ?>
         
-        <!-- Hero Section -->
-        <section class="hero-section bg-primary-dark text-white py-5">
+        <?php
+        // Page Banner with service title
+        echo services_pro_get_banner_section(
+            get_the_title(),
+            has_excerpt() ? get_the_excerpt() : 'Professional service details and booking information'
+        );
+        ?>
+
+        <!-- Service Details Section -->
+        <section class="section">
             <div class="container">
-                <div class="row align-items-center">
+                <div class="row">
                     <div class="col-lg-8">
-                        <nav aria-label="breadcrumb" class="mb-3">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="<?php echo esc_url(home_url('/')); ?>" class="text-white-50">Home</a>
-                                </li>
-                                <li class="breadcrumb-item">
-                                    <a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>" class="text-white-50">Services</a>
-                                </li>
-                                <li class="breadcrumb-item active text-white" aria-current="page"><?php the_title(); ?></li>
-                            </ol>
-                        </nav>
-                        <h1 class="display-4 fw-bold mb-3"><?php the_title(); ?></h1>
-                        <?php if (has_excerpt()) : ?>
-                            <p class="lead text-white-75"><?php the_excerpt(); ?></p>
-                        <?php endif; ?>
+                        <!-- Service Content -->
+                        <div class="service-content">
+                            <?php if (has_post_thumbnail()): ?>
+                                <div class="service-featured-image mb-4">
+                                    <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded-3 w-100')); ?>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="content-wrapper">
+                                <?php the_content(); ?>
+                            </div>
+                            
+                            <?php
+                            // Service Categories
+                            $service_categories = get_the_terms(get_the_ID(), 'service_category');
+                            if ($service_categories && !is_wp_error($service_categories)):
+                            ?>
+                                <div class="service-categories mt-4 pt-4 border-top">
+                                    <h4 class="h6 mb-3">Service Categories:</h4>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <?php foreach ($service_categories as $category): ?>
+                                            <a href="<?php echo esc_url(get_term_link($category)); ?>" class="badge bg-accent-light text-accent text-decoration-none fs-6 px-3 py-2">
+                                                <?php echo esc_html($category->name); ?>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <!-- Service Sidebar -->
+                        <div class="service-sidebar">
+                            <!-- Service Info Card -->
+                            <div class="card bg-accent-light border-0 mb-4">
+                                <div class="card-body p-4">
+                                    <h3 class="h5 mb-3 text-accent">Service Information</h3>
+                                    
+                                    <?php
+                                    // Get service price
+                                    $price = get_post_meta(get_the_ID(), 'service_price', true);
+                                    if ($price):
+                                    ?>
+                                        <div class="service-price mb-3">
+                                            <span class="text-muted small">Starting from</span>
+                                            <div class="h4 text-accent mb-0">$<?php echo esc_html($price); ?></div>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <?php
+                                    // Get service duration
+                                    $duration = get_post_meta(get_the_ID(), 'service_duration', true);
+                                    if ($duration):
+                                    ?>
+                                        <div class="service-duration mb-3">
+                                            <i class="fas fa-clock text-accent me-2"></i>
+                                            <strong>Duration:</strong> <?php echo esc_html($duration); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-accent w-100 mb-2">
+                                        <i class="fas fa-calendar-check me-2"></i>Book Service
+                                    </a>
+                                    <a href="tel:+1234567890" class="btn btn-outline-accent w-100">
+                                        <i class="fas fa-phone me-2"></i>Call Now
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Service Features -->
+                            <div class="card border-0 mb-4">
+                                <div class="card-body p-4">
+                                    <h4 class="h6 mb-3">What's Included:</h4>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Professional service</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Quality guarantee</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Licensed & insured</li>
+                                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Free consultation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Services Section -->
+        <section class="section bg-light">
+            <div class="container">
+                <?php echo services_pro_get_section_heading(
+                    'Related Services',
+                    'Other services you might be interested in'
+                ); ?>
+                
+                <?php
+                // Get related services from same categories
+                $current_categories = wp_get_post_terms(get_the_ID(), 'service_category', array('fields' => 'ids'));
+                
+                if (!empty($current_categories)):
+                    $related_services = new WP_Query(array(
+                        'post_type' => 'service',
+                        'posts_per_page' => 3,
+                        'post__not_in' => array(get_the_ID()),
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'service_category',
+                                'field' => 'term_id',
+                                'terms' => $current_categories,
+                            ),
+                        ),
+                    ));
+                    
+                    if ($related_services->have_posts()):
+                ?>
+                    <div class="row g-4">
+                        <?php while ($related_services->have_posts()): $related_services->the_post(); ?>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="service-card h-100 bg-white rounded-3 shadow-sm border-0 overflow-hidden">
+                                    <?php if (has_post_thumbnail()): ?>
+                                        <div class="service-image">
+                                            <?php the_post_thumbnail('medium', array('class' => 'w-100', 'style' => 'height: 180px; object-fit: cover;')); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <div class="card-body p-4">
+                                        <h4 class="h6 mb-2">
+                                            <a href="<?php the_permalink(); ?>" class="text-decoration-none text-primary-dark">
+                                                <?php the_title(); ?>
+                                            </a>
+                                        </h4>
+                                        <p class="text-muted small mb-3"><?php echo wp_trim_words(get_the_excerpt(), 10); ?></p>
+                                        <a href="<?php the_permalink(); ?>" class="btn btn-outline-accent btn-sm">
+                                            Learn More <i class="fas fa-arrow-right ms-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                <?php 
+                    endif;
+                    wp_reset_postdata();
+                endif;
+                ?>
+            </div>
+        </section>
+
+    <?php endwhile; ?>
+</main>
+
+<?php get_footer(); ?>
                     </div>
                     <?php if (has_post_thumbnail()) : ?>
                         <div class="col-lg-4">

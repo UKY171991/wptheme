@@ -22,8 +22,8 @@ get_header(); ?>
                 'Building trust through quality service since 2004'
             ); ?>
             
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6">
+            <div class="row g-4 g-lg-5 align-items-center">
+                <div class="col-12 col-lg-6 order-2 order-lg-1">
                     <div class="fade-in-up">
                         <h3 class="h4 text-accent mb-3">How We Started</h3>
                         <p class="mb-4">What began as a small family business has grown into one of the region's most trusted home service providers. Our founder, with a vision to deliver exceptional quality and reliability, started this company with just a truck and a commitment to excellence.</p>
@@ -32,27 +32,27 @@ get_header(); ?>
                         <p class="mb-4">To provide professional, reliable, and affordable home services that exceed our customers' expectations. We believe that your home deserves the best care, and we're here to deliver it with integrity and professionalism.</p>
                         
                         <div class="row g-3">
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6">
                                 <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-check-circle text-accent me-3"></i>
+                                    <i class="fas fa-check-circle text-accent me-3 flex-shrink-0"></i>
                                     <span>Licensed & Insured</span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6">
                                 <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-check-circle text-accent me-3"></i>
+                                    <i class="fas fa-check-circle text-accent me-3 flex-shrink-0"></i>
                                     <span>100% Satisfaction Guarantee</span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6">
                                 <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-check-circle text-accent me-3"></i>
+                                    <i class="fas fa-check-circle text-accent me-3 flex-shrink-0"></i>
                                     <span>Available 7 Days a Week</span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-sm-6">
                                 <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-check-circle text-accent me-3"></i>
+                                    <i class="fas fa-check-circle text-accent me-3 flex-shrink-0"></i>
                                     <span>Free Estimates</span>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@ get_header(); ?>
                     </div>
                 </div>
                 
-                <div class="col-lg-6">
+                <div class="col-12 col-lg-6 order-1 order-lg-2 text-center">
                     <div class="fade-in-up">
                         <?php echo services_pro_get_stats_section(); ?>
                     </div>

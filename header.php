@@ -13,8 +13,8 @@
 <div id="page" class="site">
     <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'services-pro'); ?></a>
 
-    <header id="masthead" class="site-header bg-white shadow-sm">
-        <nav class="navbar navbar-expand-lg navbar-light py-3">
+    <header id="masthead" class="site-header bg-white shadow-sm position-relative">
+        <nav class="navbar navbar-expand-lg navbar-light py-2 py-lg-3">
             <div class="container">
                 <!-- Brand/Logo -->
                 <div class="site-branding">
@@ -38,7 +38,7 @@
                 </div>
 
                 <!-- Mobile Toggle Button -->
-                <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'services-pro'); ?>">
+                <button class="navbar-toggler border-0 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'services-pro'); ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -52,13 +52,13 @@
                         'container'      => false,
                         'depth'          => 3,
                         'walker'         => new Bootstrap_Walker_Nav_Menu(),
-                        'fallback_cb'    => false,
+                        'fallback_cb'    => 'wp_page_menu',
                     ));
                     ?>
                     
                     <!-- CTA Button -->
-                    <div class="d-flex ms-lg-3">
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-accent btn-rounded px-4">
+                    <div class="d-flex ms-lg-3 mt-3 mt-lg-0">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-accent btn-rounded px-4 w-100 w-lg-auto text-center">
                             <i class="fas fa-phone me-2"></i>Get Quote
                         </a>
                     </div>

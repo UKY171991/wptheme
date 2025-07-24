@@ -35,39 +35,403 @@ Author: Services Pro Team
 body {
     padding-top: 0 !important;
     margin-top: 0 !important;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
-/* Ensure header has no extra spacing */
+/* Ensure header has no extra spacing and never sticky */
 .site-header {
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
-    position: relative; /* Ensure header is not sticky */
+    position: relative !important;
+    top: auto !important;
+    z-index: 1030;
 }
 
-/* Tight navbar spacing */
+/* Optimized navbar spacing for all devices */
 .navbar {
     margin-bottom: 0;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    position: relative !important;
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
 }
 
 /* Remove any sticky behavior */
-.navbar-sticky {
+.navbar-sticky,
+.fixed-top,
+.sticky-top {
     position: relative !important;
     top: auto !important;
 }
 
-/* Page banner styling */
+/* Header and navigation styling */
+.site-header {
+    background-color: white !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative !important;
+    z-index: 1030;
+}
+
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    min-height: 70px;
+}
+
+.site-branding .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-dark) !important;
+}
+
+.site-branding small {
+    font-size: 0.8rem;
+    color: var(--text-muted) !important;
+}
+
+/* Navigation links */
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: var(--text-dark);
+    padding: 0.75rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link.active {
+    color: var(--accent);
+    background-color: var(--accent-light);
+}
+
+/* Dropdown styling for desktop */
+@media (min-width: 992px) {
+    .dropdown-menu {
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 0.25rem;
+        transition: all 0.2s ease;
+    }
+    
+    .dropdown-item:hover {
+        background-color: var(--accent-light);
+        color: var(--accent);
+        transform: translateX(5px);
+    }
+}
+
+/* Mobile navigation improvements */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: rgba(255, 255, 255, 0.98);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        margin-top: 0.75rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .navbar-nav {
+        width: 100%;
+    }
+    
+    .navbar-nav .nav-item {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 1rem 1.25rem !important;
+        border-radius: 0.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        margin-bottom: 0.25rem;
+        font-weight: 500;
+        color: var(--text-dark) !important;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+        background-color: var(--accent-light);
+        color: var(--accent) !important;
+        transform: translateX(5px);
+    }
+    
+    .navbar-nav .nav-link.active {
+        background-color: var(--accent);
+        color: var(--white) !important;
+        font-weight: 600;
+    }
+    
+    .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+    
+    .navbar-toggler {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background-color: var(--light-gray);
+    }
+    
+    .navbar-toggler:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        background-color: var(--accent-light);
+    }
+    
+    .navbar-toggler-icon {
+        width: 1.2em;
+        height: 1.2em;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2811, 17, 51, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-toggler.active .navbar-toggler-icon {
+        transform: rotate(90deg);
+    }
+    
+    /* Mobile navigation collapse */
+    .navbar-collapse {
+        background-color: white;
+        border-radius: 0.75rem;
+        margin-top: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    
+    .navbar-collapse.show {
+        animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Navigation links in mobile */
+    .navbar-nav .nav-link {
+        padding: 1rem 1.25rem;
+        margin: 0.25rem 0;
+        border-radius: 0.5rem;
+        color: var(--text-dark);
+        font-weight: 500;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus,
+    .navbar-nav .nav-link.active {
+        background-color: var(--accent-light);
+        color: var(--accent);
+        transform: translateX(5px);
+    }
+    
+    .navbar-nav .nav-item:last-child .nav-link {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+    
+    /* Dropdown menus on mobile */
+    .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        border: none;
+        box-shadow: none;
+        background-color: rgba(248, 249, 250, 0.8);
+        border-radius: 0.5rem;
+        margin: 0.5rem 0 0 1rem;
+        padding: 0.5rem;
+        display: none;
+    }
+    
+    .dropdown-menu.show {
+        display: block !important;
+    }
+    
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+        border-radius: 0.25rem;
+        font-size: 0.95rem;
+        color: var(--text-dark);
+        margin-bottom: 0.25rem;
+        transition: all 0.2s ease;
+    }
+    
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        background-color: var(--accent-light);
+        color: var(--accent);
+        transform: translateX(3px);
+    }
+    
+    /* Dropdown chevron styling */
+    .nav-link .fas {
+        transition: transform 0.3s ease;
+    }
+    
+    .dropdown.show .nav-link .fas {
+        transform: rotate(180deg);
+    }
+    
+    /* Multi-level dropdown support */
+    .dropdown-submenu .dropdown-menu {
+        margin-left: 2rem;
+        background-color: rgba(240, 242, 247, 0.9);
+    }
+    
+    /* CTA Button mobile styles */
+    .navbar-collapse .d-flex {
+        width: 100%;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid var(--accent-light);
+    }
+    
+    .navbar-collapse .btn {
+        width: 100%;
+        padding: 1.25rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 0.75rem;
+        text-align: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .navbar-collapse .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Service category cards */
+.service-category-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.service-category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+}
+
+.service-category-card .category-icon-header {
+    background: linear-gradient(135deg, var(--accent-light), rgba(var(--accent-rgb), 0.1));
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-category-card .category-icon-header i {
+    font-size: 3rem !important;
+    color: var(--accent);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.service-category-card .stretched-link:hover {
+    color: var(--accent) !important;
+}
+
+.service-category-card .card-body {
+    position: relative;
+    z-index: 2;
+}
+
+/* Service cards */
+.service-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important;
+}
+
+.service-card .service-image img {
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-image img {
+    transform: scale(1.05);
+}
+
+.service-card .badge {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+}
+
+/* Page banner styling - fully responsive */
 .page-banner {
-    padding: 4rem 0;
+    padding: 3rem 0;
     min-height: 250px;
     display: flex;
     align-items: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .page-banner .min-vh-30 {
     min-height: 30vh;
+}
+
+@media (max-width: 768px) {
+    .page-banner {
+        padding: 2rem 0;
+        min-height: 200px;
+    }
+    
+    .page-banner .min-vh-30 {
+        min-height: 25vh;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-banner {
+        padding: 1.5rem 0;
+        min-height: 150px;
+    }
+    
+    .page-banner .min-vh-30 {
+        min-height: 20vh;
+    }
 }
 
 /* ========================================
@@ -231,9 +595,94 @@ body {
 }
 
 /* ========================================
-   RESPONSIVE DESIGN IMPROVEMENTS
+   RESPONSIVE DESIGN IMPROVEMENTS - MOBILE FIRST
    ======================================== */
-@media (max-width: 768px) {
+
+/* Base mobile styles (up to 576px) */
+.section {
+    padding: 2rem 0;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.display-1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+.display-2 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+}
+
+.display-3 {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.display-4 {
+    font-size: 1.75rem;
+    line-height: 1.3;
+}
+
+.lead {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* Container spacing for mobile */
+.container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Button responsive sizing */
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+}
+
+.btn-lg {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+/* Card and content spacing */
+.card {
+    margin-bottom: 1.5rem;
+}
+
+.row {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+}
+
+.row > * {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .section {
+        padding: 2.5rem 0;
+    }
+    
     .section-title {
         font-size: 2rem;
     }
@@ -242,82 +691,618 @@ body {
         font-size: 3rem;
     }
     
+    .display-2 {
+        font-size: 2.5rem;
+    }
+    
+    .display-3 {
+        font-size: 2.25rem;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    
+    .btn-lg {
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .section {
+        padding: 3rem 0;
+    }
+    
+    .section-title {
+        font-size: 2.25rem;
+    }
+    
+    .display-1 {
+        font-size: 3.5rem;
+    }
+    
+    .display-2 {
+        font-size: 3rem;
+    }
+    
     .display-3 {
         font-size: 2.5rem;
     }
     
     .display-4 {
-        font-size: 2rem;
+        font-size: 2.25rem;
     }
     
-    .page-banner {
-        padding: 2rem 0;
-        min-height: 200px;
+    .row {
+        margin-left: -1rem;
+        margin-right: -1rem;
     }
     
-    .navbar {
-        padding: 0.75rem 0;
-    }
-    
-    .menu-item-card,
-    .service-card {
-        margin-bottom: 1.5rem;
-    }
-    
-    .section {
-        padding: 3rem 0;
+    .row > * {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
 
-@media (max-width: 576px) {
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .section {
+        padding: 4rem 0;
+    }
+    
     .section-title {
-        font-size: 1.75rem;
+        font-size: 2.5rem;
+    }
+    
+    .display-1 {
+        font-size: 4rem;
+    }
+    
+    .display-2 {
+        font-size: 3.5rem;
     }
     
     .display-3 {
-        font-size: 2rem;
+        font-size: 3rem;
     }
     
     .display-4 {
-        font-size: 1.75rem;
+        font-size: 2.5rem;
     }
     
-    .page-banner {
-        padding: 1.5rem 0;
-        min-height: 150px;
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
     
-    .btn-lg {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
+    .row {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+    }
+    
+    .row > * {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .section {
+        padding: 5rem 0;
+    }
+    
+    .section-title {
+        font-size: 2.75rem;
+    }
+    
+    .display-1 {
+        font-size: 4.5rem;
+    }
+    
+    .display-2 {
+        font-size: 4rem;
+    }
+    
+    .display-3 {
+        font-size: 3.5rem;
+    }
+    
+    .display-4 {
+        font-size: 3rem;
+    }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 767.98px) {
+    /* Stack content vertically on mobile */
+    .flex-lg-row {
+        flex-direction: column !important;
+    }
+    
+    /* Full width buttons on mobile */
+    .btn-mobile-full {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    /* Reduce padding on mobile */
+    .p-lg-5 {
+        padding: 2rem !important;
+    }
+    
+    .py-lg-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    .px-lg-5 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    
+    /* Adjust text alignment on mobile */
+    .text-lg-start {
+        text-align: center !important;
+    }
+    
+    .text-lg-end {
+        text-align: center !important;
+    }
+    
+    /* Hide on mobile */
+    .d-lg-block {
+        display: none !important;
+    }
+    
+    /* Show only on mobile */
+    .d-mobile-block {
+        display: block !important;
+    }
+    
+    @media (min-width: 768px) {
+        .d-mobile-block {
+            display: none !important;
+        }
+    }
+    
+    /* Image responsive behavior */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Form improvements for mobile */
+    .form-control,
+    .form-select {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 0.75rem 1rem;
+    }
+    
+    /* Table responsive */
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    /* Accordion improvements */
+    .accordion-button {
+        font-size: 0.95rem;
+        padding: 1rem;
+    }
+    
+    /* Card improvements */
+    .card {
+        border-radius: 0.75rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+}
+
+/* Tablet-specific optimizations */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .section {
+        padding: 3.5rem 0;
+    }
+    
+    /* Tablet grid adjustments */
+    .col-tablet-6 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+    
+    .col-tablet-12 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .btn,
+    .d-print-none {
+        display: none !important;
+    }
+    
+    .section {
+        padding: 1rem 0;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
     }
 }
 
 /* ========================================
-   ANIMATION AND TRANSITION IMPROVEMENTS
+   ENHANCED UTILITY CLASSES
    ======================================== */
-.fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
+
+/* Flex utilities for better mobile layout */
+.flex-mobile-column {
+    flex-direction: column;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+@media (min-width: 768px) {
+    .flex-mobile-column {
+        flex-direction: row;
     }
 }
 
-.hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Text size utilities for responsive typography */
+.text-responsive {
+    font-size: 0.9rem;
 }
 
-.hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+@media (min-width: 576px) {
+    .text-responsive {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .text-responsive {
+        font-size: 1.1rem;
+    }
+}
+
+/* Spacing utilities for mobile */
+.spacing-mobile-sm {
+    margin: 0.5rem 0;
+}
+
+.spacing-mobile-md {
+    margin: 1rem 0;
+}
+
+.spacing-mobile-lg {
+    margin: 1.5rem 0;
+}
+
+@media (min-width: 768px) {
+    .spacing-mobile-sm {
+        margin: 1rem 0;
+    }
+    
+    .spacing-mobile-md {
+        margin: 2rem 0;
+    }
+    
+    .spacing-mobile-lg {
+        margin: 3rem 0;
+    }
+}
+
+/* Card enhancements for mobile */
+.card-mobile-enhanced {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.card-mobile-enhanced:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 767.98px) {
+    .card-mobile-enhanced {
+        margin-bottom: 1rem;
+        border-radius: 0.75rem;
+    }
+    
+    .card-mobile-enhanced .card-body {
+        padding: 1.25rem;
+    }
+}
+
+/* Button improvements for mobile */
+.btn-mobile-stack {
+    margin-bottom: 0.75rem;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .btn-mobile-stack {
+        width: auto;
+        margin-bottom: 0;
+        margin-right: 0.75rem;
+    }
+}
+
+/* Image responsive utilities */
+.img-mobile-full {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.img-mobile-round {
+    border-radius: 50%;
+    max-width: 150px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .img-mobile-round {
+        max-width: 200px;
+    }
+}
+
+/* Content width utilities */
+.content-mobile-full {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .content-mobile-80 {
+        width: 80%;
+        margin: 0 auto;
+    }
+    
+    .content-mobile-60 {
+        width: 60%;
+        margin: 0 auto;
+    }
+}
+
+/* Gradient overlays for better text readability */
+.overlay-gradient {
+    position: relative;
+}
+
+.overlay-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(11, 17, 51, 0.8) 0%, rgba(255, 95, 0, 0.6) 100%);
+    z-index: 1;
+}
+
+.overlay-gradient > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Enhanced shadow utilities */
+.shadow-mobile-sm {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-mobile-md {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.shadow-mobile-lg {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading states */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ========================================
+   MOBILE TOUCH STATES AND INTERACTIONS
+   ======================================== */
+
+/* Touch-friendly button targets */
+.mobile-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    position: relative;
+}
+
+/* Touch states for interactive elements */
+.btn.touched,
+.card.touched,
+.nav-link.touched {
+    transform: scale(0.98);
+    background-color: var(--accent-light);
+    transition: all 0.1s ease;
+}
+
+/* Disable hover effects on mobile */
+.is-mobile-device .hover-effect:hover,
+.is-mobile-device .card:hover,
+.is-mobile-device .btn:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Mobile-specific animations */
+.mobile-no-hover {
+    pointer-events: auto;
+}
+
+.mobile-no-hover:hover {
+    transform: none !important;
+    box-shadow: inherit !important;
+}
+
+/* Enhanced mobile navigation */
+@media (max-width: 991.98px) {
+    .navbar-toggler.active {
+        transform: rotate(180deg);
+        background-color: var(--accent-light);
+    }
+    
+    .navbar-collapse.animate-in {
+        animation: slideInDown 0.3s ease-out;
+    }
+    
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Mobile dropdown animations */
+    .dropdown-menu.show {
+        animation: fadeInUp 0.2s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 999999;
+    padding: 8px 16px;
+    background: var(--primary-dark);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+    left: 6px;
+    top: 7px;
+}
+
+/* Enhanced focus states for better accessibility */
+.btn:focus,
+.form-control:focus,
+.form-select:focus,
+.nav-link:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 95, 0, 0.25);
+    outline: 2px solid transparent;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn-accent {
+        border: 2px solid var(--accent);
+    }
+    
+    .text-accent {
+        font-weight: 600;
+    }
+    
+    .card {
+        border: 2px solid var(--text-dark);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Ensure proper color contrast for all text */
+.text-muted {
+    color: #6c757d !important;
+}
+
+.text-light {
+    color: #f8f9fa !important;
+}
+
+/* Print-friendly styles */
+@media print {
+    .navbar,
+    .btn,
+    .d-print-none,
+    .skip-link {
+        display: none !important;
+    }
+    
+    .section {
+        padding: 1rem 0;
+        page-break-inside: avoid;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: #000;
+        background: #fff;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        color: #000;
+    }
+    
+    .page-banner {
+        background: none !important;
+        color: #000 !important;
+        padding: 1rem 0;
+    }
 }
 
 /* ========================================

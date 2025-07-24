@@ -14,16 +14,16 @@ get_header(); ?>
         <section class="section bg-light">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <article id="post-<?php the_ID(); ?>" <?php post_class('fade-in-up'); ?>>
+                    <div class="col-12 col-lg-10 col-xl-8">
+                        <article id="post-<?php the_ID(); ?>" <?php post_class('fade-in-up bg-white rounded-3 shadow-sm p-4 p-lg-5'); ?>>
                             
                             <!-- Featured Image -->
                             <?php if (has_post_thumbnail()) : ?>
-                                <div class="mb-5 text-center">
+                                <div class="mb-4 mb-lg-5 text-center">
                                     <figure>
-                                        <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded shadow-sm')); ?>
+                                        <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded-3 shadow-sm w-100')); ?>
                                         <?php if (get_the_post_thumbnail_caption()) : ?>
-                                            <figcaption class="mt-2 text-muted fst-italic">
+                                            <figcaption class="mt-3 text-muted fst-italic small">
                                                 <?php echo get_the_post_thumbnail_caption(); ?>
                                             </figcaption>
                                         <?php endif; ?>
@@ -37,7 +37,7 @@ get_header(); ?>
                                 the_content();
 
                                 wp_link_pages(array(
-                                    'before' => '<div class="page-links d-flex flex-wrap gap-2 mt-4"><span class="me-2">' . esc_html__('Pages:', 'services-pro') . '</span>',
+                                    'before' => '<div class="page-links d-flex flex-wrap gap-2 mt-4 justify-content-center justify-content-lg-start"><span class="me-2 align-self-center">' . esc_html__('Pages:', 'services-pro') . '</span>',
                                     'after'  => '</div>',
                                     'link_before' => '<span class="btn btn-sm btn-outline-accent">',
                                     'link_after'  => '</span>',
@@ -47,12 +47,12 @@ get_header(); ?>
 
                             <!-- Page Meta -->
                             <?php if (is_user_logged_in()) : ?>
-                                <div class="page-meta mt-5 pt-4 border-top">
-                                    <div class="d-flex justify-content-between align-items-center">
+                                <div class="page-meta mt-4 mt-lg-5 pt-3 pt-lg-4 border-top">
+                                    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center gap-2">
                                         <small class="text-muted">
-                                            Last updated: <?php echo get_the_modified_date(); ?>
+                                            <i class="fas fa-clock me-1"></i>Last updated: <?php echo get_the_modified_date(); ?>
                                         </small>
-                                        <?php edit_post_link('Edit Page', '<small class="text-muted">', '</small>'); ?>
+                                        <?php edit_post_link('<i class="fas fa-edit me-1"></i>Edit Page', '<small class="btn btn-sm btn-outline-secondary">', '</small>'); ?>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -62,7 +62,7 @@ get_header(); ?>
                         <?php
                         if (comments_open() || get_comments_number()) :
                             ?>
-                            <div class="comments-section mt-5 pt-4 border-top">
+                            <div class="comments-section mt-4 mt-lg-5 bg-white rounded-3 shadow-sm p-4 p-lg-5">
                                 <?php comments_template(); ?>
                             </div>
                         <?php endif; ?>
