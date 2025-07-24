@@ -22,14 +22,20 @@
                     if (has_custom_logo()) {
                         the_custom_logo();
                     } else {
+                        $site_name = get_bloginfo('name');
+                        if (empty($site_name)) {
+                            $site_name = 'Blue'; // Fallback to Blue as shown in screenshot
+                        }
+                        
+                        $site_description = get_bloginfo('description', 'display');
+                        if (empty($site_description)) {
+                            $site_description = 'Professional Home Services';
+                        }
                         ?>
                         <a class="navbar-brand fw-bold text-primary-dark text-decoration-none" href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                            <?php bloginfo('name'); ?>
-                            <?php
-                            $description = get_bloginfo('description', 'display');
-                            if ($description || is_customize_preview()) :
-                                ?>
-                                <small class="d-block text-muted fw-normal"><?php echo esc_html($description); ?></small>
+                            <?php echo esc_html($site_name); ?>
+                            <?php if ($site_description): ?>
+                                <small class="d-block text-muted fw-normal"><?php echo esc_html($site_description); ?></small>
                             <?php endif; ?>
                         </a>
                         <?php

@@ -111,6 +111,138 @@ function services_pro_customize_register($wp_customize) {
     ));
     
     $wp_customize->add_control('contact_address', array(
+        'label' => __('Business Address', 'services-pro'),
+        'section' => 'services_pro_contact',
+        'type' => 'textarea',
+    ));
+    
+    // Social Media Section
+    $wp_customize->add_section('services_pro_social', array(
+        'title' => __('Social Media', 'services-pro'),
+        'priority' => 45,
+    ));
+    
+    // Facebook URL
+    $wp_customize->add_setting('social_facebook', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control('social_facebook', array(
+        'label' => __('Facebook URL', 'services-pro'),
+        'section' => 'services_pro_social',
+        'type' => 'url',
+    ));
+    
+    // Instagram URL
+    $wp_customize->add_setting('social_instagram', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control('social_instagram', array(
+        'label' => __('Instagram URL', 'services-pro'),
+        'section' => 'services_pro_social',
+        'type' => 'url',
+    ));
+    
+    // Twitter URL
+    $wp_customize->add_setting('social_twitter', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control('social_twitter', array(
+        'label' => __('Twitter URL', 'services-pro'),
+        'section' => 'services_pro_social',
+        'type' => 'url',
+    ));
+    
+    // LinkedIn URL
+    $wp_customize->add_setting('social_linkedin', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control('social_linkedin', array(
+        'label' => __('LinkedIn URL', 'services-pro'),
+        'section' => 'services_pro_social',
+        'type' => 'url',
+    ));
+    
+    // Performance Section
+    $wp_customize->add_section('services_pro_performance', array(
+        'title' => __('Performance Settings', 'services-pro'),
+        'priority' => 50,
+    ));
+    
+    // Enable lazy loading
+    $wp_customize->add_setting('enable_lazy_loading', array(
+        'default' => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    
+    $wp_customize->add_control('enable_lazy_loading', array(
+        'label' => __('Enable Lazy Loading for Images', 'services-pro'),
+        'section' => 'services_pro_performance',
+        'type' => 'checkbox',
+    ));
+    
+    // Enable image optimization
+    $wp_customize->add_setting('enable_image_optimization', array(
+        'default' => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    
+    $wp_customize->add_control('enable_image_optimization', array(
+        'label' => __('Enable Image Optimization', 'services-pro'),
+        'section' => 'services_pro_performance',
+        'type' => 'checkbox',
+    ));
+    
+    // Accessibility Section
+    $wp_customize->add_section('services_pro_accessibility', array(
+        'title' => __('Accessibility', 'services-pro'),
+        'priority' => 55,
+    ));
+    
+    // High contrast mode
+    $wp_customize->add_setting('enable_high_contrast', array(
+        'default' => false,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    
+    $wp_customize->add_control('enable_high_contrast', array(
+        'label' => __('Enable High Contrast Mode', 'services-pro'),
+        'section' => 'services_pro_accessibility',
+        'type' => 'checkbox',
+    ));
+    
+    // Skip links
+    $wp_customize->add_setting('enable_skip_links', array(
+        'default' => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    
+    $wp_customize->add_control('enable_skip_links', array(
+        'label' => __('Enable Skip Links for Screen Readers', 'services-pro'),
+        'section' => 'services_pro_accessibility',
+        'type' => 'checkbox',
+    ));
+    
+    $wp_customize->add_control('contact_email', array(
+        'label' => __('Email Address', 'services-pro'),
+        'section' => 'services_pro_contact',
+        'type' => 'email',
+    ));
+    
+    // Address
+    $wp_customize->add_setting('contact_address', array(
+        'default' => '123 Main Street, City, State 12345',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    
+    $wp_customize->add_control('contact_address', array(
         'label' => __('Address', 'services-pro'),
         'section' => 'services_pro_contact',
         'type' => 'textarea',
