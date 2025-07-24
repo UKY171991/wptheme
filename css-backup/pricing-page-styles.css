@@ -1,0 +1,2532 @@
+/*
+Enhanced Modern Pricing Page Styles
+2025 Edition - Conversion-Optimized Design
+*/
+
+/* ========================================
+   GLOBAL STYLES & ANIMATIONS
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+.modern-pricing-page {
+    overflow-x: hidden;
+    color: #333;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+}
+
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ========================================
+   ENHANCED PRICING PAGE HERO SECTION
+   ======================================== */
+
+.pricing-hero {
+    position: relative;
+    padding: 10rem 0 8rem;
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #0ea5e9 100%);
+    color: white;
+    overflow: hidden;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(17, 24, 39, 0.25);
+}
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(11, 17, 51, 0.2);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: white;
+}
+
+.breadcrumb-separator {
+    margin: 0 0.5rem;
+    opacity: 0.6;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.badge-icon {
+    font-size: 1.2rem;
+}
+
+.pricing-hero h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.pricing-hero p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto 4rem;
+}
+
+.pricing-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.pricing-features .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.pricing-features .feature-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.feature-text {
+    text-align: left;
+}
+
+.feature-text strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.feature-text small {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   PRICING TOGGLE SECTION
+   ======================================== */
+
+.pricing-toggle-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #dee2e6;
+}
+
+.pricing-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.toggle-label {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.toggle-discount {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+    animation: pulse 2s infinite;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(26px);
+}
+
+/* ========================================
+   ENHANCED PRICING PLANS SECTION
+   ======================================== */
+
+.pricing-plans {
+    padding: 8rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.section-header p {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+.pricing-card {
+    background: white;
+    border-radius: 25px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.pricing-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 95, 0, 0.2);
+}
+
+.featured-plan {
+    border: 3px solid #ff5f00;
+    transform: scale(1.05);
+    position: relative;
+}
+
+.featured-plan::before {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    height: 6px;
+}
+
+.featured-plan:hover {
+    transform: scale(1.05) translateY(-15px);
+    box-shadow: 0 35px 70px rgba(255, 95, 0, 0.25);
+}
+
+.plan-badge {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+    padding: 0.75rem 2.5rem;
+    border-radius: 0 0 20px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 5px 15px rgba(255, 95, 0, 0.3);
+}
+
+.plan-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.plan-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.plan-header h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.plan-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.plan-rating {
+    margin-top: 1rem;
+}
+
+.stars {
+    color: #ffc107;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.rating-text {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.plan-pricing {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    position: relative;
+}
+
+.price-amount {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #333;
+    display: block;
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+.featured-plan .price-amount {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.price-period {
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.price-savings {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    background: #28a745;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+}
+
+.savings-badge {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.plan-features {
+    margin-bottom: 3rem;
+}
+
+.plan-features .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.plan-features .feature-item:hover {
+    background: rgba(255, 95, 0, 0.05);
+    margin: 0 -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 10px;
+}
+
+.plan-features .feature-item:last-child {
+    border-bottom: none;
+}
+
+.feature-check {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.feature-cross {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.feature-unavailable {
+    opacity: 0.5;
+}
+
+.plan-cta {
+    text-align: center;
+}
+
+.btn-plan {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-plan:hover {
+    background: #222;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-plan.featured {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    box-shadow: 0 15px 35px rgba(255, 95, 0, 0.3);
+}
+
+.btn-plan.featured:hover {
+    background: linear-gradient(135deg, #e55100 0%, #f57c00 100%);
+    box-shadow: 0 20px 45px rgba(255, 95, 0, 0.4);
+}
+
+.plan-note {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.plan-guarantee {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #28a745;
+    font-weight: 600;
+}
+
+.comparison-section {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.btn-comparison {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-comparison:hover {
+    background: linear-gradient(135deg, #5a6268 0%, #3d4142 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.comparison-table {
+    margin-top: 3rem;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.comparison-table th {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    font-weight: 700;
+    color: #333;
+}
+
+.comparison-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+}
+
+/* ========================================
+   PRICING CALCULATOR SECTION
+   ======================================== */
+
+.pricing-calculator {
+    padding: 8rem 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.calculator-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 4rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.calculator-form {
+    background: white;
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #ff5f00;
+    background: white;
+    box-shadow: 0 0 20px rgba(255, 95, 0, 0.1);
+}
+
+.form-range {
+    width: 100%;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 5px;
+    outline: none;
+    -webkit-appearance: none;
+    margin-bottom: 0.5rem;
+}
+
+.form-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.range-value {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    color: #ff5f00;
+    font-size: 1.1rem;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.75rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.checkbox-item:hover {
+    background: rgba(255, 95, 0, 0.05);
+}
+
+.checkbox-item input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 5px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-item input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    border-color: #ff5f00;
+}
+
+.checkbox-item input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.calculator-result {
+    background: linear-gradient(135deg, #333 0%, #555 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 2rem;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.result-header h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.estimate-badge {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.price-breakdown {
+    margin-bottom: 2rem;
+}
+
+.base-price,
+.additional-service,
+.discount-line,
+.total-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.total-price {
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.total-price span:last-child {
+    color: #ffd700;
+    font-size: 1.5rem;
+}
+
+.discount-line {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.result-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-calculate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+    padding: 1.25rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-calculate:hover {
+    background: linear-gradient(135deg, #e55100 0%, #f57c00 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 95, 0, 0.3);
+}
+
+.btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: white;
+    padding: 1rem 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    text-decoration: none;
+}
+
+.calculator-notes {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.calculator-notes p {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ========================================
+   ENHANCED SERVICE PRICING SECTION
+   ======================================== */
+
+.service-pricing {
+    padding: 8rem 0;
+    background: white;
+}
+
+.service-categories {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    margin-top: 4rem;
+}
+
+.service-category {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 25px;
+    padding: 3rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.service-category:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    border-color: rgba(255, 95, 0, 0.2);
+}
+
+.category-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.category-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.category-header h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.category-header p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.category-rating {
+    margin-top: 1rem;
+}
+
+.category-rating .stars {
+    color: #ffc107;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-rating span {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.service-list {
+    display: grid;
+    gap: 2rem;
+}
+
+.service-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.service-item:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    border-color: rgba(255, 95, 0, 0.3);
+}
+
+.service-info h4 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.service-info p {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.service-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.feature-tag {
+    background: rgba(255, 95, 0, 0.1);
+    color: #ff5f00;
+    padding: 0.3rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.service-price {
+    text-align: right;
+}
+
+.service-price .price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ff5f00;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.service-price .min-price {
+    font-size: 0.9rem;
+    color: #666;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.price-range {
+    font-size: 0.8rem;
+    color: #999;
+    font-style: italic;
+}
+
+/* ========================================
+   CUSTOMER TESTIMONIALS SECTION
+   ======================================== */
+
+.pricing-testimonials {
+    padding: 8rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+.testimonial-item {
+    background: white;
+    padding: 3rem 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-rating .stars {
+    color: #ffc107;
+    font-size: 1.3rem;
+}
+
+.rating-number {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.testimonial-item blockquote {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 2rem;
+    font-style: italic;
+    border-left: 4px solid #ff5f00;
+    padding-left: 1.5rem;
+    margin-left: 0;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.author-info strong {
+    display: block;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.author-info span {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.testimonial-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.service-used {
+    font-weight: 600;
+    color: #ff5f00;
+    font-size: 0.9rem;
+}
+
+.verified {
+    color: #28a745;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* ========================================
+   ENHANCED FAQ SECTION
+   ======================================== */
+
+.pricing-faq {
+    padding: 8rem 0;
+    background: white;
+}
+
+.faq-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    margin-top: 4rem;
+}
+
+.faq-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.faq-item {
+    background: #f8f9fa;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.faq-item:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.faq-item.active {
+    box-shadow: 0 15px 40px rgba(255, 95, 0, 0.1);
+    border: 2px solid rgba(255, 95, 0, 0.2);
+}
+
+.faq-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: white;
+}
+
+.faq-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.faq-toggle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff5f00;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-toggle {
+    transform: rotate(45deg);
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: #f8f9fa;
+}
+
+.faq-content p {
+    padding: 0 2rem 2rem;
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+}
+
+.faq-contact {
+    position: sticky;
+    top: 2rem;
+}
+
+.contact-card {
+    background: linear-gradient(135deg, #333 0%, #555 100%);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.contact-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.contact-card p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.contact-btn.phone {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+}
+
+.contact-btn.phone:hover {
+    background: linear-gradient(135deg, #e55100 0%, #f57c00 100%);
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
+.contact-btn.chat {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.contact-btn.chat:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    text-decoration: none;
+}
+
+/* ========================================
+   ENHANCED CTA SECTION
+   ======================================== */
+
+.pricing-cta {
+    position: relative;
+    padding: 8rem 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+    color: white;
+    overflow: hidden;
+}
+
+.cta-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cta-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 30% 90%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 10%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+    animation: float 15s ease-in-out infinite;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.cta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.cta-content h2 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.cta-content p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+}
+
+.cta-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.cta-stats .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-icon {
+    font-size: 2rem;
+}
+
+.stat-content strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.stat-content span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: white;
+    color: #ff5f00;
+    padding: 1.5rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary:hover {
+    background: #f8f9fa;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(255, 255, 255, 0.3);
+    color: #ff5f00;
+    text-decoration: none;
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+.btn-primary.pulse-animation:hover {
+    animation: none;
+}
+
+.cta-buttons .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 1.5rem 3rem;
+    font-size: 1.2rem;
+}
+
+.cta-buttons .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.cta-guarantee {
+    margin-bottom: 2rem;
+}
+
+.guarantee-items {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.guarantee-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.guarantee-icon {
+    font-size: 1.2rem;
+}
+
+.urgency-indicator {
+    background: rgba(255, 193, 7, 0.9);
+    color: #333;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    display: inline-block;
+    animation: pulse 3s infinite;
+}
+
+.urgency-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 1200px) {
+    .calculator-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .faq-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .faq-contact {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-hero {
+        padding: 6rem 0 4rem;
+        min-height: 70vh;
+    }
+    
+    .pricing-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .pricing-features {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .hero-stats {
+        gap: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .featured-plan {
+        transform: none;
+    }
+    
+    .featured-plan:hover {
+        transform: translateY(-10px);
+    }
+    
+    .pricing-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .plan-pricing {
+        padding: 1.5rem 1rem;
+    }
+    
+    .price-amount {
+        font-size: 3rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2.5rem;
+    }
+    
+    .service-item {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .service-price {
+        text-align: center;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .testimonial-item {
+        padding: 2rem 1.5rem;
+    }
+    
+    .cta-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .cta-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .cta-stats .stat-item {
+        justify-content: center;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .btn-primary,
+    .cta-buttons .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+    
+    .guarantee-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .calculator-form,
+    .calculator-result {
+        padding: 2rem;
+    }
+    
+    .service-category {
+        padding: 2rem;
+    }
+    
+    .pricing-toggle {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .pricing-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+    
+    .guarantee-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .pricing-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .calculator-form,
+    .calculator-result {
+        padding: 1.5rem;
+    }
+}
+
+/* ========================================
+   HERO ENHANCEMENTS
+   ======================================== */
+
+.hero-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 3rem 0 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-cta-primary,
+.hero-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-width: 220px;
+    justify-content: center;
+}
+
+.hero-cta-primary {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+    box-shadow: 0 15px 35px rgba(255, 95, 0, 0.4);
+}
+
+.hero-cta-primary:hover {
+    background: linear-gradient(135deg, #e55100 0%, #f57c00 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 45px rgba(255, 95, 0, 0.6);
+    color: white;
+    text-decoration: none;
+}
+
+.hero-cta-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.hero-cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    color: white;
+    text-decoration: none;
+}
+
+.hero-trust-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1.25rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* ========================================
+   VALUE BANNER ENHANCEMENT
+   ======================================== */
+
+.value-banner {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.value-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 95, 0, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 95, 0, 0.2);
+    max-width: 300px;
+}
+
+.value-item i {
+    color: #ff5f00;
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   ENHANCED PRICING CARD FEATURES
+   ======================================== */
+
+.price-note {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.price-note small {
+    color: #666;
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+/* ========================================
+   CALCULATOR ENHANCEMENTS
+   ======================================== */
+
+.calculator-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.benefit-item {
+    text-align: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.benefit-item i {
+    font-size: 3rem;
+    color: #ff5f00;
+    margin-bottom: 1rem;
+}
+
+.benefit-item h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.benefit-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.size-adjustment,
+.urgency-fee {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* ========================================
+   TESTIMONIAL STATS ENHANCEMENT
+   ======================================== */
+
+.testimonial-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    text-align: center;
+    background: white;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255, 95, 0, 0.2);
+}
+
+.stat-box .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ff5f00;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-box .stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   ANIMATION CLASSES
+   ======================================== */
+
+.updating {
+    opacity: 0.7;
+    transform: scale(0.98);
+    transition: all 0.3s ease;
+}
+
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.field-error {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+.form-control.error {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.2) !important;
+}
+
+.notification {
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
+}
+
+/* ========================================
+   ENHANCED MOBILE RESPONSIVENESS
+   ======================================== */
+
+@media (max-width: 768px) {
+    .hero-cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .hero-cta-primary,
+    .hero-cta-secondary {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .hero-trust-indicators {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .trust-badge {
+        justify-content: center;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .value-banner {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .value-item {
+        width: 100%;
+        max-width: 350px;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .calculator-benefits {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .testimonial-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .stat-box {
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .hero-trust-indicators {
+        gap: 0.75rem;
+    }
+    
+    .trust-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+    background: white;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+.featured-plan {
+    border: 3px solid #ff5f00;
+    transform: scale(1.05);
+}
+
+.featured-plan:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.plan-badge {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 0 0 15px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.plan-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.plan-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.plan-header h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.plan-subtitle {
+    color: #666;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.plan-pricing {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 0;
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+.price-amount {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #333;
+    display: block;
+    line-height: 1;
+}
+
+.featured-plan .price-amount {
+    color: #ff5f00;
+}
+
+.price-period {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.plan-features {
+    margin-bottom: 2.5rem;
+}
+
+.plan-features .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.plan-features .feature-item:last-child {
+    border-bottom: none;
+}
+
+.feature-check {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.feature-cross {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.feature-unavailable {
+    opacity: 0.5;
+}
+
+.plan-cta {
+    text-align: center;
+}
+
+.btn-plan {
+    display: inline-block;
+    width: 100%;
+    padding: 1.25rem 2rem;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.btn-plan:hover {
+    background: #222;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-plan.featured {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    box-shadow: 0 10px 30px rgba(255, 95, 0, 0.3);
+}
+
+.btn-plan.featured:hover {
+    background: linear-gradient(135deg, #e55100 0%, #f57c00 100%);
+    box-shadow: 0 15px 40px rgba(255, 95, 0, 0.4);
+}
+
+.plan-note {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    font-style: italic;
+}
+
+/* ========================================
+   SERVICE PRICING SECTION
+   ======================================== */
+
+.service-pricing {
+    padding: 6rem 0;
+    background: white;
+}
+
+.service-categories {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+.service-category {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem;
+    transition: all 0.3s ease;
+}
+
+.service-category:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.category-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.category-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.category-header h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.category-header p {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.service-list {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.service-info h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.service-info p {
+    color: #666;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.service-price {
+    text-align: right;
+    flex-shrink: 0;
+    margin-left: 2rem;
+}
+
+.service-price .price {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ff5f00;
+    margin-bottom: 0.25rem;
+}
+
+.min-price {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* ========================================
+   PRICING FAQ SECTION
+   ======================================== */
+
+.pricing-faq {
+    padding: 6rem 0;
+    background: #f8f9fa;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.faq-item {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.faq-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #ff5f00;
+}
+
+.faq-item p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ========================================
+   PRICING CTA SECTION
+   ======================================== */
+
+.pricing-cta {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.cta-content p {
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.cta-guarantee {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+
+.guarantee-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+.guarantee-icon {
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 992px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-plan {
+        transform: none;
+    }
+    
+    .featured-plan:hover {
+        transform: translateY(-10px);
+    }
+    
+    .service-categories {
+        gap: 2rem;
+    }
+    
+    .service-category {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-hero {
+        padding: 6rem 0 4rem;
+    }
+    
+    .pricing-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .pricing-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .pricing-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .service-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .service-price {
+        margin-left: 0;
+        text-align: center;
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-content h2 {
+        font-size: 2.2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-guarantee {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pricing-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .pricing-card {
+        padding: 1.5rem;
+    }
+    
+    .price-amount {
+        font-size: 2.5rem;
+    }
+    
+    .service-category {
+        padding: 1.5rem;
+    }
+    
+    .category-header h3 {
+        font-size: 1.6rem;
+    }
+    
+    .faq-item {
+        padding: 2rem 1.5rem;
+    }
+}

@@ -1,0 +1,36 @@
+
+    /* EMERGENCY SERVICE PAGE LAYOUT FIX - CSS ONLY */
+    .page-template-page-services .particles-js,
+    .page-template-page-services .cosmic-particles,
+    .page-template-page-services .animated-badge-carousel,
+    .page-template-page-services canvas {
+        display: none !important;
+    }
+    
+    .page-template-page-services .ultra-fancy-hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        min-height: 60vh !important;
+        padding: 60px 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: white !important;
+        text-align: center !important;
+    }
+    
+    .page-template-page-services .services-grid {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+        gap: 30px !important;
+        padding: 60px 20px !important;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        background: #f8f9fa !important;
+    }
+    
+    @media (max-width: 768px) {
+        .page-template-page-services .services-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+    

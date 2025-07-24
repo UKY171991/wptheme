@@ -1,493 +1,728 @@
 <?php
-/**
- * Template Name: Contact Page
- *
- * @package ServiceBlueprint
- */
-
+/*
+Template Name: Enhanced Contact Page
+*/
 get_header(); ?>
 
-<main id="main" class="site-main" role="main">
-    <div class="container">
-        <?php while (have_posts()) : the_post(); ?>
-            
-            <!-- Hero Section -->
-            <section class="contact-hero">
-                <div class="hero-content">
-                    <h1 class="page-title"><?php the_title(); ?></h1>
-                    <p class="page-description"><?php the_excerpt(); ?></p>
+<div class="enhanced-contact-page">
+    <!-- Modern Hero Banner -->
+    <section class="modern-hero contact-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+            <div class="hero-particles"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-comments"></i>
+                    Let's Connect
                 </div>
-            </section>
-
-            <!-- Contact Information -->
-            <section class="contact-info">
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        </div>
-                        <h3><?php esc_html_e('Address', 'service-blueprint'); ?></h3>
-                        <p>
-                            <?php 
-                            $address = get_theme_mod('service_blueprint_contact_address', '123 Business St, Suite 100<br>City, State 12345');
-                            echo wp_kses_post($address);
-                            ?>
-                        </p>
+                
+                <h1 class="hero-title">
+                    Get in <span class="title-highlight">Touch</span>
+                </h1>
+                
+                <p class="hero-description">
+                    Ready to transform your space? Our expert team is here to help with all your home and business service needs. Let's discuss your project today.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support Available</div>
                     </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone" aria-hidden="true"></i>
-                        </div>
-                        <h3><?php esc_html_e('Phone', 'service-blueprint'); ?></h3>
-                        <p>
-                            <a href="tel:<?php echo esc_attr(str_replace(array(' ', '(', ')', '-'), '', get_theme_mod('service_blueprint_contact_phone', '+1 (555) 123-4567'))); ?>">
-                                <?php echo esc_html(get_theme_mod('service_blueprint_contact_phone', '+1 (555) 123-4567')); ?>
-                            </a>
-                        </p>
+                    <div class="stat-item">
+                        <div class="stat-number">< 2hr</div>
+                        <div class="stat-label">Response Time</div>
                     </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope" aria-hidden="true"></i>
-                        </div>
-                        <h3><?php esc_html_e('Email', 'service-blueprint'); ?></h3>
-                        <p>
-                            <a href="mailto:<?php echo esc_attr(get_theme_mod('service_blueprint_contact_email', get_option('admin_email'))); ?>">
-                                <?php echo esc_html(get_theme_mod('service_blueprint_contact_email', get_option('admin_email'))); ?>
-                            </a>
-                        </p>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock" aria-hidden="true"></i>
-                        </div>
-                        <h3><?php esc_html_e('Business Hours', 'service-blueprint'); ?></h3>
-                        <p>
-                            <?php 
-                            $hours = get_theme_mod('service_blueprint_business_hours', 'Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed');
-                            echo wp_kses_post($hours);
-                            ?>
-                        </p>
+                    <div class="stat-item">
+                        <div class="stat-number">5★</div>
+                        <div class="stat-label">Customer Rating</div>
                     </div>
                 </div>
-            </section>
+                
+                <div class="hero-buttons">
+                    <a href="#contact-form" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </a>
+                    <a href="tel:+1234567890" class="btn btn-secondary">
+                        <i class="fas fa-phone"></i>
+                        Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Contact Form -->
-            <section class="contact-form-section">
-                <div class="form-container">
-                    <h2><?php esc_html_e('Get In Touch', 'service-blueprint'); ?></h2>
-                    <p><?php esc_html_e('Ready to start your project? Send us a message and we\'ll get back to you as soon as possible.', 'service-blueprint'); ?></p>
-
-                    <form class="contact-form" id="contact-form" method="post" action="">
-                        <?php wp_nonce_field('contact_form_nonce', 'contact_nonce'); ?>
+    <!-- Main Contact Section -->
+    <section class="contact-main">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <div class="section-header">
+                        <h2>Send Us a Message</h2>
+                        <p>Ready to get started? Fill out the form below and we'll get back to you within 24 hours.</p>
+                    </div>
+                    
+                    <form id="contactForm" class="enhanced-contact-form" method="post" action="#">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                                <span class="form-icon"><i class="fas fa-user"></i></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                                <span class="form-icon"><i class="fas fa-envelope"></i></span>
+                            </div>
+                        </div>
                         
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="contact_name"><?php esc_html_e('Full Name', 'service-blueprint'); ?> <span class="required">*</span></label>
-                                <input type="text" id="contact_name" name="contact_name" required>
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                                <span class="form-icon"><i class="fas fa-phone"></i></span>
                             </div>
                             
                             <div class="form-group">
-                                <label for="contact_email"><?php esc_html_e('Email Address', 'service-blueprint'); ?> <span class="required">*</span></label>
-                                <input type="email" id="contact_email" name="contact_email" required>
+                                <label for="service">Service Needed</label>
+                                <select id="service" name="service">
+                                    <option value="">Select a service...</option>
+                                    <option value="house-cleaning">House Cleaning</option>
+                                    <option value="pressure-washing">Pressure Washing</option>
+                                    <option value="gutter-cleaning">Gutter Cleaning</option>
+                                    <option value="window-cleaning">Window Cleaning</option>
+                                    <option value="lawn-care">Lawn Care</option>
+                                    <option value="handyman">Handyman Services</option>
+                                    <option value="pet-services">Pet Services</option>
+                                    <option value="moving-help">Moving Assistance</option>
+                                    <option value="other">Other Services</option>
+                                </select>
+                                <span class="form-icon"><i class="fas fa-tools"></i></span>
                             </div>
                         </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="contact_phone"><?php esc_html_e('Phone Number', 'service-blueprint'); ?></label>
-                                <input type="tel" id="contact_phone" name="contact_phone">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="contact_company"><?php esc_html_e('Company', 'service-blueprint'); ?></label>
-                                <input type="text" id="contact_company" name="contact_company">
-                            </div>
-                        </div>
-
+                        
                         <div class="form-group">
-                            <label for="contact_service"><?php esc_html_e('Service of Interest', 'service-blueprint'); ?></label>
-                            <select id="contact_service" name="contact_service">
-                                <option value=""><?php esc_html_e('Select a service...', 'service-blueprint'); ?></option>
-                                <?php
-                                $service_categories = get_terms(array(
-                                    'taxonomy' => 'service_category',
-                                    'hide_empty' => false,
-                                ));
-                                
-                                if ($service_categories) :
-                                    foreach ($service_categories as $category) :
-                                ?>
-                                    <option value="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html($category->name); ?></option>
-                                <?php
-                                    endforeach;
-                                endif;
-                                ?>
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">How can we help you?</option>
+                                <option value="quote">Get a Free Quote</option>
+                                <option value="booking">Schedule Service</option>
+                                <option value="question">Ask a Question</option>
+                                <option value="partnership">Business Partnership</option>
+                                <option value="complaint">Feedback/Complaint</option>
+                                <option value="other">Other Inquiry</option>
                             </select>
+                            <span class="form-icon"><i class="fas fa-comment-alt"></i></span>
                         </div>
-
+                        
                         <div class="form-group">
-                            <label for="contact_budget"><?php esc_html_e('Project Budget', 'service-blueprint'); ?></label>
-                            <select id="contact_budget" name="contact_budget">
-                                <option value=""><?php esc_html_e('Select budget range...', 'service-blueprint'); ?></option>
-                                <option value="under-5k"><?php esc_html_e('Under $5,000', 'service-blueprint'); ?></option>
-                                <option value="5k-10k"><?php esc_html_e('$5,000 - $10,000', 'service-blueprint'); ?></option>
-                                <option value="10k-25k"><?php esc_html_e('$10,000 - $25,000', 'service-blueprint'); ?></option>
-                                <option value="25k-50k"><?php esc_html_e('$25,000 - $50,000', 'service-blueprint'); ?></option>
-                                <option value="50k-plus"><?php esc_html_e('$50,000+', 'service-blueprint'); ?></option>
-                            </select>
+                            <label for="message">Tell us about your project *</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Please describe your project, preferred timing, property size, specific requirements, or any questions you have..." required></textarea>
                         </div>
-
-                        <div class="form-group">
-                            <label for="contact_message"><?php esc_html_e('Message', 'service-blueprint'); ?> <span class="required">*</span></label>
-                            <textarea id="contact_message" name="contact_message" rows="6" required placeholder="<?php esc_attr_e('Tell us about your project...', 'service-blueprint'); ?>"></textarea>
+                        
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span class="checkmark"></span>
+                                <span class="checkbox-text">Subscribe to our newsletter for tips and special offers</span>
+                            </label>
                         </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="submit-btn">
-                                <span class="btn-text"><?php esc_html_e('Send Message', 'service-blueprint'); ?></span>
-                                <span class="btn-loading" style="display: none;"><?php esc_html_e('Sending...', 'service-blueprint'); ?></span>
-                            </button>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+                        </button>
+                        
+                        <div class="form-note">
+                            <i class="fas fa-shield-alt"></i>
+                            Your information is secure and will never be shared with third parties.
                         </div>
                     </form>
-
-                    <div id="form-messages"></div>
                 </div>
-            </section>
 
-            <!-- Page Content -->
-            <section class="page-content">
-                <div class="entry-content">
-                    <?php the_content(); ?>
+                <!-- Contact Information -->
+                <div class="contact-info-section">
+                    <div class="section-header">
+                        <h2>Get In Touch</h2>
+                        <p>Multiple ways to reach us. Choose what works best for you.</p>
+                    </div>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-item priority">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-content">
+                                <h3>Call Us Now</h3>
+                                <p><a href="tel:+1234567890">(123) 456-7890</a></p>
+                                <span class="availability">Available 7 days a week</span>
+                                <div class="contact-hours">
+                                    <small>Mon-Fri: 7AM-8PM | Weekends: 8AM-6PM</small>
+                                </div>
+                            </div>
+                            <div class="contact-badge">
+                                <span>Fast Response</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-content">
+                                <h3>Email Us</h3>
+                                <p><a href="mailto:hello@servicesbusiness.com">hello@servicesbusiness.com</a></p>
+                                <span class="availability">Response within 2 hours</span>
+                                <div class="contact-hours">
+                                    <small>Perfect for detailed project discussions</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="contact-content">
+                                <h3>Live Chat</h3>
+                                <p>Chat with our team instantly</p>
+                                <span class="availability">Available during business hours</span>
+                                <div class="contact-hours">
+                                    <small>Quick answers to simple questions</small>
+                                </div>
+                            </div>
+                            <button class="chat-btn" onclick="openChat()">
+                                <i class="fas fa-comment"></i> Start Chat
+                            </button>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-content">
+                                <h3>Visit Our Office</h3>
+                                <p>123 Business Street<br>Suite 100<br>Your City, ST 12345</p>
+                                <span class="availability">By appointment only</span>
+                                <div class="contact-hours">
+                                    <small>Perfect for large project consultations</small>
+                                </div>
+                            </div>
+                            <a href="https://maps.google.com" class="directions-btn" target="_blank">
+                                <i class="fas fa-directions"></i> Get Directions
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Emergency Contact -->
+                    <div class="emergency-contact">
+                        <div class="emergency-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Emergency Services</h3>
+                        </div>
+                        <p>Need urgent help? Call our 24/7 emergency line:</p>
+                        <a href="tel:+1234567891" class="emergency-number">(123) 456-7891</a>
+                        <small>Additional charges may apply for after-hours service</small>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-        <?php endwhile; ?>
-    </div>
-</main>
+    <!-- Service Areas Map -->
+    <section class="service-areas-map">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Service Areas</h2>
+                <p>We proudly serve the greater metropolitan area and surrounding communities</p>
+            </div>
+            
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <div class="map-content">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Interactive Service Area Map</h3>
+                        <p>Click on any area to learn more about our services in your neighborhood</p>
+                        <button class="map-btn">View Full Map</button>
+                    </div>
+                </div>
+                
+                <div class="service-areas-grid">
+                    <div class="area-card">
+                        <div class="area-icon">
+                            <i class="fas fa-city"></i>
+                        </div>
+                        <h4>Downtown Core</h4>
+                        <p>City center and business district</p>
+                        <ul>
+                            <li>Same-day service available</li>
+                            <li>Premium location coverage</li>
+                            <li>Extended hours available</li>
+                        </ul>
+                        <span class="coverage-badge">Full Coverage</span>
+                    </div>
+                    
+                    <div class="area-card">
+                        <div class="area-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h4>Residential Areas</h4>
+                        <p>Suburban neighborhoods and communities</p>
+                        <ul>
+                            <li>Regular service schedules</li>
+                            <li>Family-friendly services</li>
+                            <li>Neighborhood discounts</li>
+                        </ul>
+                        <span class="coverage-badge">Full Coverage</span>
+                    </div>
+                    
+                    <div class="area-card">
+                        <div class="area-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4>Commercial Districts</h4>
+                        <p>Office parks and retail centers</p>
+                        <ul>
+                            <li>Business hour flexibility</li>
+                            <li>Corporate contracts available</li>
+                            <li>Bulk service discounts</li>
+                        </ul>
+                        <span class="coverage-badge">Full Coverage</span>
+                    </div>
+                    
+                    <div class="area-card">
+                        <div class="area-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <h4>Outlying Areas</h4>
+                        <p>Rural and extended metropolitan areas</p>
+                        <ul>
+                            <li>Special trip scheduling</li>
+                            <li>Minimum service requirements</li>
+                            <li>Travel fee may apply</li>
+                        </ul>
+                        <span class="coverage-badge limited">Limited Coverage</span>
+                    </div>
+                </div>
+                
+                <div class="coverage-note">
+                    <div class="note-content">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <h4>Don't see your area?</h4>
+                            <p>We're constantly expanding our service areas. <a href="tel:+1234567890">Give us a call</a> to check if we can service your location or to get on our expansion waitlist.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<style>
-.contact-hero {
-    text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 12px;
-    margin-bottom: 60px;
-}
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions about our services</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-category">
+                    <h3><i class="fas fa-clock"></i> Scheduling & Timing</h3>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>How quickly can you start my project?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Most projects can be scheduled within 24-48 hours. Emergency services are available same-day for urgent situations with additional fees.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Do you work on weekends?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes! We offer weekend services at no additional charge. Weekend slots fill up quickly, so we recommend booking in advance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <h3><i class="fas fa-dollar-sign"></i> Pricing & Payment</h3>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>How do you calculate pricing?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Pricing depends on service type, property size, and specific requirements. We provide free, detailed quotes for all services with no hidden fees.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>What payment methods do you accept?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We accept cash, check, all major credit cards, PayPal, and Venmo. Payment is due upon completion unless other arrangements are made.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-category">
+                    <h3><i class="fas fa-shield-alt"></i> Insurance & Safety</h3>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Are you licensed and insured?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, we are fully licensed, bonded, and insured. We carry comprehensive liability insurance and can provide certificates upon request.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>What if something gets damaged?</h4>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Our insurance covers accidental damage. We'll work with you and our insurance provider to resolve any issues quickly and fairly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-.page-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>What Our Customers Say</h2>
+                <p>Real reviews from satisfied customers in your community</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card featured">
+                    <div class="testimonial-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">5.0</span>
+                    </div>
+                    <blockquote>
+                        "Absolutely amazing service! They transformed our dirty gutters and pressure washed our entire house. The team was professional, punctual, and went above and beyond our expectations."
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Homeowner, Oakville</p>
+                            <span class="service-type">House Cleaning & Pressure Washing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">5.0</span>
+                    </div>
+                    <blockquote>
+                        "Quick response for our moving day. The team helped us load and unload efficiently. Highly recommend for anyone needing moving assistance!"
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Mike Chen</h4>
+                            <p>Resident, Downtown</p>
+                            <span class="service-type">Moving Assistance</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">5.0</span>
+                    </div>
+                    <blockquote>
+                        "Regular dog walking service has been a lifesaver. My dog loves the walker and I love the GPS tracking and photo updates!"
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Lisa Rodriguez</h4>
+                            <p>Pet Owner, Suburbs</p>
+                            <span class="service-type">Pet Services</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonials-stats">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.9</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Would Recommend</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24hr</div>
+                    <div class="stat-label">Avg Response Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-.page-description {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-info {
-    margin-bottom: 80px;
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.contact-item {
-    text-align: center;
-    padding: 40px 30px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e5e7eb;
-    transition: all 0.3s ease;
-}
-
-.contact-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.contact-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    color: white;
-    font-size: 1.8rem;
-}
-
-.contact-item h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 15px;
-}
-
-.contact-item p {
-    color: #6b7280;
-    line-height: 1.6;
-}
-
-.contact-item a {
-    color: #2563eb;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.contact-item a:hover {
-    color: #1d4ed8;
-}
-
-.contact-form-section {
-    background: #f9fafb;
-    padding: 80px 0;
-    border-radius: 12px;
-    margin-bottom: 60px;
-}
-
-.form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.contact-form-section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 15px;
-}
-
-.contact-form-section p {
-    text-align: center;
-    color: #6b7280;
-    margin-bottom: 40px;
-    font-size: 1.1rem;
-}
-
-.contact-form {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: 500;
-    color: #374151;
-    margin-bottom: 8px;
-}
-
-.required {
-    color: #ef4444;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background-color: #ffffff;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-.submit-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-}
-
-.submit-btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none;
-}
-
-#form-messages {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 6px;
-    display: none;
-}
-
-#form-messages.success {
-    background: #dcfce7;
-    color: #166534;
-    border: 1px solid #bbf7d0;
-}
-
-#form-messages.error {
-    background: #fef2f2;
-    color: #dc2626;
-    border: 1px solid #fecaca;
-}
-
-.page-content {
-    margin-top: 60px;
-}
-
-.entry-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-    color: #374151;
-    line-height: 1.8;
-}
-
-@media (max-width: 768px) {
-    .contact-hero {
-        padding: 40px 15px;
-    }
-    
-    .page-title {
-        font-size: 2.5rem;
-    }
-    
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .contact-item {
-        padding: 30px 20px;
-    }
-    
-    .contact-form-section {
-        padding: 60px 0;
-    }
-    
-    .contact-form {
-        padding: 30px 20px;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-    
-    .contact-form-section h2 {
-        font-size: 2rem;
-    }
-}
-</style>
+    <!-- CTA Section -->
+    <section class="contact-cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2>Ready to Get Started?</h2>
+                    <p>Join hundreds of satisfied customers who trust us with their home and business needs. Get your free quote today!</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="tel:+1234567890" class="btn btn-primary">
+                        <i class="fas fa-phone"></i>
+                        Call Now
+                    </a>
+                    <a href="#contact-form" class="btn btn-secondary">
+                        <i class="fas fa-form"></i>
+                        Get Free Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
 <script>
+// Enhanced Contact Page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contact-form');
-    const messages = document.getElementById('form-messages');
-    const submitBtn = form.querySelector('.submit-btn');
-    const btnText = submitBtn.querySelector('.btn-text');
-    const btnLoading = submitBtn.querySelector('.btn-loading');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Show loading state
-        submitBtn.disabled = true;
-        btnText.style.display = 'none';
-        btnLoading.style.display = 'inline';
-        
-        // Hide previous messages
-        messages.style.display = 'none';
-        messages.className = '';
-        
-        // Collect form data
-        const formData = new FormData(form);
-        formData.append('action', 'handle_contact_form');
-        
-        // Submit form
-        fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Reset button state
-            submitBtn.disabled = false;
-            btnText.style.display = 'inline';
-            btnLoading.style.display = 'none';
+    // Form handling
+    const form = document.getElementById('contactForm');
+    
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Show message
-            messages.style.display = 'block';
+            // Get form data
+            const formData = new FormData(form);
+            const name = formData.get('name').trim();
+            const email = formData.get('email').trim();
+            const subject = formData.get('subject');
+            const message = formData.get('message').trim();
             
-            if (data.success) {
-                messages.className = 'success';
-                messages.textContent = data.data;
-                form.reset();
-            } else {
-                messages.className = 'error';
-                messages.textContent = data.data || 'An error occurred. Please try again.';
+            // Validation
+            if (!name || !email || !subject || !message) {
+                showNotification('Please fill in all required fields.', 'error');
+                return;
             }
-        })
-        .catch(error => {
-            // Reset button state
-            submitBtn.disabled = false;
-            btnText.style.display = 'inline';
-            btnLoading.style.display = 'none';
             
-            // Show error message
-            messages.style.display = 'block';
-            messages.className = 'error';
-            messages.textContent = 'An error occurred. Please try again.';
+            if (!isValidEmail(email)) {
+                showNotification('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalText = submitBtn.querySelector('.btn-text').textContent;
+            
+            submitBtn.classList.add('loading');
+            submitBtn.querySelector('.btn-text').textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(function() {
+                submitBtn.classList.remove('loading');
+                submitBtn.classList.add('success');
+                submitBtn.querySelector('.btn-text').textContent = 'Message Sent!';
+                
+                showNotification('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.', 'success');
+                
+                // Reset form after success
+                setTimeout(function() {
+                    form.reset();
+                    submitBtn.classList.remove('success');
+                    submitBtn.querySelector('.btn-text').textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 3000);
+            }, 2000);
+        });
+    }
+    
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', function() {
+            const isActive = item.classList.contains('active');
+            
+            // Close all other FAQ items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active', !isActive);
         });
     });
+    
+    // Smooth scrolling for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Form field animations
+    const formGroups = document.querySelectorAll('.form-group');
+    formGroups.forEach(group => {
+        const input = group.querySelector('input, select, textarea');
+        if (input) {
+            input.addEventListener('focus', function() {
+                group.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    group.classList.remove('focused');
+                }
+            });
+            
+            // Check if field has value on load
+            if (input.value) {
+                group.classList.add('focused');
+            }
+        }
+    });
+    
+    // Live chat simulation
+    window.openChat = function() {
+        showNotification('Chat feature coming soon! For immediate assistance, please call us at (123) 456-7890', 'info');
+    };
+    
+    // Map interaction simulation
+    const mapBtn = document.querySelector('.map-btn');
+    if (mapBtn) {
+        mapBtn.addEventListener('click', function() {
+            showNotification('Interactive map opening... This would integrate with Google Maps or similar service.', 'info');
+        });
+    }
 });
+
+// Utility functions
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notification => notification.remove());
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <div class="notification-icon">
+                <i class="fas ${getNotificationIcon(type)}"></i>
+            </div>
+            <div class="notification-message">${message}</div>
+            <button class="notification-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Show notification
+    setTimeout(() => notification.classList.add('show'), 100);
+    
+    // Auto hide after 5 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 5000);
+    
+    // Close button functionality
+    notification.querySelector('.notification-close').addEventListener('click', function() {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    });
+}
+
+function getNotificationIcon(type) {
+    switch(type) {
+        case 'success': return 'fa-check-circle';
+        case 'error': return 'fa-exclamation-circle';
+        case 'warning': return 'fa-exclamation-triangle';
+        default: return 'fa-info-circle';
+    }
+}
 </script>
 
 <?php get_footer(); ?>

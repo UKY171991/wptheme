@@ -1,0 +1,406 @@
+/* ========================================
+   CLEAN HEADER MENU SYSTEM - COMPLETE REWRITE
+   Simple, reliable dropdown menu that actually works
+   ======================================== */
+
+/* ========================================
+   RESET ALL EXISTING MENU STYLES
+   ======================================== */
+
+/* Prevent body margin/padding that sticky headers might add */
+body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.site-header,
+.site-header * {
+    box-sizing: border-box !important;
+}
+
+/* ========================================
+   HEADER CONTAINER
+   ======================================== */
+
+/* ANTI-STICKY OVERRIDE: Absolutely prevent any sticky/fixed positioning */
+.site-header,
+#masthead,
+#masthead.site-header,
+.site-header#masthead,
+header.site-header,
+header#masthead {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+    transform: none !important;
+    z-index: 999 !important;
+    background: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    height: 80px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Additional anti-sticky overrides for common selectors */
+body .site-header,
+body #masthead,
+body header {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+}
+
+.site-header .header-container {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+}
+
+/* ========================================
+   LOGO/BRANDING
+   ======================================== */
+
+.site-header .site-branding {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.site-header .site-branding h1.site-title {
+    margin: 0 !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #0b1133 !important;
+}
+
+.site-header .site-branding h1.site-title a {
+    color: #0b1133 !important;
+    text-decoration: none !important;
+}
+
+.site-header .site-branding .custom-logo {
+    height: 50px !important;
+    width: auto !important;
+}
+
+/* ========================================
+   NAVIGATION MENU
+   ======================================== */
+
+.site-header .main-navigation {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+.site-header .nav-menu {
+    display: flex !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+.site-header .nav-menu > .menu-item {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.site-header .nav-menu > .menu-item > a {
+    display: flex !important;
+    align-items: center !important;
+    height: 80px !important;
+    padding: 0 20px !important;
+    color: #333333 !important;
+    text-decoration: none !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    border-bottom: 3px solid transparent !important;
+}
+
+.site-header .nav-menu > .menu-item > a:hover,
+.site-header .nav-menu > .menu-item.current-menu-item > a {
+    color: #ff5f00 !important;
+    border-bottom-color: #ff5f00 !important;
+}
+
+/* ========================================
+   DROPDOWN INDICATOR
+   ======================================== */
+
+.site-header .nav-menu .menu-item-has-children > a::after {
+    content: '▼' !important;
+    font-size: 12px !important;
+    margin-left: 8px !important;
+    transition: transform 0.3s ease !important;
+}
+
+.site-header .nav-menu .menu-item-has-children:hover > a::after {
+    transform: rotate(180deg) !important;
+}
+
+/* ========================================
+   DROPDOWN MENU
+   ======================================== */
+
+.site-header .nav-menu .sub-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    min-width: 250px !important;
+    background: #0b1133 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    border-top: 3px solid #ff5f00 !important;
+    list-style: none !important;
+    padding: 10px 0 !important;
+    margin: 0 !important;
+    z-index: 999999 !important;
+    
+    /* Hidden by default */
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Multi-level dropdown positioning */
+.site-header .nav-menu .sub-menu .sub-menu {
+    position: absolute !important;
+    top: 0 !important;
+    left: 100% !important;
+    margin-left: 5px !important;
+    transform: translateX(-10px) !important;
+    z-index: 999999 !important;
+}
+
+/* Show dropdown on hover */
+.site-header .nav-menu .menu-item-has-children:hover > .sub-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+/* Show multi-level dropdown on hover */
+.site-header .nav-menu .sub-menu .menu-item-has-children:hover > .sub-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) !important;
+}
+
+.site-header .nav-menu .sub-menu .menu-item {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.site-header .nav-menu .sub-menu .menu-item a {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 20px !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+}
+
+.site-header .nav-menu .sub-menu .menu-item a:hover {
+    background: rgba(255, 95, 0, 0.1) !important;
+    color: #ff5f00 !important;
+    padding-left: 30px !important;
+}
+
+/* Multi-level dropdown indicators */
+.site-header .nav-menu .sub-menu .menu-item-has-children > a::after {
+    content: '▶' !important;
+    font-size: 10px !important;
+    float: right !important;
+    margin-top: 2px !important;
+    transition: transform 0.3s ease !important;
+}
+
+.site-header .nav-menu .sub-menu .menu-item-has-children:hover > a::after {
+    transform: rotate(90deg) !important;
+}
+
+/* ========================================
+   MOBILE MENU TOGGLE
+   ======================================== */
+
+.site-header .menu-toggle {
+    display: none !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 10px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+
+.site-header .menu-toggle-icon {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+}
+
+.site-header .hamburger-line {
+    width: 25px !important;
+    height: 3px !important;
+    background: #333333 !important;
+    transition: all 0.3s ease !important;
+}
+
+.site-header .menu-toggle-text {
+    font-size: 12px !important;
+    color: #333333 !important;
+}
+
+/* ========================================
+   BODY PADDING REMOVED (NO FIXED HEADER)
+   ======================================== */
+
+body {
+    padding-top: 0 !important;
+    margin: 0 !important;
+}
+
+/* ========================================
+   MOBILE RESPONSIVE
+   ======================================== */
+
+@media screen and (max-width: 768px) {
+    .site-header {
+        height: 70px !important;
+        position: static !important;
+    }
+    
+    body {
+        padding-top: 0 !important;
+    }
+    
+    .site-header .menu-toggle {
+        display: flex !important;
+    }
+    
+    .site-header .nav-menu {
+        position: absolute !important;
+        top: 70px !important;
+        left: -100% !important;
+        width: 100% !important;
+        height: calc(100vh - 70px) !important;
+        background: #ffffff !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        padding: 20px !important;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+        transition: left 0.3s ease !important;
+        overflow-y: auto !important;
+    }
+    
+    .site-header .nav-menu.mobile-open {
+        left: 0 !important;
+    }
+    
+    .site-header .nav-menu > .menu-item {
+        width: 100% !important;
+        height: auto !important;
+        border-bottom: 1px solid #eeeeee !important;
+    }
+    
+    .site-header .nav-menu > .menu-item > a {
+        width: 100% !important;
+        height: auto !important;
+        padding: 15px 0 !important;
+        border-bottom: none !important;
+        justify-content: space-between !important;
+    }
+    
+    .site-header .nav-menu .sub-menu {
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        background: #f8f9fa !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-left: 3px solid #ff5f00 !important;
+        margin: 10px 0 !important;
+        display: none !important;
+    }
+    
+    .site-header .nav-menu .menu-item.dropdown-open > .sub-menu {
+        display: block !important;
+    }
+    
+    /* Multi-level mobile dropdowns */
+    .site-header .nav-menu .sub-menu .sub-menu {
+        background: #e9ecef !important;
+        border-left: 3px solid #ff8533 !important;
+        margin-left: 20px !important;
+    }
+    
+    .site-header .nav-menu .sub-menu .menu-item a {
+        color: #333333 !important;
+        padding-left: 30px !important;
+    }
+    
+    .site-header .nav-menu .sub-menu .sub-menu .menu-item a {
+        color: #333333 !important;
+        padding-left: 50px !important;
+    }
+    
+    .site-header .nav-menu .sub-menu .menu-item a:hover,
+    .site-header .nav-menu .sub-menu .sub-menu .menu-item a:hover {
+        background: rgba(255, 95, 0, 0.1) !important;
+        color: #ff5f00 !important;
+        padding-left: 40px !important;
+    }
+    
+    .site-header .nav-menu .sub-menu .sub-menu .menu-item a:hover {
+        padding-left: 60px !important;
+    }
+}
+
+/* ========================================
+   OVERRIDE ALL CONFLICTING STYLES
+   ======================================== */
+
+/* Nuclear option - override everything */
+html body .site-header .nav-menu .menu-item-has-children:hover > .sub-menu,
+body .site-header .nav-menu .menu-item-has-children:hover > .sub-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    display: block !important;
+}
+
+/* Ensure dropdowns stay visible when hovering over them */
+.site-header .nav-menu .sub-menu:hover {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    display: block !important;
+}

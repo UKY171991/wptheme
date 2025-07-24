@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Menu Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="header-styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .test-header {
+            background: #ff5f00;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .debug-panel {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .debug-panel h4 {
+            margin: 0 0 10px 0;
+            font-family: Arial, sans-serif;
+            color: #495057;
+        }
+        .test-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .test-controls button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .test-controls button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h2>🔧 Mobile Menu Test Environment</h2>
+            <p>Testing multi-level mobile menu functionality</p>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+            <span>Toggle Menu</span>
+        </button>
+
+        <!-- Mobile Menu Container -->
+        <div class="mobile-menu-container">
+            <ul class="nav-menu-mobile">
+                <li class="menu-item"><a href="#home">Home</a></li>
+                <li class="menu-item"><a href="#about">About</a></li>
+                <li class="menu-item menu-item-has-children">
+                    <a href="#services">Services</a>
+                    <ul class="sub-menu">
+                        <li class="menu-item menu-item-has-children">
+                            <a href="#coaching">🎓 Coaching & Consulting</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item"><a href="#business-coaching">Business Coaching</a></li>
+                                <li class="menu-item"><a href="#public-speaking">Public Speaking</a></li>
+                                <li class="menu-item"><a href="#life-coaching">Life Coaching</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item menu-item-has-children">
+                            <a href="#pets">Pet & Animal Services</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item"><a href="#pet-sitting">Pet Sitting</a></li>
+                                <li class="menu-item"><a href="#dog-walking">Dog Walking</a></li>
+                                <li class="menu-item"><a href="#pet-grooming">Pet Grooming</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item"><a href="#cleaning">Cleaning Services</a></li>
+                        <li class="menu-item"><a href="#maintenance">Home Maintenance</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#pricing">Pricing</a></li>
+                <li class="menu-item"><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <div class="mobile-contact">
+                <a href="tel:1234567890"><i class="fas fa-phone-alt"></i></a>
+                <a href="mailto:test@example.com"><i class="fas fa-envelope"></i></a>
+                <a href="#contact"><i class="fas fa-calendar-check"></i></a>
+            </div>
+        </div>
+
+        <div class="test-controls">
+            <button onclick="testMobileMenu()">🧪 Run Test</button>
+            <button onclick="clearDebug()">🗑️ Clear Debug</button>
+            <button onclick="simulateTouch()">📱 Simulate Touch</button>
+        </div>
+
+        <div class="debug-panel">
+            <h4>🐛 Debug Console</h4>
+            <div id="debug-output">Initializing...</div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Additional test functions
+        function log(message) {
+            const output = document.getElementById('debug-output');
+            const timestamp = new Date().toLocaleTimeString();
+            output.innerHTML += `<br>[${timestamp}] ${message}`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function clearDebug() {
+            document.getElementById('debug-output').innerHTML = 'Debug cleared...';
+        }
+
+        function simulateTouch() {
+            log('Simulating touch interactions...');
+            const menuItems = document.querySelectorAll('.menu-item-has-children > a');
+            menuItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.click();
+                    log(`Clicked: ${item.textContent.trim()}`);
+                }, index * 1000);
+            });
+        }
+
+        // Enhanced debugging
+        $(document).ready(function() {
+            log('jQuery loaded and ready');
+            log('Menu toggle elements: ' + $('.menu-toggle').length);
+            log('Mobile menu containers: ' + $('.mobile-menu-container').length);
+            log('Menu items with children: ' + $('.menu-item-has-children').length);
+            
+            // Monitor menu state changes
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const target = mutation.target;
+                        if (target.classList.contains('mobile-menu-container')) {
+                            log(`Menu container class changed: ${target.className}`);
+                        } else if (target.classList.contains('menu-item-has-children')) {
+                            log(`Menu item class changed: ${target.className}`);
+                        }
+                    }
+                });
+            });
+
+            observer.observe(document.body, {
+                attributes: true,
+                attributeFilter: ['class'],
+                subtree: true
+            });
+
+            // Test window function
+            window.testMobileMenu = function() {
+                log('Running comprehensive menu test...');
+                
+                // Test 1: Menu toggle
+                const $toggle = $('.menu-toggle');
+                const $menu = $('.mobile-menu-container');
+                
+                log(`Test 1 - Toggle: ${$toggle.length > 0 ? 'FOUND' : 'NOT FOUND'}`);
+                log(`Test 1 - Menu: ${$menu.length > 0 ? 'FOUND' : 'NOT FOUND'}`);
+                
+                if ($toggle.length && $menu.length) {
+                    $toggle.click();
+                    setTimeout(() => {
+                        const isActive = $menu.hasClass('active');
+                        log(`Test 1 - Menu opened: ${isActive ? 'SUCCESS' : 'FAILED'}`);
+                        
+                        // Test 2: Submenu functionality
+                        const $firstSubmenu = $('.menu-item-has-children').first();
+                        if ($firstSubmenu.length) {
+                            const $link = $firstSubmenu.children('a');
+                            log(`Test 2 - Testing submenu: "${$link.text().trim()}"`);
+                            $link.click();
+                            
+                            setTimeout(() => {
+                                const submenuActive = $firstSubmenu.hasClass('active');
+                                log(`Test 2 - Submenu opened: ${submenuActive ? 'SUCCESS' : 'FAILED'}`);
+                                
+                                // Test 3: Nested submenu
+                                const $nestedSubmenu = $firstSubmenu.find('.menu-item-has-children').first();
+                                if ($nestedSubmenu.length) {
+                                    const $nestedLink = $nestedSubmenu.children('a');
+                                    log(`Test 3 - Testing nested submenu: "${$nestedLink.text().trim()}"`);
+                                    $nestedLink.click();
+                                    
+                                    setTimeout(() => {
+                                        const nestedActive = $nestedSubmenu.hasClass('active');
+                                        log(`Test 3 - Nested submenu opened: ${nestedActive ? 'SUCCESS' : 'FAILED'}`);
+                                        log('All tests completed!');
+                                    }, 500);
+                                } else {
+                                    log('Test 3 - No nested submenus found');
+                                }
+                            }, 500);
+                        } else {
+                            log('Test 2 - No submenus found');
+                        }
+                    }, 500);
+                } else {
+                    log('Test 1 - Required elements not found');
+                }
+            };
+        });
+
+        // Override console.log to capture logs
+        const originalLog = console.log;
+        console.log = function(...args) {
+            log(args.join(' '));
+            originalLog.apply(console, args);
+        };
+    </script>
+</body>
+</html>

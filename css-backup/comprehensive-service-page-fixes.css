@@ -1,0 +1,581 @@
+/* 
+🔧 COMPREHENSIVE SERVICE PAGE LAYOUT FIX
+🎯 Fixes ALL sections on the service page
+📱 Mobile-first responsive design
+✅ Overrides all problematic layouts
+*/
+
+/* =================================================
+   UNIVERSAL RESETS & MOBILE-FIRST BASE
+   ================================================= */
+
+/* Force proper box-sizing for all service page elements */
+.page-template-page-services * {
+    box-sizing: border-box !important;
+}
+
+/* Fix container overflow issues */
+.page-template-page-services .container,
+.page-template-page-services .row,
+.page-template-page-services .col-md-12 {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 15px !important;
+    overflow: hidden !important;
+}
+
+/* =================================================
+   HERO SECTION FIXES
+   ================================================= */
+
+/* Fix hero section layout completely */
+.page-template-page-services .ultra-fancy-hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    min-height: 60vh !important;
+    max-height: 60vh !important;
+    overflow: hidden !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 40px 20px !important;
+}
+
+/* Remove problematic hero elements */
+.page-template-page-services .particles-js,
+.page-template-page-services .cosmic-particles,
+.page-template-page-services .animated-badge-carousel,
+.page-template-page-services .floating-elements {
+    display: none !important;
+}
+
+/* Fix hero content */
+.page-template-page-services .hero-content {
+    text-align: center !important;
+    max-width: 600px !important;
+    z-index: 10 !important;
+    color: white !important;
+}
+
+.page-template-page-services .hero-content h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 20px !important;
+    color: white !important;
+}
+
+.page-template-page-services .hero-content p {
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 30px !important;
+    color: rgba(255,255,255,0.9) !important;
+}
+
+/* =================================================
+   STATISTICS SECTION FIXES
+   ================================================= */
+
+/* Fix stats section completely */
+.page-template-page-services .ultra-fancy-stats-section,
+.page-template-page-services .stats-section {
+    padding: 60px 0 !important;
+    background: #f8f9fa !important;
+    overflow: hidden !important;
+}
+
+/* Remove 3D animations */
+.page-template-page-services .stat-3d-card,
+.page-template-page-services .animated-counter,
+.page-template-page-services .cosmic-background {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Create proper stats grid */
+.page-template-page-services .stats-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 30px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+.page-template-page-services .stat-item {
+    background: white !important;
+    padding: 30px 20px !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+    transform: none !important;
+}
+
+.page-template-page-services .stat-number {
+    font-size: 2.5rem !important;
+    font-weight: bold !important;
+    color: #667eea !important;
+    margin-bottom: 10px !important;
+    display: block !important;
+}
+
+.page-template-page-services .stat-label {
+    font-size: 1rem !important;
+    color: #666 !important;
+    margin: 0 !important;
+}
+
+/* =================================================
+   SERVICE FILTER SECTION FIXES
+   ================================================= */
+
+/* Fix service filter tabs */
+.page-template-page-services .ultra-fancy-service-filter,
+.page-template-page-services .cosmic-filter-tabs {
+    padding: 40px 0 !important;
+    background: white !important;
+}
+
+/* Reset filter buttons */
+.page-template-page-services .filter-tabs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 15px !important;
+    margin: 0 auto !important;
+    max-width: 800px !important;
+    padding: 0 20px !important;
+}
+
+.page-template-page-services .filter-tab {
+    background: #f8f9fa !important;
+    border: 2px solid #e9ecef !important;
+    padding: 12px 24px !important;
+    border-radius: 25px !important;
+    color: #495057 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    animation: none !important;
+    transform: none !important;
+}
+
+.page-template-page-services .filter-tab:hover,
+.page-template-page-services .filter-tab.active {
+    background: #667eea !important;
+    border-color: #667eea !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+}
+
+/* =================================================
+   SERVICE CARDS SECTION FIXES
+   ================================================= */
+
+/* Fix service cards grid */
+.page-template-page-services .services-grid,
+.page-template-page-services .ultra-fancy-services-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: 30px !important;
+    padding: 60px 20px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    background: #f8f9fa !important;
+}
+
+/* Fix individual service cards */
+.page-template-page-services .service-card {
+    background: white !important;
+    border-radius: 15px !important;
+    padding: 30px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    height: auto !important;
+    min-height: 350px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    animation: none !important;
+    transform: none !important;
+}
+
+.page-template-page-services .service-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
+}
+
+/* Fix card content */
+.page-template-page-services .service-icon {
+    width: 60px !important;
+    height: 60px !important;
+    margin: 0 auto 20px !important;
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: white !important;
+    font-size: 24px !important;
+}
+
+.page-template-page-services .service-title {
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    margin-bottom: 15px !important;
+    text-align: center !important;
+}
+
+.page-template-page-services .service-description {
+    flex-grow: 1 !important;
+    color: #666 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+}
+
+.page-template-page-services .service-price {
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+    color: #667eea !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+}
+
+.page-template-page-services .service-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+    padding: 12px 30px !important;
+    border-radius: 25px !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: block !important;
+    margin: 0 auto !important;
+    width: fit-content !important;
+}
+
+.page-template-page-services .service-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* =================================================
+   QUOTE CALCULATOR FIXES
+   ================================================= */
+
+/* Fix quote calculator section */
+.page-template-page-services .quote-calculator-section {
+    padding: 80px 0 !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+.page-template-page-services .quote-calculator {
+    max-width: 600px !important;
+    margin: 0 auto !important;
+    padding: 40px !important;
+    background: rgba(255,255,255,0.1) !important;
+    border-radius: 20px !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.page-template-page-services .quote-calculator h3 {
+    text-align: center !important;
+    margin-bottom: 30px !important;
+    font-size: 2rem !important;
+    color: white !important;
+}
+
+/* Fix form elements */
+.page-template-page-services .quote-form {
+    display: grid !important;
+    gap: 20px !important;
+}
+
+.page-template-page-services .form-group {
+    margin-bottom: 20px !important;
+}
+
+.page-template-page-services .form-group label {
+    display: block !important;
+    margin-bottom: 8px !important;
+    font-weight: 600 !important;
+    color: white !important;
+}
+
+.page-template-page-services .form-group input,
+.page-template-page-services .form-group select,
+.page-template-page-services .form-group textarea {
+    width: 100% !important;
+    padding: 12px 15px !important;
+    border: none !important;
+    border-radius: 8px !important;
+    background: rgba(255,255,255,0.9) !important;
+    color: #333 !important;
+    font-size: 1rem !important;
+}
+
+.page-template-page-services .quote-result {
+    background: rgba(255,255,255,0.2) !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    margin-top: 20px !important;
+}
+
+/* =================================================
+   BENEFITS SECTION FIXES
+   ================================================= */
+
+/* Fix benefits section */
+.page-template-page-services .benefits-section {
+    padding: 80px 0 !important;
+    background: #f8f9fa !important;
+}
+
+.page-template-page-services .benefits-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 30px !important;
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+.page-template-page-services .benefit-item {
+    background: white !important;
+    padding: 30px 20px !important;
+    border-radius: 15px !important;
+    text-align: center !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+    animation: none !important;
+    transform: none !important;
+}
+
+.page-template-page-services .benefit-icon {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 0 auto 20px !important;
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: white !important;
+    font-size: 20px !important;
+}
+
+/* =================================================
+   CTA SECTION FIXES
+   ================================================= */
+
+/* Fix CTA section */
+.page-template-page-services .cta-section {
+    padding: 80px 0 !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    text-align: center !important;
+    color: white !important;
+}
+
+.page-template-page-services .cta-content {
+    max-width: 600px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+.page-template-page-services .cta-title {
+    font-size: 2.5rem !important;
+    margin-bottom: 20px !important;
+    color: white !important;
+}
+
+.page-template-page-services .cta-description {
+    font-size: 1.1rem !important;
+    margin-bottom: 30px !important;
+    color: rgba(255,255,255,0.9) !important;
+}
+
+.page-template-page-services .cta-button {
+    background: white !important;
+    color: #667eea !important;
+    padding: 15px 40px !important;
+    border-radius: 30px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    transition: all 0.3s ease !important;
+    display: inline-block !important;
+}
+
+.page-template-page-services .cta-button:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px rgba(255,255,255,0.3) !important;
+}
+
+/* =================================================
+   MOBILE RESPONSIVE FIXES
+   ================================================= */
+
+@media (max-width: 768px) {
+    /* Mobile hero fixes */
+    .page-template-page-services .ultra-fancy-hero-section {
+        min-height: 50vh !important;
+        max-height: 50vh !important;
+        padding: 30px 15px !important;
+    }
+    
+    .page-template-page-services .hero-content h1 {
+        font-size: 2rem !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .page-template-page-services .hero-content p {
+        font-size: 1rem !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Mobile stats fixes */
+    .page-template-page-services .stats-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+        padding: 0 15px !important;
+    }
+    
+    .page-template-page-services .stat-item {
+        padding: 20px 15px !important;
+    }
+    
+    .page-template-page-services .stat-number {
+        font-size: 2rem !important;
+    }
+    
+    /* Mobile filter fixes */
+    .page-template-page-services .filter-tabs {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 0 15px !important;
+    }
+    
+    .page-template-page-services .filter-tab {
+        width: 100% !important;
+        max-width: 200px !important;
+        text-align: center !important;
+    }
+    
+    /* Mobile service cards fixes */
+    .page-template-page-services .services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 40px 15px !important;
+    }
+    
+    .page-template-page-services .service-card {
+        padding: 25px !important;
+        min-height: 300px !important;
+    }
+    
+    /* Mobile quote calculator fixes */
+    .page-template-page-services .quote-calculator {
+        margin: 0 15px !important;
+        padding: 30px 20px !important;
+    }
+    
+    .page-template-page-services .quote-calculator h3 {
+        font-size: 1.5rem !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Mobile benefits fixes */
+    .page-template-page-services .benefits-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 0 15px !important;
+    }
+    
+    /* Mobile CTA fixes */
+    .page-template-page-services .cta-title {
+        font-size: 2rem !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .page-template-page-services .cta-description {
+        font-size: 1rem !important;
+        margin-bottom: 25px !important;
+    }
+    
+    .page-template-page-services .cta-button {
+        padding: 12px 30px !important;
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small mobile fixes */
+    .page-template-page-services .container,
+    .page-template-page-services .row {
+        padding: 0 10px !important;
+    }
+    
+    .page-template-page-services .stats-container {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .page-template-page-services .hero-content h1 {
+        font-size: 1.75rem !important;
+    }
+    
+    .page-template-page-services .service-card {
+        padding: 20px !important;
+    }
+    
+    .page-template-page-services .quote-calculator {
+        padding: 20px 15px !important;
+    }
+}
+
+/* =================================================
+   EMERGENCY OVERRIDES FOR STUBBORN ELEMENTS
+   ================================================= */
+
+/* Force hide any remaining problematic elements */
+.page-template-page-services .particles-canvas,
+.page-template-page-services .cosmic-animation,
+.page-template-page-services .floating-badge,
+.page-template-page-services .ultra-complex-element,
+.page-template-page-services .mega-fancy-overlay {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Force proper layouts for any missed containers */
+.page-template-page-services div[class*="ultra"],
+.page-template-page-services div[class*="mega"],
+.page-template-page-services div[class*="cosmic"] {
+    animation: none !important;
+    transform: none !important;
+    position: static !important;
+    overflow: visible !important;
+}
+
+/* Success indicator */
+.service-page-layout-fixed::before {
+    content: "✅ All Service Page Layouts Fixed!" !important;
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    background: #28a745 !important;
+    color: white !important;
+    padding: 10px 15px !important;
+    border-radius: 5px !important;
+    z-index: 9999 !important;
+    font-weight: bold !important;
+}

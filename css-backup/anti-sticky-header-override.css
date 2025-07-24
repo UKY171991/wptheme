@@ -1,0 +1,110 @@
+/* ========================================
+   ANTI-STICKY HEADER OVERRIDE
+   Ultimate override to prevent ANY sticky header behavior
+   ======================================== */
+
+/* Nuclear option: Override ANY possible sticky header selectors */
+header,
+#header,
+.header,
+#masthead,
+.masthead,
+.site-header,
+#site-header,
+.main-header,
+#main-header,
+.primary-header,
+#primary-header,
+.top-header,
+#top-header,
+nav.navbar,
+.navbar-fixed-top,
+.navbar-fixed,
+.fixed-header,
+.sticky-header,
+.sticky-nav,
+.fixed-nav,
+[data-sticky],
+[class*="sticky"],
+[class*="fixed"] {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+}
+
+/* Specifically target common WordPress header selectors */
+body .site-header,
+body #masthead,
+body header.site-header,
+.site-header#masthead,
+#masthead.site-header {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+}
+
+/* Prevent body adjustments for sticky headers */
+body,
+html body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Override any inline styles */
+body [style*="position: fixed"],
+body [style*="position:fixed"],
+body [style*="position: sticky"],
+body [style*="position:sticky"] {
+    position: static !important;
+    top: auto !important;
+}
+
+/* Override JavaScript-added sticky classes */
+.js-sticky,
+.is-sticky,
+.sticky-active,
+.header-sticky,
+.nav-sticky,
+.menu-sticky {
+    position: static !important;
+    top: auto !important;
+    transform: none !important;
+}
+
+/* Media queries to ensure this works on all screen sizes */
+@media (max-width: 768px) {
+    header,
+    #header,
+    .header,
+    #masthead,
+    .site-header,
+    nav {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+    }
+}
+
+@media (min-width: 769px) {
+    header,
+    #header,
+    .header,
+    #masthead,
+    .site-header,
+    nav {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+    }
+}

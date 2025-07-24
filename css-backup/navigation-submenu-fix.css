@@ -1,0 +1,336 @@
+/*
+Navigation Submenu Fix
+Fixes multi-level navigation issues with hover states and clickability
+*/
+
+/* ========================================
+   CRITICAL MENU COLOR FIXES
+   ======================================== */
+
+/* Force correct background colors for all menu levels */
+.nav-menu .sub-menu,
+.nav-menu .sub-menu .sub-menu {
+    background: #0b1133 !important;
+    color: white !important;
+}
+
+/* Ensure menu items have correct colors */
+.nav-menu .sub-menu li {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+.nav-menu .sub-menu a {
+    background: transparent !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.nav-menu .sub-menu a:hover,
+.nav-menu .sub-menu a:focus {
+    background-color: rgba(255,95,0,0.1) !important;
+    color: #ff5f00 !important;
+    text-decoration: none !important;
+}
+
+/* Fix any WordPress default menu styling conflicts */
+.nav-menu .sub-menu li a,
+.nav-menu .sub-menu li a:visited {
+    color: white !important;
+}
+
+.nav-menu .sub-menu li a:hover,
+.nav-menu .sub-menu li a:focus,
+.nav-menu .sub-menu li a:active {
+    color: #ff5f00 !important;
+    background-color: rgba(255,95,0,0.1) !important;
+}
+
+/* ========================================
+   CRITICAL NAVIGATION SUBMENU FIXES
+   ======================================== */
+
+/* Ensure navigation has proper hover zones without gaps */
+.nav-menu .menu-item-has-children {
+    position: relative;
+}
+
+/* First level submenu - improved hover handling */
+.nav-menu .sub-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    background: #0b1133 !important;
+    min-width: 250px !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(10px) !important;
+    transition: all 0.3s ease !important;
+    z-index: 999999 !important;
+    border-radius: 0 0 5px 5px !important;
+    border-top: 3px solid #ff5f00 !important;
+    /* Add padding to prevent gaps */
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Ensure submenu stays open when hovering over parent OR submenu */
+.nav-menu .menu-item-has-children:hover > .sub-menu,
+.nav-menu .menu-item-has-children > .sub-menu:hover {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    z-index: 999999 !important;
+}
+
+/* Third level submenu (sub-menu of sub-menu) */
+.nav-menu .sub-menu .sub-menu {
+    position: absolute !important;
+    top: 0 !important;
+    left: 100% !important;
+    transform: translateX(10px) !important;
+    border-top: 3px solid #ff5f00 !important;
+    border-radius: 0 5px 5px 0 !important;
+    z-index: 999999 !important;
+    /* Remove any margins that might cause gaps */
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Enhanced hover handling for nested submenus */
+.nav-menu .sub-menu .menu-item-has-children:hover > .sub-menu,
+.nav-menu .sub-menu .menu-item-has-children > .sub-menu:hover {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) !important;
+    z-index: 999999 !important;
+}
+
+/* Ensure submenu items have proper positioning */
+.nav-menu .sub-menu li {
+    width: 100% !important;
+    margin: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    position: relative !important;
+    /* Ensure no gaps between items */
+    display: block !important;
+}
+
+.nav-menu .sub-menu li:last-child {
+    border-bottom: none !important;
+}
+
+/* Enhanced link styling for better clickability */
+.nav-menu .sub-menu a {
+    padding: 1rem 1.5rem !important;
+    font-size: 0.9rem !important;
+    color: white !important;
+    display: block !important;
+    white-space: nowrap !important;
+    text-transform: none !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px !important;
+    position: relative !important;
+    text-decoration: none !important;
+    /* Ensure links are clickable */
+    pointer-events: auto !important;
+    z-index: 999999 !important;
+}
+
+.nav-menu .sub-menu a:hover {
+    background-color: rgba(255,95,0,0.1) !important;
+    color: #ff5f00 !important;
+    text-decoration: none !important;
+}
+
+/* Remove any pseudo-element conflicts */
+.nav-menu .sub-menu a::after {
+    display: none !important;
+}
+
+/* Improved submenu indicators */
+.menu-item-has-children > a::after {
+    content: '▼' !important;
+    margin-left: 5px !important;
+    font-size: 0.7em !important;
+    vertical-align: middle !important;
+    opacity: 0.7 !important;
+}
+
+/* Sub-submenu indicators with better positioning */
+.nav-menu .sub-menu .menu-item-has-children > a::after {
+    content: '▶' !important;
+    position: absolute !important;
+    right: 1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-left: 0 !important;
+    opacity: 0.7 !important;
+    pointer-events: none !important;
+}
+
+/* ========================================
+   HOVER ZONE EXTENSIONS
+   ======================================== */
+
+/* Extend hover zones to prevent menu closing */
+.nav-menu .menu-item-has-children {
+    position: relative;
+}
+
+/* Create invisible hover bridge for smooth navigation */
+.nav-menu .menu-item-has-children::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: transparent;
+    z-index: 999998;
+    pointer-events: auto;
+}
+
+/* For nested submenus, create right-side hover bridge */
+.nav-menu .sub-menu .menu-item-has-children::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 10px;
+    height: 100%;
+    background: transparent;
+    z-index: 999998;
+    pointer-events: auto;
+}
+
+/* ========================================
+   TIMING AND TRANSITION IMPROVEMENTS
+   ======================================== */
+
+/* Improved timing for smoother interactions */
+.nav-menu .sub-menu {
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease !important;
+}
+
+/* Delayed hide to prevent accidental closing */
+.nav-menu .menu-item-has-children:not(:hover) > .sub-menu {
+    transition-delay: 0.1s !important;
+}
+
+/* ========================================
+   CLICKABILITY ENHANCEMENTS
+   ======================================== */
+
+/* Ensure all menu items are clickable */
+.nav-menu .sub-menu li,
+.nav-menu .sub-menu a {
+    pointer-events: auto !important;
+    user-select: none !important;
+}
+
+/* Make sure links work on touch devices */
+.nav-menu .sub-menu a {
+    touch-action: manipulation !important;
+}
+
+/* ========================================
+   RESPONSIVE FIXES
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Disable complex hover behavior on mobile */
+    .nav-menu .sub-menu,
+    .nav-menu .sub-menu .sub-menu {
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        background: rgba(255,255,255,0.05) !important;
+        margin-left: 1rem !important;
+        min-width: auto !important;
+    }
+    
+    .nav-menu .sub-menu a {
+        padding: 0.8rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    /* Disable hover bridges on mobile */
+    .nav-menu .menu-item-has-children::before,
+    .nav-menu .sub-menu .menu-item-has-children::after {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   JAVASCRIPT-ENHANCED SUBMENU BEHAVIOR
+   ======================================== */
+
+/* Enhanced submenu visibility with JavaScript classes */
+.js-navigation-enhanced .nav-menu .sub-menu.show-submenu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    z-index: 999999 !important;
+}
+
+.js-navigation-enhanced .nav-menu .sub-menu .sub-menu.show-nested-submenu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) !important;
+    z-index: 999999 !important;
+}
+
+/* Touch device specific styles */
+.js-navigation-enhanced .nav-menu .sub-menu.touch-opened {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    z-index: 999999 !important;
+}
+
+/* Keyboard focus enhancements */
+.js-navigation-enhanced .nav-menu .menu-item-has-children.keyboard-focus > .sub-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    z-index: 999999 !important;
+}
+
+/* Improved hover states with JavaScript support */
+.js-navigation-enhanced .nav-menu .menu-item-has-children:hover > .sub-menu,
+.js-navigation-enhanced .nav-menu .menu-item-has-children.keyboard-focus > .sub-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    transition-delay: 0s !important;
+}
+
+.js-navigation-enhanced .nav-menu .sub-menu .menu-item-has-children:hover > .sub-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) !important;
+    transition-delay: 0s !important;
+}
+
+/* ========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+
+/* Focus states for keyboard navigation */
+.nav-menu .sub-menu a:focus {
+    background-color: rgba(255,95,0,0.2) !important;
+    color: #ff5f00 !important;
+    outline: 2px solid #ff5f00 !important;
+    outline-offset: -2px !important;
+}
+
+/* Ensure focus doesn't break the layout */
+.nav-menu .sub-menu a:focus {
+    z-index: 999999 !important;
+}

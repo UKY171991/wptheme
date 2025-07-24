@@ -1,0 +1,435 @@
+/* ========================================
+   GLOBAL HEADER SYSTEM - UNIVERSAL FOR ALL PAGES
+   Consistent header styling across entire website
+   ======================================== */
+
+/* ========================================
+   HEADER RESET AND BASE STYLES
+   ======================================== */
+
+#masthead.site-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 999999 !important;
+    background: var(--white) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.site-header .header-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 var(--spacing-md) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 80px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* ========================================
+   SITE BRANDING (LOGO)
+   ======================================== */
+
+.site-header .site-branding {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+}
+
+.site-header .site-branding .custom-logo-link {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.site-header .site-branding .custom-logo {
+    height: 50px !important;
+    width: auto !important;
+    max-width: 200px !important;
+}
+
+.site-header .site-title-wrapper {
+    margin: 0 !important;
+}
+
+.site-header .site-title {
+    margin: 0 !important;
+    font-size: var(--font-size-xl) !important;
+    font-weight: 700 !important;
+    color: var(--secondary-color) !important;
+}
+
+.site-header .site-title a {
+    text-decoration: none !important;
+    color: var(--secondary-color) !important;
+    transition: color 0.3s ease !important;
+}
+
+.site-header .site-title a:hover {
+    color: var(--primary-color) !important;
+}
+
+.site-header .site-description {
+    margin: 0 !important;
+    font-size: var(--font-size-sm) !important;
+    color: var(--text-light) !important;
+}
+
+/* ========================================
+   MAIN NAVIGATION
+   ======================================== */
+
+.site-header .main-navigation {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 !important;
+    justify-content: flex-end !important;
+}
+
+.site-header .nav-menu {
+    display: flex !important;
+    align-items: center !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: var(--spacing-lg) !important;
+}
+
+.site-header .nav-menu .menu-item {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.site-header .nav-menu .menu-item > a {
+    display: flex !important;
+    align-items: center !important;
+    padding: var(--spacing-sm) var(--spacing-md) !important;
+    font-size: var(--font-size-base) !important;
+    font-weight: 500 !important;
+    color: var(--text-dark) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    border-radius: 5px !important;
+}
+
+.site-header .nav-menu .menu-item > a:hover {
+    color: var(--primary-color) !important;
+    background-color: rgba(255, 95, 0, 0.1) !important;
+}
+
+/* Current page highlighting */
+.site-header .nav-menu .current-menu-item > a,
+.site-header .nav-menu .current_page_item > a {
+    color: var(--primary-color) !important;
+    background-color: rgba(255, 95, 0, 0.1) !important;
+}
+
+/* ========================================
+   DROPDOWN MENU STYLING - CRITICAL FIX
+   ======================================== */
+
+.site-header .nav-menu .sub-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    min-width: 220px !important;
+    background: var(--secondary-color) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-top: 3px solid var(--primary-color) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    z-index: 9999999 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: all 0.3s ease !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: var(--spacing-sm) 0 !important;
+    display: block !important;
+}
+
+/* CRITICAL: Force dropdown visibility on hover */
+.site-header .nav-menu .menu-item:hover > .sub-menu,
+.site-header .nav-menu .menu-item:focus-within > .sub-menu,
+.site-header .nav-menu .menu-item.dropdown-open > .sub-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    display: block !important;
+}
+
+.site-header .nav-menu .sub-menu .menu-item {
+    display: block !important;
+    width: 100% !important;
+}
+
+.site-header .nav-menu .sub-menu .menu-item a {
+    display: block !important;
+    padding: var(--spacing-sm) var(--spacing-md) !important;
+    color: var(--white) !important;
+    font-size: var(--font-size-sm) !important;
+    font-weight: 400 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    border-radius: 0 !important;
+}
+
+.site-header .nav-menu .sub-menu .menu-item a:hover {
+    color: var(--primary-color) !important;
+    background-color: rgba(255, 95, 0, 0.1) !important;
+    padding-left: var(--spacing-lg) !important;
+}
+
+/* Multi-level dropdowns */
+.site-header .nav-menu .sub-menu .sub-menu {
+    top: -8px !important;
+    left: 100% !important;
+    margin-left: 10px !important;
+    transform: translateX(-10px) !important;
+}
+
+.site-header .nav-menu .sub-menu .menu-item:hover > .sub-menu {
+    transform: translateX(0) !important;
+}
+
+/* Override any conflicting styles */
+.site-header .nav-menu .menu-item.menu-item-has-children > a::after {
+    content: '▼' !important;
+    font-size: 10px !important;
+    margin-left: 8px !important;
+    transition: transform 0.3s ease !important;
+}
+
+.site-header .nav-menu .menu-item.menu-item-has-children:hover > a::after {
+    transform: rotate(180deg) !important;
+}
+
+/* ========================================
+   MOBILE MENU TOGGLE
+   ======================================== */
+
+.site-header .menu-toggle {
+    display: none !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: var(--spacing-sm) !important;
+    align-items: center !important;
+    gap: var(--spacing-xs) !important;
+    color: var(--text-dark) !important;
+    font-size: var(--font-size-base) !important;
+    font-weight: 500 !important;
+}
+
+.site-header .menu-toggle-icon {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+}
+
+.site-header .hamburger-line {
+    width: 24px !important;
+    height: 3px !important;
+    background-color: var(--text-dark) !important;
+    transition: all 0.3s ease !important;
+}
+
+.site-header .menu-toggle:hover .hamburger-line {
+    background-color: var(--primary-color) !important;
+}
+
+/* ========================================
+   BODY PADDING FOR FIXED HEADER
+   ======================================== */
+
+body {
+    padding-top: 80px !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media screen and (max-width: 1024px) {
+    .site-header .header-container {
+        padding: 0 var(--spacing-sm) !important;
+    }
+    
+    .site-header .nav-menu {
+        gap: var(--spacing-md) !important;
+    }
+    
+    .site-header .nav-menu .menu-item > a {
+        padding: var(--spacing-xs) var(--spacing-sm) !important;
+        font-size: var(--font-size-sm) !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .site-header .header-container {
+        height: 70px !important;
+    }
+    
+    body {
+        padding-top: 70px !important;
+    }
+    
+    .site-header .menu-toggle {
+        display: flex !important;
+    }
+    
+    .site-header .nav-menu {
+        position: fixed !important;
+        top: 70px !important;
+        left: -100% !important;
+        width: 100% !important;
+        height: calc(100vh - 70px) !important;
+        background: var(--white) !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        padding: var(--spacing-lg) !important;
+        transition: left 0.3s ease !important;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+        overflow-y: auto !important;
+        gap: 0 !important;
+    }
+    
+    .site-header .nav-menu.mobile-open {
+        left: 0 !important;
+    }
+    
+    .site-header .nav-menu .menu-item {
+        width: 100% !important;
+        border-bottom: 1px solid var(--medium-gray) !important;
+    }
+    
+    .site-header .nav-menu .menu-item > a {
+        width: 100% !important;
+        padding: var(--spacing-md) !important;
+        justify-content: space-between !important;
+        border-radius: 0 !important;
+    }
+    
+    .site-header .nav-menu .sub-menu {
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        background: var(--light-gray) !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: none !important;
+    }
+    
+    .site-header .nav-menu .menu-item.dropdown-open > .sub-menu {
+        display: block !important;
+    }
+    
+    .site-header .nav-menu .sub-menu .menu-item a {
+        color: var(--text-dark) !important;
+        padding-left: var(--spacing-xl) !important;
+    }
+    
+    .site-header .nav-menu .sub-menu .menu-item a:hover {
+        color: var(--primary-color) !important;
+        background-color: rgba(255, 95, 0, 0.1) !important;
+        padding-left: calc(var(--spacing-xl) + var(--spacing-sm)) !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .site-header .header-container {
+        height: 60px !important;
+        padding: 0 var(--spacing-sm) !important;
+    }
+    
+    body {
+        padding-top: 60px !important;
+    }
+    
+    .site-header .nav-menu {
+        top: 60px !important;
+        height: calc(100vh - 60px) !important;
+        padding: var(--spacing-md) !important;
+    }
+    
+    .site-header .site-branding .custom-logo {
+        height: 40px !important;
+    }
+    
+    .site-header .site-title {
+        font-size: var(--font-size-lg) !important;
+    }
+}
+
+/* ========================================
+   HEADER SCROLL BEHAVIOR
+   ======================================== */
+
+.site-header.scrolled {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ========================================
+   ACCESSIBILITY IMPROVEMENTS
+   ======================================== */
+
+.site-header .skip-link {
+    position: absolute !important;
+    left: -9999px !important;
+    top: 10px !important;
+    z-index: 999999 !important;
+    padding: var(--spacing-sm) var(--spacing-md) !important;
+    background: var(--secondary-color) !important;
+    color: var(--white) !important;
+    text-decoration: none !important;
+    border-radius: 5px !important;
+}
+
+.site-header .skip-link:focus {
+    left: 10px !important;
+}
+
+/* Focus styles for better accessibility */
+.site-header .nav-menu .menu-item a:focus {
+    outline: 2px solid var(--primary-color) !important;
+    outline-offset: 2px !important;
+}
+
+.site-header .menu-toggle:focus {
+    outline: 2px solid var(--primary-color) !important;
+    outline-offset: 2px !important;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    .site-header {
+        position: static !important;
+        box-shadow: none !important;
+        background: var(--white) !important;
+    }
+    
+    body {
+        padding-top: 0 !important;
+    }
+    
+    .site-header .nav-menu {
+        display: none !important;
+    }
+}

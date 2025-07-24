@@ -1,0 +1,610 @@
+/* ========================================
+   UNIVERSAL PAGE CONTENT STYLES
+   Enhanced content styling with better spacing
+   ======================================== */
+
+/* Universal Page Content Container */
+.universal-page-content {
+    padding: 100px 0;
+    background: #f8f9fa;
+    margin-top: 0;
+}
+
+.universal-page-content .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.content-section {
+    background: white;
+    padding: 80px 60px;
+    border-radius: 25px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Universal Typography with Enhanced Spacing */
+.content-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 35px;
+    line-height: 1.2;
+}
+
+.content-section h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #34495e;
+    margin: 55px 0 30px 0;
+    line-height: 1.3;
+}
+
+.content-section h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #34495e;
+    margin: 45px 0 25px 0;
+}
+
+.content-section h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #34495e;
+    margin: 35px 0 20px 0;
+}
+
+.content-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 28px;
+}
+
+.content-section ul, .content-section ol {
+    margin: 30px 0;
+    padding-left: 35px;
+}
+
+.content-section li {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Service Category Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.service-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.service-card-content {
+    padding: 25px;
+}
+
+.service-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.service-info h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.service-info h3 a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.service-info h3 a:hover {
+    color: #ff5f00;
+}
+
+.service-excerpt {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.service-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ff5f00;
+    margin-bottom: 20px;
+}
+
+/* Single Service Detail Layout */
+.service-detail-layout {
+    max-width: 100%;
+}
+
+.service-image {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.service-image img {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.service-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.service-description .content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.service-description .content h2,
+.service-description .content h3,
+.service-description .content h4 {
+    color: #333;
+    margin: 30px 0 15px;
+}
+
+.service-description .content p {
+    margin-bottom: 20px;
+}
+
+.service-description .content ul,
+.service-description .content ol {
+    margin: 20px 0;
+    padding-left: 30px;
+}
+
+.service-description .content li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.service-sidebar .service-info {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #e9ecef;
+}
+
+.service-sidebar .service-info h3 {
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.service-sidebar .detail-item {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.service-sidebar .detail-item:last-of-type {
+    border-bottom: none;
+    margin-bottom: 30px;
+}
+
+.service-sidebar .detail-item strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.service-sidebar .detail-item ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.service-sidebar .detail-item li {
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* No services message */
+.no-services {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.no-services h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.no-services p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .universal-page-content {
+        padding: 40px 0;
+    }
+    
+    .content-section {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .service-content-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .service-sidebar {
+        order: -1;
+    }
+    
+    .service-image img {
+        height: 250px;
+    }
+    
+    .service-description .content {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .universal-page-content .container {
+        padding: 0 15px;
+    }
+    
+    .content-section {
+        padding: 20px 15px;
+    }
+    
+    .service-sidebar .service-info {
+        padding: 20px;
+    }
+}
+
+/* About Page Styles */
+.about-content {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content-main h2 {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.content-main h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 40px 0 20px;
+    font-weight: 600;
+}
+
+.content-main p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 24px;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+}
+
+.benefits-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.benefits-list li:last-child {
+    border-bottom: none;
+}
+
+.benefits-list strong {
+    color: #667eea;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.content-sidebar .cta-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.cta-box h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.cta-box p {
+    color: #666;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+}
+
+/* Services Grid Styles */
+.services-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.service-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.service-list li {
+    padding: 8px 0;
+    color: #555;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.service-list li:last-child {
+    border-bottom: none;
+}
+
+.service-cta {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.service-cta:hover {
+    background: #5a6fd8;
+}
+
+/* Pricing Grid Styles */
+.pricing-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    border-color: #667eea;
+}
+
+.pricing-card.featured {
+    border-color: #667eea;
+    transform: scale(1.05);
+}
+
+.featured-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #667eea;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pricing-card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #667eea;
+    margin-bottom: 24px;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.pricing-card li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: #555;
+    position: relative;
+    padding-left: 24px;
+}
+
+.pricing-card li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.pricing-card li:last-child {
+    border-bottom: none;
+}
+
+.pricing-cta {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+.pricing-cta:hover {
+    background: #5a6fd8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .services-grid,
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .service-card,
+    .pricing-card {
+        padding: 30px 20px;
+    }
+    
+    .content-main h2 {
+        font-size: 1.8rem;
+    }
+    
+    .content-main h3 {
+        font-size: 1.5rem;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+    }
+}

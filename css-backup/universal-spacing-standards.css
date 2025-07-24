@@ -1,0 +1,189 @@
+/*
+====================================================
+UNIVERSAL SECTION SPACING STANDARDS
+Consistent spacing across all pages
+====================================================
+*/
+
+/* ========================================
+   GLOBAL SECTION SPACING STANDARDS
+   ======================================== */
+
+/* Standard section spacing - matches home page */
+.universal-page-content .about-section,
+.services-preview,
+.trust-section,
+.process-section,
+.testimonials-section,
+.final-cta-section,
+.pricing-section,
+.services-showcase-section,
+.why-choose-section,
+.cta-section,
+.contact-section,
+.hero-section,
+.features-section,
+.team-section,
+.mission-section,
+.values-section,
+.stats-section,
+.portfolio-section,
+.blog-section {
+    padding: 6rem 0 !important;
+}
+
+/* Special cases with top/bottom variations */
+.universal-banner {
+    padding: 6rem 0 !important;
+}
+
+/* Ensure proper spacing for improved templates */
+.story-section,
+.values-mission-section,
+.differentiators-section,
+.leadership-section,
+.community-section,
+.about-cta-section {
+    padding: 6rem 0 !important;
+}
+
+/* ========================================
+   RESPONSIVE SPACING ADJUSTMENTS
+   ======================================== */
+
+/* Tablet spacing */
+@media (max-width: 1024px) {
+    .universal-page-content .about-section,
+    .services-preview,
+    .trust-section,
+    .process-section,
+    .testimonials-section,
+    .final-cta-section,
+    .story-section,
+    .values-mission-section,
+    .differentiators-section,
+    .leadership-section,
+    .community-section,
+    .about-cta-section,
+    .universal-banner {
+        padding: 4rem 0 !important;
+    }
+}
+
+/* Mobile spacing */
+@media (max-width: 768px) {
+    .universal-page-content .about-section,
+    .services-preview,
+    .trust-section,
+    .process-section,
+    .testimonials-section,
+    .final-cta-section,
+    .story-section,
+    .values-mission-section,
+    .differentiators-section,
+    .leadership-section,
+    .community-section,
+    .about-cta-section,
+    .universal-banner {
+        padding: 3rem 0 !important;
+    }
+}
+
+/* Small mobile spacing */
+@media (max-width: 480px) {
+    .universal-page-content .about-section,
+    .services-preview,
+    .trust-section,
+    .process-section,
+    .testimonials-section,
+    .final-cta-section,
+    .story-section,
+    .values-mission-section,
+    .differentiators-section,
+    .leadership-section,
+    .community-section,
+    .about-cta-section,
+    .universal-banner {
+        padding: 2rem 0 !important;
+    }
+}
+
+/* ========================================
+   SECTION HEADER SPACING STANDARDS
+   ======================================== */
+
+.section-header {
+    margin-bottom: 4rem !important;
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        margin-bottom: 3rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header {
+        margin-bottom: 2rem !important;
+    }
+}
+
+/* ========================================
+   CONTAINER SPACING STANDARDS
+   ======================================== */
+
+.container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+
+/* ========================================
+   GRID AND CARD SPACING STANDARDS
+   ======================================== */
+
+.features-grid,
+.services-showcase,
+.team-grid,
+.testimonials-grid,
+.process-steps,
+.values-grid,
+.differentiators-grid,
+.leadership-grid,
+.community-grid {
+    gap: 2rem !important;
+}
+
+@media (max-width: 768px) {
+    .features-grid,
+    .services-showcase,
+    .team-grid,
+    .testimonials-grid,
+    .process-steps,
+    .values-grid,
+    .differentiators-grid,
+    .leadership-grid,
+    .community-grid {
+        gap: 1.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .features-grid,
+    .services-showcase,
+    .team-grid,
+    .testimonials-grid,
+    .process-steps,
+    .values-grid,
+    .differentiators-grid,
+    .leadership-grid,
+    .community-grid {
+        gap: 1rem !important;
+    }
+}

@@ -1,0 +1,251 @@
+/**
+ * Universal Text Alignment Fix
+ * Fixes text alignment issues across all pages and banner sections
+ */
+
+/* ===== HOME PAGE HERO TEXT ALIGNMENT ===== */
+
+.modern-hero .hero-content {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+    padding: 2rem 1rem !important;
+}
+
+.modern-hero .hero-badge {
+    align-self: center !important;
+    text-align: center !important;
+    margin: 0 auto 2rem auto !important;
+}
+
+.modern-hero .hero-title {
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 auto 2rem auto !important;
+}
+
+.modern-hero .title-highlight {
+    text-align: center !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.modern-hero .hero-description {
+    text-align: center !important;
+    margin: 0 auto 3rem auto !important;
+    max-width: 800px !important;
+}
+
+.modern-hero .hero-buttons {
+    align-self: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 auto 4rem auto !important;
+}
+
+.modern-hero .hero-stats {
+    align-self: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    text-align: center !important;
+}
+
+/* ===== UNIVERSAL BANNER TEXT ALIGNMENT ===== */
+
+.page-banner .banner-content,
+.hero-section .hero-content,
+.page-hero .hero-content {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding: 2rem 1rem !important;
+}
+
+.page-banner h1,
+.hero-section h1,
+.page-hero h1,
+.banner-title,
+.hero-title {
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 auto 1.5rem auto !important;
+}
+
+.page-banner p,
+.hero-section p,
+.page-hero p,
+.banner-subtitle,
+.hero-subtitle {
+    text-align: center !important;
+    margin: 0 auto 2rem auto !important;
+    max-width: 700px !important;
+}
+
+.breadcrumb {
+    text-align: center !important;
+    margin: 0 auto 1.5rem auto !important;
+    width: 100% !important;
+}
+
+/* ===== SPECIFIC PAGE BANNER FIXES ===== */
+
+/* About Page */
+.about-hero .hero-content {
+    text-align: center !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+}
+
+/* Contact Page */
+.contact-header .header-content {
+    text-align: center !important;
+    max-width: 700px !important;
+    margin: 0 auto !important;
+}
+
+/* Pricing Page */
+.pricing-hero .hero-content {
+    text-align: center !important;
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+}
+
+/* Services Page */
+.services-hero-modern .hero-content {
+    text-align: center !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+}
+
+/* Team, Portfolio, Testimonials, etc. */
+.team-hero .container,
+.portfolio-hero .container,
+.testimonials-hero .container,
+.careers-hero .container,
+.faq-hero .container {
+    text-align: center !important;
+}
+
+/* ===== RESPONSIVE TEXT ALIGNMENT ===== */
+
+@media screen and (max-width: 768px) {
+    .modern-hero .hero-content {
+        padding: 1.5rem 1rem !important;
+        max-width: 100% !important;
+    }
+    
+    .modern-hero .hero-title {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .modern-hero .hero-description {
+        font-size: 1.1rem !important;
+        max-width: 100% !important;
+    }
+    
+    .page-banner .banner-content,
+    .hero-section .hero-content,
+    .page-hero .hero-content {
+        padding: 1.5rem 1rem !important;
+        max-width: 100% !important;
+    }
+    
+    .page-banner h1,
+    .hero-section h1,
+    .page-hero h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero-buttons {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1rem !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .modern-hero .hero-title {
+        font-size: 2rem !important;
+    }
+    
+    .modern-hero .hero-description {
+        font-size: 1rem !important;
+    }
+    
+    .page-banner h1,
+    .hero-section h1,
+    .page-hero h1 {
+        font-size: 2rem !important;
+    }
+    
+    .modern-hero .hero-content,
+    .page-banner .banner-content {
+        padding: 1rem 0.5rem !important;
+    }
+}
+
+/* ===== CONTAINER AND ALIGNMENT OVERRIDES ===== */
+
+/* Ensure all hero sections have proper centering */
+.modern-hero,
+.page-banner,
+.hero-section,
+.page-hero {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.modern-hero .container,
+.page-banner .container,
+.hero-section .container,
+.page-hero .container {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 1rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Fix any floating or positioning issues */
+.modern-hero *,
+.page-banner *,
+.hero-section *,
+.page-hero * {
+    box-sizing: border-box !important;
+}
+
+/* Ensure buttons are properly centered */
+.hero-buttons .btn-primary,
+.hero-buttons .btn-secondary {
+    align-self: center !important;
+}
+
+/* Fix stats alignment */
+.hero-stats {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 2rem !important;
+    flex-wrap: wrap !important;
+}
+
+.hero-stats .stat-item {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}

@@ -1,0 +1,588 @@
+/*
+================================================================
+AGGRESSIVE SERVICE PAGE MOBILE LAYOUT FIXES
+================================================================
+Direct fixes for service page layout issues with !important overrides
+*/
+
+/* ========================================
+   FORCE MOBILE RESPONSIVE CONTAINER FIXES
+   ======================================== */
+@media screen and (max-width: 768px) {
+    /* Universal container fixes */
+    body, html {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .site-main, #main {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .container, .hero-content-ultra-fancy, .services-hero-ultra-fancy .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 15px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Service hero section aggressive fixes */
+    .services-hero-ultra-fancy {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        padding: 2rem 0 !important;
+        min-height: auto !important;
+        height: auto !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        position: relative !important;
+    }
+    
+    /* Remove all fancy animations and particles that cause overflow */
+    .hero-mega-particles,
+    .hero-animated-waves,
+    .hero-floating-elements,
+    .hero-background-gradient-ultra,
+    .hero-overlay-premium,
+    .hero-spotlight-effect,
+    #hero-interactive-canvas,
+    .hero-entrance-animation,
+    .floating-service-icons,
+    .stats-background-effects,
+    .stats-particle-field,
+    .stats-energy-waves {
+        display: none !important;
+    }
+    
+    /* Hero content fixes */
+    .hero-content-ultra-fancy {
+        position: relative !important;
+        z-index: 10 !important;
+        text-align: center !important;
+        color: white !important;
+        padding: 1rem 15px !important;
+    }
+    
+    /* Badge carousel - completely redesign for mobile */
+    .hero-badges-carousel {
+        width: 100% !important;
+        overflow: hidden !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .badge-track {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        animation: none !important;
+        transform: none !important;
+    }
+    
+    .hero-badge-fancy {
+        background: rgba(255,255,255,0.9) !important;
+        color: #333 !important;
+        padding: 0.75rem 1rem !important;
+        border-radius: 25px !important;
+        font-size: 0.875rem !important;
+        font-weight: 600 !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+        max-width: 280px !important;
+        animation: none !important;
+        transform: none !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* Title fixes */
+    .hero-title-ultra-fancy {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+        margin: 1.5rem 0 1rem 0 !important;
+        text-align: center !important;
+        color: white !important;
+    }
+    
+    .title-line-1,
+    .title-line-2,
+    .title-line-3 {
+        display: block !important;
+        animation: none !important;
+        transform: none !important;
+    }
+    
+    .title-underline-animated {
+        display: none !important;
+    }
+    
+    /* Subtitle fixes */
+    .hero-subtitle-ultra-fancy {
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 1.5rem !important;
+        text-align: center !important;
+        color: rgba(255,255,255,0.9) !important;
+        animation: none !important;
+        padding: 0 1rem !important;
+    }
+    
+    .subtitle-highlight {
+        background: rgba(255,215,0,0.9) !important;
+        color: #333 !important;
+        padding: 0.25rem 0.5rem !important;
+        border-radius: 3px !important;
+        font-weight: 600 !important;
+    }
+}
+
+/* ========================================
+   STATS SECTION MOBILE FIXES
+   ======================================== */
+@media screen and (max-width: 768px) {
+    .hero-stats-ultra-fancy {
+        width: 100% !important;
+        padding: 1.5rem 0 !important;
+        background: rgba(255,255,255,0.1) !important;
+        backdrop-filter: blur(5px) !important;
+        margin: 0 !important;
+    }
+    
+    .stats-container-ultra-fancy {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+        padding: 0 15px !important;
+        max-width: 100% !important;
+    }
+    
+    .stat-item-ultra {
+        background: rgba(255,255,255,0.9) !important;
+        padding: 1rem !important;
+        border-radius: 10px !important;
+        text-align: center !important;
+        animation: none !important;
+        transform: none !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    }
+    
+    .stat-icon-fancy {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.5rem !important;
+        display: block !important;
+    }
+    
+    .stat-number-animated {
+        font-size: 1.5rem !important;
+        font-weight: bold !important;
+        color: #007bff !important;
+        margin-bottom: 0.25rem !important;
+        display: block !important;
+    }
+    
+    .stat-label-fancy {
+        font-size: 0.75rem !important;
+        font-weight: 600 !important;
+        color: #333 !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .stat-detail-fancy {
+        font-size: 0.7rem !important;
+        color: #666 !important;
+        margin-bottom: 0.25rem !important;
+    }
+    
+    .stat-trend {
+        font-size: 0.7rem !important;
+        color: #28a745 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stat-glow-effect {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   CTA BUTTONS AGGRESSIVE MOBILE FIXES
+   ======================================== */
+@media screen and (max-width: 768px) {
+    .hero-cta-ultra-fancy {
+        padding: 1.5rem 0 !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
+    .cta-buttons-premium {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        padding: 0 15px !important;
+        margin: 0 auto !important;
+        max-width: 300px !important;
+    }
+    
+    .btn-ultra-fancy {
+        width: 100% !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+        transition: all 0.3s ease !important;
+        min-height: 44px !important;
+        box-sizing: border-box !important;
+        animation: none !important;
+        transform: none !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+    
+    .btn-ultra-fancy.primary {
+        background: #007bff !important;
+        color: white !important;
+        border: 2px solid #007bff !important;
+    }
+    
+    .btn-ultra-fancy.secondary {
+        background: white !important;
+        color: #007bff !important;
+        border: 2px solid #007bff !important;
+    }
+    
+    .btn-ultra-fancy:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0,123,255,0.3) !important;
+    }
+    
+    /* Remove all fancy button effects */
+    .btn-icon-ultra,
+    .btn-particles,
+    .btn-glow-effect,
+    .btn-wave-effect,
+    .btn-text-sub {
+        display: none !important;
+    }
+    
+    .btn-text-main {
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+    }
+}
+
+/* ========================================
+   CONTENT SECTIONS MOBILE FIXES
+   ======================================== */
+@media screen and (max-width: 768px) {
+    /* All content sections */
+    section {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        padding: 2rem 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Section headers */
+    .section-header-ultra-fancy,
+    .section-title-cosmic {
+        text-align: center !important;
+        padding: 0 15px !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    .section-title-cosmic {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .section-subtitle-cosmic {
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+        color: #666 !important;
+        padding: 0 1rem !important;
+    }
+    
+    /* Service cards and grids */
+    .services-grid,
+    .service-showcase,
+    .ultra-fancy-services-section {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        padding: 0 15px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .service-card,
+    .service-showcase-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1.5rem !important;
+        margin: 0 !important;
+        border-radius: 10px !important;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+        background: white !important;
+        animation: none !important;
+        transform: none !important;
+    }
+    
+    .service-card h3 {
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    .service-card p {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 1rem !important;
+        color: #666 !important;
+    }
+    
+    .service-card .btn,
+    .service-card button,
+    .service-card a {
+        width: 100% !important;
+        padding: 0.875rem !important;
+        font-size: 16px !important;
+        min-height: 44px !important;
+        border-radius: 8px !important;
+        text-align: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: #007bff !important;
+        color: white !important;
+        border: none !important;
+        text-decoration: none !important;
+    }
+}
+
+/* ========================================
+   QUOTE CALCULATOR AGGRESSIVE FIXES
+   ======================================== */
+@media screen and (max-width: 768px) {
+    .instant-quote-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 2rem 0 !important;
+        overflow-x: hidden !important;
+        background: #f8f9fa !important;
+    }
+    
+    .quote-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 15px !important;
+        margin: 0 auto !important;
+    }
+    
+    .quote-calculator {
+        background: white !important;
+        border-radius: 15px !important;
+        padding: 1.5rem !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        margin: 0 auto !important;
+    }
+    
+    .quote-header {
+        text-align: center !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .quote-header h2 {
+        font-size: 1.75rem !important;
+        margin-bottom: 0.5rem !important;
+        color: #333 !important;
+    }
+    
+    .quote-header p {
+        font-size: 1rem !important;
+        color: #666 !important;
+    }
+    
+    /* Calculator steps - force single column */
+    .calculator-steps {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        margin-bottom: 2rem !important;
+        width: 100% !important;
+    }
+    
+    .step {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        padding: 1rem !important;
+        background: #f8f9fa !important;
+        border-radius: 10px !important;
+        font-size: 14px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .step.active {
+        background: linear-gradient(135deg, #007bff, #0056b3) !important;
+        color: white !important;
+    }
+    
+    .step-number {
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: rgba(255,255,255,0.2) !important;
+        font-weight: bold !important;
+        font-size: 14px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Service options - force single column */
+    .service-options {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        margin: 1.5rem 0 !important;
+        width: 100% !important;
+    }
+    
+    .service-option {
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+        padding: 1rem !important;
+        border: 2px solid #e9ecef !important;
+        border-radius: 12px !important;
+        background: white !important;
+        transition: all 0.3s ease !important;
+        cursor: pointer !important;
+        width: 100% !important;
+        text-align: left !important;
+        box-sizing: border-box !important;
+    }
+    
+    .service-option:hover,
+    .service-option.selected {
+        border-color: #007bff !important;
+        background: #f8f9ff !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    .option-icon {
+        font-size: 2rem !important;
+        width: 50px !important;
+        height: 50px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: #007bff !important;
+        border-radius: 12px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Navigation buttons */
+    .calculator-navigation {
+        display: flex !important;
+        justify-content: space-between !important;
+        gap: 1rem !important;
+        margin-top: 2rem !important;
+        width: 100% !important;
+    }
+    
+    .nav-btn {
+        flex: 1 !important;
+        padding: 1rem !important;
+        border: 2px solid #007bff !important;
+        background: white !important;
+        color: #007bff !important;
+        border-radius: 8px !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        min-height: 44px !important;
+    }
+    
+    .nav-btn:disabled {
+        opacity: 0.5 !important;
+        cursor: not-allowed !important;
+    }
+    
+    .nav-btn.next {
+        background: #007bff !important;
+        color: white !important;
+    }
+}
+
+/* ========================================
+   FORCE HIDE PROBLEMATIC ELEMENTS
+   ======================================== */
+@media screen and (max-width: 768px) {
+    /* Hide all complex animations and decorative elements */
+    [class*="particle"],
+    [class*="animation"],
+    [class*="floating"],
+    [class*="morphing"],
+    [class*="wave"],
+    [class*="glow"],
+    [class*="spotlight"],
+    canvas,
+    .parallax,
+    .bg-orb,
+    .bg-shape {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    /* Force simple backgrounds */
+    * {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0.3s !important;
+    }
+}
+
+/* ========================================
+   EMERGENCY OVERFLOW FIXES
+   ======================================== */
+@media screen and (max-width: 768px) {
+    * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    *:not(html):not(body) {
+        overflow-x: hidden !important;
+    }
+    
+    /* Fix any remaining wide elements */
+    .row, .grid, .container, .wrapper, 
+    section, article, main, div,
+    .hero-content-ultra-fancy,
+    .services-hero-ultra-fancy,
+    .stats-container-ultra-fancy,
+    .instant-quote-section,
+    .quote-calculator {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}

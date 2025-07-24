@@ -1,0 +1,225 @@
+/**
+ * Submenu Integration Patches
+ * Ensures seamless integration between existing header styles and new advanced submenu system
+ */
+
+/* ===== INTEGRATION WITH EXISTING CLEAN HEADER ===== */
+.site-header .main-navigation .nav-menu {
+    position: relative;
+    z-index: 9999;
+}
+
+/* Ensure dropdown indicators work with existing styles */
+.nav-menu .dropdown-toggle {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 10px;
+    transition: transform 0.3s ease;
+    color: inherit;
+}
+
+.nav-menu .menu-item:hover .dropdown-toggle,
+.nav-menu .menu-item.dropdown-open .dropdown-toggle {
+    transform: rotate(180deg);
+}
+
+/* ===== OVERRIDE CONFLICTING STYLES ===== */
+/* Remove any conflicting transforms from existing CSS */
+.nav-menu .menu-item a {
+    transform: none !important;
+}
+
+.nav-menu .menu-item:hover > a {
+    transform: none !important;
+}
+
+/* Ensure proper stacking context */
+.nav-menu .menu-item {
+    position: relative;
+    z-index: auto;
+}
+
+.nav-menu .menu-item.has-dropdown {
+    position: relative;
+}
+
+/* ===== ENHANCED DROPDOWN VISIBILITY ===== */
+.sub-menu {
+    /* Ensure dropdowns are visible and properly positioned */
+    display: block !important;
+    position: absolute !important;
+    z-index: 99999 !important;
+}
+
+/* Override any existing hover delays */
+.nav-menu .menu-item:hover > .sub-menu,
+.nav-menu .menu-item.dropdown-open > .sub-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ===== MOBILE INTEGRATION ===== */
+@media (max-width: 768px) {
+    /* Ensure mobile menu toggle works */
+    .menu-toggle {
+        display: block;
+        z-index: 99999;
+    }
+    
+    .main-navigation.mobile-menu-open .nav-menu {
+        display: block;
+    }
+    
+    /* Mobile submenu accordion style */
+    .nav-menu .sub-menu {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        background: rgba(248, 249, 250, 0.95) !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        padding: 0;
+    }
+    
+    .nav-menu .menu-item.mobile-open > .sub-menu {
+        max-height: 600px;
+        padding: 8px 0;
+    }
+    
+    /* Mobile submenu toggle buttons */
+    .submenu-toggle {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        font-size: 18px;
+        color: inherit;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    
+    .submenu-toggle:hover,
+    .submenu-toggle:focus {
+        background: rgba(52, 152, 219, 0.1);
+        color: #3498db;
+    }
+    
+    .submenu-toggle::before {
+        content: "+";
+    }
+    
+    .menu-item.mobile-open .submenu-toggle::before {
+        content: "−";
+    }
+    
+    .submenu-toggle .screen-reader-text {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+}
+
+/* ===== COMPATIBILITY FIXES ===== */
+/* Override any theme-specific dropdown hiding */
+.nav-menu .menu-item:hover .sub-menu,
+.nav-menu .menu-item:focus-within .sub-menu,
+.nav-menu .menu-item.dropdown-open .sub-menu {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Fix any positioning conflicts */
+.main-navigation {
+    position: static !important;
+}
+
+.nav-menu {
+    position: relative !important;
+}
+
+/* Ensure proper link styling in submenus */
+.sub-menu .menu-item a {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* ===== HIGH PRIORITY OVERRIDES ===== */
+/* Use !important only where necessary to override conflicting styles */
+.sub-menu {
+    list-style: none !important;
+    margin: 0 !important;
+}
+
+.sub-menu .menu-item {
+    display: block !important;
+    width: 100% !important;
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+.nav-menu .menu-item a[aria-expanded="true"] {
+    color: #3498db;
+}
+
+.nav-menu .menu-item a:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+.sub-menu .menu-item a:focus {
+    outline: 2px solid #3498db;
+    outline-offset: -2px;
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+.nav-menu .menu-item {
+    contain: layout style;
+}
+
+.sub-menu {
+    will-change: opacity, visibility, transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* ===== TOUCH DEVICE SPECIFIC ===== */
+@media (hover: none) and (pointer: coarse) {
+    .nav-menu .menu-item:hover > .sub-menu {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-15px);
+    }
+    
+    .nav-menu .menu-item.touch-open > .sub-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    /* Larger touch targets for mobile */
+    .nav-menu .menu-item a {
+        padding: 16px 20px;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .sub-menu .menu-item a {
+        padding: 16px 20px;
+        font-size: 16px;
+    }
+}

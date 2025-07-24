@@ -1,260 +1,163 @@
-# Service Blueprint WordPress Theme
+# Services Pro WordPress Theme
 
-A comprehensive WordPress theme designed specifically for service-based businesses. This theme provides a complete solution for showcasing services, managing client interactions, and building a professional online presence.
+A professional WordPress theme designed specifically for home services, cleaning, maintenance, and personal assistance businesses.
 
 ## Features
 
-### 🎨 **Modern Design**
-- Clean, professional layout with responsive design
-- Parallax scrolling effects and smooth animations
-- Customizable color schemes and typography
-- Mobile-first approach ensuring perfect display on all devices
+### 🎨 Design & Layout
+- Modern, responsive design that works on all devices
+- Beautiful gradient color scheme with professional styling
+- Smooth animations and hover effects
+- Clean, easy-to-read typography
+- Mobile-first approach
 
-### 🛠️ **Service Management**
-- Custom "Services" post type with advanced meta fields
-- 9 pre-built service category templates
-- Dynamic service filtering and sorting
-- Individual service pages with detailed information
-- FAQ system for each service
-- Process step visualization
-- Pricing and duration display
+### 🧹 Service Categories Included
+- **Home & Cleaning Services** - House cleaning, pressure washing, window cleaning, etc.
+- **Home & Property Maintenance** - Furniture assembly, TV mounting, handyman services, etc.
+- **Personal Errands & Concierge** - Grocery shopping, delivery services, personal assistant, etc.
+- **Pet & Animal Services** - Dog walking, pet sitting, grooming services, etc.
+- **Child & Family Support** - Babysitting, toy organization, birthday party setup, etc.
+- **Creative & Digital Services** - Graphic design, social media management, photography, etc.
+- **Coaching & Consulting** - Business coaching, life coaching, marketing consulting, etc.
+- **Office & Admin Services** - Virtual assistant, data entry, transcription, etc.
+- **Selling, Flipping & Setup** - Furniture flipping, product sourcing, setup services, etc.
 
-### 🧭 **Navigation & User Experience**
-- Multi-level navigation menu (up to 3 levels)
-- Accessibility-focused design with ARIA labels
-- Keyboard navigation support
-- Skip links for screen readers
-- Search functionality with advanced filtering
-
-### 🎯 **Homepage Features**
-- Hero section with customizable content
-- Featured services grid
-- Service categories showcase
-- Client testimonials carousel
-- Call-to-action sections
-- Company statistics display
-
-### 📧 **Contact & Conversion**
-- Built-in contact forms on service pages
-- AJAX form submission
-- Email notifications for new inquiries
-- Quote request functionality
-- Social media integration
-
-### ⚙️ **Admin Panel**
-- Custom meta boxes for service management
+### 🛠️ WordPress Features
+- Custom post type for Services
+- Service categories taxonomy
+- Custom fields for service pricing and details
 - Theme customizer integration
-- Dashboard widgets for quick overview
-- Admin columns customization
-- Bulk actions for service management
+- Widget-ready footer areas
+- SEO-friendly structure
+- Contact form integration ready
 
-### 🔍 **SEO & Performance**
-- SEO-optimized structure
-- Fast loading times
-- Optimized images and assets
-- Clean, semantic HTML5 markup
-- Schema.org markup for services
+### 📱 Pages Included
+- Homepage with hero section and service showcase
+- Services archive page
+- Individual service detail pages
+- Contact page with form
+- About page template
+- 404 error page
+- Search results page
 
 ## Installation
 
-1. **Download & Install**
-   ```
-   Download the theme files
-   Upload to /wp-content/themes/service-blueprint/
-   Activate through WordPress admin
-   ```
+1. Download the theme files
+2. Upload to your WordPress site's `/wp-content/themes/` directory
+3. Activate the theme in WordPress Admin > Appearance > Themes
+4. Configure the theme settings in Customizer
 
-2. **Automatic Setup**
-   - Upon activation, you'll see a setup notice in the admin
-   - Click "Setup Default Content" to create sample services and pages
-   - This creates 9 service categories and 3 sample services
+## Setup Instructions
 
-3. **Manual Setup**
-   - Navigate to Appearance > Customize to configure theme settings
-   - Create your services under Services > Add New
-   - Configure menus under Appearance > Menus
+### 1. Initial Theme Setup
+1. Go to **Appearance > Customize**
+2. Configure your site title and tagline
+3. Upload your logo (optional)
+4. Set up your contact information:
+   - Phone number
+   - Email address
+   - Business address
 
-## Theme Structure
+### 2. Configure Hero Section
+In the Customizer under "Hero Section":
+- Set your main headline
+- Write your subtitle/description
+- Customize the call-to-action button text and link
 
-```
-service-blueprint/
-├── style.css                 # Main stylesheet
-├── functions.php             # Theme functions and setup
-├── index.php                 # Homepage template
-├── header.php               # Site header
-├── footer.php               # Site footer
-├── single-service.php       # Individual service pages
-├── archive-service.php      # Services archive
-├── taxonomy-service_category.php  # Service category pages
-├── search.php               # Search results
-├── 404.php                  # Error page
-├── inc/
-│   ├── nav-walker.php       # Custom navigation walker
-│   ├── meta-boxes.php       # Service meta boxes
-│   └── theme-init.php       # Theme initialization
-└── assets/
-    ├── js/
-    │   └── theme.js         # Theme JavaScript
-    └── css/
-        └── admin.css        # Admin styles
-```
+### 3. Create Your Navigation Menu
+1. Go to **Appearance > Menus**
+2. Create a new menu
+3. Add pages/links for:
+   - Home
+   - Services
+   - About
+   - Contact
+4. Assign to "Primary Menu" location
 
-## Service Categories
+### 4. Set Up Services
+1. The theme automatically creates service categories based on your business type
+2. Go to **Services > Add New** to create individual service pages
+3. Add service details like pricing, duration, and features
+4. Assign services to appropriate categories
 
-The theme includes 9 pre-configured service categories:
+### 5. Create Essential Pages
+Create these important pages:
+- **Services** (use Page Template: Services Page)
+- **Contact** (use Page Template: Contact Page)
+- **About** (regular page)
 
-1. **Web Development** - Custom websites and web applications
-2. **Digital Marketing** - SEO, social media, and online advertising
-3. **Graphic Design** - Logo design, branding, and visual identity
-4. **Content Creation** - Copywriting and multimedia production
-5. **Business Consulting** - Strategic planning and optimization
-6. **Mobile Apps** - iOS and Android development
-7. **Data Analytics** - Business intelligence and reporting
-8. **Cloud Solutions** - Cloud migration and DevOps
-9. **Training & Support** - Technical training and documentation
+### 6. Configure Widgets
+Go to **Appearance > Widgets** and set up:
+- Footer widget areas
+- Sidebar (if needed)
 
 ## Customization
 
-### Theme Customizer Options
+### Colors
+The theme uses a professional blue gradient color scheme. To customize:
+1. Edit `style.css`
+2. Look for color variables in the CSS
+3. Replace with your brand colors
 
-Access through **Appearance > Customize**:
-
-- **Site Identity**: Logo, site title, tagline
-- **Colors**: Primary, secondary, and accent colors
-- **Typography**: Google Fonts integration
-- **Hero Section**: Title, subtitle, button text and URL
-- **Footer**: Copyright text and contact information
-- **Social Media**: Facebook, Twitter, LinkedIn, Instagram links
-
-### Custom Post Types
-
-**Services Post Type**
-- Title and description
-- Featured image
-- Service category assignment
-- Custom meta fields:
-  - Price range
-  - Duration
-  - Features list
-  - Process steps
-  - FAQ section
-  - Featured service toggle
+### Adding More Services
+To add services to existing categories:
+1. Edit `functions.php`
+2. Find the `get_service_categories_with_icons()` function
+3. Add your services to the appropriate category array
 
 ### Custom Fields
+Each service can have:
+- **Price** - Display pricing information
+- **Duration** - How long the service takes
+- **Features** - List of what's included (one per line)
 
-Each service includes:
-- **Price**: Service pricing information
-- **Duration**: Project timeline
-- **Features**: List of included features
-- **Process**: Step-by-step service process
-- **FAQ**: Frequently asked questions
-- **Contact Form**: Integrated contact form
+## File Structure
 
-## Development
-
-### Requirements
-- WordPress 5.0+
-- PHP 7.4+
-- MySQL 5.6+
-
-### Hooks & Filters
-
-The theme provides several hooks for customization:
-
-```php
-// Modify service archive query
-add_filter('service_blueprint_archive_query', 'custom_archive_query');
-
-// Customize service card output
-add_filter('service_blueprint_service_card', 'custom_service_card');
-
-// Add custom meta fields
-add_action('service_blueprint_meta_fields', 'add_custom_meta_fields');
+```
+wptheme/
+├── style.css (main stylesheet)
+├── functions.php (theme functions)
+├── header.php (site header)
+├── footer.php (site footer)
+├── index.php (homepage)
+├── page.php (default page template)
+├── page-services.php (services page template)
+├── page-contact.php (contact page template)
+├── single.php (blog post template)
+├── single-services.php (individual service template)
+├── archive-services.php (services archive)
+├── search.php (search results)
+├── 404.php (error page)
+└── js/
+    └── script.js (JavaScript functionality)
 ```
 
-### JavaScript Events
+## Support & Customization
 
-```javascript
-// Service filter change
-$(document).on('serviceFilterChanged', function(e, filter) {
-    // Handle filter change
-});
+This theme is designed to be easily customizable for your specific business needs. All service categories and content can be modified through the WordPress admin or by editing the theme files.
 
-// Form submission
-$(document).on('serviceFormSubmitted', function(e, response) {
-    // Handle form response
-});
-```
+### Common Customizations
+- Change service categories and icons
+- Modify color scheme
+- Add additional custom fields
+- Integrate with booking/scheduling plugins
+- Add payment processing
+- Connect with CRM systems
 
 ## Browser Support
-
-- Chrome (latest 2 versions)
-- Firefox (latest 2 versions)
-- Safari (latest 2 versions)
-- Edge (latest 2 versions)
-- Internet Explorer 11+
-
-## Accessibility
-
-The theme follows WCAG 2.1 AA guidelines:
-- Semantic HTML5 markup
-- ARIA labels and roles
-- Keyboard navigation support
-- Color contrast compliance
-- Screen reader compatibility
-- Focus indicators
-- Skip links
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers
 
 ## Performance
-
 - Optimized CSS and JavaScript
-- Lazy loading for images
-- Minified assets in production
-- Efficient database queries
-- Caching-friendly structure
-
-## Support
-
-### Documentation
-- Theme setup guide
-- Customization tutorials
-- FAQ section
-- Video tutorials
-
-### Community
-- WordPress.org support forums
-- GitHub repository for bug reports
-- Community Discord channel
-
-## Changelog
-
-### Version 1.0.0
-- Initial release
-- Complete service management system
-- 9 service category templates
-- Responsive design
-- Accessibility features
-- Admin panel integration
-- SEO optimization
-
-## License
-
-This theme is licensed under GPL v2 or later.
-
-## Credits
-
-- **Fonts**: Google Fonts (Open Sans, Playfair Display)
-- **Icons**: Font Awesome 6
-- **Images**: Placeholder images from placeholder.com
-- **Inspiration**: Modern service business websites
-
-## Contributing
-
-We welcome contributions! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request with detailed description
+- Responsive images
+- Lazy loading ready
+- SEO optimized structure
+- Fast loading times
 
 ---
 
-**Service Blueprint Theme** - Transform your service business with a professional WordPress presence.
+**Note**: This theme is perfect for service-based businesses looking for a professional online presence. It's designed to showcase your services effectively and convert visitors into customers.

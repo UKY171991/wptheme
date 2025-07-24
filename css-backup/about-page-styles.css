@@ -1,0 +1,1592 @@
+/*
+Modern About Page Styles
+Clean, Professional, Engaging Design
+*/
+
+/* ========================================
+   UNIVERSAL LAYOUT SYSTEM - ABOUT PAGE
+   ======================================== */
+
+/* Remove any decorative shapes or elements */
+.universal-page-content::before,
+.universal-page-content::after,
+.about-section::before,
+.about-section::after,
+.page-about::before,
+.page-about::after {
+    display: none !important;
+}
+
+/* Hide any SVG shapes that might be added by plugins or theme customizer */
+.decorative-shape,
+.wave-shape,
+.custom-shape-divider,
+.elementor-shape,
+.shape-divider {
+    display: none !important;
+}
+
+/* Universal Page Content Container */
+.universal-page-content {
+    background: #f8f9fa;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.universal-page-content .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Remove the unnecessary content-section styling that adds extra padding */
+.universal-page-content .content-section {
+    background: transparent;
+    padding: 0;
+}
+
+/* Universal Banner System - Using Universal Spacing Standards */
+.universal-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin: 0 !important;
+    /* Padding handled by universal-spacing-standards.css */
+}
+
+/* Remove any decorative elements from the banner */
+.universal-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    animation: floatBackground 20s ease-in-out infinite;
+}
+
+/* Ensure no other decorative elements appear */
+.universal-banner::after {
+    display: none !important;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: white;
+}
+
+.banner-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.banner-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Banner Statistics */
+.banner-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+    color: #ff5f00;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+.banner-buttons {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+/* About Page Sections - Using Universal Spacing Standards */
+.about-section {
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+    /* Padding handled by universal-spacing-standards.css */
+}
+
+.about-section:nth-child(even) {
+    background: white;
+}
+
+.about-section:nth-child(odd) {
+    background: #f8f9fa;
+}
+
+/* Ensure proper spacing between sections */
+.about-section + .about-section {
+    margin-top: 0;
+}
+
+/* Remove extra white content-section wrapper styles that may conflict */
+.universal-page-content .about-section {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+}
+
+/* Force remove any decorative SVG or shapes */
+.about-section svg,
+.about-section .shape,
+.about-section .wave,
+.about-section [class*="shape"],
+.about-section [class*="wave"],
+.about-section [class*="divider"] {
+    display: none !important;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+}
+
+.section-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.section-header h2 i {
+    color: #667eea;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #718096;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Story Content Grid */
+.story-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.story-text {
+    order: 1;
+}
+
+.story-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4a5568;
+    margin-bottom: 1.2rem;
+}
+
+.story-image {
+    order: 2;
+    position: relative;
+}
+
+.story-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.image-caption {
+    text-align: center;
+    margin-top: 0.75rem;
+}
+
+.image-caption p {
+    font-size: 0.85rem;
+    color: #718096;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    border-color: #667eea;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: #667eea;
+    margin-bottom: 1.2rem;
+    display: block;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.8rem;
+}
+
+.feature-card p {
+    color: #718096;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Mission Section - Using Universal Spacing Standards */
+.mission-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white;
+    /* Padding handled by universal-spacing-standards.css */
+}
+
+.mission-section .section-header h2 {
+    color: white;
+}
+
+.mission-section .section-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mission-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.mission-text h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mission-statement {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+}
+
+.mission-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.mission-point {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.mission-point i {
+    color: #68d391;
+    font-size: 1.1rem;
+}
+
+.mission-visual {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mission-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #ff5f00;
+}
+
+.mission-visual p {
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Team Section */
+.team-section {
+    background: white !important;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-member {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.team-member:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    border-color: #667eea;
+    background: white;
+}
+
+.member-photo {
+    font-size: 4rem;
+    color: #667eea;
+    margin-bottom: 1.2rem;
+}
+
+.team-member h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.4rem;
+}
+
+.member-role {
+    font-size: 0.95rem;
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.member-bio {
+    color: #718096;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Call to Action - Using Universal Spacing Standards */
+.about-cta {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    color: white;
+    text-align: center;
+    /* Padding handled by universal-spacing-standards.css */
+}
+
+.cta-content h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cta-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-large {
+    padding: 1.5rem 3rem;
+    font-size: 1.2rem;
+}
+
+/* ========================================
+   ABOUT PAGE MODERN HERO SECTION
+   ======================================== */
+
+/* Override any conflicting styles - ensure about page uses modern-hero styles */
+body.page-about .modern-hero,
+.page-about .modern-hero {
+    position: relative !important;
+    min-height: 90vh !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    padding: 2rem 0 !important;
+    z-index: 1 !important;
+}
+
+body.page-about .hero-background,
+.page-about .hero-background {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%) !important;
+    animation: floatBackground 20s ease-in-out infinite !important;
+}
+
+body.page-about .hero-overlay,
+.page-about .hero-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(11, 17, 51, 0.1) !important;
+    z-index: 1 !important;
+}
+
+body.page-about .hero-content,
+.page-about .hero-content {
+    position: relative !important;
+    z-index: 2 !important;
+    text-align: center !important;
+    color: white !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding: 2rem !important;
+}
+
+body.page-about .hero-badge,
+.page-about .hero-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 50px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    margin-bottom: 2rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    animation: slideUp 1s ease-out 0.3s both !important;
+}
+
+body.page-about .badge-icon,
+.page-about .badge-icon {
+    font-size: 1.2rem !important;
+}
+
+body.page-about .hero-title,
+.page-about .hero-title {
+    font-size: 4rem !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    margin-bottom: 2rem !important;
+    animation: slideUp 1s ease-out 0.5s both !important;
+    color: white !important;
+}
+
+body.page-about .title-highlight,
+.page-about .title-highlight {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    display: block !important;
+}
+
+body.page-about .hero-description,
+.page-about .hero-description {
+    font-size: 1.3rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 3rem !important;
+    opacity: 0.9 !important;
+    max-width: 700px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    animation: slideUp 1s ease-out 0.7s both !important;
+    color: white !important;
+}
+
+body.page-about .hero-buttons,
+.page-about .hero-buttons {
+    display: flex !important;
+    gap: 1.5rem !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 4rem !important;
+    animation: slideUp 1s ease-out 0.9s both !important;
+}
+
+body.page-about .btn-primary,
+.page-about .btn-primary {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    padding: 1.25rem 2.5rem !important;
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%) !important;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 10px 30px rgba(255, 95, 0, 0.3) !important;
+}
+
+body.page-about .btn-primary:hover,
+.page-about .btn-primary:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 15px 40px rgba(255, 95, 0, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+body.page-about .btn-secondary,
+.page-about .btn-secondary {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    padding: 1.25rem 2.5rem !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+body.page-about .btn-secondary:hover,
+.page-about .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-3px) !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+body.page-about .hero-stats,
+.page-about .hero-stats {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    gap: 2rem !important;
+    max-width: 600px !important;
+    margin: 0 auto !important;
+    animation: slideUp 1s ease-out 1.1s both !important;
+}
+
+body.page-about .stat-item,
+.page-about .stat-item {
+    text-align: center !important;
+    padding: 1.5rem 1rem !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 15px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+body.page-about .stat-number,
+.page-about .stat-number {
+    display: block !important;
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    color: #ff5f00 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+body.page-about .stat-label,
+.page-about .stat-label {
+    display: block !important;
+    font-size: 0.9rem !important;
+    opacity: 0.9 !important;
+    font-weight: 500 !important;
+    color: white !important;
+}
+
+/* Animation Keyframes */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatBackground {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+/* Legacy About Hero Styles (keeping for compatibility) */
+.about-hero {
+    position: relative;
+    padding: 8rem 0 6rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    overflow: hidden;
+}
+
+.breadcrumb a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    opacity: 0.8;
+}
+
+.about-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.about-hero p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   OUR STORY SECTION
+   ======================================== */
+
+.our-story {
+    padding: 6rem 0;
+    background: white;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.story-intro {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.story-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.story-point {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.story-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.story-point h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.story-point p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.story-visual {
+    position: relative;
+}
+
+.story-image-wrapper {
+    position: relative;
+}
+
+.story-image {
+    position: relative;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.story-image-bg {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+}
+
+.story-image-bg::after {
+    content: "Building Trust Through Excellence";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    max-width: 320px;
+    line-height: 1.3;
+}
+
+.stats-overlay {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    display: flex;
+    gap: 1rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ff5f00;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 600;
+}
+
+/* ========================================
+   MISSION, VISION & VALUES
+   ======================================== */
+
+.mission-vision-values {
+    padding: 6rem 0;
+    background: #f8f9fa;
+}
+
+.mvv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.mvv-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.mvv-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.mvv-card:hover::before {
+    transform: scaleX(1);
+}
+
+.mvv-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.mvv-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.mvv-card h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.mvv-card p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.mvv-highlight {
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.values-list {
+    text-align: left;
+    margin: 0;
+}
+
+.value-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.value-dot {
+    width: 8px;
+    height: 8px;
+    background: #ff5f00;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* ========================================
+   WHY CHOOSE US SECTION
+   ======================================== */
+
+.why-choose-us {
+    padding: 6rem 0;
+    background: white;
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.advantage-card {
+    background: #f8f9fa;
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.advantage-card:hover {
+    transform: translateY(-5px);
+    border-color: #ff5f00;
+    background: white;
+    box-shadow: 0 15px 40px rgba(255, 95, 0, 0.1);
+}
+
+.advantage-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.advantage-card:hover .advantage-icon {
+    transform: scale(1.1);
+}
+
+.advantage-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.advantage-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.advantage-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.feature-tag {
+    background: rgba(255, 95, 0, 0.1);
+    color: #ff5f00;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ========================================
+   TEAM SECTION
+   ======================================== */
+
+.team-section {
+    padding: 6rem 0;
+    background: #f8f9fa;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+}
+
+.team-member {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.member-image {
+    position: relative;
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.member-avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.member-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 95, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.team-member:hover .member-overlay {
+    opacity: 1;
+}
+
+.member-social {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: white;
+    color: #ff5f00;
+    transform: translateY(-3px);
+}
+
+.member-info {
+    padding: 2rem;
+    text-align: center;
+}
+
+.member-info h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.member-role {
+    color: #ff5f00;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.member-bio {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.member-expertise {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.expertise-tag {
+    background: #f8f9fa;
+    color: #333;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ========================================
+   SUCCESS METRICS SECTION
+   ======================================== */
+
+.success-metrics {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.metric-card {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.metric-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.metric-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: #ff5f00;
+}
+
+.metric-label {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.metric-description {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ========================================
+   ABOUT CTA SECTION
+   ======================================== */
+
+.about-cta {
+    padding: 6rem 0;
+    background: white;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.cta-content p {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .banner-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .story-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .story-image {
+        order: -1;
+    }
+    
+    .mission-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+    
+    .mission-text {
+        order: 2;
+    }
+    
+    .mission-visual {
+        order: 1;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .universal-page-content .content-section {
+        padding: 0;
+    }
+    
+    .banner-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    .banner-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card,
+    .team-member {
+        padding: 1.5rem;
+    }
+    
+    .section-header h2 {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .story-image img {
+        height: 280px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .mission-text h2 {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .mission-points {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .universal-page-content .container {
+        padding: 0 15px;
+    }
+    
+    .feature-card,
+    .team-member {
+        padding: 1.2rem;
+    }
+    
+    .story-content {
+        gap: 1.5rem;
+    }
+    
+    .mission-content {
+        gap: 1.5rem;
+    }
+    
+    .stat-item {
+        padding: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .breadcrumb {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 0.95rem;
+    }
+    
+    .btn-large {
+        padding: 1.1rem 2.2rem;
+        font-size: 1rem;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatBackground {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(1deg);
+    }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   FINAL CLEANUP - REMOVE ALL DECORATIVE ELEMENTS
+   ======================================== */
+
+/* Ultimate cleanup for any remaining decorative elements */
+body.page-about,
+.page-template-page-about-enhanced {
+    overflow-x: hidden !important;
+}
+
+/* Remove ALL possible decorative shapes */
+body.page-about *[class*="wave"],
+body.page-about *[class*="shape"],
+body.page-about *[class*="divider"],
+body.page-about *[class*="decoration"],
+body.page-about *[class*="ornament"],
+body.page-about svg:not(.fas):not(.far):not(.fab):not(.icon),
+body.page-about canvas,
+body.page-about .wp-block-spacer::before,
+body.page-about .wp-block-spacer::after,
+body.page-about .entry-content::before,
+body.page-about .entry-content::after {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+/* Clean sections without any decorative borders */
+body.page-about .about-section {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    outline: none !important;
+}
+
+/* Ensure no absolute positioned decorative elements */
+body.page-about .about-section > *:not(.container) {
+    position: static !important;
+}
+
+/* Force clean backgrounds */
+body.page-about .about-section {
+    background-image: none !important;
+    background-attachment: scroll !important;
+}
+
+/* Re-enable only the specific pseudo-elements we want */
+body.page-about .universal-banner::before,
+body.page-about .feature-card::before {
+    content: '' !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* ========================================
+   GLOBAL SHAPE AND DECORATION REMOVAL
+   ======================================== */
+
+/* Hide any theme or plugin decorative elements */
+body.page-about .elementor-shape-top,
+body.page-about .elementor-shape-bottom,
+body.page-about .wp-block-cover::before,
+body.page-about .wp-block-cover::after,
+body.page-about [class*="shape-divider"],
+body.page-about [class*="wave-divider"],
+body.page-about [class*="decorative"],
+body.page-about svg[class*="wave"],
+body.page-about svg[class*="shape"],
+body.page-about .custom-shape,
+body.page-about .section-divider {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Hide any orange decorative elements specifically */
+body.page-about *[style*="orange"],
+body.page-about *[fill*="orange"],
+body.page-about *[stroke*="orange"],
+body.page-about .orange-shape,
+body.page-about .orange-wave {
+    display: none !important;
+}
+
+/* Ensure clean section breaks */
+body.page-about .about-section {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove any potential custom CSS that adds shapes */
+body.page-about *::before,
+body.page-about *::after {
+    content: none !important;
+}
+
+/* Re-enable only the specific pseudo-elements we want */
+body.page-about .universal-banner::before,
+body.page-about .feature-card::before {
+    content: '' !important;
+}

@@ -1,0 +1,236 @@
+/*
+Menu Color Fix
+Ensures consistent dark theme for navigation menus
+*/
+
+/* ========================================
+   CRITICAL MENU COLOR OVERRIDES
+   ======================================== */
+
+/* Main navigation background */
+.site-header {
+    background: #0b1133 !important;
+    color: white !important;
+}
+
+/* Main menu links */
+.nav-menu a,
+.nav-menu li a {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.nav-menu a:hover,
+.nav-menu li a:hover {
+    color: #ff5f00 !important;
+    text-decoration: none !important;
+}
+
+/* Submenu styling - force dark theme */
+.nav-menu .sub-menu,
+.nav-menu ul.sub-menu,
+.main-navigation .sub-menu {
+    background: #0b1133 !important;
+    border: none !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3) !important;
+    border-top: 3px solid #ff5f00 !important;
+}
+
+/* Submenu items */
+.nav-menu .sub-menu li,
+.nav-menu ul.sub-menu li {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-menu .sub-menu li:last-child {
+    border-bottom: none !important;
+}
+
+/* Submenu links */
+.nav-menu .sub-menu a,
+.nav-menu .sub-menu li a,
+.nav-menu ul.sub-menu a,
+.nav-menu ul.sub-menu li a {
+    background: transparent !important;
+    color: white !important;
+    padding: 1rem 1.5rem !important;
+    display: block !important;
+    text-decoration: none !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem !important;
+    border: none !important;
+}
+
+/* Submenu link hover states */
+.nav-menu .sub-menu a:hover,
+.nav-menu .sub-menu li a:hover,
+.nav-menu .sub-menu a:focus,
+.nav-menu .sub-menu li a:focus,
+.nav-menu ul.sub-menu a:hover,
+.nav-menu ul.sub-menu li a:hover {
+    background-color: rgba(255,95,0,0.1) !important;
+    color: #ff5f00 !important;
+    text-decoration: none !important;
+}
+
+/* Third level submenus */
+.nav-menu .sub-menu .sub-menu,
+.nav-menu ul.sub-menu .sub-menu {
+    background: #0b1133 !important;
+    border-top: 3px solid #ff5f00 !important;
+    border-radius: 0 5px 5px 0 !important;
+}
+
+/* Remove any conflicting WordPress default styles */
+.nav-menu .sub-menu li a:visited,
+.nav-menu ul.sub-menu li a:visited {
+    color: white !important;
+}
+
+/* Override any theme-specific menu styles */
+.main-navigation .nav-menu .sub-menu a,
+.main-navigation .nav-menu ul.sub-menu a {
+    color: white !important;
+    background: transparent !important;
+}
+
+.main-navigation .nav-menu .sub-menu a:hover,
+.main-navigation .nav-menu ul.sub-menu a:hover {
+    color: #ff5f00 !important;
+    background-color: rgba(255,95,0,0.1) !important;
+}
+
+/* Service category specific styling */
+.menu-item-object-service_category .sub-menu {
+    background: #0b1133 !important;
+}
+
+.menu-item-object-service_category .sub-menu a {
+    color: white !important;
+}
+
+.menu-item-object-service_category .sub-menu a:hover {
+    color: #ff5f00 !important;
+    background-color: rgba(255,95,0,0.1) !important;
+}
+
+/* Ensure dropdown indicators are visible */
+.menu-item-has-children > a::after {
+    color: white !important;
+    opacity: 0.7 !important;
+}
+
+.nav-menu .sub-menu .menu-item-has-children > a::after {
+    color: white !important;
+    opacity: 0.7 !important;
+}
+
+/* Mobile menu colors */
+@media (max-width: 768px) {
+    .nav-menu .sub-menu,
+    .nav-menu .sub-menu .sub-menu {
+        background: rgba(255,255,255,0.05) !important;
+    }
+    
+    .nav-menu .sub-menu a {
+        color: white !important;
+    }
+    
+    .nav-menu .sub-menu a:hover {
+        color: #ff5f00 !important;
+        background-color: rgba(255,95,0,0.1) !important;
+    }
+}
+
+/* ========================================
+   HIGH PRIORITY OVERRIDES
+   ======================================== */
+
+/* Use highest specificity to override any conflicting styles */
+body .site-header .main-navigation .nav-menu .sub-menu,
+html body .site-header .main-navigation .nav-menu .sub-menu {
+    background: #0b1133 !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-top: 3px solid #ff5f00 !important;
+}
+
+body .site-header .main-navigation .nav-menu .sub-menu a,
+html body .site-header .main-navigation .nav-menu .sub-menu a {
+    color: white !important;
+    background: transparent !important;
+}
+
+body .site-header .main-navigation .nav-menu .sub-menu a:hover,
+html body .site-header .main-navigation .nav-menu .sub-menu a:hover {
+    color: #ff5f00 !important;
+    background-color: rgba(255,95,0,0.1) !important;
+}
+
+/* Override the ultimate-dropdown-emergency-fix.css white background */
+body .sub-menu,
+html body .sub-menu,
+body .nav-menu .sub-menu,
+html body .nav-menu .sub-menu,
+body .main-navigation .sub-menu,
+html body .main-navigation .sub-menu {
+    background: #0b1133 !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-top: 3px solid #ff5f00 !important;
+    color: white !important;
+}
+
+/* Override dropdown menu links */
+body .sub-menu a,
+html body .sub-menu a,
+body .nav-menu .sub-menu a,
+html body .nav-menu .sub-menu a,
+body .main-navigation .sub-menu a,
+html body .main-navigation .sub-menu a {
+    color: white !important;
+    background: transparent !important;
+    text-decoration: none !important;
+}
+
+body .sub-menu a:hover,
+html body .sub-menu a:hover,
+body .nav-menu .sub-menu a:hover,
+html body .nav-menu .sub-menu a:hover,
+body .main-navigation .sub-menu a:hover,
+html body .main-navigation .sub-menu a:hover {
+    color: #ff5f00 !important;
+    background-color: rgba(255,95,0,0.1) !important;
+    text-decoration: none !important;
+}
+
+/* Nuclear option - highest specificity possible */
+html body .site-header .main-navigation .nav-menu .sub-menu,
+html body .nav-menu .menu-item:hover .sub-menu,
+html body .dropdown-menu,
+html body .mega-menu-wrapper {
+    background-color: #0b1133 !important;
+    border-color: rgba(255,255,255,0.1) !important;
+    border-top-color: #ff5f00 !important;
+}
+
+html body .site-header .main-navigation .nav-menu .sub-menu li a,
+html body .nav-menu .sub-menu li a,
+html body .dropdown-menu li a,
+html body .mega-menu-wrapper li a {
+    color: white !important;
+    background-color: transparent !important;
+}
+
+html body .site-header .main-navigation .nav-menu .sub-menu li a:hover,
+html body .site-header .main-navigation .nav-menu .sub-menu li a:focus,
+html body .nav-menu .sub-menu li a:hover,
+html body .nav-menu .sub-menu li a:focus,
+html body .dropdown-menu li a:hover,
+html body .dropdown-menu li a:focus,
+html body .mega-menu-wrapper li a:hover,
+html body .mega-menu-wrapper li a:focus {
+    color: #ff5f00 !important;
+    background-color: rgba(255,95,0,0.1) !important;
+}

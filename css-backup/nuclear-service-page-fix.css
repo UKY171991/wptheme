@@ -1,0 +1,235 @@
+/* 
+🚨 EMERGENCY SERVICE PAGE LAYOUT FIX 🚨
+IMMEDIATE OVERRIDE - HIGHEST PRIORITY
+*/
+
+/* FORCE HIDE ALL PROBLEMATIC ELEMENTS */
+.page-template-page-services .particles-js,
+.page-template-page-services .cosmic-particles,
+.page-template-page-services .animated-badge-carousel,
+.page-template-page-services .floating-elements,
+.page-template-page-services canvas,
+.page-template-page-services [class*="particle"],
+.page-template-page-services [class*="cosmic"],
+.page-template-page-services [class*="mega-fancy"],
+.page-template-page-services [class*="ultra-fancy"] canvas {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* FORCE CLEAN HERO SECTION */
+.page-template-page-services .ultra-fancy-hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    min-height: 60vh !important;
+    max-height: 60vh !important;
+    padding: 60px 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    color: white !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+.page-template-page-services .hero-content {
+    z-index: 100 !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+}
+
+.page-template-page-services .hero-content h1 {
+    font-size: 3rem !important;
+    color: white !important;
+    margin-bottom: 20px !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+}
+
+.page-template-page-services .hero-content p {
+    font-size: 1.2rem !important;
+    color: rgba(255,255,255,0.9) !important;
+    max-width: 600px !important;
+    margin: 0 auto 30px !important;
+    line-height: 1.6 !important;
+}
+
+/* FORCE CLEAN SERVICE GRID */
+.page-template-page-services .services-grid,
+.page-template-page-services .ultra-fancy-services-grid,
+.page-template-page-services .service-items {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: 30px !important;
+    padding: 60px 20px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    background: #f8f9fa !important;
+}
+
+.page-template-page-services .service-card,
+.page-template-page-services .service-item {
+    background: white !important;
+    padding: 30px !important;
+    border-radius: 15px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    text-align: center !important;
+    height: 350px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    transition: transform 0.3s ease !important;
+    animation: none !important;
+    transform: none !important;
+}
+
+.page-template-page-services .service-card:hover {
+    transform: translateY(-5px) !important;
+}
+
+/* FORCE CLEAN STATS SECTION */
+.page-template-page-services .stats-section,
+.page-template-page-services .ultra-fancy-stats-section {
+    padding: 60px 0 !important;
+    background: white !important;
+}
+
+.page-template-page-services .stats-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 30px !important;
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+.page-template-page-services .stat-item {
+    background: #f8f9fa !important;
+    padding: 30px 20px !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    animation: none !important;
+    transform: none !important;
+}
+
+/* FORCE CLEAN FILTER SECTION */
+.page-template-page-services .filter-tabs,
+.page-template-page-services .cosmic-filter-tabs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 15px !important;
+    margin: 40px auto !important;
+    max-width: 800px !important;
+    padding: 0 20px !important;
+}
+
+.page-template-page-services .filter-tab {
+    background: #f8f9fa !important;
+    border: 2px solid #e9ecef !important;
+    padding: 12px 24px !important;
+    border-radius: 25px !important;
+    color: #495057 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    animation: none !important;
+    transform: none !important;
+}
+
+.page-template-page-services .filter-tab:hover,
+.page-template-page-services .filter-tab.active {
+    background: #667eea !important;
+    border-color: #667eea !important;
+    color: white !important;
+}
+
+/* MOBILE FIXES */
+@media (max-width: 768px) {
+    .page-template-page-services .ultra-fancy-hero-section {
+        min-height: 50vh !important;
+        max-height: 50vh !important;
+        padding: 40px 15px !important;
+    }
+    
+    .page-template-page-services .hero-content h1 {
+        font-size: 2.2rem !important;
+    }
+    
+    .page-template-page-services .hero-content p {
+        font-size: 1rem !important;
+    }
+    
+    .page-template-page-services .services-grid,
+    .page-template-page-services .ultra-fancy-services-grid {
+        grid-template-columns: 1fr !important;
+        padding: 40px 15px !important;
+        gap: 20px !important;
+    }
+    
+    .page-template-page-services .service-card {
+        height: auto !important;
+        min-height: 250px !important;
+        padding: 20px !important;
+    }
+    
+    .page-template-page-services .stats-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .page-template-page-services .filter-tabs {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .page-template-page-services .filter-tab {
+        width: 100% !important;
+        max-width: 200px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-template-page-services .hero-content h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .page-template-page-services .stats-container {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .page-template-page-services .service-card {
+        padding: 15px !important;
+    }
+}
+
+/* FORCE CONTAINERS TO BEHAVE */
+.page-template-page-services .container,
+.page-template-page-services .row {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* SUCCESS INDICATOR */
+.page-template-page-services::before {
+    content: "✅ EMERGENCY FIX APPLIED!" !important;
+    position: fixed !important;
+    top: 10px !important;
+    right: 10px !important;
+    background: #28a745 !important;
+    color: white !important;
+    padding: 8px 12px !important;
+    border-radius: 5px !important;
+    z-index: 99999 !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+}
