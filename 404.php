@@ -1,569 +1,451 @@
-<?php get_header(); ?>
+<?php
+/**
+ * 404 Error Page Template
+ * 
+ * @package ServiceBlueprint
+ */
 
-<div class="error-404-section">
+get_header(); ?>
+
+<section class="error-404-section">
     <div class="container">
-        <div class="error-404">
-            <div class="error-content">
-                <div class="error-animation">
-                    <div class="error-number">4</div>
-                    <div class="error-party-icon">🎉</div>
-                    <div class="error-number">4</div>
-                </div>
-                
-                <h1 class="error-title">Oops! Page Not Found</h1>
-                <h2 class="error-subtitle">This page seems to have left the party early! 🎪</h2>
-                <p class="error-message">
-                    Don't worry - even the best party planners sometimes lose track of things. 
-                    Let's get you back to the celebration and find what you're looking for!
+        <div class="error-404-content">
+            <!-- Error illustration -->
+            <div class="error-illustration">
+                <div class="error-number">404</div>
+                <div class="error-icon">🔍</div>
+            </div>
+            
+            <div class="error-text">
+                <h1 class="error-title"><?php esc_html_e('Page Not Found', 'service-blueprint'); ?></h1>
+                <p class="error-description">
+                    <?php esc_html_e('Sorry, we couldn\'t find the page you were looking for. It may have been moved, deleted, or you entered the wrong URL.', 'service-blueprint'); ?>
                 </p>
-                
-                <div class="error-actions">
-                    <a href="<?php echo esc_url(home_url('/')); ?>" class="error-btn primary">
-                        <i class="btn-icon">🏠</i>
-                        <span>Go Home</span>
-                    </a>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="error-btn secondary">
-                        <i class="btn-icon">🎪</i>
-                        <span>Browse Rentals</span>
-                    </a>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="error-btn secondary">
-                        <i class="btn-icon">💬</i>
-                        <span>Get Help</span>
-                    </a>
-                </div>
-                
-                <div class="search-section">
-                    <h3>🔍 Try searching for what you need:</h3>
-                    <div class="search-form-wrapper">
-                        <?php get_search_form(); ?>
+            </div>
+            
+            <!-- Search form -->
+            <div class="error-search">
+                <h2><?php esc_html_e('Search for what you need', 'service-blueprint'); ?></h2>
+                <form role="search" method="get" class="search-form" action="<?php echo esc_url(home_url('/')); ?>">
+                    <div class="search-input-group">
+                        <input type="search" 
+                               class="search-field" 
+                               placeholder="<?php esc_attr_e('Search services...', 'service-blueprint'); ?>" 
+                               value="<?php echo get_search_query(); ?>" 
+                               name="s" 
+                               aria-label="<?php esc_attr_e('Search', 'service-blueprint'); ?>" />
+                        <button type="submit" class="search-submit">
+                            <span class="search-icon">🔍</span>
+                            <span class="sr-only"><?php esc_html_e('Search', 'service-blueprint'); ?></span>
+                        </button>
                     </div>
+                </form>
+            </div>
+            
+            <!-- Helpful links -->
+            <div class="helpful-links">
+                <h2><?php esc_html_e('Or try these popular sections', 'service-blueprint'); ?></h2>
+                
+                <div class="links-grid">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="helpful-link">
+                        <span class="link-icon">🏠</span>
+                        <span class="link-text"><?php esc_html_e('Homepage', 'service-blueprint'); ?></span>
+                    </a>
+                    
+                    <a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>" class="helpful-link">
+                        <span class="link-icon">🛠️</span>
+                        <span class="link-text"><?php esc_html_e('All Services', 'service-blueprint'); ?></span>
+                    </a>
+                    
+                    <?php
+                    // Get popular service categories
+                    $popular_categories = get_terms(array(
+                        'taxonomy' => 'service_category',
+                        'orderby' => 'count',
+                        'order' => 'DESC',
+                        'number' => 4,
+                        'hide_empty' => true
+                    ));
+                    
+                    if (!is_wp_error($popular_categories) && !empty($popular_categories)) :
+                        foreach ($popular_categories as $category) :
+                            $icon = get_term_meta($category->term_id, 'category_icon', true);
+                    ?>
+                        <a href="<?php echo esc_url(get_term_link($category)); ?>" class="helpful-link">
+                            <span class="link-icon"><?php echo $icon ? esc_html($icon) : '📋'; ?></span>
+                            <span class="link-text"><?php echo esc_html($category->name); ?></span>
+                        </a>
+                    <?php 
+                        endforeach;
+                    endif;
+                    
+                    // Add contact page if it exists
+                    $contact_page = get_page_by_title('Contact');
+                    if ($contact_page) :
+                    ?>
+                        <a href="<?php echo esc_url(get_permalink($contact_page)); ?>" class="helpful-link">
+                            <span class="link-icon">📞</span>
+                            <span class="link-text"><?php esc_html_e('Contact Us', 'service-blueprint'); ?></span>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
             
-            <div class="helpful-links-section">
-                <div class="helpful-links-card">
-                    <h3>🎉 Popular Event Rentals</h3>
-                    <div class="quick-links-grid">
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#tables-chairs" class="quick-link">
-                            <span class="link-icon">🪑</span>
-                            <span>Tables & Chairs</span>
-                        </a>
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#tents" class="quick-link">
-                            <span class="link-icon">🎪</span>
-                            <span>Tents & Canopies</span>
-                        </a>
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#entertainment" class="quick-link">
-                            <span class="link-icon">🎠</span>
-                            <span>Entertainment</span>
-                        </a>
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>#lighting" class="quick-link">
-                            <span class="link-icon">💡</span>
-                            <span>Event Lighting</span>
-                        </a>
-                    </div>
-                </div>
+            <!-- Recent services -->
+            <?php
+            $recent_services = new WP_Query(array(
+                'post_type' => 'service',
+                'posts_per_page' => 3,
+                'post_status' => 'publish'
+            ));
+            
+            if ($recent_services->have_posts()) :
+            ?>
+            <div class="recent-services">
+                <h2><?php esc_html_e('Latest Services', 'service-blueprint'); ?></h2>
                 
-                <div class="helpful-links-card">
-                    <h3>📞 Need Immediate Help?</h3>
-                    <div class="contact-options">
-                        <a href="tel:<?php echo esc_attr(str_replace([' ', '-', '(', ')'], '', get_theme_mod('contact_phone', '+919876543210'))); ?>" class="contact-option">
-                            <span class="contact-icon">📞</span>
-                            <div class="contact-details">
-                                <span class="contact-label">Call Us Now</span>
-                                <span class="contact-value"><?php echo esc_html(get_theme_mod('contact_phone', '+91 98765 43210')); ?></span>
+                <div class="services-preview">
+                    <?php while ($recent_services->have_posts()) : $recent_services->the_post(); ?>
+                        <article class="service-preview-card">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="service-preview-image">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php the_post_thumbnail('thumbnail', array('alt' => get_the_title())); ?>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="service-preview-content">
+                                <h3 class="service-preview-title">
+                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                </h3>
+                                
+                                <div class="service-preview-excerpt">
+                                    <?php echo wp_trim_words(get_the_excerpt(), 15); ?>
+                                </div>
+                                
+                                <a href="<?php the_permalink(); ?>" class="service-preview-link">
+                                    <?php esc_html_e('Learn More', 'service-blueprint'); ?> →
+                                </a>
                             </div>
-                        </a>
-                        
-                        <a href="https://wa.me/<?php echo esc_attr(str_replace(['+', ' ', '-', '(', ')'], '', get_theme_mod('contact_phone', '919876543210'))); ?>" class="contact-option whatsapp">
-                            <span class="contact-icon">💬</span>
-                            <div class="contact-details">
-                                <span class="contact-label">WhatsApp Us</span>
-                                <span class="contact-value">Instant Response</span>
-                            </div>
-                        </a>
-                        
-                        <a href="mailto:<?php echo esc_attr(get_theme_mod('contact_email', 'info@partyprorentals.com')); ?>" class="contact-option">
-                            <span class="contact-icon">✉️</span>
-                            <div class="contact-details">
-                                <span class="contact-label">Email Us</span>
-                                <span class="contact-value"><?php echo esc_html(get_theme_mod('contact_email', 'info@partyprorentals.com')); ?></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="helpful-links-card">
-                    <h3>🎯 Event Planning Resources</h3>
-                    <ul class="resource-links">
-                        <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('pricing'))); ?>">💰 Pricing & Packages</a></li>
-                        <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('about'))); ?>">ℹ️ About PartyPro</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/')); ?>">🏠 Homepage</a></li>
-                        <?php if (get_page_by_path('gallery')): ?>
-                        <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('gallery'))); ?>">📸 Event Gallery</a></li>
-                        <?php endif; ?>
-                    </ul>
+                        </article>
+                    <?php endwhile; wp_reset_postdata(); ?>
                 </div>
             </div>
-        </div>
-        
-        <div class="error-illustration">
-            <div class="floating-elements">
-                <div class="floating-balloon">�</div>
-                <div class="floating-confetti">🎊</div>
-                <div class="floating-party">🎉</div>
-                <div class="floating-cake">🎂</div>
+            <?php endif; ?>
+            
+            <!-- Back to home button -->
+            <div class="error-actions">
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="btn btn-primary btn-large">
+                    <?php esc_html_e('← Back to Homepage', 'service-blueprint'); ?>
+                </a>
             </div>
-            <p class="illustration-text">Even our party balloons couldn't find this page!</p>
         </div>
     </div>
-</div>
+</section>
 
 <style>
+/* 404 Page Styles */
 .error-404-section {
-    min-height: 80vh;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 4rem 0;
-    position: relative;
+    padding: 80px 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
 }
 
-.error-404 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-    max-width: 1200px;
+.error-404-content {
+    text-align: center;
+    max-width: 800px;
     margin: 0 auto;
 }
 
-.error-content {
-    text-align: left;
-}
-
-.error-animation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+.error-illustration {
+    margin-bottom: 40px;
+    position: relative;
 }
 
 .error-number {
-    font-size: 6rem;
-    font-weight: bold;
-    color: #667eea;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 900;
+    color: #e5e7eb;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.error-icon {
+    font-size: 4rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     animation: bounce 2s infinite;
 }
 
-.error-party-icon {
-    font-size: 4rem;
-    animation: spin 3s linear infinite;
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    40%, 43% {
+        transform: translate(-50%, -50%) translateY(-10px);
+    }
+    70% {
+        transform: translate(-50%, -50%) translateY(-5px);
+    }
+    90% {
+        transform: translate(-50%, -50%) translateY(-2px);
+    }
 }
 
 .error-title {
     font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 1rem;
-    font-weight: bold;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 20px;
 }
 
-.error-subtitle {
-    font-size: 1.5rem;
-    color: #667eea;
-    margin-bottom: 1rem;
-}
-
-.error-message {
-    font-size: 1.1rem;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    max-width: 500px;
-}
-
-.error-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-}
-
-.error-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-}
-
-.error-btn.primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-}
-
-.error-btn.secondary {
-    background: white;
-    color: #667eea;
-    border: 2px solid #667eea;
-}
-
-.error-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.search-section {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-}
-
-.search-section h3 {
-    margin-bottom: 1rem;
-    color: #333;
+.error-description {
     font-size: 1.2rem;
+    color: #6b7280;
+    margin-bottom: 50px;
+    line-height: 1.6;
 }
 
-.search-form-wrapper form {
+.error-search {
+    margin-bottom: 60px;
+}
+
+.error-search h2 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: #374151;
+}
+
+.search-input-group {
     display: flex;
-    gap: 0.5rem;
-}
-
-.search-form-wrapper input[type="search"] {
-    flex: 1;
-    padding: 12px 16px;
-    border: 2px solid #e1e5e9;
-    border-radius: 25px;
-    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 2px solid #e5e7eb;
+    border-radius: 50px;
+    overflow: hidden;
     transition: border-color 0.3s ease;
 }
 
-.search-form-wrapper input[type="search"]:focus {
-    outline: none;
-    border-color: #667eea;
+.search-input-group:focus-within {
+    border-color: #2563eb;
 }
 
-.search-form-wrapper input[type="submit"] {
-    background: #667eea;
+.search-field {
+    flex: 1;
+    padding: 15px 25px;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    background: white;
+}
+
+.search-submit {
+    background: #2563eb;
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: 25px;
+    padding: 15px 25px;
     cursor: pointer;
-    font-weight: 600;
     transition: background 0.3s ease;
-}
-
-.search-form-wrapper input[type="submit"]:hover {
-    background: #5a6fd8;
-}
-
-.helpful-links-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.helpful-links-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-.helpful-links-card h3 {
-    margin-bottom: 1.5rem;
-    color: #333;
     font-size: 1.2rem;
 }
 
-.quick-links-grid {
+.search-submit:hover {
+    background: #1d4ed8;
+}
+
+.helpful-links {
+    margin-bottom: 60px;
+}
+
+.helpful-links h2 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #374151;
+}
+
+.links-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.quick-link {
+.helpful-link {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 10px;
+    gap: 10px;
+    padding: 25px 20px;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
     text-decoration: none;
-    color: #333;
+    color: #374151;
     transition: all 0.3s ease;
-    font-weight: 600;
 }
 
-.quick-link:hover {
-    background: #667eea;
-    color: white;
+.helpful-link:hover {
+    border-color: #2563eb;
     transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
+    text-decoration: none;
 }
 
 .link-icon {
-    font-size: 1.2rem;
+    font-size: 2rem;
 }
 
-.contact-options {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contact-option {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    text-decoration: none;
-    color: #333;
-    transition: all 0.3s ease;
-}
-
-.contact-option:hover {
-    background: #667eea;
-    color: white;
-    transform: translateY(-2px);
-}
-
-.contact-option.whatsapp:hover {
-    background: #25d366;
-}
-
-.contact-icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-}
-
-.contact-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.contact-label {
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.contact-value {
-    font-size: 0.8rem;
-    opacity: 0.8;
-}
-
-.resource-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.resource-links li {
-    margin-bottom: 0.5rem;
-}
-
-.resource-links a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    text-decoration: none;
-    color: #333;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+.link-text {
     font-weight: 500;
-}
-
-.resource-links a:hover {
-    background: #f8f9fa;
-    color: #667eea;
-    transform: translateX(5px);
-}
-
-.error-illustration {
     text-align: center;
-    padding: 2rem;
-    position: relative;
 }
 
-.floating-elements {
-    position: relative;
-    height: 200px;
-    margin-bottom: 2rem;
+.recent-services {
+    margin-bottom: 60px;
 }
 
-.floating-elements > div {
-    position: absolute;
-    font-size: 3rem;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
+.recent-services h2 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #374151;
 }
 
-.floating-balloon {
-    top: 20%;
-    left: 10%;
-    animation-name: float1;
+.services-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
 }
 
-.floating-confetti {
-    top: 40%;
-    right: 15%;
-    animation-name: float2;
+.service-preview-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.floating-party {
-    top: 60%;
-    left: 20%;
-    animation-name: float3;
+.service-preview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.floating-cake {
-    top: 30%;
-    right: 30%;
-    animation-name: float4;
+.service-preview-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
 }
 
-.illustration-text {
-    color: #666;
-    font-style: italic;
-    font-size: 1.2rem;
-    margin-top: 2rem;
+.service-preview-content {
+    padding: 20px;
 }
 
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-20px);
-    }
-    60% {
-        transform: translateY(-10px);
-    }
+.service-preview-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
 }
 
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.service-preview-title a {
+    color: #1f2937;
+    text-decoration: none;
 }
 
-@keyframes float1 {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-20px) rotate(5deg);
-    }
+.service-preview-title a:hover {
+    color: #2563eb;
 }
 
-@keyframes float2 {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-15px) rotate(-5deg);
-    }
+.service-preview-excerpt {
+    color: #6b7280;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
-@keyframes float3 {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-25px) rotate(3deg);
-    }
+.service-preview-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
 }
 
-@keyframes float4 {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-18px) rotate(-3deg);
-    }
+.service-preview-link:hover {
+    text-decoration: underline;
 }
 
+.error-actions {
+    margin-top: 40px;
+}
+
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .error-404 {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        text-align: center;
-    }
-    
-    .error-content {
-        text-align: center;
+    .error-404-section {
+        padding: 60px 0;
     }
     
     .error-number {
-        font-size: 4rem;
+        font-size: 8rem;
+    }
+    
+    .error-icon {
+        font-size: 3rem;
     }
     
     .error-title {
         font-size: 2rem;
     }
     
-    .error-subtitle {
-        font-size: 1.2rem;
+    .error-description {
+        font-size: 1.1rem;
     }
     
-    .error-actions {
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
+    .links-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
     
-    .error-btn {
-        width: 200px;
-        justify-content: center;
-    }
-    
-    .search-form-wrapper form {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .quick-links-grid {
+    .services-preview {
         grid-template-columns: 1fr;
     }
     
-    .floating-elements {
-        height: 150px;
+    .search-input-group {
+        flex-direction: column;
+        border-radius: 12px;
     }
     
-    .floating-elements > div {
-        font-size: 2rem;
+    .search-field,
+    .search-submit {
+        border-radius: 0;
+    }
+    
+    .search-field {
+        border-bottom: 1px solid #e5e7eb;
     }
 }
 
 @media (max-width: 480px) {
-    .error-animation {
-        flex-direction: column;
-        gap: 0.5rem;
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .helpful-link {
+        padding: 20px 15px;
     }
     
     .error-number {
-        font-size: 3rem;
+        font-size: 6rem;
     }
     
-    .error-party-icon {
+    .error-icon {
         font-size: 2.5rem;
-    }
-    
-    .helpful-links-card {
-        padding: 1.5rem;
     }
 }
 </style>

@@ -1,400 +1,389 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Template for displaying single posts
+ *
+ * @package ServiceBlueprint
+ */
 
-<!-- Enhanced Hero Section for Single Post -->
-<section class="blog-hero-section">
-    <div class="hero-background-animated"></div>
-    <div class="hero-overlay-gradient"></div>
+get_header(); ?>
+
+<main id="main" class="site-main" role="main">
     <div class="container">
-        <div class="blog-hero-content">
-            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                <div class="blog-hero-badge">
-                    <i class="fas fa-newspaper"></i>
-                    <?php if (get_post_type() == 'service') : ?>
-                        <span>Service</span>
-                    <?php else : ?>
-                        <span>Blog Post</span>
-                    <?php endif; ?>
-                </div>
-                
-                <h1 class="blog-hero-title"><?php the_title(); ?></h1>
-                
-                <div class="blog-hero-meta">
-                    <div class="meta-grid">
-                        <div class="meta-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span><?php echo get_the_date('M j, Y'); ?></span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-user-circle"></i>
-                            <span><?php the_author(); ?></span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-clock"></i>
-                            <span><?php echo get_reading_time(); ?> min read</span>
-                        </div>
-                        <?php if (get_post_type() == 'service') : ?>
-                            <div class="meta-item service-badge">
-                                <i class="fas fa-star"></i>
-                                <span>Premium Service</span>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
+        <?php while (have_posts()) : the_post(); ?>
+            <article id="post-<?php the_ID(); ?>" <?php post_class('single-post'); ?>>
                 
                 <?php if (has_post_thumbnail()) : ?>
-                    <div class="blog-hero-image">
-                        <?php the_post_thumbnail('large', array('class' => 'hero-featured-image')); ?>
+                    <div class="post-featured-image">
+                        <?php the_post_thumbnail('large'); ?>
                     </div>
                 <?php endif; ?>
-            <?php endwhile; endif; ?>
-        </div>
-    </div>
-</section>
 
-<!-- Enhanced Main Content -->
-<section class="blog-content-section">
-    <div class="container">
-        <div class="blog-content-wrapper">
-            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                <article class="blog-post-enhanced">
-                    <!-- Table of Contents for Long Posts -->
-                    <?php if (str_word_count(get_the_content()) > 500) : ?>
-                        <div class="table-of-contents">
-                            <div class="toc-header">
-                                <i class="fas fa-list"></i>
-                                <h3>Table of Contents</h3>
-                            </div>
-                            <div class="toc-content" id="toc-content">
-                                <!-- Auto-generated TOC will be populated by JavaScript -->
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                    
-                    <!-- Enhanced Post Content -->
-                    <div class="post-content-enhanced">
-                        <div class="content-wrapper">
-                            <?php the_content(); ?>
-                        </div>
+                <header class="entry-header">
+                    <div class="post-meta">
+                        <span class="post-date">
+                            <i class="fas fa-calendar" aria-hidden="true"></i>
+                            <?php echo get_the_date(); ?>
+                        </span>
                         
-                        <!-- Enhanced Social Sharing -->
-                        <div class="social-sharing-enhanced">
-                            <h4>Share this post</h4>
-                            <div class="sharing-buttons">
-                                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" 
-                                   class="share-btn facebook" target="_blank">
-                                    <i class="fab fa-facebook-f"></i>
-                                    <span>Facebook</span>
-                                </a>
-                                <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" 
-                                   class="share-btn twitter" target="_blank">
-                                    <i class="fab fa-twitter"></i>
-                                    <span>Twitter</span>
-                                </a>
-                                <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode(get_permalink()); ?>" 
-                                   class="share-btn linkedin" target="_blank">
-                                    <i class="fab fa-linkedin-in"></i>
-                                    <span>LinkedIn</span>
-                                </a>
-                                <a href="https://wa.me/?text=<?php echo urlencode(get_the_title() . ' - ' . get_permalink()); ?>" 
-                                   class="share-btn whatsapp" target="_blank">
-                                    <i class="fab fa-whatsapp"></i>
-                                    <span>WhatsApp</span>
-                                </a>
-                            </div>
-                        </div>
+                        <?php if (get_the_category()) : ?>
+                            <span class="post-categories">
+                                <i class="fas fa-folder" aria-hidden="true"></i>
+                                <?php the_category(', '); ?>
+                            </span>
+                        <?php endif; ?>
+                        
+                        <?php if (get_the_author()) : ?>
+                            <span class="post-author">
+                                <i class="fas fa-user" aria-hidden="true"></i>
+                                <?php the_author(); ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                     
-                    <!-- Enhanced Service Details for Service Posts -->
-                    <?php if (get_post_type() == 'service') : ?>
-                        <div class="service-details-enhanced">
-                            <div class="service-header">
-                                <h3 class="service-title">
-                                    <i class="fas fa-info-circle"></i>
-                                    Service Details
-                                </h3>
-                                <p class="service-subtitle">Everything you need to know about this service</p>
-                            </div>
-                            
-                            <div class="service-meta-grid">
-                                <?php 
-                                $price = get_post_meta(get_the_ID(), '_service_price', true);
-                                $duration = get_post_meta(get_the_ID(), '_service_duration', true);
-                                $capacity = get_post_meta(get_the_ID(), '_service_capacity', true);
-                                ?>
-                                
-                                <?php if ($price) : ?>
-                                    <div class="meta-card price-card">
-                                        <div class="meta-icon">
-                                            <i class="fas fa-tags"></i>
-                                        </div>
-                                        <div class="meta-info">
-                                            <span class="meta-label">Starting Price</span>
-                                            <span class="meta-value price-value">₹<?php echo esc_html($price); ?></span>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <?php if ($duration) : ?>
-                                    <div class="meta-card duration-card">
-                                        <div class="meta-icon">
-                                            <i class="fas fa-clock"></i>
-                                        </div>
-                                        <div class="meta-info">
-                                            <span class="meta-label">Duration</span>
-                                            <span class="meta-value"><?php echo esc_html($duration); ?></span>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <?php if ($capacity) : ?>
-                                    <div class="meta-card capacity-card">
-                                        <div class="meta-icon">
-                                            <i class="fas fa-users"></i>
-                                        </div>
-                                        <div class="meta-info">
-                                            <span class="meta-label">Capacity</span>
-                                            <span class="meta-value"><?php echo esc_html($capacity); ?></span>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            
-                            <div class="service-cta-enhanced">
-                                <div class="cta-content">
-                                    <h4>Ready to get started?</h4>
-                                    <p>Book this service now and experience the difference</p>
-                                </div>
-                                <div class="cta-buttons">
-                                    <a href="/contact" class="cta-button-primary">
-                                        <i class="fas fa-calendar-check"></i>
-                                        Book Now
-                                    </a>
-                                    <a href="tel:+1234567890" class="cta-button-secondary">
-                                        <i class="fas fa-phone"></i>
-                                        Call Us
-                                    </a>
-                                </div>
-                            </div>
+                    <h1 class="entry-title"><?php the_title(); ?></h1>
+                </header>
+
+                <div class="entry-content">
+                    <?php
+                    the_content();
+                    
+                    wp_link_pages(array(
+                        'before' => '<div class="page-links">' . esc_html__('Pages:', 'service-blueprint'),
+                        'after'  => '</div>',
+                    ));
+                    ?>
+                </div>
+
+                <footer class="entry-footer">
+                    <?php if (get_the_tags()) : ?>
+                        <div class="post-tags">
+                            <i class="fas fa-tags" aria-hidden="true"></i>
+                            <?php the_tags('', ', '); ?>
                         </div>
                     <?php endif; ?>
                     
-                    <!-- Enhanced Post Navigation -->
-                    <div class="post-navigation-enhanced">
-                        <h3 class="nav-title">Continue Reading</h3>
-                        <div class="nav-links">
+                    <?php if (get_edit_post_link()) : ?>
+                        <div class="edit-link">
                             <?php
-                            $prev_post = get_previous_post();
-                            $next_post = get_next_post();
+                            edit_post_link(
+                                sprintf(
+                                    wp_kses(
+                                        /* translators: %s: Name of current post. Only visible to screen readers */
+                                        __('Edit <span class="sr-only">%s</span>', 'service-blueprint'),
+                                        array(
+                                            'span' => array(
+                                                'class' => array(),
+                                            ),
+                                        )
+                                    ),
+                                    get_the_title()
+                                ),
+                                '<span class="edit-link">',
+                                '</span>'
+                            );
                             ?>
-                            
-                            <?php if ($prev_post) : ?>
-                                <div class="nav-previous">
-                                    <a href="<?php echo get_permalink($prev_post->ID); ?>" class="nav-link">
-                                        <div class="nav-direction">
-                                            <i class="fas fa-arrow-left"></i>
-                                            <span>Previous</span>
-                                        </div>
-                                        <div class="nav-content">
-                                            <h4><?php echo get_the_title($prev_post->ID); ?></h4>
-                                            <p><?php echo wp_trim_words(get_the_excerpt($prev_post->ID), 10); ?></p>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                            
-                            <?php if ($next_post) : ?>
-                                <div class="nav-next">
-                                    <a href="<?php echo get_permalink($next_post->ID); ?>" class="nav-link">
-                                        <div class="nav-direction">
-                                            <span>Next</span>
-                                            <i class="fas fa-arrow-right"></i>
-                                        </div>
-                                        <div class="nav-content">
-                                            <h4><?php echo get_the_title($next_post->ID); ?></h4>
-                                            <p><?php echo wp_trim_words(get_the_excerpt($next_post->ID), 10); ?></p>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
                         </div>
-                    </div>
-                </article>
-            <?php endwhile; endif; ?>
-        </div>
+                    <?php endif; ?>
+                </footer>
+
+            </article>
+
+            <!-- Post Navigation -->
+            <nav class="post-navigation" role="navigation">
+                <div class="nav-links">
+                    <?php
+                    $prev_post = get_previous_post();
+                    $next_post = get_next_post();
+                    ?>
+                    
+                    <?php if ($prev_post) : ?>
+                        <div class="nav-previous">
+                            <a href="<?php echo get_permalink($prev_post); ?>" rel="prev">
+                                <span class="nav-subtitle"><?php esc_html_e('Previous Post', 'service-blueprint'); ?></span>
+                                <span class="nav-title"><?php echo get_the_title($prev_post); ?></span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <?php if ($next_post) : ?>
+                        <div class="nav-next">
+                            <a href="<?php echo get_permalink($next_post); ?>" rel="next">
+                                <span class="nav-subtitle"><?php esc_html_e('Next Post', 'service-blueprint'); ?></span>
+                                <span class="nav-title"><?php echo get_the_title($next_post); ?></span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </nav>
+
+            <?php
+            // If comments are open or we have at least one comment, load up the comment template.
+            if (comments_open() || get_comments_number()) :
+                comments_template();
+            endif;
+            ?>
+
+        <?php endwhile; ?>
     </div>
-</section>
+</main>
 
-<!-- Enhanced Related Posts/Services -->
-<?php if (get_post_type() == 'service') : ?>
-    <section class="related-services-enhanced">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-star"></i>
-                    Related Services
-                </h2>
-                <p class="section-subtitle">Discover more services that might interest you</p>
-            </div>
-            
-            <div class="services-grid-enhanced">
-                <?php
-                $related_services = get_posts(array(
-                    'post_type' => 'service',
-                    'posts_per_page' => 3,
-                    'post__not_in' => array(get_the_ID()),
-                    'orderby' => 'rand'
-                ));
-                
-                foreach ($related_services as $service) : setup_postdata($service);
-                ?>
-                    <div class="service-card-enhanced">
-                        <div class="service-card-header">
-                            <div class="service-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="service-badge">Service</div>
-                        </div>
-                        <div class="service-card-content">
-                            <h3 class="service-title"><?php echo get_the_title($service->ID); ?></h3>
-                            <p class="service-description">
-                                <?php echo wp_trim_words(get_the_content($service->ID), 20); ?>
-                            </p>
-                        </div>
-                        <div class="service-card-footer">
-                            <a href="<?php echo get_permalink($service->ID); ?>" class="service-link">
-                                Learn More <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                <?php endforeach; wp_reset_postdata(); ?>
-            </div>
-        </div>
-    </section>
-<?php else : ?>
-    <section class="related-posts-enhanced">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-newspaper"></i>
-                    Related Articles
-                </h2>
-                <p class="section-subtitle">More articles you might find interesting</p>
-            </div>
-            
-            <div class="posts-grid-enhanced">
-                <?php
-                $related_posts = get_posts(array(
-                    'posts_per_page' => 3,
-                    'post__not_in' => array(get_the_ID()),
-                    'orderby' => 'rand'
-                ));
-                
-                foreach ($related_posts as $post) : setup_postdata($post);
-                ?>
-                    <div class="post-card-enhanced">
-                        <?php if (has_post_thumbnail($post->ID)) : ?>
-                            <div class="post-image">
-                                <?php echo get_the_post_thumbnail($post->ID, 'medium'); ?>
-                            </div>
-                        <?php endif; ?>
-                        <div class="post-content">
-                            <h3 class="post-title"><?php echo get_the_title($post->ID); ?></h3>
-                            <p class="post-excerpt">
-                                <?php echo wp_trim_words(get_the_excerpt($post->ID), 15); ?>
-                            </p>
-                            <div class="post-meta">
-                                <span class="post-date"><?php echo get_the_date('M j, Y', $post->ID); ?></span>
-                            </div>
-                            <a href="<?php echo get_permalink($post->ID); ?>" class="post-link">
-                                Read More <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                <?php endforeach; wp_reset_postdata(); ?>
-            </div>
-        </div>
-    </section>
-<?php endif; ?>
-
-<!-- Reading Progress Bar -->
-<div class="reading-progress-bar" id="reading-progress"></div>
-
-<!-- Back to Top Button -->
-<button class="back-to-top" id="back-to-top">
-    <i class="fas fa-chevron-up"></i>
-</button>
-
-<script>
-// Reading progress bar
-window.addEventListener('scroll', function() {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById('reading-progress').style.width = scrolled + '%';
-});
-
-// Back to top button
-window.addEventListener('scroll', function() {
-    const backToTop = document.getElementById('back-to-top');
-    if (window.pageYOffset > 300) {
-        backToTop.style.display = 'block';
-    } else {
-        backToTop.style.display = 'none';
-    }
-});
-
-document.getElementById('back-to-top').addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Table of Contents generation
-document.addEventListener('DOMContentLoaded', function() {
-    const tocContent = document.getElementById('toc-content');
-    if (tocContent) {
-        const headings = document.querySelectorAll('.post-content-enhanced h2, .post-content-enhanced h3');
-        const toc = document.createElement('ul');
-        
-        headings.forEach((heading, index) => {
-            const id = 'heading-' + index;
-            heading.id = id;
-            
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = '#' + id;
-            a.textContent = heading.textContent;
-            a.className = heading.tagName.toLowerCase();
-            
-            li.appendChild(a);
-            toc.appendChild(li);
-        });
-        
-        tocContent.appendChild(toc);
-    }
-});
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-</script>
-
-<?php
-// Helper function to calculate reading time
-function get_reading_time() {
-    $content = get_the_content();
-    $word_count = str_word_count(strip_tags($content));
-    $reading_time = ceil($word_count / 200); // Average reading speed: 200 words per minute
-    return $reading_time;
+<style>
+.single-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
 }
-?>
+
+.post-featured-image {
+    margin-bottom: 40px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.post-featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.entry-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #6b7280;
+    flex-wrap: wrap;
+}
+
+.post-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-meta i {
+    font-size: 0.8rem;
+}
+
+.post-meta a {
+    color: #6b7280;
+    text-decoration: none;
+}
+
+.post-meta a:hover {
+    color: #2563eb;
+}
+
+.entry-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+}
+
+.entry-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #374151;
+}
+
+.entry-content h2,
+.entry-content h3,
+.entry-content h4 {
+    color: #1f2937;
+    margin: 2rem 0 1rem;
+}
+
+.entry-content h2 {
+    font-size: 1.8rem;
+}
+
+.entry-content h3 {
+    font-size: 1.5rem;
+}
+
+.entry-content h4 {
+    font-size: 1.3rem;
+}
+
+.entry-content p {
+    margin-bottom: 1.5rem;
+}
+
+.entry-content ul,
+.entry-content ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.entry-content li {
+    margin-bottom: 0.5rem;
+}
+
+.entry-content blockquote {
+    background: #f9fafb;
+    border-left: 4px solid #2563eb;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+}
+
+.entry-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+.entry-footer {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.post-tags {
+    margin-bottom: 1rem;
+}
+
+.post-tags i {
+    margin-right: 8px;
+    color: #6b7280;
+}
+
+.post-tags a {
+    display: inline-block;
+    background: #f3f4f6;
+    color: #374151;
+    padding: 4px 12px;
+    margin: 2px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.post-tags a:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.post-navigation {
+    margin: 40px 0;
+    padding: 20px 0;
+    border-top: 1px solid #e5e7eb;
+}
+
+.nav-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.nav-previous,
+.nav-next {
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-previous:hover,
+.nav-next:hover {
+    background: #f3f4f6;
+    transform: translateY(-2px);
+}
+
+.nav-previous a,
+.nav-next a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.nav-next {
+    text-align: right;
+}
+
+.nav-subtitle {
+    display: block;
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+.nav-title {
+    display: block;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.page-links {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.page-links a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.page-links a:hover {
+    background: #1d4ed8;
+}
+
+.edit-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.edit-link a {
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.edit-link a:hover {
+    color: #2563eb;
+}
+
+@media (max-width: 768px) {
+    .single-post {
+        padding: 40px 15px;
+    }
+    
+    .entry-title {
+        font-size: 2rem;
+    }
+    
+    .entry-content {
+        font-size: 1rem;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .nav-links {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-next {
+        text-align: left;
+    }
+}
+</style>
 
 <?php get_footer(); ?>

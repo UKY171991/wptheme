@@ -1,227 +1,260 @@
-# PartyPro WordPress Theme
+# Service Blueprint WordPress Theme
 
-A modern, responsive WordPress theme designed specifically for party rental and event planning businesses. This theme features a vibrant design with booking functionality, service showcases, and everything needed to run a successful party rental business.
+A comprehensive WordPress theme designed specifically for service-based businesses. This theme provides a complete solution for showcasing services, managing client interactions, and building a professional online presence.
 
-## 🎉 Features
+## Features
 
-### Core Features
-- **Responsive Design** - Looks great on all devices
-- **Party Rental Focus** - Designed specifically for event rental businesses
-- **Modern UI** - Clean, professional design with party-themed elements
-- **Contact Forms** - Built-in contact form with price calculator
-- **Service Management** - Custom post types for services and testimonials
-- **Pricing Pages** - Dedicated pricing packages with toggle options
-- **SEO Optimized** - Clean code structure for better search rankings
+### 🎨 **Modern Design**
+- Clean, professional layout with responsive design
+- Parallax scrolling effects and smooth animations
+- Customizable color schemes and typography
+- Mobile-first approach ensuring perfect display on all devices
 
-### Business Features
-- **Price Calculator** - Interactive pricing tool for customers
-- **Service Showcase** - Dedicated pages for displaying rental services
-- **Contact Integration** - Phone, WhatsApp, and email integration
-- **Booking System** - Contact forms designed for event bookings
-- **Gallery Support** - Image galleries for showcasing past events
-- **Testimonial System** - Customer review management
+### 🛠️ **Service Management**
+- Custom "Services" post type with advanced meta fields
+- 9 pre-built service category templates
+- Dynamic service filtering and sorting
+- Individual service pages with detailed information
+- FAQ system for each service
+- Process step visualization
+- Pricing and duration display
 
-### Technical Features
-- **Custom Post Types** - Services and testimonials
-- **Customizer Support** - Easy theme customization
-- **Widget Areas** - Sidebar and footer widget support
-- **Menu Support** - Custom navigation menus
-- **SEO Ready** - Proper heading structure and meta tags
-- **Fast Loading** - Optimized CSS and JavaScript
+### 🧭 **Navigation & User Experience**
+- Multi-level navigation menu (up to 3 levels)
+- Accessibility-focused design with ARIA labels
+- Keyboard navigation support
+- Skip links for screen readers
+- Search functionality with advanced filtering
 
-## 📁 File Structure
+### 🎯 **Homepage Features**
+- Hero section with customizable content
+- Featured services grid
+- Service categories showcase
+- Client testimonials carousel
+- Call-to-action sections
+- Company statistics display
+
+### 📧 **Contact & Conversion**
+- Built-in contact forms on service pages
+- AJAX form submission
+- Email notifications for new inquiries
+- Quote request functionality
+- Social media integration
+
+### ⚙️ **Admin Panel**
+- Custom meta boxes for service management
+- Theme customizer integration
+- Dashboard widgets for quick overview
+- Admin columns customization
+- Bulk actions for service management
+
+### 🔍 **SEO & Performance**
+- SEO-optimized structure
+- Fast loading times
+- Optimized images and assets
+- Clean, semantic HTML5 markup
+- Schema.org markup for services
+
+## Installation
+
+1. **Download & Install**
+   ```
+   Download the theme files
+   Upload to /wp-content/themes/service-blueprint/
+   Activate through WordPress admin
+   ```
+
+2. **Automatic Setup**
+   - Upon activation, you'll see a setup notice in the admin
+   - Click "Setup Default Content" to create sample services and pages
+   - This creates 9 service categories and 3 sample services
+
+3. **Manual Setup**
+   - Navigate to Appearance > Customize to configure theme settings
+   - Create your services under Services > Add New
+   - Configure menus under Appearance > Menus
+
+## Theme Structure
 
 ```
-/wptheme/
-├── style.css              # Main stylesheet with theme information
-├── index.php              # Homepage template with hero section
-├── header.php             # Site header with navigation
-├── footer.php             # Site footer with contact info
-├── functions.php          # Theme functionality and features
-├── single.php             # Single post/service template
-├── page.php               # General page template
-├── archive.php            # Archive/blog listing template
-├── search.php             # Search results template
-├── 404.php                # Custom 404 error page
-├── page-contact.php       # Contact page with forms
-├── page-services.php      # Services listing page
-├── page-pricing.php       # Pricing packages page
-├── js/
-│   └── main.js           # JavaScript functionality
-└── README.md             # This file
+service-blueprint/
+├── style.css                 # Main stylesheet
+├── functions.php             # Theme functions and setup
+├── index.php                 # Homepage template
+├── header.php               # Site header
+├── footer.php               # Site footer
+├── single-service.php       # Individual service pages
+├── archive-service.php      # Services archive
+├── taxonomy-service_category.php  # Service category pages
+├── search.php               # Search results
+├── 404.php                  # Error page
+├── inc/
+│   ├── nav-walker.php       # Custom navigation walker
+│   ├── meta-boxes.php       # Service meta boxes
+│   └── theme-init.php       # Theme initialization
+└── assets/
+    ├── js/
+    │   └── theme.js         # Theme JavaScript
+    └── css/
+        └── admin.css        # Admin styles
 ```
 
-## 🚀 Installation
+## Service Categories
 
-1. **Download the theme** files to your WordPress themes directory:
-   ```
-   /wp-content/themes/partypro/
-   ```
+The theme includes 9 pre-configured service categories:
 
-2. **Activate the theme** in WordPress Admin:
-   - Go to Appearance > Themes
-   - Find "PartyPro" and click "Activate"
+1. **Web Development** - Custom websites and web applications
+2. **Digital Marketing** - SEO, social media, and online advertising
+3. **Graphic Design** - Logo design, branding, and visual identity
+4. **Content Creation** - Copywriting and multimedia production
+5. **Business Consulting** - Strategic planning and optimization
+6. **Mobile Apps** - iOS and Android development
+7. **Data Analytics** - Business intelligence and reporting
+8. **Cloud Solutions** - Cloud migration and DevOps
+9. **Training & Support** - Technical training and documentation
 
-3. **Set up menus**:
-   - Go to Appearance > Menus
-   - Create a menu and assign it to "Primary Menu"
-
-4. **Create pages**:
-   - Home (set as front page)
-   - Services
-   - Pricing  
-   - Contact
-   - About
-
-5. **Customize the theme**:
-   - Go to Appearance > Customize
-   - Update hero section text
-   - Add your contact information
-
-## 🎨 Customization
+## Customization
 
 ### Theme Customizer Options
-- **Hero Section**: Update title and subtitle text
-- **Contact Information**: Phone, email, and address
-- **Colors**: Primary and secondary color schemes
-- **Logo**: Upload your business logo
 
-### Creating Services
-1. Go to Services > Add New in WordPress admin
-2. Add service title, description, and featured image
-3. Fill in service details (price, duration, capacity)
-4. Publish the service
+Access through **Appearance > Customize**:
 
-### Menu Setup
-Create pages and add them to your navigation menu:
-- Home
-- Services  
-- Pricing
-- About
-- Contact
+- **Site Identity**: Logo, site title, tagline
+- **Colors**: Primary, secondary, and accent colors
+- **Typography**: Google Fonts integration
+- **Hero Section**: Title, subtitle, button text and URL
+- **Footer**: Copyright text and contact information
+- **Social Media**: Facebook, Twitter, LinkedIn, Instagram links
 
-## 📱 Responsive Design
+### Custom Post Types
 
-The theme is fully responsive and includes:
-- Mobile-first CSS approach
-- Flexible grid layouts
-- Touch-friendly navigation
-- Optimized images for all screen sizes
+**Services Post Type**
+- Title and description
+- Featured image
+- Service category assignment
+- Custom meta fields:
+  - Price range
+  - Duration
+  - Features list
+  - Process steps
+  - FAQ section
+  - Featured service toggle
 
-## 🎯 Target Business Types
+### Custom Fields
 
-This theme is perfect for:
-- Party rental companies
-- Event planning businesses
-- Wedding service providers
-- Corporate event organizers
-- Equipment rental services
-- Catering companies with rental services
+Each service includes:
+- **Price**: Service pricing information
+- **Duration**: Project timeline
+- **Features**: List of included features
+- **Process**: Step-by-step service process
+- **FAQ**: Frequently asked questions
+- **Contact Form**: Integrated contact form
 
-## 💼 Business Features Included
+## Development
 
-### Service Management
-- Custom service post type
-- Price, duration, and capacity fields
-- Service image galleries
-- Detailed service descriptions
+### Requirements
+- WordPress 5.0+
+- PHP 7.4+
+- MySQL 5.6+
 
-### Pricing System
-- Multiple pricing packages
-- Basic vs. Premium pricing toggle
-- Additional services pricing
-- Interactive price calculator
+### Hooks & Filters
 
-### Contact & Booking
-- Contact form with event details
-- Phone and WhatsApp integration
-- Email inquiry system
-- Quick booking buttons
+The theme provides several hooks for customization:
 
-### Customer Features
-- Price estimation tool
-- Service browsing
-- Easy contact methods
-- Mobile-friendly booking
+```php
+// Modify service archive query
+add_filter('service_blueprint_archive_query', 'custom_archive_query');
 
-## 🔧 Technical Requirements
+// Customize service card output
+add_filter('service_blueprint_service_card', 'custom_service_card');
 
-- WordPress 5.0 or higher
-- PHP 7.4 or higher
-- Modern web browser support
-- Responsive design compatibility
+// Add custom meta fields
+add_action('service_blueprint_meta_fields', 'add_custom_meta_fields');
+```
 
-## 🎨 Color Scheme
+### JavaScript Events
 
-- **Primary**: #667eea (Purple-blue gradient)
-- **Secondary**: #f1c40f (Golden yellow)
-- **Text**: #333333 (Dark gray)
-- **Background**: #ffffff (White)
-- **Accent**: #764ba2 (Purple)
+```javascript
+// Service filter change
+$(document).on('serviceFilterChanged', function(e, filter) {
+    // Handle filter change
+});
 
-## 📞 Default Contact Information
+// Form submission
+$(document).on('serviceFormSubmitted', function(e, response) {
+    // Handle form response
+});
+```
 
-Update these in the WordPress Customizer:
-- **Phone**: +91 98765 43210
-- **Email**: info@partyprorentals.com  
-- **Address**: 123 Party Street, Your City
-- **Hours**: Mon-Sun: 8AM - 8PM
+## Browser Support
 
-## 🚀 Getting Started Guide
+- Chrome (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Edge (latest 2 versions)
+- Internet Explorer 11+
 
-### For New Businesses
-1. Install and activate the theme
-2. Update contact information in Customizer
-3. Create your service pages
-4. Set up pricing packages
-5. Add your business content
-6. Test the contact forms
+## Accessibility
 
-### For Existing Businesses  
-1. Migrate your existing content
-2. Set up service custom posts
-3. Import your pricing structure
-4. Update all contact information
-5. Add testimonials and gallery images
+The theme follows WCAG 2.1 AA guidelines:
+- Semantic HTML5 markup
+- ARIA labels and roles
+- Keyboard navigation support
+- Color contrast compliance
+- Screen reader compatibility
+- Focus indicators
+- Skip links
 
-## 📈 Business Growth Features
+## Performance
 
-- **SEO Optimized**: Better search engine visibility
-- **Mobile Ready**: Reach customers on all devices
-- **Professional Design**: Build trust with potential clients
-- **Easy Booking**: Streamlined customer experience
-- **Social Integration**: Connect with social media platforms
+- Optimized CSS and JavaScript
+- Lazy loading for images
+- Minified assets in production
+- Efficient database queries
+- Caching-friendly structure
 
-## 🛠️ Support & Customization
+## Support
 
-The theme includes:
-- Clean, well-commented code
-- WordPress coding standards
-- Extensible architecture
-- Custom post type support
-- Widget areas for additional content
+### Documentation
+- Theme setup guide
+- Customization tutorials
+- FAQ section
+- Video tutorials
 
-## 📋 Included Pages
+### Community
+- WordPress.org support forums
+- GitHub repository for bug reports
+- Community Discord channel
 
-1. **Homepage** - Hero section with services overview
-2. **Services** - Complete service listings
-3. **Pricing** - Package pricing with calculator
-4. **Contact** - Contact form with business info
-5. **About** - Space for business story
-6. **Blog** - News and updates section
+## Changelog
 
-## 🎉 Perfect For Party Rental Business
+### Version 1.0.0
+- Initial release
+- Complete service management system
+- 9 service category templates
+- Responsive design
+- Accessibility features
+- Admin panel integration
+- SEO optimization
 
-This theme includes everything mentioned in your business guide:
-- Professional service presentation
-- Clear pricing structure
-- Easy customer contact methods
-- Mobile-friendly design
-- Trust-building elements
-- Scalable business features
+## License
 
-Start your party rental business with a professional online presence that converts visitors into customers!
+This theme is licensed under GPL v2 or later.
+
+## Credits
+
+- **Fonts**: Google Fonts (Open Sans, Playfair Display)
+- **Icons**: Font Awesome 6
+- **Images**: Placeholder images from placeholder.com
+- **Inspiration**: Modern service business websites
+
+## Contributing
+
+We welcome contributions! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request with detailed description
 
 ---
 
-**Note**: This theme is designed to grow with your business. Start with the basic features and expand as your party rental business develops.
+**Service Blueprint Theme** - Transform your service business with a professional WordPress presence.

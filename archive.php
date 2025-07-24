@@ -1,295 +1,323 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Template for displaying archive pages
+ *
+ * @package ServiceBlueprint
+ */
 
-<!-- Enhanced Archive Hero Section -->
-<section class="hero-section-advanced archive-hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-particles"></div>
-    <div class="container">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <?php if (is_category()) : ?>
-                    📂 Category
-                <?php elseif (is_tag()) : ?>
-                    🏷️ Tag
-                <?php elseif (is_search()) : ?>
-                    🔍 Search Results
-                <?php else : ?>
-                    📝 Blog Archive
-                <?php endif; ?>
-            </div>
-            <h1 class="hero-title-fancy">
-                <?php if (is_category()) : ?>
-                    <?php single_cat_title(); ?>
-                <?php elseif (is_tag()) : ?>
-                    <?php single_tag_title(); ?>
-                <?php elseif (is_search()) : ?>
-                    Search Results for: "<?php echo get_search_query(); ?>"
-                <?php else : ?>
-                    Blog <span class="gradient-text">Archive</span>
-                <?php endif; ?>
-            </h1>
-            <p class="hero-subtitle-fancy">
-                <?php if (is_category()) : ?>
-                    Explore all articles in the <?php single_cat_title(); ?> category
-                <?php elseif (is_tag()) : ?>
-                    Discover articles tagged with <?php single_tag_title(); ?>
-                <?php elseif (is_search()) : ?>
-                    Find articles matching your search criteria
-                <?php else : ?>
-                    Browse through all our articles, tips, and insights
-                <?php endif; ?>
-            </p>
-            
-            <?php if (have_posts()) : ?>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number"><?php echo $wp_query->found_posts; ?></div>
-                        <div class="stat-label">Articles Found</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number"><?php echo $wp_query->max_num_pages; ?></div>
-                        <div class="stat-label">Pages</div>
-                    </div>
-                </div>
-            <?php endif; ?>
-        </div>
-    </div>
-</section>
+get_header(); ?>
 
-<!-- Archive Content Section -->
-<section class="services-section-fancy archive-content">
+<main id="main" class="site-main" role="main">
     <div class="container">
+        <header class="page-header">
+            <?php
+            the_archive_title('<h1 class="page-title">', '</h1>');
+            the_archive_description('<div class="archive-description">', '</div>');
+            ?>
+        </header>
+
         <?php if (have_posts()) : ?>
-            <div class="posts-filter">
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">All Posts</button>
-                    <button class="filter-btn" data-filter="recent">Recent</button>
-                    <button class="filter-btn" data-filter="popular">Popular</button>
-                    <button class="filter-btn" data-filter="featured">Featured</button>
-                </div>
-                
-                <div class="search-box">
-                    <input type="text" id="archive-search" placeholder="Search articles...">
-                    <i class="fas fa-search"></i>
-                </div>
-            </div>
-            
-            <div class="row" id="archive-posts-container">
+            <div class="posts-grid">
                 <?php while (have_posts()) : the_post(); ?>
-                    <div class="col-md-6 col-lg-4 d-flex">
-                        <?php get_template_part('content-archive-card'); ?>
-                    </div>
+                    <article id="post-<?php the_ID(); ?>" <?php post_class('post-card'); ?>>
+                        
+                        <?php if (has_post_thumbnail()) : ?>
+                            <div class="post-thumbnail">
+                                <a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+                                    <?php the_post_thumbnail('medium'); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="post-content">
+                            <div class="post-meta">
+                                <span class="post-date">
+                                    <i class="fas fa-calendar" aria-hidden="true"></i>
+                                    <?php echo get_the_date(); ?>
+                                </span>
+                                
+                                <?php if (get_the_category()) : ?>
+                                    <span class="post-categories">
+                                        <i class="fas fa-folder" aria-hidden="true"></i>
+                                        <?php the_category(', '); ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+
+                            <header class="entry-header">
+                                <h2 class="entry-title">
+                                    <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+                                </h2>
+                            </header>
+
+                            <div class="entry-summary">
+                                <?php the_excerpt(); ?>
+                            </div>
+
+                            <footer class="entry-footer">
+                                <a href="<?php the_permalink(); ?>" class="read-more">
+                                    <?php esc_html_e('Read More', 'service-blueprint'); ?>
+                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                                
+                                <?php if (get_the_author()) : ?>
+                                    <span class="post-author">
+                                        <i class="fas fa-user" aria-hidden="true"></i>
+                                        <?php the_author(); ?>
+                                    </span>
+                                <?php endif; ?>
+                            </footer>
+                        </div>
+                    </article>
                 <?php endwhile; ?>
             </div>
-            
-            <!-- Enhanced Pagination -->
-            <nav class="pagination-enhanced" aria-label="Blog Pagination">
-                <ul class="pagination justify-content-center">
-                <?php
-                $links = paginate_links(array(
-                    'prev_text' => '<i class="fas fa-chevron-left"></i> Previous',
-                    'next_text' => 'Next <i class="fas fa-chevron-right"></i>',
-                    'type' => 'array',
-                    'before_page_number' => '<span class="sr-only">Page </span>'
-                ));
-                if ($links) {
-                    foreach ($links as $link) {
-                        echo '<li class="page-item">' . str_replace('page-numbers', 'page-link', $link) . '</li>';
-                    }
-                }
-                ?>
-                </ul>
-            </nav>
-            
+
+            <?php
+            // Pagination
+            the_posts_pagination(array(
+                'mid_size'  => 2,
+                'prev_text' => __('Previous', 'service-blueprint'),
+                'next_text' => __('Next', 'service-blueprint'),
+            ));
+            ?>
+
         <?php else : ?>
             <div class="no-posts">
-                <div class="no-posts-content">
-                    <div class="no-posts-icon">📝</div>
-                    <h2>No posts found</h2>
-                    <p>Sorry, no posts were found matching your criteria. Try searching for something else or browse our categories.</p>
-                    <div class="no-posts-actions">
-                        <a href="<?php echo home_url(); ?>" class="btn-primary-fancy">
-                            <span>Go Home</span>
-                            <i class="arrow-right">→</i>
-                        </a>
-                        <?php get_search_form(); ?>
-                    </div>
-                </div>
+                <h2><?php esc_html_e('Nothing here', 'service-blueprint'); ?></h2>
+                <p><?php esc_html_e('It looks like nothing was found at this location. Maybe try a search?', 'service-blueprint'); ?></p>
+                <?php get_search_form(); ?>
             </div>
         <?php endif; ?>
     </div>
-</section>
+</main>
 
 <style>
-/* Archive-specific styles */
-.archive-hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+.page-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
 }
 
-.archive-content {
-    background: var(--light-color);
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.archive-description {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.post-thumbnail {
+    position: relative;
+    overflow: hidden;
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover .post-thumbnail img {
+    transform: scale(1.05);
+}
+
+.post-content {
+    padding: 25px;
+}
+
+.post-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #6b7280;
+    flex-wrap: wrap;
+}
+
+.post-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-meta i {
+    font-size: 0.8rem;
+}
+
+.post-meta a {
+    color: #6b7280;
+    text-decoration: none;
+}
+
+.post-meta a:hover {
+    color: #2563eb;
+}
+
+.entry-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.entry-title a {
+    color: #1f2937;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.entry-title a:hover {
+    color: #2563eb;
+}
+
+.entry-summary {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.entry-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #f3f4f6;
+}
+
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.read-more:hover {
+    color: #1d4ed8;
+    transform: translateX(3px);
+}
+
+.post-author {
+    font-size: 0.9rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .no-posts {
     text-align: center;
-    padding: 5rem 0;
-}
-
-.no-posts-content {
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.no-posts-icon {
-    font-size: 4rem;
-    margin-bottom: 2rem;
-    opacity: 0.5;
+    padding: 60px 20px;
 }
 
 .no-posts h2 {
     font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
+    color: #1f2937;
+    margin-bottom: 15px;
 }
 
 .no-posts p {
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-    line-height: 1.6;
+    color: #6b7280;
+    margin-bottom: 30px;
 }
 
-.no-posts-actions {
+/* Pagination */
+.pagination {
     display: flex;
-    gap: 1rem;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 50px;
 }
 
-/* Archive search functionality */
-#archive-search {
-    width: 100%;
-    padding: 12px 45px 12px 20px;
-    border: 2px solid var(--border-color);
-    border-radius: 50px;
-    font-size: 0.9rem;
-    transition: var(--transition);
+.pagination .page-numbers {
+    display: inline-block;
+    padding: 10px 15px;
+    color: #374151;
+    text-decoration: none;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
-#archive-search:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+.pagination .page-numbers:hover,
+.pagination .page-numbers.current {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
 }
 
-/* Archive filter functionality */
-#archive-posts-container .post-card {
-    transition: var(--transition);
-}
-
-#archive-posts-container .post-card.hidden {
-    display: none;
+.pagination .page-numbers.prev,
+.pagination .page-numbers.next {
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
-    .no-posts-actions {
+    .posts-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .page-header {
+        padding: 30px 15px;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .post-content {
+        padding: 20px;
+    }
+    
+    .entry-footer {
         flex-direction: column;
-        align-items: center;
+        gap: 10px;
+        align-items: flex-start;
     }
     
-    .no-posts-icon {
-        font-size: 3rem;
+    .pagination {
+        flex-wrap: wrap;
     }
-    
-    .no-posts h2 {
-        font-size: 1.5rem;
+}
+
+@media (max-width: 480px) {
+    .post-meta {
+        flex-direction: column;
+        gap: 8px;
     }
 }
 </style>
-
-<script>
-// Archive page functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Search functionality
-    const searchInput = document.getElementById('archive-search');
-    const postCards = document.querySelectorAll('#archive-posts-container .post-card');
-    
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            
-            postCards.forEach(card => {
-                const title = card.querySelector('.post-title').textContent.toLowerCase();
-                const excerpt = card.querySelector('.post-excerpt').textContent.toLowerCase();
-                
-                if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-        });
-    }
-    
-    // Filter functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            const filter = this.getAttribute('data-filter');
-            
-            // Add your filtering logic here
-            // For now, just show all posts
-            postCards.forEach(card => {
-                card.classList.remove('hidden');
-            });
-        });
-    });
-    
-    // Animate numbers on scroll
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    const animateNumbers = () => {
-        statNumbers.forEach(stat => {
-            const target = parseInt(stat.textContent);
-            const current = parseInt(stat.textContent);
-            
-            if (current > 0) {
-                let count = 0;
-                const increment = target / 50;
-                const timer = setInterval(() => {
-                    count += increment;
-                    if (count >= target) {
-                        stat.textContent = target;
-                        clearInterval(timer);
-                    } else {
-                        stat.textContent = Math.floor(count);
-                    }
-                }, 20);
-            }
-        });
-    };
-    
-    // Trigger animation when stats are visible
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateNumbers();
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-    
-    const statsSection = document.querySelector('.hero-stats');
-    if (statsSection) {
-        observer.observe(statsSection);
-    }
-});
-</script>
 
 <?php get_footer(); ?>

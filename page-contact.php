@@ -1,407 +1,491 @@
 <?php
 /**
  * Template Name: Contact Page
- * 
- * Enhanced contact page with modern design and improved user experience
+ *
+ * @package ServiceBlueprint
  */
 
-get_header();
-?>
+get_header(); ?>
 
-<div class="contact-page-wrapper">
-    <!-- Hero Section -->
-    <section class="contact-hero py-5 bg-gradient-primary">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8 mx-auto text-center">
-                    <div class="hero-content text-white">
-                        <div class="hero-badge mb-3">
-                            <span class="badge bg-white text-primary px-3 py-2 rounded-pill fs-6">
-                                <i class="bi bi-envelope-heart me-2"></i>
-                                <?php esc_html_e('Contact Us', 'blueprint'); ?>
-                            </span>
+<main id="main" class="site-main" role="main">
+    <div class="container">
+        <?php while (have_posts()) : the_post(); ?>
+            
+            <!-- Hero Section -->
+            <section class="contact-hero">
+                <div class="hero-content">
+                    <h1 class="page-title"><?php the_title(); ?></h1>
+                    <p class="page-description"><?php the_excerpt(); ?></p>
+                </div>
+            </section>
+
+            <!-- Contact Information -->
+            <section class="contact-info">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         </div>
-                        <h1 class="display-4 fw-bold mb-4">
-                            <?php esc_html_e('Get in Touch', 'blueprint'); ?>
-                        </h1>
-                        <p class="lead mb-4">
-                            <?php esc_html_e('Have questions about our business blueprints? Need help choosing the right one for your entrepreneurial journey? Our team is here to help you succeed.', 'blueprint'); ?>
+                        <h3><?php esc_html_e('Address', 'service-blueprint'); ?></h3>
+                        <p>
+                            <?php 
+                            $address = get_theme_mod('service_blueprint_contact_address', '123 Business St, Suite 100<br>City, State 12345');
+                            echo wp_kses_post($address);
+                            ?>
+                        </p>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                        </div>
+                        <h3><?php esc_html_e('Phone', 'service-blueprint'); ?></h3>
+                        <p>
+                            <a href="tel:<?php echo esc_attr(str_replace(array(' ', '(', ')', '-'), '', get_theme_mod('service_blueprint_contact_phone', '+1 (555) 123-4567'))); ?>">
+                                <?php echo esc_html(get_theme_mod('service_blueprint_contact_phone', '+1 (555) 123-4567')); ?>
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                        </div>
+                        <h3><?php esc_html_e('Email', 'service-blueprint'); ?></h3>
+                        <p>
+                            <a href="mailto:<?php echo esc_attr(get_theme_mod('service_blueprint_contact_email', get_option('admin_email'))); ?>">
+                                <?php echo esc_html(get_theme_mod('service_blueprint_contact_email', get_option('admin_email'))); ?>
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                        </div>
+                        <h3><?php esc_html_e('Business Hours', 'service-blueprint'); ?></h3>
+                        <p>
+                            <?php 
+                            $hours = get_theme_mod('service_blueprint_business_hours', 'Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed');
+                            echo wp_kses_post($hours);
+                            ?>
                         </p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Contact Information and Form -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row g-4">
-                <!-- Contact Information -->
-                <div class="col-lg-5">
-                    <div class="row g-4">
-                        <!-- Phone -->
-                        <div class="col-12">
-                            <div class="contact-info-card text-center">
-                                <div class="contact-icon">
-                                    <i class="bi bi-telephone-fill"></i>
-                                </div>
-                                <h4 class="fw-bold mb-2"><?php esc_html_e('Phone', 'blueprint'); ?></h4>
-                                <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9+]/', '', get_theme_mod('contact_phone', '+1 (555) 123-4567'))); ?>" class="text-decoration-none text-primary fw-semibold">
-                                    <?php echo esc_html(get_theme_mod('contact_phone', '+1 (555) 123-4567')); ?>
-                                </a>
-                            </div>
-                        </div>
+            <!-- Contact Form -->
+            <section class="contact-form-section">
+                <div class="form-container">
+                    <h2><?php esc_html_e('Get In Touch', 'service-blueprint'); ?></h2>
+                    <p><?php esc_html_e('Ready to start your project? Send us a message and we\'ll get back to you as soon as possible.', 'service-blueprint'); ?></p>
 
-                        <!-- Email -->
-                        <div class="col-12">
-                            <div class="contact-info-card text-center">
-                                <div class="contact-icon">
-                                    <i class="bi bi-envelope-fill"></i>
-                                </div>
-                                <h4 class="fw-bold mb-2"><?php esc_html_e('Email', 'blueprint'); ?></h4>
-                                <a href="mailto:<?php echo esc_attr(get_theme_mod('contact_email', 'info@blueprintfolder.com')); ?>" class="text-decoration-none text-primary fw-semibold">
-                                    <?php echo esc_html(get_theme_mod('contact_email', 'info@blueprintfolder.com')); ?>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Address -->
-                        <div class="col-12">
-                            <div class="contact-info-card text-center">
-                                <div class="contact-icon">
-                                    <i class="bi bi-geo-alt-fill"></i>
-                                </div>
-                                <h4 class="fw-bold mb-2"><?php esc_html_e('Address', 'blueprint'); ?></h4>
-                                <address class="mb-0 text-muted">
-                                    <?php echo esc_html(get_theme_mod('contact_address', '123 Business Street, Enterprise City')); ?>
-                                </address>
-                            </div>
-                        </div>
-
-                        <!-- Business Hours -->
-                        <div class="col-12">
-                            <div class="contact-info-card text-center">
-                                <div class="contact-icon">
-                                    <i class="bi bi-clock-fill"></i>
-                                </div>
-                                <h4 class="fw-bold mb-2"><?php esc_html_e('Business Hours', 'blueprint'); ?></h4>
-                                <div class="text-muted">
-                                    <p class="mb-1"><?php esc_html_e('Monday - Friday: 9AM - 6PM EST', 'blueprint'); ?></p>
-                                    <p class="mb-0"><?php esc_html_e('Saturday: 10AM - 2PM EST', 'blueprint'); ?></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Social Connect -->
-                        <div class="col-12">
-                            <div class="contact-info-card text-center">
-                                <h4 class="fw-bold mb-3"><?php esc_html_e('Connect With Us', 'blueprint'); ?></h4>
-                                <div class="d-flex justify-content-center gap-3">
-                                    <a href="#" class="btn btn-outline-primary btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="Facebook">
-                                        <i class="bi bi-facebook"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-outline-primary btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="Instagram">
-                                        <i class="bi bi-instagram"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-outline-primary btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="Twitter">
-                                        <i class="bi bi-twitter"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-outline-primary btn-sm rounded-circle" style="width: 40px; height: 40px;" aria-label="LinkedIn">
-                                        <i class="bi bi-linkedin"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="col-lg-7">
-                    <div class="contact-form">
-                        <h2 class="h3 fw-bold mb-3"><?php esc_html_e('Send Us a Message', 'blueprint'); ?></h2>
-                        <p class="text-muted mb-4"><?php esc_html_e('Fill out the form below and we\'ll get back to you as soon as possible.', 'blueprint'); ?></p>
+                    <form class="contact-form" id="contact-form" method="post" action="">
+                        <?php wp_nonce_field('contact_form_nonce', 'contact_nonce'); ?>
                         
-                        <!-- Contact Form 7 Integration -->
-                        <?php if (function_exists('wpcf7') && $cf7_form = get_field('contact_form_shortcode')) : ?>
-                            <?php echo do_shortcode($cf7_form); ?>
-                        <?php elseif (function_exists('wpcf7')) : ?>
-                            <!-- Default Contact Form 7 shortcode - replace with your actual form ID -->
-                            <?php echo do_shortcode('[contact-form-7 id="1" title="Contact form"]'); ?>
-                        <?php else : ?>
-                            <!-- Fallback form if Contact Form 7 is not installed -->
-                            <div class="alert alert-warning" role="alert">
-                                <i class="bi bi-exclamation-triangle me-2"></i>
-                                <strong><?php esc_html_e('Contact Form 7 Required', 'blueprint'); ?></strong><br>
-                                <?php esc_html_e('Please install and configure Contact Form 7 plugin for the contact form functionality.', 'blueprint'); ?>
-                                <a href="<?php echo admin_url('plugin-install.php?s=contact+form+7&tab=search&type=term'); ?>" class="alert-link"><?php esc_html_e('Install Now', 'blueprint'); ?></a>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact_name"><?php esc_html_e('Full Name', 'service-blueprint'); ?> <span class="required">*</span></label>
+                                <input type="text" id="contact_name" name="contact_name" required>
                             </div>
                             
-                            <!-- Basic HTML form as fallback -->
-                            <form id="contact-form" class="needs-validation" method="post" action="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" novalidate>
-                                <div class="row g-3">
-                                    <!-- Name -->
-                                    <div class="col-md-6">
-                                        <label for="contact-name" class="form-label"><?php esc_html_e('Name', 'blueprint'); ?> <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="contact-name" name="contact_name" required>
-                                        <div class="invalid-feedback">
-                                            <?php esc_html_e('Please provide your name.', 'blueprint'); ?>
-                                        </div>
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div class="col-md-6">
-                                        <label for="contact-email" class="form-label"><?php esc_html_e('Email', 'blueprint'); ?> <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="contact-email" name="contact_email" required>
-                                        <div class="invalid-feedback">
-                                            <?php esc_html_e('Please provide a valid email address.', 'blueprint'); ?>
-                                        </div>
-                                    </div>
-
-                                    <!-- Phone -->
-                                    <div class="col-md-6">
-                                        <label for="contact-phone" class="form-label"><?php esc_html_e('Phone (optional)', 'blueprint'); ?></label>
-                                        <input type="tel" class="form-control" id="contact-phone" name="contact_phone">
-                                    </div>
-
-                                    <!-- Subject -->
-                                    <div class="col-md-6">
-                                        <label for="contact-subject" class="form-label"><?php esc_html_e('Subject', 'blueprint'); ?> <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="contact-subject" name="contact_subject" required>
-                                            <option value=""><?php esc_html_e('Choose a subject...', 'blueprint'); ?></option>
-                                            <option value="general"><?php esc_html_e('General Inquiry', 'blueprint'); ?></option>
-                                            <option value="blueprint"><?php esc_html_e('Business Blueprint Question', 'blueprint'); ?></option>
-                                            <option value="support"><?php esc_html_e('Support Request', 'blueprint'); ?></option>
-                                            <option value="partnership"><?php esc_html_e('Partnership Opportunity', 'blueprint'); ?></option>
-                                            <option value="consultation"><?php esc_html_e('Consultation Request', 'blueprint'); ?></option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            <?php esc_html_e('Please select a subject.', 'blueprint'); ?>
-                                        </div>
-                                    </div>
-
-                                    <!-- Message -->
-                                    <div class="col-12">
-                                        <label for="contact-message" class="form-label"><?php esc_html_e('Message', 'blueprint'); ?> <span class="text-danger">*</span></label>
-                                        <textarea class="form-control" id="contact-message" name="contact_message" rows="6" required placeholder="<?php esc_attr_e('Please describe how we can help you...', 'blueprint'); ?>"></textarea>
-                                        <div class="invalid-feedback">
-                                            <?php esc_html_e('Please provide your message.', 'blueprint'); ?>
-                                        </div>
-                                    </div>
-
-                                    <!-- Privacy Policy -->
-                                    <div class="col-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="privacy-check" name="privacy_check" required>
-                                            <label class="form-check-label" for="privacy-check">
-                                                <?php esc_html_e('I agree to the', 'blueprint'); ?> 
-                                                <a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>" class="text-primary"><?php esc_html_e('Privacy Policy', 'blueprint'); ?></a> 
-                                                <?php esc_html_e('and consent to the processing of my data.', 'blueprint'); ?>
-                                            </label>
-                                            <div class="invalid-feedback">
-                                                <?php esc_html_e('You must agree to the privacy policy.', 'blueprint'); ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Submit Button -->
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary btn-lg px-4 py-2">
-                                            <i class="bi bi-send me-2"></i>
-                                            <?php esc_html_e('Send Message', 'blueprint'); ?>
-                                        </button>
-                                        <div id="form-messages" class="mt-3"></div>
-                                    </div>
-                                </div>
-                            </form>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Map Section -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="text-center mb-4"><?php esc_html_e('Find Us', 'blueprint'); ?></h2>
-                    <div class="map-container border-radius-custom overflow-hidden shadow-custom" style="height: 400px; background: #e2e8f0;">
-                        <div class="d-flex align-items-center justify-content-center h-100">
-                            <div class="text-center text-muted">
-                                <i class="bi bi-geo-alt display-4 mb-3"></i>
-                                <h5><?php esc_html_e('Interactive Map', 'blueprint'); ?></h5>
-                                <p><?php esc_html_e('Map integration coming soon', 'blueprint'); ?></p>
-                            </div>
-                        </div>
-                        <!-- You can replace this placeholder with actual map integration -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="text-center mb-5"><?php esc_html_e('Frequently Asked Questions', 'blueprint'); ?></h2>
-                    
-                    <?php
-                    // Query FAQ posts
-                    $faq_query = new WP_Query(array(
-                        'post_type' => 'faq',
-                        'posts_per_page' => -1,
-                        'post_status' => 'publish',
-                        'orderby' => 'menu_order',
-                        'order' => 'ASC',
-                        'meta_query' => array(
-                            'relation' => 'OR',
-                            array(
-                                'key' => 'faq_category',
-                                'value' => 'contact',
-                                'compare' => 'LIKE'
-                            ),
-                            array(
-                                'key' => 'faq_category',
-                                'value' => 'general',
-                                'compare' => 'LIKE'
-                            ),
-                            array(
-                                'key' => 'faq_category',
-                                'compare' => 'NOT EXISTS'
-                            )
-                        )
-                    ));
-
-                    if ($faq_query->have_posts()) : ?>
-                        <div class="accordion" id="contactFAQ">
-                            <?php $faq_count = 1; ?>
-                            <?php while ($faq_query->have_posts()) : $faq_query->the_post(); ?>
-                                <div class="accordion-item border-0 mb-3 shadow-sm">
-                                    <h3 class="accordion-header" id="faq<?php echo $faq_count; ?>">
-                                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $faq_count; ?>" aria-expanded="false" aria-controls="collapse<?php echo $faq_count; ?>">
-                                            <?php the_title(); ?>
-                                        </button>
-                                    </h3>
-                                    <div id="collapse<?php echo $faq_count; ?>" class="accordion-collapse collapse" aria-labelledby="faq<?php echo $faq_count; ?>" data-bs-parent="#contactFAQ">
-                                        <div class="accordion-body text-muted">
-                                            <?php the_content(); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php $faq_count++; ?>
-                            <?php endwhile; ?>
-                        </div>
-                    <?php else : ?>
-                        <!-- Fallback FAQ content if no FAQ posts exist -->
-                        <div class="accordion" id="contactFAQ">
-                            <!-- FAQ Item 1 -->
-                            <div class="accordion-item border-0 mb-3 shadow-sm">
-                                <h3 class="accordion-header" id="faq1">
-                                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                        <?php esc_html_e('How do I choose the right business blueprint?', 'blueprint'); ?>
-                                    </button>
-                                </h3>
-                                <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="faq1" data-bs-parent="#contactFAQ">
-                                    <div class="accordion-body text-muted">
-                                        <?php esc_html_e('We recommend starting with our business category pages to explore options that match your interests and budget. Each blueprint includes detailed information about startup costs, profit potential, and required skills. You can also schedule a consultation with our team for personalized guidance.', 'blueprint'); ?>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- FAQ Item 2 -->
-                            <div class="accordion-item border-0 mb-3 shadow-sm">
-                                <h3 class="accordion-header" id="faq2">
-                                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                        <?php esc_html_e('What\'s included in a business blueprint?', 'blueprint'); ?>
-                                    </button>
-                                </h3>
-                                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#contactFAQ">
-                                    <div class="accordion-body text-muted">
-                                        <?php esc_html_e('Each blueprint includes a comprehensive business plan, startup cost analysis, profit projections, step-by-step implementation guide, marketing strategies, supplier recommendations, legal requirements, and ongoing support resources.', 'blueprint'); ?>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- FAQ Item 3 -->
-                            <div class="accordion-item border-0 mb-3 shadow-sm">
-                                <h3 class="accordion-header" id="faq3">
-                                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                        <?php esc_html_e('How long does it take to implement a blueprint?', 'blueprint'); ?>
-                                    </button>
-                                </h3>
-                                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#contactFAQ">
-                                    <div class="accordion-body text-muted">
-                                        <?php esc_html_e('Implementation timelines vary by business type. Simple online businesses can be launched in 2-4 weeks, while more complex operations may take 2-3 months. Each blueprint includes a detailed timeline with milestones to help you track your progress.', 'blueprint'); ?>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- FAQ Item 4 -->
-                            <div class="accordion-item border-0 mb-3 shadow-sm">
-                                <h3 class="accordion-header" id="faq4">
-                                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                        <?php esc_html_e('Do you offer ongoing support after purchase?', 'blueprint'); ?>
-                                    </button>
-                                </h3>
-                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#contactFAQ">
-                                    <div class="accordion-body text-muted">
-                                        <?php esc_html_e('Yes! All blueprints include 30 days of email support. We also offer premium support packages for entrepreneurs who want more hands-on guidance, including monthly coaching calls and priority assistance.', 'blueprint'); ?>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="contact_email"><?php esc_html_e('Email Address', 'service-blueprint'); ?> <span class="required">*</span></label>
+                                <input type="email" id="contact_email" name="contact_email" required>
                             </div>
                         </div>
 
-                        <!-- Admin notice for FAQ management -->
-                        <?php if (current_user_can('manage_options')) : ?>
-                            <div class="alert alert-info mt-4" role="alert">
-                                <i class="bi bi-info-circle me-2"></i>
-                                <strong><?php esc_html_e('Admin Notice:', 'blueprint'); ?></strong>
-                                <?php esc_html_e('No FAQ posts found. You can add FAQ content from the', 'blueprint'); ?>
-                                <a href="<?php echo admin_url('edit.php?post_type=faq'); ?>" class="alert-link"><?php esc_html_e('FAQ admin panel', 'blueprint'); ?></a>.
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact_phone"><?php esc_html_e('Phone Number', 'service-blueprint'); ?></label>
+                                <input type="tel" id="contact_phone" name="contact_phone">
                             </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    
-                    <?php wp_reset_postdata(); ?>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+                            
+                            <div class="form-group">
+                                <label for="contact_company"><?php esc_html_e('Company', 'service-blueprint'); ?></label>
+                                <input type="text" id="contact_company" name="contact_company">
+                            </div>
+                        </div>
 
-<!-- Contact Form JavaScript -->
+                        <div class="form-group">
+                            <label for="contact_service"><?php esc_html_e('Service of Interest', 'service-blueprint'); ?></label>
+                            <select id="contact_service" name="contact_service">
+                                <option value=""><?php esc_html_e('Select a service...', 'service-blueprint'); ?></option>
+                                <?php
+                                $service_categories = get_terms(array(
+                                    'taxonomy' => 'service_category',
+                                    'hide_empty' => false,
+                                ));
+                                
+                                if ($service_categories) :
+                                    foreach ($service_categories as $category) :
+                                ?>
+                                    <option value="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html($category->name); ?></option>
+                                <?php
+                                    endforeach;
+                                endif;
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact_budget"><?php esc_html_e('Project Budget', 'service-blueprint'); ?></label>
+                            <select id="contact_budget" name="contact_budget">
+                                <option value=""><?php esc_html_e('Select budget range...', 'service-blueprint'); ?></option>
+                                <option value="under-5k"><?php esc_html_e('Under $5,000', 'service-blueprint'); ?></option>
+                                <option value="5k-10k"><?php esc_html_e('$5,000 - $10,000', 'service-blueprint'); ?></option>
+                                <option value="10k-25k"><?php esc_html_e('$10,000 - $25,000', 'service-blueprint'); ?></option>
+                                <option value="25k-50k"><?php esc_html_e('$25,000 - $50,000', 'service-blueprint'); ?></option>
+                                <option value="50k-plus"><?php esc_html_e('$50,000+', 'service-blueprint'); ?></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact_message"><?php esc_html_e('Message', 'service-blueprint'); ?> <span class="required">*</span></label>
+                            <textarea id="contact_message" name="contact_message" rows="6" required placeholder="<?php esc_attr_e('Tell us about your project...', 'service-blueprint'); ?>"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="submit-btn">
+                                <span class="btn-text"><?php esc_html_e('Send Message', 'service-blueprint'); ?></span>
+                                <span class="btn-loading" style="display: none;"><?php esc_html_e('Sending...', 'service-blueprint'); ?></span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="form-messages"></div>
+                </div>
+            </section>
+
+            <!-- Page Content -->
+            <section class="page-content">
+                <div class="entry-content">
+                    <?php the_content(); ?>
+                </div>
+            </section>
+
+        <?php endwhile; ?>
+    </div>
+</main>
+
+<style>
+.contact-hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 60px;
+}
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.page-description {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-info {
+    margin-bottom: 80px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.contact-item {
+    text-align: center;
+    padding: 40px 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.contact-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 15px;
+}
+
+.contact-item p {
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.contact-item a {
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #1d4ed8;
+}
+
+.contact-form-section {
+    background: #f9fafb;
+    padding: 80px 0;
+    border-radius: 12px;
+    margin-bottom: 60px;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.contact-form-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 15px;
+}
+
+.contact-form-section p {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.contact-form {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.required {
+    color: #ef4444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#form-messages {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    display: none;
+}
+
+#form-messages.success {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+#form-messages.error {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.page-content {
+    margin-top: 60px;
+}
+
+.entry-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    color: #374151;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .contact-hero {
+        padding: 40px 15px;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .contact-item {
+        padding: 30px 20px;
+    }
+    
+    .contact-form-section {
+        padding: 60px 0;
+    }
+    
+    .contact-form {
+        padding: 30px 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .contact-form-section h2 {
+        font-size: 2rem;
+    }
+}
+</style>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Form validation
     const form = document.getElementById('contact-form');
-    const messageDiv = document.getElementById('form-messages');
-    
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
+    const messages = document.getElementById('form-messages');
+    const submitBtn = form.querySelector('.submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        if (form.checkValidity()) {
-            // Show loading state
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...';
-            submitBtn.disabled = true;
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline';
+        
+        // Hide previous messages
+        messages.style.display = 'none';
+        messages.className = '';
+        
+        // Collect form data
+        const formData = new FormData(form);
+        formData.append('action', 'handle_contact_form');
+        
+        // Submit form
+        fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
             
-            // Simulate form submission (replace with actual AJAX call)
-            setTimeout(function() {
-                messageDiv.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle me-2"></i>Thank you! Your message has been sent successfully. We\'ll get back to you soon.</div>';
+            // Show message
+            messages.style.display = 'block';
+            
+            if (data.success) {
+                messages.className = 'success';
+                messages.textContent = data.data;
                 form.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                form.classList.remove('was-validated');
-            }, 2000);
-        }
-        
-        form.classList.add('was-validated');
+            } else {
+                messages.className = 'error';
+                messages.textContent = data.data || 'An error occurred. Please try again.';
+            }
+        })
+        .catch(error => {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+            
+            // Show error message
+            messages.style.display = 'block';
+            messages.className = 'error';
+            messages.textContent = 'An error occurred. Please try again.';
+        });
     });
 });
 </script>
