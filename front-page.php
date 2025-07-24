@@ -5,278 +5,310 @@ Template Name: Front Page
 get_header(); ?>
 
 <main id="main" class="site-main">
-
-<?php
-// Universal Banner Configuration
-$badge_icon = '⭐';
-$badge_text = '#1 Rated Home Services in Your Area';
-$title = 'Professional Home Services';
-$highlight = 'You Can Trust';
-$description = 'From deep cleaning to handyman repairs, we provide reliable, high-quality services that make your life easier. Licensed, insured, and dedicated to your satisfaction.';
-$buttons = [
-    [
-        'text' => 'Explore Services',
-        'url' => '#services',
-        'type' => 'btn-primary',
-        'icon' => '→'
-    ],
-    [
-        'text' => 'Get Free Quote',
-        'url' => get_permalink(get_page_by_path('contact')),
-        'type' => 'btn-secondary',
-        'icon' => '📞'
-    ]
-];
-$stats = [
-    ['number' => '500+', 'label' => 'Happy Clients'],
-    ['number' => '15+', 'label' => 'Services'],
-    ['number' => '24/7', 'label' => 'Support'],
-    ['number' => '100%', 'label' => 'Satisfaction']
-];
-
-include get_template_directory() . '/template-parts/universal-banner.php';
-?>
-
-<!-- Services Preview Section -->
-<section class="services-preview" id="services">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-badge">Our Services</div>
-            <h2>What We Do Best</h2>
-            <p>Professional services designed to save you time and give you peace of mind</p>
-        </div>
-        
-        <div class="services-showcase">
-            <div class="service-card">
-                <div class="service-icon">🧹</div>
-                <h3>Home Cleaning</h3>
-                <p>Deep cleaning services that leave your home spotless and fresh</p>
-                <ul class="service-highlights">
-                    <li>Regular & deep cleaning</li>
-                    <li>Move-in/move-out cleaning</li>
-                    <li>Post-construction cleanup</li>
-                    <li>Eco-friendly products</li>
-                </ul>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="service-link">
-                    Learn More <span>→</span>
-                </a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">🔧</div>
-                <h3>Handyman Services</h3>
-                <p>Expert repairs and maintenance to keep your home in perfect condition</p>
-                <ul class="service-highlights">
-                    <li>General repairs</li>
-                    <li>Furniture assembly</li>
-                    <li>Painting & touch-ups</li>
-                    <li>Minor plumbing</li>
-                </ul>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="service-link">
-                    Learn More <span>→</span>
-                </a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">🌿</div>
-                <h3>Yard Care</h3>
-                <p>Complete landscaping and yard maintenance services</p>
-                <ul class="service-highlights">
-                    <li>Lawn mowing & care</li>
-                    <li>Garden maintenance</li>
-                    <li>Pressure washing</li>
-                    <li>Seasonal cleanup</li>
-                </ul>
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="service-link">
-                    Learn More <span>→</span>
-                </a>
-            </div>
-        </div>
-        
-        <div class="services-cta">
-            <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn-outline">
-                <span>View All Services</span>
-                <i>→</i>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Trust Section -->
-<section class="trust-section">
-    <div class="container">
-        <div class="trust-grid">
-            <div class="trust-content">
-                <div class="section-header">
-                    <div class="section-badge">Why Choose Us</div>
-                    <h2>Trusted by Homeowners Everywhere</h2>
-                    <p>We've built our reputation on reliability, quality, and exceptional customer service</p>
+    <!-- Hero Section -->
+    <section class="section full-height bg-primary-dark text-white d-flex align-items-center">
+        <div class="overlay-accent"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 section-content">
+                    <div class="fade-in-up">
+                        <div class="badge bg-accent text-white px-3 py-2 rounded-pill mb-4">
+                            <i class="fas fa-star me-2"></i>#1 Rated Home Services in Your Area
+                        </div>
+                        
+                        <h1 class="display-3 fw-bold mb-4">
+                            Professional Home Services 
+                            <span class="text-accent">You Can Trust</span>
+                        </h1>
+                        
+                        <p class="lead mb-4">From deep cleaning to handyman repairs, we provide reliable, high-quality services that make your life easier. Licensed, insured, and dedicated to your satisfaction.</p>
+                        
+                        <div class="d-flex flex-wrap gap-3 mb-5">
+                            <a href="#services" class="btn btn-accent btn-rounded btn-lg">
+                                <i class="fas fa-tools me-2"></i>Explore Services
+                            </a>
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-outline-light btn-rounded btn-lg">
+                                <i class="fas fa-phone me-2"></i>Get Free Quote
+                            </a>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-6 col-md-3 text-center">
+                                <div class="h4 fw-bold text-accent mb-1">15,000+</div>
+                                <small class="text-light">Happy Customers</small>
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <div class="h4 fw-bold text-accent mb-1">20+</div>
+                                <small class="text-light">Years Experience</small>
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <div class="h4 fw-bold text-accent mb-1">99%</div>
+                                <small class="text-light">Satisfaction Rate</small>
+                            </div>
+                            <div class="col-6 col-md-3 text-center">
+                                <div class="h4 fw-bold text-accent mb-1">24/7</div>
+                                <small class="text-light">Emergency Support</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="trust-features">
-                    <div class="trust-feature">
-                        <div class="feature-icon">🛡️</div>
-                        <div>
-                            <h4>Fully Licensed & Insured</h4>
-                            <p>Complete protection and peace of mind for every service</p>
+                <div class="col-lg-6">
+                    <div class="fade-in-up text-center">
+                        <i class="fas fa-home display-1 text-accent"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <?php echo services_pro_get_section_heading(
+                'Our Services',
+                'Professional home services that exceed your expectations'
+            ); ?>
+            
+            <?php
+            // Display services from custom post type
+            $services_query = new WP_Query(array('post_type' => 'service', 'posts_per_page' => 1));
+            if ($services_query->have_posts()) :
+                wp_reset_postdata();
+                // Use dynamic services
+                services_pro_display_services(6);
+            else :
+                // Fallback to static services if no custom posts exist
+            ?>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card card-service card-hover h-100">
+                            <div class="card-body p-4 text-center">
+                                <div class="icon-circle mx-auto mb-3">
+                                    <i class="fas fa-broom icon-md"></i>
+                                </div>
+                                <h3 class="h5 mb-3">Home Cleaning</h3>
+                                <p class="mb-3">Deep cleaning services that leave your home spotless and fresh</p>
+                                <ul class="list-unstyled text-start mb-4">
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Regular & deep cleaning</li>
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Move-in/move-out cleaning</li>
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Post-construction cleanup</li>
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Eco-friendly products</li>
+                                </ul>
+                                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-accent btn-rounded">
+                                    Learn More <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="trust-feature">
-                        <div class="feature-icon">⭐</div>
-                        <div>
-                            <h4>5-Star Rated Service</h4>
-                            <p>Consistently rated excellent by our satisfied customers</p>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card card-service card-hover h-100">
+                            <div class="card-body p-4 text-center">
+                                <div class="icon-circle mx-auto mb-3">
+                                    <i class="fas fa-tools icon-md"></i>
+                                </div>
+                                <h3 class="h5 mb-3">Handyman Services</h3>
+                                <p class="mb-3">Expert repairs and maintenance to keep your home in perfect condition</p>
+                                <ul class="list-unstyled text-start mb-4">
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>General repairs</li>
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Furniture assembly</li>
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Painting & touch-ups</li>
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Minor plumbing</li>
+                                </ul>
+                                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-accent btn-rounded">
+                                    Learn More <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="trust-feature">
-                        <div class="feature-icon">💰</div>
-                        <div>
-                            <h4>Transparent Pricing</h4>
-                            <p>No hidden fees or surprise charges - just honest pricing</p>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card card-service card-hover h-100">
+                            <div class="card-body p-4 text-center">
+                                <div class="icon-circle mx-auto mb-3">
+                                    <i class="fas fa-leaf icon-md"></i>
+                                </div>
+                                <h3 class="h5 mb-3">Yard Care</h3>
+                                <p class="mb-3">Complete landscaping and yard maintenance services</p>
+                                <ul class="list-unstyled text-start mb-4">
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Lawn mowing & care</li>
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Garden maintenance</li>
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Pressure washing</li>
+                                    <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Seasonal cleanup</li>
+                                </ul>
+                                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-accent btn-rounded">
+                                    Learn More <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="trust-feature">
-                        <div class="feature-icon">🚀</div>
-                        <div>
-                            <h4>Quick Response</h4>
-                            <p>Fast scheduling and reliable service when you need it</p>
-                        </div>
-                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
             
-            <div class="trust-visual">
-                <div class="trust-image">
-                    <div class="trust-image-bg"></div>
-                </div>
-                <div class="trust-badge">
-                    <span class="badge-number">500+</span>
-                    <span class="badge-text">Projects Completed</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Process Section -->
-<section class="process-section">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-badge">How It Works</div>
-            <h2>Simple Process, Amazing Results</h2>
-            <p>Getting professional service has never been easier</p>
-        </div>
-        
-        <div class="process-steps">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <div class="step-icon">📞</div>
-                <h3>Contact Us</h3>
-                <p>Call or message us with your service needs. We'll discuss your requirements and provide a free estimate.</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <div class="step-icon">📅</div>
-                <h3>Schedule Service</h3>
-                <p>Choose a convenient time that works for you. We offer flexible scheduling including evenings and weekends.</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <div class="step-icon">⚡</div>
-                <h3>Expert Service</h3>
-                <p>Our trained professionals arrive on time with all necessary tools and materials to complete your project.</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <div class="step-icon">✅</div>
-                <h3>Quality Guarantee</h3>
-                <p>We ensure your complete satisfaction with our work. If you're not happy, we'll make it right.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials-section">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-badge">Testimonials</div>
-            <h2>What Our Customers Say</h2>
-            <p>Real feedback from real customers who trust us with their homes</p>
-        </div>
-        
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                <blockquote>
-                    "Absolutely fantastic service! They transformed my cluttered garage into an organized space I actually want to use. Professional, efficient, and reasonably priced."
-                </blockquote>
-                <div class="testimonial-author">
-                    <div class="author-avatar">SM</div>
-                    <div class="author-info">
-                        <h4>Sarah Martinez</h4>
-                        <p>Homeowner</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                <blockquote>
-                    "The team did an amazing deep clean of our entire house. Every surface was spotless and they were incredibly thorough. Will definitely use them again!"
-                </blockquote>
-                <div class="testimonial-author">
-                    <div class="author-avatar">DJ</div>
-                    <div class="author-info">
-                        <h4>David Johnson</h4>
-                        <p>Business Owner</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                <blockquote>
-                    "Quick response, fair pricing, and excellent work. They fixed several issues around my house that I'd been putting off for months. Highly recommend!"
-                </blockquote>
-                <div class="testimonial-author">
-                    <div class="author-avatar">ER</div>
-                    <div class="author-info">
-                        <h4>Emily Rodriguez</h4>
-                        <p>Property Manager</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Final CTA Section -->
-<section class="final-cta-section">
-    <div class="container">
-        <div class="cta-content">
-            <h2>Ready to Get Started?</h2>
-            <p>Join hundreds of satisfied customers who trust us with their home service needs</p>
-            <div class="cta-buttons">
-                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn-primary">
-                    <span>Get Free Quote</span>
-                    <i>📞</i>
-                </a>
-                <a href="tel:+1234567890" class="btn-secondary">
-                    <span>Call Now</span>
-                    <i>☎️</i>
+            <div class="text-center mt-5">
+                <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-accent btn-rounded btn-lg">
+                    <i class="fas fa-th-large me-2"></i>View All Services
                 </a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-</main><!-- #main -->
+    <!-- Why Choose Us Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="section-heading text-center mb-5">
+                <h2 class="section-title">Why Choose Us</h2>
+                <p class="section-subtitle">What sets us apart from the competition</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center fade-in-up">
+                        <div class="icon-circle mx-auto mb-3">
+                            <i class="fas fa-shield-alt icon-md"></i>
+                        </div>
+                        <h3 class="h6 mb-2">Licensed & Insured</h3>
+                        <p class="small text-muted">Fully licensed and insured for your peace of mind</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center fade-in-up">
+                        <div class="icon-circle mx-auto mb-3">
+                            <i class="fas fa-clock icon-md"></i>
+                        </div>
+                        <h3 class="h6 mb-2">Always On Time</h3>
+                        <p class="small text-muted">Reliable scheduling and punctual service delivery</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center fade-in-up">
+                        <div class="icon-circle mx-auto mb-3">
+                            <i class="fas fa-star icon-md"></i>
+                        </div>
+                        <h3 class="h6 mb-2">Quality Guaranteed</h3>
+                        <p class="small text-muted">100% satisfaction guarantee on all our services</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center fade-in-up">
+                        <div class="icon-circle mx-auto mb-3">
+                            <i class="fas fa-dollar-sign icon-md"></i>
+                        </div>
+                        <h3 class="h6 mb-2">Affordable Pricing</h3>
+                        <p class="small text-muted">Competitive rates with transparent pricing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section bg-primary-dark">
+        <div class="container">
+            <div class="section-heading text-center mb-5">
+                <h2 class="section-title text-white">What Our Customers Say</h2>
+                <p class="section-subtitle text-light">Real reviews from satisfied customers</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 h-100">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="mb-3">"Exceptional service! They cleaned our entire house perfectly and were very professional. Highly recommend!"</p>
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-accent text-white me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Sarah Johnson</h6>
+                                    <small class="text-muted">Homeowner</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 h-100">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="mb-3">"Fast, reliable, and affordable. The handyman fixed everything on my list and more. Great communication!"</p>
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-accent text-white me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Mike Davis</h6>
+                                    <small class="text-muted">Business Owner</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 h-100">
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="mb-3">"They transformed our yard completely! Professional, courteous, and the results exceeded our expectations."</p>
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-accent text-white me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Lisa Chen</h6>
+                                    <small class="text-muted">Homeowner</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section bg-accent text-white">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
+                    <p class="lead mb-4">Join thousands of satisfied customers who trust us with their home service needs. Get your free quote today!</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-light btn-rounded btn-lg">
+                            <i class="fas fa-phone me-2"></i>Call for Free Quote
+                        </a>
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-light btn-rounded btn-lg">
+                            <i class="fas fa-list me-2"></i>Browse Services
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
 <?php get_footer(); ?>

@@ -6,48 +6,110 @@
 
 get_header(); ?>
 
-<div class="main-content">
+<main id="main" class="site-main">
     <?php if (is_home() && !is_front_page()) : ?>
         <!-- Blog Index Page -->
-        <div class="modern-blog-page">
-            <!-- Blog Hero Section -->
-            <section class="blog-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 4rem 0 3rem; color: white; text-align: center;">
-                <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-                    <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; font-weight: 700;">
-                        Latest Blog Posts
-                    </h1>
-                    <p style="font-size: 1.1rem; opacity: 0.9; max-width: 500px; margin: 0 auto;">
-                        Stay updated with our latest insights and stories.
-                    </p>
-                </div>
-            </section>
+        <?php echo services_pro_get_banner_section(
+            'Our Blog',
+            'Stay updated with our latest insights, tips, and industry news.'
+        ); ?>
 
-            <!-- Blog Content -->
-            <main class="blog-main" style="padding: 4rem 0; background: #f8f9fa;">
-                <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-                    
-                    <?php if (have_posts()) : ?>
-                        
-                        <!-- Blog Grid -->
-                        <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                            
-                            <?php while (have_posts()) : the_post(); ?>
-                                
-                                <article class="blog-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                                    
-                                    <!-- Featured Image -->
-                                    <div class="blog-card-image" style="height: 200px; background: linear-gradient(135deg, #667eea, #764ba2); position: relative; overflow: hidden;">
-                                        <?php if (has_post_thumbnail()) : ?>
-                                            <?php the_post_thumbnail('medium', array('style' => 'width: 100%; height: 100%; object-fit: cover;')); ?>
-                                        <?php elseif (get_post_meta(get_the_ID(), '_thumbnail_url', true)) : ?>
-                                            <img src="<?php echo esc_url(get_post_meta(get_the_ID(), '_thumbnail_url', true)); ?>" 
-                                                 alt="<?php the_title_attribute(); ?>" 
-                                                 style="width: 100%; height: 100%; object-fit: cover;">
-                                        <?php else : ?>
-                                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 3rem;">
-                                                📄
+        <!-- Blog Content -->
+        <section class="section bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <?php if (have_posts()) : ?>
+                            <div class="row g-4">
+                                <?php while (have_posts()) : the_post(); ?>
+                                    <div class="col-md-6">
+                                        <article id="post-<?php the_ID(); ?>" <?php post_class('card card-hover h-100 border-0 shadow-sm'); ?>>
+                                            <?php if (has_post_thumbnail()) : ?>
+                                                <div class="card-img-top overflow-hidden" style="height: 200px;">
+                                                    <a href="<?php the_permalink(); ?>">
+                                                        <?php the_post_thumbnail('medium', array('class' => 'w-100 h-100 object-fit-cover')); ?>
+                                                    </a>
+                                                </div>
+                                            <?php endif; ?>
+                                            
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <?php 
+                                                    $categories = get_the_category();
+                                                    if (!empty($categories)) : ?>
+                                                        <span class="badge bg-light text-dark me-2">
+                                                            <?php echo esc_html($categories[0]->name); ?>
+                                                        </span>
+                                                    <?php endif; ?>
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-calendar me-1"></i>
+                                                        <?php echo get_the_date(); ?>
+                                                    </small>
+                                                </div>
+                                                
+                                                <h3 class="h5 card-title">
+                                                    <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
+                                                        <?php the_title(); ?>
+                                                    </a>
+                                                </h3>
+                                                
+                                                <p class="card-text text-muted">
+                                                    <?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?>
+                                                </p>
+                                                
+                                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-user me-1"></i>
+                                                            <?php the_author(); ?>
+                                                        </small>
+                                                    </div>
+                                                    <a href="<?php the_permalink(); ?>" class="btn btn-sm btn-outline-accent">
+                                                        Read More <i class="fas fa-arrow-right ms-1"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        <?php endif; ?>
+                                        </article>
+                                    </div>
+                                <?php endwhile; ?>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="row mt-5">
+                                <div class="col-12">
+                                    <?php
+                                    the_posts_pagination(array(
+                                        'mid_size' => 2,
+                                        'prev_text' => '<i class="fas fa-chevron-left"></i> Previous',
+                                        'next_text' => 'Next <i class="fas fa-chevron-right"></i>',
+                                        'class' => 'pagination justify-content-center'
+                                    ));
+                                    ?>
+                                </div>
+                            </div>
+
+                        <?php else : ?>
+                            <div class="text-center py-5">
+                                <i class="fas fa-newspaper text-muted mb-3" style="font-size: 4rem;"></i>
+                                <h3 class="h4 mb-3">No Posts Found</h3>
+                                <p class="text-muted mb-4">Sorry, but nothing matched your search terms. Please try again with different keywords.</p>
+                                <a href="<?php echo esc_url(home_url('/')); ?>" class="btn btn-accent btn-rounded">
+                                    <i class="fas fa-home me-2"></i>Back to Home
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-4">
+                        <?php get_sidebar(); ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <?php else : ?>
+        <!-- Default Page Content -->
                                         
                                         <!-- Category Badge -->
                                         <div class="category-badge" style="position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.9); color: #333; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">

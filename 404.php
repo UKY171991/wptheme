@@ -1,71 +1,148 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying 404 pages (not found)
+ */
 
-<!-- 404 Error Banner Section -->
-<section class="page-banner error-banner" style="background: linear-gradient(135deg, rgba(231, 76, 60, 0.9), rgba(155, 89, 182, 0.8));">
-    <div class="container">
-        <div class="banner-content">
-            <div class="breadcrumb">
-                <a href="<?php echo home_url(); ?>"><i class="fas fa-home"></i> Home</a> 
-                <span class="breadcrumb-separator">→</span> 
-                <span>404 Error</span>
-            </div>
-            <div style="font-size: 4rem; margin-bottom: 1rem;">🏠</div>
-            <h1 class="banner-title">404 - Page Not Found</h1>
-            <p class="banner-subtitle">Sorry, the page you're looking for doesn't exist. But don't worry, we're here to help with all your service needs!</p>
-        </div>
-    </div>
-</section>
+get_header(); ?>
 
-<div class="error-404" style="padding: 4rem 0; background: #f8f9fa;">
-    <div class="container">
-        <div class="error-content" style="max-width: 600px; margin: 0 auto; text-align: center;">
-            
-            <div class="error-actions" style="margin-bottom: 4rem;">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="cta-button" style="margin-right: 1rem;">Go Home</a>
-                <a href="<?php echo esc_url(home_url('/#contact')); ?>" class="btn">Contact Us</a>
-            </div>
-            
-            <!-- Search form -->
-            <div class="error-search" style="background: #f8f9fa; padding: 2rem; border-radius: 15px; margin-bottom: 3rem;">
-                <h3 style="margin-bottom: 1rem;">Search Our Site</h3>
-                <form role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>" style="max-width: 400px; margin: 0 auto;">
-                    <div style="display: flex; gap: 1rem;">
-                        <input type="search" name="s" placeholder="Search for services..." style="flex: 1; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
-                        <button type="submit" class="btn">Search</button>
+<main id="main" class="site-main">
+    <!-- 404 Hero Section -->
+    <section class="section bg-primary-dark text-white">
+        <div class="overlay-accent"></div>
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8 section-content">
+                    <div class="fade-in-up">
+                        <div class="mb-4" style="font-size: 8rem;">
+                            <i class="fas fa-exclamation-triangle text-accent"></i>
+                        </div>
+                        
+                        <h1 class="display-1 fw-bold mb-4">404</h1>
+                        
+                        <h2 class="h3 mb-4">
+                            Oops! Page Not Found
+                            <span class="text-accent d-block">But We're Here to Help</span>
+                        </h2>
+                        
+                        <p class="lead mb-5">The page you're looking for doesn't exist, but don't worry! Our home services are still available to make your life easier.</p>
+                        
+                        <div class="d-flex flex-wrap gap-3 justify-content-center">
+                            <a href="<?php echo esc_url(home_url('/')); ?>" class="btn btn-accent btn-rounded btn-lg">
+                                <i class="fas fa-home me-2"></i>Go Home
+                            </a>
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-light btn-rounded btn-lg">
+                                <i class="fas fa-tools me-2"></i>View Services
+                            </a>
+                        </div>
                     </div>
-                </form>
-            </div>
-            
-            <!-- Popular services -->
-            <div class="popular-links">
-                <h3 style="margin-bottom: 2rem;">Popular Services</h3>
-                <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-                    <?php 
-                    $popular_services = array(
-                        array('title' => 'House Cleaning', 'icon' => '🧹', 'link' => '#services'),
-                        array('title' => 'Handyman Services', 'icon' => '🧰', 'link' => '#services'),
-                        array('title' => 'Pet Care', 'icon' => '🐶', 'link' => '#services'),
-                        array('title' => 'Personal Errands', 'icon' => '🛍️', 'link' => '#services'),
-                    );
-                    
-                    foreach ($popular_services as $service) :
-                    ?>
-                        <a href="<?php echo esc_url(home_url('/' . $service['link'])); ?>" class="service-link" style="display: block; background: white; padding: 2rem; border-radius: 15px; text-decoration: none; color: #333; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
-                            <div style="font-size: 3rem; margin-bottom: 1rem;"><?php echo $service['icon']; ?></div>
-                            <h4><?php echo esc_html($service['title']); ?></h4>
-                        </a>
-                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<style>
-.service-link:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
-}
-</style>
+    <!-- Search Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center mb-5">
+                        <h3 class="h4 mb-3">Search Our Site</h3>
+                        <p class="text-muted">Try searching for what you were looking for</p>
+                    </div>
+                    
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <?php get_search_form(); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Services Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-heading text-center mb-5">
+                <h3 class="section-title">Popular Services</h3>
+                <p class="section-subtitle">Maybe one of these is what you were looking for?</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card card-hover h-100 border-0 shadow-sm text-center">
+                        <div class="card-body p-4">
+                            <i class="fas fa-broom text-accent mb-3" style="font-size: 3rem;"></i>
+                            <h5 class="card-title mb-3">House Cleaning</h5>
+                            <p class="card-text text-muted mb-4">Professional cleaning services for your home</p>
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-accent">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card card-hover h-100 border-0 shadow-sm text-center">
+                        <div class="card-body p-4">
+                            <i class="fas fa-tools text-accent mb-3" style="font-size: 3rem;"></i>
+                            <h5 class="card-title mb-3">Handyman Services</h5>
+                            <p class="card-text text-muted mb-4">Expert repairs and maintenance for your home</p>
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-accent">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card card-hover h-100 border-0 shadow-sm text-center">
+                        <div class="card-body p-4">
+                            <i class="fas fa-paw text-accent mb-3" style="font-size: 3rem;"></i>
+                            <h5 class="card-title mb-3">Pet Care</h5>
+                            <p class="card-text text-muted mb-4">Reliable pet sitting and walking services</p>
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-accent">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card card-hover h-100 border-0 shadow-sm text-center">
+                        <div class="card-body p-4">
+                            <i class="fas fa-shopping-bag text-accent mb-3" style="font-size: 3rem;"></i>
+                            <h5 class="card-title mb-3">Personal Shopping</h5>
+                            <p class="card-text text-muted mb-4">Convenient shopping and errand services</p>
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-accent">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Section -->
+    <section class="section bg-accent text-white">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h3 class="h4 mb-4">Still Need Help?</h3>
+                    <p class="lead mb-4">Our customer service team is ready to assist you with any questions or service needs.</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-light btn-rounded">
+                            <i class="fas fa-envelope me-2"></i>Contact Us
+                        </a>
+                        <a href="tel:+1234567890" class="btn btn-outline-light btn-rounded">
+                            <i class="fas fa-phone me-2"></i>Call Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
 <?php get_footer(); ?>

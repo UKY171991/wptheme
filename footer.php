@@ -1,49 +1,156 @@
-    <footer class="site-footer">
+    <footer class="site-footer bg-primary-dark text-white">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3><?php bloginfo('name'); ?></h3>
-                    <p><?php bloginfo('description'); ?></p>
-                    <?php if (get_theme_mod('contact_address')) : ?>
-                        <p><strong>Address:</strong><br><?php echo esc_html(get_theme_mod('contact_address')); ?></p>
-                    <?php endif; ?>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <?php
-                    wp_nav_menu(array(
-                        'theme_location' => 'footer',
-                        'container' => false,
-                        'menu_class' => '',
-                        'fallback_cb' => 'services_pro_footer_fallback_menu',
-                    ));
-                    ?>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <?php if (get_theme_mod('contact_phone')) : ?>
-                        <p><strong>Phone:</strong> <a href="tel:<?php echo esc_attr(str_replace(array(' ', '(', ')', '-'), '', get_theme_mod('contact_phone'))); ?>"><?php echo esc_html(get_theme_mod('contact_phone')); ?></a></p>
-                    <?php endif; ?>
-                    <?php if (get_theme_mod('contact_email')) : ?>
-                        <p><strong>Email:</strong> <a href="mailto:<?php echo esc_attr(get_theme_mod('contact_email')); ?>"><?php echo esc_html(get_theme_mod('contact_email')); ?></a></p>
-                    <?php endif; ?>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Business Hours</h3>
-                    <ul>
-                        <li>Monday - Friday: 8:00 AM - 6:00 PM</li>
-                        <li>Saturday: 9:00 AM - 4:00 PM</li>
-                        <li>Sunday: Emergency calls only</li>
-                    </ul>
+            <div class="section-padding">
+                <div class="row">
+                    <!-- Company Info -->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <h3 class="h5 text-accent mb-3"><?php bloginfo('name'); ?></h3>
+                        <p class="text-light mb-3"><?php bloginfo('description'); ?></p>
+                        
+                        <?php if (get_theme_mod('contact_address')) : ?>
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="fas fa-map-marker-alt text-accent me-3 mt-1"></i>
+                                <span class="text-light"><?php echo esc_html(get_theme_mod('contact_address')); ?></span>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <?php if (get_theme_mod('contact_phone')) : ?>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-phone text-accent me-3"></i>
+                                <a href="tel:<?php echo esc_attr(str_replace(array(' ', '(', ')', '-'), '', get_theme_mod('contact_phone'))); ?>" class="text-light text-decoration-none">
+                                    <?php echo esc_html(get_theme_mod('contact_phone')); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <?php if (get_theme_mod('contact_email')) : ?>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-envelope text-accent me-3"></i>
+                                <a href="mailto:<?php echo esc_attr(get_theme_mod('contact_email')); ?>" class="text-light text-decoration-none">
+                                    <?php echo esc_html(get_theme_mod('contact_email')); ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <h4 class="h6 text-accent mb-3">Quick Links</h4>
+                        <?php
+                        if (has_nav_menu('footer')) {
+                            wp_nav_menu(array(
+                                'theme_location' => 'footer',
+                                'container' => false,
+                                'menu_class' => 'list-unstyled footer-menu',
+                                'depth' => 1,
+                            ));
+                        } else {
+                            echo '<ul class="list-unstyled footer-menu">';
+                            echo '<li><a href="' . esc_url(home_url('/')) . '" class="text-light text-decoration-none">Home</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/about/')) . '" class="text-light text-decoration-none">About</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/services/')) . '" class="text-light text-decoration-none">Services</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/contact/')) . '" class="text-light text-decoration-none">Contact</a></li>';
+                            echo '</ul>';
+                        }
+                        ?>
+                    </div>
+                    
+                    <!-- Services -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h4 class="h6 text-accent mb-3">Our Services</h4>
+                        <ul class="list-unstyled footer-menu">
+                            <li><a href="#" class="text-light text-decoration-none">House Cleaning</a></li>
+                            <li><a href="#" class="text-light text-decoration-none">Home Maintenance</a></li>
+                            <li><a href="#" class="text-light text-decoration-none">Handyman Services</a></li>
+                            <li><a href="#" class="text-light text-decoration-none">Lawn Care</a></li>
+                            <li><a href="#" class="text-light text-decoration-none">Emergency Services</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Business Hours -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h4 class="h6 text-accent mb-3">Business Hours</h4>
+                        <ul class="list-unstyled text-light">
+                            <li class="mb-2">
+                                <strong>Monday - Friday:</strong><br>
+                                8:00 AM - 6:00 PM
+                            </li>
+                            <li class="mb-2">
+                                <strong>Saturday:</strong><br>
+                                9:00 AM - 4:00 PM
+                            </li>
+                            <li class="mb-2">
+                                <strong>Sunday:</strong><br>
+                                Emergency calls only
+                            </li>
+                        </ul>
+                        
+                        <!-- CTA Button -->
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-accent btn-rounded mt-3">
+                            <i class="fas fa-phone me-2"></i>Get Free Quote
+                        </a>
+                    </div>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. All rights reserved. | 
-                Professional Home Services | Licensed & Insured</p>
+            <!-- Footer Bottom -->
+            <div class="border-top border-secondary pt-4 pb-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-md-0 text-light small">
+                            &copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. All rights reserved.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0 text-light small">
+                            Licensed & Insured | Professional Home Services
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div><!-- #page -->
+
+<?php wp_footer(); ?>
+
+<!-- Theme JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Add scroll effect to header
+    let lastScrollTop = 0;
+    const header = document.querySelector('.site-header');
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+});
+</script>
+
+</body>
+</html>
             </div>
         </div>
     </footer>

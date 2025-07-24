@@ -13,53 +13,58 @@
 <div id="page" class="site">
     <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'services-pro'); ?></a>
 
-    <header id="masthead" class="site-header">
-        <div class="header-container">
-            <div class="site-branding">
-                <?php
-                if (has_custom_logo()) {
-                    the_custom_logo();
-                } else {
-                    ?>
-                    <div class="site-title-wrapper">
-                        <h1 class="site-title">
-                            <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                                <?php bloginfo('name'); ?>
-                            </a>
-                        </h1>
-                        <?php
-                        $description = get_bloginfo('description', 'display');
-                        if ($description || is_customize_preview()) :
-                            ?>
-                            <p class="site-description"><?php echo esc_html($description); ?></p>
-                        <?php endif; ?>
-                    </div>
+    <header id="masthead" class="site-header bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
+            <div class="container">
+                <!-- Brand/Logo -->
+                <div class="site-branding">
                     <?php
-                }
-                ?>
-            </div>
+                    if (has_custom_logo()) {
+                        the_custom_logo();
+                    } else {
+                        ?>
+                        <a class="navbar-brand fw-bold text-primary-dark text-decoration-none" href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                            <?php bloginfo('name'); ?>
+                            <?php
+                            $description = get_bloginfo('description', 'display');
+                            if ($description || is_customize_preview()) :
+                                ?>
+                                <small class="d-block text-muted fw-normal"><?php echo esc_html($description); ?></small>
+                            <?php endif; ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
 
-            <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary menu', 'services-pro'); ?>">
-                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-                    <span class="menu-toggle-icon">
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                    </span>
-                    <span class="menu-toggle-text"><?php esc_html_e('Menu', 'services-pro'); ?></span>
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'services-pro'); ?>">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'primary',
-                    'menu_id'        => 'primary-menu',
-                    'menu_class'     => 'nav-menu',
-                    'container'      => false,
-                    'depth'          => 0,
-                    'walker'         => new Clean_Walker_Nav_Menu(),
-                    'fallback_cb'    => 'clean_navigation_fallback',
-                ));
-                ?>
-            </nav>
-        </div>
+                <!-- Navigation Menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <?php
+                    wp_nav_menu(array(
+                        'theme_location' => 'primary',
+                        'menu_id'        => 'primary-menu',
+                        'menu_class'     => 'navbar-nav ms-auto mb-2 mb-lg-0',
+                        'container'      => false,
+                        'depth'          => 3,
+                        'walker'         => new Bootstrap_Walker_Nav_Menu(),
+                        'fallback_cb'    => false,
+                    ));
+                    ?>
+                    
+                    <!-- CTA Button -->
+                    <div class="d-flex ms-lg-3">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-accent btn-rounded px-4">
+                            <i class="fas fa-phone me-2"></i>Get Quote
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </header>
+
+    <main id="primary" class="site-main">

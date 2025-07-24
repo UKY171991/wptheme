@@ -1,42 +1,77 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying all pages
+ */
 
-<!-- Page Banner Section -->
-<section class="page-banner default-banner">
-    <div class="container">
-        <div class="banner-content">
-            <div class="breadcrumb">
-                <a href="<?php echo home_url(); ?>"><i class="fas fa-home"></i> Home</a> 
-                <span class="breadcrumb-separator">→</span> 
-                <span><?php the_title(); ?></span>
-            </div>
-            <h1 class="banner-title"><?php the_title(); ?></h1>
-            <?php if (has_excerpt()) : ?>
-                <p class="banner-subtitle"><?php the_excerpt(); ?></p>
-            <?php else : ?>
-                <p class="banner-subtitle">Welcome to our page</p>
-            <?php endif; ?>
-        </div>
-    </div>
-</section>
+get_header(); ?>
 
-<div class="page-content" style="padding: 4rem 0;">
-    <div class="container">
-        <?php while (have_posts()) : the_post(); ?>
-            <article class="page">
-                <div class="page-content-wrapper" style="max-width: 800px; margin: 0 auto;">
-                    <?php if (has_post_thumbnail()) : ?>
-                        <div class="page-featured-image" style="margin-bottom: 3rem; text-align: center;">
-                            <?php the_post_thumbnail('large', array('style' => 'max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);')); ?>
-                        </div>
-                    <?php endif; ?>
+<main id="main" class="site-main">
+    <?php while (have_posts()) : the_post(); ?>
+        <!-- Page Banner -->
+        <?php echo services_pro_get_banner_section(get_the_title(), get_the_excerpt()); ?>
 
-                    <div class="page-content-text" style="font-size: 1.1rem; line-height: 1.8; color: #333;">
-                        <?php the_content(); ?>
+        <!-- Page Content -->
+        <section class="section bg-light">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <article id="post-<?php the_ID(); ?>" <?php post_class('fade-in-up'); ?>>
+                            
+                            <!-- Featured Image -->
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="mb-5 text-center">
+                                    <figure>
+                                        <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded shadow-sm')); ?>
+                                        <?php if (get_the_post_thumbnail_caption()) : ?>
+                                            <figcaption class="mt-2 text-muted fst-italic">
+                                                <?php echo get_the_post_thumbnail_caption(); ?>
+                                            </figcaption>
+                                        <?php endif; ?>
+                                    </figure>
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Page Content -->
+                            <div class="page-content">
+                                <?php
+                                the_content();
+
+                                wp_link_pages(array(
+                                    'before' => '<div class="page-links d-flex flex-wrap gap-2 mt-4"><span class="me-2">' . esc_html__('Pages:', 'services-pro') . '</span>',
+                                    'after'  => '</div>',
+                                    'link_before' => '<span class="btn btn-sm btn-outline-accent">',
+                                    'link_after'  => '</span>',
+                                ));
+                                ?>
+                            </div>
+
+                            <!-- Page Meta -->
+                            <?php if (is_user_logged_in()) : ?>
+                                <div class="page-meta mt-5 pt-4 border-top">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">
+                                            Last updated: <?php echo get_the_modified_date(); ?>
+                                        </small>
+                                        <?php edit_post_link('Edit Page', '<small class="text-muted">', '</small>'); ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </article>
+
+                        <!-- Comments -->
+                        <?php
+                        if (comments_open() || get_comments_number()) :
+                            ?>
+                            <div class="comments-section mt-5 pt-4 border-top">
+                                <?php comments_template(); ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-            </article>
-        <?php endwhile; ?>
-    </div>
-</div>
+            </div>
+        </section>
+
+    <?php endwhile; ?>
+</main>
 
 <?php get_footer(); ?>

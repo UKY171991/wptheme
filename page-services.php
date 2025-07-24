@@ -1,733 +1,500 @@
 <?php
 /**
- * Template Name: Services Page
+ * Template Name: Services
  */
+
 get_header(); ?>
 
 <main id="main" class="site-main">
+    <?php
+    // Page Banner
+    echo services_pro_get_banner_section(
+        'Our Services',
+        'Professional home services designed to make your life easier. From cleaning to maintenance, we provide reliable solutions you can trust.'
+    );
+    ?>
 
-<?php
-// Universal Banner Configuration
-$badge_icon = '🛠️';
-$badge_text = 'Professional Home Services';
-$title = 'Our Services';
-$highlight = 'Quality & Reliability';
-$description = 'Comprehensive home services designed to make your life easier. From cleaning to maintenance, we provide professional, reliable solutions you can trust.';
-$buttons = [
-    [
-        'text' => 'Browse Services',
-        'url' => '#services-grid',
-        'type' => 'btn-primary',
-        'icon' => '→'
-    ],
-    [
-        'text' => 'Get Quote',
-        'url' => get_permalink(get_page_by_path('contact')),
-        'type' => 'btn-secondary',
-        'icon' => '📞'
-    ]
-];
-
-include get_template_directory() . '/template-parts/universal-banner.php';
-?>
-
-<!-- Services Grid Section -->
-<section id="services-grid" class="services-section">
-    <div class="container">
-        <div class="services-grid">
-            <?php
-            $service_categories = get_service_categories();
-            $count = 0;
-            foreach ($service_categories as $category_name => $category) {
-                if ($count >= 6) break; // Show only 6 main categories
-                ?>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <?php 
-                        $icons = ['🧹', '🔧', '🛍️', '🐶', '👶', '🎨'];
-                        echo $icons[$count % count($icons)]; 
-                        ?>
-                    </div>
-                    <h3><?php echo esc_html($category['name']); ?></h3>
-                    <p><?php echo esc_html($category['description']); ?></p>
-                    <ul class="service-list">
-                        <?php 
-                        $services = array_slice(array_keys($category['services'] ?? []), 0, 4);
-                        foreach ($services as $service_name) {
-                            echo '<li>' . esc_html($service_name) . '</li>';
-                        }
-                        ?>
-                    </ul>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="service-cta">Get Quote →</a>
-                </div>
-                <?php
-                $count++;
-            }
-            ?>
+    <!-- Services Grid Section -->
+    <section id="services-grid" class="section">
+        <div class="container">
+            <?php echo services_pro_get_section_heading(
+                'Professional Services',
+                'Choose from our comprehensive range of home services'
+            ); ?>
+            
+            <!-- Services Display -->
+            <div class="services-content">
+                <?php services_pro_display_services(); ?>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <!-- Why Choose Us Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <?php echo services_pro_get_section_heading(
+                'Why Choose Our Services',
+                'We are committed to providing exceptional service quality'
+            ); ?>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-shield-alt text-accent" style="font-size: 3rem;"></i>
+                        </div>
+                        <h4 class="h5 mb-3">Licensed & Insured</h4>
+                        <p class="text-muted">Fully licensed and insured for your peace of mind and protection.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-clock text-accent" style="font-size: 3rem;"></i>
+                        </div>
+                        <h4 class="h5 mb-3">24/7 Availability</h4>
+                        <p class="text-muted">Emergency services available around the clock for urgent needs.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-thumbs-up text-accent" style="font-size: 3rem;"></i>
+                        </div>
+                        <h4 class="h5 mb-3">Satisfaction Guarantee</h4>
+                        <p class="text-muted">100% satisfaction guarantee on all our services and workmanship.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <?php echo services_pro_get_cta_section(
+        'Ready to Get Started?',
+        'Contact us today for a free consultation and personalized quote for your service needs.',
+        'Get Free Quote',
+        get_permalink(get_page_by_path('contact'))
+    ); ?>
 </main>
 
-<style>
-        /* RESET AND BASE STYLES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* HERO SECTION */
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-btn {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .hero-btn:hover {
-            background: white;
-            color: #667eea;
-            transform: translateY(-2px);
-        }
-        
-        /* SERVICES GRID SECTION */
-        .services-section {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-size: 2.8rem;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .service-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            color: white;
-            font-size: 2rem;
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .service-card p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-        
-        .service-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-        
-        .service-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .service-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        /* STATISTICS SECTION */
-        .stats-section {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 30px 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .stat-item:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-5px);
-        }
-        
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .stat-item:hover .stat-number {
-            color: white;
-        }
-        
-        .stat-label {
-            font-size: 1.1rem;
-            color: #666;
-            font-weight: 500;
-        }
-        
-        .stat-item:hover .stat-label {
-            color: white;
-        }
-        
-        /* QUOTE CALCULATOR SECTION */
-        .quote-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .quote-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.1);
-            padding: 50px 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .quote-container h3 {
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: white;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.9);
-            color: #333;
-            font-size: 1rem;
-        }
-        
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-        
-        .quote-btn {
-            width: 100%;
-            background: white;
-            color: #667eea;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .quote-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255,255,255,0.3);
-        }
-        
-        .quote-result {
-            margin-top: 25px;
-            padding: 20px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            text-align: center;
-            display: none;
-        }
-        
-        /* CTA SECTION */
-        .cta-section {
-            padding: 80px 0;
-            background: #333;
-            color: white;
-            text-align: center;
-        }
-        
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .cta-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 18px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-        
-        /* MOBILE RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
+<?php get_footer(); ?>
+                'Explore our services by category'
+            ); ?>
             
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .service-card {
-                height: auto;
-                min-height: 300px;
-                padding: 30px 20px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            
-            .quote-container {
-                padding: 30px 20px;
-                margin: 0 20px;
-            }
-            
-            .section-title h2 {
-                font-size: 2.2rem;
-            }
-            
-            .cta-section h2 {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .service-card {
-                padding: 25px 15px;
-            }
-            
-            .container {
-                padding: 0 15px;
-            }
-        }
-    </style>
-</head>
-
-<body <?php body_class(); ?>>
-
-<!-- HERO SECTION -->
-<section class="hero-section">
-    <div class="container">
-        <div class="hero-content">
-            <h1>Professional Services</h1>
-            <p>We provide high-quality services to help your business grow and succeed. Our expert team delivers exceptional results tailored to your needs.</p>
-            <a href="#services" class="hero-btn">View Our Services</a>
-        </div>
-    </div>
-</section>
-
-<!-- SERVICES SECTION -->
-<section class="services-section" id="services">
-    <div class="container">
-        <div class="section-title">
-            <h2>Our Services</h2>
-            <p>Choose from our comprehensive range of professional services designed to meet your business objectives.</p>
-        </div>
-        
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <h3>Web Development</h3>
-                <p>Custom websites and web applications built with modern technologies. Responsive design, fast loading, and optimized for search engines.</p>
-                <div class="service-price">Starting at $999</div>
-                <a href="#quote" class="service-btn">Get Quote</a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3>Mobile Apps</h3>
-                <p>Native and cross-platform mobile applications for iOS and Android. User-friendly interface and smooth performance guaranteed.</p>
-                <div class="service-price">Starting at $1,499</div>
-                <a href="#quote" class="service-btn">Get Quote</a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Digital Marketing</h3>
-                <p>Complete digital marketing solutions including SEO, social media marketing, and online advertising campaigns to boost your presence.</p>
-                <div class="service-price">Starting at $599</div>
-                <a href="#quote" class="service-btn">Get Quote</a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-paint-brush"></i>
-                </div>
-                <h3>Graphic Design</h3>
-                <p>Professional graphic design services including logos, branding, print materials, and digital assets that represent your brand perfectly.</p>
-                <div class="service-price">Starting at $399</div>
-                <a href="#quote" class="service-btn">Get Quote</a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-cogs"></i>
-                </div>
-                <h3>Consulting</h3>
-                <p>Expert business and technology consulting to help you make informed decisions and optimize your operations for maximum efficiency.</p>
-                <div class="service-price">Starting at $149/hr</div>
-                <a href="#quote" class="service-btn">Get Quote</a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <h3>Support & Maintenance</h3>
-                <p>Ongoing support and maintenance services to keep your digital assets running smoothly with regular updates and monitoring.</p>
-                <div class="service-price">Starting at $99/month</div>
-                <a href="#quote" class="service-btn">Get Quote</a>
+            <div class="row g-4">
+                <?php foreach ($service_categories as $category) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card category-card h-100 shadow-sm border-0 text-center">
+                            <div class="card-body p-4">
+                                <div class="category-icon mb-3">
+                                    <i class="fas fa-tools fa-3x text-accent"></i>
+                                </div>
+                                <h3 class="h5 mb-3"><?php echo esc_html($category->name); ?></h3>
+                                <?php if ($category->description) : ?>
+                                    <p class="text-muted mb-4"><?php echo esc_html($category->description); ?></p>
+                                <?php endif; ?>
+                                <span class="badge bg-light text-dark mb-3"><?php echo esc_html($category->count); ?> Services</span>
+                                <div>
+                                    <a href="<?php echo esc_url(get_term_link($category)); ?>" class="btn btn-accent btn-sm">
+                                        View Services <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <?php endif; ?>
 
-<!-- STATISTICS SECTION -->
-<section class="stats-section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Our Success in Numbers</h2>
-            <p>We're proud of our track record and the results we've delivered for our clients.</p>
-        </div>
-        
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Projects Completed</div>
-            </div>
+    <!-- Process Section -->
+    <section class="section">
+        <div class="container">
+            <?php echo services_pro_get_section_heading(
+                'Our Process',
+                'Simple steps to get the service you need'
+            ); ?>
             
-            <div class="stat-item">
-                <div class="stat-number">98%</div>
-                <div class="stat-label">Client Satisfaction</div>
-            </div>
-            
-            <div class="stat-item">
-                <div class="stat-number">50+</div>
-                <div class="stat-label">Team Members</div>
-            </div>
-            
-            <div class="stat-item">
-                <div class="stat-number">5</div>
-                <div class="stat-label">Years Experience</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- QUOTE CALCULATOR SECTION -->
-<section class="quote-section" id="quote">
-    <div class="container">
-        <div class="quote-container">
-            <h3>Get Your Quote</h3>
-            <form id="quote-form">
-                <div class="form-group">
-                    <label for="service-type">Service Type</label>
-                    <select id="service-type" name="service-type" required>
-                        <option value="">Select a service</option>
-                        <option value="web-development">Web Development</option>
-                        <option value="mobile-apps">Mobile Apps</option>
-                        <option value="digital-marketing">Digital Marketing</option>
-                        <option value="graphic-design">Graphic Design</option>
-                        <option value="consulting">Consulting</option>
-                        <option value="support">Support & Maintenance</option>
-                    </select>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step text-center">
+                        <div class="step-icon bg-accent text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3">
+                            <span class="h4 mb-0">1</span>
+                        </div>
+                        <h4 class="h5 mb-3">Contact Us</h4>
+                        <p class="text-muted">Get in touch with our team to discuss your service needs and get a free quote.</p>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="project-budget">Budget Range</label>
-                    <select id="project-budget" name="project-budget" required>
-                        <option value="">Select budget range</option>
-                        <option value="under-1000">Under $1,000</option>
-                        <option value="1000-5000">$1,000 - $5,000</option>
-                        <option value="5000-10000">$5,000 - $10,000</option>
-                        <option value="10000-plus">$10,000+</option>
-                    </select>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step text-center">
+                        <div class="step-icon bg-accent text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3">
+                            <span class="h4 mb-0">2</span>
+                        </div>
+                        <h4 class="h5 mb-3">Schedule Service</h4>
+                        <p class="text-muted">We'll work with your schedule to find the perfect time for your service appointment.</p>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="timeline">Project Timeline</label>
-                    <select id="timeline" name="timeline" required>
-                        <option value="">Select timeline</option>
-                        <option value="urgent">ASAP (Rush job)</option>
-                        <option value="1-month">1 Month</option>
-                        <option value="2-3-months">2-3 Months</option>
-                        <option value="3-plus-months">3+ Months</option>
-                    </select>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step text-center">
+                        <div class="step-icon bg-accent text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3">
+                            <span class="h4 mb-0">3</span>
+                        </div>
+                        <h4 class="h5 mb-3">Professional Service</h4>
+                        <p class="text-muted">Our experienced technicians will complete your service with precision and care.</p>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="project-details">Project Details</label>
-                    <textarea id="project-details" name="project-details" placeholder="Tell us about your project requirements..."></textarea>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step text-center">
+                        <div class="step-icon bg-accent text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3">
+                            <span class="h4 mb-0">4</span>
+                        </div>
+                        <h4 class="h5 mb-3">Follow-up</h4>
+                        <p class="text-muted">We ensure your complete satisfaction and are available for any follow-up needs.</p>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="contact-email">Email Address</label>
-                    <input type="email" id="contact-email" name="contact-email" placeholder="your@email.com" required>
-                </div>
-                
-                <button type="submit" class="quote-btn">Calculate Quote</button>
-            </form>
-            
-            <div class="quote-result" id="quote-result">
-                <h4>Estimated Quote</h4>
-                <p id="quote-amount">$0</p>
-                <p>We'll send you a detailed proposal within 24 hours!</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- CTA SECTION -->
-<section class="cta-section">
-    <div class="container">
-        <h2>Ready to Get Started?</h2>
-        <p>Let's discuss your project and how we can help you achieve your goals.</p>
-        <a href="/contact" class="cta-btn">Contact Us Today</a>
-    </div>
-</section>
+    <!-- FAQ Section -->
+    <?php
+    $service_faqs = new WP_Query(array(
+        'post_type' => 'faq',
+        'posts_per_page' => 5,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'faq_category',
+                'field'    => 'slug',
+                'terms'    => 'services',
+            ),
+        ),
+    ));
+    
+    if ($service_faqs->have_posts()) :
+    ?>
+    <section class="section bg-light">
+        <div class="container">
+            <?php echo services_pro_get_section_heading(
+                'Frequently Asked Questions',
+                'Common questions about our services'
+            ); ?>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <?php services_pro_display_faqs(5, 'services'); ?>
+                    
+                    <div class="text-center mt-4">
+                        <a href="<?php echo esc_url(get_post_type_archive_link('faq')); ?>" class="btn btn-outline-accent">
+                            View All FAQs <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif; wp_reset_postdata(); ?>
 
-<script>
-// Quote Calculator Functionality
-document.getElementById('quote-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const serviceType = document.getElementById('service-type').value;
-    const budget = document.getElementById('project-budget').value;
-    const timeline = document.getElementById('timeline').value;
-    
-    let basePrice = 0;
-    
-    // Base prices for different services
-    switch(serviceType) {
-        case 'web-development':
-            basePrice = 1500;
-            break;
-        case 'mobile-apps':
-            basePrice = 2500;
-            break;
-        case 'digital-marketing':
-            basePrice = 800;
-            break;
-        case 'graphic-design':
-            basePrice = 600;
-            break;
-        case 'consulting':
-            basePrice = 200; // per hour, estimate 10 hours
-            break;
-        case 'support':
-            basePrice = 150; // monthly
-            break;
-        default:
-            basePrice = 1000;
-    }
-    
-    // Adjust price based on timeline
-    if (timeline === 'urgent') {
-        basePrice *= 1.5; // 50% rush fee
-    } else if (timeline === '1-month') {
-        basePrice *= 1.2; // 20% for faster delivery
-    }
-    
-    // Adjust based on budget range
-    if (budget === 'under-1000') {
-        basePrice = Math.min(basePrice, 900);
-    } else if (budget === '1000-5000') {
-        basePrice = Math.min(Math.max(basePrice, 1000), 5000);
-    } else if (budget === '5000-10000') {
-        basePrice = Math.min(Math.max(basePrice, 5000), 10000);
-    }
-    
-    // Show result
-    document.getElementById('quote-amount').textContent = '$' + basePrice.toLocaleString();
-    document.getElementById('quote-result').style.display = 'block';
-    
-    // Smooth scroll to result
-    document.getElementById('quote-result').scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'center'
-    });
-});
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Add Font Awesome for icons
-const fontAwesome = document.createElement('link');
-fontAwesome.rel = 'stylesheet';
-fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
-document.head.appendChild(fontAwesome);
-
-console.log('✅ Clean Services Page Loaded Successfully');
-</script>
+    <!-- CTA Section -->
+    <?php echo services_pro_get_cta_section(); ?>
+</main>
 
 <?php get_footer(); ?>
-</body>
-</html>
+
+    <!-- Services Grid Section -->
+    <section id="services-grid" class="section">
+        <div class="container">
+            <div class="section-heading text-center mb-5">
+                <h2 class="section-title">All Services</h2>
+                <p class="section-subtitle">Professional solutions for every home need</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- House Cleaning -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-service card-hover h-100">
+                        <div class="card-header text-center">
+                            <i class="fas fa-broom icon-lg"></i>
+                            <h3 class="h5 mb-0">House Cleaning</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">Professional cleaning services to keep your home spotless and healthy.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Regular weekly/bi-weekly cleaning</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Deep cleaning services</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Move-in/move-out cleaning</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Post-construction cleanup</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Eco-friendly products</li>
+                            </ul>
+                            <div class="text-center">
+                                <div class="service-price mb-3">Starting at $89</div>
+                                <a href="#" class="btn btn-outline-accent btn-rounded">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Handyman Services -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-service card-hover h-100">
+                        <div class="card-header text-center">
+                            <i class="fas fa-tools icon-lg"></i>
+                            <h3 class="h5 mb-0">Handyman Services</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">Expert repairs and maintenance to keep your home in perfect condition.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>General home repairs</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Furniture assembly</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Painting & touch-ups</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Minor plumbing fixes</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Electrical work</li>
+                            </ul>
+                            <div class="text-center">
+                                <div class="service-price mb-3">Starting at $75/hr</div>
+                                <a href="#" class="btn btn-outline-accent btn-rounded">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lawn & Garden Care -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-service card-hover h-100">
+                        <div class="card-header text-center">
+                            <i class="fas fa-leaf icon-lg"></i>
+                            <h3 class="h5 mb-0">Lawn & Garden Care</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">Complete landscaping and garden maintenance services.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Lawn mowing & edging</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Garden maintenance</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Seasonal cleanup</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Mulching & fertilizing</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Pressure washing</li>
+                            </ul>
+                            <div class="text-center">
+                                <div class="service-price mb-3">Starting at $60</div>
+                                <a href="#" class="btn btn-outline-accent btn-rounded">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Shopping -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-service card-hover h-100">
+                        <div class="card-header text-center">
+                            <i class="fas fa-shopping-bag icon-lg"></i>
+                            <h3 class="h5 mb-0">Personal Shopping</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">Convenient shopping and errand services to save you time.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Grocery shopping</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Gift purchasing</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Prescription pickup</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Delivery services</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>General errands</li>
+                            </ul>
+                            <div class="text-center">
+                                <div class="service-price mb-3">Starting at $25/hr</div>
+                                <a href="#" class="btn btn-outline-accent btn-rounded">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pet Care -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-service card-hover h-100">
+                        <div class="card-header text-center">
+                            <i class="fas fa-paw icon-lg"></i>
+                            <h3 class="h5 mb-0">Pet Care</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">Reliable pet care services when you can't be there.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Dog walking</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Pet sitting</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Feeding & care</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Exercise & playtime</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Basic grooming</li>
+                            </ul>
+                            <div class="text-center">
+                                <div class="service-price mb-3">Starting at $30</div>
+                                <a href="#" class="btn btn-outline-accent btn-rounded">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Elderly Care -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-service card-hover h-100">
+                        <div class="card-header text-center">
+                            <i class="fas fa-heart icon-lg"></i>
+                            <h3 class="h5 mb-0">Elderly Care</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-3">Compassionate assistance for seniors to maintain independence.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Companionship</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Light housekeeping</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Meal preparation</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Transportation</li>
+                                <li class="mb-2"><i class="fas fa-check text-accent me-2"></i>Medication reminders</li>
+                            </ul>
+                            <div class="text-center">
+                                <div class="service-price mb-3">Starting at $20/hr</div>
+                                <a href="#" class="btn btn-outline-accent btn-rounded">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="section-heading text-center mb-5">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Simple steps to get the help you need</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center fade-in-up">
+                        <div class="rounded-circle bg-accent text-white mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <span class="h3 mb-0">1</span>
+                        </div>
+                        <h3 class="h5 mb-3">Choose Service</h3>
+                        <p class="text-muted">Select the service you need from our comprehensive list</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center fade-in-up">
+                        <div class="rounded-circle bg-accent text-white mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <span class="h3 mb-0">2</span>
+                        </div>
+                        <h3 class="h5 mb-3">Schedule</h3>
+                        <p class="text-muted">Pick a convenient time that works with your schedule</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center fade-in-up">
+                        <div class="rounded-circle bg-accent text-white mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <span class="h3 mb-0">3</span>
+                        </div>
+                        <h3 class="h5 mb-3">We Arrive</h3>
+                        <p class="text-muted">Our professional team arrives on time and ready to work</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center fade-in-up">
+                        <div class="rounded-circle bg-accent text-white mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <span class="h3 mb-0">4</span>
+                        </div>
+                        <h3 class="h5 mb-3">Relax</h3>
+                        <p class="text-muted">Sit back and enjoy your free time while we handle the work</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Areas -->
+    <section class="section bg-primary-dark text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-heading text-center mb-5">
+                        <h2 class="section-title text-white">Service Areas</h2>
+                        <p class="section-subtitle text-light">We proudly serve the following areas</p>
+                    </div>
+                    
+                    <div class="row g-3 text-center">
+                        <div class="col-md-4">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body py-3">
+                                    <h6 class="mb-0">Downtown</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body py-3">
+                                    <h6 class="mb-0">Suburbs</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body py-3">
+                                    <h6 class="mb-0">Westside</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body py-3">
+                                    <h6 class="mb-0">Eastside</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body py-3">
+                                    <h6 class="mb-0">North Valley</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body py-3">
+                                    <h6 class="mb-0">South Hills</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-muted">Don't see your area listed? <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="text-decoration-none">Contact us</a> to check availability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section bg-accent text-white">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
+                    <p class="lead mb-4">Let us take care of your to-do list while you focus on what matters most to you.</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-light btn-rounded btn-lg">
+                            <i class="fas fa-calendar me-2"></i>Schedule Service
+                        </a>
+                        <a href="tel:+1234567890" class="btn btn-outline-light btn-rounded btn-lg">
+                            <i class="fas fa-phone me-2"></i>Call Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?php get_footer(); ?>
