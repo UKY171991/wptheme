@@ -388,16 +388,21 @@ a:focus {
 
 /* Header Main */
 .header-main {
-    padding: var(--spacing-4) 0;
+    padding: var(--spacing-5) 0;
 }
 
 .header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--spacing-6);
 }
 
 /* Site Branding */
+.site-branding {
+    min-width: 200px;
+}
+
 .site-branding .site-title {
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-bold);
@@ -424,6 +429,8 @@ a:focus {
 .main-navigation {
     display: flex;
     align-items: center;
+    flex: 1;
+    justify-content: center;
 }
 
 .navbar-nav {
@@ -431,7 +438,8 @@ a:focus {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: var(--spacing-2);
+    gap: var(--spacing-4);
+    align-items: center;
 }
 
 .navbar-nav .nav-item {
@@ -442,18 +450,20 @@ a:focus {
 .navbar-nav .dropdown-item {
     color: var(--color-gray-700);
     font-weight: var(--font-weight-medium);
-    padding: var(--spacing-3) var(--spacing-4);
+    padding: var(--spacing-3) var(--spacing-5);
     text-decoration: none;
     transition: color var(--transition-fast);
     display: flex;
     align-items: center;
     white-space: nowrap;
+    border-radius: var(--border-radius);
 }
 
 .navbar-nav .nav-item > a:hover,
 .navbar-nav .dropdown-item:hover {
     color: var(--color-primary);
     text-decoration: none;
+    background-color: var(--color-gray-50);
 }
 
 /* Dropdown Menus */
@@ -463,7 +473,7 @@ a:focus {
 
 .dropdown-toggle .dropdown-arrow {
     font-size: var(--font-size-xs);
-    margin-left: var(--spacing-2);
+    margin-left: var(--spacing-3);
     transition: transform var(--transition-fast);
 }
 
@@ -487,6 +497,7 @@ a:focus {
     z-index: var(--z-dropdown);
     list-style: none;
     margin: 0;
+    border: 1px solid var(--color-gray-200);
 }
 
 .dropdown:hover .dropdown-menu {
@@ -586,6 +597,11 @@ a:focus {
 }
 
 /* Header CTA */
+.header-cta {
+    min-width: 120px;
+    text-align: right;
+}
+
 .header-cta .btn {
     font-size: var(--font-size-sm);
     padding: var(--spacing-2) var(--spacing-4);
@@ -825,6 +841,21 @@ a:focus {
    RESPONSIVE DESIGN
    ============================================================================ */
 
+/* Large Screens - Enhanced spacing */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+    
+    .navbar-nav {
+        gap: var(--spacing-6);
+    }
+    
+    .header-content {
+        gap: var(--spacing-8);
+    }
+}
+
 @media (max-width: 1023px) {
     .navbar-nav {
         display: none;
@@ -869,7 +900,7 @@ a:focus {
     }
     
     .header-content {
-        gap: var(--spacing-4);
+        gap: var(--spacing-6);
     }
 }
 
