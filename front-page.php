@@ -10,7 +10,7 @@
 get_header(); ?>
 
 <main id="primary" class="site-main">
-    
+    Testing
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-background">
