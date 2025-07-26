@@ -188,6 +188,11 @@ add_action('init', 'blueprint_folder_register_taxonomies');
 require_once get_template_directory() . '/inc/navigation-walker.php';
 
 /**
+ * INCLUDE TEMPLATE FUNCTIONS
+ */
+require_once get_template_directory() . '/inc/template-functions.php';
+
+/**
  * INCLUDE CUSTOMIZER SETTINGS
  */
 require_once get_template_directory() . '/inc/customizer.php';
