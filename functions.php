@@ -1,7 +1,10 @@
 <?php
 /**
- * Services Pro Theme Functions
- * Version: 3.0 - Clean WordPress standards implementation
+ * WordPress Theme Functions - Completely Rebuilt
+ * Modern, Clean, Professional Theme for Business Services
+ * 
+ * @package Professional_Services_Theme
+ * @version 1.0.0
  */
 
 // Prevent direct access
@@ -9,71 +12,73 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Include the navigation walker
+require_once get_template_directory() . '/inc/navigation-walker-new.php';
+
 /**
- * Theme setup
+ * Theme Setup
  */
-function services_pro_setup() {
-    // Add theme support for various features
+function professional_services_setup() {
+    // Add default posts and comments RSS feed links to head
+    add_theme_support('automatic-feed-links');
+
+    // Let WordPress manage the document title
     add_theme_support('title-tag');
+
+    // Enable support for Post Thumbnails on posts and pages
     add_theme_support('post-thumbnails');
+
+    // Add default image sizes
+    add_image_size('hero-large', 1920, 800, true);
+    add_image_size('service-thumb', 400, 300, true);
+    add_image_size('portfolio-thumb', 500, 400, true);
+    add_image_size('team-member', 300, 300, true);
+    add_image_size('testimonial-thumb', 150, 150, true);
+
+    // Switch default core markup for search form, comment form, and comments
     add_theme_support('html5', array(
         'search-form',
         'comment-form',
         'comment-list',
         'gallery',
         'caption',
+        'style',
+        'script',
     ));
-    add_theme_support('custom-logo');
+
+    // Add theme support for selective refresh for widgets
     add_theme_support('customize-selective-refresh-widgets');
-    add_theme_support('align-wide');
-    add_theme_support('wp-block-styles');
+
+    // Add support for editor styles
+    add_theme_support('editor-styles');
+
+    // Add support for responsive embedded content
     add_theme_support('responsive-embeds');
 
-    // Add editor color palette
-    add_theme_support('editor-color-palette', array(
-        array(
-            'name' => esc_html__('Primary Dark', 'services-pro'),
-            'slug' => 'primary-dark',
-            'color' => '#0b1133',
-        ),
-        array(
-            'name' => esc_html__('Accent Orange', 'services-pro'),
-            'slug' => 'accent',
-            'color' => '#ff5f00',
-        ),
-        array(
-            'name' => esc_html__('Light Gray', 'services-pro'),
-            'slug' => 'light-gray',
-            'color' => '#f8f9fa',
-        ),
-    ));
+    // Add support for wide and full alignment
+    add_theme_support('align-wide');
 
-    // Register navigation menus
+    // Navigation menus
     register_nav_menus(array(
-        'primary' => esc_html__('Primary Menu', 'services-pro'),
-        'footer' => esc_html__('Footer Menu', 'services-pro'),
-        'mobile' => esc_html__('Mobile Menu', 'services-pro'),
+        'primary' => esc_html__('Primary Navigation', 'professional-services'),
+        'footer'  => esc_html__('Footer Navigation', 'professional-services'),
+        'services' => esc_html__('Services Menu', 'professional-services'),
     ));
-
-    // Add custom image sizes
-    add_image_size('service-thumbnail', 300, 200, true);
-    add_image_size('hero-image', 1200, 600, true);
-    add_image_size('team-member', 400, 400, true);
-    add_image_size('portfolio-item', 600, 400, true);
 }
-add_action('after_setup_theme', 'services_pro_setup');
+add_action('after_setup_theme', 'professional_services_setup');
 
 /**
  * Register Custom Post Types
  */
-function services_pro_register_custom_post_types() {
-    // Services Custom Post Type
+function professional_services_register_post_types() {
+    
+    // Services Post Type
     register_post_type('service', array(
         'labels' => array(
             'name' => 'Services',
             'singular_name' => 'Service',
             'menu_name' => 'Services',
-            'add_new' => 'Add New Service',
+            'add_new' => 'Add Service',
             'add_new_item' => 'Add New Service',
             'edit_item' => 'Edit Service',
             'new_item' => 'New Service',
@@ -83,905 +88,675 @@ function services_pro_register_custom_post_types() {
             'not_found_in_trash' => 'No services found in trash'
         ),
         'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_nav_menus' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'services'),
+        'capability_type' => 'post',
         'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => 20,
         'menu_icon' => 'dashicons-hammer',
-        'menu_position' => 5,
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
         'show_in_rest' => true,
-        'rewrite' => array('slug' => 'service'),
-        'capability_type' => 'post',
-        'hierarchical' => false,
-        'taxonomies' => array('service_category', 'service_tag')
     ));
 
-    // FAQs Custom Post Type
-    register_post_type('faq', array(
+    // Testimonials Post Type
+    register_post_type('testimonial', array(
         'labels' => array(
-            'name' => 'FAQs',
-            'singular_name' => 'FAQ',
-            'menu_name' => 'FAQs',
-            'add_new' => 'Add New FAQ',
-            'add_new_item' => 'Add New FAQ',
-            'edit_item' => 'Edit FAQ',
-            'new_item' => 'New FAQ',
-            'view_item' => 'View FAQ',
-            'search_items' => 'Search FAQs',
-            'not_found' => 'No FAQs found',
-            'not_found_in_trash' => 'No FAQs found in trash'
+            'name' => 'Testimonials',
+            'singular_name' => 'Testimonial',
+            'menu_name' => 'Testimonials',
+            'add_new' => 'Add Testimonial',
+            'add_new_item' => 'Add New Testimonial',
+            'edit_item' => 'Edit Testimonial',
+            'new_item' => 'New Testimonial',
+            'view_item' => 'View Testimonial',
+            'search_items' => 'Search Testimonials',
+            'not_found' => 'No testimonials found',
+            'not_found_in_trash' => 'No testimonials found in trash'
         ),
         'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_nav_menus' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'testimonials'),
+        'capability_type' => 'post',
         'has_archive' => true,
-        'menu_icon' => 'dashicons-editor-help',
-        'menu_position' => 6,
-        'supports' => array('title', 'editor', 'custom-fields'),
+        'hierarchical' => false,
+        'menu_position' => 21,
+        'menu_icon' => 'dashicons-testimonial',
+        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
         'show_in_rest' => true,
-        'rewrite' => array('slug' => 'faq'),
-        'capability_type' => 'post',
-        'hierarchical' => false,
-        'taxonomies' => array('faq_category')
     ));
 
-    // Menu Items Custom Post Type (for restaurant/food service menu)
-    register_post_type('menu_item', array(
+    // Pricing Plans Post Type
+    register_post_type('pricing_plan', array(
         'labels' => array(
-            'name' => 'Menu Items',
-            'singular_name' => 'Menu Item',
-            'menu_name' => 'Menu Items',
-            'add_new' => 'Add New Menu Item',
-            'add_new_item' => 'Add New Menu Item',
-            'edit_item' => 'Edit Menu Item',
-            'new_item' => 'New Menu Item',
-            'view_item' => 'View Menu Item',
-            'search_items' => 'Search Menu Items',
-            'not_found' => 'No menu items found',
-            'not_found_in_trash' => 'No menu items found in trash'
+            'name' => 'Pricing Plans',
+            'singular_name' => 'Pricing Plan',
+            'menu_name' => 'Pricing Plans',
+            'add_new' => 'Add Plan',
+            'add_new_item' => 'Add New Plan',
+            'edit_item' => 'Edit Plan',
+            'new_item' => 'New Plan',
+            'view_item' => 'View Plan',
+            'search_items' => 'Search Plans',
+            'not_found' => 'No plans found',
+            'not_found_in_trash' => 'No plans found in trash'
         ),
         'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_nav_menus' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'pricing'),
+        'capability_type' => 'post',
         'has_archive' => true,
-        'menu_icon' => 'dashicons-food',
-        'menu_position' => 7,
+        'hierarchical' => false,
+        'menu_position' => 22,
+        'menu_icon' => 'dashicons-cart',
+        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
+        'show_in_rest' => true,
+    ));
+
+    // Projects Post Type
+    register_post_type('project', array(
+        'labels' => array(
+            'name' => 'Projects',
+            'singular_name' => 'Project',
+            'menu_name' => 'Projects',
+            'add_new' => 'Add Project',
+            'add_new_item' => 'Add New Project',
+            'edit_item' => 'Edit Project',
+            'new_item' => 'New Project',
+            'view_item' => 'View Project',
+            'search_items' => 'Search Projects',
+            'not_found' => 'No projects found',
+            'not_found_in_trash' => 'No projects found in trash'
+        ),
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_nav_menus' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'projects'),
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => 23,
+        'menu_icon' => 'dashicons-portfolio',
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
         'show_in_rest' => true,
-        'rewrite' => array('slug' => 'menu-item'),
-        'capability_type' => 'post',
-        'hierarchical' => false,
-        'taxonomies' => array('menu_category')
     ));
 }
-add_action('init', 'services_pro_register_custom_post_types');
+add_action('init', 'professional_services_register_post_types');
 
 /**
  * Register Custom Taxonomies
  */
-function services_pro_register_taxonomies() {
+function professional_services_register_taxonomies() {
+    
     // Service Categories
     register_taxonomy('service_category', 'service', array(
         'labels' => array(
             'name' => 'Service Categories',
             'singular_name' => 'Service Category',
-            'menu_name' => 'Categories',
+            'menu_name' => 'Service Categories',
+            'all_items' => 'All Categories',
+            'edit_item' => 'Edit Category',
+            'view_item' => 'View Category',
+            'update_item' => 'Update Category',
             'add_new_item' => 'Add New Category',
-            'edit_item' => 'Edit Category'
+            'new_item_name' => 'New Category Name',
+            'search_items' => 'Search Categories',
+            'popular_items' => 'Popular Categories',
+            'separate_items_with_commas' => 'Separate categories with commas',
+            'add_or_remove_items' => 'Add or remove categories',
+            'choose_from_most_used' => 'Choose from most used categories',
+            'not_found' => 'No categories found'
         ),
-        'hierarchical' => true,
         'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_nav_menus' => true,
+        'show_admin_column' => true,
+        'hierarchical' => true,
+        'rewrite' => array('slug' => 'service-category'),
+        'query_var' => true,
         'show_in_rest' => true,
-        'rewrite' => array('slug' => 'service-category')
     ));
 
-    // Service Tags
-    register_taxonomy('service_tag', 'service', array(
+    // Project Categories
+    register_taxonomy('project_category', 'project', array(
         'labels' => array(
-            'name' => 'Service Tags',
-            'singular_name' => 'Service Tag',
-            'menu_name' => 'Tags',
-            'add_new_item' => 'Add New Tag',
-            'edit_item' => 'Edit Tag'
-        ),
-        'hierarchical' => false,
-        'public' => true,
-        'show_in_rest' => true,
-        'rewrite' => array('slug' => 'service-tag')
-    ));
-
-    // FAQ Categories
-    register_taxonomy('faq_category', 'faq', array(
-        'labels' => array(
-            'name' => 'FAQ Categories',
-            'singular_name' => 'FAQ Category',
-            'menu_name' => 'Categories',
+            'name' => 'Project Categories',
+            'singular_name' => 'Project Category',
+            'menu_name' => 'Project Categories',
+            'all_items' => 'All Categories',
+            'edit_item' => 'Edit Category',
+            'view_item' => 'View Category',
+            'update_item' => 'Update Category',
             'add_new_item' => 'Add New Category',
-            'edit_item' => 'Edit Category'
+            'new_item_name' => 'New Category Name',
+            'search_items' => 'Search Categories',
+            'popular_items' => 'Popular Categories',
+            'separate_items_with_commas' => 'Separate categories with commas',
+            'add_or_remove_items' => 'Add or remove categories',
+            'choose_from_most_used' => 'Choose from most used categories',
+            'not_found' => 'No categories found'
         ),
-        'hierarchical' => true,
         'public' => true,
-        'show_in_rest' => true,
-        'rewrite' => array('slug' => 'faq-category')
-    ));
-
-    // Menu Categories
-    register_taxonomy('menu_category', 'menu_item', array(
-        'labels' => array(
-            'name' => 'Menu Categories',
-            'singular_name' => 'Menu Category',
-            'menu_name' => 'Categories',
-            'add_new_item' => 'Add New Category',
-            'edit_item' => 'Edit Category'
-        ),
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_nav_menus' => true,
+        'show_admin_column' => true,
         'hierarchical' => true,
-        'public' => true,
+        'rewrite' => array('slug' => 'project-category'),
+        'query_var' => true,
         'show_in_rest' => true,
-        'rewrite' => array('slug' => 'menu-category')
     ));
 }
-add_action('init', 'services_pro_register_taxonomies');
+add_action('init', 'professional_services_register_taxonomies');
 
 /**
- * Add custom meta boxes for custom post types
+ * Add Meta Boxes for Custom Post Types
  */
-function services_pro_add_meta_boxes() {
-    // Service meta boxes
+function professional_services_add_meta_boxes() {
+    
+    // Service Meta Box
     add_meta_box(
         'service_details',
         'Service Details',
-        'services_pro_service_details_callback',
+        'professional_services_service_meta_box',
         'service',
         'normal',
-        'high'
+        'default'
     );
-    
-    // Menu item meta boxes
+
+    // Testimonial Meta Box
     add_meta_box(
-        'menu_item_details',
-        'Menu Item Details',
-        'services_pro_menu_item_details_callback',
-        'menu_item',
+        'testimonial_details',
+        'Testimonial Details',
+        'professional_services_testimonial_meta_box',
+        'testimonial',
         'normal',
-        'high'
+        'default'
+    );
+
+    // Pricing Plan Meta Box
+    add_meta_box(
+        'pricing_details',
+        'Pricing Details',
+        'professional_services_pricing_meta_box',
+        'pricing_plan',
+        'normal',
+        'default'
+    );
+
+    // Project Meta Box
+    add_meta_box(
+        'project_details',
+        'Project Details',
+        'professional_services_project_meta_box',
+        'project',
+        'normal',
+        'default'
     );
 }
-add_action('add_meta_boxes', 'services_pro_add_meta_boxes');
+add_action('add_meta_boxes', 'professional_services_add_meta_boxes');
 
 /**
- * Service details meta box callback
+ * Service Meta Box Content
  */
-function services_pro_service_details_callback($post) {
-    wp_nonce_field('services_pro_service_details', 'services_pro_service_details_nonce');
+function professional_services_service_meta_box($post) {
+    wp_nonce_field('service_meta_box', 'service_meta_box_nonce');
     
-    $price_range = get_post_meta($post->ID, 'service_price_range', true);
-    $duration = get_post_meta($post->ID, 'service_duration', true);
-    $includes = get_post_meta($post->ID, 'service_includes', true);
-    ?>
-    <table class="form-table">
-        <tr>
-            <th><label for="service_price_range">Price Range</label></th>
-            <td><input type="text" id="service_price_range" name="service_price_range" value="<?php echo esc_attr($price_range); ?>" class="regular-text" placeholder="e.g., $100 - $500" /></td>
-        </tr>
-        <tr>
-            <th><label for="service_duration">Duration</label></th>
-            <td><input type="text" id="service_duration" name="service_duration" value="<?php echo esc_attr($duration); ?>" class="regular-text" placeholder="e.g., 2-4 hours" /></td>
-        </tr>
-        <tr>
-            <th><label for="service_includes">What's Included</label></th>
-            <td><textarea id="service_includes" name="service_includes" rows="3" cols="50" class="large-text"><?php echo esc_textarea($includes); ?></textarea></td>
-        </tr>
-    </table>
-    <?php
+    $price_range = get_post_meta($post->ID, '_service_price_range', true);
+    $duration = get_post_meta($post->ID, '_service_duration', true);
+    $icon = get_post_meta($post->ID, '_service_icon', true);
+    $features = get_post_meta($post->ID, '_service_features', true);
+    
+    echo '<table class="form-table">';
+    echo '<tr><th><label for="service_price_range">Price Range</label></th>';
+    echo '<td><input type="text" id="service_price_range" name="service_price_range" value="' . esc_attr($price_range) . '" class="regular-text" placeholder="e.g., $100-$500" /></td></tr>';
+    
+    echo '<tr><th><label for="service_duration">Duration</label></th>';
+    echo '<td><input type="text" id="service_duration" name="service_duration" value="' . esc_attr($duration) . '" class="regular-text" placeholder="e.g., 2-4 hours" /></td></tr>';
+    
+    echo '<tr><th><label for="service_icon">Font Awesome Icon</label></th>';
+    echo '<td><input type="text" id="service_icon" name="service_icon" value="' . esc_attr($icon) . '" class="regular-text" placeholder="e.g., fas fa-wrench" /></td></tr>';
+    
+    echo '<tr><th><label for="service_features">Features (one per line)</label></th>';
+    echo '<td><textarea id="service_features" name="service_features" rows="5" class="large-text">' . esc_textarea($features) . '</textarea></td></tr>';
+    
+    $excerpt = get_post_meta($post->ID, '_service_excerpt', true);
+    echo '<tr><th><label for="service_excerpt">Short Description</label></th>';
+    echo '<td><textarea id="service_excerpt" name="service_excerpt" rows="3" class="large-text" placeholder="Brief description for service cards">' . esc_textarea($excerpt) . '</textarea></td></tr>';
+    
+    echo '</table>';
 }
 
 /**
- * Menu item details meta box callback
+ * Testimonial Meta Box Content
  */
-function services_pro_menu_item_details_callback($post) {
-    wp_nonce_field('services_pro_menu_item_details', 'services_pro_menu_item_details_nonce');
+function professional_services_testimonial_meta_box($post) {
+    wp_nonce_field('testimonial_meta_box', 'testimonial_meta_box_nonce');
     
-    $price = get_post_meta($post->ID, 'menu_item_price', true);
-    $ingredients = get_post_meta($post->ID, 'ingredients', true);
-    $allergens = get_post_meta($post->ID, 'allergens', true);
-    $dietary_info = get_post_meta($post->ID, 'dietary_info', true);
-    $calories = get_post_meta($post->ID, 'calories', true);
-    $prep_time = get_post_meta($post->ID, 'prep_time', true);
-    ?>
-    <table class="form-table">
-        <tr>
-            <th><label for="menu_item_price">Price</label></th>
-            <td><input type="number" id="menu_item_price" name="menu_item_price" value="<?php echo esc_attr($price); ?>" step="0.01" min="0" placeholder="0.00" /></td>
-        </tr>
-        <tr>
-            <th><label for="ingredients">Ingredients</label></th>
-            <td><textarea id="ingredients" name="ingredients" rows="3" cols="50" class="large-text" placeholder="List main ingredients..."><?php echo esc_textarea($ingredients); ?></textarea></td>
-        </tr>
-        <tr>
-            <th><label for="allergens">Allergens</label></th>
-            <td><input type="text" id="allergens" name="allergens" value="<?php echo esc_attr($allergens); ?>" class="regular-text" placeholder="e.g., Contains nuts, dairy" /></td>
-        </tr>
-        <tr>
-            <th><label for="dietary_info">Dietary Information</label></th>
-            <td><input type="text" id="dietary_info" name="dietary_info" value="<?php echo esc_attr($dietary_info); ?>" class="regular-text" placeholder="e.g., vegetarian, vegan, gluten-free, spicy" /></td>
-        </tr>
-        <tr>
-            <th><label for="calories">Calories</label></th>
-            <td><input type="number" id="calories" name="calories" value="<?php echo esc_attr($calories); ?>" min="0" placeholder="0" /></td>
-        </tr>
-        <tr>
-            <th><label for="prep_time">Prep Time</label></th>
-            <td><input type="text" id="prep_time" name="prep_time" value="<?php echo esc_attr($prep_time); ?>" class="regular-text" placeholder="e.g., 15 minutes" /></td>
-        </tr>
-    </table>
-    <?php
+    $client_name = get_post_meta($post->ID, '_client_name', true);
+    $client_company = get_post_meta($post->ID, '_client_company', true);
+    $client_position = get_post_meta($post->ID, '_client_position', true);
+    $rating = get_post_meta($post->ID, '_testimonial_rating', true);
+    
+    echo '<table class="form-table">';
+    echo '<tr><th><label for="client_name">Client Name</label></th>';
+    echo '<td><input type="text" id="client_name" name="client_name" value="' . esc_attr($client_name) . '" class="regular-text" /></td></tr>';
+    
+    echo '<tr><th><label for="client_company">Company</label></th>';
+    echo '<td><input type="text" id="client_company" name="client_company" value="' . esc_attr($client_company) . '" class="regular-text" /></td></tr>';
+    
+    echo '<tr><th><label for="client_position">Position</label></th>';
+    echo '<td><input type="text" id="client_position" name="client_position" value="' . esc_attr($client_position) . '" class="regular-text" /></td></tr>';
+    
+    echo '<tr><th><label for="testimonial_rating">Rating (1-5)</label></th>';
+    echo '<td><select id="testimonial_rating" name="testimonial_rating">';
+    for ($i = 1; $i <= 5; $i++) {
+        echo '<option value="' . $i . '"' . selected($rating, $i, false) . '>' . $i . ' Star' . ($i > 1 ? 's' : '') . '</option>';
+    }
+    echo '</select></td></tr>';
+    echo '</table>';
 }
 
 /**
- * Save custom meta box data
+ * Pricing Plan Meta Box Content
  */
-function services_pro_save_meta_boxes($post_id) {
-    // Service details
-    if (isset($_POST['services_pro_service_details_nonce']) && wp_verify_nonce($_POST['services_pro_service_details_nonce'], 'services_pro_service_details')) {
+function professional_services_pricing_meta_box($post) {
+    wp_nonce_field('pricing_meta_box', 'pricing_meta_box_nonce');
+    
+    $price = get_post_meta($post->ID, '_plan_price', true);
+    $period = get_post_meta($post->ID, '_plan_period', true);
+    $features = get_post_meta($post->ID, '_plan_features', true);
+    $featured = get_post_meta($post->ID, '_plan_featured', true);
+    $button_text = get_post_meta($post->ID, '_plan_button_text', true);
+    $button_url = get_post_meta($post->ID, '_plan_button_url', true);
+    
+    echo '<table class="form-table">';
+    echo '<tr><th><label for="plan_price">Price</label></th>';
+    echo '<td><input type="text" id="plan_price" name="plan_price" value="' . esc_attr($price) . '" class="regular-text" placeholder="e.g., $99" /></td></tr>';
+    
+    echo '<tr><th><label for="plan_period">Billing Period</label></th>';
+    echo '<td><input type="text" id="plan_period" name="plan_period" value="' . esc_attr($period) . '" class="regular-text" placeholder="e.g., per month" /></td></tr>';
+    
+    echo '<tr><th><label for="plan_features">Features (one per line)</label></th>';
+    echo '<td><textarea id="plan_features" name="plan_features" rows="8" class="large-text">' . esc_textarea($features) . '</textarea></td></tr>';
+    
+    echo '<tr><th><label for="plan_featured">Featured Plan</label></th>';
+    echo '<td><input type="checkbox" id="plan_featured" name="plan_featured" value="1"' . checked($featured, 1, false) . ' /> Mark as featured</td></tr>';
+    
+    echo '<tr><th><label for="plan_button_text">Button Text</label></th>';
+    echo '<td><input type="text" id="plan_button_text" name="plan_button_text" value="' . esc_attr($button_text) . '" class="regular-text" placeholder="e.g., Get Started" /></td></tr>';
+    
+    echo '<tr><th><label for="plan_button_url">Button URL</label></th>';
+    echo '<td><input type="url" id="plan_button_url" name="plan_button_url" value="' . esc_attr($button_url) . '" class="regular-text" /></td></tr>';
+    echo '</table>';
+}
+
+/**
+ * Project Meta Box Content
+ */
+function professional_services_project_meta_box($post) {
+    wp_nonce_field('project_meta_box', 'project_meta_box_nonce');
+    
+    $client = get_post_meta($post->ID, '_project_client', true);
+    $date = get_post_meta($post->ID, '_project_date', true);
+    $url = get_post_meta($post->ID, '_project_url', true);
+    $technologies = get_post_meta($post->ID, '_project_technologies', true);
+    
+    echo '<table class="form-table">';
+    echo '<tr><th><label for="project_client">Client</label></th>';
+    echo '<td><input type="text" id="project_client" name="project_client" value="' . esc_attr($client) . '" class="regular-text" /></td></tr>';
+    
+    echo '<tr><th><label for="project_date">Project Date</label></th>';
+    echo '<td><input type="date" id="project_date" name="project_date" value="' . esc_attr($date) . '" class="regular-text" /></td></tr>';
+    
+    echo '<tr><th><label for="project_url">Project URL</label></th>';
+    echo '<td><input type="url" id="project_url" name="project_url" value="' . esc_attr($url) . '" class="regular-text" /></td></tr>';
+    
+    echo '<tr><th><label for="project_technologies">Technologies Used</label></th>';
+    echo '<td><textarea id="project_technologies" name="project_technologies" rows="3" class="large-text">' . esc_textarea($technologies) . '</textarea></td></tr>';
+    echo '</table>';
+}
+
+/**
+ * Save Meta Box Data
+ */
+function professional_services_save_meta_boxes($post_id) {
+    // Check if nonce is valid
+    if (!isset($_POST['service_meta_box_nonce']) && !isset($_POST['testimonial_meta_box_nonce']) && 
+        !isset($_POST['pricing_meta_box_nonce']) && !isset($_POST['project_meta_box_nonce'])) {
+        return;
+    }
+
+    // Check if user has permissions
+    if (isset($_POST['post_type']) && 'page' == $_POST['post_type']) {
+        if (!current_user_can('edit_page', $post_id)) {
+            return;
+        }
+    } else {
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+    }
+
+    // If this is an autosave, our form has not been submitted
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // Service meta
+    if (isset($_POST['service_meta_box_nonce']) && wp_verify_nonce($_POST['service_meta_box_nonce'], 'service_meta_box')) {
         if (isset($_POST['service_price_range'])) {
-            update_post_meta($post_id, 'service_price_range', sanitize_text_field($_POST['service_price_range']));
+            update_post_meta($post_id, '_service_price_range', sanitize_text_field($_POST['service_price_range']));
         }
         if (isset($_POST['service_duration'])) {
-            update_post_meta($post_id, 'service_duration', sanitize_text_field($_POST['service_duration']));
+            update_post_meta($post_id, '_service_duration', sanitize_text_field($_POST['service_duration']));
         }
-        if (isset($_POST['service_includes'])) {
-            update_post_meta($post_id, 'service_includes', sanitize_textarea_field($_POST['service_includes']));
+        if (isset($_POST['service_icon'])) {
+            update_post_meta($post_id, '_service_icon', sanitize_text_field($_POST['service_icon']));
+        }
+        if (isset($_POST['service_features'])) {
+            update_post_meta($post_id, '_service_features', sanitize_textarea_field($_POST['service_features']));
+        }
+        if (isset($_POST['service_excerpt'])) {
+            update_post_meta($post_id, '_service_excerpt', sanitize_textarea_field($_POST['service_excerpt']));
         }
     }
-    
-    // Menu item details
-    if (isset($_POST['services_pro_menu_item_details_nonce']) && wp_verify_nonce($_POST['services_pro_menu_item_details_nonce'], 'services_pro_menu_item_details')) {
-        if (isset($_POST['menu_item_price'])) {
-            update_post_meta($post_id, 'menu_item_price', sanitize_text_field($_POST['menu_item_price']));
+
+    // Testimonial meta
+    if (isset($_POST['testimonial_meta_box_nonce']) && wp_verify_nonce($_POST['testimonial_meta_box_nonce'], 'testimonial_meta_box')) {
+        if (isset($_POST['client_name'])) {
+            update_post_meta($post_id, '_client_name', sanitize_text_field($_POST['client_name']));
         }
-        if (isset($_POST['ingredients'])) {
-            update_post_meta($post_id, 'ingredients', sanitize_textarea_field($_POST['ingredients']));
+        if (isset($_POST['client_company'])) {
+            update_post_meta($post_id, '_client_company', sanitize_text_field($_POST['client_company']));
         }
-        if (isset($_POST['allergens'])) {
-            update_post_meta($post_id, 'allergens', sanitize_text_field($_POST['allergens']));
+        if (isset($_POST['client_position'])) {
+            update_post_meta($post_id, '_client_position', sanitize_text_field($_POST['client_position']));
         }
-        if (isset($_POST['dietary_info'])) {
-            update_post_meta($post_id, 'dietary_info', sanitize_text_field($_POST['dietary_info']));
+        if (isset($_POST['testimonial_rating'])) {
+            update_post_meta($post_id, '_testimonial_rating', intval($_POST['testimonial_rating']));
         }
-        if (isset($_POST['calories'])) {
-            update_post_meta($post_id, 'calories', intval($_POST['calories']));
+    }
+
+    // Pricing meta
+    if (isset($_POST['pricing_meta_box_nonce']) && wp_verify_nonce($_POST['pricing_meta_box_nonce'], 'pricing_meta_box')) {
+        if (isset($_POST['plan_price'])) {
+            update_post_meta($post_id, '_plan_price', sanitize_text_field($_POST['plan_price']));
         }
-        if (isset($_POST['prep_time'])) {
-            update_post_meta($post_id, 'prep_time', sanitize_text_field($_POST['prep_time']));
+        if (isset($_POST['plan_period'])) {
+            update_post_meta($post_id, '_plan_period', sanitize_text_field($_POST['plan_period']));
+        }
+        if (isset($_POST['plan_features'])) {
+            update_post_meta($post_id, '_plan_features', sanitize_textarea_field($_POST['plan_features']));
+        }
+        if (isset($_POST['plan_featured'])) {
+            update_post_meta($post_id, '_plan_featured', 1);
+        } else {
+            delete_post_meta($post_id, '_plan_featured');
+        }
+        if (isset($_POST['plan_button_text'])) {
+            update_post_meta($post_id, '_plan_button_text', sanitize_text_field($_POST['plan_button_text']));
+        }
+        if (isset($_POST['plan_button_url'])) {
+            update_post_meta($post_id, '_plan_button_url', esc_url_raw($_POST['plan_button_url']));
+        }
+    }
+
+    // Project meta
+    if (isset($_POST['project_meta_box_nonce']) && wp_verify_nonce($_POST['project_meta_box_nonce'], 'project_meta_box')) {
+        if (isset($_POST['project_client'])) {
+            update_post_meta($post_id, '_project_client', sanitize_text_field($_POST['project_client']));
+        }
+        if (isset($_POST['project_date'])) {
+            update_post_meta($post_id, '_project_date', sanitize_text_field($_POST['project_date']));
+        }
+        if (isset($_POST['project_url'])) {
+            update_post_meta($post_id, '_project_url', esc_url_raw($_POST['project_url']));
+        }
+        if (isset($_POST['project_technologies'])) {
+            update_post_meta($post_id, '_project_technologies', sanitize_textarea_field($_POST['project_technologies']));
         }
     }
 }
-add_action('save_post', 'services_pro_save_meta_boxes');
+add_action('save_post', 'professional_services_save_meta_boxes');
 
 /**
- * Display services grid
+ * Enqueue Scripts and Styles
  */
-function services_pro_display_services($limit = 6, $category = '') {
-    $args = array(
-        'post_type' => 'service',
-        'posts_per_page' => $limit,
-        'post_status' => 'publish'
-    );
+function professional_services_scripts() {
+    // Main stylesheet - using the new clean stylesheet
+    wp_enqueue_style('professional-services-style', get_template_directory_uri() . '/style-new.css', array(), '1.0.0');
     
-    if (!empty($category)) {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => 'service_category',
-                'field'    => 'slug',
-                'terms'    => $category,
-            ),
-        );
-    }
+    // Homepage specific styles
+    wp_enqueue_style('homepage-styles', get_template_directory_uri() . '/css/homepage-styles.css', array('professional-services-style'), '1.0.0');
     
-    $services = new WP_Query($args);
-    
-    if ($services->have_posts()) :
-        ?>
-        <div class="row g-4">
-            <?php while ($services->have_posts()) : $services->the_post(); ?>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card service-card h-100 shadow-sm border-0">
-                        <?php if (has_post_thumbnail()) : ?>
-                            <div class="card-img-top position-relative overflow-hidden">
-                                <?php the_post_thumbnail('service-thumbnail', array('class' => 'img-fluid w-100', 'style' => 'height: 200px; object-fit: cover;')); ?>
-                                <div class="overlay position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25"></div>
-                            </div>
-                        <?php endif; ?>
-                        
-                        <div class="card-body p-4">
-                            <h3 class="card-title h5 mb-3">
-                                <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
-                                    <?php the_title(); ?>
-                                </a>
-                            </h3>
-                            
-                            <p class="card-text text-muted mb-4"><?php echo wp_trim_words(get_the_excerpt(), 15); ?></p>
-                            
-                            <a href="<?php the_permalink(); ?>" class="btn btn-accent btn-sm">
-                                Learn More <i class="fas fa-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            <?php endwhile; ?>
-        </div>
-        <?php
-    endif;
-    wp_reset_postdata();
-}
-
-/**
- * Display FAQ accordion
- */
-function services_pro_display_faqs($limit = -1, $category = '') {
-    $args = array(
-        'post_type' => 'faq',
-        'posts_per_page' => $limit,
-        'post_status' => 'publish'
-    );
-    
-    if (!empty($category)) {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => 'faq_category',
-                'field'    => 'slug',
-                'terms'    => $category,
-            ),
-        );
-    }
-    
-    $faqs = new WP_Query($args);
-    
-    if ($faqs->have_posts()) :
-        ?>
-        <div class="accordion" id="faqAccordion">
-            <?php
-            $counter = 0;
-            while ($faqs->have_posts()) : $faqs->the_post();
-                $counter++;
-                $collapse_id = 'faq_' . $counter;
-            ?>
-                <div class="accordion-item border-0 shadow-sm mb-3">
-                    <h3 class="accordion-header" id="heading<?php echo esc_attr($collapse_id); ?>">
-                        <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo esc_attr($collapse_id); ?>" aria-expanded="false" aria-controls="<?php echo esc_attr($collapse_id); ?>">
-                            <i class="fas fa-question-circle text-accent me-3"></i>
-                            <?php the_title(); ?>
-                        </button>
-                    </h3>
-                    <div id="<?php echo esc_attr($collapse_id); ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo esc_attr($collapse_id); ?>" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body bg-white">
-                            <?php the_content(); ?>
-                        </div>
-                    </div>
-                </div>
-            <?php endwhile; ?>
-        </div>
-        <?php
-    endif;
-    wp_reset_postdata();
-}
-
-/**
- * Enqueue scripts and styles
- */
-function services_pro_scripts() {
-    // Main stylesheet
-    wp_enqueue_style('services-pro-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version'));
-    
-    // Global utilities CSS
-    wp_enqueue_style('services-pro-global', get_template_directory_uri() . '/global.css', array('services-pro-style'), wp_get_theme()->get('Version'));
-    
-    // Bootstrap CSS
-    wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css', array(), '5.3.0');
+    // Google Fonts
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', array(), null);
     
     // Font Awesome
-    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css', array(), '6.0.0');
     
-    // Bootstrap JS
-    wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.3.0', true);
+    // jQuery (WordPress includes this by default, but ensure it's loaded)
+    wp_enqueue_script('jquery');
     
-    // Theme JS
-    wp_enqueue_script('services-pro-scripts', get_template_directory_uri() . '/js/theme.js', array('jquery', 'bootstrap'), wp_get_theme()->get('Version'), true);
+    // Main JavaScript
+    wp_enqueue_script('professional-services-main', get_template_directory_uri() . '/js/theme-main.js', array('jquery'), '1.0.0', true);
     
-    // Localize script for AJAX
-    wp_localize_script('services-pro-scripts', 'servicesPro', array(
-        'ajaxurl' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('services_pro_nonce'),
-    ));
-    
-    // Comment reply
+    // Comment reply script
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
 }
-add_action('wp_enqueue_scripts', 'services_pro_scripts');
+add_action('wp_enqueue_scripts', 'professional_services_scripts');
 
 /**
- * Include required files
+ * Register Widget Areas
  */
-$template_files = array(
-    '/inc/clean-navigation-walker.php',
-    '/inc/customizer.php',
-    '/inc/template-functions.php'
-);
-
-foreach ($template_files as $file) {
-    $file_path = get_template_directory() . $file;
-    if (file_exists($file_path)) {
-        require_once $file_path;
-    }
-}
-
-/**
- * Register widget areas
- */
-function services_pro_widgets_init() {
+function professional_services_widgets_init() {
     register_sidebar(array(
-        'name'          => esc_html__('Main Sidebar', 'services-pro'),
+        'name'          => esc_html__('Main Sidebar', 'professional-services'),
         'id'            => 'sidebar-1',
-        'description'   => esc_html__('Add widgets here.', 'services-pro'),
-        'before_widget' => '<section id="%1$s" class="widget %2$s mb-4">',
+        'description'   => esc_html__('Add widgets here.', 'professional-services'),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget'  => '</section>',
-        'before_title'  => '<h3 class="widget-title h5 mb-3">',
+        'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
     ));
-    
+
     register_sidebar(array(
-        'name'          => esc_html__('Footer Widgets', 'services-pro'),
-        'id'            => 'footer-widgets',
-        'description'   => esc_html__('Footer widget area.', 'services-pro'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s col-lg-3 mb-4">',
+        'name'          => esc_html__('Footer Widget Area 1', 'professional-services'),
+        'id'            => 'footer-1',
+        'description'   => esc_html__('Add widgets here.', 'professional-services'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget'  => '</div>',
-        'before_title'  => '<h4 class="widget-title h6 mb-3 text-white">',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ));
+
+    register_sidebar(array(
+        'name'          => esc_html__('Footer Widget Area 2', 'professional-services'),
+        'id'            => 'footer-2',
+        'description'   => esc_html__('Add widgets here.', 'professional-services'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ));
+
+    register_sidebar(array(
+        'name'          => esc_html__('Footer Widget Area 3', 'professional-services'),
+        'id'            => 'footer-3',
+        'description'   => esc_html__('Add widgets here.', 'professional-services'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
         'after_title'   => '</h4>',
     ));
 }
-add_action('widgets_init', 'services_pro_widgets_init');
+add_action('widgets_init', 'professional_services_widgets_init');
 
 /**
- * Navigation fallback function
- */
-function clean_navigation_fallback() {
-    echo '<ul class="navbar-nav ms-auto">';
-    echo '<li class="nav-item"><a class="nav-link" href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="' . esc_url(home_url('/about/')) . '">About</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="' . esc_url(home_url('/services/')) . '">Services</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="' . esc_url(home_url('/contact/')) . '">Contact</a></li>';
-    echo '</ul>';
-}
-
-/**
- * Add custom CSS to head based on customizer settings
- */
-function services_pro_customize_css() {
-    $primary_color = get_theme_mod('primary_color', '#0b1133');
-    $accent_color = get_theme_mod('accent_color', '#ff5f00');
-    
-    if ($primary_color !== '#0b1133' || $accent_color !== '#ff5f00') {
-        ?>
-        <style type="text/css">
-            :root {
-                --primary-dark: <?php echo esc_html($primary_color); ?>;
-                --accent: <?php echo esc_html($accent_color); ?>;
-            }
-        </style>
-        <?php
-    }
-}
-add_action('wp_head', 'services_pro_customize_css');
-
-/**
- * Simple theme setup function for creating default menus
- */
-function services_pro_simple_setup() {
-    // Create a basic navigation menu if none exists
-    $menu_name = 'Primary Menu';
-    $menu_exists = wp_get_nav_menu_object($menu_name);
-    
-    if (!$menu_exists) {
-        $menu_id = wp_create_nav_menu($menu_name);
-        
-        // Add menu items
-        wp_update_nav_menu_item($menu_id, 0, array(
-            'menu-item-title' => 'Home',
-            'menu-item-url' => home_url('/'),
-            'menu-item-status' => 'publish',
-            'menu-item-type' => 'custom'
-        ));
-        
-        wp_update_nav_menu_item($menu_id, 0, array(
-            'menu-item-title' => 'About',
-            'menu-item-url' => home_url('/about'),
-            'menu-item-status' => 'publish',
-            'menu-item-type' => 'custom'
-        ));
-        
-        wp_update_nav_menu_item($menu_id, 0, array(
-            'menu-item-title' => 'Services',
-            'menu-item-url' => home_url('/services'),
-            'menu-item-status' => 'publish',
-            'menu-item-type' => 'custom'
-        ));
-        
-        wp_update_nav_menu_item($menu_id, 0, array(
-            'menu-item-title' => 'Menu',
-            'menu-item-url' => home_url('/menu'),
-            'menu-item-status' => 'publish',
-            'menu-item-type' => 'custom'
-        ));
-        
-        wp_update_nav_menu_item($menu_id, 0, array(
-            'menu-item-title' => 'Blog',
-            'menu-item-url' => home_url('/blog'),
-            'menu-item-status' => 'publish',
-            'menu-item-type' => 'custom'
-        ));
-        
-        // Add our custom post type archives
-        wp_update_nav_menu_item($menu_id, 0, array(
-            'menu-item-title' => 'FAQ',
-            'menu-item-url' => get_post_type_archive_link('faq'),
-            'menu-item-status' => 'publish',
-            'menu-item-type' => 'custom'
-        ));
-        
-        wp_update_nav_menu_item($menu_id, 0, array(
-            'menu-item-title' => 'Contact',
-            'menu-item-url' => home_url('/contact'),
-            'menu-item-status' => 'publish',
-            'menu-item-type' => 'custom'
-        ));
-        
-        // Assign to primary location
-        $locations = get_theme_mod('nav_menu_locations');
-        $locations['primary'] = $menu_id;
-        set_theme_mod('nav_menu_locations', $locations);
-    }
-}
-add_action('after_switch_theme', 'services_pro_simple_setup');
-
-/**
- * Add custom admin menu for easy management
- */
-function services_pro_admin_menu() {
-    add_menu_page(
-        'Theme Manager',
-        'Theme Manager',
-        'manage_options',
-        'services-pro-theme',
-        'services_pro_admin_page',
-        'dashicons-admin-home',
-        30
-    );
-}
-add_action('admin_menu', 'services_pro_admin_menu');
-
-/**
- * Admin page content
- */
-function services_pro_admin_page() {
-    ?>
-    <div class="wrap">
-        <h1>Services Pro Theme Manager</h1>
-        
-        <div class="card">
-            <h2>Quick Links</h2>
-            <p>Manage your content and settings:</p>
-            <ul>
-                <li><a href="<?php echo admin_url('edit.php?post_type=service'); ?>">Manage Services</a> - Add, edit, and organize your services</li>
-                <li><a href="<?php echo admin_url('edit.php?post_type=faq'); ?>">Manage FAQs</a> - Create and categorize frequently asked questions</li>
-                <li><a href="<?php echo admin_url('edit.php?post_type=menu_item'); ?>">Manage Menu Items</a> - Add food items with pricing and categories</li>
-                <li><a href="<?php echo admin_url('edit-tags.php?taxonomy=service_category&post_type=service'); ?>">Service Categories</a> - Organize services by type</li>
-                <li><a href="<?php echo admin_url('edit-tags.php?taxonomy=menu_category&post_type=menu_item'); ?>">Menu Categories</a> - Group menu items (e.g., Appetizers, Main Course)</li>
-                <li><a href="<?php echo admin_url('nav-menus.php'); ?>">Manage Navigation Menus</a> - Customize site navigation</li>
-                <li><a href="<?php echo admin_url('customize.php'); ?>">Customize Theme</a> - Colors, fonts, and layout</li>
-            </ul>
-        </div>
-        
-        <div class="card">
-            <h2>Content Status</h2>
-            <?php
-            $services_count = wp_count_posts('service')->publish;
-            $faqs_count = wp_count_posts('faq')->publish;
-            $menu_items_count = wp_count_posts('menu_item')->publish;
-            $posts_count = wp_count_posts('post')->publish;
-            ?>
-            <table class="wp-list-table widefat fixed striped">
-                <thead>
-                    <tr>
-                        <th>Content Type</th>
-                        <th>Published Items</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Services</td>
-                        <td><?php echo esc_html($services_count); ?> published</td>
-                        <td><a href="<?php echo admin_url('post-new.php?post_type=service'); ?>" class="button">Add New Service</a></td>
-                    </tr>
-                    <tr>
-                        <td>FAQs</td>
-                        <td><?php echo esc_html($faqs_count); ?> published</td>
-                        <td><a href="<?php echo admin_url('post-new.php?post_type=faq'); ?>" class="button">Add New FAQ</a></td>
-                    </tr>
-                    <tr>
-                        <td>Menu Items</td>
-                        <td><?php echo esc_html($menu_items_count); ?> published</td>
-                        <td><a href="<?php echo admin_url('post-new.php?post_type=menu_item'); ?>" class="button">Add New Menu Item</a></td>
-                    </tr>
-                    <tr>
-                        <td>Blog Posts</td>
-                        <td><?php echo esc_html($posts_count); ?> published</td>
-                        <td><a href="<?php echo admin_url('post-new.php'); ?>" class="button">Add New Post</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="card">
-            <h2>Sample Data</h2>
-            <p>Need some content to get started?</p>
-            <a href="<?php echo get_template_directory_uri(); ?>/sample-data-generator.php" class="button button-secondary" target="_blank">
-                Generate Sample Content
-            </a>
-            <p><em>This will create sample services, FAQs, and menu items to help you get started.</em></p>
-        </div>
-        
-        <div class="card">
-            <h2>Frontend Pages</h2>
-            <p>View your website pages:</p>
-            <ul>
-                <li><a href="<?php echo home_url('/'); ?>" target="_blank">Home Page</a></li>
-                <li><a href="<?php echo home_url('/about/'); ?>" target="_blank">About Page</a></li>
-                <li><a href="<?php echo home_url('/services/'); ?>" target="_blank">Services Page</a></li>
-                <li><a href="<?php echo home_url('/menu/'); ?>" target="_blank">Menu Page</a></li>
-                <li><a href="<?php echo home_url('/blog/'); ?>" target="_blank">Blog Page</a></li>
-                <li><a href="<?php echo get_post_type_archive_link('service'); ?>" target="_blank">Services Archive</a></li>
-                <li><a href="<?php echo get_post_type_archive_link('faq'); ?>" target="_blank">FAQ Archive</a></li>
-                <li><a href="<?php echo get_post_type_archive_link('menu_item'); ?>" target="_blank">Menu Archive</a></li>
-            </ul>
-        </div>
-        
-        <div class="card">
-            <h2>Theme Features</h2>
-            <ul>
-                <li>✅ Custom Post Types: Services, FAQs, Menu Items</li>
-                <li>✅ Category Organization for all content types</li>
-                <li>✅ Non-sticky header with tight spacing</li>
-                <li>✅ Bootstrap 5 responsive design</li>
-                <li>✅ Color-consistent design system</li>
-                <li>✅ WordPress coding standards compliant</li>
-                <li>✅ Mobile-friendly navigation</li>
-                <li>✅ Menu page with category filtering</li>
-            </ul>
-        </div>
-    </div>
-    
-    <style>
-    .card {
-        background: #fff;
-        border: 1px solid #ccd0d4;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        padding: 20px;
-    }
-    .card h2 {
-        margin-top: 0;
-        color: #23282d;
-    }
-    </style>
-    <?php
-}
-
-/**
- * Admin notices for theme setup
- */
-function services_pro_admin_notice() {
-    if (is_admin() && !get_option('services_pro_setup_complete')) {
-        echo '<div class="notice notice-info is-dismissible">';
-        echo '<p><strong>Services Pro Theme:</strong> Welcome! Your theme is ready to use. ';
-        echo '<a href="' . admin_url('customize.php') . '">Customize your site</a> or ';
-        echo '<a href="' . admin_url('nav-menus.php') . '">set up your menus</a>.</p>';
-        echo '</div>';
-    }
-}
-add_action('admin_notices', 'services_pro_admin_notice');
-
-/**
- * Mark setup as complete when customizer is saved
- */
-function services_pro_mark_setup_complete() {
-    update_option('services_pro_setup_complete', true);
-}
-add_action('customize_save_after', 'services_pro_mark_setup_complete');
-
-/**
- * ========================================
- * THEME QA AND TESTING FUNCTIONS
- * ========================================
+ * Helper Functions for Frontend Display
  */
 
 /**
- * Comprehensive theme health check
+ * Get Services by Category
  */
-function services_pro_theme_health_check() {
-    $health_status = array(
-        'mobile_menu' => 'checking',
-        'navigation' => 'checking',
-        'responsive_design' => 'checking',
-        'accessibility' => 'checking',
-        'performance' => 'checking',
-        'seo_ready' => 'checking'
+function get_services_by_category($category_slug = '', $limit = -1) {
+    $args = array(
+        'post_type' => 'service',
+        'posts_per_page' => $limit,
+        'post_status' => 'publish',
     );
     
-    // Check mobile menu functionality
-    $mobile_menu_scripts = array(
-        get_template_directory() . '/js/theme.js',
-        get_template_directory() . '/global.css'
-    );
-    
-    $mobile_menu_working = true;
-    foreach ($mobile_menu_scripts as $file) {
-        if (!file_exists($file)) {
-            $mobile_menu_working = false;
-            break;
-        }
-    }
-    
-    $health_status['mobile_menu'] = $mobile_menu_working ? 'passed' : 'failed';
-    
-    // Check navigation walker
-    $health_status['navigation'] = class_exists('Bootstrap_Walker_Nav_Menu') ? 'passed' : 'failed';
-    
-    // Check responsive design elements
-    $responsive_elements = array(
-        'Bootstrap CSS' => wp_style_is('bootstrap', 'enqueued'),
-        'Responsive meta tag' => true, // We know this exists from header.php
-        'Mobile CSS' => true // We added mobile styles
-    );
-    
-    $health_status['responsive_design'] = (count(array_filter($responsive_elements)) === count($responsive_elements)) ? 'passed' : 'warning';
-    
-    // Check accessibility features
-    $accessibility_features = array(
-        'Skip links' => has_action('wp_body_open'),
-        'Alt text support' => post_type_supports('attachment', 'title'),
-        'Focus styles' => true // We added focus styles
-    );
-    
-    $health_status['accessibility'] = (count(array_filter($accessibility_features)) >= 2) ? 'passed' : 'warning';
-    
-    // Check performance optimizations
-    $performance_features = array(
-        'Image lazy loading' => get_theme_mod('enable_lazy_loading', true),
-        'Minified assets' => true, // Assume optimized
-        'Caching headers' => true // Assume server configured
-    );
-    
-    $health_status['performance'] = (count(array_filter($performance_features)) >= 2) ? 'passed' : 'warning';
-    
-    // Check SEO readiness
-    $seo_features = array(
-        'Title tag support' => current_theme_supports('title-tag'),
-        'Meta description' => true, // WordPress handles this
-        'Open Graph' => true, // Can be added via plugins
-        'Schema markup' => true // Can be enhanced
-    );
-    
-    $health_status['seo_ready'] = (count(array_filter($seo_features)) >= 3) ? 'passed' : 'warning';
-    
-    return $health_status;
-}
-
-/**
- * Admin dashboard widget for theme health
- */
-function services_pro_add_dashboard_widget() {
-    if (current_user_can('manage_options')) {
-        wp_add_dashboard_widget(
-            'services_pro_theme_health',
-            'Services Pro Theme Health Check',
-            'services_pro_dashboard_widget_content'
+    if (!empty($category_slug)) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'service_category',
+                'field'    => 'slug',
+                'terms'    => $category_slug,
+            ),
         );
     }
-}
-add_action('wp_dashboard_setup', 'services_pro_add_dashboard_widget');
-
-/**
- * Dashboard widget content
- */
-function services_pro_dashboard_widget_content() {
-    $health_check = services_pro_theme_health_check();
     
-    echo '<div class="services-pro-health-check">';
-    echo '<style>
-        .health-item { margin: 10px 0; padding: 8px; border-radius: 4px; }
-        .health-passed { background: #d1eddb; color: #155724; }
-        .health-warning { background: #fff3cd; color: #856404; }
-        .health-failed { background: #f8d7da; color: #721c24; }
-        .health-checking { background: #d7f3ff; color: #0c5460; }
-    </style>';
-    
-    foreach ($health_check as $check => $status) {
-        $label = ucwords(str_replace('_', ' ', $check));
-        $class = 'health-' . $status;
-        $icon = $status === 'passed' ? '✓' : ($status === 'failed' ? '✗' : '⚠');
-        
-        echo "<div class='health-item {$class}'>";
-        echo "<strong>{$icon} {$label}:</strong> " . ucfirst($status);
-        echo "</div>";
-    }
-    
-    echo '<p><strong>Last checked:</strong> ' . current_time('Y-m-d H:i:s') . '</p>';
-    echo '<p><a href="' . admin_url('customize.php') . '" class="button button-primary">Customize Theme</a></p>';
-    echo '</div>';
+    return new WP_Query($args);
 }
 
 /**
- * Mobile menu testing function
+ * Get Testimonials
  */
-function services_pro_test_mobile_menu() {
-    $tests = array();
+function get_testimonials($limit = -1) {
+    $args = array(
+        'post_type' => 'testimonial',
+        'posts_per_page' => $limit,
+        'post_status' => 'publish',
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+    );
     
-    // Test 1: Check if theme.js exists and has mobile menu code
-    $theme_js = get_template_directory() . '/js/theme.js';
-    if (file_exists($theme_js)) {
-        $js_content = file_get_contents($theme_js);
-        $tests['js_file'] = strpos($js_content, 'initMobileMenu') !== false;
-    } else {
-        $tests['js_file'] = false;
-    }
-    
-    // Test 2: Check if CSS has mobile styles
-    $global_css = get_template_directory() . '/global.css';
-    if (file_exists($global_css)) {
-        $css_content = file_get_contents($global_css);
-        $tests['mobile_css'] = strpos($css_content, '@media (max-width: 991.98px)') !== false;
-    } else {
-        $tests['mobile_css'] = false;
-    }
-    
-    // Test 3: Check if navigation walker exists
-    $tests['nav_walker'] = class_exists('Bootstrap_Walker_Nav_Menu');
-    
-    // Test 4: Check if Bootstrap is enqueued
-    $tests['bootstrap'] = wp_style_is('bootstrap', 'enqueued') || wp_script_is('bootstrap', 'enqueued');
-    
-    return $tests;
+    return new WP_Query($args);
 }
 
 /**
- * Add testing tools to admin bar for administrators
+ * Get Pricing Plans
  */
-function services_pro_admin_bar_testing_tools($wp_admin_bar) {
-    if (!current_user_can('manage_options') || !is_admin_bar_showing()) {
+function get_pricing_plans($limit = -1) {
+    $args = array(
+        'post_type' => 'pricing_plan',
+        'posts_per_page' => $limit,
+        'post_status' => 'publish',
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+    );
+    
+    return new WP_Query($args);
+}
+
+/**
+ * Get Projects
+ */
+function get_projects($category_slug = '', $limit = -1) {
+    $args = array(
+        'post_type' => 'project',
+        'posts_per_page' => $limit,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => 'DESC',
+    );
+    
+    if (!empty($category_slug)) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'project_category',
+                'field'    => 'slug',
+                'terms'    => $category_slug,
+            ),
+        );
+    }
+    
+    return new WP_Query($args);
+}
+
+/**
+ * Add Menu Navigation to Admin Bar for Easy Access
+ */
+function professional_services_admin_bar_menu($wp_admin_bar) {
+    if (!current_user_can('edit_theme_options')) {
         return;
     }
-    
-    $wp_admin_bar->add_node(array(
-        'id' => 'services_pro_testing',
-        'title' => 'Theme QA ✓',
-        'href' => admin_url('customize.php'),
+
+    $wp_admin_bar->add_menu(array(
+        'id'    => 'theme-services',
+        'title' => 'Theme Services',
+        'href'  => admin_url('edit.php?post_type=service'),
     ));
-    
-    $wp_admin_bar->add_node(array(
-        'id' => 'test_mobile_menu',
-        'parent' => 'services_pro_testing',
-        'title' => 'Test Mobile Menu',
-        'href' => '#',
-        'meta' => array(
-            'onclick' => 'if(window.innerWidth > 992) { alert("Resize browser to mobile width to test menu"); } else { document.querySelector(".navbar-toggler").click(); }'
-        ),
+
+    $wp_admin_bar->add_menu(array(
+        'id'     => 'services',
+        'parent' => 'theme-services',
+        'title'  => 'All Services',
+        'href'   => admin_url('edit.php?post_type=service'),
     ));
-    
-    $wp_admin_bar->add_node(array(
-        'id' => 'test_responsive',
-        'parent' => 'services_pro_testing',
-        'title' => 'Test Responsive Design',
-        'href' => '#',
-        'meta' => array(
-            'onclick' => 'window.open("https://responsivedesignchecker.com/?url=" + encodeURIComponent(window.location.href), "_blank")'
-        ),
+
+    $wp_admin_bar->add_menu(array(
+        'id'     => 'service-categories',
+        'parent' => 'theme-services',
+        'title'  => 'Service Categories',
+        'href'   => admin_url('edit-tags.php?taxonomy=service_category&post_type=service'),
+    ));
+
+    $wp_admin_bar->add_menu(array(
+        'id'     => 'testimonials',
+        'parent' => 'theme-services',
+        'title'  => 'Testimonials',
+        'href'   => admin_url('edit.php?post_type=testimonial'),
+    ));
+
+    $wp_admin_bar->add_menu(array(
+        'id'     => 'pricing-plans',
+        'parent' => 'theme-services',
+        'title'  => 'Pricing Plans',
+        'href'   => admin_url('edit.php?post_type=pricing_plan'),
+    ));
+
+    $wp_admin_bar->add_menu(array(
+        'id'     => 'projects',
+        'parent' => 'theme-services',
+        'title'  => 'Projects',
+        'href'   => admin_url('edit.php?post_type=project'),
+    ));
+
+    $wp_admin_bar->add_menu(array(
+        'id'     => 'menus',
+        'parent' => 'theme-services',
+        'title'  => 'Manage Menus',
+        'href'   => admin_url('nav-menus.php'),
     ));
 }
-add_action('admin_bar_menu', 'services_pro_admin_bar_testing_tools', 100);
+add_action('admin_bar_menu', 'professional_services_admin_bar_menu', 999);
+
+/**
+ * Flush rewrite rules on theme activation
+ */
+function professional_services_flush_rewrites() {
+    professional_services_register_post_types();
+    professional_services_register_taxonomies();
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'professional_services_flush_rewrites');

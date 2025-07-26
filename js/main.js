@@ -1,53 +1,132 @@
 /**
- * Main JavaScript file for Services Pro theme
- * Enhanced with Bootstrap 5 support and multi-level dropdown functionality
+ * Blueprint Folder Pro - Main JavaScript
+ * Modern ES6+ JavaScript for theme functionality
+ * Version: 2.0.0
  */
 
-jQuery(document).ready(function($) {
-    
-    // Initialize Bootstrap components
-    initializeBootstrapComponents();
-    
-    // Enhanced multi-level dropdown support
-    initializeMultiLevelDropdowns();
-    
-    // Accessibility improvements
-    initializeAccessibility();
-    
-    // Smooth scroll for anchor links
-    initializeSmoothScroll();
-    
-    // Animation on scroll
-    initializeScrollAnimations();
-    
-    /**
-     * Initialize Bootstrap components
-     */
-    function initializeBootstrapComponents() {
-        // Initialize all Bootstrap tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-        
-        // Initialize all Bootstrap popovers
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl);
-        });
-    }
-    
-    /**
-     * Enhanced multi-level dropdown functionality
-     */
-    function initializeMultiLevelDropdowns() {
-        // Handle multi-level dropdowns on desktop (hover)
-        $('.dropdown-submenu').on('mouseenter', function() {
-            if ($(window).width() > 991) {
-                var $submenu = $(this).children('.dropdown-menu');
-                $submenu.addClass('show');
+document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+
+    // ================================
+    // NAVIGATION MODULE
+    // ================================
+    const Navigation = {
+        init() {
+            this.setupMobileMenu();
+            this.setupDropdowns();
+            this.setupSmoothScroll();
+            this.setupActiveStates();
+        },
+
+        setupMobileMenu() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navigation = document.querySelector('.main-navigation');
+            const overlay = document.querySelector('.mobile-nav-overlay');
+
+            if (!menuToggle || !navigation) return;
+
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
                 
-                // Position submenu to prevent going off-screen
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+                navigation.classList.toggle('mobile-menu-open');
+                
+                if (overlay) {
+                    overlay.classList.toggle('active');
+                }
+                
+                // Prevent body scroll when menu is open
+                document.body.classList.toggle('menu-open', !isExpanded);
+            });
+
+            // Close menu when overlay is clicked
+            if (overlay) {
+                overlay.addEventListener('click', () => {
+                    this.closeMobileMenu();
+                });
+            }
+
+            // Close menu on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navigation.classList.contains('mobile-menu-open')) {
+                    this.closeMobileMenu();
+                }
+            });
+        },
+
+        closeMobileMenu() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navigation = document.querySelector('.main-navigation');
+            const overlay = document.querySelector('.mobile-nav-overlay');
+
+            if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+            if (navigation) navigation.classList.remove('mobile-menu-open');
+            if (overlay) overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        },
+
+        setupDropdowns() {
+            const dropdownTriggers = document.querySelectorAll('.menu-item-has-children > a');
+
+            dropdownTriggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    // Only prevent default on mobile
+                    if (window.innerWidth <= 1023) {
+                        e.preventDefault();
+                        const parent = trigger.parentElement;
+                        const submenu = parent.querySelector('.sub-menu');
+                        
+                        if (submenu) {
+                            parent.classList.toggle('dropdown-open');
+                            submenu.style.maxHeight = parent.classList.contains('dropdown-open') 
+                                ? submenu.scrollHeight + 'px' 
+                                : '0';
+                        }
+                    }
+                });
+            });
+        },
+
+        setupSmoothScroll() {
+            const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+
+            smoothScrollLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        // Close mobile menu if open
+                        this.closeMobileMenu();
+                        
+                        // Smooth scroll to target
+                        const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+                        const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        },
+
+        setupActiveStates() {
+            const menuLinks = document.querySelectorAll('.nav-menu a');
+            const currentPath = window.location.pathname;
+
+            menuLinks.forEach(link => {
+                if (link.pathname === currentPath) {
+                    link.classList.add('active');
+                    link.closest('.menu-item')?.classList.add('current-menu-item');
+                }
+            });
+        }
+    };
                 positionSubmenu($submenu);
             }
         }).on('mouseleave', function() {

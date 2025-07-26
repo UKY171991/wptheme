@@ -247,6 +247,64 @@ function services_pro_customize_register($wp_customize) {
         'section' => 'services_pro_contact',
         'type' => 'textarea',
     ));
+    
+    // Header Section
+    $wp_customize->add_section('header_options', array(
+        'title'    => __('Header Options', 'services-pro'),
+        'priority' => 25,
+    ));
+
+    // Header Phone Number
+    $wp_customize->add_setting('header_phone', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('header_phone', array(
+        'label'    => __('Header Phone Number', 'services-pro'),
+        'section'  => 'header_options',
+        'type'     => 'text',
+        'description' => __('Phone number to display in header', 'services-pro'),
+    ));
+
+    // Header CTA Text
+    $wp_customize->add_setting('header_cta_text', array(
+        'default'           => 'Get Quote',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('header_cta_text', array(
+        'label'    => __('Header CTA Text', 'services-pro'),
+        'section'  => 'header_options',
+        'type'     => 'text',
+        'description' => __('Text for the call-to-action button', 'services-pro'),
+    ));
+
+    // Header CTA URL
+    $wp_customize->add_setting('header_cta_url', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    $wp_customize->add_control('header_cta_url', array(
+        'label'    => __('Header CTA URL', 'services-pro'),
+        'section'  => 'header_options',
+        'type'     => 'url',
+        'description' => __('URL for the call-to-action button', 'services-pro'),
+    ));
+
+    // Show Header Search
+    $wp_customize->add_setting('show_header_search', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+
+    $wp_customize->add_control('show_header_search', array(
+        'label'    => __('Show Header Search', 'services-pro'),
+        'section'  => 'header_options',
+        'type'     => 'checkbox',
+        'description' => __('Display search toggle in header', 'services-pro'),
+    ));
 }
 add_action('customize_register', 'services_pro_customize_register');
 
