@@ -1,42 +1,10 @@
 <?php
 /**
  * Custom Navigation Walker for BluePrint Folder Theme
- * Handles multi-level dropdown menus w/**
- * Fallback function for when no menu is assigned
- * Creates a basic navigation structure
+ * Handles multi-level dropdown menus
+ * 
+ * Note: Navigation fallback function is defined in functions.php
  */
-function blueprint_folder_navigation_fallback() {
-    echo '<ul class="nav-menu primary-nav">';
-    echo '<li class="menu-item"><a class="nav-link" href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    echo '<li class="menu-item"><a class="nav-link" href="' . esc_url(home_url('/about')) . '">About</a></li>';
-    
-    // Services dropdown
-    echo '<li class="menu-item dropdown">';
-    echo '<a class="nav-link dropdown-toggle" href="' . esc_url(get_post_type_archive_link('service')) . '">Services <i class="fas fa-chevron-down dropdown-arrow"></i></a>';
-    echo '<ul class="dropdown-menu">';
-    
-    // Add service categories if they exist
-    $categories = get_terms(array(
-        'taxonomy' => 'service_category',
-        'hide_empty' => false,
-        'number' => 5
-    ));
-    
-    if (!empty($categories) && !is_wp_error($categories)) {
-        foreach ($categories as $category) {
-            echo '<li class="menu-item"><a class="nav-link" href="' . esc_url(get_term_link($category)) . '">' . esc_html($category->name) . '</a></li>';
-        }
-        echo '<li class="menu-item menu-divider"><hr></li>';
-    }
-    
-    echo '<li class="menu-item"><a class="nav-link" href="' . esc_url(get_post_type_archive_link('service')) . '">All Services</a></li>';
-    echo '</ul>';
-    echo '</li>';
-    
-    echo '<li class="menu-item"><a class="nav-link" href="' . esc_url(home_url('/pricing')) . '">Pricing</a></li>';
-    echo '<li class="menu-item"><a class="nav-link" href="' . esc_url(home_url('/contact')) . '">Contact</a></li>';
-    echo '</ul>';
-}
 
 /**
  * 
