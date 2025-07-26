@@ -21,6 +21,8 @@
             this.smoothScroll();
             this.lazyLoading();
             this.contactForm();
+            this.headerScroll();
+            this.dropdownMenus();
         },
 
         // Mobile menu functionality
@@ -334,6 +336,57 @@
                     'animation-duration': '0.01ms !important',
                     'animation-iteration-count': '1 !important',
                     'transition-duration': '0.01ms !important'
+                });
+            }
+        },
+
+        // Header scroll effects
+        headerScroll: function() {
+            const $header = $('.site-header');
+            const $window = $(window);
+            let lastScrollTop = 0;
+            
+            $window.on('scroll', function() {
+                const scrollTop = $window.scrollTop();
+                
+                // Add scrolled class when scrolling down
+                if (scrollTop > 100) {
+                    $header.addClass('header-scrolled');
+                } else {
+                    $header.removeClass('header-scrolled');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+        },
+
+        // Enhanced dropdown menu functionality
+        dropdownMenus: function() {
+            const $dropdowns = $('.dropdown');
+            
+            // Handle keyboard navigation
+            $dropdowns.find('.dropdown-toggle').on('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    $(this).parent().toggleClass('dropdown-open');
+                } else if (e.key === 'Escape') {
+                    $(this).parent().removeClass('dropdown-open');
+                    $(this).focus();
+                }
+            });
+            
+            // Handle click outside to close
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $dropdowns.removeClass('dropdown-open');
+                }
+            });
+            
+            // Handle touch devices
+            if ('ontouchstart' in window) {
+                $dropdowns.find('.dropdown-toggle').on('touchstart', function(e) {
+                    e.preventDefault();
+                    $(this).parent().toggleClass('dropdown-open');
                 });
             }
         }

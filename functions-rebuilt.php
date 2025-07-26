@@ -538,6 +538,9 @@ function blueprint_folder_scripts() {
     // Main stylesheet
     wp_enqueue_style('blueprint-folder-style', get_stylesheet_uri(), array(), '2.0.0');
     
+    // Header improvements CSS
+    wp_enqueue_style('blueprint-folder-header', get_template_directory_uri() . '/css/header-improvements.css', array('blueprint-folder-style'), '2.0.0');
+    
     // Font Awesome for icons
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css', array(), '6.0.0');
     
@@ -545,7 +548,7 @@ function blueprint_folder_scripts() {
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', array(), null);
     
     // Main JavaScript
-    wp_enqueue_script('blueprint-folder-script', get_template_directory_uri() . '/js/theme-main.js', array('jquery'), '2.0.0', true);
+    wp_enqueue_script('blueprint-folder-script', get_template_directory_uri() . '/js/theme-main-rebuilt.js', array('jquery'), '2.0.0', true);
     
     // Localize script for AJAX
     wp_localize_script('blueprint-folder-script', 'blueprint_folder_ajax', array(
