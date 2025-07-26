@@ -25,6 +25,102 @@
             this.dropdownMenus();
         },
 
+        // Header scroll effects
+        headerScroll: function() {
+            const $header = $('.site-header');
+            const $window = $(window);
+            let lastScrollTop = 0;
+            
+            $window.on('scroll', function() {
+                const scrollTop = $window.scrollTop();
+                
+                // Add scrolled class when scrolling down
+                if (scrollTop > 100) {
+                    $header.addClass('header-scrolled');
+                } else {
+                    $header.removeClass('header-scrolled');
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+        },
+
+        // Enhanced dropdown menu functionality
+        dropdownMenus: function() {
+            const $dropdowns = $('.dropdown');
+            const $navItems = $('.navbar-nav .nav-item');
+            
+            // Handle desktop hover for dropdowns
+            $dropdowns.on('mouseenter', function() {
+                if ($(window).width() > 1023) {
+                    $(this).addClass('dropdown-open');
+                    $(this).find('.dropdown-menu').stop(true, true).fadeIn(200);
+                }
+            });
+            
+            $dropdowns.on('mouseleave', function() {
+                if ($(window).width() > 1023) {
+                    $(this).removeClass('dropdown-open');
+                    $(this).find('.dropdown-menu').stop(true, true).fadeOut(200);
+                }
+            });
+            
+            // Handle keyboard navigation
+            $dropdowns.find('.dropdown-toggle').on('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    $(this).parent().toggleClass('dropdown-open');
+                    const $menu = $(this).parent().find('.dropdown-menu');
+                    if ($(this).parent().hasClass('dropdown-open')) {
+                        $menu.fadeIn(200);
+                    } else {
+                        $menu.fadeOut(200);
+                    }
+                } else if (e.key === 'Escape') {
+                    $(this).parent().removeClass('dropdown-open');
+                    $(this).parent().find('.dropdown-menu').fadeOut(200);
+                    $(this).focus();
+                }
+            });
+            
+            // Handle click outside to close
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $dropdowns.removeClass('dropdown-open');
+                    $dropdowns.find('.dropdown-menu').fadeOut(200);
+                }
+            });
+            
+            // Handle touch devices
+            if ('ontouchstart' in window) {
+                $dropdowns.find('.dropdown-toggle').on('touchstart', function(e) {
+                    if ($(window).width() > 1023) {
+                        e.preventDefault();
+                        const $parent = $(this).parent();
+                        const isOpen = $parent.hasClass('dropdown-open');
+                        
+                        // Close all other dropdowns
+                        $dropdowns.removeClass('dropdown-open');
+                        $dropdowns.find('.dropdown-menu').fadeOut(200);
+                        
+                        // Toggle current dropdown
+                        if (!isOpen) {
+                            $parent.addClass('dropdown-open');
+                            $parent.find('.dropdown-menu').fadeIn(200);
+                        }
+                    }
+                });
+            }
+            
+            // Handle navigation item active states
+            $navItems.find('a').on('click', function() {
+                // Remove active class from all items
+                $navItems.removeClass('current-menu-item');
+                // Add active class to clicked item
+                $(this).closest('.nav-item').addClass('current-menu-item');
+            });
+        },
+
         // Mobile menu functionality
         mobileMenu: function() {
             const $menuToggle = $('.menu-toggle');
@@ -336,57 +432,6 @@
                     'animation-duration': '0.01ms !important',
                     'animation-iteration-count': '1 !important',
                     'transition-duration': '0.01ms !important'
-                });
-            }
-        },
-
-        // Header scroll effects
-        headerScroll: function() {
-            const $header = $('.site-header');
-            const $window = $(window);
-            let lastScrollTop = 0;
-            
-            $window.on('scroll', function() {
-                const scrollTop = $window.scrollTop();
-                
-                // Add scrolled class when scrolling down
-                if (scrollTop > 100) {
-                    $header.addClass('header-scrolled');
-                } else {
-                    $header.removeClass('header-scrolled');
-                }
-                
-                lastScrollTop = scrollTop;
-            });
-        },
-
-        // Enhanced dropdown menu functionality
-        dropdownMenus: function() {
-            const $dropdowns = $('.dropdown');
-            
-            // Handle keyboard navigation
-            $dropdowns.find('.dropdown-toggle').on('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    $(this).parent().toggleClass('dropdown-open');
-                } else if (e.key === 'Escape') {
-                    $(this).parent().removeClass('dropdown-open');
-                    $(this).focus();
-                }
-            });
-            
-            // Handle click outside to close
-            $(document).on('click', function(e) {
-                if (!$(e.target).closest('.dropdown').length) {
-                    $dropdowns.removeClass('dropdown-open');
-                }
-            });
-            
-            // Handle touch devices
-            if ('ontouchstart' in window) {
-                $dropdowns.find('.dropdown-toggle').on('touchstart', function(e) {
-                    e.preventDefault();
-                    $(this).parent().toggleClass('dropdown-open');
                 });
             }
         }
