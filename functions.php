@@ -188,6 +188,11 @@ add_action('init', 'blueprint_folder_register_taxonomies');
 require_once get_template_directory() . '/inc/navigation-walker.php';
 
 /**
+ * INCLUDE CUSTOMIZER SETTINGS
+ */
+require_once get_template_directory() . '/inc/customizer.php';
+
+/**
  * FORCE NAVIGATION MENU DISPLAY EVEN WHEN EMPTY
  */
 function blueprint_folder_force_nav_menu_display() {
@@ -210,6 +215,14 @@ function blueprint_folder_scripts() {
     // Header CSS
     wp_enqueue_style('blueprint-folder-header', get_template_directory_uri() . '/css/header.css', array('blueprint-folder-style'), '2.0.0');
     
+    // Enhanced Homepage CSS
+    if (is_front_page() || is_home()) {
+        wp_enqueue_style('blueprint-folder-homepage', get_template_directory_uri() . '/css/homepage-enhanced.css', array('blueprint-folder-style'), '2.0.0');
+    }
+    
+    // Interactive Elements CSS
+    wp_enqueue_style('blueprint-folder-interactive', get_template_directory_uri() . '/css/interactive-elements.css', array('blueprint-folder-style'), '2.0.0');
+    
     // Bootstrap CSS (CDN)
     wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css', array(), '5.3.0');
     
@@ -223,7 +236,7 @@ function blueprint_folder_scripts() {
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.3.0', true);
     
     // Theme main script
-    wp_enqueue_script('blueprint-folder-main', get_template_directory_uri() . '/js/theme-main.js', array('jquery', 'bootstrap'), '2.0.0', true);
+    wp_enqueue_script('blueprint-folder-main', get_template_directory_uri() . '/js/theme-main-enhanced.js', array('jquery', 'bootstrap'), '2.0.0', true);
     
     // Localize script for AJAX
     wp_localize_script('blueprint-folder-main', 'blueprint_folder_ajax', array(
@@ -366,6 +379,75 @@ function blueprint_folder_seo_meta() {
     }
 }
 add_action('wp_head', 'blueprint_folder_seo_meta');
+
+/**
+ * ADMIN MENU FOR SAMPLE DATA GENERATION
+ */
+function blueprint_folder_admin_menu() {
+    add_theme_page(
+        'Sample Data Generator',
+        'Sample Data',
+        'manage_options',
+        'blueprint-sample-data',
+        'blueprint_folder_admin_page'
+    );
+}
+add_action('admin_menu', 'blueprint_folder_admin_menu');
+
+/**
+ * ADMIN PAGE FOR SAMPLE DATA
+ */
+function blueprint_folder_admin_page() {
+    if (isset($_POST['generate_data']) && current_user_can('manage_options')) {
+        // Include and run the sample data generator
+        require_once get_template_directory() . '/sample-data-generator-enhanced.php';
+        blueprint_folder_generate_sample_data();
+        echo '<div class="notice notice-success"><p>Sample data generated successfully!</p></div>';
+    }
+    
+    ?>
+    <div class="wrap">
+        <h1>BluePrint Folder - Sample Data Generator</h1>
+        <p>Generate sample content to get started with your website quickly.</p>
+        
+        <div class="card" style="max-width: 600px;">
+            <div class="card-body">
+                <h3>What will be created:</h3>
+                <ul>
+                    <li>5 Service Categories (Web Development, Digital Marketing, Business Consulting, Graphic Design, Technical Support)</li>
+                    <li>12 Sample Services across all categories</li>
+                    <li>6 Customer Testimonials</li>
+                    <li>3 Pricing Plans (Starter, Professional, Enterprise)</li>
+                </ul>
+                
+                <p><strong>After generating:</strong></p>
+                <ol>
+                    <li>Go to <a href="<?php echo admin_url('nav-menus.php'); ?>">Appearance → Menus</a></li>
+                    <li>Add Service Categories and Services to your navigation menu</li>
+                    <li>Test the multi-level dropdown functionality</li>
+                </ol>
+                
+                <form method="post">
+                    <?php wp_nonce_field('generate_sample_data'); ?>
+                    <input type="submit" name="generate_data" class="button button-primary" value="Generate Sample Data">
+                </form>
+            </div>
+        </div>
+        
+        <div class="card" style="max-width: 600px; margin-top: 20px;">
+            <div class="card-body">
+                <h3>Next Steps:</h3>
+                <ol>
+                    <li><strong>Customize Homepage:</strong> Go to <a href="<?php echo admin_url('customize.php'); ?>">Appearance → Customize</a></li>
+                    <li><strong>Set up Menus:</strong> <a href="<?php echo admin_url('nav-menus.php'); ?>">Appearance → Menus</a></li>
+                    <li><strong>Add Content:</strong> Create pages for About, Contact, etc.</li>
+                    <li><strong>Upload Logo:</strong> <a href="<?php echo admin_url('customize.php?autofocus[control]=custom_logo'); ?>">Customize → Site Identity</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <?php
+}
 
 // That's all folks!
 ?>
