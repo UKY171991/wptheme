@@ -1,0 +1,482 @@
+/*
+ * Header Layout Fix - BluePrint Folder Theme
+ * Fixes layout issues, admin bar conflicts, and positioning problems
+ * Version: 1.0.0
+ */
+
+/* ============================================================================
+   IMPORTANT LAYOUT OVERRIDES
+   ============================================================================ */
+
+/* Force clean header layout - override any conflicting styles */
+.site-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 9999 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Remove any problematic pseudo-elements */
+.site-header::before,
+.site-header::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Remove decorative elements that might interfere */
+.site-header .decorative-element,
+.site-header .background-shape,
+.site-header .orange-element,
+.site-header .overlay-element,
+.site-header [style*="position: absolute"],
+.site-header [class*="orange"],
+.site-header [class*="decorative"] {
+    display: none !important;
+}
+
+/* ============================================================================
+   ADMIN BAR ADJUSTMENTS
+   ============================================================================ */
+
+/* Hide admin bar for non-admin users */
+body:not(.logged-in) #wpadminbar {
+    display: none !important;
+}
+
+/* Adjust header positioning when admin bar is present */
+.admin-bar .site-header {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    .admin-bar .site-header {
+        top: 46px;
+    }
+}
+
+/* ============================================================================
+   HEADER LAYOUT FIXES
+   ============================================================================ */
+
+.site-header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.site-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 70px;
+    gap: 20px;
+    position: relative;
+}
+
+/* Ensure content doesn't overlap with fixed header */
+body {
+    padding-top: 70px;
+}
+
+.admin-bar body {
+    padding-top: 102px; /* 70px header + 32px admin bar */
+}
+
+@media screen and (max-width: 782px) {
+    .admin-bar body {
+        padding-top: 116px; /* 70px header + 46px admin bar */
+    }
+}
+
+/* ============================================================================
+   SITE BRANDING FIXES
+   ============================================================================ */
+
+.site-branding {
+    flex-shrink: 0;
+    z-index: 1001;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1d4ed8;
+}
+
+.site-title a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.site-title a:hover {
+    color: #f59e0b;
+}
+
+/* ============================================================================
+   NAVIGATION FIXES
+   ============================================================================ */
+
+.main-navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    justify-content: center;
+}
+
+.nav-menu-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #374151;
+    font-weight: 500;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+    display: block;
+}
+
+.nav-menu a:hover {
+    color: #f59e0b;
+}
+
+/* ============================================================================
+   HEADER CTA FIXES
+   ============================================================================ */
+
+.header-cta {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-cta-btn {
+    background: #f59e0b;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.header-cta-btn:hover {
+    background: #d97706;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    color: white;
+}
+
+/* ============================================================================
+   MOBILE MENU FIXES
+   ============================================================================ */
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1002;
+}
+
+.hamburger {
+    width: 25px;
+    height: 3px;
+    background: #374151;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.menu-toggle.active .hamburger-1 {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active .hamburger-2 {
+    opacity: 0;
+}
+
+.menu-toggle.active .hamburger-3 {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ============================================================================
+   OVERLAY ELEMENT FIXES
+   ============================================================================ */
+
+/* Remove any problematic overlay elements */
+.overlay-accent,
+.hero-overlay,
+.decorative-overlay {
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Ensure no background elements interfere with header */
+.site-header::before,
+.site-header::after {
+    display: none !important;
+}
+
+/* Remove any orange decorative elements that might be interfering */
+.site-header .orange-element,
+.site-header .decorative-shape,
+.site-header [style*="orange"] {
+    display: none !important;
+}
+
+/* ============================================================================
+   MOBILE MENU FIXES
+   ============================================================================ */
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1002;
+    outline: none;
+}
+
+.hamburger {
+    width: 25px;
+    height: 3px;
+    background: #374151;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.menu-toggle.active .hamburger-1 {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active .hamburger-2 {
+    opacity: 0;
+}
+
+.menu-toggle.active .hamburger-3 {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.mobile-menu-open {
+    overflow: hidden;
+}
+
+/* Mobile menu overlay */
+.mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.mobile-nav-overlay.active {
+    display: block;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .header-content {
+        min-height: 60px;
+        gap: 10px;
+    }
+    
+    .site-title {
+        font-size: 22px;
+    }
+    
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        gap: 0;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-menu li {
+        width: 100%;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-menu a {
+        padding: 15px 0;
+        font-size: 16px;
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .header-cta-btn .cta-text {
+        display: none;
+    }
+    
+    .header-cta-btn .cta-text-mobile {
+        display: inline;
+    }
+    
+    .header-actions {
+        display: none;
+    }
+    
+    body {
+        padding-top: 60px;
+    }
+    
+    .admin-bar body {
+        padding-top: 106px; /* 60px header + 46px admin bar */
+    }
+}
+
+@media (max-width: 480px) {
+    .header-content {
+        padding: 0 15px;
+        gap: 8px;
+    }
+    
+    .site-title {
+        font-size: 20px;
+    }
+    
+    .header-cta-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+.header-scrolled {
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================================================
+   CONTACT INFO MOBILE
+   ============================================================================ */
+
+.mobile-contact-info {
+    display: none;
+    padding: 20px 0;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .mobile-contact-info {
+        display: block;
+    }
+}
+
+.mobile-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    color: #6b7280;
+}
+
+.mobile-contact-item i {
+    width: 20px;
+    color: #f59e0b;
+}
+
+.mobile-contact-item a {
+    color: #374151;
+    text-decoration: none;
+}
+
+.mobile-contact-item a:hover {
+    color: #f59e0b;
+}
