@@ -326,8 +326,14 @@ a:focus {
 .site-header {
     background-color: white;
     box-shadow: var(--shadow-sm);
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: var(--z-sticky);
+    transition: all var(--transition-fast);
+}
+
+.site-header.scrolled {
+    box-shadow: var(--shadow-md);
 }
 
 /* Header Top */
@@ -907,11 +913,25 @@ a:focus {
     }
     
     .navbar-nav {
-        gap: var(--spacing-6);
+        gap: var(--spacing-2);
+    }
+    
+    .navbar-nav .nav-item > a {
+        padding: var(--spacing-3) var(--spacing-5);
     }
     
     .header-content {
         gap: var(--spacing-8);
+        min-height: 90px;
+    }
+    
+    .site-branding .site-title {
+        font-size: var(--font-size-4xl);
+    }
+    
+    .header-cta .btn {
+        font-size: var(--font-size-base);
+        padding: var(--spacing-3) var(--spacing-6);
     }
 }
 
@@ -922,6 +942,28 @@ a:focus {
     
     .menu-toggle {
         display: flex;
+    }
+    
+    .header-content {
+        gap: var(--spacing-4);
+    }
+    
+    .site-branding {
+        min-width: auto;
+        flex: 1;
+    }
+    
+    .site-branding .site-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .header-cta {
+        min-width: auto;
+    }
+    
+    .header-cta .btn {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-size-xs);
     }
     
     .nav-menu-wrapper.mobile-menu-open {
@@ -936,12 +978,22 @@ a:focus {
         z-index: calc(var(--z-dropdown) + 1);
         transform: translateX(0);
         transition: transform var(--transition-fast);
+        overflow-y: auto;
     }
     
     .nav-menu-wrapper.mobile-menu-open .navbar-nav {
         display: flex;
         flex-direction: column;
         gap: 0;
+        align-items: stretch;
+        width: 100%;
+    }
+    
+    .nav-menu-wrapper.mobile-menu-open .nav-item > a {
+        padding: var(--spacing-4);
+        border-radius: 0;
+        border-bottom: 1px solid var(--color-gray-200);
+        min-height: auto;
     }
     
     .nav-menu-wrapper.mobile-menu-open .dropdown-menu {
@@ -952,18 +1004,47 @@ a:focus {
         visibility: visible;
         transform: none;
         margin-left: var(--spacing-4);
+        border: none;
+        border-radius: 0;
     }
     
     .grid-cols-3 {
         grid-template-columns: repeat(2, 1fr);
     }
-    
-    .header-content {
-        gap: var(--spacing-6);
-    }
 }
 
 @media (max-width: 767px) {
+    .header-top {
+        display: none;
+    }
+    
+    .header-main {
+        padding: var(--spacing-3) 0;
+    }
+    
+    .header-content {
+        min-height: 60px;
+        gap: var(--spacing-3);
+    }
+    
+    .site-branding .site-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .header-cta .btn {
+        padding: var(--spacing-2);
+        font-size: var(--font-size-xs);
+    }
+    
+    .header-cta .btn i {
+        display: none;
+    }
+    
+    .nav-menu-wrapper.mobile-menu-open {
+        width: 280px;
+        padding: var(--spacing-6) var(--spacing-4);
+    }
+    
     .header-top-content {
         flex-direction: column;
         gap: var(--spacing-3);
@@ -1003,6 +1084,49 @@ a:focus {
     .container {
         padding-left: var(--spacing-3);
         padding-right: var(--spacing-3);
+    }
+    
+    .header-main {
+        padding: var(--spacing-2) 0;
+    }
+    
+    .header-content {
+        min-height: 50px;
+        gap: var(--spacing-2);
+    }
+    
+    .site-branding .site-title {
+        font-size: var(--font-size-lg);
+    }
+    
+    .header-cta {
+        min-width: auto;
+    }
+    
+    .header-cta .btn {
+        padding: var(--spacing-1) var(--spacing-2);
+        font-size: var(--font-size-xs);
+        min-width: 70px;
+    }
+    
+    .menu-toggle {
+        padding: var(--spacing-1);
+    }
+    
+    .hamburger-line {
+        width: 20px;
+        height: 2px;
+    }
+    
+    .menu-text {
+        font-size: 10px;
+        margin-top: 2px;
+    }
+    
+    .nav-menu-wrapper.mobile-menu-open {
+        width: 100%;
+        right: 0;
+        padding: var(--spacing-4) var(--spacing-3);
     }
     
     h1 { font-size: var(--font-size-3xl); }
