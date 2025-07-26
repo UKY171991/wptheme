@@ -12,7 +12,7 @@
 <?php wp_body_open(); ?>
 
 <div id="page" class="site">
-    <a class="skip-link screen-reader-text" href="#main"><?php esc_html_e('Skip to content', 'professional-services'); ?></a>
+    <a class="skip-link screen-reader-text" href="#main"><?php esc_html_e('Skip to content', 'blueprint-folder'); ?></a>
 
     <!-- Header -->
     <header id="masthead" class="site-header" role="banner">
@@ -23,48 +23,39 @@
                     <div class="contact-info">
                         <?php 
                         $phone = get_theme_mod('company_phone', '(555) 123-4567');
-                        $email = get_theme_mod('company_email', 'info@company.com');
+                        $email = get_theme_mod('company_email', 'info@blueprintfolder.com');
                         if ($phone): ?>
                             <span class="header-phone">
                                 <i class="fas fa-phone" aria-hidden="true"></i>
-                                <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9+]/', '', $phone)); ?>"><?php echo esc_html($phone); ?></a>
+                                <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9+]/', '', $phone)); ?>" aria-label="Call us"><?php echo esc_html($phone); ?></a>
                             </span>
                         <?php endif; 
                         if ($email): ?>
                             <span class="header-email">
                                 <i class="fas fa-envelope" aria-hidden="true"></i>
-                                <a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a>
+                                <a href="mailto:<?php echo esc_attr($email); ?>" aria-label="Email us"><?php echo esc_html($email); ?></a>
                             </span>
                         <?php endif; ?>
                     </div>
                     
                     <div class="social-links">
                         <?php 
-                        $facebook = get_theme_mod('social_facebook', '');
-                        $twitter = get_theme_mod('social_twitter', '');
-                        $linkedin = get_theme_mod('social_linkedin', '');
-                        $instagram = get_theme_mod('social_instagram', '');
+                        $social_networks = array(
+                            'facebook' => 'fab fa-facebook-f',
+                            'twitter' => 'fab fa-twitter',
+                            'linkedin' => 'fab fa-linkedin-in',
+                            'instagram' => 'fab fa-instagram',
+                            'youtube' => 'fab fa-youtube'
+                        );
                         
-                        if ($facebook): ?>
-                            <a href="<?php echo esc_url($facebook); ?>" target="_blank" rel="noopener" aria-label="Facebook">
-                                <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                            </a>
-                        <?php endif;
-                        if ($twitter): ?>
-                            <a href="<?php echo esc_url($twitter); ?>" target="_blank" rel="noopener" aria-label="Twitter">
-                                <i class="fab fa-twitter" aria-hidden="true"></i>
-                            </a>
-                        <?php endif;
-                        if ($linkedin): ?>
-                            <a href="<?php echo esc_url($linkedin); ?>" target="_blank" rel="noopener" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                            </a>
-                        <?php endif;
-                        if ($instagram): ?>
-                            <a href="<?php echo esc_url($instagram); ?>" target="_blank" rel="noopener" aria-label="Instagram">
-                                <i class="fab fa-instagram" aria-hidden="true"></i>
-                            </a>
-                        <?php endif; ?>
+                        foreach ($social_networks as $network => $icon_class) {
+                            $url = get_theme_mod("social_{$network}", '');
+                            if ($url): ?>
+                                <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr(ucfirst($network)); ?>">
+                                    <i class="<?php echo esc_attr($icon_class); ?>" aria-hidden="true"></i>
+                                </a>
+                            <?php endif;
+                        } ?>
                     </div>
                 </div>
             </div>
@@ -98,21 +89,18 @@
                     </div>
 
                     <!-- Primary Navigation -->
-                    <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', 'professional-services'); ?>">
+                    <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', 'blueprint-folder'); ?>">
                         <!-- Mobile Menu Toggle -->
-                        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'professional-services'); ?>">
+                        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'blueprint-folder'); ?>">
                             <span class="hamburger-line"></span>
                             <span class="hamburger-line"></span>
                             <span class="hamburger-line"></span>
-                            <span class="menu-text"><?php esc_html_e('Menu', 'professional-services'); ?></span>
+                            <span class="menu-text"><?php esc_html_e('Menu', 'blueprint-folder'); ?></span>
                         </button>
 
                         <!-- Navigation Menu -->
                         <div class="nav-menu-wrapper">
                             <?php
-                            // Include the navigation walker
-                            require_once get_template_directory() . '/inc/navigation-walker-new.php';
-                            
                             if (has_nav_menu('primary')) {
                                 wp_nav_menu(array(
                                     'theme_location' => 'primary',
@@ -120,11 +108,11 @@
                                     'menu_class'     => 'navbar-nav',
                                     'container'      => false,
                                     'depth'          => 3,
-                                    'fallback_cb'    => 'professional_services_navigation_fallback',
-                                    'walker'         => new Professional_Services_Walker_Nav_Menu(),
+                                    'fallback_cb'    => 'blueprint_folder_navigation_fallback',
+                                    'walker'         => new BluePrint_Folder_Walker_Nav_Menu(),
                                 ));
                             } else {
-                                professional_services_navigation_fallback();
+                                blueprint_folder_navigation_fallback();
                             }
                             ?>
                         </div>
@@ -132,9 +120,9 @@
 
                     <!-- Header CTA -->
                     <div class="header-cta">
-                        <a href="<?php echo esc_url(home_url('/contact')); ?>" class="btn btn-primary">
+                        <a href="<?php echo esc_url(home_url('/contact')); ?>" class="btn btn-primary" aria-label="Get a quote">
                             <i class="fas fa-phone" aria-hidden="true"></i>
-                            <?php esc_html_e('Get Quote', 'professional-services'); ?>
+                            <?php esc_html_e('Get Quote', 'blueprint-folder'); ?>
                         </a>
                     </div>
                 </div>
