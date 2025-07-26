@@ -1,6 +1,10 @@
 <?php
 /**
- * Template Name: Pricing
+ * Template Name: Enhanced Pricing Page
+ * Professional pricing page with advanced features
+ * 
+ * @package BluePrint_Folder_Theme
+ * @version 2.1.0
  */
 
 get_header(); ?>

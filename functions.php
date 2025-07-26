@@ -210,27 +210,32 @@ add_filter('wp_nav_menu_args', function($args) {
  */
 function blueprint_folder_scripts() {
     // Theme stylesheet
-    wp_enqueue_style('blueprint-folder-style', get_stylesheet_uri(), array(), '2.0.0');
+    wp_enqueue_style('blueprint-folder-style', get_stylesheet_uri(), array(), '2.1.0');
     
     // Header CSS
-    wp_enqueue_style('blueprint-folder-header', get_template_directory_uri() . '/css/header.css', array('blueprint-folder-style'), '2.0.0');
+    wp_enqueue_style('blueprint-folder-header', get_template_directory_uri() . '/css/header.css', array('blueprint-folder-style'), '2.1.0');
     
     // Interactive Elements CSS
-    wp_enqueue_style('blueprint-folder-interactive', get_template_directory_uri() . '/css/interactive-elements.css', array('blueprint-folder-style'), '2.0.0');
+    wp_enqueue_style('blueprint-folder-interactive', get_template_directory_uri() . '/css/interactive-elements.css', array('blueprint-folder-style'), '2.1.0');
     
     // Enhanced Homepage CSS
     if (is_front_page() || is_home()) {
-        wp_enqueue_style('blueprint-folder-homepage', get_template_directory_uri() . '/css/homepage-enhanced.css', array('blueprint-folder-style'), '2.0.0');
+        wp_enqueue_style('blueprint-folder-homepage', get_template_directory_uri() . '/css/homepage-enhanced.css', array('blueprint-folder-style'), '2.1.0');
     }
     
-    // Interactive Elements CSS
-    wp_enqueue_style('blueprint-folder-interactive', get_template_directory_uri() . '/css/interactive-elements.css', array('blueprint-folder-style'), '2.0.0');
+    // Enhanced Pricing CSS
+    if (is_page_template('page-pricing.php') || is_page_template('page-pricing-enhanced.php')) {
+        wp_enqueue_style('blueprint-folder-pricing', get_template_directory_uri() . '/css/pricing-enhanced.css', array('blueprint-folder-style'), '2.1.0');
+    }
     
     // Bootstrap CSS (CDN)
     wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css', array(), '5.3.0');
     
     // Font Awesome (CDN)
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
+    
+    // Google Fonts
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap', array(), null);
     
     // jQuery (WordPress built-in)
     wp_enqueue_script('jquery');
@@ -239,12 +244,21 @@ function blueprint_folder_scripts() {
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.3.0', true);
     
     // Theme main script
-    wp_enqueue_script('blueprint-folder-main', get_template_directory_uri() . '/js/theme-main-enhanced.js', array('jquery', 'bootstrap'), '2.0.0', true);
+    wp_enqueue_script('blueprint-folder-main', get_template_directory_uri() . '/js/theme-main-enhanced.js', array('jquery', 'bootstrap'), '2.1.0', true);
     
-    // Localize script for AJAX
-    wp_localize_script('blueprint-folder-main', 'blueprint_folder_ajax', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce'    => wp_create_nonce('blueprint_folder_nonce')
+    // Enhanced Pricing JavaScript
+    if (is_page_template('page-pricing.php') || is_page_template('page-pricing-enhanced.php')) {
+        wp_enqueue_script('blueprint-folder-pricing', get_template_directory_uri() . '/js/pricing-enhanced.js', array('jquery', 'bootstrap'), '2.1.0', true);
+    }
+    
+    // Localize script for AJAX and theme data
+    wp_localize_script('blueprint-folder-main', 'wpData', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('blueprint_folder_nonce'),
+        'homeUrl' => home_url('/'),
+        'contactUrl' => get_permalink(get_page_by_path('contact')),
+        'themeUrl' => get_template_directory_uri(),
+        'isDebug' => defined('WP_DEBUG') && WP_DEBUG
     ));
 }
 add_action('wp_enqueue_scripts', 'blueprint_folder_scripts');
@@ -382,6 +396,143 @@ function blueprint_folder_seo_meta() {
     }
 }
 add_action('wp_head', 'blueprint_folder_seo_meta');
+
+/**
+ * ENHANCED PERFORMANCE OPTIMIZATIONS
+ */
+function blueprint_folder_performance_optimizations() {
+    // Remove unnecessary emoji scripts
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('admin_print_scripts', 'print_emoji_detection_script');
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    remove_action('admin_print_styles', 'print_emoji_styles');
+    
+    // Remove unnecessary REST API links
+    remove_action('wp_head', 'rest_output_link_wp_head');
+    remove_action('wp_head', 'wp_oembed_add_discovery_links');
+    
+    // Remove unnecessary generator tags
+    remove_action('wp_head', 'wp_generator');
+    
+    // Defer non-critical JavaScript
+    add_filter('script_loader_tag', 'blueprint_folder_defer_scripts', 10, 3);
+}
+add_action('init', 'blueprint_folder_performance_optimizations');
+
+/**
+ * DEFER NON-CRITICAL SCRIPTS
+ */
+function blueprint_folder_defer_scripts($tag, $handle, $src) {
+    $defer_scripts = array('blueprint-folder-pricing', 'bootstrap');
+    
+    if (in_array($handle, $defer_scripts)) {
+        return str_replace('<script ', '<script defer ', $tag);
+    }
+    
+    return $tag;
+}
+
+/**
+ * LAZY LOAD IMAGES
+ */
+function blueprint_folder_lazy_load_images($content) {
+    if (is_admin() || is_feed() || wp_is_mobile()) {
+        return $content;
+    }
+    
+    return preg_replace_callback('/<img([^>]+?)>/', function($matches) {
+        $img = $matches[0];
+        if (strpos($img, 'loading=') !== false) {
+            return $img;
+        }
+        return str_replace('<img', '<img loading="lazy"', $img);
+    }, $content);
+}
+add_filter('the_content', 'blueprint_folder_lazy_load_images');
+
+/**
+ * ENHANCED SECURITY HEADERS
+ */
+function blueprint_folder_security_headers() {
+    if (!is_admin()) {
+        header('X-Content-Type-Options: nosniff');
+        header('X-Frame-Options: SAMEORIGIN');
+        header('X-XSS-Protection: 1; mode=block');
+        header('Referrer-Policy: strict-origin-when-cross-origin');
+    }
+}
+add_action('send_headers', 'blueprint_folder_security_headers');
+
+/**
+ * ENHANCED CONTACT FORM HANDLER
+ */
+function blueprint_folder_handle_contact_form() {
+    if (!wp_verify_nonce($_POST['contact_nonce'], 'blueprint_folder_contact')) {
+        wp_die('Security check failed');
+    }
+    
+    $name = sanitize_text_field($_POST['contact_name']);
+    $email = sanitize_email($_POST['contact_email']);
+    $subject = sanitize_text_field($_POST['contact_subject']);
+    $message = sanitize_textarea_field($_POST['contact_message']);
+    $quote = sanitize_text_field($_POST['quote_type'] ?? '');
+    
+    // Enhanced email content
+    $email_content = sprintf(
+        "New contact form submission:\n\nName: %s\nEmail: %s\nSubject: %s\n%s\nMessage:\n%s\n\n---\nSent from: %s",
+        $name,
+        $email,
+        $subject,
+        $quote ? "Interested in: {$quote}\n" : '',
+        $message,
+        home_url()
+    );
+    
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: ' . get_option('blogname') . ' <' . get_option('admin_email') . '>',
+        'Reply-To: ' . $name . ' <' . $email . '>'
+    );
+    
+    $sent = wp_mail(
+        get_option('admin_email'),
+        'New Contact: ' . $subject,
+        nl2br($email_content),
+        $headers
+    );
+    
+    if ($sent) {
+        wp_safe_redirect(add_query_arg('contact', 'success', wp_get_referer()));
+    } else {
+        wp_safe_redirect(add_query_arg('contact', 'error', wp_get_referer()));
+    }
+    exit;
+}
+add_action('wp_ajax_contact_form', 'blueprint_folder_handle_contact_form');
+add_action('wp_ajax_nopriv_contact_form', 'blueprint_folder_handle_contact_form');
+
+/**
+ * DYNAMIC SCHEMA MARKUP
+ */
+function blueprint_folder_schema_markup() {
+    if (is_front_page()) {
+        $schema = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => get_bloginfo('name'),
+            'url' => home_url(),
+            'description' => get_bloginfo('description'),
+            'sameAs' => array(
+                get_theme_mod('social_facebook', ''),
+                get_theme_mod('social_twitter', ''),
+                get_theme_mod('social_linkedin', '')
+            )
+        );
+        
+        echo '<script type="application/ld+json">' . json_encode($schema) . '</script>';
+    }
+}
+add_action('wp_head', 'blueprint_folder_schema_markup');
 
 /**
  * ADMIN MENU FOR SAMPLE DATA GENERATION
