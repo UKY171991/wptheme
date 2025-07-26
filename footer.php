@@ -3,7 +3,7 @@
             <div class="section-padding">
                 <div class="row">
                     <!-- Company Info -->
-                     testing
+                     testing new
                     <div class="col-lg-4 col-md-6 mb-4">
                         <h3 class="h5 text-accent mb-3"><?php bloginfo('name'); ?></h3>
                         <p class="text-light mb-3"><?php bloginfo('description'); ?></p>
