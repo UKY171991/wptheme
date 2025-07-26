@@ -1,0 +1,374 @@
+/*
+ * Header Layout Fixes - Critical Issues Only
+ * Focused fixes for specific header layout problems
+ */
+
+/* ============================================================================
+   CRITICAL HEADER FIXES
+   ============================================================================ */
+
+/* Fix header overflow and ensure proper stacking */
+.site-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 999 !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.8) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Fix header main section layout */
+.header-main {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* Critical header content flex fixes */
+.header-content {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    max-width: var(--container-max-width) !important;
+    margin: 0 auto !important;
+    padding: 0 var(--spacing-4) !important;
+    box-sizing: border-box !important;
+    flex-wrap: nowrap !important;
+    min-height: 70px !important;
+    gap: var(--spacing-4) !important;
+}
+
+/* Site branding fixes - prevent overflow */
+.site-branding {
+    flex-shrink: 0 !important;
+    min-width: 150px !important;
+    max-width: 250px !important;
+    overflow: hidden !important;
+}
+
+.site-branding .site-title {
+    margin: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: clamp(var(--font-size-lg), 2.5vw, var(--font-size-2xl)) !important;
+    line-height: 1.2 !important;
+}
+
+.site-branding .site-title a {
+    color: var(--color-primary) !important;
+    text-decoration: none !important;
+}
+
+/* Navigation container fixes */
+.main-navigation {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+.nav-menu-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+/* Navigation menu critical fixes */
+.navbar-nav {
+    display: flex !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    gap: 0 !important;
+}
+
+.navbar-nav .nav-item {
+    position: relative !important;
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+.navbar-nav .nav-item > a {
+    display: block !important;
+    padding: var(--spacing-3) var(--spacing-3) !important;
+    color: var(--color-gray-700) !important;
+    text-decoration: none !important;
+    font-weight: var(--font-weight-medium) !important;
+    font-size: var(--font-size-sm) !important;
+    white-space: nowrap !important;
+    transition: all var(--transition-fast) !important;
+    position: relative !important;
+}
+
+.navbar-nav .nav-item > a:hover {
+    color: var(--color-primary) !important;
+}
+
+/* Header CTA button fixes */
+.header-cta {
+    flex-shrink: 0 !important;
+    min-width: 120px !important;
+}
+
+.header-cta .btn {
+    font-size: var(--font-size-sm) !important;
+    padding: var(--spacing-2) var(--spacing-3) !important;
+    white-space: nowrap !important;
+    border-radius: var(--border-radius) !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: var(--spacing-2) !important;
+}
+
+/* Mobile menu toggle - hidden by default */
+.menu-toggle {
+    display: none !important;
+    background: none !important;
+    border: none !important;
+    padding: var(--spacing-2) !important;
+    cursor: pointer !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: var(--spacing-1) !important;
+    color: var(--color-gray-700) !important;
+}
+
+.hamburger-line {
+    width: 24px !important;
+    height: 3px !important;
+    background-color: currentColor !important;
+    transition: all var(--transition-fast) !important;
+    border-radius: 2px !important;
+}
+
+.menu-text {
+    font-size: var(--font-size-xs) !important;
+    margin-top: var(--spacing-1) !important;
+}
+
+/* ============================================================================
+   RESPONSIVE BREAKPOINTS - ESSENTIAL ONLY
+   ============================================================================ */
+
+/* Large tablets and small desktops */
+@media (max-width: 1199px) {
+    .header-content {
+        gap: var(--spacing-3) !important;
+        padding: 0 var(--spacing-3) !important;
+    }
+    
+    .site-branding {
+        min-width: 130px !important;
+        max-width: 200px !important;
+    }
+    
+    .navbar-nav .nav-item > a {
+        padding: var(--spacing-2) var(--spacing-2) !important;
+        font-size: var(--font-size-sm) !important;
+    }
+    
+    .header-cta {
+        min-width: 100px !important;
+    }
+}
+
+/* Show mobile menu on tablets and below */
+@media (max-width: 991px) {
+    .header-content {
+        gap: var(--spacing-2) !important;
+        padding: 0 var(--spacing-3) !important;
+    }
+    
+    .menu-toggle {
+        display: flex !important;
+    }
+    
+    .nav-menu-wrapper {
+        display: none !important;
+        position: fixed !important;
+        top: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        background-color: white !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+        z-index: 1000 !important;
+        padding: var(--spacing-4) !important;
+        max-height: calc(100vh - 100px) !important;
+        overflow-y: auto !important;
+    }
+    
+    .nav-menu-wrapper.mobile-menu-open {
+        display: block !important;
+    }
+    
+    .mobile-menu-open .navbar-nav {
+        flex-direction: column !important;
+        gap: var(--spacing-2) !important;
+        align-items: stretch !important;
+    }
+    
+    .mobile-menu-open .navbar-nav .nav-item {
+        width: 100% !important;
+    }
+    
+    .mobile-menu-open .navbar-nav .nav-item > a {
+        padding: var(--spacing-3) !important;
+        border-bottom: 1px solid var(--color-gray-200) !important;
+        text-align: center !important;
+        font-size: var(--font-size-base) !important;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 768px) {
+    .header-main {
+        padding: var(--spacing-2) 0 !important;
+    }
+    
+    .header-content {
+        min-height: 60px !important;
+        gap: var(--spacing-2) !important;
+        padding: 0 var(--spacing-2) !important;
+    }
+    
+    .site-branding {
+        min-width: 100px !important;
+        max-width: 150px !important;
+    }
+    
+    .site-branding .site-title {
+        font-size: var(--font-size-lg) !important;
+    }
+    
+    .header-cta {
+        min-width: 80px !important;
+    }
+    
+    .header-cta .btn {
+        padding: var(--spacing-2) !important;
+        font-size: var(--font-size-xs) !important;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .header-content {
+        gap: var(--spacing-1) !important;
+        padding: 0 var(--spacing-2) !important;
+    }
+    
+    .site-branding {
+        min-width: 80px !important;
+        max-width: 120px !important;
+    }
+    
+    .site-branding .site-title {
+        font-size: var(--font-size-base) !important;
+    }
+    
+    .header-cta .btn {
+        padding: var(--spacing-1) var(--spacing-2) !important;
+        min-width: 60px !important;
+    }
+    
+    /* Hide CTA text on very small screens, show only icon */
+    .header-cta .btn .fas {
+        margin-right: 0 !important;
+    }
+    
+    .header-cta .btn span:not(.fas) {
+        display: none !important;
+    }
+}
+
+/* ============================================================================
+   DROPDOWN MENU FIXES
+   ============================================================================ */
+
+.dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    min-width: 200px !important;
+    z-index: calc(var(--z-sticky) + 1) !important;
+    background-color: white !important;
+    border: 1px solid var(--color-gray-200) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: var(--shadow-lg) !important;
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: all var(--transition-fast) !important;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown.show .dropdown-menu {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+.dropdown-menu .nav-item a {
+    padding: var(--spacing-3) var(--spacing-4) !important;
+    color: var(--color-gray-700) !important;
+    border-bottom: 1px solid var(--color-gray-100) !important;
+}
+
+.dropdown-menu .nav-item:last-child a {
+    border-bottom: none !important;
+}
+
+.dropdown-menu .nav-item a:hover {
+    background-color: var(--color-gray-50) !important;
+    color: var(--color-primary) !important;
+}
+
+/* ============================================================================
+   ACCESSIBILITY FIXES
+   ============================================================================ */
+
+.navbar-nav .nav-item > a:focus,
+.menu-toggle:focus,
+.header-cta .btn:focus {
+    outline: 2px solid var(--color-primary) !important;
+    outline-offset: 2px !important;
+}
+
+/* Ensure proper contrast and visibility */
+.site-header {
+    color: var(--color-gray-700) !important;
+}
+
+/* Mobile overlay */
+.mobile-nav-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    z-index: 998 !important;
+    display: none !important;
+    opacity: 0 !important;
+    transition: opacity var(--transition-fast) !important;
+}
+
+.mobile-nav-overlay.active {
+    display: block !important;
+    opacity: 1 !important;
+}
