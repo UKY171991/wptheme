@@ -36,7 +36,9 @@ function blueprint_folder_navigation_fallback() {
     echo '<li class="menu-item"><a class="nav-link" href="' . esc_url(home_url('/pricing')) . '">Pricing</a></li>';
     echo '<li class="menu-item"><a class="nav-link" href="' . esc_url(home_url('/contact')) . '">Contact</a></li>';
     echo '</ul>';
-}rkup
+}
+
+/**
  * 
  * @package BluePrint_Folder_Theme
  * @version 1.0.0
