@@ -212,9 +212,6 @@ function blueprint_folder_scripts() {
     // Theme stylesheet
     wp_enqueue_style('blueprint-folder-style', get_stylesheet_uri(), array(), '2.1.0');
     
-    // Header CSS
-    wp_enqueue_style('blueprint-folder-header', get_template_directory_uri() . '/css/header.css', array('blueprint-folder-style'), '2.1.0');
-    
     // Interactive Elements CSS
     wp_enqueue_style('blueprint-folder-interactive', get_template_directory_uri() . '/css/interactive-elements.css', array('blueprint-folder-style'), '2.1.0');
     
@@ -223,9 +220,9 @@ function blueprint_folder_scripts() {
         wp_enqueue_style('blueprint-folder-homepage', get_template_directory_uri() . '/css/homepage-enhanced.css', array('blueprint-folder-style'), '2.1.0');
     }
     
-    // Enhanced Pricing CSS
-    if (is_page_template('page-pricing.php') || is_page_template('page-pricing-enhanced.php')) {
-        wp_enqueue_style('blueprint-folder-pricing', get_template_directory_uri() . '/css/pricing-enhanced.css', array('blueprint-folder-style'), '2.1.0');
+    // Enhanced Pricing CSS - Only load on pricing page template and only specific styles
+    if (is_page_template('page-pricing-enhanced.php')) {
+        // Don't load header CSS for this template
     }
     
     // Bootstrap CSS (CDN)
