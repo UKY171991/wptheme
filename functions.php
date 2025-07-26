@@ -215,6 +215,9 @@ function blueprint_folder_scripts() {
     // Header CSS
     wp_enqueue_style('blueprint-folder-header', get_template_directory_uri() . '/css/header.css', array('blueprint-folder-style'), '2.0.0');
     
+    // Interactive Elements CSS
+    wp_enqueue_style('blueprint-folder-interactive', get_template_directory_uri() . '/css/interactive-elements.css', array('blueprint-folder-style'), '2.0.0');
+    
     // Enhanced Homepage CSS
     if (is_front_page() || is_home()) {
         wp_enqueue_style('blueprint-folder-homepage', get_template_directory_uri() . '/css/homepage-enhanced.css', array('blueprint-folder-style'), '2.0.0');

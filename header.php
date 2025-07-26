@@ -45,21 +45,22 @@
                 <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', 'blueprint-folder'); ?>">
                     <!-- Mobile Menu Toggle -->
                     <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'blueprint-folder'); ?>">
-                        <span class="hamburger"></span>
-                        <span class="hamburger"></span>
-                        <span class="hamburger"></span>
+                        <span class="hamburger hamburger-1"></span>
+                        <span class="hamburger hamburger-2"></span>
+                        <span class="hamburger hamburger-3"></span>
+                        <span class="sr-only">Menu</span>
                     </button>
 
                     <!-- Navigation Menu -->
-                    <div class="nav-menu-wrapper">
+                    <div class="nav-menu-wrapper" id="primary-menu">
                         <?php
                         if (has_nav_menu('primary')) {
                             wp_nav_menu(array(
                                 'theme_location' => 'primary',
-                                'menu_id'        => 'primary-menu',
-                                'menu_class'     => 'nav-menu',
+                                'menu_id'        => 'primary-navigation',
+                                'menu_class'     => 'nav-menu primary-nav',
                                 'container'      => false,
-                                'depth'          => 3,
+                                'depth'          => 4,
                                 'fallback_cb'    => 'blueprint_folder_navigation_fallback',
                                 'walker'         => new BluePrint_Folder_Walker_Nav_Menu(),
                             ));
@@ -67,15 +68,43 @@
                             blueprint_folder_navigation_fallback();
                         }
                         ?>
+                        
+                        <!-- Mobile Contact Info -->
+                        <div class="mobile-contact-info">
+                            <div class="mobile-contact-item">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                                <a href="tel:<?php echo esc_attr(get_theme_mod('company_phone', '(555) 123-4567')); ?>">
+                                    <?php echo esc_html(get_theme_mod('company_phone', '(555) 123-4567')); ?>
+                                </a>
+                            </div>
+                            <div class="mobile-contact-item">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <a href="mailto:<?php echo esc_attr(get_theme_mod('company_email', 'info@blueprintfolder.com')); ?>">
+                                    <?php echo esc_html(get_theme_mod('company_email', 'info@blueprintfolder.com')); ?>
+                                </a>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <!-- Menu Overlay for Mobile -->
+                    <div class="menu-overlay"></div>
                 </nav>
 
                 <!-- Header CTA -->
                 <div class="header-cta">
-                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="btn btn-primary">
-                        <i class="fas fa-phone" aria-hidden="true"></i>
-                        <span>Get Quote</span>
+                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="btn btn-primary header-cta-btn">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        <span class="cta-text">Get Quote</span>
+                        <span class="cta-text-mobile">Quote</span>
                     </a>
+                    
+                    <!-- Additional Header Actions -->
+                    <div class="header-actions">
+                        <a href="tel:<?php echo esc_attr(get_theme_mod('company_phone', '(555) 123-4567')); ?>" class="header-phone-link" title="Call Us">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <span class="sr-only">Call Us</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

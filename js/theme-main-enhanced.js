@@ -34,37 +34,75 @@
         mobileMenu: function() {
             const menuToggle = $('.menu-toggle');
             const navMenu = $('.nav-menu-wrapper');
+            const menuOverlay = $('.menu-overlay');
             const body = $('body');
+            const mobileContactInfo = $('.mobile-contact-info');
             
+            // Toggle menu function
+            function toggleMenu() {
+                const isActive = menuToggle.hasClass('active');
+                
+                if (isActive) {
+                    // Close menu
+                    menuToggle.removeClass('active');
+                    navMenu.removeClass('active');
+                    menuOverlay.removeClass('active');
+                    body.removeClass('menu-open');
+                    menuToggle.attr('aria-expanded', 'false');
+                    mobileContactInfo.slideUp(300);
+                } else {
+                    // Open menu
+                    menuToggle.addClass('active');
+                    navMenu.addClass('active');
+                    menuOverlay.addClass('active');
+                    body.addClass('menu-open');
+                    menuToggle.attr('aria-expanded', 'true');
+                    
+                    // Show mobile contact info with delay
+                    setTimeout(() => {
+                        mobileContactInfo.slideDown(300);
+                    }, 200);
+                }
+            }
+            
+            // Menu toggle click
             menuToggle.on('click', function(e) {
                 e.preventDefault();
-                
-                $(this).toggleClass('active');
-                navMenu.toggleClass('active');
-                body.toggleClass('menu-open');
-                
-                // Update aria-expanded
-                const isExpanded = $(this).attr('aria-expanded') === 'true';
-                $(this).attr('aria-expanded', !isExpanded);
+                toggleMenu();
+            });
+            
+            // Close menu when clicking overlay
+            menuOverlay.on('click', function() {
+                toggleMenu();
             });
             
             // Close menu when clicking outside
             $(document).on('click', function(e) {
-                if (!$(e.target).closest('.main-navigation').length) {
-                    menuToggle.removeClass('active');
-                    navMenu.removeClass('active');
-                    body.removeClass('menu-open');
-                    menuToggle.attr('aria-expanded', 'false');
+                if (!$(e.target).closest('.main-navigation').length && navMenu.hasClass('active')) {
+                    toggleMenu();
                 }
             });
             
             // Close menu on escape key
             $(document).on('keydown', function(e) {
-                if (e.keyCode === 27) { // Escape key
-                    menuToggle.removeClass('active');
-                    navMenu.removeClass('active');
-                    body.removeClass('menu-open');
-                    menuToggle.attr('aria-expanded', 'false');
+                if (e.keyCode === 27 && navMenu.hasClass('active')) { // Escape key
+                    toggleMenu();
+                }
+            });
+            
+            // Handle window resize
+            $(window).on('resize', function() {
+                if ($(window).width() > 991 && navMenu.hasClass('active')) {
+                    toggleMenu();
+                }
+            });
+            
+            // Smooth close animation for menu items
+            $('.nav-menu a').on('click', function() {
+                if ($(window).width() <= 991) {
+                    setTimeout(() => {
+                        toggleMenu();
+                    }, 300);
                 }
             });
         },
@@ -258,27 +296,73 @@
          */
         dropdownMenus: function() {
             const dropdownItems = $('.nav-menu .dropdown');
+            let hoverTimeout;
             
-            // Handle mouse hover for desktop
+            // Enhanced hover functionality for desktop
             dropdownItems.on('mouseenter', function() {
-                $(this).addClass('show');
-                $(this).find('.dropdown-menu').fadeIn(200);
+                if ($(window).width() > 991) {
+                    clearTimeout(hoverTimeout);
+                    const $this = $(this);
+                    const $menu = $this.find('.dropdown-menu');
+                    
+                    $this.addClass('show');
+                    $menu.stop(true, true).fadeIn(200);
+                    
+                    // Add ARIA attributes
+                    $this.find('.dropdown-toggle').attr('aria-expanded', 'true');
+                }
             });
             
             dropdownItems.on('mouseleave', function() {
-                $(this).removeClass('show');
-                $(this).find('.dropdown-menu').fadeOut(200);
+                if ($(window).width() > 991) {
+                    const $this = $(this);
+                    const $menu = $this.find('.dropdown-menu');
+                    
+                    hoverTimeout = setTimeout(() => {
+                        $this.removeClass('show');
+                        $menu.stop(true, true).fadeOut(200);
+                        $this.find('.dropdown-toggle').attr('aria-expanded', 'false');
+                    }, 100);
+                }
             });
             
-            // Handle click for mobile
+            // Click functionality for mobile and accessibility
             dropdownItems.find('.dropdown-toggle').on('click', function(e) {
+                const $parent = $(this).parent();
+                const $menu = $parent.find('.dropdown-menu');
+                const isActive = $parent.hasClass('show');
+                
                 if ($(window).width() <= 991) {
                     e.preventDefault();
-                    const parent = $(this).parent();
-                    const menu = parent.find('.dropdown-menu');
                     
-                    parent.toggleClass('show');
-                    menu.slideToggle(300);
+                    // Close other dropdowns
+                    dropdownItems.not($parent).removeClass('show');
+                    dropdownItems.not($parent).find('.dropdown-menu').slideUp(300);
+                    
+                    // Toggle current dropdown
+                    if (isActive) {
+                        $parent.removeClass('show');
+                        $menu.slideUp(300);
+                        $(this).attr('aria-expanded', 'false');
+                    } else {
+                        $parent.addClass('show');
+                        $menu.slideDown(300);
+                        $(this).attr('aria-expanded', 'true');
+                    }
+                }
+            });
+            
+            // Keyboard navigation
+            dropdownItems.find('.dropdown-toggle').on('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    $(this).trigger('click');
+                } else if (e.key === 'Escape') {
+                    const $parent = $(this).parent();
+                    $parent.removeClass('show');
+                    $parent.find('.dropdown-menu').fadeOut(200);
+                    $(this).attr('aria-expanded', 'false');
+                    $(this).focus();
                 }
             });
             
@@ -287,6 +371,16 @@
                 if ($(window).width() > 991) {
                     dropdownItems.removeClass('show');
                     dropdownItems.find('.dropdown-menu').removeAttr('style');
+                    dropdownItems.find('.dropdown-toggle').attr('aria-expanded', 'false');
+                }
+            });
+            
+            // Close all dropdowns when clicking outside
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    dropdownItems.removeClass('show');
+                    dropdownItems.find('.dropdown-menu').fadeOut(200);
+                    dropdownItems.find('.dropdown-toggle').attr('aria-expanded', 'false');
                 }
             });
         },
