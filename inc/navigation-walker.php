@@ -1,7 +1,7 @@
 <?php
 /**
- * Custom Navigation Walker for BluePrint Folder Theme
- * Handles multi-level dropdown menus with proper Bootstrap classes
+ * Simple Navigation Walker for BluePrint Folder Theme
+ * Clean, minimal navigation with dropdown support
  * 
  * @package BluePrint_Folder_Theme
  * @version 2.0.0
@@ -14,14 +14,7 @@ class BluePrint_Folder_Walker_Nav_Menu extends Walker_Nav_Menu {
      */
     public function start_lvl(&$output, $depth = 0, $args = null) {
         $indent = str_repeat("\t", $depth);
-        $classes = array('dropdown-menu');
-        
-        if ($depth >= 1) {
-            $classes[] = 'dropdown-submenu';
-        }
-        
-        $class_names = implode(' ', $classes);
-        $output .= "\n$indent<ul class=\"$class_names\">\n";
+        $output .= "\n$indent<ul class=\"dropdown-menu\">\n";
     }
 
     /**
@@ -44,10 +37,94 @@ class BluePrint_Folder_Walker_Nav_Menu extends Walker_Nav_Menu {
         // Check if this item has children
         $has_children = in_array('menu-item-has-children', $classes);
         
-        if ($has_children) {
-            if ($depth === 0) {
-                $classes[] = 'dropdown';
-            } else {
+        if ($has_children && $depth === 0) {
+            $classes[] = 'dropdown';
+        }
+
+        // Filter and build class names
+        $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
+        $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
+
+        // Build ID
+        $id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args);
+        $id = $id ? ' id="' . esc_attr($id) . '"' : '';
+
+        $output .= $indent . '<li' . $id . $class_names . '>';
+
+        // Build link attributes
+        $atts = array();
+        $atts['title']  = !empty($item->attr_title) ? $item->attr_title : '';
+        $atts['target'] = !empty($item->target) ? $item->target : '';
+        $atts['rel']    = !empty($item->xfn) ? $item->xfn : '';
+        $atts['href']   = !empty($item->url) ? $item->url : '';
+
+        // Add dropdown toggle if has children
+        if ($has_children && $depth === 0) {
+            $atts['class'] = 'dropdown-toggle';
+        }
+
+        // Filter attributes
+        $atts = apply_filters('nav_menu_link_attributes', $atts, $item, $args);
+
+        $attributes = '';
+        foreach ($atts as $attr => $value) {
+            if (!empty($value)) {
+                $value = ('href' === $attr) ? esc_url($value) : esc_attr($value);
+                $attributes .= ' ' . $attr . '="' . $value . '"';
+            }
+        }
+
+        // Build the link
+        $item_output = isset($args->before) ? $args->before : '';
+        $item_output .= '<a' . $attributes . '>';
+        $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
+        $item_output .= '</a>';
+        $item_output .= isset($args->after) ? $args->after : '';
+
+        $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+    }
+
+    /**
+     * End Element - End the element output
+     */
+    public function end_el(&$output, $item, $depth = 0, $args = null) {
+        $output .= "</li>\n";
+    }
+}
+
+/**
+ * Navigation fallback function
+ */
+function blueprint_folder_navigation_fallback() {
+    echo '<ul class="nav-menu">';
+    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/about')) . '">About</a></li>';
+    
+    // Services dropdown
+    echo '<li class="dropdown">';
+    echo '<a href="' . esc_url(get_post_type_archive_link('service')) . '" class="dropdown-toggle">Services</a>';
+    echo '<ul class="dropdown-menu">';
+    
+    // Get service categories
+    $categories = get_terms(array(
+        'taxonomy' => 'service_category',
+        'hide_empty' => false,
+    ));
+    
+    if (!empty($categories) && !is_wp_error($categories)) {
+        foreach ($categories as $category) {
+            echo '<li><a href="' . esc_url(get_term_link($category)) . '">' . esc_html($category->name) . '</a></li>';
+        }
+    }
+    
+    echo '<li><a href="' . esc_url(get_post_type_archive_link('service')) . '">View All Services</a></li>';
+    echo '</ul>';
+    echo '</li>';
+    
+    echo '<li><a href="' . esc_url(home_url('/pricing')) . '">Pricing</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/contact')) . '">Contact</a></li>';
+    echo '</ul>';
+}
                 $classes[] = 'dropdown-submenu';
             }
         }

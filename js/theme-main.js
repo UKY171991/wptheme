@@ -125,7 +125,6 @@
         mobileMenu: function() {
             const $menuToggle = $('.menu-toggle');
             const $navWrapper = $('.nav-menu-wrapper');
-            const $overlay = $('.mobile-nav-overlay');
             const $body = $('body');
 
             // Toggle mobile menu
@@ -137,47 +136,34 @@
                 if (isOpen) {
                     // Close menu
                     $(this).removeClass('active').attr('aria-expanded', 'false');
-                    $navWrapper.removeClass('mobile-menu-open');
-                    $overlay.removeClass('active');
+                    $navWrapper.removeClass('mobile-open');
                     $body.removeClass('menu-open');
                 } else {
                     // Open menu
                     $(this).addClass('active').attr('aria-expanded', 'true');
-                    $navWrapper.addClass('mobile-menu-open');
-                    $overlay.addClass('active');
+                    $navWrapper.addClass('mobile-open');
                     $body.addClass('menu-open');
                 }
             });
 
-            // Close menu when overlay is clicked
-            $overlay.on('click', function() {
-                $menuToggle.removeClass('active').attr('aria-expanded', 'false');
-                $navWrapper.removeClass('mobile-menu-open');
-                $(this).removeClass('active');
-                $body.removeClass('menu-open');
-            });
-
             // Handle dropdown menus on mobile
-            $('.navbar-nav .dropdown > .nav-link').on('click', function(e) {
-                if ($(window).width() <= 1023) {
+            $('.nav-menu .dropdown > a').on('click', function(e) {
+                if ($(window).width() <= 768) {
                     e.preventDefault();
                     
                     const $dropdown = $(this).closest('.dropdown');
-                    const $submenu = $dropdown.find('> .dropdown-menu');
                     
-                    $dropdown.toggleClass('show');
-                    $submenu.slideToggle(300);
+                    $dropdown.toggleClass('mobile-open');
                 }
             });
 
             // Close mobile menu on window resize
             $(window).on('resize', function() {
-                if ($(window).width() > 1023) {
+                if ($(window).width() > 768) {
                     $menuToggle.removeClass('active').attr('aria-expanded', 'false');
-                    $navWrapper.removeClass('mobile-menu-open');
-                    $overlay.removeClass('active');
+                    $navWrapper.removeClass('mobile-open');
                     $body.removeClass('menu-open');
-                    $('.navbar-nav .dropdown').removeClass('show');
+                    $('.nav-menu .dropdown').removeClass('mobile-open');
                     $('.dropdown-menu').removeAttr('style');
                 }
             });
