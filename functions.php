@@ -203,6 +203,29 @@ require_once get_template_directory() . '/inc/customizer.php';
 function blueprint_folder_force_nav_menu_display() {
     return true;
 }
+
+/**
+ * NAVIGATION FALLBACK MENU
+ */
+function blueprint_folder_navigation_fallback() {
+    $menu_items = array(
+        array('url' => home_url('/'), 'title' => 'Home'),
+        array('url' => home_url('/about'), 'title' => 'About'),
+        array('url' => home_url('/services'), 'title' => 'Services'),
+        array('url' => home_url('/portfolio'), 'title' => 'Portfolio'),
+        array('url' => home_url('/pricing'), 'title' => 'Pricing'),
+        array('url' => home_url('/contact'), 'title' => 'Contact'),
+    );
+    
+    echo '<ul id="primary-navigation" class="nav-menu primary-nav">';
+    foreach ($menu_items as $item) {
+        $current_class = (is_page(str_replace(home_url('/'), '', $item['url'])) || 
+                         ($item['url'] === home_url('/') && is_front_page())) ? ' current-menu-item' : '';
+        echo '<li class="nav-item' . $current_class . '"><a href="' . esc_url($item['url']) . '">' . esc_html($item['title']) . '</a></li>';
+    }
+    echo '</ul>';
+}
+
 add_filter('wp_nav_menu_args', function($args) {
     if (isset($args['theme_location']) && $args['theme_location'] === 'primary') {
         $args['fallback_cb'] = 'blueprint_folder_navigation_fallback';

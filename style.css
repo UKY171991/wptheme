@@ -467,6 +467,27 @@ a:focus {
     width: 100%;
 }
 
+/* Ensure desktop navigation is always visible on larger screens */
+@media (min-width: 769px) {
+    .navbar-nav {
+        display: flex !important;
+    }
+    
+    .menu-toggle {
+        display: none !important;
+    }
+    
+    .nav-menu-wrapper {
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        transform: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+}
+
 .navbar-nav {
     display: flex;
     list-style: none;
@@ -935,7 +956,7 @@ a:focus {
     }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 768px) {
     .navbar-nav {
         display: none;
     }
