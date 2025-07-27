@@ -7,7 +7,14 @@
  * @version 2.0.0
  */
 
-get_header(); ?>
+get_header(); 
+
+// Get current term information
+$current_term = get_queried_object();
+$term_name = $current_term->name ?? '';
+$term_description = $current_term->description ?? '';
+$term_slug = $current_term->slug ?? '';
+?>
 
 <div class="service-category-archive">
     
@@ -20,12 +27,12 @@ get_header(); ?>
                 <?php blueprint_folder_breadcrumb(); ?>
                 
                 <h1 class="page-title">
-                    <?php single_term_title(); ?>
+                    <?php echo esc_html($term_name); ?>
                 </h1>
                 
-                <?php if (term_description()) : ?>
+                <?php if (!empty($term_description)) : ?>
                     <div class="category-description">
-                        <?php echo term_description(); ?>
+                        <?php echo esc_html($term_description); ?>
                     </div>
                 <?php else : ?>
                     <p class="page-subtitle">
@@ -157,17 +164,6 @@ get_header(); ?>
     </section>
 
 </div>
-$term_name = $queried_object->name;
-$term_description = $queried_object->description;
-$term_slug = $queried_object->slug;
-
-// Count services in this category
-$services_count = 0;
-if (have_posts()) {
-    global $wp_query;
-    $services_count = $wp_query->found_posts;
-}
-?>
 
 <main id="main" class="site-main">
     <?php
