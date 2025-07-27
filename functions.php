@@ -685,51 +685,7 @@ function blueprint_folder_scripts() {
 }
 add_action('wp_enqueue_scripts', 'blueprint_folder_scripts');
 
-/**
- * REGISTER WIDGET AREAS
- */
-function blueprint_folder_widgets_init() {
-    register_sidebar(array(
-        'name'          => esc_html__('Primary Sidebar', 'blueprint-folder'),
-        'id'            => 'sidebar-1',
-        'description'   => esc_html__('Add widgets here.', 'blueprint-folder'),
-        'before_widget' => '<section id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</section>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    ));
-
-    register_sidebar(array(
-        'name'          => esc_html__('Footer Widget Area 1', 'blueprint-folder'),
-        'id'            => 'footer-1',
-        'description'   => esc_html__('Footer widget area 1', 'blueprint-folder'),
-        'before_widget' => '<div class="footer-widget">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h4 class="footer-widget-title">',
-        'after_title'   => '</h4>',
-    ));
-
-    register_sidebar(array(
-        'name'          => esc_html__('Footer Widget Area 2', 'blueprint-folder'),
-        'id'            => 'footer-2',
-        'description'   => esc_html__('Footer widget area 2', 'blueprint-folder'),
-        'before_widget' => '<div class="footer-widget">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h4 class="footer-widget-title">',
-        'after_title'   => '</h4>',
-    ));
-
-    register_sidebar(array(
-        'name'          => esc_html__('Footer Widget Area 3', 'blueprint-folder'),
-        'id'            => 'footer-3',
-        'description'   => esc_html__('Footer widget area 3', 'blueprint-folder'),
-        'before_widget' => '<div class="footer-widget">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h4 class="footer-widget-title">',
-        'after_title'   => '</h4>',
-    ));
-}
-add_action('widgets_init', 'blueprint_folder_widgets_init');
+// Removed duplicate function - using consolidated version below
 
 /**
  * HELPER FUNCTIONS FOR CONTENT RETRIEVAL
@@ -1619,17 +1575,47 @@ function blueprint_folder_get_projects($posts_per_page = -1) {
 }
 
 /**
- * REGISTER SIDEBAR
+ * REGISTER SIDEBAR - Updated to include all widget areas
  */
 function blueprint_folder_widgets_init() {
     register_sidebar(array(
-        'name'          => esc_html__('Sidebar', 'blueprint-folder'),
+        'name'          => esc_html__('Primary Sidebar', 'blueprint-folder'),
         'id'            => 'sidebar-1',
         'description'   => esc_html__('Add widgets here.', 'blueprint-folder'),
         'before_widget' => '<div id="%1$s" class="widget %2$s mb-4">',
         'after_widget'  => '</div>',
         'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
+    ));
+
+    register_sidebar(array(
+        'name'          => esc_html__('Footer Widget Area 1', 'blueprint-folder'),
+        'id'            => 'footer-1',
+        'description'   => esc_html__('Footer widget area 1', 'blueprint-folder'),
+        'before_widget' => '<div class="footer-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="footer-widget-title">',
+        'after_title'   => '</h4>',
+    ));
+
+    register_sidebar(array(
+        'name'          => esc_html__('Footer Widget Area 2', 'blueprint-folder'),
+        'id'            => 'footer-2',
+        'description'   => esc_html__('Footer widget area 2', 'blueprint-folder'),
+        'before_widget' => '<div class="footer-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="footer-widget-title">',
+        'after_title'   => '</h4>',
+    ));
+
+    register_sidebar(array(
+        'name'          => esc_html__('Footer Widget Area 3', 'blueprint-folder'),
+        'id'            => 'footer-3',
+        'description'   => esc_html__('Footer widget area 3', 'blueprint-folder'),
+        'before_widget' => '<div class="footer-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="footer-widget-title">',
+        'after_title'   => '</h4>',
     ));
 }
 add_action('widgets_init', 'blueprint_folder_widgets_init');
