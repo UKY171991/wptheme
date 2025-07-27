@@ -78,7 +78,7 @@
                             </button>
 
                             <!-- Navigation Menu Container -->
-                            <div class="navbar-collapse collapse" id="primary-menu">
+                            <div class="navbar-collapse" id="primary-menu">
                                 <div class="nav-menu-wrapper">
                                     <?php
                                     if (has_nav_menu('primary')) {

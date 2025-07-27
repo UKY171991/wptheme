@@ -291,6 +291,9 @@ function blueprint_folder_scripts() {
     // Header Rebuilt CSS - HIGH PRIORITY
     wp_enqueue_style('blueprint-folder-header-rebuilt', get_template_directory_uri() . '/css/header-rebuilt.css', array('blueprint-folder-style'), '2.1.0');
     
+    // Header Menu Fallback CSS - CRITICAL for menu visibility
+    wp_enqueue_style('blueprint-folder-header-fallback', get_template_directory_uri() . '/css/header-menu-fallback.css', array('blueprint-folder-header-rebuilt'), '2.1.0');
+    
     // Header Effects CSS - Additional animations
     wp_enqueue_style('blueprint-folder-header-effects', get_template_directory_uri() . '/css/header-effects.css', array('blueprint-folder-header-rebuilt'), '2.1.0');
     
@@ -325,11 +328,16 @@ function blueprint_folder_scripts() {
     // Bootstrap JS (CDN)
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.3.0', true);
     
+    // Header Menu Fix JavaScript - CRITICAL
+    wp_enqueue_script('blueprint-folder-header-menu-fix', get_template_directory_uri() . '/js/header-menu-fix.js', array(), '2.1.0', true);
+    
     // Enhanced Header JavaScript - HIGH PRIORITY
     wp_enqueue_script('blueprint-folder-header-enhanced', get_template_directory_uri() . '/js/header-enhanced.js', array(), '2.1.0', true);
     
-    // Header Layout Fix JavaScript - HIGH PRIORITY
-    wp_enqueue_script('blueprint-folder-header-fix', get_template_directory_uri() . '/js/header-layout-fix.js', array('jquery'), '2.1.0', true);
+    // Header Layout Fix JavaScript - HIGH PRIORITY  
+    if (file_exists(get_template_directory() . '/js/header-layout-fix.js')) {
+        wp_enqueue_script('blueprint-folder-header-fix', get_template_directory_uri() . '/js/header-layout-fix.js', array('jquery'), '2.1.0', true);
+    }
     
     // Theme main script
     wp_enqueue_script('blueprint-folder-main', get_template_directory_uri() . '/js/theme-main-enhanced.js', array('jquery', 'bootstrap'), '2.1.0', true);

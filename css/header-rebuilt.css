@@ -182,6 +182,17 @@
     justify-content: center;
 }
 
+/* Show navigation on desktop by default */
+@media (min-width: 992px) {
+    .navbar-collapse {
+        display: flex !important;
+    }
+    
+    .menu-toggle {
+        display: none;
+    }
+}
+
 .nav-menu-wrapper {
     display: flex;
     align-items: center;
@@ -285,6 +296,13 @@
     gap: 0.5rem;
     border-radius: var(--border-radius);
     transition: background-color var(--transition-speed) ease;
+}
+
+/* Show menu toggle only on mobile */
+@media (max-width: 991.98px) {
+    .menu-toggle {
+        display: flex;
+    }
 }
 
 .menu-toggle:hover,
