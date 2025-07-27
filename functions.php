@@ -734,34 +734,9 @@ add_action('widgets_init', 'blueprint_folder_widgets_init');
 /**
  * HELPER FUNCTIONS FOR CONTENT RETRIEVAL
  */
-function blueprint_folder_get_services($category = '', $limit = -1) {
-    $args = array(
-        'post_type'      => 'service',
-        'posts_per_page' => $limit,
-        'post_status'    => 'publish',
-        'meta_query'     => array()
-    );
-    
-    if (!empty($category)) {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => 'service_category',
-                'field'    => 'slug',
-                'terms'    => $category,
-            ),
-        );
-    }
-    
-    return new WP_Query($args);
-}
+// Removed duplicate function - using newer version below
 
-function blueprint_folder_get_testimonials($limit = -1) {
-    return new WP_Query(array(
-        'post_type'      => 'testimonial',
-        'posts_per_page' => $limit,
-        'post_status'    => 'publish',
-    ));
-}
+// Removed duplicate function - using newer version below
 
 function blueprint_folder_get_pricing_plans() {
     return new WP_Query(array(
@@ -774,25 +749,7 @@ function blueprint_folder_get_pricing_plans() {
     ));
 }
 
-function blueprint_folder_get_projects($category = '', $limit = -1) {
-    $args = array(
-        'post_type'      => 'project',
-        'posts_per_page' => $limit,
-        'post_status'    => 'publish',
-    );
-    
-    if (!empty($category)) {
-        $args['meta_query'] = array(
-            array(
-                'key'     => '_project_category',
-                'value'   => $category,
-                'compare' => 'LIKE'
-            )
-        );
-    }
-    
-    return new WP_Query($args);
-}
+// Removed duplicate function - using newer version below
 
 /**
  * FLUSH REWRITE RULES ON ACTIVATION
