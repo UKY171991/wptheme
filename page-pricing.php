@@ -340,6 +340,7 @@ get_header(); ?>
 </main>
 
 <style>
+/* Pricing Card Styles */
 .pricing-card.featured {
     transform: scale(1.05);
     border: 2px solid #3498db !important;
@@ -362,6 +363,121 @@ get_header(); ?>
     transform: translateY(-3px);
 }
 
+/* Button Styles */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.btn-outline-primary:hover {
+    background-color: #3498db;
+    border-color: #3498db;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.btn-light {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #2c3e50;
+}
+
+.btn-light:hover {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    color: #2c3e50;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline-light {
+    background-color: transparent;
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+.btn-outline-light:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #2c3e50;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+/* CTA Buttons Specific Styling */
+.cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.cta-buttons .btn {
+    min-width: 200px;
+    white-space: nowrap;
+}
+
+/* Icon Spacing */
+.btn i {
+    display: inline-block;
+}
+
+.btn i.me-1 {
+    margin-right: 0.25rem !important;
+}
+
+.btn i.me-2 {
+    margin-right: 0.5rem !important;
+}
+
+.btn i.ms-1 {
+    margin-left: 0.25rem !important;
+}
+
+.btn i.ms-2 {
+    margin-left: 0.5rem !important;
+}
+
+/* Accordion Styles */
 .accordion-button:not(.collapsed) {
     background-color: #f8f9fa;
     color: #2c3e50;
@@ -372,11 +488,59 @@ get_header(); ?>
     border-color: #3498db;
 }
 
+.accordion-button {
+    font-weight: 500;
+    border: none;
+    border-radius: 8px !important;
+}
+
+.accordion-item {
+    border-radius: 8px !important;
+    overflow: hidden;
+}
+
+/* Responsive Design */
 @media (max-width: 992px) {
     .pricing-card.featured {
         transform: none;
         margin-top: 1rem;
     }
+}
+
+@media (max-width: 768px) {
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .btn-lg {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Additional Button States */
+.btn:focus,
+.btn:active {
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+    outline: none;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Ensure text is readable */
+.btn {
+    line-height: 1.5;
+    text-align: center;
 }
 </style>
 
