@@ -24,6 +24,75 @@ get_header(); ?>
                     'Browse our complete range of professional services'
                 ); ?>
                 
+                <!-- Service Categories Filter -->
+                <div class="service-categories-filter mb-5">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="categories-wrapper bg-light rounded-3 p-4">
+                                <h4 class="h5 mb-3 text-center" style="color: #2c3e50; font-weight: 600;">
+                                    <i class="fas fa-filter me-2" style="color: #3498db;"></i>
+                                    Filter by Category
+                                </h4>
+                                
+                                <div class="categories-list d-flex flex-wrap justify-content-center gap-3">
+                                    <!-- All Services Button -->
+                                    <a href="<?php echo get_post_type_archive_link('service'); ?>" 
+                                       class="category-filter-btn <?php echo !is_tax('service_category') ? 'active' : ''; ?>">
+                                        <i class="fas fa-th-large me-2"></i>
+                                        All Services
+                                        <span class="category-count"><?php echo wp_count_posts('service')->publish; ?></span>
+                                    </a>
+                                    
+                                    <?php
+                                    // Get all service categories
+                                    $service_categories = get_terms(array(
+                                        'taxonomy' => 'service_category',
+                                        'hide_empty' => true,
+                                        'orderby' => 'name',
+                                        'order' => 'ASC'
+                                    ));
+                                    
+                                    if ($service_categories && !is_wp_error($service_categories)) :
+                                        $current_category = get_queried_object();
+                                        
+                                        foreach ($service_categories as $category) :
+                                            $is_current = (is_tax('service_category') && $current_category->term_id == $category->term_id);
+                                    ?>
+                                        <a href="<?php echo get_term_link($category); ?>" 
+                                           class="category-filter-btn <?php echo $is_current ? 'active' : ''; ?>">
+                                            <i class="fas fa-tag me-2"></i>
+                                            <?php echo esc_html($category->name); ?>
+                                            <span class="category-count"><?php echo $category->count; ?></span>
+                                        </a>
+                                    <?php 
+                                        endforeach;
+                                    endif; 
+                                    ?>
+                                </div>
+                                
+                                <?php if (is_tax('service_category')) : 
+                                    $current_category = get_queried_object();
+                                ?>
+                                    <div class="current-category-info mt-4 p-3 bg-white rounded-2 border-start border-primary border-4">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-info-circle text-primary me-3" style="font-size: 1.2rem;"></i>
+                                            <div>
+                                                <h5 class="mb-1" style="color: #2c3e50;">
+                                                    Showing: <?php echo esc_html($current_category->name); ?>
+                                                </h5>
+                                                <p class="mb-0 text-muted small">
+                                                    <?php echo $current_category->description ? esc_html($current_category->description) : 'Services in this category'; ?>
+                                                    (<?php echo $current_category->count; ?> service<?php echo $current_category->count != 1 ? 's' : ''; ?>)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="row g-4">
                     <?php while (have_posts()) : the_post(); 
                         $service_icon = get_post_meta(get_the_ID(), '_service_icon', true) ?: 'fas fa-home';
