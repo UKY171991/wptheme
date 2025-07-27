@@ -657,7 +657,7 @@ get_header(); ?>
                         <p style="color: #666; margin-bottom: 1.5rem; font-size: 0.95rem;">
                             From cleaning to repairs, we're here to help make your life easier.
                         </p>
-                        <a href="<?php echo esc_url(home_url('/services')); ?>" style="background: linear-gradient(135deg, #ff5f00, #ff8c00); color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease;">
+                        <a href="<?php echo esc_url(home_url('/service')); ?>" style="background: linear-gradient(135deg, #ff5f00, #ff8c00); color: white; padding: 1rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease;">
                             View Services
                         </a>
                     </div>
