@@ -133,118 +133,61 @@ Bootstrap 5 Compatible | Vanilla JS
             },
 
             setupEnhancedDropdowns: function() {
-                const dropdowns = document.querySelectorAll('.dropdown, .dropdown-submenu');
+                // Simple dropdown functionality that works with CSS hover
+                const dropdowns = document.querySelectorAll('.dropdown');
                 
                 dropdowns.forEach(dropdown => {
                     const toggle = dropdown.querySelector('.dropdown-toggle');
                     const menu = dropdown.querySelector('.dropdown-menu');
                     
                     if (toggle && menu) {
-                        let hoverTimeout;
-                        
-                        // Desktop hover behavior with delay
-                        if (window.innerWidth >= 992) {
-                            dropdown.addEventListener('mouseenter', function() {
-                                clearTimeout(hoverTimeout);
-                                
-                                // Close sibling dropdowns at the same level
-                                const parent = dropdown.parentElement;
-                                if (parent) {
-                                    const siblings = parent.querySelectorAll(':scope > .dropdown, :scope > .dropdown-submenu');
-                                    siblings.forEach(sibling => {
-                                        if (sibling !== dropdown) {
-                                            const siblingToggle = sibling.querySelector('.dropdown-toggle');
-                                            const siblingMenu = sibling.querySelector('.dropdown-menu');
-                                            if (siblingToggle && siblingMenu) {
-                                                siblingToggle.setAttribute('aria-expanded', 'false');
-                                                siblingMenu.classList.remove('show');
-                                            }
-                                        }
-                                    });
-                                }
-                                
-                                toggle.setAttribute('aria-expanded', 'true');
-                                menu.classList.add('show');
-                            });
-
-                            dropdown.addEventListener('mouseleave', function() {
-                                hoverTimeout = setTimeout(() => {
-                                    toggle.setAttribute('aria-expanded', 'false');
-                                    menu.classList.remove('show');
-                                    
-                                    // Also close all child submenus
-                                    const childSubmenus = menu.querySelectorAll('.dropdown-submenu .dropdown-menu');
-                                    childSubmenus.forEach(childMenu => {
-                                        childMenu.classList.remove('show');
-                                        const childToggle = childMenu.previousElementSibling;
-                                        if (childToggle && childToggle.classList.contains('dropdown-toggle')) {
-                                            childToggle.setAttribute('aria-expanded', 'false');
-                                        }
-                                    });
-                                }, 150);
-                            });
-                            
-                            // Cancel close if mouse re-enters
-                            menu.addEventListener('mouseenter', function() {
-                                clearTimeout(hoverTimeout);
-                            });
-                        }
-
-                        // Click behavior for all devices
+                        // Click behavior for mobile and accessibility
                         toggle.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            
-                            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                            
-                            // Close sibling dropdowns at the same level
-                            const parent = dropdown.parentElement;
-                            if (parent) {
-                                const siblings = parent.querySelectorAll(':scope > .dropdown, :scope > .dropdown-submenu');
-                                siblings.forEach(sibling => {
-                                    if (sibling !== dropdown) {
-                                        const siblingToggle = sibling.querySelector('.dropdown-toggle');
-                                        const siblingMenu = sibling.querySelector('.dropdown-menu');
-                                        if (siblingToggle && siblingMenu) {
-                                            siblingToggle.setAttribute('aria-expanded', 'false');
-                                            siblingMenu.classList.remove('show');
+                            // Only prevent default on mobile
+                            if (window.innerWidth < 992) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                
+                                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                                
+                                // Close all other dropdowns
+                                dropdowns.forEach(otherDropdown => {
+                                    if (otherDropdown !== dropdown) {
+                                        const otherToggle = otherDropdown.querySelector('.dropdown-toggle');
+                                        const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                                        if (otherToggle && otherMenu) {
+                                            otherToggle.setAttribute('aria-expanded', 'false');
+                                            otherMenu.classList.remove('show');
                                         }
                                     }
                                 });
-                            }
 
-                            // Toggle current dropdown
-                            if (isExpanded) {
-                                this.setAttribute('aria-expanded', 'false');
-                                menu.classList.remove('show');
-                                
-                                // Close all child submenus
-                                const childSubmenus = menu.querySelectorAll('.dropdown-submenu .dropdown-menu');
-                                childSubmenus.forEach(childMenu => {
-                                    childMenu.classList.remove('show');
-                                    const childToggle = childMenu.previousElementSibling;
-                                    if (childToggle && childToggle.classList.contains('dropdown-toggle')) {
-                                        childToggle.setAttribute('aria-expanded', 'false');
-                                    }
-                                });
-                            } else {
-                                this.setAttribute('aria-expanded', 'true');
-                                menu.classList.add('show');
-                                
-                                // Focus first menu item on mobile
-                                if (window.innerWidth < 992) {
-                                    const firstItem = menu.querySelector('.dropdown-item');
-                                    if (firstItem) {
-                                        setTimeout(() => firstItem.focus(), 100);
-                                    }
+                                // Toggle current dropdown
+                                if (isExpanded) {
+                                    this.setAttribute('aria-expanded', 'false');
+                                    menu.classList.remove('show');
+                                } else {
+                                    this.setAttribute('aria-expanded', 'true');
+                                    menu.classList.add('show');
                                 }
                             }
                         });
 
-                        // Close dropdown when clicking outside
+                        // Desktop hover behavior is handled by CSS
+                        // Just update aria-expanded for accessibility
+                        if (window.innerWidth >= 992) {
+                            dropdown.addEventListener('mouseenter', function() {
+                                toggle.setAttribute('aria-expanded', 'true');
+                            });
+
+                            dropdown.addEventListener('mouseleave', function() {
+                                toggle.setAttribute('aria-expanded', 'false');
+                            });
+                        }
+
+                        // Close dropdown when clicking outside (mobile)
                         document.addEventListener('click', function(e) {
-                            if (!dropdown.contains(e.target)) {
-                                clearTimeout(hoverTimeout);
+                            if (!dropdown.contains(e.target) && window.innerWidth < 992) {
                                 toggle.setAttribute('aria-expanded', 'false');
                                 menu.classList.remove('show');
                             }
@@ -253,7 +196,6 @@ Bootstrap 5 Compatible | Vanilla JS
                         // Close dropdown on escape key
                         document.addEventListener('keydown', function(e) {
                             if (e.key === 'Escape') {
-                                clearTimeout(hoverTimeout);
                                 toggle.setAttribute('aria-expanded', 'false');
                                 menu.classList.remove('show');
                                 toggle.focus();
@@ -262,16 +204,46 @@ Bootstrap 5 Compatible | Vanilla JS
                     }
                 });
                 
+                // Handle submenu interactions
+                const submenus = document.querySelectorAll('.dropdown-submenu');
+                submenus.forEach(submenu => {
+                    const toggle = submenu.querySelector('.dropdown-toggle');
+                    const menu = submenu.querySelector('.dropdown-menu');
+                    
+                    if (toggle && menu) {
+                        // Mobile click behavior for submenus
+                        toggle.addEventListener('click', function(e) {
+                            if (window.innerWidth < 992) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                
+                                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                                
+                                if (isExpanded) {
+                                    this.setAttribute('aria-expanded', 'false');
+                                    menu.classList.remove('show');
+                                } else {
+                                    this.setAttribute('aria-expanded', 'true');
+                                    menu.classList.add('show');
+                                }
+                            }
+                        });
+                    }
+                });
+                
                 // Handle window resize to reset dropdown behavior
                 window.addEventListener('resize', function() {
-                    dropdowns.forEach(dropdown => {
-                        const toggle = dropdown.querySelector('.dropdown-toggle');
-                        const menu = dropdown.querySelector('.dropdown-menu');
-                        if (toggle && menu) {
-                            toggle.setAttribute('aria-expanded', 'false');
-                            menu.classList.remove('show');
-                        }
-                    });
+                    if (window.innerWidth >= 992) {
+                        // Reset mobile states on desktop
+                        dropdowns.forEach(dropdown => {
+                            const toggle = dropdown.querySelector('.dropdown-toggle');
+                            const menu = dropdown.querySelector('.dropdown-menu');
+                            if (toggle && menu) {
+                                toggle.setAttribute('aria-expanded', 'false');
+                                menu.classList.remove('show');
+                            }
+                        });
+                    }
                 });
             },
 

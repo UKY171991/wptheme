@@ -1,0 +1,53 @@
+/* Dropdown Menu Fix */
+.dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.dropdown:hover > .dropdown-menu,
+.dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    display: block !important;
+}
+
+/* Ensure proper z-index */
+.navbar-nav .dropdown {
+    position: relative;
+    z-index: 1000;
+}
+
+.dropdown-menu {
+    z-index: 1050;
+    position: absolute;
+}
+
+/* Fix submenu positioning */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+}
+
+/* Mobile fixes */
+@media (max-width: 991.98px) {
+    .dropdown-menu {
+        position: static !important;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: none;
+    }
+    
+    .dropdown-menu.show {
+        display: block !important;
+    }
+}

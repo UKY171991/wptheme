@@ -279,19 +279,27 @@ img {
 @media (min-width: 992px) {
     .dropdown-menu {
         border: none;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
         border-radius: var(--border-radius);
-        padding: 0.5rem 0;
-        margin-top: 0.5rem;
+        padding: 0.75rem 0;
+        margin-top: 0.25rem;
         background: #ffffff;
-        animation: dropdownSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: absolute;
         top: 100%;
         left: 0;
         z-index: 1050;
         display: none;
-        min-width: 220px;
+        min-width: 240px;
         border-top: 3px solid var(--accent);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .dropdown:hover > .dropdown-menu,
+    .dropdown-menu.show {
+        opacity: 1;
+        transform: translateY(0);
     }
     
     .dropdown-item {
@@ -339,9 +347,13 @@ img {
     }
     
     /* Dropdown hover behavior */
-    .dropdown:hover .dropdown-menu {
-        display: block;
+    .dropdown:hover > .dropdown-menu {
+        display: block !important;
         animation: dropdownSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .dropdown-menu.show {
+        display: block !important;
     }
     
     /* Multi-level submenu styling */
@@ -359,7 +371,7 @@ img {
     }
     
     .dropdown-submenu:hover > .dropdown-menu {
-        display: block;
+        display: block !important;
         animation: dropdownSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
@@ -372,15 +384,30 @@ img {
     }
     
     /* Right-aligned dropdown positioning */
-    .navbar-nav.ms-auto .dropdown-menu {
+    .navbar-nav.ms-auto .nav-item:last-child .dropdown-menu {
         right: 0;
         left: auto;
     }
     
     /* But keep submenus left-aligned relative to their parent */
     .dropdown-submenu > .dropdown-menu {
-        right: auto;
-        left: 100%;
+        right: auto !important;
+        left: 100% !important;
+    }
+    
+    /* Ensure dropdown appears above other content */
+    .dropdown-menu {
+        z-index: 1050 !important;
+    }
+    
+    /* Fix dropdown positioning issues */
+    .dropdown {
+        position: relative;
+    }
+    
+    .dropdown-menu {
+        position: absolute !important;
+        will-change: transform;
     }
 }
 

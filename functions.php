@@ -697,11 +697,17 @@ function blueprint_folder_scripts() {
     // Single Global CSS - Contains all theme styles
     wp_enqueue_style('blueprint-folder-global', get_template_directory_uri() . '/assets/css/global.css', array('bootstrap', 'font-awesome'), '3.0.0');
     
+    // Dropdown menu fix
+    wp_enqueue_style('blueprint-folder-dropdown-fix', get_template_directory_uri() . '/assets/css/dropdown-fix.css', array('blueprint-folder-global'), '1.0.0');
+    
     // Bootstrap JS (CDN)
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
     
     // Single Global JavaScript - Contains all theme functionality
     wp_enqueue_script('blueprint-folder-global', get_template_directory_uri() . '/assets/js/global.js', array('bootstrap'), '3.0.0', true);
+    
+    // Dropdown menu fix
+    wp_enqueue_script('blueprint-folder-dropdown-fix', get_template_directory_uri() . '/assets/js/dropdown-fix.js', array('blueprint-folder-global'), '1.0.0', true);
     
     // Localize script for AJAX and theme data
     wp_localize_script('blueprint-folder-global', 'wpAjax', array(
