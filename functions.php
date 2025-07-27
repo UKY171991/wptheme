@@ -303,6 +303,175 @@ function blueprint_folder_navigation_fallback() {
     echo '</ul>';
 }
 
+/**
+ * ENHANCED BREADCRUMB NAVIGATION
+ */
+function blueprint_folder_breadcrumb() {
+    // Return early if on front page
+    if (is_front_page()) {
+        return;
+    }
+    
+    $delimiter = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
+    $home_title = esc_html__('Home', 'blueprint-folder');
+    
+    // Start breadcrumb
+    echo '<nav class="breadcrumb-navigation" aria-label="Breadcrumb">';
+    echo '<ol class="breadcrumb-list">';
+    
+    // Home link
+    echo '<li class="breadcrumb-item">';
+    echo '<a href="' . esc_url(home_url('/')) . '">';
+    echo '<i class="fas fa-home" aria-hidden="true"></i> ';
+    echo esc_html($home_title);
+    echo '</a>';
+    echo '</li>';
+    
+    if (is_category() || is_single()) {
+        echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
+        
+        if (is_single()) {
+            $category = get_the_category();
+            if (!empty($category)) {
+                $cat = $category[0];
+                echo '<li class="breadcrumb-item">';
+                echo '<a href="' . esc_url(get_category_link($cat->term_id)) . '">';
+                echo esc_html($cat->name);
+                echo '</a>';
+                echo '</li>';
+                echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
+            }
+            
+            echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
+            echo esc_html(get_the_title());
+            echo '</li>';
+        } else {
+            echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
+            echo esc_html(single_cat_title('', false));
+            echo '</li>';
+        }
+        
+    } elseif (is_page()) {
+        $post = get_post();
+        
+        if ($post->post_parent) {
+            $parent_pages = array();
+            $parent_id = $post->post_parent;
+            
+            while ($parent_id) {
+                $parent = get_post($parent_id);
+                $parent_pages[] = $parent;
+                $parent_id = $parent->post_parent;
+            }
+            
+            $parent_pages = array_reverse($parent_pages);
+            
+            foreach ($parent_pages as $parent) {
+                echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
+                echo '<li class="breadcrumb-item">';
+                echo '<a href="' . esc_url(get_permalink($parent->ID)) . '">';
+                echo esc_html($parent->post_title);
+                echo '</a>';
+                echo '</li>';
+            }
+        }
+        
+        echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
+        echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
+        echo esc_html(get_the_title());
+        echo '</li>';
+        
+    } elseif (is_tag()) {
+        echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
+        echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
+        echo esc_html__('Tag: ', 'blueprint-folder') . esc_html(single_tag_title('', false));
+        echo '</li>';
+        
+    } elseif (is_author()) {
+        echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
+        echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
+        echo esc_html__('Author: ', 'blueprint-folder') . esc_html(get_the_author());
+        echo '</li>';
+        
+    } elseif (is_archive()) {
+        echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
+        echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
+        
+        if (is_post_type_archive()) {
+            echo esc_html(post_type_archive_title('', false));
+        } else {
+            echo esc_html__('Archive', 'blueprint-folder');
+        }
+        
+        echo '</li>';
+        
+    } elseif (is_search()) {
+        echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
+        echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
+        echo esc_html__('Search Results for: ', 'blueprint-folder') . esc_html(get_search_query());
+        echo '</li>';
+        
+    } elseif (is_404()) {
+        echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
+        echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
+        echo esc_html__('404 Error', 'blueprint-folder');
+        echo '</li>';
+    }
+    
+    echo '</ol>';
+    echo '</nav>';
+    
+    // Add breadcrumb styles
+    if (!wp_style_is('blueprint-breadcrumb', 'enqueued')) {
+        echo '<style>
+        .breadcrumb-navigation {
+            margin: 1.5rem 0;
+        }
+        
+        .breadcrumb-list {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 0.9rem;
+            gap: 0.5rem;
+        }
+        
+        .breadcrumb-item {
+            margin: 0;
+        }
+        
+        .breadcrumb-item a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: #1e40af;
+        }
+        
+        .breadcrumb-separator {
+            color: #9ca3af;
+            font-size: 0.75rem;
+        }
+        
+        .breadcrumb-current {
+            color: #1e40af;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 767.98px) {
+            .breadcrumb-list {
+                font-size: 0.8rem;
+            }
+        }
+        </style>';
+    }
+}
+
 add_filter('wp_nav_menu_args', function($args) {
     if (isset($args['theme_location']) && $args['theme_location'] === 'primary') {
         $args['fallback_cb'] = 'blueprint_folder_navigation_fallback';
@@ -317,8 +486,11 @@ function blueprint_folder_scripts() {
     // Theme stylesheet
     wp_enqueue_style('blueprint-folder-style', get_stylesheet_uri(), array(), '2.1.0');
     
-    // Multi-Level WordPress Menu CSS - HIGHEST PRIORITY for proper menu display
-    wp_enqueue_style('blueprint-folder-multi-level-menu', get_template_directory_uri() . '/css/multi-level-menu.css', array('blueprint-folder-style'), '2.1.0');
+    // Enhanced Global Styles - HIGHEST PRIORITY for professional appearance
+    wp_enqueue_style('blueprint-folder-enhanced-global', get_template_directory_uri() . '/css/enhanced-global-styles.css', array('blueprint-folder-style'), '2.2.0');
+    
+    // Multi-Level WordPress Menu CSS - HIGH PRIORITY for proper menu display
+    wp_enqueue_style('blueprint-folder-multi-level-menu', get_template_directory_uri() . '/css/multi-level-menu.css', array('blueprint-folder-enhanced-global'), '2.1.0');
     
     // WordPress Standard Menu CSS - CRITICAL (backup)
     wp_enqueue_style('blueprint-folder-wp-menu', get_template_directory_uri() . '/css/wordpress-standard-menu.css', array('blueprint-folder-multi-level-menu'), '2.1.0');
@@ -363,8 +535,11 @@ function blueprint_folder_scripts() {
     // Bootstrap JS (CDN)
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.3.0', true);
     
-    // Multi-Level Menu JavaScript - HIGHEST PRIORITY for WordPress menu functionality
-    wp_enqueue_script('blueprint-folder-multi-level-menu', get_template_directory_uri() . '/js/multi-level-menu.js', array(), '2.2.0', true);
+    // Enhanced Global JavaScript - HIGHEST PRIORITY for professional functionality
+    wp_enqueue_script('blueprint-folder-enhanced-global', get_template_directory_uri() . '/js/enhanced-global.js', array(), '2.2.0', true);
+    
+    // Multi-Level Menu JavaScript - HIGH PRIORITY for WordPress menu functionality
+    wp_enqueue_script('blueprint-folder-multi-level-menu', get_template_directory_uri() . '/js/multi-level-menu.js', array('blueprint-folder-enhanced-global'), '2.2.0', true);
     
     // Header Menu Fix JavaScript - CRITICAL (backup)
     wp_enqueue_script('blueprint-folder-header-menu-fix', get_template_directory_uri() . '/js/header-menu-fix.js', array('blueprint-folder-multi-level-menu'), '2.1.0', true);
