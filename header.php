@@ -93,8 +93,8 @@
         </nav>
     </header>
 
-    <!-- Professional Banner Section (exclude homepage) -->
-    <?php if (!is_front_page()) : ?>
+    <!-- Professional Banner Section (exclude homepage and single services) -->
+    <?php if (!is_front_page() && !(is_single() && get_post_type() === 'service')) : ?>
         <?php get_template_part('template-parts/banner-section'); ?>
     <?php endif; ?>
 
