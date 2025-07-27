@@ -6,7 +6,7 @@
 get_header(); ?>
 <main id="main" class="site-main">
     <!-- Pricing Hero Section -->
-    <section id="pricing-hero" class="section bg-light">
+    <section id="pricing-hero" class="py-5 bg-light">
         <div class="container">
             <div class="section-heading text-center mb-5">
                 <h1 class="section-title mb-3" style="color: #2c3e50; font-weight: 600;">
@@ -20,7 +20,7 @@ get_header(); ?>
         </div>
     </section>
     <!-- Pricing Plans Section -->
-    <section id="pricing-plans" class="section">
+    <section id="pricing-plans" class="py-5">
         <div class="container">
             <div class="row g-4">
                 <!-- Basic Plan -->
@@ -229,7 +229,7 @@ get_header(); ?>
         </div>
     </section>
     <!-- FAQ Section -->
-    <section id="pricing-faq" class="section">
+    <section id="pricing-faq" class="py-5 bg-light">
         <div class="container">
             <div class="section-heading text-center mb-5">
                 <h2 class="section-title mb-3" style="color: #2c3e50; font-weight: 600;">
@@ -297,7 +297,7 @@ get_header(); ?>
         </div>
     </section>
     <!-- CTA Section -->
-    <section class="section bg-primary">
+    <section class="py-5 bg-primary">
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
