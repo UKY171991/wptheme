@@ -1658,3 +1658,42 @@ function blueprint_folder_save_menu_custom_fields($menu_id, $menu_item_db_id, $a
         update_post_meta($menu_item_db_id, '_menu_item_description', sanitize_textarea_field($_POST['menu-item-description'][$menu_item_db_id]));
     }
 }
+
+/**
+ * Footer Menu Fallback
+ */
+function blueprint_folder_footer_fallback_menu() {
+    $fallback_links = array(
+        array(
+            'url' => home_url('/about'),
+            'title' => 'About Us'
+        ),
+        array(
+            'url' => home_url('/services'),
+            'title' => 'Services'
+        ),
+        array(
+            'url' => home_url('/portfolio'),
+            'title' => 'Portfolio'
+        ),
+        array(
+            'url' => home_url('/contact'),
+            'title' => 'Contact'
+        ),
+        array(
+            'url' => home_url('/blog'),
+            'title' => 'Blog'
+        )
+    );
+    
+    echo '<ul class="footer-menu list-unstyled">';
+    foreach ($fallback_links as $link) {
+        echo '<li class="mb-2">';
+        echo '<a href="' . esc_url($link['url']) . '" class="text-light text-decoration-none">';
+        echo '<i class="fas fa-arrow-right me-2 text-primary"></i>';
+        echo esc_html($link['title']);
+        echo '</a>';
+        echo '</li>';
+    }
+    echo '</ul>';
+}
