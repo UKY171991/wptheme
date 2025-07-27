@@ -339,17 +339,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-                    <div class="card border-0 shadow-sm h-100 card-hover">
-                        <div class="card-body p-4">
-                            <i class="fas fa-calendar text-accent mb-3" style="font-size: 3rem;"></i>
-                            <h3 class="h2 fw-bold text-primary-dark mb-2">5+</h3>
-                            <p class="text-muted mb-0">Years Experience</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Call to Action -->
     <section class="section bg-accent text-white">
         <div class="container">
@@ -458,38 +447,45 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterButtons = document.querySelectorAll('[data-filter]');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     const sortButtons = document.querySelectorAll('[name="sort"]');
+    
     // Filter functionality
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
             const filter = this.dataset.filter;
+            
             // Update button states
             filterButtons.forEach(btn => btn.classList.remove('active', 'btn-accent'));
             filterButtons.forEach(btn => btn.classList.add('btn-outline-accent'));
             this.classList.add('active', 'btn-accent');
             this.classList.remove('btn-outline-accent');
+            
             // Filter items
             portfolioItems.forEach(item => {
                 if (filter === 'all' || item.dataset.category === filter) {
                     item.style.display = 'block';
-} else {
+                } else {
                     item.style.display = 'none';
-}
-});
-});
-});
+                }
+            });
+        });
+    });
+    
     // Portfolio hover effects
     const portfolioCards = document.querySelectorAll('.portfolio-item .card');
     portfolioCards.forEach(card => {
         const overlay = card.querySelector('.portfolio-overlay');
-        card.addEventListener('mouseenter', function() {
-            overlay.classList.remove('opacity-0');
-            overlay.classList.add('opacity-100');
-});
-        card.addEventListener('mouseleave', function() {
-            overlay.classList.add('opacity-0');
-            overlay.classList.remove('opacity-100');
-});
-});
+        if (overlay) {
+            card.addEventListener('mouseenter', function() {
+                overlay.classList.remove('opacity-0');
+                overlay.classList.add('opacity-100');
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                overlay.classList.add('opacity-0');
+                overlay.classList.remove('opacity-100');
+            });
+        }
+    });
 });
 </script>
 <?php get_footer(); ?>
