@@ -192,95 +192,17 @@ require_once get_template_directory() . '/inc/template-functions.php';
 require_once get_template_directory() . '/inc/customizer.php';
 
 /**
- * ENHANCED HEADER LAYOUT & ADMIN BAR FIXES
+ * BASIC HEADER SETUP
  */
-function blueprint_folder_header_fixes() {
+function blueprint_folder_header_setup() {
     // Hide admin bar for non-admin users
     if (!current_user_can('administrator') && !is_admin()) {
         show_admin_bar(false);
     }
-    
-    // Enhanced header styles with responsive support
-    add_action('wp_head', function() {
-        echo '<style>
-        /* Enhanced header fixes with responsive support */
-        .site-header { 
-            position: fixed !important; 
-            top: 0 !important; 
-            z-index: 1030 !important; 
-            width: 100% !important;
-            left: 0 !important;
-            right: 0 !important;
-        }
-        .site-header::before, 
-        .site-header::after { 
-            display: none !important; 
-        }
-        
-        /* Responsive body padding */
-        body { 
-            padding-top: 80px !important; 
-        }
-        .admin-bar body { 
-            padding-top: 112px !important; 
-        }
-        
-        @media (max-width: 782px) { 
-            .admin-bar body { 
-                padding-top: 126px !important; 
-            } 
-        }
-        
-        @media (max-width: 575.98px) {
-            body {
-                padding-top: 70px !important;
-            }
-            .admin-bar body {
-                padding-top: 102px !important;
-            }
-        }
-        
-        @media (min-width: 1400px) {
-            body {
-                padding-top: 90px !important;
-            }
-            .admin-bar body {
-                padding-top: 122px !important;
-            }
-        }
-        
-        /* Ensure header stays above other elements */
-        .site-header {
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-        }
-        </style>';
-    }, 9999);
 }
-add_action('after_setup_theme', 'blueprint_folder_header_fixes');
+add_action('after_setup_theme', 'blueprint_folder_header_setup');
 
-/**
- * Remove any conflicting header elements
- */
-function blueprint_folder_clean_header() {
-    add_action('wp_footer', function() {
-        echo '<script>
-        jQuery(document).ready(function($) {
-            // Remove any problematic elements
-            $(".site-header").find(".overlay-accent, .decorative-overlay, [style*=orange]").remove();
-            
-            // Ensure proper positioning
-            $(".site-header").css({
-                "position": "fixed",
-                "top": "0",
-                "z-index": "9999",
-                "width": "100%"
-            });
-        });
-        </script>';
-    });
-}
-add_action('init', 'blueprint_folder_clean_header');
+
 
 /**
  * FORCE NAVIGATION MENU DISPLAY EVEN WHEN EMPTY

@@ -130,58 +130,20 @@ img {
    ENHANCED HEADER & NAVIGATION
    ======================================== */
 .site-header {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: var(--white);
     box-shadow: var(--shadow);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative;
     z-index: 1030;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     transition: var(--transition);
     width: 100%;
 }
 
-.site-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.95);
-    z-index: -1;
-}
-
-/* Adjust body for fixed header */
-body {
-    padding-top: 90px !important;
-}
-
-.admin-bar body {
-    padding-top: 122px !important;
-}
-
-@media (max-width: 782px) {
-    .admin-bar body {
-        padding-top: 136px !important;
-    }
-}
-
-/* Ensure main content doesn't overlap with header */
+/* Ensure main content flows naturally */
 .site-main {
     position: relative;
     z-index: 1;
     background: var(--white);
-}
-
-/* Fix for WordPress admin bar */
-@media screen and (max-width: 600px) {
-    .admin-bar body {
-        padding-top: 126px !important;
-    }
 }
 
 .navbar {

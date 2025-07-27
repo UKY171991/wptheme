@@ -431,31 +431,8 @@ Bootstrap 5 Compatible | Vanilla JS
             },
 
             fixHeaderSpacing: function() {
-                // Ensure proper spacing for fixed header
-                const header = document.querySelector('.site-header');
-                const body = document.body;
-                
-                if (header) {
-                    const headerHeight = header.offsetHeight;
-                    body.style.paddingTop = (headerHeight + 10) + 'px';
-                    
-                    // Adjust for admin bar
-                    if (body.classList.contains('admin-bar')) {
-                        const adminBar = document.getElementById('wpadminbar');
-                        if (adminBar) {
-                            const adminBarHeight = adminBar.offsetHeight;
-                            body.style.paddingTop = (headerHeight + adminBarHeight + 10) + 'px';
-                        }
-                    }
-                }
-                
-                // Fix hero section overlap
-                const heroSection = document.querySelector('.hero-section');
-                if (heroSection && header) {
-                    const headerHeight = header.offsetHeight;
-                    heroSection.style.marginTop = '0';
-                    heroSection.style.paddingTop = (headerHeight + 40) + 'px';
-                }
+                // No special header spacing needed for static header
+                return;
             },
 
             handleServiceFilters: function() {
@@ -487,23 +464,8 @@ Bootstrap 5 Compatible | Vanilla JS
             },
 
             setupScrollEffects: function() {
-                // Add scroll-based header effects
-                let lastScrollTop = 0;
-                const header = document.querySelector('.site-header');
-                
-                window.addEventListener('scroll', function() {
-                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                    
-                    if (header) {
-                        if (scrollTop > 100) {
-                            header.classList.add('scrolled');
-                        } else {
-                            header.classList.remove('scrolled');
-                        }
-                    }
-                    
-                    lastScrollTop = scrollTop;
-                }, { passive: true });
+                // No scroll effects needed for static header
+                return;
             },
 
             fixMobileLayout: function() {
