@@ -63,8 +63,104 @@ body.mobile-menu-open {overflow: hidden; }/* ===================================
 .btn-rounded {border-radius: 2rem; }/* Button Group and Spacing */
 .btn + .btn {margin-left: 0.5rem; }/* Icon spacing within buttons */
 .btn i {display: inline-block; line-height: 1; }.btn i.me-1 {margin-right: 0.25rem !important; }.btn i.me-2 {margin-right: 0.5rem !important; }.btn i.ms-1 {margin-left: 0.25rem !important; }.btn i.ms-2 {margin-left: 0.5rem !important; }/* CTA Button Groups */
-.cta-buttons {display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center; }.cta-buttons .btn {min-width: 180px; }/* Responsive Button Styles */
-@media (max-width: 768px) {.cta-buttons {flex-direction: column; width: 100%; gap: 0.75rem; }.cta-buttons .btn {width: 100%; min-width: auto; justify-content: center; }.btn-lg {padding: 0.875rem 1.5rem; font-size: 1rem; }.btn {padding: 0.75rem 1.25rem; }}@media (max-width: 576px) {.btn {font-size: 0.9rem; padding: 0.625rem 1rem; }.btn-lg {font-size: 0.95rem; padding: 0.75rem 1.25rem; }.btn-sm {font-size: 0.8rem; padding: 0.5rem 0.875rem; }}/* Form Elements */
+.cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.cta-buttons .btn {
+    min-width: 180px;
+}
+
+/* Modern CTA Section Styling */
+.bg-primary .btn-light {
+    background-color: white;
+    color: var(--text-dark);
+    border-color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bg-primary .btn-light:hover,
+.bg-primary .btn-light:focus {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    color: var(--text-dark);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.bg-primary .btn-outline-light {
+    background-color: transparent;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+}
+
+.bg-primary .btn-outline-light:hover,
+.bg-primary .btn-outline-light:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced gap utilities for button groups */
+.gap-3 {
+    gap: 1rem !important;
+}
+
+/* Responsive Button Styles */
+@media (max-width: 768px) {
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        min-width: auto;
+        justify-content: center;
+    }
+    
+    .d-flex.flex-column.flex-md-row .btn {
+        width: 100%;
+        margin-bottom: 0;
+    }
+    
+    .btn-lg {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .btn {
+        padding: 0.75rem 1.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.625rem 1rem;
+    }
+    
+    .btn-lg {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.25rem;
+    }
+    
+    .btn-sm {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.875rem;
+    }
+}/* Form Elements */
 .form-control {border-radius: var(--border-radius-sm); border: 2px solid #e9ecef; padding: 0.75rem 1rem; transition: var(--transition); font-size: 1rem; }.form-control: focus {border-color: var(--accent); box-shadow: var(--focus-shadow); }.form-label {font-weight: 500; margin-bottom: 0.5rem; color: var(--text-dark); }/* ========================================
    SECTIONS & LAYOUT
    ======================================== */

@@ -205,29 +205,31 @@ function services_pro_get_breadcrumbs() {
 function services_pro_get_cta_section($title = '', $subtitle = '', $button_text = 'Get Started', $button_url = '') {
     if (empty($title)) {
         $title = 'Ready to Get Started?';
-}
+    }
 
     if (empty($subtitle)) {
         $subtitle = 'Contact us today for a free consultation and see how we can help you.';
-}
+    }
 
     if (empty($button_url)) {
         $button_url = get_permalink(get_page_by_path('contact'));
-}
+    }
 
-    ob_start();?>
-    <section class="section bg-accent text-white">
+    ob_start(); ?>
+    <section class="py-5 bg-primary text-white">
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
-                    <h2 class="display-5 fw-bold mb-4"><?php echo esc_html($title);?></h2>
-                    <p class="lead mb-4"><?php echo esc_html($subtitle);?></p>
-                    <div class="d-flex flex-wrap gap-3 justify-content-center">
-                        <a href="<?php echo esc_url($button_url);?>" class="btn btn-light btn-rounded btn-lg">
-                            <i class="fas fa-phone me-2"></i><?php echo esc_html($button_text);?>
+                    <h2 class="mb-3"><?php echo esc_html($title); ?></h2>
+                    <p class="lead mb-4" style="color: rgba(255, 255, 255, 0.9);">
+                        <?php echo esc_html($subtitle); ?>
+                    </p>
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                        <a href="<?php echo esc_url($button_url); ?>" class="btn btn-light btn-lg">
+                            <i class="fas fa-envelope me-2"></i><?php echo esc_html($button_text); ?>
                         </a>
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('services')));?>" class="btn btn-outline-light btn-rounded btn-lg">
-                            <i class="fas fa-list me-2"></i>View Services
+                        <a href="tel:+1234567890" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-phone me-2"></i>Call Now
                         </a>
                     </div>
                 </div>

@@ -294,16 +294,16 @@ get_header(); ?>
         </div>
     </section>
     <!-- CTA Section -->
-    <section class="section bg-primary">
+    <section class="py-5 bg-primary text-white">
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
-                    <h2 class="text-white mb-4" style="font-weight: 600;">Ready to Get Started?</h2>
-                    <p class="text-white-50 mb-4 lead">
+                    <h2 class="mb-3" style="font-weight: 600;">Ready to Get Started?</h2>
+                    <p class="lead mb-4" style="color: rgba(255, 255, 255, 0.9);">
                         Contact us today for a free consultation and personalized quote for your service needs. Let us help transform your vision into reality.
                     </p>
-                    <div class="cta-buttons">
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-light btn-lg me-3">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-light btn-lg">
                             <i class="fas fa-envelope me-2"></i>
                             Get Free Quote
                         </a>
