@@ -241,8 +241,8 @@ $services_count = $current_term->count ?? 0;?>
                     <p class="text-white-50 mb-4 lead">
                         Contact us today for personalized solutions and professional service tailored to your specific needs.
                     </p>
-                    <div class="cta-buttons">
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')) . '?service=' . urlencode($term_name));?>" class="btn btn-light btn-lg me-3">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')) . '?service=' . urlencode($term_name));?>" class="btn btn-light btn-lg">
                             <i class="fas fa-envelope me-2"></i>
                             Get Free Quote
                         </a>

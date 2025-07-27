@@ -313,7 +313,7 @@ get_header(); ?>
     </div>
 </section>
 <!-- CTA Section -->
-<section class="section bg-primary">
+<section class="py-5 bg-primary">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8">
@@ -321,8 +321,8 @@ get_header(); ?>
                 <p class="text-white-50 mb-4 lead">
                     Let's discuss how we can help transform your business and achieve your goals.
                 </p>
-                <div class="cta-buttons">
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-light btn-lg me-3">
+                <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-light btn-lg">
                         <i class="fas fa-envelope me-2"></i>
                         Get In Touch
                     </a>

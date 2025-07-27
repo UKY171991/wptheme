@@ -34,14 +34,16 @@ get_header(); ?>
                         <?php echo get_theme_mod('hero_subtitle', 'We deliver exceptional business solutions tailored to your unique needs. From consultation to implementation, we\'re your trusted partner for success.');?>
                     </p>
                     <div class="hero-actions">
-                        <a href="<?php echo esc_url(home_url('/contact'));?>" class="btn btn-primary btn-lg me-3">
-                            <i class="fas fa-rocket me-2"></i>
-                            Get Started Today
-                        </a>
-                        <a href="<?php echo esc_url(get_post_type_archive_link('service'));?>" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-play me-2"></i>
-                            View Our Services
-                        </a>
+                        <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                            <a href="<?php echo esc_url(home_url('/contact'));?>" class="btn btn-primary btn-lg">
+                                <i class="fas fa-rocket me-2"></i>
+                                Get Started Today
+                            </a>
+                            <a href="<?php echo esc_url(get_post_type_archive_link('service'));?>" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-play me-2"></i>
+                                View Our Services
+                            </a>
+                        </div>
                     </div>
                     <!-- Trust Indicators -->
                     <div class="trust-indicators">

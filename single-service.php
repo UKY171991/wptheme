@@ -347,8 +347,8 @@ get_header(); ?>
                 <p class="text-white-50 mb-4 lead">
                     Let's discuss how <?php the_title();?> can help achieve your goals.
                 </p>
-                <div class="cta-buttons">
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>?service=<?php echo urlencode(get_the_title());?>" class="btn btn-light btn-lg me-3">
+                <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>?service=<?php echo urlencode(get_the_title());?>" class="btn btn-light btn-lg">
                         <i class="fas fa-rocket me-2"></i>
                         Start Your Project
                     </a>

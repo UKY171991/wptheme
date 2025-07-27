@@ -305,8 +305,8 @@ get_header(); ?>
                     <p class="text-white-50 mb-4 lead">
                         Contact us today for a free consultation and let us help you select the perfect service plan for your needs.
                     </p>
-                    <div class="cta-buttons">
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-light btn-lg me-3">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-light btn-lg">
                             <i class="fas fa-envelope me-2"></i>
                             Get Free Consultation
                         </a>
