@@ -183,9 +183,11 @@ function blueprint_folder_register_taxonomies() {
 add_action('init', 'blueprint_folder_register_taxonomies');
 
 /**
- * INCLUDE NAVIGATION WALKER
+ * INCLUDE NAVIGATION WALKERS
  */
 require_once get_template_directory() . '/inc/navigation-walker.php';
+require_once get_template_directory() . '/inc/navigation-walker-rebuilt.php';
+require_once get_template_directory() . '/inc/clean-navigation-walker.php';
 
 /**
  * INCLUDE TEMPLATE FUNCTIONS
@@ -286,8 +288,14 @@ function blueprint_folder_scripts() {
     // Theme stylesheet
     wp_enqueue_style('blueprint-folder-style', get_stylesheet_uri(), array(), '2.1.0');
     
+    // Header Rebuilt CSS - HIGH PRIORITY
+    wp_enqueue_style('blueprint-folder-header-rebuilt', get_template_directory_uri() . '/css/header-rebuilt.css', array('blueprint-folder-style'), '2.1.0');
+    
+    // Header Effects CSS - Additional animations
+    wp_enqueue_style('blueprint-folder-header-effects', get_template_directory_uri() . '/css/header-effects.css', array('blueprint-folder-header-rebuilt'), '2.1.0');
+    
     // Header Layout Fix CSS - HIGH PRIORITY
-    wp_enqueue_style('blueprint-folder-header-fix', get_template_directory_uri() . '/css/header-layout-fix.css', array('blueprint-folder-style'), '2.1.0');
+    wp_enqueue_style('blueprint-folder-header-fix', get_template_directory_uri() . '/css/header-layout-fix.css', array('blueprint-folder-header-rebuilt'), '2.1.0');
     
     // Interactive Elements CSS
     wp_enqueue_style('blueprint-folder-interactive', get_template_directory_uri() . '/css/interactive-elements.css', array('blueprint-folder-style'), '2.1.0');
@@ -316,6 +324,9 @@ function blueprint_folder_scripts() {
     
     // Bootstrap JS (CDN)
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.3.0', true);
+    
+    // Enhanced Header JavaScript - HIGH PRIORITY
+    wp_enqueue_script('blueprint-folder-header-enhanced', get_template_directory_uri() . '/js/header-enhanced.js', array(), '2.1.0', true);
     
     // Header Layout Fix JavaScript - HIGH PRIORITY
     wp_enqueue_script('blueprint-folder-header-fix', get_template_directory_uri() . '/js/header-layout-fix.js', array('jquery'), '2.1.0', true);

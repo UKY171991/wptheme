@@ -12,6 +12,94 @@ if (!defined('ABSPATH')) {
  * Add customizer settings
  */
 function services_pro_customize_register($wp_customize) {
+    
+    // Header Settings Section
+    $wp_customize->add_section('blueprint_folder_header', array(
+        'title' => __('Header Settings', 'blueprint-folder'),
+        'priority' => 25,
+        'description' => __('Customize the header appearance and functionality.', 'blueprint-folder'),
+    ));
+    
+    // Header CTA Text
+    $wp_customize->add_setting('header_cta_text', array(
+        'default' => 'Get Quote',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('header_cta_text', array(
+        'label' => __('Header CTA Button Text', 'blueprint-folder'),
+        'section' => 'blueprint_folder_header',
+        'type' => 'text',
+        'description' => __('Text for the call-to-action button in the header.', 'blueprint-folder'),
+    ));
+    
+    // Header CTA URL
+    $wp_customize->add_setting('header_cta_url', array(
+        'default' => home_url('/contact'),
+        'sanitize_callback' => 'esc_url_raw',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('header_cta_url', array(
+        'label' => __('Header CTA Button URL', 'blueprint-folder'),
+        'section' => 'blueprint_folder_header',
+        'type' => 'url',
+        'description' => __('URL for the call-to-action button in the header.', 'blueprint-folder'),
+    ));
+    
+    // Company Phone
+    $wp_customize->add_setting('company_phone', array(
+        'default' => '(555) 123-4567',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('company_phone', array(
+        'label' => __('Company Phone Number', 'blueprint-folder'),
+        'section' => 'blueprint_folder_header',
+        'type' => 'tel',
+        'description' => __('Phone number displayed in the header.', 'blueprint-folder'),
+    ));
+    
+    // Company Email
+    $wp_customize->add_setting('company_email', array(
+        'default' => 'info@blueprintfolder.com',
+        'sanitize_callback' => 'sanitize_email',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('company_email', array(
+        'label' => __('Company Email', 'blueprint-folder'),
+        'section' => 'blueprint_folder_header',
+        'type' => 'email',
+        'description' => __('Email address displayed in the mobile menu.', 'blueprint-folder'),
+    ));
+    
+    // Social Media Links
+    $social_networks = array(
+        'facebook' => 'Facebook',
+        'twitter' => 'Twitter',
+        'linkedin' => 'LinkedIn',
+        'instagram' => 'Instagram',
+        'youtube' => 'YouTube'
+    );
+    
+    foreach ($social_networks as $network => $label) {
+        $wp_customize->add_setting("social_{$network}", array(
+            'default' => '',
+            'sanitize_callback' => 'esc_url_raw',
+            'transport' => 'refresh',
+        ));
+        
+        $wp_customize->add_control("social_{$network}", array(
+            'label' => sprintf(__('%s URL', 'blueprint-folder'), $label),
+            'section' => 'blueprint_folder_header',
+            'type' => 'url',
+            'description' => sprintf(__('URL for your %s profile.', 'blueprint-folder'), $label),
+        ));
+    }
+    
     // Theme Colors Section
     $wp_customize->add_section('services_pro_colors', array(
         'title' => __('Theme Colors', 'services-pro'),
