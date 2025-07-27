@@ -254,120 +254,118 @@ get_header(); ?>
         
         <!-- Services Grid -->
         <div class="row g-4">
-            <!-- Service 1 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="modern-service-card h-100">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="service-title">Web Development</h3>
-                    <p class="service-description">Custom websites and web applications built with modern technologies and best practices.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check text-primary me-2"></i>Responsive Design</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>SEO Optimized</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Fast Loading</li>
-                    </ul>
-                    <a href="<?php echo esc_url(home_url('/services/web-development')); ?>" class="btn btn-outline-primary">
-                        Learn More <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
-                </div>
-            </div>
+            <?php
+            // Get services from database
+            $services_query = blueprint_folder_get_services('', 6);
             
-            <!-- Service 2 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="modern-service-card h-100 featured">
-                    <div class="featured-badge">Popular</div>
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="service-title">Digital Marketing</h3>
-                    <p class="service-description">Comprehensive digital marketing strategies to boost your online presence and drive results.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check text-primary me-2"></i>SEO & SEM</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Social Media</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Content Marketing</li>
-                    </ul>
-                    <a href="<?php echo esc_url(home_url('/services/digital-marketing')); ?>" class="btn btn-primary">
-                        Learn More <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
-                </div>
-            </div>
+            // Default services if none exist
+            $default_services = array(
+                array(
+                    'title' => 'Web Development',
+                    'description' => 'Custom websites and web applications built with modern technologies and best practices.',
+                    'icon' => 'fas fa-laptop-code',
+                    'features' => array('Responsive Design', 'SEO Optimized', 'Fast Loading'),
+                    'url' => home_url('/services/web-development'),
+                    'featured' => false
+                ),
+                array(
+                    'title' => 'Digital Marketing',
+                    'description' => 'Comprehensive digital marketing strategies to boost your online presence and drive results.',
+                    'icon' => 'fas fa-chart-line',
+                    'features' => array('SEO & SEM', 'Social Media', 'Content Marketing'),
+                    'url' => home_url('/services/digital-marketing'),
+                    'featured' => true
+                ),
+                array(
+                    'title' => 'Business Consulting',
+                    'description' => 'Expert guidance to help your business optimize operations and achieve strategic goals.',
+                    'icon' => 'fas fa-users-cog',
+                    'features' => array('Strategy Planning', 'Process Optimization', 'Growth Analysis'),
+                    'url' => home_url('/services/consulting'),
+                    'featured' => false
+                ),
+                array(
+                    'title' => 'Mobile Apps',
+                    'description' => 'Native and cross-platform mobile applications for iOS and Android devices.',
+                    'icon' => 'fas fa-mobile-alt',
+                    'features' => array('iOS & Android', 'User-Friendly UI', 'App Store Ready'),
+                    'url' => home_url('/services/mobile-apps'),
+                    'featured' => false
+                ),
+                array(
+                    'title' => 'Cybersecurity',
+                    'description' => 'Comprehensive security solutions to protect your business from digital threats.',
+                    'icon' => 'fas fa-shield-alt',
+                    'features' => array('Security Audits', 'Threat Monitoring', 'Data Protection'),
+                    'url' => home_url('/services/cybersecurity'),
+                    'featured' => false
+                ),
+                array(
+                    'title' => 'Cloud Solutions',
+                    'description' => 'Scalable cloud infrastructure and migration services for modern businesses.',
+                    'icon' => 'fas fa-cloud',
+                    'features' => array('Cloud Migration', 'Infrastructure Setup', '24/7 Monitoring'),
+                    'url' => home_url('/services/cloud-solutions'),
+                    'featured' => false
+                )
+            );
             
-            <!-- Service 3 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="modern-service-card h-100">
-                    <div class="service-icon">
-                        <i class="fas fa-users-cog"></i>
-                    </div>
-                    <h3 class="service-title">Business Consulting</h3>
-                    <p class="service-description">Expert guidance to help your business optimize operations and achieve strategic goals.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check text-primary me-2"></i>Strategy Planning</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Process Optimization</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Growth Analysis</li>
-                    </ul>
-                    <a href="<?php echo esc_url(home_url('/services/consulting')); ?>" class="btn btn-outline-primary">
-                        Learn More <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
-                </div>
-            </div>
+            $services_to_display = array();
             
-            <!-- Service 4 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="modern-service-card h-100">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="service-title">Mobile Apps</h3>
-                    <p class="service-description">Native and cross-platform mobile applications for iOS and Android devices.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check text-primary me-2"></i>iOS & Android</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>User-Friendly UI</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>App Store Ready</li>
-                    </ul>
-                    <a href="<?php echo esc_url(home_url('/services/mobile-apps')); ?>" class="btn btn-outline-primary">
-                        Learn More <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
-                </div>
-            </div>
+            if ($services_query->have_posts()) {
+                // Use actual services from database
+                $count = 0;
+                while ($services_query->have_posts() && $count < 6) {
+                    $services_query->the_post();
+                    $icon = get_post_meta(get_the_ID(), '_service_icon', true) ?: 'fas fa-cog';
+                    $features = get_post_meta(get_the_ID(), '_service_features', true);
+                    if (!$features) {
+                        $features = array('Professional Service', 'Expert Support', 'Quality Results');
+                    }
+                    
+                    $services_to_display[] = array(
+                        'title' => get_the_title(),
+                        'description' => get_the_excerpt() ?: wp_trim_words(get_the_content(), 20),
+                        'icon' => $icon,
+                        'features' => is_array($features) ? $features : array($features),
+                        'url' => get_permalink(),
+                        'featured' => $count === 1 // Make second service featured
+                    );
+                    $count++;
+                }
+                wp_reset_postdata();
+            } else {
+                // Use default services
+                $services_to_display = $default_services;
+            }
             
-            <!-- Service 5 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="modern-service-card h-100">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
+            foreach ($services_to_display as $service) :
+            ?>
+                <div class="col-lg-4 col-md-6">
+                    <div class="modern-service-card h-100<?php echo $service['featured'] ? ' featured' : ''; ?>">
+                        <?php if ($service['featured']) : ?>
+                            <div class="featured-badge">Popular</div>
+                        <?php endif; ?>
+                        
+                        <div class="service-icon">
+                            <i class="<?php echo esc_attr($service['icon']); ?>"></i>
+                        </div>
+                        
+                        <h3 class="service-title"><?php echo esc_html($service['title']); ?></h3>
+                        <p class="service-description"><?php echo esc_html($service['description']); ?></p>
+                        
+                        <ul class="service-features">
+                            <?php foreach ($service['features'] as $feature) : ?>
+                                <li><i class="fas fa-check text-primary me-2"></i><?php echo esc_html($feature); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                        
+                        <a href="<?php echo esc_url($service['url']); ?>" class="btn <?php echo $service['featured'] ? 'btn-primary' : 'btn-outline-primary'; ?>">
+                            Learn More <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
                     </div>
-                    <h3 class="service-title">Cybersecurity</h3>
-                    <p class="service-description">Comprehensive security solutions to protect your business from digital threats.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check text-primary me-2"></i>Security Audits</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Threat Monitoring</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Data Protection</li>
-                    </ul>
-                    <a href="<?php echo esc_url(home_url('/services/cybersecurity')); ?>" class="btn btn-outline-primary">
-                        Learn More <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
                 </div>
-            </div>
-            
-            <!-- Service 6 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="modern-service-card h-100">
-                    <div class="service-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <h3 class="service-title">Cloud Solutions</h3>
-                    <p class="service-description">Scalable cloud infrastructure and migration services for modern businesses.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check text-primary me-2"></i>Cloud Migration</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>Infrastructure Setup</li>
-                        <li><i class="fas fa-check text-primary me-2"></i>24/7 Monitoring</li>
-                    </ul>
-                    <a href="<?php echo esc_url(home_url('/services/cloud-solutions')); ?>" class="btn btn-outline-primary">
-                        Learn More <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
         
         <div class="text-center mt-5">
@@ -452,77 +450,91 @@ get_header(); ?>
         </div>
         
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="modern-testimonial-card h-100">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <blockquote class="testimonial-text">
-                        "BluePrint Folder transformed our business with their exceptional web development services. The team was professional, responsive, and delivered beyond our expectations."
-                    </blockquote>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4 class="author-name">Sarah Johnson</h4>
-                            <p class="author-position">CEO, TechStart Inc.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+            // Get testimonials from database
+            $testimonials_query = blueprint_folder_get_testimonials(3);
             
-            <div class="col-lg-4 col-md-6">
-                <div class="modern-testimonial-card h-100">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <blockquote class="testimonial-text">
-                        "Outstanding digital marketing results! Our online presence increased by 300% within just 3 months. Highly recommend their services."
-                    </blockquote>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4 class="author-name">Michael Chen</h4>
-                            <p class="author-position">Marketing Director, GrowthCo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            // Default testimonials if none exist
+            $default_testimonials = array(
+                array(
+                    'content' => 'BluePrint Folder transformed our business with their exceptional web development services. The team was professional, responsive, and delivered beyond our expectations.',
+                    'name' => 'Sarah Johnson',
+                    'position' => 'CEO, TechStart Inc.',
+                    'rating' => 5
+                ),
+                array(
+                    'content' => 'Outstanding digital marketing results! Our online presence increased by 300% within just 3 months. Highly recommend their services.',
+                    'name' => 'Michael Chen',
+                    'position' => 'Marketing Director, GrowthCo',
+                    'rating' => 5
+                ),
+                array(
+                    'content' => 'The consulting services helped us streamline our operations and increase efficiency by 40%. Professional team with excellent expertise.',
+                    'name' => 'Emily Rodriguez',
+                    'position' => 'Operations Manager, Efficiency Plus',
+                    'rating' => 5
+                )
+            );
             
-            <div class="col-lg-4 col-md-6">
-                <div class="modern-testimonial-card h-100">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <blockquote class="testimonial-text">
-                        "The consulting services helped us streamline our operations and increase efficiency by 40%. Professional team with excellent expertise."
-                    </blockquote>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
+            $testimonials_to_display = array();
+            
+            if ($testimonials_query->have_posts()) {
+                // Use actual testimonials from database
+                while ($testimonials_query->have_posts()) {
+                    $testimonials_query->the_post();
+                    $client_name = get_post_meta(get_the_ID(), '_testimonial_client_name', true);
+                    $client_position = get_post_meta(get_the_ID(), '_testimonial_client_position', true);
+                    $client_company = get_post_meta(get_the_ID(), '_testimonial_client_company', true);
+                    $rating = get_post_meta(get_the_ID(), '_testimonial_rating', true) ?: 5;
+                    
+                    $position_text = '';
+                    if ($client_position && $client_company) {
+                        $position_text = $client_position . ', ' . $client_company;
+                    } elseif ($client_position) {
+                        $position_text = $client_position;
+                    } elseif ($client_company) {
+                        $position_text = $client_company;
+                    }
+                    
+                    $testimonials_to_display[] = array(
+                        'content' => get_the_content(),
+                        'name' => $client_name ?: get_the_title(),
+                        'position' => $position_text,
+                        'rating' => intval($rating)
+                    );
+                }
+                wp_reset_postdata();
+            } else {
+                // Use default testimonials
+                $testimonials_to_display = $default_testimonials;
+            }
+            
+            foreach ($testimonials_to_display as $testimonial) :
+            ?>
+                <div class="col-lg-4 col-md-6">
+                    <div class="modern-testimonial-card h-100">
+                        <div class="testimonial-rating">
+                            <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                <i class="fas fa-star<?php echo ($i <= $testimonial['rating']) ? '' : ' text-muted'; ?>"></i>
+                            <?php endfor; ?>
                         </div>
-                        <div class="author-info">
-                            <h4 class="author-name">Emily Rodriguez</h4>
-                            <p class="author-position">Operations Manager, Efficiency Plus</p>
+                        <blockquote class="testimonial-text">
+                            "<?php echo esc_html($testimonial['content']); ?>"
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4 class="author-name"><?php echo esc_html($testimonial['name']); ?></h4>
+                                <?php if ($testimonial['position']) : ?>
+                                    <p class="author-position"><?php echo esc_html($testimonial['position']); ?></p>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -540,95 +552,116 @@ get_header(); ?>
         </div>
         
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <article class="modern-blog-card h-100">
-                    <div class="blog-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-laptop-code fa-2x text-primary"></i>
-                        </div>
-                        <div class="blog-category">Web Development</div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-date">
-                                <i class="fas fa-calendar me-1"></i>
-                                March 15, 2024
-                            </span>
-                            <span class="blog-author">
-                                <i class="fas fa-user me-1"></i>
-                                John Doe
-                            </span>
-                        </div>
-                        <h3 class="blog-title">
-                            <a href="#">10 Essential Web Development Trends for 2024</a>
-                        </h3>
-                        <p class="blog-excerpt">Discover the latest trends shaping the future of web development and how they can benefit your business.</p>
-                        <a href="#" class="btn btn-outline-primary btn-sm">
-                            Read More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
+            <?php
+            // Get recent blog posts
+            $blog_query = blueprint_folder_get_blog_posts(3);
             
-            <div class="col-lg-4 col-md-6">
-                <article class="modern-blog-card h-100">
-                    <div class="blog-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-chart-line fa-2x text-primary"></i>
-                        </div>
-                        <div class="blog-category">Digital Marketing</div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-date">
-                                <i class="fas fa-calendar me-1"></i>
-                                March 12, 2024
-                            </span>
-                            <span class="blog-author">
-                                <i class="fas fa-user me-1"></i>
-                                Jane Smith
-                            </span>
-                        </div>
-                        <h3 class="blog-title">
-                            <a href="#">Maximizing ROI with Strategic Digital Marketing</a>
-                        </h3>
-                        <p class="blog-excerpt">Learn proven strategies to increase your return on investment through targeted digital marketing campaigns.</p>
-                        <a href="#" class="btn btn-outline-primary btn-sm">
-                            Read More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
+            // Default blog posts if none exist
+            $default_posts = array(
+                array(
+                    'title' => '10 Essential Web Development Trends for 2024',
+                    'excerpt' => 'Discover the latest trends shaping the future of web development and how they can benefit your business.',
+                    'date' => 'March 15, 2024',
+                    'author' => 'John Doe',
+                    'category' => 'Web Development',
+                    'icon' => 'fas fa-laptop-code',
+                    'url' => '#'
+                ),
+                array(
+                    'title' => 'Maximizing ROI with Strategic Digital Marketing',
+                    'excerpt' => 'Learn proven strategies to increase your return on investment through targeted digital marketing campaigns.',
+                    'date' => 'March 12, 2024',
+                    'author' => 'Jane Smith',
+                    'category' => 'Digital Marketing',
+                    'icon' => 'fas fa-chart-line',
+                    'url' => '#'
+                ),
+                array(
+                    'title' => 'Essential Cybersecurity Practices for Small Business',
+                    'excerpt' => 'Protect your business with these fundamental cybersecurity measures every small business should implement.',
+                    'date' => 'March 10, 2024',
+                    'author' => 'Mike Johnson',
+                    'category' => 'Cybersecurity',
+                    'icon' => 'fas fa-shield-alt',
+                    'url' => '#'
+                )
+            );
             
-            <div class="col-lg-4 col-md-6">
-                <article class="modern-blog-card h-100">
-                    <div class="blog-image">
-                        <div class="image-placeholder">
-                            <i class="fas fa-shield-alt fa-2x text-primary"></i>
+            $posts_to_display = array();
+            
+            if ($blog_query->have_posts()) {
+                // Use actual blog posts from database
+                while ($blog_query->have_posts()) {
+                    $blog_query->the_post();
+                    $categories = get_the_category();
+                    $category_name = !empty($categories) ? $categories[0]->name : 'Blog';
+                    
+                    // Map category to icon
+                    $category_icons = array(
+                        'web development' => 'fas fa-laptop-code',
+                        'digital marketing' => 'fas fa-chart-line',
+                        'cybersecurity' => 'fas fa-shield-alt',
+                        'business' => 'fas fa-briefcase',
+                        'technology' => 'fas fa-microchip',
+                        'design' => 'fas fa-paint-brush'
+                    );
+                    
+                    $icon = 'fas fa-newspaper';
+                    foreach ($category_icons as $cat => $cat_icon) {
+                        if (stripos($category_name, $cat) !== false) {
+                            $icon = $cat_icon;
+                            break;
+                        }
+                    }
+                    
+                    $posts_to_display[] = array(
+                        'title' => get_the_title(),
+                        'excerpt' => get_the_excerpt() ?: wp_trim_words(get_the_content(), 20),
+                        'date' => get_the_date(),
+                        'author' => get_the_author(),
+                        'category' => $category_name,
+                        'icon' => $icon,
+                        'url' => get_permalink()
+                    );
+                }
+                wp_reset_postdata();
+            } else {
+                // Use default posts
+                $posts_to_display = $default_posts;
+            }
+            
+            foreach ($posts_to_display as $post) :
+            ?>
+                <div class="col-lg-4 col-md-6">
+                    <article class="modern-blog-card h-100">
+                        <div class="blog-image">
+                            <div class="image-placeholder">
+                                <i class="<?php echo esc_attr($post['icon']); ?> fa-2x text-primary"></i>
+                            </div>
+                            <div class="blog-category"><?php echo esc_html($post['category']); ?></div>
                         </div>
-                        <div class="blog-category">Cybersecurity</div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-date">
-                                <i class="fas fa-calendar me-1"></i>
-                                March 10, 2024
-                            </span>
-                            <span class="blog-author">
-                                <i class="fas fa-user me-1"></i>
-                                Mike Johnson
-                            </span>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-date">
+                                    <i class="fas fa-calendar me-1"></i>
+                                    <?php echo esc_html($post['date']); ?>
+                                </span>
+                                <span class="blog-author">
+                                    <i class="fas fa-user me-1"></i>
+                                    <?php echo esc_html($post['author']); ?>
+                                </span>
+                            </div>
+                            <h3 class="blog-title">
+                                <a href="<?php echo esc_url($post['url']); ?>"><?php echo esc_html($post['title']); ?></a>
+                            </h3>
+                            <p class="blog-excerpt"><?php echo esc_html($post['excerpt']); ?></p>
+                            <a href="<?php echo esc_url($post['url']); ?>" class="btn btn-outline-primary btn-sm">
+                                Read More <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
                         </div>
-                        <h3 class="blog-title">
-                            <a href="#">Essential Cybersecurity Practices for Small Business</a>
-                        </h3>
-                        <p class="blog-excerpt">Protect your business with these fundamental cybersecurity measures every small business should implement.</p>
-                        <a href="#" class="btn btn-outline-primary btn-sm">
-                            Read More <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
+                    </article>
+                </div>
+            <?php endforeach; ?>
         </div>
         
         <div class="text-center mt-5">

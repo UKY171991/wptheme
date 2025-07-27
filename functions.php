@@ -658,6 +658,9 @@ function blueprint_folder_scripts() {
     // Homepage sections styles
     wp_enqueue_style('blueprint-folder-homepage', get_template_directory_uri() . '/assets/css/homepage-sections.css', array('blueprint-folder-global'), '1.0.0');
     
+    // Page templates styles
+    wp_enqueue_style('blueprint-folder-pages', get_template_directory_uri() . '/assets/css/page-templates.css', array('blueprint-folder-global'), '1.0.0');
+    
     // Bootstrap JS (CDN)
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
     
@@ -1591,6 +1594,88 @@ function blueprint_folder_banner_customizer($wp_customize) {
     ));
 }
 add_action('customize_register', 'blueprint_folder_banner_customizer');
+
+/**
+ * HELPER FUNCTIONS FOR DYNAMIC CONTENT
+ */
+
+// Get services with optional category filter
+function blueprint_folder_get_services($category = '', $posts_per_page = -1) {
+    $args = array(
+        'post_type' => 'service',
+        'posts_per_page' => $posts_per_page,
+        'post_status' => 'publish',
+        'orderby' => 'menu_order',
+        'order' => 'ASC'
+    );
+    
+    if (!empty($category)) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'service_category',
+                'field' => 'slug',
+                'terms' => $category
+            )
+        );
+    }
+    
+    return new WP_Query($args);
+}
+
+// Get testimonials
+function blueprint_folder_get_testimonials($posts_per_page = -1) {
+    $args = array(
+        'post_type' => 'testimonial',
+        'posts_per_page' => $posts_per_page,
+        'post_status' => 'publish',
+        'orderby' => 'menu_order',
+        'order' => 'ASC'
+    );
+    
+    return new WP_Query($args);
+}
+
+// Get recent blog posts
+function blueprint_folder_get_blog_posts($posts_per_page = 3) {
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => $posts_per_page,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => 'DESC'
+    );
+    
+    return new WP_Query($args);
+}
+
+// Get projects/portfolio
+function blueprint_folder_get_projects($posts_per_page = -1) {
+    $args = array(
+        'post_type' => 'project',
+        'posts_per_page' => $posts_per_page,
+        'post_status' => 'publish',
+        'orderby' => 'menu_order',
+        'order' => 'ASC'
+    );
+    
+    return new WP_Query($args);
+}
+
+/**
+ * REGISTER SIDEBAR
+ */
+function blueprint_folder_widgets_init() {
+    register_sidebar(array(
+        'name'          => esc_html__('Sidebar', 'blueprint-folder'),
+        'id'            => 'sidebar-1',
+        'description'   => esc_html__('Add widgets here.', 'blueprint-folder'),
+        'before_widget' => '<div id="%1$s" class="widget %2$s mb-4">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ));
+}
+add_action('widgets_init', 'blueprint_folder_widgets_init');
 
 /**
  * MENU ITEM CUSTOM FIELDS SUPPORT

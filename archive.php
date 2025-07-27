@@ -1,9 +1,87 @@
-<?php/** * The main template file for blog posts archive */get_header(); ?><!-- Page Header --><section class="section-sm bg-light-gray">    <div class="container">        <?php blueprint_folder_breadcrumb(); ?>        <div class="row justify-content-center">            <div class="col-lg-8 text-center">                <h1 class="page-title">                    <?php                    if (is_home() && get_option('page_for_posts')) {                        echo get_the_title(get_option('page_for_posts'));                    } elseif (is_category()) {                        single_cat_title('Category: ');                    } elseif (is_tag()) {                        single_tag_title('Tag: ');                    } elseif (is_author()) {                        the_author();                    } elseif (is_date()) {                        echo get_the_date('F Y');                    } elseif (is_search()) {                        echo 'Search Results for: ' . get_search_query();                    } else {                        echo 'Blog';                    }                    ?>                </h1>                <?php if (is_category() || is_tag()) : ?>                    <p class="lead"><?php echo term_description(); ?></p>                <?php else : ?>                    <p class="lead">Stay updated with our latest insights, tips, and industry news.</p>                <?php endif; ?>            </div>        </div>    </div></section><!-- Blog Content --><section class="section">    <div class="container">        <div class="row">            <!-- Main Content -->            <div class="col-lg-8">                <?php if (have_posts()) : ?>                    <div class="blog-posts">                        <?php while (have_posts()) : the_post(); ?>                            <article id="post-<?php the_ID(); ?>" <?php post_class('blog-post mb-5'); ?>>                                <?php if (has_post_thumbnail()) : ?>                                    <div class="post-thumbnail mb-4">                                        <a href="<?php the_permalink(); ?>">                                            <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded')); ?>                                        </a>                                    </div>                                <?php endif; ?>                                                                <div class="post-content">                                    <div class="post-meta mb-3">                                        <span class="post-date text-muted">                                            <i class="fas fa-calendar me-2"></i>                                            <?php echo get_the_date(); ?>                                        </span>                                                                                <?php if (get_the_category()) : ?>                                            <span class="post-categories ms-3">                                                <i class="fas fa-folder me-2"></i>                                                <?php the_category(', '); ?>                                            </span>                                        <?php endif; ?>                                                                                <span class="post-author ms-3">                                            <i class="fas fa-user me-2"></i>                                            By <?php the_author(); ?>                                        </span>                                    </div>                                                                        <h2 class="post-title h3 mb-3">                                        <a href="<?php the_permalink(); ?>" class="text-decoration-none">                                            <?php the_title(); ?>                                        </a>                                    </h2>                                                                        <div class="post-excerpt">                                        <?php the_excerpt(); ?>                                    </div>                                                                        <div class="post-footer d-flex justify-content-between align-items-center mt-4">                                        <a href="<?php the_permalink(); ?>" class="btn btn-primary">                                            Read More <i class="fas fa-arrow-right ms-2"></i>                                        </a>                                                                                <?php if (get_the_tags()) : ?>                                            <div class="post-tags">                                                <?php the_tags('<span class="badge bg-light text-dark me-1">', '</span><span class="badge bg-light text-dark me-1">', '</span>'); ?>                                            </div>                                        <?php endif; ?>                                    </div>                                </div>                            </article>                        <?php endwhile; ?>                    </div>                                        <!-- Pagination -->                    <div class="blog-pagination mt-5">                        <?php                        the_posts_pagination(array(                            'prev_text' => '<i class="fas fa-chevron-left"></i> Previous',                            'next_text' => 'Next <i class="fas fa-chevron-right"></i>',                            'class' => 'pagination justify-content-center'                        ));                        ?>                    </div>                                    <?php else : ?>                    <div class="no-posts text-center">                        <h3>No Posts Found</h3>                        <?php if (is_search()) : ?>                            <p>Sorry, no posts matched your search criteria. Please try a different search.</p>                            <?php get_search_form(); ?>                        <?php else : ?>                            <p>We're working on creating great content. Please check back soon!</p>                        <?php endif; ?>                        <a href="<?php echo esc_url(home_url('/')); ?>" class="btn btn-primary mt-3">                            <i class="fas fa-home me-2"></i>                            Return Home                        </a>                    </div>                <?php endif; ?>            </div>                        <!-- Sidebar -->            <div class="col-lg-4">                <div class="blog-sidebar">                    <!-- Search -->                    <div class="widget mb-4">                        <h5 class="widget-title">Search</h5>                        <?php get_search_form(); ?>                    </div>                                        <!-- Recent Posts -->                    <div class="widget mb-4">                        <h5 class="widget-title">Recent Posts</h5>                        <?php                        $recent_posts = new WP_Query(array(                            'post_type' => 'post',                            'posts_per_page' => 5,                            'post_status' => 'publish'                        ));                                                if ($recent_posts->have_posts()) : ?>                            <ul class="list-unstyled">                                <?php while ($recent_posts->have_posts()) : $recent_posts->the_post(); ?>                                    <li class="mb-3">                                        <a href="<?php the_permalink(); ?>" class="text-decoration-none">                                            <h6 class="mb-1"><?php the_title(); ?></h6>                                            <small class="text-muted"><?php echo get_the_date(); ?></small>                                        </a>                                    </li>                                <?php endwhile; ?>                            </ul>                            <?php wp_reset_postdata(); ?>                        <?php endif; ?>                    </div>                                        <!-- Categories -->                    <?php                    $categories = get_categories(array('hide_empty' => true));                    if ($categories) : ?>                        <div class="widget mb-4">                            <h5 class="widget-title">Categories</h5>                            <ul class="list-unstyled">                                <?php foreach ($categories as $category) : ?>                                    <li class="mb-2">                                        <a href="<?php echo get_category_link($category->term_id); ?>" class="text-decoration-none d-flex justify-content-between">                                            <span><?php echo esc_html($category->name); ?></span>                                            <span class="badge bg-light text-dark"><?php echo $category->count; ?></span>                                        </a>                                    </li>                                <?php endforeach; ?>                            </ul>                        </div>                    <?php endif; ?>                                        <!-- CTA Widget -->                    <div class="widget bg-primary text-white p-4 rounded">                        <h5 class="widget-title text-white">Need Help?</h5>                        <p class="mb-3">Ready to take your business to the next level?</p>                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-light w-100">                            <i class="fas fa-envelope me-2"></i>                            Get In Touch                        </a>
+<?php
+/**
+ * Archive Template
+ * Used for category, tag, and other archive pages
+ */
+
+get_header(); ?>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <?php if (have_posts()) : ?>
+                <div class="archive-posts">
+                    <?php while (have_posts()) : the_post(); ?>
+                        <article id="post-<?php the_ID(); ?>" <?php post_class('archive-post mb-5'); ?>>
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="post-thumbnail mb-3">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php the_post_thumbnail('medium', array('class' => 'img-fluid rounded')); ?>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="post-content">
+                                <header class="post-header mb-3">
+                                    <h2 class="post-title">
+                                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                    </h2>
+                                    
+                                    <div class="post-meta">
+                                        <span class="post-date">
+                                            <i class="fas fa-calendar me-2"></i>
+                                            <?php echo get_the_date(); ?>
+                                        </span>
+                                        <span class="post-author ms-3">
+                                            <i class="fas fa-user me-2"></i>
+                                            <?php the_author(); ?>
+                                        </span>
+                                        <span class="post-category ms-3">
+                                            <i class="fas fa-folder me-2"></i>
+                                            <?php the_category(', '); ?>
+                                        </span>
+                                    </div>
+                                </header>
+                                
+                                <div class="post-excerpt">
+                                    <?php the_excerpt(); ?>
+                                </div>
+                                
+                                <div class="post-footer">
+                                    <a href="<?php the_permalink(); ?>" class="btn btn-primary">
+                                        Read More <i class="fas fa-arrow-right ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    <?php endwhile; ?>
+                    
+                    <div class="pagination-wrapper">
+                        <?php
+                        the_posts_pagination(array(
+                            'mid_size' => 2,
+                            'prev_text' => '<i class="fas fa-arrow-left me-2"></i>Previous',
+                            'next_text' => 'Next<i class="fas fa-arrow-right ms-2"></i>',
+                        ));
+                        ?>
                     </div>
                 </div>
-            </div>
+                
+            <?php else : ?>
+                <div class="no-posts">
+                    <h2>Nothing Found</h2>
+                    <p>It seems we can't find what you're looking for. Perhaps searching can help.</p>
+                    <?php get_search_form(); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        
+        <div class="col-lg-4">
+            <aside class="sidebar">
+                <?php get_sidebar(); ?>
+            </aside>
         </div>
     </div>
-</section>
+</div>
 
 <?php get_footer(); ?>

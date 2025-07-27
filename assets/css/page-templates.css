@@ -1,0 +1,412 @@
+/* Page Templates Styles */
+
+/* ========================================
+   GENERAL PAGE STYLES
+   ======================================== */
+.page-content,
+.post-content {
+    line-height: 1.8;
+}
+
+.page-content h1,
+.page-content h2,
+.page-content h3,
+.page-content h4,
+.page-content h5,
+.page-content h6,
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.page-content p,
+.post-content p {
+    margin-bottom: 1.5rem;
+}
+
+.page-content ul,
+.page-content ol,
+.post-content ul,
+.post-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.page-content blockquote,
+.post-content blockquote {
+    border-left: 4px solid #0d6efd;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #6c757d;
+}
+
+/* ========================================
+   SINGLE POST STYLES
+   ======================================== */
+.single-post {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.post-header {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1.5rem;
+}
+
+.post-meta {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.post-meta span {
+    margin-right: 1rem;
+}
+
+.post-meta i {
+    color: #0d6efd;
+}
+
+.post-featured-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.post-footer {
+    border-top: 1px solid #e9ecef;
+    padding-top: 1.5rem;
+}
+
+.post-tags a {
+    display: inline-block;
+    background: #f8f9fa;
+    color: #495057;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.post-tags a:hover {
+    background: #0d6efd;
+    color: #ffffff;
+}
+
+.post-navigation {
+    margin-top: 2rem;
+}
+
+.post-navigation .nav-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.post-navigation a {
+    flex: 1;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: #495057;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.post-navigation a:hover {
+    background: #0d6efd;
+    color: #ffffff;
+}
+
+/* ========================================
+   ARCHIVE STYLES
+   ======================================== */
+.archive-post,
+.post-item {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.archive-post:hover,
+.post-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.archive-post .post-title a,
+.post-item .post-title a {
+    color: #212529;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.archive-post .post-title a:hover,
+.post-item .post-title a:hover {
+    color: #0d6efd;
+}
+
+.post-thumbnail {
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.post-thumbnail:hover img {
+    transform: scale(1.05);
+}
+
+.post-excerpt {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* ========================================
+   PAGINATION STYLES
+   ======================================== */
+.pagination-wrapper {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.pagination {
+    display: inline-flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.375rem;
+}
+
+.page-numbers {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #0d6efd;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.page-numbers:hover {
+    z-index: 2;
+    color: #0a58ca;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.page-numbers.current {
+    z-index: 3;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.page-numbers:first-child {
+    margin-left: 0;
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+}
+
+.page-numbers:last-child {
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+/* ========================================
+   SIDEBAR STYLES
+   ======================================== */
+.sidebar {
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 2rem;
+}
+
+.widget {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.widget-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 0.5rem;
+}
+
+.widget-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.widget-content li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.widget-content li:last-child {
+    border-bottom: none;
+}
+
+.widget-content a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.widget-content a:hover {
+    color: #0d6efd;
+}
+
+.post-count {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.recent-posts-list .post-date {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+/* ========================================
+   SEARCH FORM STYLES
+   ======================================== */
+.search-form {
+    position: relative;
+}
+
+.search-form .search-field {
+    width: 100%;
+    padding: 0.75rem 3rem 0.75rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.search-form .search-field:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.search-form .search-submit {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #0d6efd;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-form .search-submit:hover {
+    background: #0a58ca;
+}
+
+/* ========================================
+   NO POSTS STYLES
+   ======================================== */
+.no-posts {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.no-posts i {
+    margin-bottom: 1rem;
+}
+
+.no-posts h2 {
+    margin-bottom: 1rem;
+    color: #495057;
+}
+
+.no-posts .lead {
+    color: #6c757d;
+    margin-bottom: 2rem;
+}
+
+.helpful-links .btn {
+    margin: 0.5rem;
+}
+
+/* ========================================
+   RESPONSIVE STYLES
+   ======================================== */
+@media (max-width: 991.98px) {
+    .sidebar {
+        margin-top: 2rem;
+    }
+    
+    .post-navigation .nav-links {
+        flex-direction: column;
+    }
+    
+    .single-post,
+    .archive-post,
+    .post-item {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .post-meta span {
+        display: block;
+        margin-bottom: 0.5rem;
+        margin-right: 0;
+    }
+    
+    .single-post,
+    .archive-post,
+    .post-item {
+        padding: 1rem;
+    }
+    
+    .sidebar {
+        padding: 1rem;
+    }
+    
+    .widget {
+        padding: 1rem;
+    }
+    
+    .helpful-links .btn {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}

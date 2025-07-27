@@ -1,52 +1,48 @@
 <?php
 /**
- * The template for displaying all pages
+ * Generic Page Template
+ * Used for all standard pages
  */
 
 get_header(); ?>
 
-<?php while (have_posts()) : the_post(); ?>
-    <!-- Page Header -->
-    <section class="section-sm bg-light-gray">
-        <div class="container">
-            <?php blueprint_folder_breadcrumb(); ?>
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h1 class="page-title"><?php the_title(); ?></h1>
-                    <?php if (has_excerpt()) : ?>
-                        <p class="lead"><?php the_excerpt(); ?></p>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Page Content -->
-    <section class="section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="page-content">
-                        <?php
-                        the_content();
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <?php while (have_posts()) : the_post(); ?>
+                <article id="post-<?php the_ID(); ?>" <?php post_class('page-content'); ?>>
+                    <div class="page-body">
+                        <?php if (has_post_thumbnail()) : ?>
+                            <div class="page-featured-image mb-4">
+                                <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded')); ?>
+                            </div>
+                        <?php endif; ?>
                         
-                        wp_link_pages(array(
-                            'before' => '<div class="page-links"><span class="page-links-title">' . __('Pages:', 'blueprint-folder') . '</span>',
-                            'after'  => '</div>',
-                        ));
-                        ?>
+                        <div class="page-content-text">
+                            <?php
+                            the_content();
+                            
+                            wp_link_pages(array(
+                                'before' => '<div class="page-links"><span class="page-links-title">' . __('Pages:', 'blueprint-folder') . '</span>',
+                                'after'  => '</div>',
+                                'link_before' => '<span>',
+                                'link_after'  => '</span>',
+                            ));
+                            ?>
+                        </div>
                     </div>
-                    
-                    <?php
-                    // If comments are open or we have at least one comment, load up the comment template
-                    if (comments_open() || get_comments_number()) :
-                        comments_template();
-                    endif;
-                    ?>
-                </div>
-            </div>
+                </article>
+                
+                <?php
+                // If comments are open or we have at least one comment, load up the comment template.
+                if (comments_open() || get_comments_number()) :
+                    comments_template();
+                endif;
+                ?>
+                
+            <?php endwhile; ?>
         </div>
-    </section>
-<?php endwhile; ?>
+    </div>
+</div>
 
 <?php get_footer(); ?>
