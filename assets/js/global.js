@@ -43,7 +43,7 @@ Bootstrap 5 Compatible | Vanilla JS
                     toggler.addEventListener('click', function(e) {
                         e.preventDefault();
                         const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                        
+
                         if (isExpanded) {
                             this.closeMobileMenu();
                         } else {
@@ -99,7 +99,7 @@ Bootstrap 5 Compatible | Vanilla JS
                     toggler.setAttribute('aria-expanded', 'true');
                     menuPanel.classList.add('show');
                     body.classList.add('mobile-menu-open');
-                    
+
                     if (backdrop) {
                         backdrop.classList.add('show');
                     }
@@ -122,7 +122,7 @@ Bootstrap 5 Compatible | Vanilla JS
                     toggler.setAttribute('aria-expanded', 'false');
                     menuPanel.classList.remove('show');
                     body.classList.remove('mobile-menu-open');
-                    
+
                     if (backdrop) {
                         backdrop.classList.remove('show');
                     }
@@ -135,11 +135,11 @@ Bootstrap 5 Compatible | Vanilla JS
             setupEnhancedDropdowns: function() {
                 // Simple dropdown functionality that works with CSS hover
                 const dropdowns = document.querySelectorAll('.dropdown');
-                
+
                 dropdowns.forEach(dropdown => {
                     const toggle = dropdown.querySelector('.dropdown-toggle');
                     const menu = dropdown.querySelector('.dropdown-menu');
-                    
+
                     if (toggle && menu) {
                         // Click behavior for mobile and accessibility
                         toggle.addEventListener('click', function(e) {
@@ -147,9 +147,9 @@ Bootstrap 5 Compatible | Vanilla JS
                             if (window.innerWidth < 992) {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                
+
                                 const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                                
+
                                 // Close all other dropdowns
                                 dropdowns.forEach(otherDropdown => {
                                     if (otherDropdown !== dropdown) {
@@ -192,7 +192,7 @@ Bootstrap 5 Compatible | Vanilla JS
                                 menu.classList.remove('show');
                             }
                         });
-                        
+
                         // Close dropdown on escape key
                         document.addEventListener('keydown', function(e) {
                             if (e.key === 'Escape') {
@@ -203,22 +203,22 @@ Bootstrap 5 Compatible | Vanilla JS
                         });
                     }
                 });
-                
+
                 // Handle submenu interactions
                 const submenus = document.querySelectorAll('.dropdown-submenu');
                 submenus.forEach(submenu => {
                     const toggle = submenu.querySelector('.dropdown-toggle');
                     const menu = submenu.querySelector('.dropdown-menu');
-                    
+
                     if (toggle && menu) {
                         // Mobile click behavior for submenus
                         toggle.addEventListener('click', function(e) {
                             if (window.innerWidth < 992) {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                
+
                                 const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                                
+
                                 if (isExpanded) {
                                     this.setAttribute('aria-expanded', 'false');
                                     menu.classList.remove('show');
@@ -230,7 +230,7 @@ Bootstrap 5 Compatible | Vanilla JS
                         });
                     }
                 });
-                
+
                 // Handle window resize to reset dropdown behavior
                 window.addEventListener('resize', function() {
                     if (window.innerWidth >= 992) {
@@ -251,7 +251,7 @@ Bootstrap 5 Compatible | Vanilla JS
                 // Set active states based on current page
                 const currentUrl = window.location.pathname;
                 const navLinks = document.querySelectorAll('.nav-link');
-                
+
                 navLinks.forEach(link => {
                     const linkUrl = new URL(link.href).pathname;
                     if (linkUrl === currentUrl || (linkUrl !== '/' && currentUrl.includes(linkUrl))) {
@@ -265,30 +265,30 @@ Bootstrap 5 Compatible | Vanilla JS
                 // Handle keyboard navigation for standard dropdowns
                 document.addEventListener('keydown', function(e) {
                     const activeElement = document.activeElement;
-                    
+
                     // Handle dropdown navigation
                     if (activeElement.classList.contains('dropdown-toggle')) {
                         const dropdown = activeElement.closest('.dropdown');
                         const menu = dropdown.querySelector('.dropdown-menu');
-                        
+
                         if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault();
                             activeElement.setAttribute('aria-expanded', 'true');
                             menu.classList.add('show');
-                            
+
                             const firstItem = menu.querySelector('.dropdown-item');
                             if (firstItem) {
                                 firstItem.focus();
                             }
                         }
                     }
-                    
+
                     // Handle dropdown item navigation
                     if (activeElement.classList.contains('dropdown-item')) {
                         const menu = activeElement.closest('.dropdown-menu');
                         const items = Array.from(menu.querySelectorAll('.dropdown-item'));
                         const currentIndex = items.indexOf(activeElement);
-                        
+
                         if (e.key === 'ArrowDown') {
                             e.preventDefault();
                             const nextIndex = (currentIndex + 1) % items.length;
@@ -312,19 +312,19 @@ Bootstrap 5 Compatible | Vanilla JS
             setupSmoothScroll: function() {
                 // Smooth scroll for anchor links
                 const anchorLinks = document.querySelectorAll('a[href^="#"]');
-                
+
                 anchorLinks.forEach(link => {
                     link.addEventListener('click', function(e) {
                         const targetId = this.getAttribute('href');
                         const targetElement = document.querySelector(targetId);
-                        
+
                         if (targetElement) {
                             e.preventDefault();
-                            
+
                             const header = document.querySelector('.site-header');
                             const headerHeight = header ? header.offsetHeight : 0;
                             const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                            
+
                             window.scrollTo({
                                 top: targetPosition,
                                 behavior: 'smooth'
@@ -337,7 +337,7 @@ Bootstrap 5 Compatible | Vanilla JS
             setupFocusManagement: function() {
                 // Trap focus in mobile menu when open
                 const menuPanel = document.querySelector('[data-mobile-menu-panel]');
-                
+
                 if (menuPanel) {
                     menuPanel.addEventListener('keydown', function(e) {
                         if (e.key === 'Tab' && this.classList.contains('show')) {
@@ -346,7 +346,7 @@ Bootstrap 5 Compatible | Vanilla JS
                             );
                             const firstElement = focusableElements[0];
                             const lastElement = focusableElements[focusableElements.length - 1];
-                            
+
                             if (e.shiftKey && document.activeElement === firstElement) {
                                 e.preventDefault();
                                 lastElement.focus();
@@ -362,7 +362,7 @@ Bootstrap 5 Compatible | Vanilla JS
             setupCTAButton: function() {
                 // Enhanced CTA button functionality
                 const ctaButtons = document.querySelectorAll('.enhanced-cta-btn');
-                
+
                 ctaButtons.forEach(button => {
                     // Add ripple effect on click
                     button.addEventListener('click', function(e) {
@@ -371,7 +371,7 @@ Bootstrap 5 Compatible | Vanilla JS
                         const size = Math.max(rect.width, rect.height);
                         const x = e.clientX - rect.left - size / 2;
                         const y = e.clientY - rect.top - size / 2;
-                        
+
                         ripple.style.cssText = `
                             position: absolute;
                             width: ${size}px;
@@ -384,9 +384,9 @@ Bootstrap 5 Compatible | Vanilla JS
                             animation: ripple 0.6s linear;
                             pointer-events: none;
                         `;
-                        
+
                         this.appendChild(ripple);
-                        
+
                         setTimeout(() => {
                             ripple.remove();
                         }, 600);
@@ -397,16 +397,16 @@ Bootstrap 5 Compatible | Vanilla JS
             setupSubmenuInteractions: function() {
                 // Handle submenu interactions on mobile
                 const submenuToggles = document.querySelectorAll('.dropdown-toggle');
-                
+
                 submenuToggles.forEach(toggle => {
                     toggle.addEventListener('click', function(e) {
                         if (window.innerWidth < 992) {
                             const parentItem = this.closest('.dropdown');
                             const submenu = parentItem.querySelector('.dropdown-menu');
-                            
+
                             if (submenu) {
                                 const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                                
+
                                 if (isExpanded) {
                                     this.setAttribute('aria-expanded', 'false');
                                     submenu.classList.remove('show');
@@ -439,19 +439,19 @@ Bootstrap 5 Compatible | Vanilla JS
                 // Service filter functionality
                 const filterButtons = document.querySelectorAll('.filter-btn');
                 const serviceCards = document.querySelectorAll('.service-card');
-                
+
                 filterButtons.forEach(button => {
                     button.addEventListener('click', function() {
                         const filter = this.getAttribute('data-filter');
-                        
+
                         // Update active button
                         filterButtons.forEach(btn => btn.classList.remove('active'));
                         this.classList.add('active');
-                        
+
                         // Filter service cards
                         serviceCards.forEach(card => {
                             const categories = card.getAttribute('data-category');
-                            
+
                             if (filter === 'all' || (categories && categories.includes(filter))) {
                                 card.style.display = 'block';
                                 card.style.animation = 'fadeInUp 0.5s ease';
@@ -472,7 +472,7 @@ Bootstrap 5 Compatible | Vanilla JS
                 // Fix mobile layout issues
                 const handleResize = () => {
                     const viewport = window.innerWidth;
-                    
+
                     // Fix mobile menu positioning
                     if (viewport < 992) {
                         const mobileMenu = document.querySelector('.navbar-collapse');
@@ -481,7 +481,7 @@ Bootstrap 5 Compatible | Vanilla JS
                             mobileMenu.style.overflowY = 'auto';
                         }
                     }
-                    
+
                     // Fix grid layouts on small screens
                     const grids = document.querySelectorAll('.services-grid, .categories-grid, .blog-grid');
                     grids.forEach(grid => {
@@ -490,7 +490,7 @@ Bootstrap 5 Compatible | Vanilla JS
                         }
                     });
                 };
-                
+
                 window.addEventListener('resize', handleResize);
                 handleResize(); // Run on load
             }
@@ -530,7 +530,7 @@ Bootstrap 5 Compatible | Vanilla JS
             setupLazyLoading: function() {
                 // Simple lazy loading for images
                 const images = document.querySelectorAll('img[data-src]');
-                
+
                 if ('IntersectionObserver' in window) {
                     const imageObserver = new IntersectionObserver((entries, observer) => {
                         entries.forEach(entry => {
@@ -549,14 +549,14 @@ Bootstrap 5 Compatible | Vanilla JS
                 // Enhanced keyboard navigation for mega menu
                 document.addEventListener('keydown', function(e) {
                     const activeElement = document.activeElement;
-                    
+
                     if (activeElement.classList.contains('mega-menu-link')) {
                         const megaMenu = activeElement.closest('.services-mega-menu');
                         if (!megaMenu) return;
-                        
+
                         const allLinks = Array.from(megaMenu.querySelectorAll('.mega-menu-link'));
                         const currentIndex = allLinks.indexOf(activeElement);
-                        
+
                         if (e.key === 'Tab' && !e.shiftKey) {
                             // Tab forward through mega menu
                             e.preventDefault();
@@ -576,7 +576,7 @@ Bootstrap 5 Compatible | Vanilla JS
                 // Use Intersection Observer for better performance
                 if ('IntersectionObserver' in window) {
                     const megaMenus = document.querySelectorAll('.services-mega-menu');
-                    
+
                     const observer = new IntersectionObserver((entries) => {
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
@@ -607,9 +607,9 @@ Bootstrap 5 Compatible | Vanilla JS
                 const notification = document.createElement('div');
                 notification.className = `notification notification-${type}`;
                 notification.textContent = message;
-                
+
                 document.body.appendChild(notification);
-                
+
                 setTimeout(() => {
                     notification.remove();
                 }, 3000);
@@ -686,3 +686,4 @@ Bootstrap 5 Compatible | Vanilla JS
     window.BlueprintFolder = BlueprintFolder;
 
 })();
+

@@ -2,7 +2,7 @@
 /**
  * Universal Banner Template Part
  * Consistent banner design for all pages
- * 
+ *
  * @param string $badge_icon - Icon for the badge
  * @param string $badge_text - Text for the badge
  * @param string $title - Main title
@@ -19,50 +19,44 @@ $title = $title ?? 'Welcome';
 $highlight = $highlight ?? '';
 $description = $description ?? 'Quality services you can trust.';
 $buttons = $buttons ?? [];
-$stats = $stats ?? [];
-?>
-
+$stats = $stats ?? [];?>
 <section class="universal-banner">
     <div class="container">
         <div class="banner-content">
             <div class="banner-badge">
-                <span class="badge-icon"><?php echo esc_html($badge_icon); ?></span>
-                <?php echo esc_html($badge_text); ?>
+                <span class="badge-icon"><?php echo esc_html($badge_icon);?></span>
+                <?php echo esc_html($badge_text);?>
             </div>
-            
             <h1 class="banner-title">
-                <?php echo esc_html($title); ?>
-                <?php if ($highlight): ?>
-                    <span class="title-highlight"><?php echo esc_html($highlight); ?></span>
-                <?php endif; ?>
+                <?php echo esc_html($title);?>
+                <?php if ($highlight):?>
+                    <span class="title-highlight"><?php echo esc_html($highlight);?></span>
+                <?php endif;?>
             </h1>
-            
             <p class="banner-description">
-                <?php echo esc_html($description); ?>
+                <?php echo esc_html($description);?>
             </p>
-            
-            <?php if (!empty($buttons)): ?>
+            <?php if (!empty($buttons)):?>
                 <div class="banner-buttons">
-                    <?php foreach ($buttons as $button): ?>
-                        <a href="<?php echo esc_url($button['url']); ?>" 
-                           class="<?php echo esc_attr($button['type'] ?? 'btn-primary'); ?>">
-                            <span><?php echo esc_html($button['text']); ?></span>
-                            <i><?php echo esc_html($button['icon'] ?? '→'); ?></i>
+                    <?php foreach ($buttons as $button):?>
+                        <a href="<?php echo esc_url($button['url']);?>"
+                           class="<?php echo esc_attr($button['type'] ?? 'btn-primary');?>">
+                            <span><?php echo esc_html($button['text']);?></span>
+                            <i><?php echo esc_html($button['icon'] ?? '→');?></i>
                         </a>
-                    <?php endforeach; ?>
+                    <?php endforeach;?>
                 </div>
-            <?php endif; ?>
-            
-            <?php if (!empty($stats)): ?>
+            <?php endif;?>
+            <?php if (!empty($stats)):?>
                 <div class="banner-stats">
-                    <?php foreach ($stats as $stat): ?>
+                    <?php foreach ($stats as $stat):?>
                         <div class="stat-item">
-                            <span class="stat-number"><?php echo esc_html($stat['number']); ?></span>
-                            <span class="stat-label"><?php echo esc_html($stat['label']); ?></span>
+                            <span class="stat-number"><?php echo esc_html($stat['number']);?></span>
+                            <span class="stat-label"><?php echo esc_html($stat['label']);?></span>
                         </div>
-                    <?php endforeach; ?>
+                    <?php endforeach;?>
                 </div>
-            <?php endif; ?>
+            <?php endif;?>
         </div>
     </div>
 </section>

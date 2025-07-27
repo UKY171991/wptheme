@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (toggle && collapse) {
                 toggle.addEventListener('click', function() {
                     const isExpanded = collapse.classList.contains('show');
-                    
+
                     if (isExpanded) {
                         collapse.classList.remove('show');
                         toggle.setAttribute('aria-expanded', 'false');
@@ -63,10 +63,10 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdown.addEventListener('mouseenter', () => {
                 if (window.innerWidth >= 992) {
                     clearTimeout(hoverTimeout);
-                    
+
                     // Close sibling dropdowns
                     this.closeSiblingDropdowns(dropdown);
-                    
+
                     // Open current dropdown
                     menu.classList.add('show');
                     toggle.setAttribute('aria-expanded', 'true');
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     hoverTimeout = setTimeout(() => {
                         menu.classList.remove('show');
                         toggle.setAttribute('aria-expanded', 'false');
-                        
+
                         // Close all child dropdowns
                         this.closeChildDropdowns(menu);
                     }, 150);
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (sibling !== currentDropdown) {
                         const siblingMenu = sibling.querySelector('.dropdown-menu');
                         const siblingToggle = sibling.querySelector('.dropdown-toggle');
-                        
+
                         if (siblingMenu && siblingToggle) {
                             siblingMenu.classList.remove('show');
                             siblingToggle.setAttribute('aria-expanded', 'false');
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Escape key closes all dropdowns
                 if (e.key === 'Escape') {
                     this.closeAllDropdowns();
-                    
+
                     // Focus the toggle if we're in a dropdown
                     const dropdown = activeElement.closest('.dropdown, .dropend');
                     if (dropdown) {
@@ -254,24 +254,24 @@ document.addEventListener('DOMContentLoaded', function() {
         // Handle window resize
         setupWindowResize: function() {
             let resizeTimeout;
-            
+
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(() => {
                     // Close all dropdowns on resize
                     this.closeAllDropdowns();
-                    
+
                     // Close mobile menu if switching to desktop
                     if (window.innerWidth >= 992) {
                         const collapse = document.querySelector('.navbar-collapse');
                         const toggle = document.querySelector('.navbar-toggler');
-                        
+
                         if (collapse && toggle) {
                             collapse.classList.remove('show');
                             toggle.setAttribute('aria-expanded', 'false');
                         }
                     }
-                    
+
                     // Reinitialize dropdowns for new screen size
                     this.setupDropdowns();
                 }, 250);
@@ -288,12 +288,12 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            
+
             if (targetElement) {
                 e.preventDefault();
                 const headerHeight = document.querySelector('.site-header').offsetHeight;
                 const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -302,3 +302,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+

@@ -26,35 +26,35 @@ if (false) { // This condition will never be true now
     $page_description = get_post_meta(get_the_ID(), 'page_description', true) ?: get_the_excerpt();
     if (empty($page_description)) {
         $page_description = 'Discover our comprehensive range of professional services designed to help your business succeed.';
-    }
+}
 } elseif (is_single()) {
     if (get_post_type() === 'service') {
         $page_title = get_the_title();
         $page_subtitle = 'Professional Service';
         $page_description = get_the_excerpt() ?: 'Learn more about this professional service and how it can benefit your business.';
-    } else {
+} else {
         $page_title = get_the_title();
         $page_subtitle = 'Blog Post';
         $page_description = get_the_excerpt() ?: 'Read our latest insights and industry updates.';
-    }
+}
 } elseif (is_archive()) {
     if (is_post_type_archive('service')) {
         $page_title = 'Our Services';
         $page_subtitle = 'Professional Solutions';
         $page_description = 'Explore our comprehensive range of professional services designed to help your business grow and succeed.';
-    } elseif (is_category()) {
+} elseif (is_category()) {
         $page_title = single_cat_title('', false);
         $page_subtitle = 'Category Archive';
         $page_description = category_description() ?: 'Browse posts in this category.';
-    } elseif (is_tag()) {
+} elseif (is_tag()) {
         $page_title = single_tag_title('', false);
         $page_subtitle = 'Tag Archive';
         $page_description = tag_description() ?: 'Posts tagged with this topic.';
-    } else {
+} else {
         $page_title = 'Archive';
         $page_subtitle = 'Browse Content';
         $page_description = 'Explore our content archive.';
-    }
+}
 } elseif (is_search()) {
     $page_title = 'Search Results';
     $page_subtitle = 'Search: ' . get_search_query();
@@ -73,7 +73,7 @@ if (false) { // This condition will never be true now
 $breadcrumbs = array();
 if (!is_front_page()) {
     $breadcrumbs[] = array('title' => 'Home', 'url' => home_url('/'));
-    
+
     if (is_page()) {
         // Add parent pages to breadcrumb
         $post = get_post();
@@ -84,93 +84,85 @@ if (!is_front_page()) {
                 $parent = get_post($parent_id);
                 $parent_pages[] = array('title' => $parent->post_title, 'url' => get_permalink($parent->ID));
                 $parent_id = $parent->post_parent;
-            }
+}
             $breadcrumbs = array_merge($breadcrumbs, array_reverse($parent_pages));
-        }
+}
         $breadcrumbs[] = array('title' => get_the_title(), 'url' => '');
-    } elseif (is_single()) {
+} elseif (is_single()) {
         if (get_post_type() === 'service') {
             $breadcrumbs[] = array('title' => 'Services', 'url' => get_post_type_archive_link('service'));
-        } else {
+} else {
             $breadcrumbs[] = array('title' => 'Blog', 'url' => get_permalink(get_option('page_for_posts')));
-        }
-        $breadcrumbs[] = array('title' => get_the_title(), 'url' => '');
-    } elseif (is_archive()) {
-        $breadcrumbs[] = array('title' => $page_title, 'url' => '');
-    }
 }
-?>
-
-<section class="<?php echo esc_attr($banner_class); ?>" role="banner">
+        $breadcrumbs[] = array('title' => get_the_title(), 'url' => '');
+} elseif (is_archive()) {
+        $breadcrumbs[] = array('title' => $page_title, 'url' => '');
+}
+}?>
+<section class="<?php echo esc_attr($banner_class);?>" role="banner">
     <div class="banner-background">
         <div class="banner-overlay"></div>
         <div class="banner-pattern"></div>
     </div>
-    
     <div class="container">
         <div class="row align-items-center min-vh-50">
             <div class="col-lg-8 mx-auto text-center">
                 <!-- Breadcrumbs -->
-                <?php if (!empty($breadcrumbs) && !is_front_page()) : ?>
+                <?php if (!empty($breadcrumbs) && !is_front_page()) :?>
                     <nav class="banner-breadcrumb" aria-label="Breadcrumb">
                         <ol class="breadcrumb justify-content-center">
-                            <?php foreach ($breadcrumbs as $index => $crumb) : ?>
-                                <li class="breadcrumb-item<?php echo empty($crumb['url']) ? ' active' : ''; ?>">
-                                    <?php if (!empty($crumb['url'])) : ?>
-                                        <a href="<?php echo esc_url($crumb['url']); ?>"><?php echo esc_html($crumb['title']); ?></a>
-                                    <?php else : ?>
-                                        <?php echo esc_html($crumb['title']); ?>
-                                    <?php endif; ?>
+                            <?php foreach ($breadcrumbs as $index => $crumb) :?>
+                                <li class="breadcrumb-item<?php echo empty($crumb['url']) ? ' active' : '';?>">
+                                    <?php if (!empty($crumb['url'])) :?>
+                                        <a href="<?php echo esc_url($crumb['url']);?>"><?php echo esc_html($crumb['title']);?></a>
+                                    <?php else :?>
+                                        <?php echo esc_html($crumb['title']);?>
+                                    <?php endif;?>
                                 </li>
-                            <?php endforeach; ?>
+                            <?php endforeach;?>
                         </ol>
                     </nav>
-                <?php endif; ?>
-
+                <?php endif;?>
                 <!-- Banner Content -->
                 <div class="banner-content">
-                    <?php if ($page_subtitle && !is_front_page()) : ?>
+                    <?php if ($page_subtitle && !is_front_page()) :?>
                         <div class="banner-subtitle">
-                            <span class="subtitle-text"><?php echo esc_html($page_subtitle); ?></span>
+                            <span class="subtitle-text"><?php echo esc_html($page_subtitle);?></span>
                         </div>
-                    <?php endif; ?>
-
+                    <?php endif;?>
                     <h1 class="banner-title">
-                        <?php echo esc_html($page_title); ?>
+                        <?php echo esc_html($page_title);?>
                     </h1>
-
-                    <?php if ($page_description) : ?>
+                    <?php if ($page_description) :?>
                         <div class="banner-description">
-                            <p><?php echo esc_html($page_description); ?></p>
+                            <p><?php echo esc_html($page_description);?></p>
                         </div>
-                    <?php endif; ?>
-
+                    <?php endif;?>
                     <!-- CTA Buttons (only on front page and service pages) -->
-                    <?php if (is_front_page() || is_page_template('page-services.php') || is_post_type_archive('service')) : ?>
+                    <?php if (is_front_page() || is_page_template('page-services.php') || is_post_type_archive('service')) :?>
                         <div class="banner-actions">
-                            <a href="<?php echo esc_url(blueprint_folder_get_header_cta_url()); ?>" 
+                            <a href="<?php echo esc_url(blueprint_folder_get_header_cta_url());?>"
                                class="btn btn-primary btn-lg me-3">
                                 <i class="fas fa-rocket me-2"></i>
                                 Get Started Today
                             </a>
-                            <a href="<?php echo esc_url(get_post_type_archive_link('service') ?: home_url('/services')); ?>" 
+                            <a href="<?php echo esc_url(get_post_type_archive_link('service') ?: home_url('/services'));?>"
                                class="btn btn-outline-light btn-lg">
                                 <i class="fas fa-eye me-2"></i>
                                 View Our Services
                             </a>
                         </div>
-                    <?php elseif (is_page('contact')) : ?>
+                    <?php elseif (is_page('contact')) :?>
                         <div class="banner-actions">
                             <a href="#contact-form" class="btn btn-primary btn-lg">
                                 <i class="fas fa-envelope me-2"></i>
                                 Send Message
                             </a>
                         </div>
-                    <?php endif; ?>
+                    <?php endif;?>
                 </div>
-
                 <!-- Banner Stats (only on front page) -->
-                <?php if (is_front_page()) : ?>
+                <?php if (is_front_page()) :?>
                     <div class="banner-stats">
                         <div class="row text-center">
                             <div class="col-md-3 col-6">
@@ -199,11 +191,10 @@ if (!is_front_page()) {
                             </div>
                         </div>
                     </div>
-                <?php endif; ?>
+                <?php endif;?>
             </div>
         </div>
     </div>
-
     <!-- Scroll Indicator -->
     <div class="scroll-indicator">
         <a href="#main-content" class="scroll-down" aria-label="Scroll to main content">

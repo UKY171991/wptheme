@@ -5,21 +5,21 @@
  */
 
 class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
-    
+
     /**
      * Start Level - UL wrapper for dropdown menus
      */
     public function start_lvl(&$output, $depth = 0, $args = null) {
         $indent = str_repeat("\t", $depth);
-        
+
         if ($depth === 0) {
             // First level dropdown
             $output .= "\n$indent<ul class=\"dropdown-menu\">\n";
-        } else {
+} else {
             // Second and third level dropdowns
             $output .= "\n$indent<ul class=\"dropdown-menu dropdown-submenu\">\n";
-        }
-    }
+}
+}
 
     /**
      * End Level - Close UL wrapper
@@ -27,7 +27,7 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
     public function end_lvl(&$output, $depth = 0, $args = null) {
         $indent = str_repeat("\t", $depth);
         $output .= "$indent</ul>\n";
-    }
+}
 
     /**
      * Start Element - LI and A tags
@@ -40,22 +40,22 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 
         // Build LI classes based on depth and children
         $li_classes = array();
-        
+
         if ($depth === 0) {
             $li_classes[] = 'nav-item';
             if ($has_children) {
                 $li_classes[] = 'dropdown';
-            }
-        } else {
+}
+} else {
             if ($has_children) {
                 $li_classes[] = 'dropend';
-            }
-        }
+}
+}
 
         // Add active states
         if (in_array('current-menu-item', $classes) || in_array('current-menu-parent', $classes)) {
             $li_classes[] = 'active';
-        }
+}
 
         // Apply WordPress filters
         $li_classes = apply_filters('nav_menu_css_class', array_filter($li_classes), $item, $args);
@@ -76,25 +76,25 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 
         // Build link classes based on depth
         $link_classes = array();
-        
+
         if ($depth === 0) {
             $link_classes[] = 'nav-link';
             if ($has_children) {
                 $link_classes[] = 'dropdown-toggle';
                 $attributes .= ' data-bs-toggle="dropdown" aria-expanded="false" role="button"';
-            }
-        } else {
+}
+} else {
             $link_classes[] = 'dropdown-item';
             if ($has_children) {
                 $link_classes[] = 'dropdown-toggle';
                 $attributes .= ' data-bs-toggle="dropdown" aria-expanded="false" role="button"';
-            }
-        }
+}
+}
 
         // Add current page indicator
         if (in_array('current-menu-item', $classes)) {
             $attributes .= ' aria-current="page"';
-        }
+}
 
         $link_class = ' class="' . implode(' ', $link_classes) . '"';
 
@@ -102,12 +102,12 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         $item_output = isset($args->before) ? $args->before : '';
         $item_output .= '<a' . $attributes . $link_class . '>';
         $item_output .= (isset($args->link_before) ? $args->link_before : '');
-        
+
         // Add menu item icon if it exists
         $menu_icon = get_post_meta($item->ID, '_menu_item_icon', true);
         if (!empty($menu_icon)) {
             $item_output .= '<i class="' . esc_attr($menu_icon) . ' me-2"></i>';
-        } else {
+} else {
             // Add default icons based on menu item title/URL
             $default_icons = array(
                 'home' => 'fas fa-home',
@@ -120,40 +120,41 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
                 'team' => 'fas fa-users',
                 'testimonials' => 'fas fa-quote-left'
             );
-            
+
             $item_title_lower = strtolower($item->title);
             $item_url_lower = strtolower($item->url);
-            
+
             foreach ($default_icons as $key => $icon) {
                 if (strpos($item_title_lower, $key) !== false || strpos($item_url_lower, $key) !== false) {
                     $item_output .= '<i class="' . esc_attr($icon) . ' me-2"></i>';
                     break;
-                }
-            }
-        }
-        
+}
+}
+}
+
         $item_output .= apply_filters('the_title', $item->title, $item->ID);
         $item_output .= (isset($args->link_after) ? $args->link_after : '');
-        
+
         // Add dropdown indicators
         if ($has_children) {
             if ($depth === 0) {
                 $item_output .= ' <i class="fas fa-chevron-down ms-1"></i>';
-            } else {
+} else {
                 $item_output .= ' <i class="fas fa-chevron-right ms-auto"></i>';
-            }
-        }
-        
+}
+}
+
         $item_output .= '</a>';
         $item_output .= isset($args->after) ? $args->after : '';
 
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
-    }
+}
 
     /**
      * End Element - Close LI tag
      */
     public function end_el(&$output, $item, $depth = 0, $args = null) {
         $output .= "</li>\n";
-    }
 }
+}
+

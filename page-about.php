@@ -5,30 +5,26 @@
  */
 
 get_header(); ?>
-
-<?php while (have_posts()) : the_post(); ?>
-
+<?php while (have_posts()) : the_post();?>
 <!-- About Content -->
 <section class="section">
     <div class="container">
         <div class="row align-items-center mb-5">
             <div class="col-lg-6">
                 <div class="about-content">
-                    <?php the_content(); ?>
+                    <?php the_content();?>
                 </div>
             </div>
-            
             <div class="col-lg-6">
-                <?php if (has_post_thumbnail()) : ?>
+                <?php if (has_post_thumbnail()) :?>
                     <div class="about-image">
-                        <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded shadow')); ?>
+                        <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded shadow'));?>
                     </div>
-                <?php endif; ?>
+                <?php endif;?>
             </div>
         </div>
     </div>
 </section>
-
 <!-- Our Story -->
 <section class="section bg-light-gray">
     <div class="container">
@@ -41,7 +37,6 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
 <!-- Values Section -->
 <section class="section">
     <div class="container">
@@ -51,7 +46,6 @@ get_header(); ?>
                 <p class="lead">The principles that guide everything we do</p>
             </div>
         </div>
-        
         <div class="row g-4">
             <div class="col-lg-4 col-md-6">
                 <div class="value-card text-center h-100">
@@ -62,7 +56,6 @@ get_header(); ?>
                     <p>We continuously explore new technologies and methodologies to deliver cutting-edge solutions that keep our clients ahead of the competition.</p>
                 </div>
             </div>
-            
             <div class="col-lg-4 col-md-6">
                 <div class="value-card text-center h-100">
                     <div class="value-icon mb-4">
@@ -72,7 +65,6 @@ get_header(); ?>
                     <p>We build long-term relationships with our clients, working as an extension of their team to achieve shared goals and mutual success.</p>
                 </div>
             </div>
-            
             <div class="col-lg-4 col-md-6">
                 <div class="value-card text-center h-100">
                     <div class="value-icon mb-4">
@@ -82,7 +74,6 @@ get_header(); ?>
                     <p>We maintain the highest standards in everything we do, from project planning to final delivery, ensuring exceptional quality and results.</p>
                 </div>
             </div>
-            
             <div class="col-lg-4 col-md-6">
                 <div class="value-card text-center h-100">
                     <div class="value-icon mb-4">
@@ -92,7 +83,6 @@ get_header(); ?>
                     <p>We operate with transparency, honesty, and ethical practices in all our business relationships and project deliveries.</p>
                 </div>
             </div>
-            
             <div class="col-lg-4 col-md-6">
                 <div class="value-card text-center h-100">
                     <div class="value-icon mb-4">
@@ -102,7 +92,6 @@ get_header(); ?>
                     <p>We believe in the power of teamwork, both within our organization and with our clients, to achieve extraordinary results.</p>
                 </div>
             </div>
-            
             <div class="col-lg-4 col-md-6">
                 <div class="value-card text-center h-100">
                     <div class="value-icon mb-4">
@@ -115,7 +104,6 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
 <!-- Stats Section -->
 <section class="section bg-light-gray">
     <div class="container">
@@ -126,21 +114,18 @@ get_header(); ?>
                     <p class="stat-label">Projects Completed</p>
                 </div>
             </div>
-            
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item">
                     <h3 class="stat-number text-primary mb-2">50+</h3>
                     <p class="stat-label">Happy Clients</p>
                 </div>
             </div>
-            
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item">
                     <h3 class="stat-number text-primary mb-2">5+</h3>
                     <p class="stat-label">Years Experience</p>
                 </div>
             </div>
-            
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item">
                     <h3 class="stat-number text-primary mb-2">24/7</h3>
@@ -150,9 +135,7 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
-<?php endwhile; ?>
-
+<?php endwhile;?>
 <!-- Team Section -->
 <section class="team-section section bg-light">
     <div class="container">
@@ -167,13 +150,12 @@ get_header(); ?>
                 </p>
             </div>
         </div>
-        
         <div class="row g-4">
             <!-- Team Member 1 -->
             <div class="col-lg-4 col-md-6">
                 <div class="team-member-card h-100">
                     <div class="team-member-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/about.jpg" 
+                        <img src="<?php echo get_template_directory_uri();?>/images/about.jpg"
                              alt="Team Member" class="img-fluid w-100" style="height: 300px; object-fit: cover;">
                         <div class="team-social text-center">
                             <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -188,12 +170,11 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-            
             <!-- Team Member 2 -->
             <div class="col-lg-4 col-md-6">
                 <div class="team-member-card h-100">
                     <div class="team-member-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/about.jpg" 
+                        <img src="<?php echo get_template_directory_uri();?>/images/about.jpg"
                              alt="Team Member" class="img-fluid w-100" style="height: 300px; object-fit: cover;">
                         <div class="team-social text-center">
                             <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -208,12 +189,11 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-            
             <!-- Team Member 3 -->
             <div class="col-lg-4 col-md-6">
                 <div class="team-member-card h-100">
                     <div class="team-member-image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/about.jpg" 
+                        <img src="<?php echo get_template_directory_uri();?>/images/about.jpg"
                              alt="Team Member" class="img-fluid w-100" style="height: 300px; object-fit: cover;">
                         <div class="team-social text-center">
                             <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -229,7 +209,6 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        
         <!-- Team Stats -->
         <div class="team-stats mt-5">
             <div class="row text-center">
@@ -261,7 +240,6 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
 <!-- Our Process Section -->
 <section class="process-section section">
     <div class="container">
@@ -276,7 +254,6 @@ get_header(); ?>
                 </p>
             </div>
         </div>
-        
         <div class="process-timeline">
             <div class="row g-4">
                 <!-- Step 1 -->
@@ -292,7 +269,6 @@ get_header(); ?>
                         <p class="text-muted">We start by understanding your goals, challenges, and requirements through detailed consultation.</p>
                     </div>
                 </div>
-                
                 <!-- Step 2 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="process-step text-center">
@@ -306,7 +282,6 @@ get_header(); ?>
                         <p class="text-muted">We create a comprehensive strategy and detailed project plan tailored to your specific needs.</p>
                     </div>
                 </div>
-                
                 <!-- Step 3 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="process-step text-center">
@@ -320,7 +295,6 @@ get_header(); ?>
                         <p class="text-muted">Our expert team implements the solution using industry best practices and cutting-edge tools.</p>
                     </div>
                 </div>
-                
                 <!-- Step 4 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="process-step text-center">
@@ -338,7 +312,6 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
 <!-- CTA Section -->
 <section class="section bg-primary">
     <div class="container">
@@ -349,11 +322,11 @@ get_header(); ?>
                     Let's discuss how we can help transform your business and achieve your goals.
                 </p>
                 <div class="cta-buttons">
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-light btn-lg me-3">
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-light btn-lg me-3">
                         <i class="fas fa-envelope me-2"></i>
                         Get In Touch
                     </a>
-                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('services'))); ?>" class="btn btn-outline-light btn-lg">
+                    <a href="<?php echo esc_url(get_permalink(get_page_by_path('services')));?>" class="btn btn-outline-light btn-lg">
                         <i class="fas fa-eye me-2"></i>
                         View Our Services
                     </a>
@@ -362,5 +335,4 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
 <?php get_footer(); ?>

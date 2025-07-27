@@ -4,7 +4,6 @@
  */
 
 get_header(); ?>
-
 <main id="main" class="site-main">
     <!-- Team Hero Section -->
     <section class="section bg-primary-dark text-white">
@@ -15,31 +14,27 @@ get_header(); ?>
                     <nav aria-label="breadcrumb" class="mb-4">
                         <ol class="breadcrumb bg-transparent p-0 m-0 justify-content-center">
                             <li class="breadcrumb-item">
-                                <a href="<?php echo esc_url(home_url('/')); ?>" class="text-white text-decoration-none">
+                                <a href="<?php echo esc_url(home_url('/'));?>" class="text-white text-decoration-none">
                                     <i class="fas fa-home me-1"></i>Home
                                 </a>
                             </li>
                             <li class="breadcrumb-item active text-accent" aria-current="page">Team</li>
                         </ol>
                     </nav>
-                    
                     <div class="fade-in-up">
                         <div class="badge bg-accent text-white px-3 py-2 rounded-pill mb-4">
                             <i class="fas fa-users me-2"></i>Meet Our Professionals
                         </div>
-                        
                         <h1 class="display-4 fw-bold mb-4">
                             Our Expert Team
                             <span class="text-accent d-block">Dedicated Professionals</span>
                         </h1>
-                        
                         <p class="lead mb-4">The passionate professionals behind our exceptional services. Each team member brings expertise, dedication, and a commitment to exceeding your expectations.</p>
-                        
                         <div class="d-flex flex-wrap gap-3 justify-content-center">
                             <a href="#team-members" class="btn btn-accent btn-rounded btn-lg">
                                 <i class="fas fa-users me-2"></i>Meet the Team
                             </a>
-                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('careers'))); ?>" class="btn btn-outline-light btn-rounded btn-lg">
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('careers')));?>" class="btn btn-outline-light btn-rounded btn-lg">
                                 <i class="fas fa-briefcase me-2"></i>Join Our Team
                             </a>
                         </div>
@@ -48,7 +43,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
     <!-- Team Culture & Values -->
     <section class="section bg-light">
         <div class="container">
@@ -56,11 +50,9 @@ get_header(); ?>
                 <h2 class="section-title">Our Culture & Values</h2>
                 <p class="section-subtitle">At the heart of our organization is a commitment to excellence, integrity, and customer satisfaction.</p>
             </div>
-            
             <div class="row align-items-center g-5">
                 <div class="col-lg-6">
                     <p class="lead mb-4">Our team members are carefully selected not only for their professional skills but also for their dedication to our core values. We foster an environment where everyone can thrive and contribute to our collective success.</p>
-                    
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <div class="text-center p-3">
@@ -71,7 +63,6 @@ get_header(); ?>
                                 <p class="text-muted small">We strive for excellence in everything we do</p>
                             </div>
                         </div>
-                        
                         <div class="col-sm-6">
                             <div class="text-center p-3">
                                 <div class="icon-circle bg-accent text-white mb-3">
@@ -81,7 +72,6 @@ get_header(); ?>
                                 <p class="text-muted small">Honesty and transparency in all interactions</p>
                             </div>
                         </div>
-                        
                         <div class="col-sm-6">
                             <div class="text-center p-3">
                                 <div class="icon-circle bg-accent text-white mb-3">
@@ -91,7 +81,6 @@ get_header(); ?>
                                 <p class="text-muted small">Collaborative approach to achieve common goals</p>
                             </div>
                         </div>
-                        
                         <div class="col-sm-6">
                             <div class="text-center p-3">
                                 <div class="icon-circle bg-accent text-white mb-3">
@@ -103,10 +92,9 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-                
                 <div class="col-lg-6">
                     <div class="position-relative">
-                        <img src="<?php echo esc_url(get_theme_mod('team_culture_image', get_template_directory_uri() . '/images/team/team-culture.jpg')); ?>" 
+                        <img src="<?php echo esc_url(get_theme_mod('team_culture_image', get_template_directory_uri() . '/images/team/team-culture.jpg'));?>"
                              alt="Team Culture" class="img-fluid rounded-4 shadow">
                         <div class="position-absolute bottom-0 start-0 end-0 bg-gradient-overlay p-4 rounded-bottom-4 text-white">
                             <h5 class="mb-2">We grow together</h5>
@@ -117,7 +105,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
     <!-- Leadership Team -->
     <section class="section bg-white">
         <div class="container">
@@ -125,13 +112,12 @@ get_header(); ?>
                 <h2 class="section-title">Leadership Team</h2>
                 <p class="section-subtitle">Meet the visionaries who guide our organization, setting standards of excellence and fostering innovation.</p>
             </div>
-            
             <div class="row g-4">
                 <!-- Leadership Member 1 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="card border-0 shadow-sm h-100 card-hover">
                         <div class="position-relative overflow-hidden">
-                            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/team/leader1.jpg" 
+                            <img src="<?php echo esc_url(get_template_directory_uri());?>/images/team/leader1.jpg"
                                  alt="John Davis" class="card-img-top" style="height: 300px; object-fit: cover;">
                             <div class="position-absolute top-0 end-0 m-3">
                                 <span class="badge bg-accent">CEO</span>
@@ -149,12 +135,11 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-                
                 <!-- Leadership Member 2 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="card border-0 shadow-sm h-100 card-hover">
                         <div class="position-relative overflow-hidden">
-                            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/team/leader2.jpg" 
+                            <img src="<?php echo esc_url(get_template_directory_uri());?>/images/team/leader2.jpg"
                                  alt="Sarah Johnson" class="card-img-top" style="height: 300px; object-fit: cover;">
                             <div class="position-absolute top-0 end-0 m-3">
                                 <span class="badge bg-accent">COO</span>
@@ -172,12 +157,11 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-                
                 <!-- Leadership Member 3 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="card border-0 shadow-sm h-100 card-hover">
                         <div class="position-relative overflow-hidden">
-                            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/team/leader3.jpg" 
+                            <img src="<?php echo esc_url(get_template_directory_uri());?>/images/team/leader3.jpg"
                                  alt="Michael Chen" class="card-img-top" style="height: 300px; object-fit: cover;">
                             <div class="position-absolute top-0 end-0 m-3">
                                 <span class="badge bg-accent">CTO</span>
@@ -198,7 +182,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
     <!-- Team Members Section -->
     <section class="section bg-primary-dark text-white" id="team-members">
         <div class="container">
@@ -206,14 +189,13 @@ get_header(); ?>
                 <h2 class="section-title text-white">Our Amazing Team</h2>
                 <p class="section-subtitle text-light">The dedicated professionals who make exceptional service possible every day.</p>
             </div>
-            
             <div class="row g-4">
                 <!-- Team Member 1 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="card border-0 shadow-sm h-100 card-hover text-center">
                         <div class="position-relative">
-                            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/team/member1.jpg" 
-                                 alt="Emma Wilson" class="card-img-top rounded-circle mx-auto mt-4" 
+                            <img src="<?php echo esc_url(get_template_directory_uri());?>/images/team/member1.jpg"
+                                 alt="Emma Wilson" class="card-img-top rounded-circle mx-auto mt-4"
                                  style="width: 120px; height: 120px; object-fit: cover;">
                         </div>
                         <div class="card-body p-4">
@@ -227,13 +209,12 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-
                 <!-- Team Member 2 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="card border-0 shadow-sm h-100 card-hover text-center">
                         <div class="position-relative">
-                            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/team/member2.jpg" 
-                                 alt="David Rodriguez" class="card-img-top rounded-circle mx-auto mt-4" 
+                            <img src="<?php echo esc_url(get_template_directory_uri());?>/images/team/member2.jpg"
+                                 alt="David Rodriguez" class="card-img-top rounded-circle mx-auto mt-4"
                                  style="width: 120px; height: 120px; object-fit: cover;">
                         </div>
                         <div class="card-body p-4">
@@ -247,13 +228,12 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-
                 <!-- Team Member 3 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="card border-0 shadow-sm h-100 card-hover text-center">
                         <div class="position-relative">
-                            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/team/member3.jpg" 
-                                 alt="Lisa Park" class="card-img-top rounded-circle mx-auto mt-4" 
+                            <img src="<?php echo esc_url(get_template_directory_uri());?>/images/team/member3.jpg"
+                                 alt="Lisa Park" class="card-img-top rounded-circle mx-auto mt-4"
                                  style="width: 120px; height: 120px; object-fit: cover;">
                         </div>
                         <div class="card-body p-4">
@@ -267,13 +247,12 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-
                 <!-- Team Member 4 -->
                 <div class="col-lg-3 col-md-6">
                     <div class="card border-0 shadow-sm h-100 card-hover text-center">
                         <div class="position-relative">
-                            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/images/team/member4.jpg" 
-                                 alt="James Thompson" class="card-img-top rounded-circle mx-auto mt-4" 
+                            <img src="<?php echo esc_url(get_template_directory_uri());?>/images/team/member4.jpg"
+                                 alt="James Thompson" class="card-img-top rounded-circle mx-auto mt-4"
                                  style="width: 120px; height: 120px; object-fit: cover;">
                         </div>
                         <div class="card-body p-4">
@@ -290,7 +269,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
     <!-- Call to Action -->
     <section class="section bg-accent text-white">
         <div class="container">
@@ -299,10 +277,10 @@ get_header(); ?>
                     <h2 class="display-5 fw-bold mb-4">Join Our Team</h2>
                     <p class="lead mb-4">We're always looking for passionate professionals to join our growing team. Discover exciting career opportunities with us.</p>
                     <div class="d-flex flex-wrap gap-3 justify-content-center">
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('careers'))); ?>" class="btn btn-light btn-rounded btn-lg">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('careers')));?>" class="btn btn-light btn-rounded btn-lg">
                             <i class="fas fa-briefcase me-2"></i>View Careers
                         </a>
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-outline-light btn-rounded btn-lg">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-outline-light btn-rounded btn-lg">
                             <i class="fas fa-envelope me-2"></i>Get In Touch
                         </a>
                     </div>
@@ -311,5 +289,4 @@ get_header(); ?>
         </div>
     </section>
 </main>
-
 <?php get_footer(); ?>

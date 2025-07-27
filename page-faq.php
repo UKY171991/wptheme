@@ -4,42 +4,36 @@
  */
 
 get_header(); ?>
-
 <main id="main" class="site-main">
     <?php
     // Page Banner
     echo services_pro_get_banner_section(
         'Frequently Asked Questions',
         'Find answers to common questions about our services, booking process, pricing, and policies.'
-    );
-    ?>
-
+    );?>
     <!-- FAQ Content -->
     <section class="section">
         <div class="container">
             <?php echo services_pro_get_section_heading(
                 'Get Your Questions Answered',
                 'Browse through our comprehensive FAQ section organized by topic'
-            ); ?>
-            
+            );?>
             <div class="faq-content">
-                <?php services_pro_display_faqs(); ?>
+                <?php services_pro_display_faqs();?>
             </div>
         </div>
     </section>
-
     <!-- Contact CTA -->
     <?php echo services_pro_get_cta_section(
         'Still Have Questions?',
         'Can\'t find what you\'re looking for? Contact us directly and we\'ll be happy to help.',
         'Contact Us',
         get_permalink(get_page_by_path('contact'))
-    ); ?>
+    );?>
 </main>
-
 <?php get_footer(); ?>
                             <div class="col-lg-10 mx-auto">
-                                <?php services_pro_display_faqs(-1, $category->slug); ?>
+                                <?php services_pro_display_faqs(-1, $category->slug);?>
                             </div>
                         </div>
                     </div>
@@ -48,20 +42,18 @@ get_header(); ?>
                         wp_reset_postdata();
                     endforeach;
                 else :
-                    // Display all FAQs without categories
-                ?>
+                    // Display all FAQs without categories?>
                     <div class="row">
                         <div class="col-lg-10 mx-auto">
                             <?php echo services_pro_get_section_heading(
                                 'All Questions',
                                 'Browse through our comprehensive FAQ collection'
-                            ); ?>
-                            
-                            <?php services_pro_display_faqs(); ?>
+                            );?>
+                            <?php services_pro_display_faqs();?>
                         </div>
                     </div>
-                <?php endif; ?>
-            <?php else : ?>
+                <?php endif;?>
+            <?php else :?>
                 <!-- No FAQs found - show default content -->
                 <div class="row">
                     <div class="col-lg-8 mx-auto text-center">
@@ -69,16 +61,15 @@ get_header(); ?>
                             <i class="fas fa-question-circle fa-4x text-muted mb-4"></i>
                             <h3 class="h4 mb-3">FAQs Coming Soon</h3>
                             <p class="text-muted mb-4">We're preparing comprehensive answers to help you. In the meantime, feel free to contact us directly with any questions.</p>
-                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-accent">
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-accent">
                                 <i class="fas fa-envelope me-2"></i>Contact Us
                             </a>
                         </div>
                     </div>
                 </div>
-            <?php endif; ?>
+            <?php endif;?>
         </div>
     </section>
-
     <!-- Contact Section for Additional Help -->
     <section class="section bg-light">
         <div class="container">
@@ -86,7 +77,6 @@ get_header(); ?>
                 <div class="col-lg-8 mx-auto text-center">
                     <h2 class="h3 mb-3">Still Have Questions?</h2>
                     <p class="text-muted mb-4">Can't find the answer you're looking for? Our friendly customer support team is here to help.</p>
-                    
                     <div class="row g-4">
                         <div class="col-md-4">
                             <div class="contact-method p-4 bg-white rounded shadow-sm">
@@ -96,16 +86,14 @@ get_header(); ?>
                                 <a href="tel:+1234567890" class="btn btn-sm btn-accent">Call Now</a>
                             </div>
                         </div>
-                        
                         <div class="col-md-4">
                             <div class="contact-method p-4 bg-white rounded shadow-sm">
                                 <i class="fas fa-envelope fa-2x text-accent mb-3"></i>
                                 <h4 class="h6 mb-2">Email Us</h4>
                                 <p class="text-muted small mb-2">We'll respond within 24 hours</p>
-                                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-sm btn-accent">Send Email</a>
+                                <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-sm btn-accent">Send Email</a>
                             </div>
                         </div>
-                        
                         <div class="col-md-4">
                             <div class="contact-method p-4 bg-white rounded shadow-sm">
                                 <i class="fas fa-comments fa-2x text-accent mb-3"></i>
@@ -120,17 +108,15 @@ get_header(); ?>
         </div>
     </section>
 </main>
-
 <?php get_footer(); ?>
                         </span>
-                        <input type="text" class="form-control border-start-0 ps-0" id="faqSearch" 
+                        <input type="text" class="form-control border-start-0 ps-0" id="faqSearch"
                                placeholder="Search for questions...">
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- FAQ Categories -->
     <section class="section bg-white">
         <div class="container">
@@ -157,7 +143,6 @@ get_header(); ?>
                             <i class="fas fa-shield-alt me-1"></i>Policies
                         </button>
                     </div>
-
                     <!-- FAQ Accordion -->
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
@@ -167,11 +152,10 @@ get_header(); ?>
                                     <h3 class="text-primary-dark mb-3 border-bottom border-accent pb-2">
                                         <i class="fas fa-tools me-2 text-accent"></i>About Our Services
                                     </h3>
-                                    
                                     <!-- FAQ Item 1 -->
                                     <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed rounded-3" type="button" 
+                                            <button class="accordion-button collapsed rounded-3" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#faq1">
                                                 <i class="fas fa-question-circle text-accent me-2"></i>
                                                 What services do you offer?
@@ -192,11 +176,10 @@ get_header(); ?>
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- FAQ Item 2 -->
                                     <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed rounded-3" type="button" 
+                                            <button class="accordion-button collapsed rounded-3" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#faq2">
                                                 <i class="fas fa-question-circle text-accent me-2"></i>
                                                 Do you provide all cleaning supplies?
@@ -209,17 +192,15 @@ get_header(); ?>
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- Booking FAQ Group -->
                                 <div class="faq-group mb-4" data-category="booking">
                                     <h3 class="text-primary-dark mb-3 border-bottom border-accent pb-2">
                                         <i class="fas fa-calendar me-2 text-accent"></i>Booking Process
                                     </h3>
-                                    
                                     <!-- FAQ Item 3 -->
                                     <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed rounded-3" type="button" 
+                                            <button class="accordion-button collapsed rounded-3" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#faq3">
                                                 <i class="fas fa-question-circle text-accent me-2"></i>
                                                 How do I book a service?
@@ -231,11 +212,10 @@ get_header(); ?>
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- FAQ Item 4 -->
                                     <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed rounded-3" type="button" 
+                                            <button class="accordion-button collapsed rounded-3" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#faq4">
                                                 <i class="fas fa-question-circle text-accent me-2"></i>
                                                 How far in advance should I book?
@@ -248,17 +228,15 @@ get_header(); ?>
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- Pricing FAQ Group -->
                                 <div class="faq-group mb-4" data-category="pricing">
                                     <h3 class="text-primary-dark mb-3 border-bottom border-accent pb-2">
                                         <i class="fas fa-dollar-sign me-2 text-accent"></i>Pricing Information
                                     </h3>
-                                    
                                     <!-- FAQ Item 5 -->
                                     <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed rounded-3" type="button" 
+                                            <button class="accordion-button collapsed rounded-3" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#faq5">
                                                 <i class="fas fa-question-circle text-accent me-2"></i>
                                                 How much do your services cost?
@@ -270,11 +248,10 @@ get_header(); ?>
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- FAQ Item 6 -->
                                     <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed rounded-3" type="button" 
+                                            <button class="accordion-button collapsed rounded-3" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#faq6">
                                                 <i class="fas fa-question-circle text-accent me-2"></i>
                                                 Do you offer discounts for regular services?
@@ -287,17 +264,15 @@ get_header(); ?>
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- Payment FAQ Group -->
                                 <div class="faq-group mb-4" data-category="payment">
                                     <h3 class="text-primary-dark mb-3 border-bottom border-accent pb-2">
                                         <i class="fas fa-credit-card me-2 text-accent"></i>Payment Options
                                     </h3>
-                                    
                                     <!-- FAQ Item 7 -->
                                     <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed rounded-3" type="button" 
+                                            <button class="accordion-button collapsed rounded-3" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#faq7">
                                                 <i class="fas fa-question-circle text-accent me-2"></i>
                                                 What payment methods do you accept?
@@ -310,17 +285,15 @@ get_header(); ?>
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- Policy FAQ Group -->
                                 <div class="faq-group mb-4" data-category="policy">
                                     <h3 class="text-primary-dark mb-3 border-bottom border-accent pb-2">
                                         <i class="fas fa-shield-alt me-2 text-accent"></i>Policies & Insurance
                                     </h3>
-                                    
                                     <!-- FAQ Item 8 -->
                                     <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed rounded-3" type="button" 
+                                            <button class="accordion-button collapsed rounded-3" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#faq8">
                                                 <i class="fas fa-question-circle text-accent me-2"></i>
                                                 Are you insured and bonded?
@@ -332,11 +305,10 @@ get_header(); ?>
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- FAQ Item 9 -->
                                     <div class="accordion-item border-0 shadow-sm mb-3 rounded-3">
                                         <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed rounded-3" type="button" 
+                                            <button class="accordion-button collapsed rounded-3" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#faq9">
                                                 <i class="fas fa-question-circle text-accent me-2"></i>
                                                 What is your cancellation policy?
@@ -356,7 +328,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
     <!-- Contact CTA -->
     <section class="section bg-accent text-white">
         <div class="container">
@@ -365,7 +336,7 @@ get_header(); ?>
                     <h2 class="display-5 fw-bold mb-4">Still Have Questions?</h2>
                     <p class="lead mb-4">Can't find the answer you're looking for? Our friendly customer service team is here to help.</p>
                     <div class="d-flex flex-wrap gap-3 justify-content-center">
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-light btn-rounded btn-lg">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-light btn-rounded btn-lg">
                             <i class="fas fa-envelope me-2"></i>Contact Us
                         </a>
                         <a href="tel:+1234567890" class="btn btn-outline-light btn-rounded btn-lg">
@@ -377,7 +348,6 @@ get_header(); ?>
         </div>
     </section>
 </main>
-
 <!-- FAQ Search and Filter Script -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -385,45 +355,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const categoryButtons = document.querySelectorAll('[data-category]');
     const faqGroups = document.querySelectorAll('.faq-group');
     const accordionItems = document.querySelectorAll('.accordion-item');
-
     // Search functionality
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
-        
         accordionItems.forEach(item => {
             const question = item.querySelector('.accordion-button').textContent.toLowerCase();
             const answer = item.querySelector('.accordion-body').textContent.toLowerCase();
-            
             if (question.includes(searchTerm) || answer.includes(searchTerm)) {
                 item.style.display = 'block';
-            } else {
+} else {
                 item.style.display = 'none';
-            }
-        });
-    });
-
+}
+});
+});
     // Category filter functionality
     categoryButtons.forEach(button => {
         button.addEventListener('click', function() {
             const category = this.dataset.category;
-            
             // Update button states
             categoryButtons.forEach(btn => btn.classList.remove('active', 'btn-accent'));
             categoryButtons.forEach(btn => btn.classList.add('btn-outline-accent'));
             this.classList.add('active', 'btn-accent');
             this.classList.remove('btn-outline-accent');
-            
             // Show/hide FAQ groups
             faqGroups.forEach(group => {
                 if (category === 'all' || group.dataset.category === category) {
                     group.style.display = 'block';
-                } else {
+} else {
                     group.style.display = 'none';
-                }
-            });
-        });
-    });
+}
+});
+});
+});
 });
 </script>
-
 <?php get_footer(); ?>

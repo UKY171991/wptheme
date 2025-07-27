@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (scrollIndicator) {
         scrollIndicator.addEventListener('click', function(e) {
             e.preventDefault();
-            
+
             const target = document.querySelector('#main-content');
             if (target) {
                 const headerHeight = document.querySelector('.site-header').offsetHeight;
                 const targetPosition = target.offsetTop - headerHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
             const rate = scrolled * -0.5;
-            
+
             if (scrolled < window.innerHeight) {
                 bannerBackground.style.transform = `translateY(${rate}px)`;
             }
@@ -45,21 +45,21 @@ document.addEventListener('DOMContentLoaded', function() {
             statNumbers.forEach(function(stat) {
                 const rect = stat.getBoundingClientRect();
                 const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-                
+
                 if (isVisible && !stat.classList.contains('animated')) {
                     stat.classList.add('animated');
-                    
+
                     const finalValue = stat.textContent;
                     const numericValue = parseInt(finalValue.replace(/\D/g, ''));
-                    
+
                     if (!isNaN(numericValue)) {
                         let currentValue = 0;
                         const increment = numericValue / 50;
                         const suffix = finalValue.replace(/\d/g, '');
-                        
+
                         const counter = setInterval(function() {
                             currentValue += increment;
-                            
+
                             if (currentValue >= numericValue) {
                                 stat.textContent = finalValue;
                                 clearInterval(counter);
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initial check
         animateStats();
-        
+
         // Check on scroll
         window.addEventListener('scroll', animateStats, { passive: true });
     }
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (bannerTitle && bannerTitle.dataset.typewriter) {
         const text = bannerTitle.textContent;
         bannerTitle.textContent = '';
-        
+
         let i = 0;
         const typeWriter = function() {
             if (i < text.length) {
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(typeWriter, 100);
             }
         };
-        
+
         setTimeout(typeWriter, 500);
     }
 
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-3px) scale(1.05)';
         });
-        
+
         button.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const windowHeight = window.innerHeight;
             const headerHeight = document.querySelector('.site-header').offsetHeight;
             const minHeight = windowHeight - headerHeight;
-            
+
             if (banner.classList.contains('hero-banner')) {
                 banner.style.minHeight = Math.max(minHeight * 0.8, 500) + 'px';
             } else {
@@ -140,3 +140,4 @@ document.addEventListener('DOMContentLoaded', function() {
     adjustBannerHeight();
     window.addEventListener('resize', adjustBannerHeight);
 });
+

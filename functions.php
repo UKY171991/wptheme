@@ -2,7 +2,7 @@
 /**
  * BluePrint Folder - Professional WordPress Theme
  * Completely Rebuilt & Optimized for https://blueprintfolder.com/
- * 
+ *
  * @package BluePrint_Folder_Theme
  * @version 2.0.0
  * @author BluePrint Folder Team
@@ -27,14 +27,14 @@ function blueprint_folder_setup() {
     add_theme_support('responsive-embeds');
     add_theme_support('align-wide');
     add_theme_support('wp-block-styles');
-    
+
     // Custom image sizes
     add_image_size('hero-banner', 1920, 800, true);
     add_image_size('service-card', 400, 300, true);
     add_image_size('testimonial-avatar', 80, 80, true);
     add_image_size('portfolio-thumb', 500, 400, true);
     add_image_size('blog-thumb', 600, 400, true);
-    
+
     // Register navigation menus
     register_nav_menus(array(
         'primary'   => esc_html__('Primary Navigation', 'blueprint-folder'),
@@ -43,7 +43,7 @@ function blueprint_folder_setup() {
         'mobile'    => esc_html__('Mobile Navigation', 'blueprint-folder'),
         'top-bar'   => esc_html__('Top Bar Navigation', 'blueprint-folder'),
     ));
-    
+
     // Text domain for translations
     load_theme_textdomain('blueprint-folder', get_template_directory() . '/languages');
 }
@@ -194,7 +194,7 @@ add_action('init', function() {
     if (!get_option('blueprint_folder_rewrite_rules_flushed_v2')) {
         flush_rewrite_rules();
         update_option('blueprint_folder_rewrite_rules_flushed_v2', 1);
-    }
+}
 }, 999);
 
 /**
@@ -211,11 +211,9 @@ function blueprint_folder_header_setup() {
     // Hide admin bar for non-admin users
     if (!current_user_can('administrator') && !is_admin()) {
         show_admin_bar(false);
-    }
+}
 }
 add_action('after_setup_theme', 'blueprint_folder_header_setup');
-
-
 
 /**
  * FORCE NAVIGATION MENU DISPLAY EVEN WHEN EMPTY
@@ -311,52 +309,52 @@ function blueprint_folder_navigation_fallback() {
             'children' => array()
         )
     );
-    
+
     echo '<ul id="primary-menu" class="navbar-nav ms-auto me-3">';
     foreach ($fallback_pages as $page) {
         $current_class = $page['current'] ? ' active' : '';
         $has_children = !empty($page['children']);
         $dropdown_class = $has_children ? ' dropdown' : '';
-        
+
         echo '<li class="nav-item' . esc_attr($dropdown_class . $current_class) . '">';
-        
+
         if ($has_children) {
             echo '<a href="' . esc_url($page['url']) . '" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">';
             echo esc_html($page['title']);
             echo ' <i class="fas fa-chevron-down ms-1"></i>';
             echo '</a>';
-            
+
             echo '<ul class="dropdown-menu">';
             foreach ($page['children'] as $child) {
                 $child_has_children = !empty($child['children']);
                 $child_dropdown_class = $child_has_children ? ' dropend' : '';
-                
+
                 echo '<li class="' . esc_attr($child_dropdown_class) . '">';
-                
+
                 if ($child_has_children) {
                     echo '<a href="' . esc_url($child['url']) . '" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">';
                     echo esc_html($child['title']);
                     echo ' <i class="fas fa-chevron-right ms-auto"></i>';
                     echo '</a>';
-                    
+
                     echo '<ul class="dropdown-menu dropdown-submenu">';
                     foreach ($child['children'] as $grandchild) {
                         echo '<li><a href="' . esc_url($grandchild['url']) . '" class="dropdown-item">' . esc_html($grandchild['title']) . '</a></li>';
-                    }
+}
                     echo '</ul>';
-                } else {
+} else {
                     echo '<a href="' . esc_url($child['url']) . '" class="dropdown-item">' . esc_html($child['title']) . '</a>';
-                }
-                
+}
+
                 echo '</li>';
-            }
+}
             echo '</ul>';
-        } else {
+} else {
             echo '<a href="' . esc_url($page['url']) . '" class="nav-link">' . esc_html($page['title']) . '</a>';
-        }
-        
+}
+
         echo '</li>';
-    }
+}
     echo '</ul>';
 }
 
@@ -367,15 +365,15 @@ function blueprint_folder_breadcrumb() {
     // Return early if on front page
     if (is_front_page()) {
         return;
-    }
-    
+}
+
     $delimiter = '<i class="fas fa-chevron-right" aria-hidden="true"></i>';
     $home_title = esc_html__('Home', 'blueprint-folder');
-    
+
     // Start breadcrumb
     echo '<nav class="breadcrumb-navigation" aria-label="Breadcrumb">';
     echo '<ol class="breadcrumb-list">';
-    
+
     // Home link
     echo '<li class="breadcrumb-item">';
     echo '<a href="' . esc_url(home_url('/')) . '">';
@@ -383,10 +381,10 @@ function blueprint_folder_breadcrumb() {
     echo esc_html($home_title);
     echo '</a>';
     echo '</li>';
-    
+
     if (is_category() || is_single()) {
         echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
-        
+
         if (is_single()) {
             $category = get_the_category();
             if (!empty($category)) {
@@ -397,32 +395,32 @@ function blueprint_folder_breadcrumb() {
                 echo '</a>';
                 echo '</li>';
                 echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
-            }
-            
+}
+
             echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
             echo esc_html(get_the_title());
             echo '</li>';
-        } else {
+} else {
             echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
             echo esc_html(single_cat_title('', false));
             echo '</li>';
-        }
-        
-    } elseif (is_page()) {
+}
+
+} elseif (is_page()) {
         $post = get_post();
-        
+
         if ($post->post_parent) {
             $parent_pages = array();
             $parent_id = $post->post_parent;
-            
+
             while ($parent_id) {
                 $parent = get_post($parent_id);
                 $parent_pages[] = $parent;
                 $parent_id = $parent->post_parent;
-            }
-            
+}
+
             $parent_pages = array_reverse($parent_pages);
-            
+
             foreach ($parent_pages as $parent) {
                 echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
                 echo '<li class="breadcrumb-item">';
@@ -430,61 +428,61 @@ function blueprint_folder_breadcrumb() {
                 echo esc_html($parent->post_title);
                 echo '</a>';
                 echo '</li>';
-            }
-        }
-        
+}
+}
+
         echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
         echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
         echo esc_html(get_the_title());
         echo '</li>';
-        
-    } elseif (is_tag()) {
+
+} elseif (is_tag()) {
         echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
         echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
         echo esc_html__('Tag: ', 'blueprint-folder') . esc_html(single_tag_title('', false));
         echo '</li>';
-        
-    } elseif (is_author()) {
+
+} elseif (is_author()) {
         echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
         echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
         echo esc_html__('Author: ', 'blueprint-folder') . esc_html(get_the_author());
         echo '</li>';
-        
-    } elseif (is_archive()) {
+
+} elseif (is_archive()) {
         echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
         echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
-        
+
         if (is_post_type_archive()) {
             echo esc_html(post_type_archive_title('', false));
-        } else {
+} else {
             echo esc_html__('Archive', 'blueprint-folder');
-        }
-        
+}
+
         echo '</li>';
-        
-    } elseif (is_search()) {
+
+} elseif (is_search()) {
         echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
         echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
         echo esc_html__('Search Results for: ', 'blueprint-folder') . esc_html(get_search_query());
         echo '</li>';
-        
-    } elseif (is_404()) {
+
+} elseif (is_404()) {
         echo '<li class="breadcrumb-separator">' . $delimiter . '</li>';
         echo '<li class="breadcrumb-item breadcrumb-current" aria-current="page">';
         echo esc_html__('404 Error', 'blueprint-folder');
         echo '</li>';
-    }
-    
+}
+
     echo '</ol>';
     echo '</nav>';
-    
+
     // Add breadcrumb styles
     if (!wp_style_is('blueprint-breadcrumb', 'enqueued')) {
         echo '<style>
         .breadcrumb-navigation {
             margin: 1.5rem 0;
-        }
-        
+}
+
         .breadcrumb-list {
             display: flex;
             align-items: center;
@@ -494,45 +492,45 @@ function blueprint_folder_breadcrumb() {
             padding: 0;
             font-size: 0.9rem;
             gap: 0.5rem;
-        }
-        
+}
+
         .breadcrumb-item {
             margin: 0;
-        }
-        
+}
+
         .breadcrumb-item a {
             color: #6b7280;
             text-decoration: none;
             transition: color 0.15s ease;
-        }
-        
+}
+
         .breadcrumb-item a:hover {
             color: #1e40af;
-        }
-        
+}
+
         .breadcrumb-separator {
             color: #9ca3af;
             font-size: 0.75rem;
-        }
-        
+}
+
         .breadcrumb-current {
             color: #1e40af;
             font-weight: 500;
-        }
-        
+}
+
         @media (max-width: 767.98px) {
             .breadcrumb-list {
                 font-size: 0.8rem;
-            }
-        }
+}
+}
         </style>';
-    }
+}
 }
 
 add_filter('wp_nav_menu_args', function($args) {
     if (isset($args['theme_location']) && $args['theme_location'] === 'primary') {
         $args['fallback_cb'] = 'blueprint_folder_navigation_fallback';
-    }
+}
     return $args;
 });
 
@@ -550,7 +548,7 @@ function blueprint_folder_add_cpt_to_menu() {
         'side',
         'default'
     );
-    
+
     // Add Service Categories to menu
     add_meta_box(
         'add-service-categories-nav-menu',
@@ -574,11 +572,11 @@ function blueprint_folder_services_nav_menu_metabox() {
         'orderby' => 'title',
         'order' => 'ASC',
     ));
-    
+
     echo '<div id="posttype-services" class="posttypediv">';
     echo '<div id="tabs-panel-services" class="tabs-panel tabs-panel-active">';
     echo '<ul id="services-checklist" class="categorychecklist form-no-clear">';
-    
+
     if (!empty($services)) {
         foreach ($services as $service) {
             echo '<li>';
@@ -589,11 +587,11 @@ function blueprint_folder_services_nav_menu_metabox() {
             echo '<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="post_type">';
             echo '<input type="hidden" class="menu-item-object" name="menu-item[-1][menu-item-object]" value="service">';
             echo '</li>';
-        }
-    } else {
+}
+} else {
         echo '<li><p>' . __('No services found.', 'blueprint-folder') . '</p></li>';
-    }
-    
+}
+
     echo '</ul>';
     echo '</div>';
     echo '<p class="button-controls">';
@@ -615,11 +613,11 @@ function blueprint_folder_service_categories_nav_menu_metabox() {
         'orderby' => 'name',
         'order' => 'ASC',
     ));
-    
+
     echo '<div id="taxonomy-service_category" class="taxonomydiv">';
     echo '<div id="tabs-panel-service_category" class="tabs-panel tabs-panel-active">';
     echo '<ul id="service_category-checklist" class="categorychecklist form-no-clear">';
-    
+
     if (!empty($categories) && !is_wp_error($categories)) {
         foreach ($categories as $category) {
             echo '<li>';
@@ -630,11 +628,11 @@ function blueprint_folder_service_categories_nav_menu_metabox() {
             echo '<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="taxonomy">';
             echo '<input type="hidden" class="menu-item-object" name="menu-item[-1][menu-item-object]" value="service_category">';
             echo '</li>';
-        }
-    } else {
+}
+} else {
         echo '<li><p>' . __('No categories found.', 'blueprint-folder') . '</p></li>';
-    }
-    
+}
+
     echo '</ul>';
     echo '</div>';
     echo '<p class="button-controls">';
@@ -652,40 +650,40 @@ function blueprint_folder_service_categories_nav_menu_metabox() {
 function blueprint_folder_scripts() {
     // Bootstrap CSS (CDN) - Load first
     wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css', array(), '5.3.0');
-    
+
     // Font Awesome (CDN)
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
-    
+
     // Google Fonts
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap', array(), null);
-    
+
     // Single Global CSS - Contains all theme styles
     wp_enqueue_style('blueprint-folder-global', get_template_directory_uri() . '/assets/css/global.css', array('bootstrap', 'font-awesome'), '3.0.0');
-    
+
     // Dropdown menu fix
     wp_enqueue_style('blueprint-folder-dropdown-fix', get_template_directory_uri() . '/assets/css/dropdown-fix.css', array('blueprint-folder-global'), '1.0.0');
-    
+
     // Banner section styles
     wp_enqueue_style('blueprint-folder-banner', get_template_directory_uri() . '/assets/css/banner-section.css', array('blueprint-folder-global'), '1.0.0');
-    
+
     // Homepage sections styles
     wp_enqueue_style('blueprint-folder-homepage', get_template_directory_uri() . '/assets/css/homepage-sections.css', array('blueprint-folder-global'), '1.0.0');
-    
+
     // Page templates styles
     wp_enqueue_style('blueprint-folder-pages', get_template_directory_uri() . '/assets/css/page-templates.css', array('blueprint-folder-global'), '1.0.0');
-    
+
     // Bootstrap JS (CDN)
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
-    
+
     // Single Global JavaScript - Contains all theme functionality
     wp_enqueue_script('blueprint-folder-global', get_template_directory_uri() . '/assets/js/global.js', array('bootstrap'), '3.0.0', true);
-    
+
     // Dropdown menu fix
     wp_enqueue_script('blueprint-folder-dropdown-fix', get_template_directory_uri() . '/assets/js/dropdown-fix.js', array('blueprint-folder-global'), '1.0.0', true);
-    
+
     // Banner section functionality
     wp_enqueue_script('blueprint-folder-banner', get_template_directory_uri() . '/assets/js/banner-section.js', array('blueprint-folder-global'), '1.0.0', true);
-    
+
     // Localize script for AJAX and theme data
     wp_localize_script('blueprint-folder-global', 'wpAjax', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
@@ -735,7 +733,7 @@ function blueprint_folder_maybe_flush_rewrites() {
     if (get_option('blueprint_folder_flush_rewrites_flag')) {
         flush_rewrite_rules();
         delete_option('blueprint_folder_flush_rewrites_flag');
-    }
+}
 }
 add_action('init', 'blueprint_folder_maybe_flush_rewrites', 999);
 
@@ -753,17 +751,16 @@ function blueprint_folder_set_flush_rewrites_flag() {
  * Add admin notice for flushing permalinks
  */
 function blueprint_folder_admin_notice_flush_permalinks() {
-    if (current_user_can('manage_options') && !get_option('blueprint_folder_permalinks_flushed')) {
-        ?>
+    if (current_user_can('manage_options') && !get_option('blueprint_folder_permalinks_flushed')) {?>
         <div class="notice notice-warning is-dismissible">
             <p>
-                <strong>BluePrint Theme:</strong> Please go to 
-                <a href="<?php echo admin_url('options-permalink.php'); ?>">Settings > Permalinks</a> 
+                <strong>BluePrint Theme:</strong> Please go to
+                <a href="<?php echo admin_url('options-permalink.php');?>">Settings > Permalinks</a>
                 and click "Save Changes" to flush permalink rules for custom post types.
             </p>
         </div>
         <?php
-    }
+}
 }
 add_action('admin_notices', 'blueprint_folder_admin_notice_flush_permalinks');
 
@@ -789,46 +786,46 @@ function blueprint_folder_pagination($args = array()) {
         'class' => 'pagination',
         'container_class' => 'blueprint-pagination'
     );
-    
+
     $args = wp_parse_args($args, $defaults);
     $class = $args['class'];
     $container_class = $args['container_class'];
     unset($args['class'], $args['container_class']);
-    
+
     $pagination = paginate_links($args);
-    
+
     if (!$pagination) {
         return;
-    }
-    
+}
+
     echo '<div class="' . esc_attr($container_class) . ' mt-5">';
     echo '<nav aria-label="Pagination Navigation" class="d-flex justify-content-center">';
     echo '<ul class="' . esc_attr($class) . '">';
-    
+
     foreach ($pagination as $page) {
         if (strpos($page, 'current') !== false) {
             echo '<li class="page-item active">';
             echo str_replace('page-numbers', 'page-link', $page);
             echo '</li>';
-        } elseif (strpos($page, 'dots') !== false) {
+} elseif (strpos($page, 'dots') !== false) {
             echo '<li class="page-item disabled">';
             echo '<span class="page-link dots">...</span>';
             echo '</li>';
-        } elseif (strpos($page, 'prev') !== false) {
+} elseif (strpos($page, 'prev') !== false) {
             echo '<li class="page-item">';
             echo str_replace(array('page-numbers', 'class="'), array('page-link prev', 'class="page-link prev '), $page);
             echo '</li>';
-        } elseif (strpos($page, 'next') !== false) {
+} elseif (strpos($page, 'next') !== false) {
             echo '<li class="page-item">';
             echo str_replace(array('page-numbers', 'class="'), array('page-link next', 'class="page-link next '), $page);
             echo '</li>';
-        } else {
+} else {
             echo '<li class="page-item">';
             echo str_replace('page-numbers', 'page-link', $page);
             echo '</li>';
-        }
-    }
-    
+}
+}
+
     echo '</ul>';
     echo '</nav>';
     echo '</div>';
@@ -840,8 +837,8 @@ function blueprint_folder_pagination($args = array()) {
 function blueprint_folder_pagination_wrapper($links) {
     if (empty($links)) {
         return $links;
-    }
-    
+}
+
     return '<div class="blueprint-pagination-wrapper d-flex justify-content-center mt-4 mb-4">' . $links . '</div>';
 }
 add_filter('the_posts_pagination', 'blueprint_folder_pagination_wrapper');
@@ -852,12 +849,12 @@ add_filter('the_posts_pagination', 'blueprint_folder_pagination_wrapper');
 function blueprint_folder_seo_meta() {
     if (is_home() || is_front_page()) {
         echo '<meta name="description" content="Professional services provider offering quality solutions for your business needs. Trusted by clients nationwide.">' . "\n";
-    } elseif (is_singular('service')) {
+} elseif (is_singular('service')) {
         $excerpt = get_the_excerpt();
         if ($excerpt) {
             echo '<meta name="description" content="' . esc_attr(wp_trim_words($excerpt, 20)) . '">' . "\n";
-        }
-    }
+}
+}
 }
 add_action('wp_head', 'blueprint_folder_seo_meta');
 
@@ -870,14 +867,14 @@ function blueprint_folder_performance_optimizations() {
     remove_action('admin_print_scripts', 'print_emoji_detection_script');
     remove_action('wp_print_styles', 'print_emoji_styles');
     remove_action('admin_print_styles', 'print_emoji_styles');
-    
+
     // Remove unnecessary REST API links
     remove_action('wp_head', 'rest_output_link_wp_head');
     remove_action('wp_head', 'wp_oembed_add_discovery_links');
-    
+
     // Remove unnecessary generator tags
     remove_action('wp_head', 'wp_generator');
-    
+
     // Defer non-critical JavaScript
     add_filter('script_loader_tag', 'blueprint_folder_defer_scripts', 10, 3);
 }
@@ -888,11 +885,11 @@ add_action('init', 'blueprint_folder_performance_optimizations');
  */
 function blueprint_folder_defer_scripts($tag, $handle, $src) {
     $defer_scripts = array('blueprint-folder-pricing', 'bootstrap');
-    
+
     if (in_array($handle, $defer_scripts)) {
         return str_replace('<script ', '<script defer ', $tag);
-    }
-    
+}
+
     return $tag;
 }
 
@@ -902,15 +899,15 @@ function blueprint_folder_defer_scripts($tag, $handle, $src) {
 function blueprint_folder_lazy_load_images($content) {
     if (is_admin() || is_feed() || wp_is_mobile()) {
         return $content;
-    }
-    
+}
+
     return preg_replace_callback('/<img([^>]+?)>/', function($matches) {
         $img = $matches[0];
         if (strpos($img, 'loading=') !== false) {
             return $img;
-        }
+}
         return str_replace('<img', '<img loading="lazy"', $img);
-    }, $content);
+}, $content);
 }
 add_filter('the_content', 'blueprint_folder_lazy_load_images');
 
@@ -923,7 +920,7 @@ function blueprint_folder_security_headers() {
         header('X-Frame-Options: SAMEORIGIN');
         header('X-XSS-Protection: 1; mode=block');
         header('Referrer-Policy: strict-origin-when-cross-origin');
-    }
+}
 }
 add_action('send_headers', 'blueprint_folder_security_headers');
 
@@ -933,14 +930,14 @@ add_action('send_headers', 'blueprint_folder_security_headers');
 function blueprint_folder_handle_contact_form() {
     if (!wp_verify_nonce($_POST['contact_nonce'], 'blueprint_folder_contact')) {
         wp_die('Security check failed');
-    }
-    
+}
+
     $name = sanitize_text_field($_POST['contact_name']);
     $email = sanitize_email($_POST['contact_email']);
     $subject = sanitize_text_field($_POST['contact_subject']);
     $message = sanitize_textarea_field($_POST['contact_message']);
     $quote = sanitize_text_field($_POST['quote_type'] ?? '');
-    
+
     // Enhanced email content
     $email_content = sprintf(
         "New contact form submission:\n\nName: %s\nEmail: %s\nSubject: %s\n%s\nMessage:\n%s\n\n---\nSent from: %s",
@@ -951,25 +948,25 @@ function blueprint_folder_handle_contact_form() {
         $message,
         home_url()
     );
-    
+
     $headers = array(
         'Content-Type: text/html; charset=UTF-8',
         'From: ' . get_option('blogname') . ' <' . get_option('admin_email') . '>',
         'Reply-To: ' . $name . ' <' . $email . '>'
     );
-    
+
     $sent = wp_mail(
         get_option('admin_email'),
         'New Contact: ' . $subject,
         nl2br($email_content),
         $headers
     );
-    
+
     if ($sent) {
         wp_safe_redirect(add_query_arg('contact', 'success', wp_get_referer()));
-    } else {
+} else {
         wp_safe_redirect(add_query_arg('contact', 'error', wp_get_referer()));
-    }
+}
     exit;
 }
 add_action('wp_ajax_contact_form', 'blueprint_folder_handle_contact_form');
@@ -992,9 +989,9 @@ function blueprint_folder_schema_markup() {
                 get_theme_mod('social_linkedin', '')
             )
         );
-        
+
         echo '<script type="application/ld+json">' . json_encode($schema) . '</script>';
-    }
+}
 }
 add_action('wp_head', 'blueprint_folder_schema_markup');
 
@@ -1021,13 +1018,10 @@ function blueprint_folder_admin_page() {
         require_once get_template_directory() . '/sample-data-generator-enhanced.php';
         blueprint_folder_generate_sample_data();
         echo '<div class="notice notice-success"><p>Sample data generated successfully!</p></div>';
-    }
-    
-    ?>
+}?>
     <div class="wrap">
         <h1>BluePrint Folder - Sample Data Generator</h1>
         <p>Generate sample content to get started with your website quickly.</p>
-        
         <div class="card" style="max-width: 600px;">
             <div class="card-body">
                 <h3>What will be created:</h3>
@@ -1037,55 +1031,47 @@ function blueprint_folder_admin_page() {
                     <li>6 Customer Testimonials</li>
                     <li>3 Pricing Plans (Starter, Professional, Enterprise)</li>
                 </ul>
-                
                 <p><strong>After generating:</strong></p>
                 <ol>
-                    <li>Go to <a href="<?php echo admin_url('nav-menus.php'); ?>">Appearance → Menus</a></li>
+                    <li>Go to <a href="<?php echo admin_url('nav-menus.php');?>">Appearance → Menus</a></li>
                     <li>Add Service Categories and Services to your navigation menu</li>
                     <li>Test the multi-level dropdown functionality</li>
                 </ol>
-                
                 <form method="post">
-                    <?php wp_nonce_field('generate_sample_data'); ?>
+                    <?php wp_nonce_field('generate_sample_data');?>
                     <input type="submit" name="generate_data" class="button button-primary" value="Generate Sample Data">
                 </form>
             </div>
         </div>
-        
         <div class="card" style="max-width: 600px; margin-top: 20px;">
             <div class="card-body">
                 <h3>Next Steps:</h3>
                 <ol>
-                    <li><strong>Customize Homepage:</strong> Go to <a href="<?php echo admin_url('customize.php'); ?>">Appearance → Customize</a></li>
-                    <li><strong>Set up Menus:</strong> <a href="<?php echo admin_url('nav-menus.php'); ?>">Appearance → Menus</a></li>
+                    <li><strong>Customize Homepage:</strong> Go to <a href="<?php echo admin_url('customize.php');?>">Appearance → Customize</a></li>
+                    <li><strong>Set up Menus:</strong> <a href="<?php echo admin_url('nav-menus.php');?>">Appearance → Menus</a></li>
                     <li><strong>Add Content:</strong> Create pages for About, Contact, etc.</li>
-                    <li><strong>Upload Logo:</strong> <a href="<?php echo admin_url('customize.php?autofocus[control]=custom_logo'); ?>">Customize → Site Identity</a></li>
+                    <li><strong>Upload Logo:</strong> <a href="<?php echo admin_url('customize.php?autofocus[control]=custom_logo');?>">Customize → Site Identity</a></li>
                 </ol>
             </div>
         </div>
     </div>
-
 /**
  * AJAX HANDLERS FOR ENHANCED FUNCTIONALITY
  */
-
 // AJAX handler for loading category services
 function load_category_services() {
     // Verify nonce for security
     if (!wp_verify_nonce($_POST['nonce'], 'blueprint_folder_nonce')) {
         wp_die('Security check failed');
-    }
-    
+}
     $category_slug = sanitize_text_field($_POST['category']);
     $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
-    
     $args = array(
         'post_type' => 'service',
         'posts_per_page' => 9,
         'paged' => $paged,
         'post_status' => 'publish',
     );
-    
     if ($category_slug && $category_slug !== 'all') {
         $args['tax_query'] = array(
             array(
@@ -1094,140 +1080,115 @@ function load_category_services() {
                 'terms'    => $category_slug,
             ),
         );
-    }
-    
+}
     $services_query = new WP_Query($args);
-    
     ob_start();
-    
     if ($services_query->have_posts()) {
         while ($services_query->have_posts()) {
             $services_query->the_post();
             get_template_part('template-parts/service-card');
-        }
-    } else {
+}
+} else {
         echo '<div class="no-services"><p>No services found in this category.</p></div>';
-    }
-    
+}
     $output = ob_get_clean();
     wp_reset_postdata();
-    
     wp_send_json_success($output);
 }
 add_action('wp_ajax_load_category_services', 'load_category_services');
 add_action('wp_ajax_nopriv_load_category_services', 'load_category_services');
-
 // AJAX handler for loading more services (infinite scroll)
 function load_more_services() {
     // Verify nonce for security
     if (!wp_verify_nonce($_POST['nonce'], 'blueprint_folder_nonce')) {
         wp_die('Security check failed');
-    }
-    
+}
     $paged = intval($_POST['page']);
-    
     $args = array(
         'post_type' => 'service',
         'posts_per_page' => 6,
         'paged' => $paged,
         'post_status' => 'publish',
     );
-    
     $services_query = new WP_Query($args);
-    
     ob_start();
-    
     if ($services_query->have_posts()) {
         while ($services_query->have_posts()) {
             $services_query->the_post();
             get_template_part('template-parts/service-card');
-        }
-    }
-    
+}
+}
     $output = ob_get_clean();
     wp_reset_postdata();
-    
     if (!empty($output)) {
         wp_send_json_success($output);
-    } else {
+} else {
         wp_send_json_error('No more services');
-    }
+}
 }
 add_action('wp_ajax_load_more_services', 'load_more_services');
 add_action('wp_ajax_nopriv_load_more_services', 'load_more_services');
-
 // AJAX handler for contact form submission
 function handle_contact_form() {
     // Verify nonce for security
     if (!wp_verify_nonce($_POST['contact_nonce'], 'blueprint_folder_contact')) {
         wp_send_json_error('Security check failed');
         wp_die();
-    }
-    
+}
     $name = sanitize_text_field($_POST['contact_name']);
     $email = sanitize_email($_POST['contact_email']);
     $phone = sanitize_text_field($_POST['contact_phone']);
     $subject = sanitize_text_field($_POST['contact_subject']);
     $service = sanitize_text_field($_POST['contact_service']);
     $message = sanitize_textarea_field($_POST['contact_message']);
-    
     // Validate required fields
     if (empty($name) || empty($email) || empty($subject) || empty($message)) {
         wp_send_json_error('Please fill in all required fields.');
         wp_die();
-    }
-    
+}
     if (!is_email($email)) {
         wp_send_json_error('Please enter a valid email address.');
         wp_die();
-    }
-    
+}
     // Prepare email
     $to = get_option('admin_email');
     $email_subject = 'New Contact Form Submission: ' . $subject;
-    
     $email_message = "You have received a new contact form submission:\n\n";
     $email_message .= "Name: $name\n";
     $email_message .= "Email: $email\n";
     if (!empty($phone)) {
         $email_message .= "Phone: $phone\n";
-    }
+}
     $email_message .= "Subject: $subject\n";
     if (!empty($service)) {
         $email_message .= "Service Interest: $service\n";
-    }
+}
     $email_message .= "\nMessage:\n$message\n\n";
     $email_message .= "This message was sent from the contact form on " . get_bloginfo('name') . " (" . home_url() . ")";
-    
     $headers = array(
         'From: ' . get_bloginfo('name') . ' <' . get_option('admin_email') . '>',
         'Reply-To: ' . $name . ' <' . $email . '>',
         'Content-Type: text/plain; charset=UTF-8'
     );
-    
     // Send email
     if (wp_mail($to, $email_subject, $email_message, $headers)) {
         wp_send_json_success('Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
-    } else {
+} else {
         wp_send_json_error('Sorry, there was an error sending your message. Please try again or contact us directly.');
-    }
-    
+}
     wp_die();
 }
 add_action('wp_ajax_handle_contact_form', 'handle_contact_form');
 add_action('wp_ajax_nopriv_handle_contact_form', 'handle_contact_form');
-
 /**
  * THEME CUSTOMIZER SETTINGS
  */
 function blueprint_folder_customize_register($wp_customize) {
-    
     // Hero Section
     $wp_customize->add_section('hero_section', array(
         'title'    => __('Hero Section', 'blueprint-folder'),
         'priority' => 30,
     ));
-    
     // Hero Title
     $wp_customize->add_setting('hero_title', array(
         'default'           => 'Professional Digital Solutions',
@@ -1238,7 +1199,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'hero_section',
         'type'    => 'text',
     ));
-    
     // Hero Subtitle
     $wp_customize->add_setting('hero_subtitle', array(
         'default'           => 'We create exceptional digital experiences that drive business growth and success.',
@@ -1249,7 +1209,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'hero_section',
         'type'    => 'textarea',
     ));
-    
     // Hero Background Image
     $wp_customize->add_setting('hero_background_image', array(
         'sanitize_callback' => 'esc_url_raw',
@@ -1258,7 +1217,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'label'   => __('Hero Background Image', 'blueprint-folder'),
         'section' => 'hero_section',
     )));
-    
     // Hero Buttons
     $wp_customize->add_setting('hero_primary_button_text', array(
         'default'           => 'Our Services',
@@ -1269,7 +1227,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'hero_section',
         'type'    => 'text',
     ));
-    
     $wp_customize->add_setting('hero_primary_button_url', array(
         'default'           => '#services',
         'sanitize_callback' => 'esc_url_raw',
@@ -1279,7 +1236,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'hero_section',
         'type'    => 'url',
     ));
-    
     // Hero Statistics
     for ($i = 1; $i <= 3; $i++) {
         $wp_customize->add_setting("hero_stat_{$i}_number", array(
@@ -1291,7 +1247,6 @@ function blueprint_folder_customize_register($wp_customize) {
             'section' => 'hero_section',
             'type'    => 'text',
         ));
-        
         $wp_customize->add_setting("hero_stat_{$i}_label", array(
             'default'           => $i == 1 ? 'Projects Completed' : ($i == 2 ? 'Happy Clients' : 'Years Experience'),
             'sanitize_callback' => 'sanitize_text_field',
@@ -1301,14 +1256,12 @@ function blueprint_folder_customize_register($wp_customize) {
             'section' => 'hero_section',
             'type'    => 'text',
         ));
-    }
-    
+}
     // About Section
     $wp_customize->add_section('about_section', array(
         'title'    => __('About Section', 'blueprint-folder'),
         'priority' => 31,
     ));
-    
     $wp_customize->add_setting('about_title', array(
         'default'           => 'About Blueprint Folder',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1318,7 +1271,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'about_section',
         'type'    => 'text',
     ));
-    
     $wp_customize->add_setting('about_content', array(
         'default'           => 'We are a team of passionate professionals dedicated to delivering exceptional digital solutions. Our expertise spans web development, design, and digital strategy to help businesses succeed online.',
         'sanitize_callback' => 'wp_kses_post',
@@ -1331,7 +1283,6 @@ function blueprint_folder_customize_register($wp_customize) {
             'rows' => 5,
         ),
     ));
-    
     $wp_customize->add_setting('about_image', array(
         'sanitize_callback' => 'esc_url_raw',
     ));
@@ -1339,7 +1290,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'label'   => __('About Image', 'blueprint-folder'),
         'section' => 'about_section',
     )));
-    
     // About Features
     for ($i = 1; $i <= 3; $i++) {
         $wp_customize->add_setting("about_feature_{$i}", array(
@@ -1351,14 +1301,12 @@ function blueprint_folder_customize_register($wp_customize) {
             'section' => 'about_section',
             'type'    => 'text',
         ));
-    }
-    
+}
     // Services Section
     $wp_customize->add_section('services_section', array(
         'title'    => __('Services Section', 'blueprint-folder'),
         'priority' => 32,
     ));
-    
     $wp_customize->add_setting('services_title', array(
         'default'           => 'Our Services',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1368,7 +1316,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'services_section',
         'type'    => 'text',
     ));
-    
     $wp_customize->add_setting('services_subtitle', array(
         'default'           => 'Comprehensive digital solutions tailored to your business needs',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1378,13 +1325,11 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'services_section',
         'type'    => 'text',
     ));
-    
     // Testimonials Section
     $wp_customize->add_section('testimonials_section', array(
         'title'    => __('Testimonials Section', 'blueprint-folder'),
         'priority' => 33,
     ));
-    
     $wp_customize->add_setting('testimonials_title', array(
         'default'           => 'What Our Clients Say',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1394,7 +1339,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'testimonials_section',
         'type'    => 'text',
     ));
-    
     $wp_customize->add_setting('testimonials_subtitle', array(
         'default'           => 'Hear from our satisfied clients about their experience working with us',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1404,13 +1348,11 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'testimonials_section',
         'type'    => 'text',
     ));
-    
     // Blog Section
     $wp_customize->add_section('blog_section', array(
         'title'    => __('Blog Section', 'blueprint-folder'),
         'priority' => 34,
     ));
-    
     $wp_customize->add_setting('blog_title', array(
         'default'           => 'Latest News & Insights',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1420,7 +1362,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'blog_section',
         'type'    => 'text',
     ));
-    
     $wp_customize->add_setting('blog_subtitle', array(
         'default'           => 'Stay updated with our latest articles and industry insights',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1430,13 +1371,11 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'blog_section',
         'type'    => 'text',
     ));
-    
     // CTA Section
     $wp_customize->add_section('cta_section', array(
         'title'    => __('Call to Action Section', 'blueprint-folder'),
         'priority' => 35,
     ));
-    
     $wp_customize->add_setting('cta_title', array(
         'default'           => 'Ready to Get Started?',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1446,7 +1385,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'cta_section',
         'type'    => 'text',
     ));
-    
     $wp_customize->add_setting('cta_text', array(
         'default'           => 'Let\'s discuss your project and see how we can help you achieve your goals.',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1456,7 +1394,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'cta_section',
         'type'    => 'textarea',
     ));
-    
     $wp_customize->add_setting('cta_primary_button_text', array(
         'default'           => 'Get In Touch',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1466,7 +1403,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'cta_section',
         'type'    => 'text',
     ));
-    
     $wp_customize->add_setting('cta_primary_button_url', array(
         'default'           => '/contact',
         'sanitize_callback' => 'esc_url_raw',
@@ -1476,7 +1412,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'cta_section',
         'type'    => 'url',
     ));
-    
     $wp_customize->add_setting('cta_secondary_button_text', array(
         'default'           => 'View Pricing',
         'sanitize_callback' => 'sanitize_text_field',
@@ -1486,7 +1421,6 @@ function blueprint_folder_customize_register($wp_customize) {
         'section' => 'cta_section',
         'type'    => 'text',
     ));
-    
     $wp_customize->add_setting('cta_secondary_button_url', array(
         'default'           => '/pricing',
         'sanitize_callback' => 'esc_url_raw',
@@ -1509,7 +1443,7 @@ add_action('customize_register', 'blueprint_folder_customize_register');
 function blueprint_folder_customize_menu_support() {
     // Add support for menu customization
     add_theme_support('customize-selective-refresh-widgets');
-    
+
     // Register additional menu locations for enhanced navigation
     register_nav_menus(array(
         'header-utility' => esc_html__('Header Utility Menu', 'blueprint-folder'),
@@ -1535,8 +1469,8 @@ function blueprint_folder_menu_walker_enhancements($args) {
     if (isset($args['theme_location']) && $args['theme_location'] === 'primary') {
         $args['walker'] = new WP_Bootstrap_Navwalker();
         $args['fallback_cb'] = 'blueprint_folder_navigation_fallback';
-    }
-    
+}
+
     return $args;
 }
 add_filter('wp_nav_menu_args', 'blueprint_folder_menu_walker_enhancements');
@@ -1550,37 +1484,37 @@ function blueprint_folder_header_customizer($wp_customize) {
         'title' => __('Header Settings', 'blueprint-folder'),
         'priority' => 30,
     ));
-    
+
     // CTA Button Text
     $wp_customize->add_setting('header_cta_text', array(
         'default' => 'Get Quote',
         'sanitize_callback' => 'sanitize_text_field',
     ));
-    
+
     $wp_customize->add_control('header_cta_text', array(
         'label' => __('CTA Button Text', 'blueprint-folder'),
         'section' => 'blueprint_folder_header',
         'type' => 'text',
     ));
-    
+
     // CTA Button URL
     $wp_customize->add_setting('header_cta_url', array(
         'default' => '/contact',
         'sanitize_callback' => 'esc_url_raw',
     ));
-    
+
     $wp_customize->add_control('header_cta_url', array(
         'label' => __('CTA Button URL', 'blueprint-folder'),
         'section' => 'blueprint_folder_header',
         'type' => 'url',
     ));
-    
+
     // Mobile Menu Style
     $wp_customize->add_setting('mobile_menu_style', array(
         'default' => 'slide',
         'sanitize_callback' => 'sanitize_text_field',
     ));
-    
+
     $wp_customize->add_control('mobile_menu_style', array(
         'label' => __('Mobile Menu Style', 'blueprint-folder'),
         'section' => 'blueprint_folder_header',
@@ -1605,7 +1539,7 @@ function blueprint_folder_get_header_cta_url() {
     $url = get_theme_mod('header_cta_url', '/contact');
     if (strpos($url, '/') === 0) {
         return home_url($url);
-    }
+}
     return $url;
 }
 
@@ -1667,7 +1601,7 @@ function blueprint_folder_get_services($category = '', $posts_per_page = -1) {
         'orderby' => 'menu_order',
         'order' => 'ASC'
     );
-    
+
     if (!empty($category)) {
         $args['tax_query'] = array(
             array(
@@ -1676,8 +1610,8 @@ function blueprint_folder_get_services($category = '', $posts_per_page = -1) {
                 'terms' => $category
             )
         );
-    }
-    
+}
+
     return new WP_Query($args);
 }
 
@@ -1690,7 +1624,7 @@ function blueprint_folder_get_testimonials($posts_per_page = -1) {
         'orderby' => 'menu_order',
         'order' => 'ASC'
     );
-    
+
     return new WP_Query($args);
 }
 
@@ -1703,7 +1637,7 @@ function blueprint_folder_get_blog_posts($posts_per_page = 3) {
         'orderby' => 'date',
         'order' => 'DESC'
     );
-    
+
     return new WP_Query($args);
 }
 
@@ -1716,7 +1650,7 @@ function blueprint_folder_get_projects($posts_per_page = -1) {
         'orderby' => 'menu_order',
         'order' => 'ASC'
     );
-    
+
     return new WP_Query($args);
 }
 
@@ -1777,20 +1711,19 @@ add_action('init', 'blueprint_folder_menu_item_custom_fields');
 
 function blueprint_folder_menu_custom_fields($item_id, $item, $depth, $args) {
     $icon_class = get_post_meta($item_id, '_menu_item_icon', true);
-    $description = get_post_meta($item_id, '_menu_item_description', true);
-    ?>
+    $description = get_post_meta($item_id, '_menu_item_description', true);?>
     <p class="field-icon description description-wide">
-        <label for="edit-menu-item-icon-<?php echo $item_id; ?>">
-            <?php _e('Icon Class', 'blueprint-folder'); ?><br />
-            <input type="text" id="edit-menu-item-icon-<?php echo $item_id; ?>" class="widefat code edit-menu-item-icon" name="menu-item-icon[<?php echo $item_id; ?>]" value="<?php echo esc_attr($icon_class); ?>" />
-            <span class="description"><?php _e('Font Awesome icon class (e.g., fas fa-home)', 'blueprint-folder'); ?></span>
+        <label for="edit-menu-item-icon-<?php echo $item_id;?>">
+            <?php _e('Icon Class', 'blueprint-folder');?><br />
+            <input type="text" id="edit-menu-item-icon-<?php echo $item_id;?>" class="widefat code edit-menu-item-icon" name="menu-item-icon[<?php echo $item_id;?>]" value="<?php echo esc_attr($icon_class);?>" />
+            <span class="description"><?php _e('Font Awesome icon class (e.g., fas fa-home)', 'blueprint-folder');?></span>
         </label>
     </p>
     <p class="field-description description description-wide">
-        <label for="edit-menu-item-description-<?php echo $item_id; ?>">
-            <?php _e('Description', 'blueprint-folder'); ?><br />
-            <textarea id="edit-menu-item-description-<?php echo $item_id; ?>" class="widefat edit-menu-item-description" rows="3" cols="20" name="menu-item-description[<?php echo $item_id; ?>]"><?php echo esc_html($description); ?></textarea>
-            <span class="description"><?php _e('Description for mega menu or tooltip', 'blueprint-folder'); ?></span>
+        <label for="edit-menu-item-description-<?php echo $item_id;?>">
+            <?php _e('Description', 'blueprint-folder');?><br />
+            <textarea id="edit-menu-item-description-<?php echo $item_id;?>" class="widefat edit-menu-item-description" rows="3" cols="20" name="menu-item-description[<?php echo $item_id;?>]"><?php echo esc_html($description);?></textarea>
+            <span class="description"><?php _e('Description for mega menu or tooltip', 'blueprint-folder');?></span>
         </label>
     </p>
     <?php
@@ -1799,10 +1732,10 @@ function blueprint_folder_menu_custom_fields($item_id, $item, $depth, $args) {
 function blueprint_folder_save_menu_custom_fields($menu_id, $menu_item_db_id, $args) {
     if (isset($_POST['menu-item-icon'][$menu_item_db_id])) {
         update_post_meta($menu_item_db_id, '_menu_item_icon', sanitize_text_field($_POST['menu-item-icon'][$menu_item_db_id]));
-    }
+}
     if (isset($_POST['menu-item-description'][$menu_item_db_id])) {
         update_post_meta($menu_item_db_id, '_menu_item_description', sanitize_textarea_field($_POST['menu-item-description'][$menu_item_db_id]));
-    }
+}
 }
 
 /**
@@ -1831,7 +1764,7 @@ function blueprint_folder_footer_fallback_menu() {
             'title' => 'Blog'
         )
     );
-    
+
     echo '<ul class="footer-menu list-unstyled">';
     foreach ($fallback_links as $link) {
         echo '<li class="mb-2">';
@@ -1840,6 +1773,7 @@ function blueprint_folder_footer_fallback_menu() {
         echo esc_html($link['title']);
         echo '</a>';
         echo '</li>';
-    }
+}
     echo '</ul>';
 }
+

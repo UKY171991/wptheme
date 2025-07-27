@@ -5,8 +5,7 @@
  */
 
 get_header(); ?>
-
-<?php while (have_posts()) : the_post(); ?>
+<?php while (have_posts()) : the_post();?>
     <!-- Contact Content -->
     <section class="section">
         <div class="container">
@@ -15,19 +14,16 @@ get_header(); ?>
                 <div class="col-lg-8 mb-5">
                     <div class="contact-form-wrapper">
                         <h3 class="mb-4">Send us a Message</h3>
-                        
                         <?php
                         // Display success/error messages
                         if (isset($_GET['contact'])) {
                             if ($_GET['contact'] === 'success') {
                                 echo '<div class="form-success">Thank you! Your message has been sent successfully. We\'ll get back to you soon.</div>';
-                            } elseif ($_GET['contact'] === 'error') {
+} elseif ($_GET['contact'] === 'error') {
                                 echo '<div class="form-error">Sorry, there was an error sending your message. Please try again.</div>';
-                            }
-                        }
-                        ?>
-                        
-                        <form class="contact-form" action="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" method="post">
+}
+}?>
+                        <form class="contact-form" action="<?php echo esc_url(admin_url('admin-ajax.php'));?>" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
@@ -42,7 +38,6 @@ get_header(); ?>
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
@@ -57,7 +52,6 @@ get_header(); ?>
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="form-group mb-3">
                                 <label for="contact_service" class="form-label">Service Interest</label>
                                 <select id="contact_service" name="contact_service" class="form-control">
@@ -70,16 +64,13 @@ get_header(); ?>
                                     <option value="other">Other</option>
                                 </select>
                             </div>
-                            
                             <div class="form-group mb-4">
                                 <label for="contact_message" class="form-label">Message *</label>
-                                <textarea id="contact_message" name="contact_message" class="form-control" rows="6" required 
+                                <textarea id="contact_message" name="contact_message" class="form-control" rows="6" required
                                           placeholder="Tell us about your project, goals, and how we can help..."></textarea>
                             </div>
-                            
                             <input type="hidden" name="action" value="handle_contact_form">
-                            <input type="hidden" name="contact_nonce" value="<?php echo wp_create_nonce('blueprint_folder_contact'); ?>">
-                            
+                            <input type="hidden" name="contact_nonce" value="<?php echo wp_create_nonce('blueprint_folder_contact');?>">
                             <button type="submit" class="btn btn-primary btn-lg">
                                 <i class="fas fa-paper-plane me-2"></i>
                                 Send Message
@@ -87,12 +78,10 @@ get_header(); ?>
                         </form>
                     </div>
                 </div>
-                
                 <!-- Contact Information -->
                 <div class="col-lg-4">
                     <div class="contact-info">
                         <h3 class="mb-4">Contact Information</h3>
-                        
                         <div class="contact-item mb-4">
                             <div class="d-flex align-items-center">
                                 <div class="contact-icon me-3">
@@ -104,7 +93,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="contact-item mb-4">
                             <div class="d-flex align-items-center">
                                 <div class="contact-icon me-3">
@@ -118,7 +106,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="contact-item mb-4">
                             <div class="d-flex align-items-center">
                                 <div class="contact-icon me-3">
@@ -132,7 +119,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="contact-item mb-4">
                             <div class="d-flex align-items-center">
                                 <div class="contact-icon me-3">
@@ -144,7 +130,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                        
                         <!-- Social Links -->
                         <div class="social-links mt-4">
                             <h6 class="mb-3">Follow Us</h6>
@@ -166,20 +151,18 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-            
             <!-- Additional Content -->
-            <?php if (get_the_content()) : ?>
+            <?php if (get_the_content()) :?>
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="page-content">
-                            <?php the_content(); ?>
+                            <?php the_content();?>
                         </div>
                     </div>
                 </div>
-            <?php endif; ?>
+            <?php endif;?>
         </div>
     </section>
-
     <!-- FAQ Section -->
     <section class="section bg-light-gray">
         <div class="container">
@@ -189,7 +172,6 @@ get_header(); ?>
                         <h2>Frequently Asked Questions</h2>
                         <p>Quick answers to common questions about our services and process.</p>
                     </div>
-                    
                     <div class="accordion" id="contactFAQ">
                         <div class="accordion-item">
                             <h3 class="accordion-header" id="faq1">
@@ -203,7 +185,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="accordion-item">
                             <h3 class="accordion-header" id="faq2">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
@@ -216,7 +197,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="accordion-item">
                             <h3 class="accordion-header" id="faq3">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
@@ -234,24 +214,19 @@ get_header(); ?>
             </div>
         </div>
     </section>
-<?php endwhile; ?>
-
+<?php endwhile;?>
 <script>
 jQuery(document).ready(function($) {
     $('.contact-form').on('submit', function(e) {
         e.preventDefault();
-        
         var $form = $(this);
         var $submitBtn = $form.find('button[type="submit"]');
         var originalText = $submitBtn.html();
-        
         // Show loading state
         $submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Sending...').prop('disabled', true);
-        
         // Remove previous messages
         $('.form-success, .form-error').remove();
-        
-        $.ajax({
+        $.ajax( {
             url: $form.attr('action'),
             type: 'POST',
             data: $form.serialize(),
@@ -260,35 +235,32 @@ jQuery(document).ready(function($) {
                 if (response.success) {
                     $form.before('<div class="alert alert-success form-success"><i class="fas fa-check-circle me-2"></i>' + response.data + '</div>');
                     $form[0].reset(); // Clear form
-                } else {
+} else {
                     $form.before('<div class="alert alert-danger form-error"><i class="fas fa-exclamation-triangle me-2"></i>' + response.data + '</div>');
-                }
-            },
+}
+},
             error: function() {
                 $form.before('<div class="alert alert-danger form-error"><i class="fas fa-exclamation-triangle me-2"></i>Sorry, there was an error sending your message. Please try again.</div>');
-            },
+},
             complete: function() {
                 // Reset button
                 $submitBtn.html(originalText).prop('disabled', false);
-                
                 // Scroll to message
-                $('html, body').animate({
+                $('html, body').animate( {
                     scrollTop: $('.alert').offset().top - 100
-                }, 500);
-            }
-        });
-    });
-    
+}, 500);
+}
+});
+});
     // Pre-fill service field if passed in URL
     var urlParams = new URLSearchParams(window.location.search);
     var serviceParam = urlParams.get('service');
     if (serviceParam) {
         $('#contact_subject').val('Inquiry about: ' + decodeURIComponent(serviceParam));
         $('#contact_message').val('I am interested in learning more about: ' + decodeURIComponent(serviceParam) + '\n\nPlease provide more information and a quote.\n\n');
-    }
+}
 });
 </script>
-
 <style>
 .form-success, .form-error {
     padding: 15px;
@@ -296,40 +268,33 @@ jQuery(document).ready(function($) {
     border-radius: 8px;
     font-weight: 500;
 }
-
 .form-success {
     background-color: #d4edda;
     border: 1px solid #c3e6cb;
     color: #155724;
 }
-
 .form-error {
     background-color: #f8d7da;
     border: 1px solid #f5c6cb;
     color: #721c24;
 }
-
 .contact-form .form-control:focus {
     border-color: #3498db;
     box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
 }
-
 .contact-form .btn-primary {
     background: linear-gradient(135deg, #3498db, #2980b9);
     border: none;
     transition: all 0.3s ease;
 }
-
 .contact-form .btn-primary:hover {
     background: linear-gradient(135deg, #2980b9, #1f4e79);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
 }
-
 .contact-form .btn-primary:disabled {
     opacity: 0.7;
     transform: none;
 }
 </style>
-
 <?php get_footer(); ?>

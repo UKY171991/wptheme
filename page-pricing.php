@@ -4,7 +4,6 @@
  */
 
 get_header(); ?>
-
 <main id="main" class="site-main">
     <!-- Pricing Hero Section -->
     <section id="pricing-hero" class="section bg-light">
@@ -20,7 +19,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
     <!-- Pricing Plans Section -->
     <section id="pricing-plans" class="section">
         <div class="container">
@@ -42,7 +40,6 @@ get_header(); ?>
                             <p class="text-muted mb-4">
                                 Perfect for small businesses and homeowners with basic service needs
                             </p>
-                            
                             <ul class="list-unstyled text-start mb-4">
                                 <li class="mb-2">
                                     <i class="fas fa-check text-success me-2"></i>
@@ -65,14 +62,12 @@ get_header(); ?>
                                     <span class="text-muted">Priority support</span>
                                 </li>
                             </ul>
-                            
-                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>?plan=basic" class="btn btn-outline-primary w-100">
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>?plan=basic" class="btn btn-outline-primary w-100">
                                 Get Started <i class="fas fa-arrow-right ms-1"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-
                 <!-- Professional Plan (Featured) -->
                 <div class="col-lg-4 col-md-6">
                     <div class="pricing-card featured h-100 bg-white rounded-3 shadow-lg border-0 overflow-hidden position-relative">
@@ -93,7 +88,6 @@ get_header(); ?>
                             <p class="text-muted mb-4">
                                 Ideal for growing businesses with comprehensive service requirements
                             </p>
-                            
                             <ul class="list-unstyled text-start mb-4">
                                 <li class="mb-2">
                                     <i class="fas fa-check text-success me-2"></i>
@@ -116,14 +110,12 @@ get_header(); ?>
                                     Emergency call-out included
                                 </li>
                             </ul>
-                            
-                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>?plan=professional" class="btn btn-primary w-100">
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>?plan=professional" class="btn btn-primary w-100">
                                 Get Started <i class="fas fa-arrow-right ms-1"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-
                 <!-- Enterprise Plan -->
                 <div class="col-lg-4 col-md-6">
                     <div class="pricing-card h-100 bg-white rounded-3 shadow-sm border-0 overflow-hidden">
@@ -141,7 +133,6 @@ get_header(); ?>
                             <p class="text-muted mb-4">
                                 Complete solution for large businesses with extensive service needs
                             </p>
-                            
                             <ul class="list-unstyled text-start mb-4">
                                 <li class="mb-2">
                                     <i class="fas fa-check text-success me-2"></i>
@@ -164,8 +155,7 @@ get_header(); ?>
                                     Dedicated account manager
                                 </li>
                             </ul>
-                            
-                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>?plan=enterprise" class="btn btn-outline-primary w-100">
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>?plan=enterprise" class="btn btn-outline-primary w-100">
                                 Get Started <i class="fas fa-arrow-right ms-1"></i>
                             </a>
                         </div>
@@ -174,7 +164,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
     <!-- Service Add-ons Section -->
     <section id="service-addons" class="section bg-light">
         <div class="container">
@@ -187,7 +176,6 @@ get_header(); ?>
                     Enhance your plan with these optional add-on services
                 </p>
             </div>
-            
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6">
                     <div class="addon-card text-center p-4 bg-white rounded-3 shadow-sm h-100">
@@ -240,7 +228,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
     <!-- FAQ Section -->
     <section id="pricing-faq" class="section">
         <div class="container">
@@ -253,7 +240,6 @@ get_header(); ?>
                     Common questions about our pricing and services
                 </p>
             </div>
-            
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="accordion" id="pricingAccordion">
@@ -269,7 +255,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="accordion-item border-0 mb-3 shadow-sm">
                             <h3 class="accordion-header" id="faq2">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
@@ -282,7 +267,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="accordion-item border-0 mb-3 shadow-sm">
                             <h3 class="accordion-header" id="faq3">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
@@ -295,7 +279,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="accordion-item border-0 mb-3 shadow-sm">
                             <h3 class="accordion-header" id="faq4">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
@@ -313,7 +296,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
     <!-- CTA Section -->
     <section class="section bg-primary">
         <div class="container">
@@ -324,7 +306,7 @@ get_header(); ?>
                         Contact us today for a free consultation and let us help you select the perfect service plan for your needs.
                     </p>
                     <div class="cta-buttons">
-                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-light btn-lg me-3">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')));?>" class="btn btn-light btn-lg me-3">
                             <i class="fas fa-envelope me-2"></i>
                             Get Free Consultation
                         </a>
@@ -338,31 +320,25 @@ get_header(); ?>
         </div>
     </section>
 </main>
-
 <style>
 /* Pricing Card Styles */
 .pricing-card.featured {
     transform: scale(1.05);
     border: 2px solid #3498db !important;
 }
-
 .pricing-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .pricing-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
 }
-
 .addon-card {
     transition: transform 0.3s ease;
 }
-
 .addon-card:hover {
     transform: translateY(-3px);
 }
-
 /* Button Styles */
 .btn {
     border-radius: 8px;
@@ -375,13 +351,11 @@ get_header(); ?>
     padding: 0.75rem 1.5rem;
     border: 1px solid transparent;
 }
-
 .btn-primary {
     background-color: #3498db;
     border-color: #3498db;
     color: #ffffff;
 }
-
 .btn-primary:hover {
     background-color: #2980b9;
     border-color: #2980b9;
@@ -389,13 +363,11 @@ get_header(); ?>
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
-
 .btn-outline-primary {
     background-color: transparent;
     border-color: #3498db;
     color: #3498db;
 }
-
 .btn-outline-primary:hover {
     background-color: #3498db;
     border-color: #3498db;
@@ -403,13 +375,11 @@ get_header(); ?>
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
-
 .btn-light {
     background-color: #ffffff;
     border-color: #ffffff;
     color: #2c3e50;
 }
-
 .btn-light:hover {
     background-color: #f8f9fa;
     border-color: #f8f9fa;
@@ -417,13 +387,11 @@ get_header(); ?>
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
-
 .btn-outline-light {
     background-color: transparent;
     border-color: #ffffff;
     color: #ffffff;
 }
-
 .btn-outline-light:hover {
     background-color: #ffffff;
     border-color: #ffffff;
@@ -431,17 +399,14 @@ get_header(); ?>
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
-
 .btn-lg {
     padding: 1rem 2rem;
     font-size: 1.125rem;
 }
-
 .btn-sm {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
 }
-
 /* CTA Buttons Specific Styling */
 .cta-buttons {
     display: flex;
@@ -450,98 +415,80 @@ get_header(); ?>
     justify-content: center;
     align-items: center;
 }
-
 .cta-buttons .btn {
     min-width: 200px;
     white-space: nowrap;
 }
-
 /* Icon Spacing */
 .btn i {
     display: inline-block;
 }
-
 .btn i.me-1 {
     margin-right: 0.25rem !important;
 }
-
 .btn i.me-2 {
     margin-right: 0.5rem !important;
 }
-
 .btn i.ms-1 {
     margin-left: 0.25rem !important;
 }
-
 .btn i.ms-2 {
     margin-left: 0.5rem !important;
 }
-
 /* Accordion Styles */
 .accordion-button:not(.collapsed) {
     background-color: #f8f9fa;
     color: #2c3e50;
 }
-
 .accordion-button:focus {
     box-shadow: none;
     border-color: #3498db;
 }
-
 .accordion-button {
     font-weight: 500;
     border: none;
     border-radius: 8px !important;
 }
-
 .accordion-item {
     border-radius: 8px !important;
     overflow: hidden;
 }
-
 /* Responsive Design */
 @media (max-width: 992px) {
     .pricing-card.featured {
         transform: none;
         margin-top: 1rem;
-    }
 }
-
+}
 @media (max-width: 768px) {
     .cta-buttons {
         flex-direction: column;
         width: 100%;
-    }
-    
+}
     .cta-buttons .btn {
         width: 100%;
         min-width: auto;
-    }
-    
+}
     .btn-lg {
         padding: 0.875rem 1.5rem;
         font-size: 1rem;
-    }
 }
-
+}
 /* Additional Button States */
 .btn:focus,
 .btn:active {
     box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
     outline: none;
 }
-
 .btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none !important;
 }
-
 /* Ensure text is readable */
 .btn {
     line-height: 1.5;
     text-align: center;
 }
 </style>
-
 <?php get_footer(); ?>
