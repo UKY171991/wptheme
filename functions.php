@@ -186,12 +186,10 @@ add_action('init', 'blueprint_folder_register_taxonomies');
 
 // Force immediate flush of rewrite rules
 add_action('after_switch_theme', function() {
-    blueprint_folder_register_post_types();
-    blueprint_folder_register_taxonomies();
     flush_rewrite_rules();
 });
 
-// Also flush on theme activation
+// Also flush on theme activation - simplified
 add_action('init', function() {
     if (!get_option('blueprint_folder_rewrite_rules_flushed_v2')) {
         flush_rewrite_rules();
@@ -723,11 +721,9 @@ function blueprint_folder_get_pricing_plans() {
 // Removed duplicate function - using newer version below
 
 /**
- * FLUSH REWRITE RULES ON ACTIVATION
+ * FLUSH REWRITE RULES ON ACTIVATION - simplified to avoid double registration
  */
 function blueprint_folder_flush_rewrites() {
-    blueprint_folder_register_post_types();
-    blueprint_folder_register_taxonomies();
     flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'blueprint_folder_flush_rewrites');
@@ -750,21 +746,8 @@ function blueprint_folder_set_flush_rewrites_flag() {
     update_option('blueprint_folder_flush_rewrites_flag', 1);
 }
 
-// Flush rewrites when custom post types are registered
-add_action('init', function() {
-    static $flushed = false;
-    if (!$flushed) {
-        blueprint_folder_register_post_types();
-        blueprint_folder_register_taxonomies();
-        $flushed = true;
-        
-        // Check if we need to flush rules
-        if (!get_option('blueprint_folder_rewrites_flushed')) {
-            flush_rewrite_rules();
-            update_option('blueprint_folder_rewrites_flushed', 1);
-        }
-    }
-}, 0);
+// Flush rewrites when custom post types are registered - removed duplicate calls
+// The post types and taxonomies are already registered via the init hooks above
 
 /**
  * Add admin notice for flushing permalinks
