@@ -1159,43 +1159,60 @@ add_action('wp_ajax_nopriv_load_more_services', 'load_more_services');
 // AJAX handler for contact form submission
 function handle_contact_form() {
     // Verify nonce for security
-    if (!wp_verify_nonce($_POST['nonce'], 'blueprint_folder_nonce')) {
-        wp_die('Security check failed');
+    if (!wp_verify_nonce($_POST['contact_nonce'], 'blueprint_folder_contact')) {
+        wp_send_json_error('Security check failed');
+        wp_die();
     }
     
-    $name = sanitize_text_field($_POST['name']);
-    $email = sanitize_email($_POST['email']);
-    $subject = sanitize_text_field($_POST['subject']);
-    $message = sanitize_textarea_field($_POST['message']);
+    $name = sanitize_text_field($_POST['contact_name']);
+    $email = sanitize_email($_POST['contact_email']);
+    $phone = sanitize_text_field($_POST['contact_phone']);
+    $subject = sanitize_text_field($_POST['contact_subject']);
+    $service = sanitize_text_field($_POST['contact_service']);
+    $message = sanitize_textarea_field($_POST['contact_message']);
     
     // Validate required fields
-    if (empty($name) || empty($email) || empty($message)) {
+    if (empty($name) || empty($email) || empty($subject) || empty($message)) {
         wp_send_json_error('Please fill in all required fields.');
+        wp_die();
     }
     
     if (!is_email($email)) {
         wp_send_json_error('Please enter a valid email address.');
+        wp_die();
     }
     
     // Prepare email
     $to = get_option('admin_email');
     $email_subject = 'New Contact Form Submission: ' . $subject;
-    $email_message = "Name: $name\n";
+    
+    $email_message = "You have received a new contact form submission:\n\n";
+    $email_message .= "Name: $name\n";
     $email_message .= "Email: $email\n";
-    $email_message .= "Subject: $subject\n\n";
-    $email_message .= "Message:\n$message";
+    if (!empty($phone)) {
+        $email_message .= "Phone: $phone\n";
+    }
+    $email_message .= "Subject: $subject\n";
+    if (!empty($service)) {
+        $email_message .= "Service Interest: $service\n";
+    }
+    $email_message .= "\nMessage:\n$message\n\n";
+    $email_message .= "This message was sent from the contact form on " . get_bloginfo('name') . " (" . home_url() . ")";
     
     $headers = array(
         'From: ' . get_bloginfo('name') . ' <' . get_option('admin_email') . '>',
-        'Reply-To: ' . $email
+        'Reply-To: ' . $name . ' <' . $email . '>',
+        'Content-Type: text/plain; charset=UTF-8'
     );
     
     // Send email
     if (wp_mail($to, $email_subject, $email_message, $headers)) {
-        wp_send_json_success('Thank you! Your message has been sent successfully.');
+        wp_send_json_success('Thank you! Your message has been sent successfully. We\'ll get back to you soon.');
     } else {
-        wp_send_json_error('Sorry, there was an error sending your message. Please try again.');
+        wp_send_json_error('Sorry, there was an error sending your message. Please try again or contact us directly.');
     }
+    
+    wp_die();
 }
 add_action('wp_ajax_handle_contact_form', 'handle_contact_form');
 add_action('wp_ajax_nopriv_handle_contact_form', 'handle_contact_form');

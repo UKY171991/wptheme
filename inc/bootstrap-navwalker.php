@@ -102,6 +102,36 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         $item_output = isset($args->before) ? $args->before : '';
         $item_output .= '<a' . $attributes . $link_class . '>';
         $item_output .= (isset($args->link_before) ? $args->link_before : '');
+        
+        // Add menu item icon if it exists
+        $menu_icon = get_post_meta($item->ID, '_menu_item_icon', true);
+        if (!empty($menu_icon)) {
+            $item_output .= '<i class="' . esc_attr($menu_icon) . ' me-2"></i>';
+        } else {
+            // Add default icons based on menu item title/URL
+            $default_icons = array(
+                'home' => 'fas fa-home',
+                'services' => 'fas fa-cogs',
+                'about' => 'fas fa-info-circle',
+                'contact' => 'fas fa-envelope',
+                'blog' => 'fas fa-blog',
+                'pricing' => 'fas fa-dollar-sign',
+                'portfolio' => 'fas fa-briefcase',
+                'team' => 'fas fa-users',
+                'testimonials' => 'fas fa-quote-left'
+            );
+            
+            $item_title_lower = strtolower($item->title);
+            $item_url_lower = strtolower($item->url);
+            
+            foreach ($default_icons as $key => $icon) {
+                if (strpos($item_title_lower, $key) !== false || strpos($item_url_lower, $key) !== false) {
+                    $item_output .= '<i class="' . esc_attr($icon) . ' me-2"></i>';
+                    break;
+                }
+            }
+        }
+        
         $item_output .= apply_filters('the_title', $item->title, $item->ID);
         $item_output .= (isset($args->link_after) ? $args->link_after : '');
         

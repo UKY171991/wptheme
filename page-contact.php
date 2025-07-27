@@ -7,19 +7,6 @@
 get_header(); ?>
 
 <?php while (have_posts()) : the_post(); ?>
-    <!-- Page Header -->
-    <section class="section-sm bg-light-gray">
-        <div class="container">
-            <?php blueprint_folder_breadcrumb(); ?>
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h1 class="page-title"><?php the_title(); ?></h1>
-                    <p class="lead">Get in touch with us today. We'd love to hear about your project and discuss how we can help.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Content -->
     <section class="section">
         <div class="container">
@@ -248,5 +235,101 @@ get_header(); ?>
         </div>
     </section>
 <?php endwhile; ?>
+
+<script>
+jQuery(document).ready(function($) {
+    $('.contact-form').on('submit', function(e) {
+        e.preventDefault();
+        
+        var $form = $(this);
+        var $submitBtn = $form.find('button[type="submit"]');
+        var originalText = $submitBtn.html();
+        
+        // Show loading state
+        $submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Sending...').prop('disabled', true);
+        
+        // Remove previous messages
+        $('.form-success, .form-error').remove();
+        
+        $.ajax({
+            url: $form.attr('action'),
+            type: 'POST',
+            data: $form.serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    $form.before('<div class="alert alert-success form-success"><i class="fas fa-check-circle me-2"></i>' + response.data + '</div>');
+                    $form[0].reset(); // Clear form
+                } else {
+                    $form.before('<div class="alert alert-danger form-error"><i class="fas fa-exclamation-triangle me-2"></i>' + response.data + '</div>');
+                }
+            },
+            error: function() {
+                $form.before('<div class="alert alert-danger form-error"><i class="fas fa-exclamation-triangle me-2"></i>Sorry, there was an error sending your message. Please try again.</div>');
+            },
+            complete: function() {
+                // Reset button
+                $submitBtn.html(originalText).prop('disabled', false);
+                
+                // Scroll to message
+                $('html, body').animate({
+                    scrollTop: $('.alert').offset().top - 100
+                }, 500);
+            }
+        });
+    });
+    
+    // Pre-fill service field if passed in URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var serviceParam = urlParams.get('service');
+    if (serviceParam) {
+        $('#contact_subject').val('Inquiry about: ' + decodeURIComponent(serviceParam));
+        $('#contact_message').val('I am interested in learning more about: ' + decodeURIComponent(serviceParam) + '\n\nPlease provide more information and a quote.\n\n');
+    }
+});
+</script>
+
+<style>
+.form-success, .form-error {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.form-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.form-error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.contact-form .form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.contact-form .btn-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.contact-form .btn-primary:hover {
+    background: linear-gradient(135deg, #2980b9, #1f4e79);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.contact-form .btn-primary:disabled {
+    opacity: 0.7;
+    transform: none;
+}
+</style>
 
 <?php get_footer(); ?>

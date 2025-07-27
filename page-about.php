@@ -262,6 +262,83 @@ get_header(); ?>
     </div>
 </section>
 
+<!-- Our Process Section -->
+<section class="process-section section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="mb-3" style="color: #2c3e50; font-weight: 600;">
+                    <i class="fas fa-route me-3" style="color: #3498db;"></i>
+                    Our Process
+                </h2>
+                <p class="lead text-muted">
+                    We follow a proven methodology to ensure every project delivers exceptional results and exceeds client expectations.
+                </p>
+            </div>
+        </div>
+        
+        <div class="process-timeline">
+            <div class="row g-4">
+                <!-- Step 1 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step text-center">
+                        <div class="process-number">
+                            <span class="step-number">1</span>
+                        </div>
+                        <div class="process-icon mb-3">
+                            <i class="fas fa-comments" style="font-size: 2.5rem; color: #3498db;"></i>
+                        </div>
+                        <h4 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">Discovery</h4>
+                        <p class="text-muted">We start by understanding your goals, challenges, and requirements through detailed consultation.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step text-center">
+                        <div class="process-number">
+                            <span class="step-number">2</span>
+                        </div>
+                        <div class="process-icon mb-3">
+                            <i class="fas fa-drafting-compass" style="font-size: 2.5rem; color: #3498db;"></i>
+                        </div>
+                        <h4 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">Planning</h4>
+                        <p class="text-muted">We create a comprehensive strategy and detailed project plan tailored to your specific needs.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step text-center">
+                        <div class="process-number">
+                            <span class="step-number">3</span>
+                        </div>
+                        <div class="process-icon mb-3">
+                            <i class="fas fa-cogs" style="font-size: 2.5rem; color: #3498db;"></i>
+                        </div>
+                        <h4 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">Execution</h4>
+                        <p class="text-muted">Our expert team implements the solution using industry best practices and cutting-edge tools.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step text-center">
+                        <div class="process-number">
+                            <span class="step-number">4</span>
+                        </div>
+                        <div class="process-icon mb-3">
+                            <i class="fas fa-rocket" style="font-size: 2.5rem; color: #3498db;"></i>
+                        </div>
+                        <h4 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">Launch</h4>
+                        <p class="text-muted">We deliver the final solution and provide ongoing support to ensure continued success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="section bg-primary">
     <div class="container">
