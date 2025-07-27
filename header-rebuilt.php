@@ -84,6 +84,7 @@
                                     'menu_class'      => 'menu nav-menu',
                                     'container'       => false,
                                     'depth'           => 0,
+                                    'walker'          => new WordPress_Standard_Walker_Nav_Menu(),
                                     'fallback_cb'     => 'blueprint_folder_navigation_fallback',
                                     'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                                 ));

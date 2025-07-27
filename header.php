@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta char                            <!-- WordPress Standard Navigation Menu -->
+                            <div class="menu-wrapper" id="primary-menu">
+                                <?php
+                                wp_nav_menu(array(
+                                    'theme_location'  => 'primary',
+                                    'menu_id'         => 'primary-menu',
+                                    'menu_class'      => 'menu nav-menu',
+                                    'container'       => false,
+                                    'depth'           => 0,
+                                    'walker'          => new WordPress_Standard_Walker_Nav_Menu(),
+                                    'fallback_cb'     => 'blueprint_folder_navigation_fallback',
+                                    'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                                ));
+                                ?>oginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     

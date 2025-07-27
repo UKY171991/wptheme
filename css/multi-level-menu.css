@@ -1,0 +1,553 @@
+/*
+ * WordPress Standard Navigation Menu Styles - Multi-Level Support
+ * Following WordPress menu structure conventions with unlimited depth
+ */
+
+/* ============================================================================
+   CSS CUSTOM PROPERTIES (WordPress Menu Variables)
+   ============================================================================ */
+:root {
+    --wp-menu-bg: #ffffff;
+    --wp-menu-text: #374151;
+    --wp-menu-text-hover: #1d4ed8;
+    --wp-menu-text-active: #1e40af;
+    --wp-menu-bg-hover: rgba(29, 78, 216, 0.1);
+    --wp-menu-bg-active: rgba(30, 64, 175, 0.1);
+    --wp-submenu-bg: #ffffff;
+    --wp-submenu-border: #e5e7eb;
+    --wp-submenu-shadow: rgba(0, 0, 0, 0.15);
+    --wp-mobile-menu-bg: #ffffff;
+    --wp-mobile-overlay: rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================================
+   NAVIGATION MENU BASE STYLES (WordPress Standard)
+   ============================================================================ */
+
+/* Main navigation container */
+.main-navigation {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    position: relative;
+    z-index: 100;
+}
+
+/* Menu wrapper - WordPress standard */
+.menu-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+/* WordPress menu structure - supports unlimited depth */
+.menu,
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    position: relative;
+    z-index: 100;
+}
+
+/* Menu items - WordPress standard classes */
+.menu-item {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Menu links with proper WordPress structure */
+.menu-item a,
+.menu-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    color: var(--wp-menu-text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border-radius: 0.375rem;
+    white-space: nowrap;
+    gap: 0.5rem;
+    position: relative;
+}
+
+/* Menu item hover and focus states */
+.menu-item a:hover,
+.menu-item a:focus,
+.menu-link:hover,
+.menu-link:focus {
+    color: var(--wp-menu-text-hover);
+    background-color: var(--wp-menu-bg-hover);
+    text-decoration: none;
+    outline: none;
+}
+
+/* Current menu item states */
+.current-menu-item > a,
+.current-menu-parent > a,
+.current-menu-ancestor > a,
+.current > a {
+    color: var(--wp-menu-text-active);
+    font-weight: 600;
+    background-color: var(--wp-menu-bg-active);
+}
+
+/* ============================================================================
+   MULTI-LEVEL DROPDOWN MENUS (WordPress Standard)
+   ============================================================================ */
+
+/* Dropdown indicator for parent items */
+.menu-item-has-children > a .dropdown-toggle,
+.menu-item-has-children > .menu-link .dropdown-toggle {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.menu-item-has-children > a .dropdown-toggle::after,
+.menu-item-has-children > .menu-link .dropdown-toggle::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid currentColor;
+    vertical-align: middle;
+}
+
+/* Alternative dropdown indicator using CSS */
+.menu-item-has-children > a::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.5rem;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid currentColor;
+    vertical-align: middle;
+    transition: transform 0.3s ease;
+}
+
+/* Sub-menu styling - Level 1 dropdowns */
+.sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--wp-submenu-bg);
+    border: 1px solid var(--wp-submenu-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px var(--wp-submenu-shadow);
+    min-width: 220px;
+    max-width: 300px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+    list-style: none;
+    margin: 0;
+}
+
+/* Show submenu on hover and focus */
+.menu-item:hover > .sub-menu,
+.menu-item:focus-within > .sub-menu,
+.menu-item.focus > .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Rotate dropdown arrow on hover */
+.menu-item:hover > a::after,
+.menu-item:focus-within > a::after,
+.menu-item.focus > a::after {
+    transform: rotate(180deg);
+}
+
+/* Sub-menu items */
+.sub-menu .menu-item {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+.sub-menu .menu-item a,
+.sub-menu .menu-link {
+    padding: 0.75rem 1.25rem;
+    border-radius: 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.sub-menu .menu-item a:hover,
+.sub-menu .menu-item a:focus,
+.sub-menu .menu-link:hover,
+.sub-menu .menu-link:focus {
+    background-color: var(--wp-menu-bg-hover);
+    padding-left: 1.5rem;
+}
+
+/* Multi-level dropdown support - Level 2 and beyond */
+.sub-menu .menu-item-has-children > a::after {
+    border-left: 4px solid currentColor;
+    border-right: none;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    margin-left: auto;
+    margin-right: 0.5rem;
+    transform: none;
+}
+
+.sub-menu .menu-item:hover > a::after,
+.sub-menu .menu-item:focus-within > a::after {
+    transform: rotate(90deg);
+}
+
+/* Third level and deeper submenus */
+.sub-menu .sub-menu {
+    top: 0;
+    left: 100%;
+    margin-left: -1px;
+    margin-top: -0.5rem;
+}
+
+/* Fourth level and beyond */
+.sub-menu .sub-menu .sub-menu {
+    top: 0;
+    left: 100%;
+    margin-left: -1px;
+    margin-top: -0.5rem;
+}
+
+/* Ensure all nested submenus follow the same pattern */
+.sub-menu .sub-menu .sub-menu .sub-menu,
+.sub-menu .sub-menu .sub-menu .sub-menu .sub-menu {
+    top: 0;
+    left: 100%;
+    margin-left: -1px;
+    margin-top: -0.5rem;
+}
+
+/* ============================================================================
+   MOBILE NAVIGATION (Responsive Menu)
+   ============================================================================ */
+
+/* Mobile menu toggle button */
+.menu-toggle {
+    display: none;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0.75rem;
+    cursor: pointer;
+    z-index: 1020;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.3s ease;
+    color: var(--wp-menu-text);
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+    background-color: var(--wp-menu-bg-hover);
+    outline: none;
+}
+
+/* Hamburger icon */
+.hamburger-box {
+    display: inline-block;
+    position: relative;
+    width: 24px;
+    height: 18px;
+}
+
+.hamburger-inner {
+    display: block;
+    top: 50%;
+    margin-top: -1px;
+    width: 24px;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 2px;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 2px;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.hamburger-inner::before {
+    top: -8px;
+}
+
+.hamburger-inner::after {
+    bottom: -8px;
+}
+
+/* Menu text */
+.menu-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.menu-text-close {
+    display: none;
+}
+
+/* Active menu toggle state */
+.menu-toggle[aria-expanded="true"] .hamburger-inner {
+    background-color: transparent;
+}
+
+.menu-toggle[aria-expanded="true"] .hamburger-inner::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.menu-toggle[aria-expanded="true"] .hamburger-inner::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-text-open {
+    display: none;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-text-close {
+    display: inline;
+}
+
+/* Mobile menu overlay */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--wp-mobile-overlay);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================================ */
+
+@media (max-width: 991.98px) {
+    /* Hide desktop menu */
+    .menu-wrapper {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background: var(--wp-mobile-menu-bg);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 2rem 1rem;
+        z-index: 1000;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .menu-wrapper.active {
+        right: 0;
+    }
+    
+    /* Show mobile toggle */
+    .menu-toggle {
+        display: flex;
+    }
+    
+    /* Mobile menu structure */
+    .menu,
+    .nav-menu {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 0;
+    }
+    
+    .menu-item {
+        width: 100%;
+        border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .menu-item:last-child {
+        border-bottom: none;
+    }
+    
+    .menu-item a,
+    .menu-link {
+        width: 100%;
+        padding: 1rem 0;
+        border-radius: 0;
+        justify-content: space-between;
+    }
+    
+    /* Mobile dropdown behavior */
+    .menu-item-has-children > a::after {
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-left: 4px solid currentColor;
+        border-right: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .menu-item.open > a::after {
+        transform: rotate(90deg);
+    }
+    
+    /* Mobile submenu styling */
+    .sub-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        background: transparent;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .menu-item.open > .sub-menu {
+        max-height: 1000px;
+    }
+    
+    .sub-menu .menu-item a,
+    .sub-menu .menu-link {
+        padding-left: 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .sub-menu .sub-menu .menu-item a,
+    .sub-menu .sub-menu .menu-link {
+        padding-left: 2.5rem;
+    }
+    
+    .sub-menu .sub-menu .sub-menu .menu-item a,
+    .sub-menu .sub-menu .sub-menu .menu-link {
+        padding-left: 3.5rem;
+    }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+    .menu-wrapper {
+        width: 280px;
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+    .menu-wrapper {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .menu-wrapper.active {
+        right: 0;
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================================================ */
+
+/* Focus styles for keyboard navigation */
+.menu-item a:focus,
+.menu-link:focus,
+.menu-toggle:focus {
+    outline: 2px solid var(--wp-menu-text-hover);
+    outline-offset: 2px;
+}
+
+/* Screen reader text */
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+/* Skip to content link */
+.skip-link {
+    background: var(--wp-menu-text-active);
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 10000;
+    border-radius: 0.25rem;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .menu-item a,
+    .menu-link,
+    .sub-menu,
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after,
+    .menu-overlay,
+    .menu-wrapper {
+        transition: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .menu-item a,
+    .menu-link {
+        border: 1px solid currentColor;
+    }
+    
+    .sub-menu {
+        border: 2px solid currentColor;
+    }
+}
