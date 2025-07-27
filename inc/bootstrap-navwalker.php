@@ -82,16 +82,16 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
             if ($has_children) {
                 $link_classes[] = 'dropdown-toggle';
                 $attributes .= ' data-bs-toggle="dropdown" aria-expanded="false" role="button"';
-}
-} else {
+                $attributes .= ' data-bs-auto-close="outside"';
+            }
+        } else {
             $link_classes[] = 'dropdown-item';
             if ($has_children) {
                 $link_classes[] = 'dropdown-toggle';
                 $attributes .= ' data-bs-toggle="dropdown" aria-expanded="false" role="button"';
-}
-}
-
-        // Add current page indicator
+                $attributes .= ' data-bs-auto-close="outside"';
+            }
+        }        // Add current page indicator
         if (in_array('current-menu-item', $classes)) {
             $attributes .= ' aria-current="page"';
 }
