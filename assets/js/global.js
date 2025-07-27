@@ -22,6 +22,7 @@ Bootstrap 5 Compatible | Vanilla JS
             init: function() {
                 this.setupEnhancedMobileMenu();
                 this.setupEnhancedDropdowns();
+                this.setupSubmenuInteractions();
                 this.setupActiveStates();
                 this.setupKeyboardNavigation();
                 this.setupSmoothScroll();
@@ -440,6 +441,34 @@ Bootstrap 5 Compatible | Vanilla JS
                         setTimeout(() => {
                             ripple.remove();
                         }, 600);
+                    });
+                });
+            },
+
+            setupSubmenuInteractions: function() {
+                // Handle submenu interactions on mobile
+                const submenuToggles = document.querySelectorAll('.has-submenu > a');
+                
+                submenuToggles.forEach(toggle => {
+                    toggle.addEventListener('click', function(e) {
+                        if (window.innerWidth < 992) {
+                            e.preventDefault();
+                            
+                            const parentItem = this.closest('.has-submenu');
+                            const submenu = parentItem.querySelector('.mega-menu-submenu, .dropdown-submenu');
+                            
+                            if (submenu) {
+                                parentItem.classList.toggle('active');
+                                
+                                // Close other submenus at the same level
+                                const siblings = parentItem.parentElement.querySelectorAll('.has-submenu');
+                                siblings.forEach(sibling => {
+                                    if (sibling !== parentItem) {
+                                        sibling.classList.remove('active');
+                                    }
+                                });
+                            }
+                        }
                     });
                 });
             }

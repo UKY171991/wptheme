@@ -1,10 +1,12 @@
 <?php
 /**
  * Bootstrap Navigation Walker
- * Compatible with Bootstrap 5
+ * Compatible with Bootstrap 5 with Mega Menu Support
  */
 
 class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
+    
+    private $current_parent_item = null;
     
     /**
      * Start Level - start of UL with mega menu support
@@ -14,11 +16,10 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         
         if ($depth === 0) {
             // Check if this is a services menu for mega menu
-            $current_item = $this->current_item ?? null;
             $is_services = false;
             
-            if ($current_item) {
-                $title = strtolower($current_item->title ?? '');
+            if ($this->current_parent_item) {
+                $title = strtolower($this->current_parent_item->title ?? '');
                 $is_services = (strpos($title, 'service') !== false);
             }
             
@@ -30,11 +31,13 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
                 $output .= "$indent\t\t\t<ul class=\"mega-menu-list\">\n";
             } else {
                 $output .= "\n$indent<div class=\"dropdown-menu\">\n";
-                $output .= "$indent\t<div class=\"mega-menu\">\n";
-                $output .= "$indent\t\t<div class=\"mega-menu-section\">\n";
-                $output .= "$indent\t\t\t<ul class=\"mega-menu-list\">\n";
+                $output .= "$indent\t<ul class=\"dropdown-menu-list\">\n";
             }
+        } elseif ($depth === 1) {
+            // Second level - submenu within mega menu
+            $output .= "\n$indent<ul class=\"mega-menu-submenu\">\n";
         } else {
+            // Third level and beyond
             $output .= "\n$indent<ul class=\"dropdown-submenu\" role=\"menu\">\n";
         }
     }
@@ -47,11 +50,10 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         
         if ($depth === 0) {
             // Check if this is a services menu for mega menu
-            $current_item = $this->current_item ?? null;
             $is_services = false;
             
-            if ($current_item) {
-                $title = strtolower($current_item->title ?? '');
+            if ($this->current_parent_item) {
+                $title = strtolower($this->current_parent_item->title ?? '');
                 $is_services = (strpos($title, 'service') !== false);
             }
             
@@ -83,9 +85,7 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
                 $output .= "$indent\t</div>\n";
                 $output .= "$indent</div>\n";
             } else {
-                $output .= "$indent\t\t\t</ul>\n";
-                $output .= "$indent\t\t</div>\n";
-                $output .= "$indent\t</div>\n";
+                $output .= "$indent\t</ul>\n";
                 $output .= "$indent</div>\n";
             }
         } else {
@@ -99,17 +99,22 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
     public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
 
-        // Store current item for mega menu detection
-        $this->current_item = $item;
-
         $classes = empty($item->classes) ? array() : (array) $item->classes;
-        $classes[] = 'nav-item';
-
+        
         // Check if item has children
         $has_children = in_array('menu-item-has-children', $classes);
         
-        if ($has_children && $depth === 0) {
-            $classes[] = 'dropdown';
+        // Store parent item for mega menu detection
+        if ($depth === 0 && $has_children) {
+            $this->current_parent_item = $item;
+        }
+
+        // Add appropriate classes based on depth
+        if ($depth === 0) {
+            $classes[] = 'nav-item';
+            if ($has_children) {
+                $classes[] = 'dropdown';
+            }
         }
 
         // Add current item class for active states
@@ -126,11 +131,28 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         // Add role for menu items
         $role_attr = $depth === 0 ? ' role="none"' : '';
 
+        // Output list item based on depth
         if ($depth === 0) {
             $output .= $indent . '<li' . $id . $class_names . $role_attr . '>';
         } elseif ($depth === 1) {
-            // Mega menu item
-            $output .= $indent . '<li class="mega-menu-item">';
+            // Check if parent is services for mega menu styling
+            $is_services = false;
+            if ($this->current_parent_item) {
+                $title = strtolower($this->current_parent_item->title ?? '');
+                $is_services = (strpos($title, 'service') !== false);
+            }
+            
+            if ($is_services) {
+                $item_class = $has_children ? 'mega-menu-item has-submenu' : 'mega-menu-item';
+                $output .= $indent . '<li class="' . $item_class . '">';
+            } else {
+                $item_class = $has_children ? 'dropdown-item has-submenu' : 'dropdown-item';
+                $output .= $indent . '<li class="' . $item_class . '">';
+            }
+        } else {
+            // Third level and beyond
+            $item_class = $has_children ? 'dropdown-item has-submenu' : 'dropdown-item';
+            $output .= $indent . '<li class="' . $item_class . '">';
         }
 
         $attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
@@ -138,7 +160,7 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         $attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
         $attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 
-        // Build link classes
+        // Build link classes based on depth
         $link_classes = array();
         
         if ($depth === 0) {
@@ -154,9 +176,33 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
                 $attributes .= ' role="menuitem"';
             }
         } elseif ($depth === 1) {
-            $link_classes[] = 'mega-menu-link';
+            // Check if parent is services for mega menu styling
+            $is_services = false;
+            if ($this->current_parent_item) {
+                $title = strtolower($this->current_parent_item->title ?? '');
+                $is_services = (strpos($title, 'service') !== false);
+            }
+            
+            if ($is_services) {
+                $link_classes[] = 'mega-menu-link';
+                if ($has_children) {
+                    $link_classes[] = 'has-submenu';
+                    $attributes .= ' data-submenu-toggle="true"';
+                }
+            } else {
+                $link_classes[] = 'dropdown-item';
+                if ($has_children) {
+                    $link_classes[] = 'dropdown-toggle';
+                    $attributes .= ' data-bs-toggle="dropdown"';
+                }
+            }
         } else {
+            // Third level and beyond
             $link_classes[] = 'dropdown-item';
+            if ($has_children) {
+                $link_classes[] = 'dropdown-toggle';
+                $attributes .= ' data-bs-toggle="dropdown"';
+            }
         }
 
         // Add current page indicator for accessibility
@@ -170,8 +216,15 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         $item_output .= '<a' . $attributes . $link_class . '>';
         $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
         
-        if ($has_children && $depth === 0) {
-            $item_output .= ' <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>';
+        // Add appropriate icons based on depth and children
+        if ($has_children) {
+            if ($depth === 0) {
+                $item_output .= ' <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>';
+            } elseif ($depth === 1) {
+                $item_output .= ' <i class="fas fa-chevron-right ms-1" aria-hidden="true"></i>';
+            } else {
+                $item_output .= ' <i class="fas fa-chevron-right ms-1" aria-hidden="true"></i>';
+            }
         }
         
         // Add description for mega menu items
@@ -189,8 +242,6 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
      * End Element - end LI tag
      */
     public function end_el(&$output, $item, $depth = 0, $args = null) {
-        if ($depth === 0 || $depth === 1) {
-            $output .= "</li>\n";
-        }
+        $output .= "</li>\n";
     }
 }

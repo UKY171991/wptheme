@@ -321,15 +321,28 @@ body {
         padding: 0;
         margin-top: 0;
         background: #ffffff;
-        min-width: 800px;
         animation: megaMenuSlideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: absolute;
         top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
         z-index: 1050;
         display: none;
         border-top: 3px solid var(--accent);
+    }
+    
+    /* Regular dropdown menu (non-mega) */
+    .dropdown-menu:not(.services-mega-menu) {
+        min-width: 280px;
+        left: 0;
+        transform: none;
+        padding: 1rem;
+        border-radius: var(--border-radius);
+    }
+    
+    /* Services mega menu */
+    .services-mega-menu {
+        min-width: 800px;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
     /* Mega Menu Layout */
@@ -3388,4 +3401,181 @@ img[loading="lazy"].loaded {
     .mega-menu {
         display: none !important;
     }
+}/*
+ ========================================
+   NESTED SUBMENU SUPPORT
+   ======================================== */
+
+/* Regular dropdown menu items */
+@media (min-width: 992px) {
+    .dropdown-menu:not(.services-mega-menu) .dropdown-item {
+        padding: 0.75rem 1rem;
+        border-radius: var(--border-radius-sm);
+        margin-bottom: 0.25rem;
+        transition: var(--transition);
+        font-weight: 500;
+        color: var(--text-dark);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    }
+    
+    .dropdown-menu:not(.services-mega-menu) .dropdown-item:hover {
+        background-color: var(--accent-light);
+        color: var(--accent);
+        transform: translateX(4px);
+    }
+    
+    /* Nested submenu positioning */
+    .dropdown-item.has-submenu {
+        position: relative;
+    }
+    
+    .dropdown-item.has-submenu .mega-menu-submenu,
+    .dropdown-item.has-submenu .dropdown-submenu {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        min-width: 200px;
+        background: white;
+        box-shadow: var(--shadow-lg);
+        border-radius: var(--border-radius);
+        padding: 0.5rem;
+        margin-left: 0.5rem;
+        display: none;
+        z-index: 1051;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .dropdown-item.has-submenu:hover .mega-menu-submenu,
+    .dropdown-item.has-submenu:hover .dropdown-submenu {
+        display: block;
+        animation: submenuSlideIn 0.2s ease;
+    }
+    
+    /* Mega menu submenu styling */
+    .mega-menu-item.has-submenu .mega-menu-submenu {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        min-width: 220px;
+        background: white;
+        box-shadow: var(--shadow-lg);
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        margin-left: 1rem;
+        display: none;
+        z-index: 1051;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .mega-menu-item.has-submenu:hover .mega-menu-submenu {
+        display: block;
+        animation: submenuSlideIn 0.2s ease;
+    }
+    
+    .mega-menu-submenu .dropdown-item {
+        padding: 0.5rem 0.75rem;
+        margin-bottom: 0.25rem;
+        border-radius: var(--border-radius-sm);
+        font-size: 0.9rem;
+    }
+    
+    /* Submenu arrow indicators */
+    .has-submenu .fas.fa-chevron-right {
+        font-size: 0.7rem;
+        opacity: 0.7;
+        transition: var(--transition);
+    }
+    
+    .has-submenu:hover .fas.fa-chevron-right {
+        opacity: 1;
+        transform: translateX(2px);
+    }
+}
+
+@keyframes submenuSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Ensure proper dropdown positioning for different menu items */
+@media (min-width: 992px) {
+    /* Default dropdown positioning */
+    .dropdown-menu {
+        left: 0;
+        transform: none;
+    }
+    
+    /* Services mega menu centering */
+    .services-mega-menu {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Right align dropdowns for items near the end */
+    .navbar-nav .nav-item:nth-last-child(-n+2) .dropdown-menu:not(.services-mega-menu) {
+        left: auto;
+        right: 0;
+    }
+}
+
+/* Mobile submenu support */
+@media (max-width: 991.98px) {
+    .mega-menu-submenu,
+    .dropdown-submenu {
+        position: static !important;
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0.5rem 0 0 1rem !important;
+        padding: 0.5rem !important;
+        background: rgba(0, 0, 0, 0.05) !important;
+        border-radius: var(--border-radius-sm) !important;
+        display: none;
+    }
+    
+    .has-submenu.active .mega-menu-submenu,
+    .has-submenu.active .dropdown-submenu {
+        display: block !important;
+    }
+    
+    .has-submenu > a {
+        cursor: pointer;
+    }
+}
+
+/* Fix for dropdown menu list styling */
+.dropdown-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu-list .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    clear: both;
+    font-weight: 500;
+    color: var(--text-dark);
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 0.25rem;
+    transition: var(--transition);
+}
+
+.dropdown-menu-list .dropdown-item:hover {
+    background-color: var(--accent-light);
+    color: var(--accent);
 }
