@@ -37,9 +37,11 @@ function blueprint_folder_setup() {
     
     // Register navigation menus
     register_nav_menus(array(
-        'primary' => esc_html__('Primary Navigation', 'blueprint-folder'),
-        'footer'  => esc_html__('Footer Navigation', 'blueprint-folder'),
-        'services' => esc_html__('Services Menu', 'blueprint-folder'),
+        'primary'   => esc_html__('Primary Navigation', 'blueprint-folder'),
+        'footer'    => esc_html__('Footer Navigation', 'blueprint-folder'),
+        'services'  => esc_html__('Services Menu', 'blueprint-folder'),
+        'mobile'    => esc_html__('Mobile Navigation', 'blueprint-folder'),
+        'top-bar'   => esc_html__('Top Bar Navigation', 'blueprint-folder'),
     ));
     
     // Text domain for translations
@@ -255,50 +257,184 @@ function blueprint_folder_force_nav_menu_display() {
 
 /**
  * NAVIGATION FALLBACK MENU (WordPress Standard)
+ * Creates a fallback menu structure with Services and Service Categories
  */
 function blueprint_folder_navigation_fallback() {
+    // Get service categories for dynamic menu
+    $service_categories = get_terms(array(
+        'taxonomy' => 'service_category',
+        'hide_empty' => false,
+        'parent' => 0, // Get top-level categories only
+    ));
+    
+    // Get individual services for dynamic menu
+    $services = get_posts(array(
+        'post_type' => 'service',
+        'posts_per_page' => 10,
+        'post_status' => 'publish',
+    ));
+    
     $fallback_pages = array(
         array(
             'url' => home_url('/'),
             'title' => esc_html__('Home', 'blueprint-folder'),
-            'current' => is_front_page()
+            'current' => is_front_page(),
+            'children' => array()
         ),
         array(
             'url' => home_url('/about'),
             'title' => esc_html__('About', 'blueprint-folder'),
-            'current' => is_page('about')
+            'current' => is_page('about'),
+            'children' => array()
         ),
         array(
             'url' => get_post_type_archive_link('service') ?: home_url('/services'),
             'title' => esc_html__('Services', 'blueprint-folder'),
-            'current' => is_post_type_archive('service') || is_page('services')
+            'current' => is_post_type_archive('service') || is_page('services') || is_singular('service') || is_tax('service_category'),
+            'children' => array()
         ),
         array(
-            'url' => home_url('/portfolio'),
+            'url' => home_url('/pricing'),
+            'title' => esc_html__('Pricing', 'blueprint-folder'),
+            'current' => is_page('pricing'),
+            'children' => array()
+        ),
+        array(
+            'url' => get_post_type_archive_link('project') ?: home_url('/portfolio'),
             'title' => esc_html__('Portfolio', 'blueprint-folder'),
-            'current' => is_page('portfolio')
+            'current' => is_post_type_archive('project') || is_page('portfolio'),
+            'children' => array()
         ),
         array(
             'url' => home_url('/contact'),
             'title' => esc_html__('Contact', 'blueprint-folder'),
-            'current' => is_page('contact')
+            'current' => is_page('contact'),
+            'children' => array()
         )
     );
+    
+    // Add service categories and services to Services menu
+    if (!empty($service_categories)) {
+        foreach ($service_categories as $category) {
+            $category_services = get_posts(array(
+                'post_type' => 'service',
+                'posts_per_page' => -1,
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'service_category',
+                        'field' => 'term_id',
+                        'terms' => $category->term_id,
+                    ),
+                ),
+            ));
+            
+            $service_items = array();
+            if (!empty($category_services)) {
+                foreach ($category_services as $service) {
+                    $service_items[] = array(
+                        'url' => get_permalink($service->ID),
+                        'title' => $service->post_title,
+                        'current' => is_singular('service') && get_the_ID() === $service->ID,
+                    );
+                }
+            }
+            
+            $fallback_pages[2]['children'][] = array(
+                'url' => get_term_link($category),
+                'title' => $category->name,
+                'current' => is_tax('service_category', $category->slug),
+                'children' => $service_items
+            );
+        }
+    }
+    
+    // Add uncategorized services
+    if (!empty($services)) {
+        $uncategorized_services = array();
+        foreach ($services as $service) {
+            $categories = get_the_terms($service->ID, 'service_category');
+            if (empty($categories) || is_wp_error($categories)) {
+                $uncategorized_services[] = array(
+                    'url' => get_permalink($service->ID),
+                    'title' => $service->post_title,
+                    'current' => is_singular('service') && get_the_ID() === $service->ID,
+                );
+            }
+        }
+        
+        if (!empty($uncategorized_services)) {
+            $fallback_pages[2]['children'] = array_merge($fallback_pages[2]['children'], $uncategorized_services);
+        }
+    }
     
     echo '<ul id="primary-menu" class="menu nav-menu">';
     foreach ($fallback_pages as $page) {
         $current_class = $page['current'] ? ' current-menu-item' : '';
+        $has_children = !empty($page['children']);
+        $children_class = $has_children ? ' menu-item-has-children' : '';
         $aria_current = $page['current'] ? ' aria-current="page"' : '';
+        $aria_expanded = $has_children ? ' aria-expanded="false"' : '';
+        $aria_haspopup = $has_children ? ' aria-haspopup="true"' : '';
         
         printf(
-            '<li class="menu-item%s">
-                <a href="%s"%s>%s</a>
-            </li>',
+            '<li class="menu-item%s%s">
+                <a href="%s" class="menu-link"%s%s%s>%s%s</a>',
             esc_attr($current_class),
+            esc_attr($children_class),
             esc_url($page['url']),
             $aria_current,
-            esc_html($page['title'])
+            $aria_expanded,
+            $aria_haspopup,
+            esc_html($page['title']),
+            $has_children ? ' <i class="fas fa-chevron-down" aria-hidden="true"></i>' : ''
         );
+        
+        // Add children if they exist
+        if ($has_children) {
+            echo '<ul class="sub-menu">';
+            foreach ($page['children'] as $child) {
+                $child_current_class = $child['current'] ? ' current-menu-item' : '';
+                $child_has_children = !empty($child['children']);
+                $child_children_class = $child_has_children ? ' menu-item-has-children' : '';
+                $child_aria_current = $child['current'] ? ' aria-current="page"' : '';
+                
+                printf(
+                    '<li class="menu-item%s%s">
+                        <a href="%s" class="menu-link"%s>%s%s</a>',
+                    esc_attr($child_current_class),
+                    esc_attr($child_children_class),
+                    esc_url($child['url']),
+                    $child_aria_current,
+                    esc_html($child['title']),
+                    $child_has_children ? ' <i class="fas fa-chevron-down" aria-hidden="true"></i>' : ''
+                );
+                
+                // Add third level children (services under categories)
+                if ($child_has_children) {
+                    echo '<ul class="sub-menu">';
+                    foreach ($child['children'] as $grandchild) {
+                        $grandchild_current_class = $grandchild['current'] ? ' current-menu-item' : '';
+                        $grandchild_aria_current = $grandchild['current'] ? ' aria-current="page"' : '';
+                        
+                        printf(
+                            '<li class="menu-item%s">
+                                <a href="%s" class="menu-link"%s>%s</a>
+                            </li>',
+                            esc_attr($grandchild_current_class),
+                            esc_url($grandchild['url']),
+                            $grandchild_aria_current,
+                            esc_html($grandchild['title'])
+                        );
+                    }
+                    echo '</ul>';
+                }
+                
+                echo '</li>';
+            }
+            echo '</ul>';
+        }
+        
+        echo '</li>';
     }
     echo '</ul>';
 }
@@ -480,6 +616,116 @@ add_filter('wp_nav_menu_args', function($args) {
 });
 
 /**
+ * ADD CUSTOM POST TYPES TO MENU ADMIN
+ * Makes Services and Service Categories available in Appearance > Menus
+ */
+function blueprint_folder_add_cpt_to_menu() {
+    // Add Services to menu
+    add_meta_box(
+        'add-services-nav-menu',
+        __('Services', 'blueprint-folder'),
+        'blueprint_folder_services_nav_menu_metabox',
+        'nav-menus',
+        'side',
+        'default'
+    );
+    
+    // Add Service Categories to menu
+    add_meta_box(
+        'add-service-categories-nav-menu',
+        __('Service Categories', 'blueprint-folder'),
+        'blueprint_folder_service_categories_nav_menu_metabox',
+        'nav-menus',
+        'side',
+        'default'
+    );
+}
+add_action('admin_head-nav-menus.php', 'blueprint_folder_add_cpt_to_menu');
+
+/**
+ * Services menu metabox
+ */
+function blueprint_folder_services_nav_menu_metabox() {
+    $services = get_posts(array(
+        'post_type' => 'service',
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'orderby' => 'title',
+        'order' => 'ASC',
+    ));
+    
+    echo '<div id="posttype-services" class="posttypediv">';
+    echo '<div id="tabs-panel-services" class="tabs-panel tabs-panel-active">';
+    echo '<ul id="services-checklist" class="categorychecklist form-no-clear">';
+    
+    if (!empty($services)) {
+        foreach ($services as $service) {
+            echo '<li>';
+            echo '<label class="menu-item-title">';
+            echo '<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="' . $service->ID . '"> ';
+            echo esc_html($service->post_title);
+            echo '</label>';
+            echo '<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="post_type">';
+            echo '<input type="hidden" class="menu-item-object" name="menu-item[-1][menu-item-object]" value="service">';
+            echo '</li>';
+        }
+    } else {
+        echo '<li><p>' . __('No services found.', 'blueprint-folder') . '</p></li>';
+    }
+    
+    echo '</ul>';
+    echo '</div>';
+    echo '<p class="button-controls">';
+    echo '<span class="add-to-menu">';
+    echo '<input type="submit" class="button-secondary submit-add-to-menu right" value="' . __('Add to Menu', 'blueprint-folder') . '" name="add-post-type-menu-item" id="submit-posttype-services">';
+    echo '<span class="spinner"></span>';
+    echo '</span>';
+    echo '</p>';
+    echo '</div>';
+}
+
+/**
+ * Service Categories menu metabox
+ */
+function blueprint_folder_service_categories_nav_menu_metabox() {
+    $categories = get_terms(array(
+        'taxonomy' => 'service_category',
+        'hide_empty' => false,
+        'orderby' => 'name',
+        'order' => 'ASC',
+    ));
+    
+    echo '<div id="taxonomy-service_category" class="taxonomydiv">';
+    echo '<div id="tabs-panel-service_category" class="tabs-panel tabs-panel-active">';
+    echo '<ul id="service_category-checklist" class="categorychecklist form-no-clear">';
+    
+    if (!empty($categories) && !is_wp_error($categories)) {
+        foreach ($categories as $category) {
+            echo '<li>';
+            echo '<label class="menu-item-title">';
+            echo '<input type="checkbox" class="menu-item-checkbox" name="menu-item[-1][menu-item-object-id]" value="' . $category->term_id . '"> ';
+            echo esc_html($category->name);
+            echo '</label>';
+            echo '<input type="hidden" class="menu-item-type" name="menu-item[-1][menu-item-type]" value="taxonomy">';
+            echo '<input type="hidden" class="menu-item-object" name="menu-item[-1][menu-item-object]" value="service_category">';
+            echo '</li>';
+        }
+    } else {
+        echo '<li><p>' . __('No categories found.', 'blueprint-folder') . '</p></li>';
+    }
+    
+    echo '</ul>';
+    echo '</div>';
+    echo '<p class="button-controls">';
+    echo '<span class="add-to-menu">';
+    echo '<input type="submit" class="button-secondary submit-add-to-menu right" value="' . __('Add to Menu', 'blueprint-folder') . '" name="add-taxonomy-menu-item" id="submit-taxonomy-service_category">';
+    echo '<span class="spinner"></span>';
+    echo '</span>';
+    echo '</p>';
+    echo '</div>';
+}
+
+/**
  * ENQUEUE SCRIPTS AND STYLES
  */
 function blueprint_folder_scripts() {
@@ -510,9 +756,13 @@ function blueprint_folder_scripts() {
     // Interactive Elements CSS
     wp_enqueue_style('blueprint-folder-interactive', get_template_directory_uri() . '/css/interactive-elements.css', array('blueprint-folder-style'), '2.1.0');
     
+    // Service & Pricing Complete CSS - COMPREHENSIVE styling for all service and pricing components
+    wp_enqueue_style('blueprint-folder-service-pricing', get_template_directory_uri() . '/css/service-pricing-complete.css', array('blueprint-folder-interactive'), '2.0.0');
+    
     // Enhanced Homepage CSS
     if (is_front_page() || is_home()) {
         wp_enqueue_style('blueprint-folder-homepage', get_template_directory_uri() . '/css/homepage-enhanced.css', array('blueprint-folder-style'), '2.1.0');
+        wp_enqueue_style('blueprint-folder-homepage-complete', get_template_directory_uri() . '/css/homepage-complete.css', array('blueprint-folder-homepage'), '2.0.0');
     }
     
     // Enhanced Pricing CSS - Only load on pricing page template and only specific styles
@@ -555,13 +805,16 @@ function blueprint_folder_scripts() {
     // Theme main script
     wp_enqueue_script('blueprint-folder-main', get_template_directory_uri() . '/js/theme-main-enhanced.js', array('jquery', 'bootstrap'), '2.1.0', true);
     
+    // Enhanced Theme JavaScript - COMPREHENSIVE interactive functionality
+    wp_enqueue_script('blueprint-folder-theme-enhanced', get_template_directory_uri() . '/js/theme-enhanced.js', array('jquery', 'bootstrap'), '2.0.0', true);
+    
     // Enhanced Pricing JavaScript
     if (is_page_template('page-pricing.php') || is_page_template('page-pricing-enhanced.php')) {
         wp_enqueue_script('blueprint-folder-pricing', get_template_directory_uri() . '/js/pricing-enhanced.js', array('jquery', 'bootstrap'), '2.1.0', true);
     }
     
     // Localize script for AJAX and theme data
-    wp_localize_script('blueprint-folder-main', 'wpData', array(
+    wp_localize_script('blueprint-folder-theme-enhanced', 'wpAjax', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('blueprint_folder_nonce'),
         'homeUrl' => home_url('/'),
@@ -909,6 +1162,423 @@ function blueprint_folder_admin_page() {
             </div>
         </div>
     </div>
+
+/**
+ * AJAX HANDLERS FOR ENHANCED FUNCTIONALITY
+ */
+
+// AJAX handler for loading category services
+function load_category_services() {
+    // Verify nonce for security
+    if (!wp_verify_nonce($_POST['nonce'], 'blueprint_folder_nonce')) {
+        wp_die('Security check failed');
+    }
+    
+    $category_slug = sanitize_text_field($_POST['category']);
+    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    
+    $args = array(
+        'post_type' => 'service',
+        'posts_per_page' => 9,
+        'paged' => $paged,
+        'post_status' => 'publish',
+    );
+    
+    if ($category_slug && $category_slug !== 'all') {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'service_category',
+                'field'    => 'slug',
+                'terms'    => $category_slug,
+            ),
+        );
+    }
+    
+    $services_query = new WP_Query($args);
+    
+    ob_start();
+    
+    if ($services_query->have_posts()) {
+        while ($services_query->have_posts()) {
+            $services_query->the_post();
+            get_template_part('template-parts/service-card');
+        }
+    } else {
+        echo '<div class="no-services"><p>No services found in this category.</p></div>';
+    }
+    
+    $output = ob_get_clean();
+    wp_reset_postdata();
+    
+    wp_send_json_success($output);
+}
+add_action('wp_ajax_load_category_services', 'load_category_services');
+add_action('wp_ajax_nopriv_load_category_services', 'load_category_services');
+
+// AJAX handler for loading more services (infinite scroll)
+function load_more_services() {
+    // Verify nonce for security
+    if (!wp_verify_nonce($_POST['nonce'], 'blueprint_folder_nonce')) {
+        wp_die('Security check failed');
+    }
+    
+    $paged = intval($_POST['page']);
+    
+    $args = array(
+        'post_type' => 'service',
+        'posts_per_page' => 6,
+        'paged' => $paged,
+        'post_status' => 'publish',
+    );
+    
+    $services_query = new WP_Query($args);
+    
+    ob_start();
+    
+    if ($services_query->have_posts()) {
+        while ($services_query->have_posts()) {
+            $services_query->the_post();
+            get_template_part('template-parts/service-card');
+        }
+    }
+    
+    $output = ob_get_clean();
+    wp_reset_postdata();
+    
+    if (!empty($output)) {
+        wp_send_json_success($output);
+    } else {
+        wp_send_json_error('No more services');
+    }
+}
+add_action('wp_ajax_load_more_services', 'load_more_services');
+add_action('wp_ajax_nopriv_load_more_services', 'load_more_services');
+
+// AJAX handler for contact form submission
+function handle_contact_form() {
+    // Verify nonce for security
+    if (!wp_verify_nonce($_POST['nonce'], 'blueprint_folder_nonce')) {
+        wp_die('Security check failed');
+    }
+    
+    $name = sanitize_text_field($_POST['name']);
+    $email = sanitize_email($_POST['email']);
+    $subject = sanitize_text_field($_POST['subject']);
+    $message = sanitize_textarea_field($_POST['message']);
+    
+    // Validate required fields
+    if (empty($name) || empty($email) || empty($message)) {
+        wp_send_json_error('Please fill in all required fields.');
+    }
+    
+    if (!is_email($email)) {
+        wp_send_json_error('Please enter a valid email address.');
+    }
+    
+    // Prepare email
+    $to = get_option('admin_email');
+    $email_subject = 'New Contact Form Submission: ' . $subject;
+    $email_message = "Name: $name\n";
+    $email_message .= "Email: $email\n";
+    $email_message .= "Subject: $subject\n\n";
+    $email_message .= "Message:\n$message";
+    
+    $headers = array(
+        'From: ' . get_bloginfo('name') . ' <' . get_option('admin_email') . '>',
+        'Reply-To: ' . $email
+    );
+    
+    // Send email
+    if (wp_mail($to, $email_subject, $email_message, $headers)) {
+        wp_send_json_success('Thank you! Your message has been sent successfully.');
+    } else {
+        wp_send_json_error('Sorry, there was an error sending your message. Please try again.');
+    }
+}
+add_action('wp_ajax_handle_contact_form', 'handle_contact_form');
+add_action('wp_ajax_nopriv_handle_contact_form', 'handle_contact_form');
+
+/**
+ * THEME CUSTOMIZER SETTINGS
+ */
+function blueprint_folder_customize_register($wp_customize) {
+    
+    // Hero Section
+    $wp_customize->add_section('hero_section', array(
+        'title'    => __('Hero Section', 'blueprint-folder'),
+        'priority' => 30,
+    ));
+    
+    // Hero Title
+    $wp_customize->add_setting('hero_title', array(
+        'default'           => 'Professional Digital Solutions',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('hero_title', array(
+        'label'   => __('Hero Title', 'blueprint-folder'),
+        'section' => 'hero_section',
+        'type'    => 'text',
+    ));
+    
+    // Hero Subtitle
+    $wp_customize->add_setting('hero_subtitle', array(
+        'default'           => 'We create exceptional digital experiences that drive business growth and success.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('hero_subtitle', array(
+        'label'   => __('Hero Subtitle', 'blueprint-folder'),
+        'section' => 'hero_section',
+        'type'    => 'textarea',
+    ));
+    
+    // Hero Background Image
+    $wp_customize->add_setting('hero_background_image', array(
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'hero_background_image', array(
+        'label'   => __('Hero Background Image', 'blueprint-folder'),
+        'section' => 'hero_section',
+    )));
+    
+    // Hero Buttons
+    $wp_customize->add_setting('hero_primary_button_text', array(
+        'default'           => 'Our Services',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('hero_primary_button_text', array(
+        'label'   => __('Primary Button Text', 'blueprint-folder'),
+        'section' => 'hero_section',
+        'type'    => 'text',
+    ));
+    
+    $wp_customize->add_setting('hero_primary_button_url', array(
+        'default'           => '#services',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('hero_primary_button_url', array(
+        'label'   => __('Primary Button URL', 'blueprint-folder'),
+        'section' => 'hero_section',
+        'type'    => 'url',
+    ));
+    
+    // Hero Statistics
+    for ($i = 1; $i <= 3; $i++) {
+        $wp_customize->add_setting("hero_stat_{$i}_number", array(
+            'default'           => $i == 1 ? '100+' : ($i == 2 ? '50+' : '5+'),
+            'sanitize_callback' => 'sanitize_text_field',
+        ));
+        $wp_customize->add_control("hero_stat_{$i}_number", array(
+            'label'   => sprintf(__('Stat %d Number', 'blueprint-folder'), $i),
+            'section' => 'hero_section',
+            'type'    => 'text',
+        ));
+        
+        $wp_customize->add_setting("hero_stat_{$i}_label", array(
+            'default'           => $i == 1 ? 'Projects Completed' : ($i == 2 ? 'Happy Clients' : 'Years Experience'),
+            'sanitize_callback' => 'sanitize_text_field',
+        ));
+        $wp_customize->add_control("hero_stat_{$i}_label", array(
+            'label'   => sprintf(__('Stat %d Label', 'blueprint-folder'), $i),
+            'section' => 'hero_section',
+            'type'    => 'text',
+        ));
+    }
+    
+    // About Section
+    $wp_customize->add_section('about_section', array(
+        'title'    => __('About Section', 'blueprint-folder'),
+        'priority' => 31,
+    ));
+    
+    $wp_customize->add_setting('about_title', array(
+        'default'           => 'About Blueprint Folder',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('about_title', array(
+        'label'   => __('About Title', 'blueprint-folder'),
+        'section' => 'about_section',
+        'type'    => 'text',
+    ));
+    
+    $wp_customize->add_setting('about_content', array(
+        'default'           => 'We are a team of passionate professionals dedicated to delivering exceptional digital solutions. Our expertise spans web development, design, and digital strategy to help businesses succeed online.',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_control('about_content', array(
+        'label'   => __('About Content', 'blueprint-folder'),
+        'section' => 'about_section',
+        'type'    => 'textarea',
+        'input_attrs' => array(
+            'rows' => 5,
+        ),
+    ));
+    
+    $wp_customize->add_setting('about_image', array(
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'about_image', array(
+        'label'   => __('About Image', 'blueprint-folder'),
+        'section' => 'about_section',
+    )));
+    
+    // About Features
+    for ($i = 1; $i <= 3; $i++) {
+        $wp_customize->add_setting("about_feature_{$i}", array(
+            'default'           => $i == 1 ? 'Expert Team' : ($i == 2 ? 'Quality Results' : '24/7 Support'),
+            'sanitize_callback' => 'sanitize_text_field',
+        ));
+        $wp_customize->add_control("about_feature_{$i}", array(
+            'label'   => sprintf(__('Feature %d', 'blueprint-folder'), $i),
+            'section' => 'about_section',
+            'type'    => 'text',
+        ));
+    }
+    
+    // Services Section
+    $wp_customize->add_section('services_section', array(
+        'title'    => __('Services Section', 'blueprint-folder'),
+        'priority' => 32,
+    ));
+    
+    $wp_customize->add_setting('services_title', array(
+        'default'           => 'Our Services',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('services_title', array(
+        'label'   => __('Services Title', 'blueprint-folder'),
+        'section' => 'services_section',
+        'type'    => 'text',
+    ));
+    
+    $wp_customize->add_setting('services_subtitle', array(
+        'default'           => 'Comprehensive digital solutions tailored to your business needs',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('services_subtitle', array(
+        'label'   => __('Services Subtitle', 'blueprint-folder'),
+        'section' => 'services_section',
+        'type'    => 'text',
+    ));
+    
+    // Testimonials Section
+    $wp_customize->add_section('testimonials_section', array(
+        'title'    => __('Testimonials Section', 'blueprint-folder'),
+        'priority' => 33,
+    ));
+    
+    $wp_customize->add_setting('testimonials_title', array(
+        'default'           => 'What Our Clients Say',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('testimonials_title', array(
+        'label'   => __('Testimonials Title', 'blueprint-folder'),
+        'section' => 'testimonials_section',
+        'type'    => 'text',
+    ));
+    
+    $wp_customize->add_setting('testimonials_subtitle', array(
+        'default'           => 'Hear from our satisfied clients about their experience working with us',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('testimonials_subtitle', array(
+        'label'   => __('Testimonials Subtitle', 'blueprint-folder'),
+        'section' => 'testimonials_section',
+        'type'    => 'text',
+    ));
+    
+    // Blog Section
+    $wp_customize->add_section('blog_section', array(
+        'title'    => __('Blog Section', 'blueprint-folder'),
+        'priority' => 34,
+    ));
+    
+    $wp_customize->add_setting('blog_title', array(
+        'default'           => 'Latest News & Insights',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('blog_title', array(
+        'label'   => __('Blog Title', 'blueprint-folder'),
+        'section' => 'blog_section',
+        'type'    => 'text',
+    ));
+    
+    $wp_customize->add_setting('blog_subtitle', array(
+        'default'           => 'Stay updated with our latest articles and industry insights',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('blog_subtitle', array(
+        'label'   => __('Blog Subtitle', 'blueprint-folder'),
+        'section' => 'blog_section',
+        'type'    => 'text',
+    ));
+    
+    // CTA Section
+    $wp_customize->add_section('cta_section', array(
+        'title'    => __('Call to Action Section', 'blueprint-folder'),
+        'priority' => 35,
+    ));
+    
+    $wp_customize->add_setting('cta_title', array(
+        'default'           => 'Ready to Get Started?',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('cta_title', array(
+        'label'   => __('CTA Title', 'blueprint-folder'),
+        'section' => 'cta_section',
+        'type'    => 'text',
+    ));
+    
+    $wp_customize->add_setting('cta_text', array(
+        'default'           => 'Let\'s discuss your project and see how we can help you achieve your goals.',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('cta_text', array(
+        'label'   => __('CTA Text', 'blueprint-folder'),
+        'section' => 'cta_section',
+        'type'    => 'textarea',
+    ));
+    
+    $wp_customize->add_setting('cta_primary_button_text', array(
+        'default'           => 'Get In Touch',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('cta_primary_button_text', array(
+        'label'   => __('Primary Button Text', 'blueprint-folder'),
+        'section' => 'cta_section',
+        'type'    => 'text',
+    ));
+    
+    $wp_customize->add_setting('cta_primary_button_url', array(
+        'default'           => '/contact',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('cta_primary_button_url', array(
+        'label'   => __('Primary Button URL', 'blueprint-folder'),
+        'section' => 'cta_section',
+        'type'    => 'url',
+    ));
+    
+    $wp_customize->add_setting('cta_secondary_button_text', array(
+        'default'           => 'View Pricing',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('cta_secondary_button_text', array(
+        'label'   => __('Secondary Button Text', 'blueprint-folder'),
+        'section' => 'cta_section',
+        'type'    => 'text',
+    ));
+    
+    $wp_customize->add_setting('cta_secondary_button_url', array(
+        'default'           => '/pricing',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('cta_secondary_button_url', array(
+        'label'   => __('Secondary Button URL', 'blueprint-folder'),
+        'section' => 'cta_section',
+        'type'    => 'url',
+    ));
+}
+add_action('customize_register', 'blueprint_folder_customize_register');
     <?php
 }
 

@@ -1,13 +1,162 @@
-<?php 
+<?php
 /**
- * Template for displaying service category archive pages
+ * Service Category Archive Template
+ * Displays services filtered by category
+ * 
+ * @package BluePrint_Folder_Theme
+ * @version 2.0.0
  */
 
-get_header(); 
+get_header(); ?>
 
-// Get current taxonomy term
-$queried_object = get_queried_object();
-$term_id = $queried_object->term_id;
+<div class="service-category-archive">
+    
+    <!-- Category Header -->
+    <section class="page-header category-header">
+        <div class="container">
+            <div class="page-header-content">
+                
+                <!-- Breadcrumb -->
+                <?php blueprint_folder_breadcrumb(); ?>
+                
+                <h1 class="page-title">
+                    <?php single_term_title(); ?>
+                </h1>
+                
+                <?php if (term_description()) : ?>
+                    <div class="category-description">
+                        <?php echo term_description(); ?>
+                    </div>
+                <?php else : ?>
+                    <p class="page-subtitle">
+                        <?php printf(esc_html__('Explore our %s services', 'blueprint-folder'), strtolower(single_term_title('', false))); ?>
+                    </p>
+                <?php endif; ?>
+                
+                <!-- Category Meta -->
+                <div class="category-meta">
+                    <?php
+                    $term = get_queried_object();
+                    $count = $term->count;
+                    printf(
+                        _n(
+                            '%d service available',
+                            '%d services available',
+                            $count,
+                            'blueprint-folder'
+                        ),
+                        $count
+                    );
+                    ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="services-grid">
+        <div class="container">
+            
+            <!-- Category Navigation -->
+            <div class="category-navigation">
+                <div class="category-nav-wrapper">
+                    <a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>" class="category-nav-item">
+                        <?php esc_html_e('All Services', 'blueprint-folder'); ?>
+                    </a>
+                    
+                    <?php
+                    $all_categories = get_terms(array(
+                        'taxonomy' => 'service_category',
+                        'hide_empty' => true,
+                        'orderby' => 'name',
+                        'order' => 'ASC',
+                    ));
+                    
+                    $current_term = get_queried_object();
+                    
+                    if (!empty($all_categories) && !is_wp_error($all_categories)) :
+                        foreach ($all_categories as $category) :
+                            $is_current = ($category->term_id === $current_term->term_id);
+                            $class = $is_current ? 'category-nav-item current' : 'category-nav-item';
+                    ?>
+                            <a href="<?php echo esc_url(get_term_link($category)); ?>" class="<?php echo esc_attr($class); ?>">
+                                <?php echo esc_html($category->name); ?>
+                                <span class="count">(<?php echo esc_html($category->count); ?>)</span>
+                            </a>
+                    <?php
+                        endforeach;
+                    endif;
+                    ?>
+                </div>
+            </div>
+            
+            <!-- Services Container -->
+            <div class="services-container">
+                <?php if (have_posts()) : ?>
+                    <?php while (have_posts()) : the_post(); ?>
+                        <article class="service-card">
+                            <div class="service-card-inner">
+                                
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <div class="service-image">
+                                        <a href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr(sprintf(__('View %s service details', 'blueprint-folder'), get_the_title())); ?>">
+                                            <?php the_post_thumbnail('service-card', array('alt' => get_the_title())); ?>
+                                        </a>
+                                        <div class="service-overlay">
+                                            <a href="<?php the_permalink(); ?>" class="service-link">
+                                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <div class="service-content">
+                                    <header class="service-header">
+                                        <h2 class="service-title">
+                                            <a href="<?php the_permalink(); ?>">
+                                                <?php the_title(); ?>
+                                            </a>
+                                        </h2>
+                                    </header>
+                                    
+                                    <div class="service-excerpt">
+                                        <?php
+                                        if (has_excerpt()) {
+                                            the_excerpt();
+                                        } else {
+                                            echo '<p>' . wp_trim_words(get_the_content(), 25, '...') . '</p>';
+                                        }
+                                        ?>
+                                    </div>
+                                    
+                                    <footer class="service-footer">
+                                        <a href="<?php the_permalink(); ?>" class="btn btn-outline">
+                                            <?php esc_html_e('Learn More', 'blueprint-folder'); ?>
+                                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                        </a>
+                                    </footer>
+                                </div>
+                            </div>
+                        </article>
+                    <?php endwhile; ?>
+                    
+                <?php else : ?>
+                    <div class="no-services">
+                        <div class="no-services-content">
+                            <i class="fas fa-tools" aria-hidden="true"></i>
+                            <h3><?php esc_html_e('No Services Found', 'blueprint-folder'); ?></h3>
+                            <p><?php esc_html_e('There are currently no services in this category. Please check back soon!', 'blueprint-folder'); ?></p>
+                            <a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>" class="btn btn-primary">
+                                <?php esc_html_e('View All Services', 'blueprint-folder'); ?>
+                            </a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+
+</div>
 $term_name = $queried_object->name;
 $term_description = $queried_object->description;
 $term_slug = $queried_object->slug;
