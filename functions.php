@@ -184,6 +184,21 @@ function blueprint_folder_register_taxonomies() {
 }
 add_action('init', 'blueprint_folder_register_taxonomies');
 
+// Force immediate flush of rewrite rules
+add_action('after_switch_theme', function() {
+    blueprint_folder_register_post_types();
+    blueprint_folder_register_taxonomies();
+    flush_rewrite_rules();
+});
+
+// Also flush on theme activation
+add_action('init', function() {
+    if (!get_option('blueprint_folder_rewrite_rules_flushed_v2')) {
+        flush_rewrite_rules();
+        update_option('blueprint_folder_rewrite_rules_flushed_v2', 1);
+    }
+}, 999);
+
 /**
  * INCLUDE NAVIGATION WALKERS AND CORE FILES
  */
@@ -716,6 +731,66 @@ function blueprint_folder_flush_rewrites() {
     flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'blueprint_folder_flush_rewrites');
+
+/**
+ * Force flush rewrite rules if needed
+ */
+function blueprint_folder_maybe_flush_rewrites() {
+    if (get_option('blueprint_folder_flush_rewrites_flag')) {
+        flush_rewrite_rules();
+        delete_option('blueprint_folder_flush_rewrites_flag');
+    }
+}
+add_action('init', 'blueprint_folder_maybe_flush_rewrites', 999);
+
+/**
+ * Set flag to flush rewrite rules on next page load
+ */
+function blueprint_folder_set_flush_rewrites_flag() {
+    update_option('blueprint_folder_flush_rewrites_flag', 1);
+}
+
+// Flush rewrites when custom post types are registered
+add_action('init', function() {
+    static $flushed = false;
+    if (!$flushed) {
+        blueprint_folder_register_post_types();
+        blueprint_folder_register_taxonomies();
+        $flushed = true;
+        
+        // Check if we need to flush rules
+        if (!get_option('blueprint_folder_rewrites_flushed')) {
+            flush_rewrite_rules();
+            update_option('blueprint_folder_rewrites_flushed', 1);
+        }
+    }
+}, 0);
+
+/**
+ * Add admin notice for flushing permalinks
+ */
+function blueprint_folder_admin_notice_flush_permalinks() {
+    if (current_user_can('manage_options') && !get_option('blueprint_folder_permalinks_flushed')) {
+        ?>
+        <div class="notice notice-warning is-dismissible">
+            <p>
+                <strong>BluePrint Theme:</strong> Please go to 
+                <a href="<?php echo admin_url('options-permalink.php'); ?>">Settings > Permalinks</a> 
+                and click "Save Changes" to flush permalink rules for custom post types.
+            </p>
+        </div>
+        <?php
+    }
+}
+add_action('admin_notices', 'blueprint_folder_admin_notice_flush_permalinks');
+
+/**
+ * Mark permalinks as flushed when permalink settings are saved
+ */
+function blueprint_folder_mark_permalinks_flushed() {
+    update_option('blueprint_folder_permalinks_flushed', 1);
+}
+add_action('load-options-permalink.php', 'blueprint_folder_mark_permalinks_flushed');
 
 /**
  * BASIC SEO META TAGS
