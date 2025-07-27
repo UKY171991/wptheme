@@ -253,23 +253,51 @@ function blueprint_folder_force_nav_menu_display() {
 }
 
 /**
- * NAVIGATION FALLBACK MENU
+ * NAVIGATION FALLBACK MENU (WordPress Standard)
  */
 function blueprint_folder_navigation_fallback() {
-    $menu_items = array(
-        array('url' => home_url('/'), 'title' => 'Home'),
-        array('url' => home_url('/about'), 'title' => 'About'),
-        array('url' => home_url('/services'), 'title' => 'Services'),
-        array('url' => home_url('/portfolio'), 'title' => 'Portfolio'),
-        array('url' => home_url('/pricing'), 'title' => 'Pricing'),
-        array('url' => home_url('/contact'), 'title' => 'Contact'),
+    $fallback_pages = array(
+        array(
+            'url' => home_url('/'),
+            'title' => esc_html__('Home', 'blueprint-folder'),
+            'current' => is_front_page()
+        ),
+        array(
+            'url' => home_url('/about'),
+            'title' => esc_html__('About', 'blueprint-folder'),
+            'current' => is_page('about')
+        ),
+        array(
+            'url' => get_post_type_archive_link('service') ?: home_url('/services'),
+            'title' => esc_html__('Services', 'blueprint-folder'),
+            'current' => is_post_type_archive('service') || is_page('services')
+        ),
+        array(
+            'url' => home_url('/portfolio'),
+            'title' => esc_html__('Portfolio', 'blueprint-folder'),
+            'current' => is_page('portfolio')
+        ),
+        array(
+            'url' => home_url('/contact'),
+            'title' => esc_html__('Contact', 'blueprint-folder'),
+            'current' => is_page('contact')
+        )
     );
     
-    echo '<ul id="primary-navigation" class="nav-menu primary-nav">';
-    foreach ($menu_items as $item) {
-        $current_class = (is_page(str_replace(home_url('/'), '', $item['url'])) || 
-                         ($item['url'] === home_url('/') && is_front_page())) ? ' current-menu-item' : '';
-        echo '<li class="nav-item' . $current_class . '"><a href="' . esc_url($item['url']) . '">' . esc_html($item['title']) . '</a></li>';
+    echo '<ul id="primary-menu" class="menu nav-menu">';
+    foreach ($fallback_pages as $page) {
+        $current_class = $page['current'] ? ' current-menu-item' : '';
+        $aria_current = $page['current'] ? ' aria-current="page"' : '';
+        
+        printf(
+            '<li class="menu-item%s">
+                <a href="%s"%s>%s</a>
+            </li>',
+            esc_attr($current_class),
+            esc_url($page['url']),
+            $aria_current,
+            esc_html($page['title'])
+        );
     }
     echo '</ul>';
 }
@@ -288,8 +316,11 @@ function blueprint_folder_scripts() {
     // Theme stylesheet
     wp_enqueue_style('blueprint-folder-style', get_stylesheet_uri(), array(), '2.1.0');
     
+    // WordPress Standard Menu CSS - CRITICAL
+    wp_enqueue_style('blueprint-folder-wp-menu', get_template_directory_uri() . '/css/wordpress-standard-menu.css', array('blueprint-folder-style'), '2.1.0');
+    
     // Header Rebuilt CSS - HIGH PRIORITY
-    wp_enqueue_style('blueprint-folder-header-rebuilt', get_template_directory_uri() . '/css/header-rebuilt.css', array('blueprint-folder-style'), '2.1.0');
+    wp_enqueue_style('blueprint-folder-header-rebuilt', get_template_directory_uri() . '/css/header-rebuilt.css', array('blueprint-folder-wp-menu'), '2.1.0');
     
     // Header Menu Fallback CSS - CRITICAL for menu visibility
     wp_enqueue_style('blueprint-folder-header-fallback', get_template_directory_uri() . '/css/header-menu-fallback.css', array('blueprint-folder-header-rebuilt'), '2.1.0');

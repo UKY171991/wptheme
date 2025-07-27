@@ -78,76 +78,70 @@
                             </button>
 
                             <!-- Navigation Menu Container -->
-                            <div class="navbar-collapse" id="primary-menu">
-                                <div class="nav-menu-wrapper">
-                                    <?php
-                                    if (has_nav_menu('primary')) {
-                                        wp_nav_menu(array(
-                                            'theme_location' => 'primary',
-                                            'menu_id'        => 'primary-navigation',
-                                            'menu_class'     => 'navbar-nav main-nav',
-                                            'container'      => false,
-                                            'depth'          => 3,
-                                            'fallback_cb'    => 'blueprint_folder_navigation_fallback',
-                                            'walker'         => class_exists('Enhanced_Bootstrap_Walker_Nav_Menu') ? new Enhanced_Bootstrap_Walker_Nav_Menu() : '',
-                                        ));
-                                    } else {
-                                        blueprint_folder_navigation_fallback();
-                                    }
-                                    ?>
-                                    
-                                    <!-- Mobile Contact Information -->
-                                    <div class="mobile-contact-info d-lg-none">
-                                        <div class="mobile-contact-section">
-                                            <h3 class="mobile-contact-title"><?php esc_html_e('Get In Touch', 'blueprint-folder'); ?></h3>
-                                            
-                                            <?php 
-                                            $phone = get_theme_mod('company_phone', '(555) 123-4567');
-                                            $email = get_theme_mod('company_email', 'info@blueprintfolder.com');
-                                            if ($phone) : 
-                                            ?>
-                                                <div class="mobile-contact-item">
-                                                    <a href="tel:<?php echo esc_attr($phone); ?>" class="mobile-contact-link">
-                                                        <i class="fas fa-phone" aria-hidden="true"></i>
-                                                        <span><?php echo esc_html($phone); ?></span>
-                                                    </a>
-                                                </div>
-                                            <?php endif; ?>
-                                            
-                                            <?php if ($email) : ?>
-                                                <div class="mobile-contact-item">
-                                                    <a href="mailto:<?php echo esc_attr($email); ?>" class="mobile-contact-link">
-                                                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                                                        <span><?php echo esc_html($email); ?></span>
-                                                    </a>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
+                            <div class="menu-wrapper" id="primary-menu">
+                                <?php
+                                wp_nav_menu(array(
+                                    'theme_location'  => 'primary',
+                                    'menu_id'         => 'primary-menu',
+                                    'menu_class'      => 'menu nav-menu',
+                                    'container'       => false,
+                                    'depth'           => 0,
+                                    'fallback_cb'     => 'blueprint_folder_navigation_fallback',
+                                    'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                                ));
+                                ?>
+                                
+                                <!-- Mobile Contact Information -->
+                                <div class="mobile-contact-info">
+                                    <div class="mobile-contact-section">
+                                        <h3 class="mobile-contact-title"><?php esc_html_e('Get In Touch', 'blueprint-folder'); ?></h3>
                                         
-                                        <!-- Mobile Social Links -->
-                                        <?php if (get_theme_mod('social_facebook') || get_theme_mod('social_twitter') || get_theme_mod('social_linkedin')) : ?>
-                                            <div class="mobile-social-section">
-                                                <h4 class="mobile-social-title"><?php esc_html_e('Follow Us', 'blueprint-folder'); ?></h4>
-                                                <div class="mobile-social-links">
-                                                    <?php if (get_theme_mod('social_facebook')) : ?>
-                                                        <a href="<?php echo esc_url(get_theme_mod('social_facebook')); ?>" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                                            <i class="fab fa-facebook-f"></i>
-                                                        </a>
-                                                    <?php endif; ?>
-                                                    <?php if (get_theme_mod('social_twitter')) : ?>
-                                                        <a href="<?php echo esc_url(get_theme_mod('social_twitter')); ?>" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                                            <i class="fab fa-twitter"></i>
-                                                        </a>
-                                                    <?php endif; ?>
-                                                    <?php if (get_theme_mod('social_linkedin')) : ?>
-                                                        <a href="<?php echo esc_url(get_theme_mod('social_linkedin')); ?>" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                                                            <i class="fab fa-linkedin-in"></i>
-                                                        </a>
-                                                    <?php endif; ?>
-                                                </div>
+                                        <?php 
+                                        $phone = get_theme_mod('company_phone', '(555) 123-4567');
+                                        $email = get_theme_mod('company_email', 'info@blueprintfolder.com');
+                                        if ($phone) : 
+                                        ?>
+                                            <div class="mobile-contact-item">
+                                                <a href="tel:<?php echo esc_attr($phone); ?>" class="mobile-contact-link">
+                                                    <i class="fas fa-phone" aria-hidden="true"></i>
+                                                    <span><?php echo esc_html($phone); ?></span>
+                                                </a>
+                                            </div>
+                                        <?php endif; ?>
+                                        
+                                        <?php if ($email) : ?>
+                                            <div class="mobile-contact-item">
+                                                <a href="mailto:<?php echo esc_attr($email); ?>" class="mobile-contact-link">
+                                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                                    <span><?php echo esc_html($email); ?></span>
+                                                </a>
                                             </div>
                                         <?php endif; ?>
                                     </div>
+                                    
+                                    <!-- Mobile Social Links -->
+                                    <?php if (get_theme_mod('social_facebook') || get_theme_mod('social_twitter') || get_theme_mod('social_linkedin')) : ?>
+                                        <div class="mobile-social-section">
+                                            <h4 class="mobile-social-title"><?php esc_html_e('Follow Us', 'blueprint-folder'); ?></h4>
+                                            <div class="mobile-social-links">
+                                                <?php if (get_theme_mod('social_facebook')) : ?>
+                                                    <a href="<?php echo esc_url(get_theme_mod('social_facebook')); ?>" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                                        <i class="fab fa-facebook-f"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                                <?php if (get_theme_mod('social_twitter')) : ?>
+                                                    <a href="<?php echo esc_url(get_theme_mod('social_twitter')); ?>" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                                                        <i class="fab fa-twitter"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                                <?php if (get_theme_mod('social_linkedin')) : ?>
+                                                    <a href="<?php echo esc_url(get_theme_mod('social_linkedin')); ?>" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                                        <i class="fab fa-linkedin-in"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             
