@@ -138,9 +138,13 @@ Bootstrap 5 Compatible | Vanilla JS
                     const menu = dropdown.querySelector('.dropdown-menu');
                     
                     if (toggle && menu) {
-                        // Desktop hover behavior
+                        let hoverTimeout;
+                        
+                        // Desktop hover behavior with delay
                         if (window.innerWidth >= 992) {
                             dropdown.addEventListener('mouseenter', function() {
+                                clearTimeout(hoverTimeout);
+                                
                                 // Close other dropdowns first
                                 dropdowns.forEach(otherDropdown => {
                                     if (otherDropdown !== dropdown) {
@@ -155,11 +159,24 @@ Bootstrap 5 Compatible | Vanilla JS
                                 
                                 toggle.setAttribute('aria-expanded', 'true');
                                 menu.classList.add('show');
+                                
+                                // Add staggered animation for mega menu items
+                                const megaItems = menu.querySelectorAll('.mega-menu-item');
+                                megaItems.forEach((item, index) => {
+                                    item.style.animationDelay = (index * 0.1) + 's';
+                                });
                             });
 
                             dropdown.addEventListener('mouseleave', function() {
-                                toggle.setAttribute('aria-expanded', 'false');
-                                menu.classList.remove('show');
+                                hoverTimeout = setTimeout(() => {
+                                    toggle.setAttribute('aria-expanded', 'false');
+                                    menu.classList.remove('show');
+                                }, 150); // Small delay to prevent accidental closes
+                            });
+                            
+                            // Cancel close if mouse re-enters
+                            menu.addEventListener('mouseenter', function() {
+                                clearTimeout(hoverTimeout);
                             });
                         }
 
@@ -192,7 +209,7 @@ Bootstrap 5 Compatible | Vanilla JS
                                 
                                 // Focus first menu item on mobile
                                 if (window.innerWidth < 992) {
-                                    const firstItem = menu.querySelector('.dropdown-item');
+                                    const firstItem = menu.querySelector('.mega-menu-link, .dropdown-item');
                                     if (firstItem) {
                                         setTimeout(() => firstItem.focus(), 100);
                                     }
@@ -203,6 +220,7 @@ Bootstrap 5 Compatible | Vanilla JS
                         // Close dropdown when clicking outside
                         document.addEventListener('click', function(e) {
                             if (!dropdown.contains(e.target)) {
+                                clearTimeout(hoverTimeout);
                                 toggle.setAttribute('aria-expanded', 'false');
                                 menu.classList.remove('show');
                             }
@@ -211,6 +229,7 @@ Bootstrap 5 Compatible | Vanilla JS
                         // Close dropdown on escape key
                         document.addEventListener('keydown', function(e) {
                             if (e.key === 'Escape') {
+                                clearTimeout(hoverTimeout);
                                 toggle.setAttribute('aria-expanded', 'false');
                                 menu.classList.remove('show');
                                 toggle.focus();
@@ -247,7 +266,7 @@ Bootstrap 5 Compatible | Vanilla JS
             },
 
             setupKeyboardNavigation: function() {
-                // Handle keyboard navigation for dropdowns
+                // Handle keyboard navigation for dropdowns and mega menus
                 document.addEventListener('keydown', function(e) {
                     const activeElement = document.activeElement;
                     
@@ -261,14 +280,60 @@ Bootstrap 5 Compatible | Vanilla JS
                             activeElement.setAttribute('aria-expanded', 'true');
                             menu.classList.add('show');
                             
-                            const firstItem = menu.querySelector('.dropdown-item');
+                            const firstItem = menu.querySelector('.mega-menu-link, .dropdown-item');
                             if (firstItem) {
                                 firstItem.focus();
                             }
                         }
                     }
                     
-                    // Handle dropdown item navigation
+                    // Handle mega menu navigation
+                    if (activeElement.classList.contains('mega-menu-link')) {
+                        const menu = activeElement.closest('.dropdown-menu');
+                        const items = Array.from(menu.querySelectorAll('.mega-menu-link'));
+                        const currentIndex = items.indexOf(activeElement);
+                        
+                        if (e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            const nextIndex = (currentIndex + 1) % items.length;
+                            items[nextIndex].focus();
+                        } else if (e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            const prevIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+                            items[prevIndex].focus();
+                        } else if (e.key === 'ArrowRight') {
+                            e.preventDefault();
+                            // Move to next column in mega menu
+                            const currentSection = activeElement.closest('.mega-menu-section');
+                            const nextSection = currentSection.nextElementSibling;
+                            if (nextSection) {
+                                const nextSectionFirstItem = nextSection.querySelector('.mega-menu-link');
+                                if (nextSectionFirstItem) {
+                                    nextSectionFirstItem.focus();
+                                }
+                            }
+                        } else if (e.key === 'ArrowLeft') {
+                            e.preventDefault();
+                            // Move to previous column in mega menu
+                            const currentSection = activeElement.closest('.mega-menu-section');
+                            const prevSection = currentSection.previousElementSibling;
+                            if (prevSection) {
+                                const prevSectionFirstItem = prevSection.querySelector('.mega-menu-link');
+                                if (prevSectionFirstItem) {
+                                    prevSectionFirstItem.focus();
+                                }
+                            }
+                        } else if (e.key === 'Escape') {
+                            e.preventDefault();
+                            const dropdown = menu.closest('.dropdown');
+                            const toggle = dropdown.querySelector('.dropdown-toggle');
+                            toggle.setAttribute('aria-expanded', 'false');
+                            menu.classList.remove('show');
+                            toggle.focus();
+                        }
+                    }
+                    
+                    // Handle regular dropdown item navigation
                     if (activeElement.classList.contains('dropdown-item')) {
                         const menu = activeElement.closest('.dropdown-menu');
                         const items = Array.from(menu.querySelectorAll('.dropdown-item'));
