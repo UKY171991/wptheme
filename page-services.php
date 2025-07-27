@@ -6,14 +6,6 @@
 get_header(); ?>
 
 <main id="main" class="site-main">
-    <?php
-    // Page Banner
-    echo services_pro_get_banner_section(
-        'Our Services',
-        'Professional home services designed to make your life easier. From cleaning to maintenance, we provide reliable solutions you can trust.'
-    );
-    ?>
-
     <!-- Services Categories Section -->
     <section id="services-categories" class="section">
         <div class="container">
