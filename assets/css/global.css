@@ -77,35 +77,38 @@ body.mobile-menu-open {overflow: hidden; }/* ===================================
 
 /* Modern CTA Section Styling */
 .bg-primary .btn-light {
-    background-color: white;
-    color: var(--text-dark);
-    border-color: white;
+    background-color: white !important;
+    color: #212529 !important;
+    border-color: white !important;
     font-weight: 600;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .bg-primary .btn-light:hover,
 .bg-primary .btn-light:focus {
-    background-color: #f8f9fa;
-    border-color: #f8f9fa;
-    color: var(--text-dark);
+    background-color: #f8f9fa !important;
+    border-color: #f8f9fa !important;
+    color: #212529 !important;
     text-decoration: none;
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .bg-primary .btn-outline-light {
-    background-color: transparent;
-    color: white;
-    border-color: rgba(255, 255, 255, 0.8);
+    background-color: transparent !important;
+    color: white !important;
+    border-color: rgba(255, 255, 255, 0.8) !important;
     font-weight: 600;
+    border-width: 2px !important;
 }
 
 .bg-primary .btn-outline-light:hover,
 .bg-primary .btn-outline-light:focus {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: white;
-    color: white;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: white !important;
+    color: white !important;
     text-decoration: none;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
