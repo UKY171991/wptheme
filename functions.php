@@ -185,21 +185,10 @@ function blueprint_folder_register_taxonomies() {
 add_action('init', 'blueprint_folder_register_taxonomies');
 
 /**
- * INCLUDE NAVIGATION WALKERS
+ * INCLUDE NAVIGATION WALKERS AND CORE FILES
  */
-require_once get_template_directory() . '/inc/navigation-walker.php';
-require_once get_template_directory() . '/inc/navigation-walker-rebuilt.php';
-require_once get_template_directory() . '/inc/clean-navigation-walker.php';
-require_once get_template_directory() . '/inc/wordpress-standard-walker.php';
-
-/**
- * INCLUDE TEMPLATE FUNCTIONS
- */
+require_once get_template_directory() . '/inc/bootstrap-navwalker.php';
 require_once get_template_directory() . '/inc/template-functions.php';
-
-/**
- * INCLUDE CUSTOMIZER SETTINGS
- */
 require_once get_template_directory() . '/inc/customizer.php';
 
 /**
@@ -729,48 +718,7 @@ function blueprint_folder_service_categories_nav_menu_metabox() {
  * ENQUEUE SCRIPTS AND STYLES
  */
 function blueprint_folder_scripts() {
-    // Theme stylesheet
-    wp_enqueue_style('blueprint-folder-style', get_stylesheet_uri(), array(), '2.1.0');
-    
-    // Enhanced Global Styles - HIGHEST PRIORITY for professional appearance
-    wp_enqueue_style('blueprint-folder-enhanced-global', get_template_directory_uri() . '/css/enhanced-global-styles.css', array('blueprint-folder-style'), '2.2.0');
-    
-    // Multi-Level WordPress Menu CSS - HIGH PRIORITY for proper menu display
-    wp_enqueue_style('blueprint-folder-multi-level-menu', get_template_directory_uri() . '/css/multi-level-menu.css', array('blueprint-folder-enhanced-global'), '2.1.0');
-    
-    // WordPress Standard Menu CSS - CRITICAL (backup)
-    wp_enqueue_style('blueprint-folder-wp-menu', get_template_directory_uri() . '/css/wordpress-standard-menu.css', array('blueprint-folder-multi-level-menu'), '2.1.0');
-    
-    // Header Rebuilt CSS - HIGH PRIORITY
-    wp_enqueue_style('blueprint-folder-header-rebuilt', get_template_directory_uri() . '/css/header-rebuilt.css', array('blueprint-folder-multi-level-menu'), '2.1.0');
-    
-    // Header Menu Fallback CSS - CRITICAL for menu visibility
-    wp_enqueue_style('blueprint-folder-header-fallback', get_template_directory_uri() . '/css/header-menu-fallback.css', array('blueprint-folder-header-rebuilt'), '2.1.0');
-    
-    // Header Effects CSS - Additional animations
-    wp_enqueue_style('blueprint-folder-header-effects', get_template_directory_uri() . '/css/header-effects.css', array('blueprint-folder-header-rebuilt'), '2.1.0');
-    
-    // Header Layout Fix CSS - HIGH PRIORITY
-    wp_enqueue_style('blueprint-folder-header-fix', get_template_directory_uri() . '/css/header-layout-fix.css', array('blueprint-folder-header-rebuilt'), '2.1.0');
-    
-    // Interactive Elements CSS
-    wp_enqueue_style('blueprint-folder-interactive', get_template_directory_uri() . '/css/interactive-elements.css', array('blueprint-folder-style'), '2.1.0');
-    
-    // Service & Pricing Complete CSS - COMPREHENSIVE styling for all service and pricing components
-    wp_enqueue_style('blueprint-folder-service-pricing', get_template_directory_uri() . '/css/service-pricing-complete.css', array('blueprint-folder-interactive'), '2.0.0');
-    
-    // Enhanced Homepage CSS
-    if (is_front_page() || is_home()) {
-        wp_enqueue_style('blueprint-folder-homepage', get_template_directory_uri() . '/css/homepage-enhanced.css', array('blueprint-folder-style'), '2.1.0');
-        wp_enqueue_style('blueprint-folder-homepage-complete', get_template_directory_uri() . '/css/homepage-complete.css', array('blueprint-folder-homepage'), '2.0.0');
-    }
-    
-    // Enhanced Pricing CSS - Only load on pricing page template and only specific styles
-    if (is_page_template('page-pricing-enhanced.php')) {
-        // Don't load header CSS for this template
-    }
-    
-    // Bootstrap CSS (CDN)
+    // Bootstrap CSS (CDN) - Load first
     wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css', array(), '5.3.0');
     
     // Font Awesome (CDN)
@@ -779,42 +727,17 @@ function blueprint_folder_scripts() {
     // Google Fonts
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap', array(), null);
     
-    // jQuery (WordPress built-in)
-    wp_enqueue_script('jquery');
+    // Single Global CSS - Contains all theme styles
+    wp_enqueue_style('blueprint-folder-global', get_template_directory_uri() . '/assets/css/global.css', array('bootstrap', 'font-awesome'), '3.0.0');
     
     // Bootstrap JS (CDN)
-    wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.3.0', true);
+    wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
     
-    // Enhanced Global JavaScript - HIGHEST PRIORITY for professional functionality
-    wp_enqueue_script('blueprint-folder-enhanced-global', get_template_directory_uri() . '/js/enhanced-global.js', array(), '2.2.0', true);
-    
-    // Multi-Level Menu JavaScript - HIGH PRIORITY for WordPress menu functionality
-    wp_enqueue_script('blueprint-folder-multi-level-menu', get_template_directory_uri() . '/js/multi-level-menu.js', array('blueprint-folder-enhanced-global'), '2.2.0', true);
-    
-    // Header Menu Fix JavaScript - CRITICAL (backup)
-    wp_enqueue_script('blueprint-folder-header-menu-fix', get_template_directory_uri() . '/js/header-menu-fix.js', array('blueprint-folder-multi-level-menu'), '2.1.0', true);
-    
-    // Enhanced Header JavaScript - HIGH PRIORITY
-    wp_enqueue_script('blueprint-folder-header-enhanced', get_template_directory_uri() . '/js/header-enhanced.js', array('blueprint-folder-multi-level-menu'), '2.1.0', true);
-    
-    // Header Layout Fix JavaScript - HIGH PRIORITY  
-    if (file_exists(get_template_directory() . '/js/header-layout-fix.js')) {
-        wp_enqueue_script('blueprint-folder-header-fix', get_template_directory_uri() . '/js/header-layout-fix.js', array('jquery'), '2.1.0', true);
-    }
-    
-    // Theme main script
-    wp_enqueue_script('blueprint-folder-main', get_template_directory_uri() . '/js/theme-main-enhanced.js', array('jquery', 'bootstrap'), '2.1.0', true);
-    
-    // Enhanced Theme JavaScript - COMPREHENSIVE interactive functionality
-    wp_enqueue_script('blueprint-folder-theme-enhanced', get_template_directory_uri() . '/js/theme-enhanced.js', array('jquery', 'bootstrap'), '2.0.0', true);
-    
-    // Enhanced Pricing JavaScript
-    if (is_page_template('page-pricing.php') || is_page_template('page-pricing-enhanced.php')) {
-        wp_enqueue_script('blueprint-folder-pricing', get_template_directory_uri() . '/js/pricing-enhanced.js', array('jquery', 'bootstrap'), '2.1.0', true);
-    }
+    // Single Global JavaScript - Contains all theme functionality
+    wp_enqueue_script('blueprint-folder-global', get_template_directory_uri() . '/assets/js/global.js', array('bootstrap'), '3.0.0', true);
     
     // Localize script for AJAX and theme data
-    wp_localize_script('blueprint-folder-theme-enhanced', 'wpAjax', array(
+    wp_localize_script('blueprint-folder-global', 'wpAjax', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('blueprint_folder_nonce'),
         'homeUrl' => home_url('/'),

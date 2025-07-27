@@ -1,202 +1,218 @@
 <?php
 /**
- * Template Name: Contact Us
+ * Template Name: Contact Page
+ * The template for displaying the contact page
  */
 
 get_header(); ?>
 
-<main id="main" class="site-main">
-    <!-- Hero Section -->
-    <section class="section bg-primary-dark text-white">
-        <div class="overlay-accent"></div>
+<?php while (have_posts()) : the_post(); ?>
+    <!-- Page Header -->
+    <section class="section-sm bg-light-gray">
         <div class="container">
-            <div class="row align-items-center min-vh-50">
-                <div class="col-lg-8 section-content">
-                    <nav aria-label="breadcrumb" class="mb-4">
-                        <ol class="breadcrumb bg-transparent p-0 m-0">
-                            <li class="breadcrumb-item">
-                                <a href="<?php echo esc_url(home_url('/')); ?>" class="text-white text-decoration-none">
-                                    <i class="fas fa-home me-1"></i>Home
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item active text-accent" aria-current="page">Contact Us</li>
-                        </ol>
-                    </nav>
-                    
-                    <div class="fade-in-up">
-                        <h1 class="display-4 fw-bold mb-4">
-                            Get in Touch
-                            <span class="text-accent">We're Here to Help</span>
-                        </h1>
-                        <p class="lead mb-4">Ready to transform your space? Our expert team is here to help with all your home and business service needs.</p>
-                        
-                        <div class="row g-4 mb-5">
-                            <div class="col-md-4 text-center">
-                                <div class="h4 fw-bold text-accent mb-1">24/7</div>
-                                <small class="text-light">Support Available</small>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <div class="h4 fw-bold text-accent mb-1">&lt; 2hr</div>
-                                <small class="text-light">Response Time</small>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <div class="h4 fw-bold text-accent mb-1">5★</div>
-                                <small class="text-light">Customer Rating</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Information Section -->
-    <section class="section bg-light">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-4">
-                    <div class="contact-info-card text-center h-100">
-                        <div class="contact-icon mb-4">
-                            <i class="fas fa-phone fa-3x text-accent"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Call Us</h3>
-                        <p class="text-muted mb-3">Ready to help 24/7</p>
-                        <a href="tel:+1234567890" class="btn btn-outline-accent btn-rounded">
-                            <i class="fas fa-phone me-2"></i>(123) 456-7890
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4">
-                    <div class="contact-info-card text-center h-100">
-                        <div class="contact-icon mb-4">
-                            <i class="fas fa-envelope fa-3x text-accent"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Email Us</h3>
-                        <p class="text-muted mb-3">We'll respond within 24 hours</p>
-                        <a href="mailto:hello@servicespro.com" class="btn btn-outline-accent btn-rounded">
-                            <i class="fas fa-envelope me-2"></i>hello@servicespro.com
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4">
-                    <div class="contact-info-card text-center h-100">
-                        <div class="contact-icon mb-4">
-                            <i class="fas fa-map-marker-alt fa-3x text-accent"></i>
-                        </div>
-                        <h3 class="h4 mb-3">Visit Us</h3>
-                        <p class="text-muted mb-3">Stop by our office</p>
-                        <address class="mb-3">
-                            123 Service Street<br>
-                            Business District<br>
-                            City, State 12345
-                        </address>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Form Section -->
-    <section class="section bg-primary-dark text-white">
-        <div class="container">
+            <?php blueprint_folder_breadcrumb(); ?>
             <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="section-heading text-center mb-5">
-                        <h2 class="section-title text-white">Send Us a Message</h2>
-                        <p class="section-subtitle text-light">We'll get back to you within 24 hours</p>
-                    </div>
-                    
-                    <form class="contact-form" action="#" method="POST">
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name" class="form-label text-white">Full Name *</label>
-                                    <input type="text" class="form-control form-control-lg" id="name" name="name" required>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="email" class="form-label text-white">Email Address *</label>
-                                    <input type="email" class="form-control form-control-lg" id="email" name="email" required>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="phone" class="form-label text-white">Phone Number</label>
-                                    <input type="tel" class="form-control form-control-lg" id="phone" name="phone">
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="service" class="form-label text-white">Service Type</label>
-                                    <select class="form-control form-control-lg" id="service" name="service">
-                                        <option value="">Select a service</option>
-                                        <option value="cleaning">House Cleaning</option>
-                                        <option value="maintenance">Home Maintenance</option>
-                                        <option value="landscaping">Landscaping</option>
-                                        <option value="handyman">Handyman Services</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="message" class="form-label text-white">Message *</label>
-                                    <textarea class="form-control form-control-lg" id="message" name="message" rows="5" required placeholder="Tell us about your project..."></textarea>
-                                </div>
-                            </div>
-                            
-                            <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-accent btn-rounded btn-lg px-5">
-                                    <i class="fas fa-paper-plane me-2"></i>Send Message
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                <div class="col-lg-8 text-center">
+                    <h1 class="page-title"><?php the_title(); ?></h1>
+                    <p class="lead">Get in touch with us today. We'd love to hear about your project and discuss how we can help.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Map Section -->
-    <section class="section p-0">
-        <div class="map-container" style="height: 400px; background: #f8f9fa;">
-            <div class="d-flex align-items-center justify-content-center h-100">
-                <div class="text-center">
-                    <i class="fas fa-map-marked-alt fa-4x text-accent mb-3"></i>
-                    <h4 class="mb-2">Service Area Map</h4>
-                    <p class="text-muted">We serve the entire metropolitan area</p>
+    <!-- Contact Content -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <!-- Contact Form -->
+                <div class="col-lg-8 mb-5">
+                    <div class="contact-form-wrapper">
+                        <h3 class="mb-4">Send us a Message</h3>
+                        
+                        <?php
+                        // Display success/error messages
+                        if (isset($_GET['contact'])) {
+                            if ($_GET['contact'] === 'success') {
+                                echo '<div class="form-success">Thank you! Your message has been sent successfully. We\'ll get back to you soon.</div>';
+                            } elseif ($_GET['contact'] === 'error') {
+                                echo '<div class="form-error">Sorry, there was an error sending your message. Please try again.</div>';
+                            }
+                        }
+                        ?>
+                        
+                        <form class="contact-form" action="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="contact_name" class="form-label">Name *</label>
+                                        <input type="text" id="contact_name" name="contact_name" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="contact_email" class="form-label">Email *</label>
+                                        <input type="email" id="contact_email" name="contact_email" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="contact_phone" class="form-label">Phone</label>
+                                        <input type="tel" id="contact_phone" name="contact_phone" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="contact_subject" class="form-label">Subject *</label>
+                                        <input type="text" id="contact_subject" name="contact_subject" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="contact_service" class="form-label">Service Interest</label>
+                                <select id="contact_service" name="contact_service" class="form-control">
+                                    <option value="">Select a service...</option>
+                                    <option value="web-development">Web Development</option>
+                                    <option value="digital-marketing">Digital Marketing</option>
+                                    <option value="business-consulting">Business Consulting</option>
+                                    <option value="graphic-design">Graphic Design</option>
+                                    <option value="technical-support">Technical Support</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group mb-4">
+                                <label for="contact_message" class="form-label">Message *</label>
+                                <textarea id="contact_message" name="contact_message" class="form-control" rows="6" required 
+                                          placeholder="Tell us about your project, goals, and how we can help..."></textarea>
+                            </div>
+                            
+                            <input type="hidden" name="action" value="handle_contact_form">
+                            <input type="hidden" name="contact_nonce" value="<?php echo wp_create_nonce('blueprint_folder_contact'); ?>">
+                            
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="col-lg-4">
+                    <div class="contact-info">
+                        <h3 class="mb-4">Contact Information</h3>
+                        
+                        <div class="contact-item mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Address</h6>
+                                    <p class="mb-0 text-muted">123 Business Street<br>City, State 12345</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Phone</h6>
+                                    <p class="mb-0 text-muted">
+                                        <a href="tel:+1234567890" class="text-decoration-none">(123) 456-7890</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Email</h6>
+                                    <p class="mb-0 text-muted">
+                                        <a href="mailto:info@blueprintfolder.com" class="text-decoration-none">info@blueprintfolder.com</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="contact-icon me-3">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Business Hours</h6>
+                                    <p class="mb-0 text-muted">Monday - Friday<br>9:00 AM - 6:00 PM EST</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Links -->
+                        <div class="social-links mt-4">
+                            <h6 class="mb-3">Follow Us</h6>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="text-decoration-none">
+                                    <i class="fab fa-facebook-f fa-lg"></i>
+                                </a>
+                                <a href="#" class="text-decoration-none">
+                                    <i class="fab fa-twitter fa-lg"></i>
+                                </a>
+                                <a href="#" class="text-decoration-none">
+                                    <i class="fab fa-linkedin-in fa-lg"></i>
+                                </a>
+                                <a href="#" class="text-decoration-none">
+                                    <i class="fab fa-instagram fa-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Additional Content -->
+            <?php if (get_the_content()) : ?>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="page-content">
+                            <?php the_content(); ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="section bg-light">
+    <section class="section bg-light-gray">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="section-heading text-center mb-5">
-                        <h2 class="section-title">Frequently Asked Questions</h2>
-                        <p class="section-subtitle">Quick answers to common questions</p>
+                    <div class="section-title text-center">
+                        <h2>Frequently Asked Questions</h2>
+                        <p>Quick answers to common questions about our services and process.</p>
                     </div>
                     
-                    <div class="accordion" id="faqAccordion">
+                    <div class="accordion" id="contactFAQ">
                         <div class="accordion-item">
                             <h3 class="accordion-header" id="faq1">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
-                                    How quickly can you respond to service requests?
+                                    How quickly do you respond to inquiries?
                                 </button>
                             </h3>
-                            <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#contactFAQ">
                                 <div class="accordion-body">
-                                    We typically respond to all inquiries within 2 hours during business hours. For emergency services, we're available 24/7 with immediate response.
+                                    We typically respond to all inquiries within 2-4 business hours during our business hours. For urgent matters, please call us directly.
                                 </div>
                             </div>
                         </div>
@@ -204,12 +220,12 @@ get_header(); ?>
                         <div class="accordion-item">
                             <h3 class="accordion-header" id="faq2">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
-                                    Are you licensed and insured?
+                                    Do you offer free consultations?
                                 </button>
                             </h3>
-                            <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
                                 <div class="accordion-body">
-                                    Yes, we are fully licensed and insured. All our technicians are bonded and covered by comprehensive liability insurance for your peace of mind.
+                                    Yes! We offer a complimentary 30-minute consultation to discuss your project needs and determine how we can best help you achieve your goals.
                                 </div>
                             </div>
                         </div>
@@ -217,12 +233,12 @@ get_header(); ?>
                         <div class="accordion-item">
                             <h3 class="accordion-header" id="faq3">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
-                                    Do you offer free estimates?
+                                    What information should I include in my message?
                                 </button>
                             </h3>
-                            <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
                                 <div class="accordion-body">
-                                    Absolutely! We provide free, no-obligation estimates for all our services. Contact us today to schedule your free consultation.
+                                    Please include details about your project, timeline, budget range, and any specific requirements. The more information you provide, the better we can assist you.
                                 </div>
                             </div>
                         </div>
@@ -231,8 +247,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
-    <?php echo services_pro_get_cta_section(); ?>
-</main>
+<?php endwhile; ?>
 
 <?php get_footer(); ?>

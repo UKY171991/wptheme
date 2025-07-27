@@ -1,191 +1,231 @@
 <?php
 /**
- * The template for displaying all single posts
+ * Template for displaying single blog posts
  */
 
 get_header(); ?>
 
-<main id="main" class="site-main">
-    <?php while (have_posts()) : the_post(); ?>
-        
-        <!-- Post Banner -->
-        <?php echo services_pro_get_banner_section(get_the_title(), get_the_excerpt()); ?>
-                                    <i class="fas fa-calendar me-2"></i>
-                                    <span><?php echo get_the_date(); ?></span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-user me-2"></i>
-                                    <span><?php the_author(); ?></span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-clock me-2"></i>
-                                    <span><?php echo reading_time(); ?> min read</span>
-                                </div>
-                                <?php if (comments_open() || get_comments_number()) : ?>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-comments me-2"></i>
-                                        <span><?php comments_number('0 Comments', '1 Comment', '% Comments'); ?></span>
+<?php while (have_posts()) : the_post(); ?>
+
+<!-- Post Header -->
+<section class="section-sm bg-light-gray">
+    <div class="container">
+        <?php blueprint_folder_breadcrumb(); ?>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="post-header text-center">
+                    <div class="post-meta mb-3">
+                        <span class="post-date text-muted">
+                            <i class="fas fa-calendar me-2"></i>
+                            <?php echo get_the_date(); ?>
+                        </span>
+                        
+                        <?php if (get_the_category()) : ?>
+                            <span class="post-categories ms-3">
+                                <i class="fas fa-folder me-2"></i>
+                                <?php the_category(', '); ?>
+                            </span>
+                        <?php endif; ?>
+                        
+                        <span class="post-author ms-3">
+                            <i class="fas fa-user me-2"></i>
+                            By <?php the_author(); ?>
+                        </span>
+                    </div>
+                    
+                    <h1 class="post-title mb-4"><?php the_title(); ?></h1>
+                    
+                    <?php if (has_excerpt()) : ?>
+                        <p class="lead text-muted"><?php the_excerpt(); ?></p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Post Content -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <article id="post-<?php the_ID(); ?>" <?php post_class('single-post'); ?>>
+                    <?php if (has_post_thumbnail()) : ?>
+                        <div class="post-featured-image mb-5">
+                            <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded shadow')); ?>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <div class="post-content">
+                        <?php the_content(); ?>
+                        
+                        <?php
+                        wp_link_pages(array(
+                            'before' => '<div class="page-links mt-4"><span class="page-links-title">Pages:</span>',
+                            'after' => '</div>',
+                            'link_before' => '<span class="page-number">',
+                            'link_after' => '</span>',
+                        ));
+                        ?>
+                    </div>
+                    
+                    <!-- Post Footer -->
+                    <div class="post-footer mt-5 pt-4 border-top">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <?php if (get_the_tags()) : ?>
+                                    <div class="post-tags">
+                                        <strong class="me-2">Tags:</strong>
+                                        <?php the_tags('<span class="badge bg-primary me-2">', '</span><span class="badge bg-primary me-2">', '</span>'); ?>
                                     </div>
                                 <?php endif; ?>
+                            </div>
+                            
+                            <div class="col-md-6 text-md-end">
+                                <div class="social-share">
+                                    <strong class="me-2">Share:</strong>
+                                    <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" 
+                                       target="_blank" class="btn btn-sm btn-outline-primary me-2">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" 
+                                       target="_blank" class="btn btn-sm btn-outline-primary me-2">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode(get_permalink()); ?>" 
+                                       target="_blank" class="btn btn-sm btn-outline-primary">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Post Content -->
-        <section class="section bg-light">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <article id="post-<?php the_ID(); ?>" <?php post_class('fade-in-up'); ?>>
-                            
-                            <!-- Featured Image -->
-                            <?php if (has_post_thumbnail()) : ?>
-                                <div class="mb-5">
-                                    <figure class="text-center">
-                                        <?php the_post_thumbnail('large', array('class' => 'img-fluid rounded shadow-sm')); ?>
-                                        <?php if (get_the_post_thumbnail_caption()) : ?>
-                                            <figcaption class="mt-2 text-muted fst-italic">
-                                                <?php echo get_the_post_thumbnail_caption(); ?>
-                                            </figcaption>
-                                        <?php endif; ?>
-                                    </figure>
-                                </div>
-                            <?php endif; ?>
-
-                            <!-- Post Content -->
-                            <div class="post-content">
-                                <?php
-                                the_content(sprintf(
-                                    wp_kses(
-                                        __('Continue reading<span class="screen-reader-text"> "%s"</span>', 'services-pro'),
-                                        array(
-                                            'span' => array(
-                                                'class' => array(),
-                                            ),
-                                        )
-                                    ),
-                                    wp_kses_post(get_the_title())
-                                ));
-
-                                wp_link_pages(array(
-                                    'before' => '<div class="page-links d-flex flex-wrap gap-2 mt-4"><span class="me-2">' . esc_html__('Pages:', 'services-pro') . '</span>',
-                                    'after'  => '</div>',
-                                    'link_before' => '<span class="btn btn-sm btn-outline-accent">',
-                                    'link_after'  => '</span>',
-                                ));
-                                ?>
+                </article>
+                
+                <!-- Author Bio -->
+                <?php if (get_the_author_meta('description')) : ?>
+                    <div class="author-bio bg-light-gray p-4 rounded mt-5">
+                        <div class="row align-items-center">
+                            <div class="col-md-2 text-center">
+                                <?php echo get_avatar(get_the_author_meta('ID'), 80, '', '', array('class' => 'rounded-circle')); ?>
                             </div>
-
-                            <!-- Post Tags -->
+                            <div class="col-md-10">
+                                <h5 class="mb-2">About <?php the_author(); ?></h5>
+                                <p class="mb-0"><?php echo get_the_author_meta('description'); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                
+                <!-- Post Navigation -->
+                <div class="post-navigation mt-5">
+                    <div class="row">
+                        <div class="col-md-6">
                             <?php
-                            $tags = get_the_tags();
-                            if ($tags) : ?>
-                                <div class="post-tags mt-5 pt-4 border-top">
-                                    <h6 class="mb-3"><i class="fas fa-tags text-accent me-2"></i>Tags:</h6>
-                                    <div class="d-flex flex-wrap gap-2">
-                                        <?php foreach ($tags as $tag) : ?>
-                                            <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>" 
-                                               class="badge bg-light text-dark text-decoration-none">
-                                                <?php echo esc_html($tag->name); ?>
-                                            </a>
-                                        <?php endforeach; ?>
-                                    </div>
+                            $prev_post = get_previous_post();
+                            if ($prev_post) : ?>
+                                <div class="nav-previous">
+                                    <a href="<?php echo get_permalink($prev_post); ?>" class="btn btn-outline-primary w-100 text-start">
+                                        <i class="fas fa-chevron-left me-2"></i>
+                                        <strong>Previous Post</strong><br>
+                                        <small><?php echo get_the_title($prev_post); ?></small>
+                                    </a>
                                 </div>
                             <?php endif; ?>
-
-                            <!-- Author Bio -->
-                            <div class="author-bio mt-5 pt-4 border-top">
-                                <div class="d-flex align-items-start">
-                                    <div class="me-3">
-                                        <?php echo get_avatar(get_the_author_meta('ID'), 80, '', '', array('class' => 'rounded-circle')); ?>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">About <?php the_author(); ?></h6>
-                                        <p class="text-muted mb-0">
-                                            <?php 
-                                            $author_bio = get_the_author_meta('description');
-                                            if ($author_bio) {
-                                                echo esc_html($author_bio);
-                                            } else {
-                                                echo 'Professional content writer and home services expert.';
-                                            }
-                                            ?>
-                                        </p>
-                                    </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <?php
+                            $next_post = get_next_post();
+                            if ($next_post) : ?>
+                                <div class="nav-next">
+                                    <a href="<?php echo get_permalink($next_post); ?>" class="btn btn-outline-primary w-100 text-end">
+                                        <strong>Next Post</strong> <i class="fas fa-chevron-right ms-2"></i><br>
+                                        <small><?php echo get_the_title($next_post); ?></small>
+                                    </a>
                                 </div>
-                            </div>
-                        </article>
-
-                        <!-- Post Navigation -->
-                        <nav class="post-navigation mt-5 pt-4 border-top" aria-label="Posts">
-                            <div class="nav-links d-flex justify-content-between">
-                                <?php
-                                $prev_post = get_previous_post();
-                                $next_post = get_next_post();
-                                ?>
-                                
-                                <?php if ($prev_post) : ?>
-                                    <div class="nav-previous">
-                                        <a href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>" class="text-decoration-none">
-                                            <div class="d-flex align-items-center">
-                                                <i class="fas fa-chevron-left me-2"></i>
-                                                <div>
-                                                    <small class="text-muted d-block">Previous Post</small>
-                                                    <strong><?php echo esc_html($prev_post->post_title); ?></strong>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <?php if ($next_post) : ?>
-                                    <div class="nav-next text-end">
-                                        <a href="<?php echo esc_url(get_permalink($next_post->ID)); ?>" class="text-decoration-none">
-                                            <div class="d-flex align-items-center">
-                                                <div>
-                                                    <small class="text-muted d-block">Next Post</small>
-                                                    <strong><?php echo esc_html($next_post->post_title); ?></strong>
-                                                </div>
-                                                <i class="fas fa-chevron-right ms-2"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                        </nav>
-
-                        <!-- Comments -->
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comments -->
+                <?php
+                if (comments_open() || get_comments_number()) :
+                    comments_template();
+                endif;
+                ?>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="blog-sidebar">
+                    <!-- Recent Posts -->
+                    <div class="widget mb-4">
+                        <h5 class="widget-title">Related Posts</h5>
                         <?php
-                        if (comments_open() || get_comments_number()) :
-                            ?>
-                            <div class="comments-section mt-5 pt-4 border-top">
-                                <?php comments_template(); ?>
-                            </div>
+                        $related_posts = new WP_Query(array(
+                            'post_type' => 'post',
+                            'posts_per_page' => 4,
+                            'post__not_in' => array(get_the_ID()),
+                            'category__in' => wp_get_post_categories(get_the_ID())
+                        ));
+                        
+                        if ($related_posts->have_posts()) : ?>
+                            <ul class="list-unstyled">
+                                <?php while ($related_posts->have_posts()) : $related_posts->the_post(); ?>
+                                    <li class="mb-3 pb-3 border-bottom">
+                                        <a href="<?php the_permalink(); ?>" class="text-decoration-none">
+                                            <h6 class="mb-1"><?php the_title(); ?></h6>
+                                            <small class="text-muted"><?php echo get_the_date(); ?></small>
+                                        </a>
+                                    </li>
+                                <?php endwhile; ?>
+                            </ul>
+                            <?php wp_reset_postdata(); ?>
                         <?php endif; ?>
                     </div>
                     
-                    <!-- Sidebar -->
-                    <div class="col-lg-4">
-                        <?php get_sidebar(); ?>
+                    <!-- Categories -->
+                    <?php
+                    $categories = get_categories(array('hide_empty' => true));
+                    if ($categories) : ?>
+                        <div class="widget mb-4">
+                            <h5 class="widget-title">Categories</h5>
+                            <ul class="list-unstyled">
+                                <?php foreach ($categories as $category) : ?>
+                                    <li class="mb-2">
+                                        <a href="<?php echo get_category_link($category->term_id); ?>" class="text-decoration-none d-flex justify-content-between">
+                                            <span><?php echo esc_html($category->name); ?></span>
+                                            <span class="badge bg-light text-dark"><?php echo $category->count; ?></span>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <!-- Newsletter Signup -->
+                    <div class="widget bg-primary text-white p-4 rounded">
+                        <h5 class="widget-title text-white">Stay Updated</h5>
+                        <p class="mb-3">Subscribe to our newsletter for the latest updates and insights.</p>
+                        <form class="newsletter-form">
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Your email address" required>
+                            </div>
+                            <button type="submit" class="btn btn-light w-100">
+                                <i class="fas fa-envelope me-2"></i>
+                                Subscribe
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-    <?php endwhile; ?>
-</main>
+<?php endwhile; ?>
 
-<?php
-get_footer();
-
-// Helper function for reading time
-function reading_time() {
-    $content = get_post_field('post_content', get_the_ID());
-    $word_count = str_word_count(strip_tags($content));
-    $reading_time = ceil($word_count / 200);
-    return $reading_time;
-}
-?>
+<?php get_footer(); ?>
