@@ -156,13 +156,15 @@ header#masthead {
     font-weight: 600;
 }
 
-/* Dropdown toggle icons */
-.nav-link .fa-chevron-down {
+/* Dropdown toggle arrows */
+.nav-link .dropdown-arrow {
     font-size: 0.75rem;
     transition: transform 0.3s ease;
+    font-style: normal;
+    color: inherit;
 }
 
-.dropdown.show .nav-link .fa-chevron-down {
+.dropdown.show .nav-link .dropdown-arrow {
     transform: rotate(180deg);
 }
 
@@ -232,9 +234,10 @@ header#masthead {
         transform: translateX(4px);
     }
 
-    .dropdown-item .fa-chevron-right {
+    .dropdown-item .dropdown-arrow {
         font-size: 0.75rem;
         opacity: 0.7;
+        font-style: normal;
     }
 
     /* Hover behavior for submenus */

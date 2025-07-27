@@ -116,11 +116,11 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         // Add dropdown indicators
         if ($has_children) {
             if ($depth === 0) {
-                $item_output .= ' <i class="fas fa-chevron-down ms-1"></i>';
-} else {
-                $item_output .= ' <i class="fas fa-chevron-right ms-auto"></i>';
-}
-}
+                $item_output .= ' <span class="dropdown-arrow ms-1">▼</span>';
+            } else {
+                $item_output .= ' <span class="dropdown-arrow ms-auto">▶</span>';
+            }
+        }
 
         $item_output .= '</a>';
         $item_output .= isset($args->after) ? $args->after : '';

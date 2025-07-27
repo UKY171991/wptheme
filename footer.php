@@ -22,7 +22,7 @@
                             <input type="email" class="form-control flex-grow-1" placeholder="Enter your email address" required 
                                    style="border: none; border-radius: 25px; padding: 12px 20px; background: rgba(255,255,255,0.1); color: white; backdrop-filter: blur(10px);">
                             <button type="submit" class="btn btn-primary px-4" style="border-radius: 25px; background: #3498db; border: none; font-weight: 600;">
-                                <i class="fas fa-paper-plane me-2"></i>Subscribe
+                                Subscribe
                             </button>
                         </form>
                     </div>
