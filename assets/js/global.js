@@ -913,11 +913,6 @@ Bootstrap 5 Compatible | Vanilla JS
         }
     });
 
-    // Expose BlueprintFolder globally for debugging
-    window.BlueprintFolder = BlueprintFolder;
-
-        },
-
         // Layout and UI fixes
         layout: {
             init: function() {
