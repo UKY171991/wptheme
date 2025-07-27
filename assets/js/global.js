@@ -15,6 +15,7 @@ Bootstrap 5 Compatible | Vanilla JS
             this.navigation.init();
             this.layout.init();
             this.utils.init();
+            this.megaMenuEnhancements.init();
         },
 
         // Enhanced Navigation functionality
@@ -584,6 +585,78 @@ Bootstrap 5 Compatible | Vanilla JS
                 
                 window.addEventListener('resize', handleResize);
                 handleResize(); // Run on load
+            }
+        },
+
+        // Additional mega menu enhancements
+        megaMenuEnhancements: {
+            init: function() {
+                this.addMegaMenuAnimations();
+                this.handleMegaMenuKeyboard();
+                this.optimizeMegaMenuPerformance();
+            },
+
+            addMegaMenuAnimations: function() {
+                const megaMenus = document.querySelectorAll('.services-mega-menu');
+                
+                megaMenus.forEach(menu => {
+                    const sections = menu.querySelectorAll('.mega-menu-section');
+                    
+                    // Add staggered animation to sections
+                    sections.forEach((section, index) => {
+                        section.style.animationDelay = (index * 0.1) + 's';
+                    });
+                });
+            },
+
+            handleMegaMenuKeyboard: function() {
+                // Enhanced keyboard navigation for mega menu
+                document.addEventListener('keydown', function(e) {
+                    const activeElement = document.activeElement;
+                    
+                    if (activeElement.classList.contains('mega-menu-link')) {
+                        const megaMenu = activeElement.closest('.services-mega-menu');
+                        if (!megaMenu) return;
+                        
+                        const allLinks = Array.from(megaMenu.querySelectorAll('.mega-menu-link'));
+                        const currentIndex = allLinks.indexOf(activeElement);
+                        
+                        if (e.key === 'Tab' && !e.shiftKey) {
+                            // Tab forward through mega menu
+                            e.preventDefault();
+                            const nextIndex = (currentIndex + 1) % allLinks.length;
+                            allLinks[nextIndex].focus();
+                        } else if (e.key === 'Tab' && e.shiftKey) {
+                            // Tab backward through mega menu
+                            e.preventDefault();
+                            const prevIndex = currentIndex === 0 ? allLinks.length - 1 : currentIndex - 1;
+                            allLinks[prevIndex].focus();
+                        }
+                    }
+                });
+            },
+
+            optimizeMegaMenuPerformance: function() {
+                // Use Intersection Observer for better performance
+                if ('IntersectionObserver' in window) {
+                    const megaMenus = document.querySelectorAll('.services-mega-menu');
+                    
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('in-viewport');
+                            } else {
+                                entry.target.classList.remove('in-viewport');
+                            }
+                        });
+                    }, {
+                        rootMargin: '50px'
+                    });
+
+                    megaMenus.forEach(menu => {
+                        observer.observe(menu);
+                    });
+                }
             }
         },
 
