@@ -214,6 +214,7 @@ img {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-left: auto; /* Ensure right alignment */
 }
 
 .navbar-nav .nav-item {
@@ -343,21 +344,43 @@ img {
         animation: dropdownSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    /* Submenu styling */
+    /* Multi-level submenu styling */
     .dropdown-submenu {
         position: relative;
     }
     
-    .dropdown-submenu .dropdown-menu {
+    .dropdown-submenu > .dropdown-menu {
         top: 0;
         left: 100%;
         margin-top: -6px;
         margin-left: -1px;
         border-radius: var(--border-radius);
+        display: none;
     }
     
     .dropdown-submenu:hover > .dropdown-menu {
         display: block;
+        animation: dropdownSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Third level and beyond */
+    .dropdown-submenu .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+    }
+    
+    /* Right-aligned dropdown positioning */
+    .navbar-nav.ms-auto .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+    
+    /* But keep submenus left-aligned relative to their parent */
+    .dropdown-submenu > .dropdown-menu {
+        right: auto;
+        left: 100%;
     }
 }
 
@@ -635,6 +658,13 @@ img {
         animation: mobileDropdownSlide 0.3s ease;
     }
     
+    /* Mobile submenu styling */
+    .dropdown-submenu .dropdown-menu {
+        background-color: rgba(0, 0, 0, 0.05);
+        margin-left: 1rem;
+        margin-top: 0.25rem;
+    }
+    
     .dropdown-item {
         display: block;
         width: 100%;
@@ -648,6 +678,7 @@ img {
         border-radius: var(--border-radius-sm);
         margin-bottom: 0.25rem;
         transition: var(--transition);
+        position: relative;
     }
     
     .dropdown-item:hover,
@@ -656,6 +687,26 @@ img {
         background-color: var(--white);
         border-color: var(--accent);
         transform: translateX(4px);
+    }
+    
+    /* Mobile submenu toggle styling */
+    .dropdown-submenu > .dropdown-item.dropdown-toggle {
+        padding-right: 2.5rem;
+    }
+    
+    .dropdown-submenu > .dropdown-item.dropdown-toggle::after {
+        content: '\f054';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: var(--transition);
+    }
+    
+    .dropdown-submenu > .dropdown-item.dropdown-toggle[aria-expanded="true"]::after {
+        transform: translateY(-50%) rotate(90deg);
     }
     
     /* Mobile Menu Footer */

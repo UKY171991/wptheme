@@ -7,7 +7,7 @@
 class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
     
     /**
-     * Start Level - start of UL for standard dropdown
+     * Start Level - start of UL for multi-level dropdown
      */
     public function start_lvl(&$output, $depth = 0, $args = null) {
         $indent = str_repeat("\t", $depth);
@@ -15,12 +15,12 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         if ($depth === 0) {
             $output .= "\n$indent<ul class=\"dropdown-menu\">\n";
         } else {
-            $output .= "\n$indent<ul class=\"dropdown-submenu\">\n";
+            $output .= "\n$indent<ul class=\"dropdown-menu dropdown-submenu\">\n";
         }
     }
 
     /**
-     * End Level - end of UL for standard dropdown
+     * End Level - end of UL for multi-level dropdown
      */
     public function end_lvl(&$output, $depth = 0, $args = null) {
         $indent = str_repeat("\t", $depth);
@@ -28,7 +28,7 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
     }
 
     /**
-     * Start Element - LI tag for standard dropdown
+     * Start Element - LI tag for multi-level dropdown
      */
     public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
@@ -43,6 +43,10 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
             $classes[] = 'nav-item';
             if ($has_children) {
                 $classes[] = 'dropdown';
+            }
+        } else {
+            if ($has_children) {
+                $classes[] = 'dropdown-submenu';
             }
         }
 
@@ -87,7 +91,7 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
             $link_classes[] = 'dropdown-item';
             if ($has_children) {
                 $link_classes[] = 'dropdown-toggle';
-                $attributes .= ' data-bs-toggle="dropdown"';
+                $attributes .= ' data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"';
             }
         }
 
@@ -102,9 +106,13 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         $item_output .= '<a' . $attributes . $link_class . '>';
         $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
         
-        // Add dropdown icon for items with children
-        if ($has_children && $depth === 0) {
-            $item_output .= ' <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>';
+        // Add dropdown icons for items with children
+        if ($has_children) {
+            if ($depth === 0) {
+                $item_output .= ' <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>';
+            } else {
+                $item_output .= ' <i class="fas fa-chevron-right ms-1" aria-hidden="true"></i>';
+            }
         }
         
         $item_output .= '</a>';

@@ -133,7 +133,7 @@ Bootstrap 5 Compatible | Vanilla JS
             },
 
             setupEnhancedDropdowns: function() {
-                const dropdowns = document.querySelectorAll('.dropdown');
+                const dropdowns = document.querySelectorAll('.dropdown, .dropdown-submenu');
                 
                 dropdowns.forEach(dropdown => {
                     const toggle = dropdown.querySelector('.dropdown-toggle');
@@ -147,17 +147,21 @@ Bootstrap 5 Compatible | Vanilla JS
                             dropdown.addEventListener('mouseenter', function() {
                                 clearTimeout(hoverTimeout);
                                 
-                                // Close other dropdowns first
-                                dropdowns.forEach(otherDropdown => {
-                                    if (otherDropdown !== dropdown) {
-                                        const otherToggle = otherDropdown.querySelector('.dropdown-toggle');
-                                        const otherMenu = otherDropdown.querySelector('.dropdown-menu');
-                                        if (otherToggle && otherMenu) {
-                                            otherToggle.setAttribute('aria-expanded', 'false');
-                                            otherMenu.classList.remove('show');
+                                // Close sibling dropdowns at the same level
+                                const parent = dropdown.parentElement;
+                                if (parent) {
+                                    const siblings = parent.querySelectorAll(':scope > .dropdown, :scope > .dropdown-submenu');
+                                    siblings.forEach(sibling => {
+                                        if (sibling !== dropdown) {
+                                            const siblingToggle = sibling.querySelector('.dropdown-toggle');
+                                            const siblingMenu = sibling.querySelector('.dropdown-menu');
+                                            if (siblingToggle && siblingMenu) {
+                                                siblingToggle.setAttribute('aria-expanded', 'false');
+                                                siblingMenu.classList.remove('show');
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                                 
                                 toggle.setAttribute('aria-expanded', 'true');
                                 menu.classList.add('show');
@@ -167,7 +171,17 @@ Bootstrap 5 Compatible | Vanilla JS
                                 hoverTimeout = setTimeout(() => {
                                     toggle.setAttribute('aria-expanded', 'false');
                                     menu.classList.remove('show');
-                                }, 150); // Small delay to prevent accidental closes
+                                    
+                                    // Also close all child submenus
+                                    const childSubmenus = menu.querySelectorAll('.dropdown-submenu .dropdown-menu');
+                                    childSubmenus.forEach(childMenu => {
+                                        childMenu.classList.remove('show');
+                                        const childToggle = childMenu.previousElementSibling;
+                                        if (childToggle && childToggle.classList.contains('dropdown-toggle')) {
+                                            childToggle.setAttribute('aria-expanded', 'false');
+                                        }
+                                    });
+                                }, 150);
                             });
                             
                             // Cancel close if mouse re-enters
@@ -183,22 +197,36 @@ Bootstrap 5 Compatible | Vanilla JS
                             
                             const isExpanded = this.getAttribute('aria-expanded') === 'true';
                             
-                            // Close all other dropdowns
-                            dropdowns.forEach(otherDropdown => {
-                                if (otherDropdown !== dropdown) {
-                                    const otherToggle = otherDropdown.querySelector('.dropdown-toggle');
-                                    const otherMenu = otherDropdown.querySelector('.dropdown-menu');
-                                    if (otherToggle && otherMenu) {
-                                        otherToggle.setAttribute('aria-expanded', 'false');
-                                        otherMenu.classList.remove('show');
+                            // Close sibling dropdowns at the same level
+                            const parent = dropdown.parentElement;
+                            if (parent) {
+                                const siblings = parent.querySelectorAll(':scope > .dropdown, :scope > .dropdown-submenu');
+                                siblings.forEach(sibling => {
+                                    if (sibling !== dropdown) {
+                                        const siblingToggle = sibling.querySelector('.dropdown-toggle');
+                                        const siblingMenu = sibling.querySelector('.dropdown-menu');
+                                        if (siblingToggle && siblingMenu) {
+                                            siblingToggle.setAttribute('aria-expanded', 'false');
+                                            siblingMenu.classList.remove('show');
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
 
                             // Toggle current dropdown
                             if (isExpanded) {
                                 this.setAttribute('aria-expanded', 'false');
                                 menu.classList.remove('show');
+                                
+                                // Close all child submenus
+                                const childSubmenus = menu.querySelectorAll('.dropdown-submenu .dropdown-menu');
+                                childSubmenus.forEach(childMenu => {
+                                    childMenu.classList.remove('show');
+                                    const childToggle = childMenu.previousElementSibling;
+                                    if (childToggle && childToggle.classList.contains('dropdown-toggle')) {
+                                        childToggle.setAttribute('aria-expanded', 'false');
+                                    }
+                                });
                             } else {
                                 this.setAttribute('aria-expanded', 'true');
                                 menu.classList.add('show');
