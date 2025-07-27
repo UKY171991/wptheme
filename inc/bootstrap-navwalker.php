@@ -11,7 +11,8 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
      */
     public function start_lvl(&$output, $depth = 0, $args = null) {
         $indent = str_repeat("\t", $depth);
-        $output .= "\n$indent<ul class=\"dropdown-menu\">\n";
+        $submenu_class = $depth === 0 ? 'dropdown-menu' : 'dropdown-submenu';
+        $output .= "\n$indent<ul class=\"$submenu_class\" role=\"menu\">\n";
     }
 
     /**
@@ -23,7 +24,7 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
     }
 
     /**
-     * Start Element - LI tag
+     * Start Element - LI tag with enhanced accessibility
      */
     public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
@@ -42,14 +43,22 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
             $classes[] = 'dropdown-item';
         }
 
+        // Add current item class for active states
+        if (in_array('current-menu-item', $classes) || in_array('current-menu-parent', $classes)) {
+            $classes[] = 'active';
+        }
+
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
         $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
 
         $id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args);
         $id = $id ? ' id="' . esc_attr($id) . '"' : '';
 
+        // Add role for menu items
+        $role_attr = $depth === 0 ? ' role="none"' : '';
+
         if ($depth === 0) {
-            $output .= $indent . '<li' . $id . $class_names . '>';
+            $output .= $indent . '<li' . $id . $class_names . $role_attr . '>';
         }
 
         $attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
@@ -62,11 +71,22 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         
         if ($has_children && $depth === 0) {
             $link_classes[] = 'dropdown-toggle';
-            $attributes .= ' data-bs-toggle="dropdown" role="button" aria-expanded="false"';
+            $attributes .= ' data-bs-toggle="dropdown" role="menuitem" aria-expanded="false" aria-haspopup="true"';
+            
+            // Add unique ID for aria-labelledby
+            $dropdown_id = 'dropdown-' . $item->ID;
+            $attributes .= ' id="' . esc_attr($dropdown_id) . '"';
+        } else {
+            $attributes .= ' role="menuitem"';
         }
         
         if ($depth > 0) {
             $link_classes = array('dropdown-item');
+        }
+
+        // Add current page indicator for accessibility
+        if (in_array('current-menu-item', $classes)) {
+            $attributes .= ' aria-current="page"';
         }
 
         $link_class = ' class="' . implode(' ', $link_classes) . '"';
@@ -76,7 +96,7 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
         
         if ($has_children && $depth === 0) {
-            $item_output .= ' <i class="fas fa-chevron-down ms-1"></i>';
+            $item_output .= ' <i class="fas fa-chevron-down ms-1" aria-hidden="true"></i>';
         }
         
         $item_output .= '</a>';
