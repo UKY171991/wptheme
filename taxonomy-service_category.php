@@ -14,140 +14,245 @@ $current_term = get_queried_object();
 $term_name = $current_term->name ?? '';
 $term_description = $current_term->description ?? '';
 $term_slug = $current_term->slug ?? '';
+$services_count = $current_term->count ?? 0;
 ?>
 
-<div class="service-category-archive">
-    
-    <!-- Category Header -->
-    <section class="page-header category-header">
+<main id="main" class="site-main">
+    <!-- Banner Section -->
+    <section class="page-banner bg-primary text-white">
         <div class="container">
-            <div class="page-header-content">
-                
-                <!-- Breadcrumb -->
-                <?php blueprint_folder_breadcrumb(); ?>
-                
-                <h1 class="page-title">
-                    <?php echo esc_html($term_name); ?>
-                </h1>
-                
-                <?php if (!empty($term_description)) : ?>
-                    <div class="category-description">
-                        <?php echo esc_html($term_description); ?>
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center bg-transparent">
+                            <li class="breadcrumb-item">
+                                <a href="<?php echo home_url('/'); ?>" class="text-white-50">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="<?php echo get_post_type_archive_link('service'); ?>" class="text-white-50">Services</a>
+                            </li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">
+                                <?php echo esc_html($term_name); ?>
+                            </li>
+                        </ol>
+                    </nav>
+                    
+                    <h1 class="display-4 fw-bold mb-3">
+                        <i class="fas fa-tag me-3"></i>
+                        <?php echo esc_html($term_name); ?>
+                    </h1>
+                    
+                    <?php if (!empty($term_description)) : ?>
+                        <p class="lead mb-4 text-white-75">
+                            <?php echo esc_html($term_description); ?>
+                        </p>
+                    <?php else : ?>
+                        <p class="lead mb-4 text-white-75">
+                            Professional <?php echo esc_html(strtolower($term_name)); ?> services for your needs
+                        </p>
+                    <?php endif; ?>
+                    
+                    <div class="d-inline-flex align-items-center bg-white bg-opacity-10 rounded-pill px-4 py-2">
+                        <i class="fas fa-list-ul me-2"></i>
+                        <span class="fw-semibold">
+                            <?php echo $services_count; ?> Service<?php echo $services_count != 1 ? 's' : ''; ?> Available
+                        </span>
                     </div>
-                <?php else : ?>
-                    <p class="page-subtitle">
-                        <?php printf(esc_html__('Explore our %s services', 'blueprint-folder'), strtolower(single_term_title('', false))); ?>
-                    </p>
-                <?php endif; ?>
-                
-                <!-- Category Meta -->
-                <div class="category-meta">
-                    <?php
-                    $term = get_queried_object();
-                    $count = $term->count;
-                    printf(
-                        _n(
-                            '%d service available',
-                            '%d services available',
-                            $count,
-                            'blueprint-folder'
-                        ),
-                        $count
-                    );
-                    ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Categories Filter -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="service-categories-filter">
+                <div class="bg-white rounded-3 p-4 shadow-sm">
+                    <h3 class="h5 mb-3 text-center" style="color: #2c3e50; font-weight: 600;">
+                        <i class="fas fa-filter me-2" style="color: #3498db;"></i>
+                        Browse Categories
+                    </h3>
+                    
+                    <div class="categories-list d-flex flex-wrap justify-content-center gap-3">
+                        <!-- All Services Button -->
+                        <a href="<?php echo get_post_type_archive_link('service'); ?>" 
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-th-large me-2"></i>
+                            All Services
+                            <span class="badge bg-primary ms-2"><?php echo wp_count_posts('service')->publish; ?></span>
+                        </a>
+                        
+                        <?php
+                        // Get all service categories
+                        $service_categories = get_terms(array(
+                            'taxonomy' => 'service_category',
+                            'hide_empty' => true,
+                            'orderby' => 'name',
+                            'order' => 'ASC'
+                        ));
+                        
+                        if ($service_categories && !is_wp_error($service_categories)) :
+                            foreach ($service_categories as $category) :
+                                $is_current = ($current_term->term_id == $category->term_id);
+                                $btn_class = $is_current ? 'btn btn-primary btn-sm' : 'btn btn-outline-secondary btn-sm';
+                        ?>
+                            <a href="<?php echo get_term_link($category); ?>" 
+                               class="<?php echo $btn_class; ?>">
+                                <i class="fas fa-tag me-2"></i>
+                                <?php echo esc_html($category->name); ?>
+                                <span class="badge <?php echo $is_current ? 'bg-white text-primary' : 'bg-secondary'; ?> ms-2">
+                                    <?php echo $category->count; ?>
+                                </span>
+                            </a>
+                        <?php 
+                            endforeach;
+                        endif; 
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Grid -->
-    <section class="services-grid">
+    <section class="section">
         <div class="container">
+            <div class="section-heading text-center mb-5">
+                <h2 class="section-title mb-3" style="color: #2c3e50; font-weight: 600;">
+                    <i class="fas fa-star me-3" style="color: #3498db;"></i>
+                    <?php echo esc_html($term_name); ?> Services
+                </h2>
+                <p class="section-subtitle lead text-muted">
+                    <?php echo $services_count; ?> professional service<?php echo $services_count != 1 ? 's' : ''; ?> available in this category
+                </p>
+            </div>
             
-            <!-- Enhanced Service Categories Filter -->
-            <div class="service-categories-filter mb-5">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="categories-wrapper bg-light rounded-3 p-4">
-                            <h4 class="h5 mb-3 text-center" style="color: #2c3e50; font-weight: 600;">
-                                <i class="fas fa-filter me-2" style="color: #3498db;"></i>
-                                Filter by Category
-                            </h4>
-                            
-                            <div class="categories-list d-flex flex-wrap justify-content-center gap-3">
-                                <!-- All Services Button -->
-                                <a href="<?php echo get_post_type_archive_link('service'); ?>" 
-                                   class="category-filter-btn <?php echo !is_tax('service_category') ? 'active' : ''; ?>">
-                                    <i class="fas fa-th-large me-2"></i>
-                                    All Services
-                                    <span class="category-count"><?php echo wp_count_posts('service')->publish; ?></span>
-                                </a>
+            <?php if (have_posts()) : ?>
+                <div class="row g-4">
+                    <?php while (have_posts()) : the_post(); 
+                        $service_icon = get_post_meta(get_the_ID(), '_service_icon', true) ?: 'fas fa-home';
+                        $service_price = get_post_meta(get_the_ID(), '_service_price', true);
+                        $service_featured = get_post_meta(get_the_ID(), '_service_featured', true);
+                    ?>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="service-card h-100 bg-white rounded-3 shadow-sm border-0 overflow-hidden <?php echo $service_featured ? 'featured' : ''; ?>">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <div class="service-image">
+                                        <a href="<?php the_permalink(); ?>">
+                                            <?php the_post_thumbnail('medium', array('class' => 'w-100', 'style' => 'height: 200px; object-fit: cover;')); ?>
+                                        </a>
+                                    </div>
+                                <?php else : ?>
+                                    <div class="service-icon-header bg-light p-4 text-center">
+                                        <i class="<?php echo esc_attr($service_icon); ?> text-primary" style="font-size: 3rem;"></i>
+                                    </div>
+                                <?php endif; ?>
                                 
-                                <?php
-                                // Get all service categories
-                                $service_categories = get_terms(array(
-                                    'taxonomy' => 'service_category',
-                                    'hide_empty' => true,
-                                    'orderby' => 'name',
-                                    'order' => 'ASC'
-                                ));
-                                
-                                if ($service_categories && !is_wp_error($service_categories)) :
-                                    $current_category = get_queried_object();
+                                <div class="card-body p-4">
+                                    <h3 class="h5 mb-3">
+                                        <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark">
+                                            <?php the_title(); ?>
+                                        </a>
+                                    </h3>
                                     
-                                    foreach ($service_categories as $category) :
-                                        $is_current = (is_tax('service_category') && $current_category->term_id == $category->term_id);
-                                ?>
-                                    <a href="<?php echo get_term_link($category); ?>" 
-                                       class="category-filter-btn <?php echo $is_current ? 'active' : ''; ?>">
-                                        <i class="fas fa-tag me-2"></i>
-                                        <?php echo esc_html($category->name); ?>
-                                        <span class="category-count"><?php echo $category->count; ?></span>
-                                    </a>
-                                <?php 
-                                    endforeach;
-                                endif; 
-                                ?>
-                            </div>
-                            
-                            <?php if (is_tax('service_category')) : 
-                                $current_category = get_queried_object();
-                            ?>
-                                <div class="current-category-info mt-4 p-3 bg-white rounded-2 border-start border-primary border-4">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-info-circle text-primary me-3" style="font-size: 1.2rem;"></i>
-                                        <div>
-                                            <h5 class="mb-1" style="color: #2c3e50;">
-                                                Showing: <?php echo esc_html($current_category->name); ?>
-                                            </h5>
-                                            <p class="mb-0 text-muted small">
-                                                <?php echo $current_category->description ? esc_html($current_category->description) : 'Services in this category'; ?>
-                                                (<?php echo $current_category->count; ?> service<?php echo $current_category->count != 1 ? 's' : ''; ?>)
-                                            </p>
+                                    <p class="text-muted mb-3">
+                                        <?php echo wp_trim_words(get_the_excerpt() ?: get_the_content(), 20); ?>
+                                    </p>
+                                    
+                                    <?php
+                                    // Display service categories
+                                    $categories = get_the_terms(get_the_ID(), 'service_category');
+                                    if ($categories && !is_wp_error($categories)) :
+                                    ?>
+                                        <div class="service-categories mb-3">
+                                            <?php foreach ($categories as $cat) : ?>
+                                                <span class="badge bg-light text-dark me-1"><?php echo esc_html($cat->name); ?></span>
+                                            <?php endforeach; ?>
                                         </div>
+                                    <?php endif; ?>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <?php if ($service_price) : ?>
+                                            <div class="service-price">
+                                                <span class="h6 text-primary mb-0"><?php echo esc_html($service_price); ?></span>
+                                            </div>
+                                        <?php endif; ?>
+                                        
+                                        <a href="<?php the_permalink(); ?>" class="btn btn-outline-primary btn-sm">
+                                            Learn More <i class="fas fa-arrow-right ms-1"></i>
+                                        </a>
                                     </div>
                                 </div>
-                            <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="mt-5">
+                    <?php
+                    the_posts_pagination(array(
+                        'mid_size' => 2,
+                        'prev_text' => '<i class="fas fa-chevron-left me-1"></i> Previous',
+                        'next_text' => 'Next <i class="fas fa-chevron-right ms-1"></i>',
+                        'class' => 'pagination justify-content-center'
+                    ));
+                    ?>
+                </div>
+                
+            <?php else : ?>
+                <div class="text-center py-5">
+                    <div class="bg-light p-5 rounded-3">
+                        <i class="fas fa-search text-muted mb-3" style="font-size: 3rem;"></i>
+                        <h3 class="h4 mb-3">No Services Found</h3>
+                        <p class="text-muted mb-4">
+                            No services are currently available in the "<?php echo esc_html($term_name); ?>" category.
+                        </p>
+                        <p class="text-muted mb-4">
+                            We're constantly adding new services. Check back soon or contact us for custom solutions.
+                        </p>
+                        <div class="d-flex gap-3 justify-content-center flex-wrap">
+                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" class="btn btn-primary">
+                                <i class="fas fa-phone me-2"></i>Contact Us
+                            </a>
+                            <a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>" class="btn btn-outline-primary">
+                                <i class="fas fa-list me-2"></i>All Services
+                            </a>
                         </div>
                     </div>
                 </div>
+            <?php endif; ?>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="section bg-primary">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="text-white mb-4" style="font-weight: 600;">
+                        Need Help with <?php echo esc_html($term_name); ?>?
+                    </h2>
+                    <p class="text-white-50 mb-4 lead">
+                        Contact us today for personalized solutions and professional service tailored to your specific needs.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact')) . '?service=' . urlencode($term_name)); ?>" class="btn btn-light btn-lg me-3">
+                            <i class="fas fa-envelope me-2"></i>
+                            Get Free Quote
+                        </a>
+                        <a href="tel:+1234567890" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-phone me-2"></i>
+                            Call Now
+                        </a>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Services Container -->
-            <div class="services-container">
-                <?php if (have_posts()) : ?>
-                    <?php while (have_posts()) : the_post(); ?>
-                        <article class="service-card">
-                            <div class="service-card-inner">
-                                
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <div class="service-image">
-                                        <a href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr(sprintf(__('View %s service details', 'blueprint-folder'), get_the_title())); ?>">
-                                            <?php the_post_thumbnail('service-card', array('alt' => get_the_title())); ?>
-                                        </a>
-                                        <div class="service-overlay">
-                                            <a href="<?php the_permalink(); ?>" class="service-link">
-                                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </div>
+    </section>
+</main>
+
+<?php get_footer(); ?>
                                             </a>
                                         </div>
                                     </div>
