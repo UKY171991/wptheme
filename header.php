@@ -8,7 +8,6 @@
     <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     
     <?php wp_head(); ?>
 </head>
@@ -18,48 +17,40 @@
 
 <div id="page" class="site">
     <!-- Skip Links for Accessibility -->
-    <div class="skip-links" aria-label="<?php esc_attr_e('Skip links', 'blueprint-folder'); ?>">
-        <a class="skip-link screen-reader-text" href="#main">
-            <?php esc_html_e('Skip to main content', 'blueprint-folder'); ?>
-        </a>
-        <a class="skip-link screen-reader-text" href="#primary-navigation">
-            <?php esc_html_e('Skip to navigation', 'blueprint-folder'); ?>
-        </a>
-    </div>
+    <a class="skip-link screen-reader-text" href="#main">
+        <?php esc_html_e('Skip to main content', 'blueprint-folder'); ?>
+    </a>
 
-    <!-- Enhanced Header Section -->
-    <header id="masthead" class="site-header" role="banner" itemscope itemtype="https://schema.org/Organization">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white" role="navigation" aria-label="<?php esc_attr_e('Main navigation', 'blueprint-folder'); ?>">
+    <!-- Professional Header -->
+    <header id="masthead" class="site-header" role="banner">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" role="navigation">
             <div class="container">
-                <!-- Enhanced Site Branding -->
-                <div class="site-branding" itemscope itemtype="https://schema.org/Brand">
+                <!-- Brand/Logo -->
+                <div class="navbar-brand-wrapper">
                     <?php if (has_custom_logo()) : ?>
                         <div class="custom-logo-container">
                             <?php 
                             $custom_logo_id = get_theme_mod('custom_logo');
                             $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
                             if ($logo) : ?>
-                                <a href="<?php echo esc_url(home_url('/')); ?>" rel="home" class="custom-logo-link" itemprop="url">
+                                <a href="<?php echo esc_url(home_url('/')); ?>" class="navbar-brand" rel="home">
                                     <img src="<?php echo esc_url($logo[0]); ?>" 
                                          alt="<?php echo esc_attr(get_bloginfo('name')); ?>" 
-                                         class="custom-logo" 
-                                         itemprop="logo"
+                                         class="logo-img"
                                          width="<?php echo esc_attr($logo[1]); ?>" 
                                          height="<?php echo esc_attr($logo[2]); ?>">
                                 </a>
                             <?php endif; ?>
                         </div>
                     <?php else : ?>
-                        <div class="text-branding">
-                            <a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>" rel="home" itemprop="url">
-                                <span class="site-title" itemprop="name"><?php bloginfo('name'); ?></span>
-                                <?php 
-                                $description = get_bloginfo('description', 'display');
-                                if ($description || is_customize_preview()) : ?>
-                                    <small class="site-description" itemprop="description"><?php echo esc_html($description); ?></small>
-                                <?php endif; ?>
-                            </a>
-                        </div>
+                        <a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                            <span class="brand-text"><?php bloginfo('name'); ?></span>
+                            <?php 
+                            $description = get_bloginfo('description', 'display');
+                            if ($description) : ?>
+                                <small class="brand-tagline d-block"><?php echo esc_html($description); ?></small>
+                            <?php endif; ?>
+                        </a>
                     <?php endif; ?>
                 </div>
 
@@ -74,35 +65,32 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Primary Navigation -->
+                <!-- Navigation Menu -->
                 <div class="collapse navbar-collapse" id="primary-navigation">
-                    <!-- Navigation Menu -->
-                        <?php
-                        wp_nav_menu(array(
-                            'theme_location'    => 'primary',
-                            'menu_id'          => 'primary-menu',
-                            'menu_class'       => 'navbar-nav',
-                            'container'        => false,
-                            'depth'            => 2,
-                            'fallback_cb'      => 'blueprint_folder_navigation_fallback',
-                            'walker'           => new WP_Bootstrap_Navwalker(),
-                            'items_wrap'       => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-                        ));
-                        ?>
+                    <?php
+                    wp_nav_menu(array(
+                        'theme_location'    => 'primary',
+                        'menu_id'          => 'primary-menu',
+                        'menu_class'       => 'navbar-nav ms-auto me-3',
+                        'container'        => false,
+                        'depth'            => 3, // Support 3 levels
+                        'fallback_cb'      => 'blueprint_folder_navigation_fallback',
+                        'walker'           => new WP_Bootstrap_Navwalker(),
+                        'items_wrap'       => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                    ));
+                    ?>
                     
                     <!-- CTA Button -->
-                    <div class="d-flex ms-3">
+                    <div class="navbar-cta">
                         <a href="<?php echo esc_url(blueprint_folder_get_header_cta_url()); ?>" 
-                           class="btn btn-primary">
+                           class="btn btn-primary btn-cta">
+                            <i class="fas fa-envelope me-2"></i>
                             <?php echo esc_html(blueprint_folder_get_header_cta_text()); ?>
                         </a>
                     </div>
                 </div>
             </div>
         </nav>
-        
-        <!-- ARIA Live Region for Screen Reader Announcements -->
-        <div class="aria-live-region" aria-live="polite" aria-atomic="true" id="navigation-announcements"></div>
     </header>
 
     <!-- Main Content Area -->

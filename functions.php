@@ -212,24 +212,9 @@ function blueprint_folder_force_nav_menu_display() {
 }
 
 /**
- * NAVIGATION FALLBACK MENU (WordPress Standard)
- * Creates a fallback menu structure with Services and Service Categories
+ * NAVIGATION FALLBACK MENU - Professional 3-Level Structure
  */
 function blueprint_folder_navigation_fallback() {
-    // Get service categories for dynamic menu
-    $service_categories = get_terms(array(
-        'taxonomy' => 'service_category',
-        'hide_empty' => false,
-        'parent' => 0, // Get top-level categories only
-    ));
-    
-    // Get individual services for dynamic menu
-    $services = get_posts(array(
-        'post_type' => 'service',
-        'posts_per_page' => 10,
-        'post_status' => 'publish',
-    ));
-    
     $fallback_pages = array(
         array(
             'url' => home_url('/'),
@@ -244,21 +229,66 @@ function blueprint_folder_navigation_fallback() {
             'children' => array()
         ),
         array(
-            'url' => get_post_type_archive_link('service') ?: home_url('/services'),
+            'url' => home_url('/services'),
             'title' => esc_html__('Services', 'blueprint-folder'),
-            'current' => is_post_type_archive('service') || is_page('services') || is_singular('service') || is_tax('service_category'),
-            'children' => array()
+            'current' => is_page('services'),
+            'children' => array(
+                array(
+                    'url' => home_url('/services/web-design'),
+                    'title' => esc_html__('Web Design', 'blueprint-folder'),
+                    'current' => false,
+                    'children' => array(
+                        array(
+                            'url' => home_url('/services/web-design/wordpress'),
+                            'title' => esc_html__('WordPress Development', 'blueprint-folder'),
+                            'current' => false,
+                        ),
+                        array(
+                            'url' => home_url('/services/web-design/ecommerce'),
+                            'title' => esc_html__('E-commerce Sites', 'blueprint-folder'),
+                            'current' => false,
+                        ),
+                        array(
+                            'url' => home_url('/services/web-design/custom'),
+                            'title' => esc_html__('Custom Development', 'blueprint-folder'),
+                            'current' => false,
+                        ),
+                    )
+                ),
+                array(
+                    'url' => home_url('/services/digital-marketing'),
+                    'title' => esc_html__('Digital Marketing', 'blueprint-folder'),
+                    'current' => false,
+                    'children' => array(
+                        array(
+                            'url' => home_url('/services/digital-marketing/seo'),
+                            'title' => esc_html__('SEO Services', 'blueprint-folder'),
+                            'current' => false,
+                        ),
+                        array(
+                            'url' => home_url('/services/digital-marketing/ppc'),
+                            'title' => esc_html__('PPC Advertising', 'blueprint-folder'),
+                            'current' => false,
+                        ),
+                        array(
+                            'url' => home_url('/services/digital-marketing/social'),
+                            'title' => esc_html__('Social Media', 'blueprint-folder'),
+                            'current' => false,
+                        ),
+                    )
+                ),
+                array(
+                    'url' => home_url('/services/consulting'),
+                    'title' => esc_html__('Consulting', 'blueprint-folder'),
+                    'current' => false,
+                    'children' => array()
+                ),
+            )
         ),
         array(
-            'url' => home_url('/pricing'),
-            'title' => esc_html__('Pricing', 'blueprint-folder'),
-            'current' => is_page('pricing'),
-            'children' => array()
-        ),
-        array(
-            'url' => get_post_type_archive_link('project') ?: home_url('/portfolio'),
+            'url' => home_url('/portfolio'),
             'title' => esc_html__('Portfolio', 'blueprint-folder'),
-            'current' => is_post_type_archive('project') || is_page('portfolio'),
+            'current' => is_page('portfolio'),
             'children' => array()
         ),
         array(
@@ -269,125 +299,47 @@ function blueprint_folder_navigation_fallback() {
         )
     );
     
-    // Add service categories and services to Services menu
-    if (!empty($service_categories)) {
-        foreach ($service_categories as $category) {
-            $category_services = get_posts(array(
-                'post_type' => 'service',
-                'posts_per_page' => -1,
-                'tax_query' => array(
-                    array(
-                        'taxonomy' => 'service_category',
-                        'field' => 'term_id',
-                        'terms' => $category->term_id,
-                    ),
-                ),
-            ));
-            
-            $service_items = array();
-            if (!empty($category_services)) {
-                foreach ($category_services as $service) {
-                    $service_items[] = array(
-                        'url' => get_permalink($service->ID),
-                        'title' => $service->post_title,
-                        'current' => is_singular('service') && get_the_ID() === $service->ID,
-                    );
-                }
-            }
-            
-            $fallback_pages[2]['children'][] = array(
-                'url' => get_term_link($category),
-                'title' => $category->name,
-                'current' => is_tax('service_category', $category->slug),
-                'children' => $service_items
-            );
-        }
-    }
-    
-    // Add uncategorized services
-    if (!empty($services)) {
-        $uncategorized_services = array();
-        foreach ($services as $service) {
-            $categories = get_the_terms($service->ID, 'service_category');
-            if (empty($categories) || is_wp_error($categories)) {
-                $uncategorized_services[] = array(
-                    'url' => get_permalink($service->ID),
-                    'title' => $service->post_title,
-                    'current' => is_singular('service') && get_the_ID() === $service->ID,
-                );
-            }
-        }
-        
-        if (!empty($uncategorized_services)) {
-            $fallback_pages[2]['children'] = array_merge($fallback_pages[2]['children'], $uncategorized_services);
-        }
-    }
-    
-    echo '<ul id="primary-menu" class="menu nav-menu">';
+    echo '<ul id="primary-menu" class="navbar-nav ms-auto me-3">';
     foreach ($fallback_pages as $page) {
-        $current_class = $page['current'] ? ' current-menu-item' : '';
+        $current_class = $page['current'] ? ' active' : '';
         $has_children = !empty($page['children']);
-        $children_class = $has_children ? ' menu-item-has-children' : '';
-        $aria_current = $page['current'] ? ' aria-current="page"' : '';
-        $aria_expanded = $has_children ? ' aria-expanded="false"' : '';
-        $aria_haspopup = $has_children ? ' aria-haspopup="true"' : '';
+        $dropdown_class = $has_children ? ' dropdown' : '';
         
-        printf(
-            '<li class="menu-item%s%s">
-                <a href="%s" class="menu-link"%s%s%s>%s%s</a>',
-            esc_attr($current_class),
-            esc_attr($children_class),
-            esc_url($page['url']),
-            $aria_current,
-            $aria_expanded,
-            $aria_haspopup,
-            esc_html($page['title']),
-            $has_children ? ' <i class="fas fa-chevron-down" aria-hidden="true"></i>' : ''
-        );
+        echo '<li class="nav-item' . esc_attr($dropdown_class . $current_class) . '">';
         
-        // Add children if they exist
         if ($has_children) {
-            echo '<ul class="sub-menu">';
+            echo '<a href="' . esc_url($page['url']) . '" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">';
+            echo esc_html($page['title']);
+            echo ' <i class="fas fa-chevron-down ms-1"></i>';
+            echo '</a>';
+            
+            echo '<ul class="dropdown-menu">';
             foreach ($page['children'] as $child) {
-                $child_current_class = $child['current'] ? ' current-menu-item' : '';
                 $child_has_children = !empty($child['children']);
-                $child_children_class = $child_has_children ? ' menu-item-has-children' : '';
-                $child_aria_current = $child['current'] ? ' aria-current="page"' : '';
+                $child_dropdown_class = $child_has_children ? ' dropend' : '';
                 
-                printf(
-                    '<li class="menu-item%s%s">
-                        <a href="%s" class="menu-link"%s>%s%s</a>',
-                    esc_attr($child_current_class),
-                    esc_attr($child_children_class),
-                    esc_url($child['url']),
-                    $child_aria_current,
-                    esc_html($child['title']),
-                    $child_has_children ? ' <i class="fas fa-chevron-down" aria-hidden="true"></i>' : ''
-                );
+                echo '<li class="' . esc_attr($child_dropdown_class) . '">';
                 
-                // Add third level children (services under categories)
                 if ($child_has_children) {
-                    echo '<ul class="sub-menu">';
+                    echo '<a href="' . esc_url($child['url']) . '" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">';
+                    echo esc_html($child['title']);
+                    echo ' <i class="fas fa-chevron-right ms-auto"></i>';
+                    echo '</a>';
+                    
+                    echo '<ul class="dropdown-menu dropdown-submenu">';
                     foreach ($child['children'] as $grandchild) {
-                        $grandchild_current_class = $grandchild['current'] ? ' current-menu-item' : '';
-                        $grandchild_aria_current = $grandchild['current'] ? ' aria-current="page"' : '';
-                        
-                        printf(
-                            '<li class="menu-item%s">
-                                <a href="%s" class="menu-link"%s>%s</a>
-                            </li>',
-                            esc_attr($grandchild_current_class),
-                            esc_url($grandchild['url']),
-                            $grandchild_aria_current,
-                            esc_html($grandchild['title'])
-                        );
+                        echo '<li><a href="' . esc_url($grandchild['url']) . '" class="dropdown-item">' . esc_html($grandchild['title']) . '</a></li>';
                     }
                     echo '</ul>';
+                } else {
+                    echo '<a href="' . esc_url($child['url']) . '" class="dropdown-item">' . esc_html($child['title']) . '</a>';
                 }
                 
                 echo '</li>';
             }
             echo '</ul>';
+        } else {
+            echo '<a href="' . esc_url($page['url']) . '" class="nav-link">' . esc_html($page['title']) . '</a>';
         }
         
         echo '</li>';
