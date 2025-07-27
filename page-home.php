@@ -106,7 +106,7 @@ get_header(); ?>
                                 <span style="color: #444; font-weight: 500;">Eco-friendly Options</span>
                             </div>
                         </div>
-                        <a href="/services#cleaning" class="btn" style="background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%); color: white; padding: 0.9rem 1.8rem; text-align: center; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255,95,0,0.2); position: relative; overflow: hidden;">
+                        <a href="/service#cleaning" class="btn" style="background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%); color: white; padding: 0.9rem 1.8rem; text-align: center; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255,95,0,0.2); position: relative; overflow: hidden;">
                             <span style="position: relative; z-index: 2;">Learn More</span>
                             <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%); transition: all 0.5s ease; z-index: 1;" class="btn-shine"></span>
                         </a>
@@ -145,7 +145,7 @@ get_header(); ?>
                                 <span style="color: #444; font-weight: 500;">Furniture Assembly</span>
                             </div>
                         </div>
-                        <a href="/services#repairs" class="btn" style="background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%); color: white; padding: 0.9rem 1.8rem; text-align: center; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255,95,0,0.2); position: relative; overflow: hidden;">
+                        <a href="/service#repairs" class="btn" style="background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%); color: white; padding: 0.9rem 1.8rem; text-align: center; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255,95,0,0.2); position: relative; overflow: hidden;">
                             <span style="position: relative; z-index: 2;">Learn More</span>
                             <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%); transition: all 0.5s ease; z-index: 1;" class="btn-shine"></span>
                         </a>
@@ -184,7 +184,7 @@ get_header(); ?>
                                 <span style="color: #444; font-weight: 500;">Irrigation & Lighting</span>
                             </div>
                         </div>
-                        <a href="/services#landscaping" class="btn" style="background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%); color: white; padding: 0.9rem 1.8rem; text-align: center; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255,95,0,0.2); position: relative; overflow: hidden;">
+                        <a href="/service#landscaping" class="btn" style="background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%); color: white; padding: 0.9rem 1.8rem; text-align: center; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255,95,0,0.2); position: relative; overflow: hidden;">
                             <span style="position: relative; z-index: 2;">Learn More</span>
                             <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%); transition: all 0.5s ease; z-index: 1;" class="btn-shine"></span>
                         </a>
