@@ -156,16 +156,30 @@ img {
 
 /* Adjust body for fixed header */
 body {
-    padding-top: 80px;
+    padding-top: 90px !important;
 }
 
 .admin-bar body {
-    padding-top: 112px;
+    padding-top: 122px !important;
 }
 
 @media (max-width: 782px) {
     .admin-bar body {
-        padding-top: 126px;
+        padding-top: 136px !important;
+    }
+}
+
+/* Ensure main content doesn't overlap with header */
+.site-main {
+    position: relative;
+    z-index: 1;
+    background: var(--white);
+}
+
+/* Fix for WordPress admin bar */
+@media screen and (max-width: 600px) {
+    .admin-bar body {
+        padding-top: 126px !important;
     }
 }
 
