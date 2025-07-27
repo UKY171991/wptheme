@@ -115,12 +115,12 @@
                     <!-- Enhanced CTA Section -->
                     <div class="navbar-actions ms-lg-3">
                         <div class="cta-wrapper">
-                            <a href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>" 
+                            <a href="<?php echo esc_url(blueprint_folder_get_header_cta_url()); ?>" 
                                class="btn btn-primary enhanced-cta-btn" 
                                role="button"
                                aria-describedby="cta-description">
                                 <i class="fas fa-envelope me-2" aria-hidden="true"></i>
-                                <span class="cta-text"><?php esc_html_e('Get Quote', 'blueprint-folder'); ?></span>
+                                <span class="cta-text"><?php echo esc_html(blueprint_folder_get_header_cta_text()); ?></span>
                             </a>
                             <span id="cta-description" class="sr-only">
                                 <?php esc_html_e('Contact us for a free quote on our services', 'blueprint-folder'); ?>
@@ -140,6 +140,9 @@
                 <div class="mobile-menu-backdrop d-lg-none" data-mobile-menu-backdrop aria-hidden="true"></div>
             </div>
         </nav>
+        
+        <!-- ARIA Live Region for Screen Reader Announcements -->
+        <div class="aria-live-region" aria-live="polite" aria-atomic="true" id="navigation-announcements"></div>
     </header>
 
     <!-- Main Content Area -->

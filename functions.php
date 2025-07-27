@@ -192,7 +192,7 @@ require_once get_template_directory() . '/inc/template-functions.php';
 require_once get_template_directory() . '/inc/customizer.php';
 
 /**
- * HEADER LAYOUT & ADMIN BAR FIXES
+ * ENHANCED HEADER LAYOUT & ADMIN BAR FIXES
  */
 function blueprint_folder_header_fixes() {
     // Hide admin bar for non-admin users
@@ -200,15 +200,60 @@ function blueprint_folder_header_fixes() {
         show_admin_bar(false);
     }
     
-    // Remove any theme customizer elements that might interfere
+    // Enhanced header styles with responsive support
     add_action('wp_head', function() {
         echo '<style>
-        /* Emergency header fixes */
-        .site-header { position: fixed !important; top: 0 !important; z-index: 9999 !important; }
-        .site-header::before, .site-header::after { display: none !important; }
-        body { padding-top: 70px !important; }
-        .admin-bar body { padding-top: 102px !important; }
-        @media (max-width: 782px) { .admin-bar body { padding-top: 116px !important; } }
+        /* Enhanced header fixes with responsive support */
+        .site-header { 
+            position: fixed !important; 
+            top: 0 !important; 
+            z-index: 1030 !important; 
+            width: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+        }
+        .site-header::before, 
+        .site-header::after { 
+            display: none !important; 
+        }
+        
+        /* Responsive body padding */
+        body { 
+            padding-top: 80px !important; 
+        }
+        .admin-bar body { 
+            padding-top: 112px !important; 
+        }
+        
+        @media (max-width: 782px) { 
+            .admin-bar body { 
+                padding-top: 126px !important; 
+            } 
+        }
+        
+        @media (max-width: 575.98px) {
+            body {
+                padding-top: 70px !important;
+            }
+            .admin-bar body {
+                padding-top: 102px !important;
+            }
+        }
+        
+        @media (min-width: 1400px) {
+            body {
+                padding-top: 90px !important;
+            }
+            .admin-bar body {
+                padding-top: 122px !important;
+            }
+        }
+        
+        /* Ensure header stays above other elements */
+        .site-header {
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+        }
         </style>';
     }, 9999);
 }
@@ -1507,3 +1552,147 @@ add_action('customize_register', 'blueprint_folder_customize_register');
 
 // That's all folks!
 ?>
+/**
+ * ENHANCED MENU CUSTOMIZATION SUPPORT
+ */
+function blueprint_folder_customize_menu_support() {
+    // Add support for menu customization
+    add_theme_support('customize-selective-refresh-widgets');
+    
+    // Register additional menu locations for enhanced navigation
+    register_nav_menus(array(
+        'header-utility' => esc_html__('Header Utility Menu', 'blueprint-folder'),
+        'mega-menu' => esc_html__('Mega Menu', 'blueprint-folder'),
+    ));
+}
+add_action('after_setup_theme', 'blueprint_folder_customize_menu_support');
+
+/**
+ * DYNAMIC MENU CACHE BUSTING
+ */
+function blueprint_folder_menu_cache_buster() {
+    // Clear menu cache when menus are updated
+    wp_cache_delete('blueprint_folder_nav_menu', 'theme_mods');
+}
+add_action('wp_update_nav_menu', 'blueprint_folder_menu_cache_buster');
+
+/**
+ * ENHANCED MENU WALKER SUPPORT
+ */
+function blueprint_folder_menu_walker_enhancements($args) {
+    // Ensure our custom walker is used for primary navigation
+    if (isset($args['theme_location']) && $args['theme_location'] === 'primary') {
+        $args['walker'] = new WP_Bootstrap_Navwalker();
+        $args['fallback_cb'] = 'blueprint_folder_navigation_fallback';
+    }
+    
+    return $args;
+}
+add_filter('wp_nav_menu_args', 'blueprint_folder_menu_walker_enhancements');
+
+/**
+ * CUSTOMIZER INTEGRATION FOR HEADER
+ */
+function blueprint_folder_header_customizer($wp_customize) {
+    // Add header section
+    $wp_customize->add_section('blueprint_folder_header', array(
+        'title' => __('Header Settings', 'blueprint-folder'),
+        'priority' => 30,
+    ));
+    
+    // CTA Button Text
+    $wp_customize->add_setting('header_cta_text', array(
+        'default' => 'Get Quote',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    
+    $wp_customize->add_control('header_cta_text', array(
+        'label' => __('CTA Button Text', 'blueprint-folder'),
+        'section' => 'blueprint_folder_header',
+        'type' => 'text',
+    ));
+    
+    // CTA Button URL
+    $wp_customize->add_setting('header_cta_url', array(
+        'default' => '/contact',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control('header_cta_url', array(
+        'label' => __('CTA Button URL', 'blueprint-folder'),
+        'section' => 'blueprint_folder_header',
+        'type' => 'url',
+    ));
+    
+    // Mobile Menu Style
+    $wp_customize->add_setting('mobile_menu_style', array(
+        'default' => 'slide',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    
+    $wp_customize->add_control('mobile_menu_style', array(
+        'label' => __('Mobile Menu Style', 'blueprint-folder'),
+        'section' => 'blueprint_folder_header',
+        'type' => 'select',
+        'choices' => array(
+            'slide' => __('Slide In', 'blueprint-folder'),
+            'overlay' => __('Full Overlay', 'blueprint-folder'),
+            'dropdown' => __('Dropdown', 'blueprint-folder'),
+        ),
+    ));
+}
+add_action('customize_register', 'blueprint_folder_header_customizer');
+
+/**
+ * GET CUSTOMIZER VALUES FOR HEADER
+ */
+function blueprint_folder_get_header_cta_text() {
+    return get_theme_mod('header_cta_text', 'Get Quote');
+}
+
+function blueprint_folder_get_header_cta_url() {
+    $url = get_theme_mod('header_cta_url', '/contact');
+    if (strpos($url, '/') === 0) {
+        return home_url($url);
+    }
+    return $url;
+}
+
+/**
+ * MENU ITEM CUSTOM FIELDS SUPPORT
+ */
+function blueprint_folder_menu_item_custom_fields() {
+    add_action('wp_nav_menu_item_custom_fields', 'blueprint_folder_menu_custom_fields', 10, 4);
+    add_action('wp_update_nav_menu_item', 'blueprint_folder_save_menu_custom_fields', 10, 3);
+}
+add_action('init', 'blueprint_folder_menu_item_custom_fields');
+
+function blueprint_folder_menu_custom_fields($item_id, $item, $depth, $args) {
+    $icon_class = get_post_meta($item_id, '_menu_item_icon', true);
+    $description = get_post_meta($item_id, '_menu_item_description', true);
+    ?>
+    <p class="field-icon description description-wide">
+        <label for="edit-menu-item-icon-<?php echo $item_id; ?>">
+            <?php _e('Icon Class', 'blueprint-folder'); ?><br />
+            <input type="text" id="edit-menu-item-icon-<?php echo $item_id; ?>" class="widefat code edit-menu-item-icon" name="menu-item-icon[<?php echo $item_id; ?>]" value="<?php echo esc_attr($icon_class); ?>" />
+            <span class="description"><?php _e('Font Awesome icon class (e.g., fas fa-home)', 'blueprint-folder'); ?></span>
+        </label>
+    </p>
+    <p class="field-description description description-wide">
+        <label for="edit-menu-item-description-<?php echo $item_id; ?>">
+            <?php _e('Description', 'blueprint-folder'); ?><br />
+            <textarea id="edit-menu-item-description-<?php echo $item_id; ?>" class="widefat edit-menu-item-description" rows="3" cols="20" name="menu-item-description[<?php echo $item_id; ?>]"><?php echo esc_html($description); ?></textarea>
+            <span class="description"><?php _e('Description for mega menu or tooltip', 'blueprint-folder'); ?></span>
+        </label>
+    </p>
+    <?php
+}
+
+function blueprint_folder_save_menu_custom_fields($menu_id, $menu_item_db_id, $args) {
+    if (isset($_POST['menu-item-icon'][$menu_item_db_id])) {
+        update_post_meta($menu_item_db_id, '_menu_item_icon', sanitize_text_field($_POST['menu-item-icon'][$menu_item_db_id]));
+    }
+    if (isset($_POST['menu-item-description'][$menu_item_db_id])) {
+        update_post_meta($menu_item_db_id, '_menu_item_description', sanitize_textarea_field($_POST['menu-item-description'][$menu_item_db_id]));
+    }
+}

@@ -1503,4 +1503,463 @@ body.mobile-menu-open {
     width: 1px;
     height: 1px;
     overflow: hidden;
+}/* CTA
+ Button Ripple Effect */
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.enhanced-cta-btn.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.enhanced-cta-btn.loading::before {
+    display: none;
+}/
+* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* CSS Containment for Better Performance */
+.site-header {
+    contain: layout style;
+}
+
+.dropdown-menu {
+    contain: layout style;
+}
+
+.enhanced-navigation {
+    contain: layout style;
+}
+
+/* Will-change for Animated Elements */
+.navbar-nav .nav-link {
+    will-change: transform, background-color;
+}
+
+.enhanced-cta-btn {
+    will-change: transform, box-shadow;
+}
+
+.hamburger-lines .line {
+    will-change: transform, opacity;
+}
+
+.dropdown-menu {
+    will-change: opacity, transform;
+}
+
+.enhanced-navigation {
+    will-change: right;
+}
+
+/* GPU Acceleration for Smooth Animations */
+.navbar-nav .nav-link,
+.enhanced-cta-btn,
+.dropdown-item,
+.hamburger-lines .line,
+.dropdown-menu,
+.enhanced-navigation {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Optimize Repaints */
+.site-header::before {
+    will-change: opacity;
+}
+
+.mobile-menu-backdrop {
+    will-change: opacity, visibility;
+}
+
+/* Critical CSS Optimization */
+.site-header {
+    /* Inline critical styles for above-the-fold content */
+    background: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+}
+
+/* Preload Hints for Fonts */
+@font-face {
+    font-family: 'Inter';
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+}
+
+/* Reduce Layout Shifts */
+.navbar {
+    min-height: 80px;
+}
+
+.custom-logo {
+    max-height: 50px;
+    width: auto;
+}
+
+/* Optimize for Mobile Performance */
+@media (max-width: 991.98px) {
+    .enhanced-navigation {
+        /* Use transform instead of right for better performance */
+        transform: translateX(100%);
+        right: 0;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .enhanced-navigation.show {
+        transform: translateX(0);
+    }
+}/*
+ ========================================
+   RESPONSIVE DESIGN ENHANCEMENTS
+   ======================================== */
+
+/* Fluid Typography */
+.text-branding .navbar-brand {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.site-title {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.site-description {
+    font-size: clamp(0.7rem, 2vw, 0.75rem);
+}
+
+/* Responsive Navigation Spacing */
+.navbar-nav .nav-link {
+    padding: clamp(0.5rem, 2vw, 0.875rem) clamp(0.75rem, 3vw, 1.25rem);
+    font-size: clamp(0.875rem, 2.5vw, 0.95rem);
+}
+
+/* Responsive CTA Button */
+.enhanced-cta-btn {
+    padding: clamp(0.75rem, 2vw, 0.875rem) clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(0.875rem, 2.5vw, 0.95rem);
+}
+
+/* Container Responsive Adjustments */
+@media (max-width: 575.98px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .navbar {
+        padding: 0.75rem 0;
+        min-height: 70px;
+    }
+    
+    body {
+        padding-top: 70px;
+    }
+    
+    .admin-bar body {
+        padding-top: 102px;
+    }
+}
+
+/* Tablet Specific Adjustments */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .navbar {
+        padding: 0.875rem 0;
+        min-height: 75px;
+    }
+    
+    body {
+        padding-top: 75px;
+    }
+    
+    .admin-bar body {
+        padding-top: 107px;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.875rem 1rem;
+    }
+}
+
+/* Large Screen Optimizations */
+@media (min-width: 1400px) {
+    .navbar {
+        padding: 1.25rem 0;
+        min-height: 90px;
+    }
+    
+    body {
+        padding-top: 90px;
+    }
+    
+    .admin-bar body {
+        padding-top: 122px;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .enhanced-cta-btn {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Ultra-wide Screen Support */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1400px;
+    }
+}
+
+/* Mobile Landscape Optimizations */
+@media (max-width: 991.98px) and (orientation: landscape) {
+    .navbar {
+        min-height: 60px;
+        padding: 0.5rem 0;
+    }
+    
+    body {
+        padding-top: 60px;
+    }
+    
+    .admin-bar body {
+        padding-top: 92px;
+    }
+    
+    .enhanced-navigation {
+        max-width: 350px;
+    }
+    
+    .mobile-menu-header,
+    .mobile-menu-footer {
+        padding: 1rem 1.5rem;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1.5rem;
+        min-height: 48px;
+    }
+}
+
+/* High DPI Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .custom-logo {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+    
+    .hamburger-lines .line {
+        height: 2px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .site-header,
+    .enhanced-mobile-toggle,
+    .mobile-menu-backdrop,
+    .skip-links {
+        display: none !important;
+    }
+    
+    body {
+        padding-top: 0 !important;
+    }
+}
+
+/* Reduced Data Mode */
+@media (prefers-reduced-data: reduce) {
+    .site-header::before {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+    
+    .dropdown-menu {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+    
+    .mobile-menu-backdrop {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --white: #1a1a1a;
+        --text-dark: #ffffff;
+        --text-muted: #b0b0b0;
+        --light-gray: #2a2a2a;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .site-header {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .mobile-menu-header,
+    .mobile-menu-footer {
+        background: #2a2a2a;
+    }
+    
+    .navbar-nav .nav-link {
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+}/* ====
+====================================
+   FINAL POLISH & MICRO-INTERACTIONS
+   ======================================== */
+
+/* Smooth page transitions */
+body {
+    transition: padding-top 0.3s ease;
+}
+
+/* Enhanced focus management */
+.skip-link:focus {
+    animation: focusPulse 0.3s ease-in-out;
+}
+
+@keyframes focusPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Loading states */
+.enhanced-cta-btn.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.enhanced-cta-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Hover enhancements for better feedback */
+.navbar-nav .nav-link:hover {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-item:hover {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced mobile menu animations */
+@media (max-width: 991.98px) {
+    .enhanced-navigation.show {
+        animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .mobile-menu-backdrop.show {
+        animation: fadeIn 0.3s ease;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Ensure consistent spacing */
+.navbar-nav .nav-item:last-child .nav-link {
+    margin-right: 0;
+}
+
+/* Polish for logo transitions */
+.custom-logo-link:hover .custom-logo {
+    filter: brightness(1.1);
+}
+
+/* Enhanced dropdown arrow animation */
+.navbar-nav .dropdown-toggle .fas {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure proper stacking context */
+.site-header {
+    isolation: isolate;
+}
+
+.dropdown-menu {
+    isolation: isolate;
+}
+
+.enhanced-navigation {
+    isolation: isolate;
+}
+
+/* Final accessibility polish */
+@media (forced-colors: active) {
+    .navbar-nav .nav-link:focus,
+    .enhanced-cta-btn:focus {
+        outline: 2px solid ButtonText;
+        outline-offset: 2px;
+    }
+    
+    .hamburger-lines .line {
+        background-color: ButtonText;
+    }
+}
+
+/* Ensure smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Final responsive polish */
+@media (max-width: 374px) {
+    .text-branding .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    .enhanced-cta-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Ensure proper contrast in all states */
+.navbar-nav .current-menu-item > .nav-link,
+.navbar-nav .nav-link.active {
+    color: #0056b3;
+    background-color: rgba(13, 110, 253, 0.1);
 }
