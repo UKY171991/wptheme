@@ -15,7 +15,7 @@ Bootstrap 5 Compatible | Vanilla JS
             this.navigation.init();
             this.layout.init();
             this.utils.init();
-            this.megaMenuEnhancements.init();
+
         },
 
         // Enhanced Navigation functionality
@@ -161,12 +161,6 @@ Bootstrap 5 Compatible | Vanilla JS
                                 
                                 toggle.setAttribute('aria-expanded', 'true');
                                 menu.classList.add('show');
-                                
-                                // Add staggered animation for mega menu items
-                                const megaItems = menu.querySelectorAll('.mega-menu-item');
-                                megaItems.forEach((item, index) => {
-                                    item.style.animationDelay = (index * 0.1) + 's';
-                                });
                             });
 
                             dropdown.addEventListener('mouseleave', function() {
@@ -211,7 +205,7 @@ Bootstrap 5 Compatible | Vanilla JS
                                 
                                 // Focus first menu item on mobile
                                 if (window.innerWidth < 992) {
-                                    const firstItem = menu.querySelector('.mega-menu-link, .dropdown-item');
+                                    const firstItem = menu.querySelector('.dropdown-item');
                                     if (firstItem) {
                                         setTimeout(() => firstItem.focus(), 100);
                                     }
@@ -268,7 +262,7 @@ Bootstrap 5 Compatible | Vanilla JS
             },
 
             setupKeyboardNavigation: function() {
-                // Handle keyboard navigation for dropdowns and mega menus
+                // Handle keyboard navigation for standard dropdowns
                 document.addEventListener('keydown', function(e) {
                     const activeElement = document.activeElement;
                     
@@ -282,60 +276,14 @@ Bootstrap 5 Compatible | Vanilla JS
                             activeElement.setAttribute('aria-expanded', 'true');
                             menu.classList.add('show');
                             
-                            const firstItem = menu.querySelector('.mega-menu-link, .dropdown-item');
+                            const firstItem = menu.querySelector('.dropdown-item');
                             if (firstItem) {
                                 firstItem.focus();
                             }
                         }
                     }
                     
-                    // Handle mega menu navigation
-                    if (activeElement.classList.contains('mega-menu-link')) {
-                        const menu = activeElement.closest('.dropdown-menu');
-                        const items = Array.from(menu.querySelectorAll('.mega-menu-link'));
-                        const currentIndex = items.indexOf(activeElement);
-                        
-                        if (e.key === 'ArrowDown') {
-                            e.preventDefault();
-                            const nextIndex = (currentIndex + 1) % items.length;
-                            items[nextIndex].focus();
-                        } else if (e.key === 'ArrowUp') {
-                            e.preventDefault();
-                            const prevIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
-                            items[prevIndex].focus();
-                        } else if (e.key === 'ArrowRight') {
-                            e.preventDefault();
-                            // Move to next column in mega menu
-                            const currentSection = activeElement.closest('.mega-menu-section');
-                            const nextSection = currentSection.nextElementSibling;
-                            if (nextSection) {
-                                const nextSectionFirstItem = nextSection.querySelector('.mega-menu-link');
-                                if (nextSectionFirstItem) {
-                                    nextSectionFirstItem.focus();
-                                }
-                            }
-                        } else if (e.key === 'ArrowLeft') {
-                            e.preventDefault();
-                            // Move to previous column in mega menu
-                            const currentSection = activeElement.closest('.mega-menu-section');
-                            const prevSection = currentSection.previousElementSibling;
-                            if (prevSection) {
-                                const prevSectionFirstItem = prevSection.querySelector('.mega-menu-link');
-                                if (prevSectionFirstItem) {
-                                    prevSectionFirstItem.focus();
-                                }
-                            }
-                        } else if (e.key === 'Escape') {
-                            e.preventDefault();
-                            const dropdown = menu.closest('.dropdown');
-                            const toggle = dropdown.querySelector('.dropdown-toggle');
-                            toggle.setAttribute('aria-expanded', 'false');
-                            menu.classList.remove('show');
-                            toggle.focus();
-                        }
-                    }
-                    
-                    // Handle regular dropdown item navigation
+                    // Handle dropdown item navigation
                     if (activeElement.classList.contains('dropdown-item')) {
                         const menu = activeElement.closest('.dropdown-menu');
                         const items = Array.from(menu.querySelectorAll('.dropdown-item'));
@@ -448,26 +396,24 @@ Bootstrap 5 Compatible | Vanilla JS
 
             setupSubmenuInteractions: function() {
                 // Handle submenu interactions on mobile
-                const submenuToggles = document.querySelectorAll('.has-submenu > a');
+                const submenuToggles = document.querySelectorAll('.dropdown-toggle');
                 
                 submenuToggles.forEach(toggle => {
                     toggle.addEventListener('click', function(e) {
                         if (window.innerWidth < 992) {
-                            e.preventDefault();
-                            
-                            const parentItem = this.closest('.has-submenu');
-                            const submenu = parentItem.querySelector('.mega-menu-submenu, .dropdown-submenu');
+                            const parentItem = this.closest('.dropdown');
+                            const submenu = parentItem.querySelector('.dropdown-menu');
                             
                             if (submenu) {
-                                parentItem.classList.toggle('active');
+                                const isExpanded = this.getAttribute('aria-expanded') === 'true';
                                 
-                                // Close other submenus at the same level
-                                const siblings = parentItem.parentElement.querySelectorAll('.has-submenu');
-                                siblings.forEach(sibling => {
-                                    if (sibling !== parentItem) {
-                                        sibling.classList.remove('active');
-                                    }
-                                });
+                                if (isExpanded) {
+                                    this.setAttribute('aria-expanded', 'false');
+                                    submenu.classList.remove('show');
+                                } else {
+                                    this.setAttribute('aria-expanded', 'true');
+                                    submenu.classList.add('show');
+                                }
                             }
                         }
                     });
@@ -588,28 +534,56 @@ Bootstrap 5 Compatible | Vanilla JS
             }
         },
 
-        // Additional mega menu enhancements
-        megaMenuEnhancements: {
+        // Utility functions
+        utils: {
             init: function() {
-                this.addMegaMenuAnimations();
-                this.handleMegaMenuKeyboard();
-                this.optimizeMegaMenuPerformance();
+                this.setupScrollToTop();
+                this.setupLazyLoading();
             },
 
-            addMegaMenuAnimations: function() {
-                const megaMenus = document.querySelectorAll('.services-mega-menu');
-                
-                megaMenus.forEach(menu => {
-                    const sections = menu.querySelectorAll('.mega-menu-section');
-                    
-                    // Add staggered animation to sections
-                    sections.forEach((section, index) => {
-                        section.style.animationDelay = (index * 0.1) + 's';
+            setupScrollToTop: function() {
+                // Add scroll to top functionality
+                const scrollBtn = document.createElement('button');
+                scrollBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+                scrollBtn.className = 'scroll-to-top';
+                scrollBtn.setAttribute('aria-label', 'Scroll to top');
+                document.body.appendChild(scrollBtn);
+
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        scrollBtn.classList.add('show');
+                    } else {
+                        scrollBtn.classList.remove('show');
+                    }
+                });
+
+                scrollBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
                     });
                 });
             },
 
-            handleMegaMenuKeyboard: function() {
+            setupLazyLoading: function() {
+                // Simple lazy loading for images
+                const images = document.querySelectorAll('img[data-src]');
+                
+                if ('IntersectionObserver' in window) {
+                    const imageObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                img.src = img.dataset.src;
+                                img.classList.remove('lazy');
+                                imageObserver.unobserve(img);
+                            }
+                        });
+                    });
+
+                    images.forEach(img => imageObserver.observe(img));
+                }
+            }rd: function() {
                 // Enhanced keyboard navigation for mega menu
                 document.addEventListener('keydown', function(e) {
                     const activeElement = document.activeElement;
