@@ -9,6 +9,21 @@ if (is_front_page()) {
     return;
 }
 
+// Exit early if this is a page template that has its own hero section
+$page_template = get_page_template_slug();
+if (in_array($page_template, array(
+    'page-portfolio.php', 
+    'page-services.php', 
+    'page-about.php',
+    'page-testimonials.php',
+    'page-team.php',
+    'page-pricing.php',
+    'page-home.php',
+    'page-careers.php'
+))) {
+    return;
+}
+
 // Get current page information
 $page_title = '';
 $page_subtitle = '';

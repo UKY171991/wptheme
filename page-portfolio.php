@@ -111,14 +111,6 @@ get_header(); ?>
                                 </div>
                             </div>
                         </div>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- Portfolio Item 2 - Home Repair -->
