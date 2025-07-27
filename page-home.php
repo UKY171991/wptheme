@@ -193,7 +193,7 @@ get_header(); ?>
             </div>
             
             <div class="view-all-services" style="text-align: center; margin-top: 4rem; position: relative; z-index: 2;">
-                <a href="/services" class="cta-button" style="padding: 1.2rem 3rem; font-size: 1.1rem; font-weight: 600; display: inline-block; background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%); border-radius: 50px; color: white; text-decoration: none; box-shadow: 0 10px 25px rgba(255,95,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden;">
+                <a href="/service" class="cta-button" style="padding: 1.2rem 3rem; font-size: 1.1rem; font-weight: 600; display: inline-block; background: linear-gradient(135deg, #ff5f00 0%, #ff8c00 100%); border-radius: 50px; color: white; text-decoration: none; box-shadow: 0 10px 25px rgba(255,95,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden;">
                     <span style="position: relative; z-index: 2;">View All Services <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i></span>
                     <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%); transition: all 0.5s ease; z-index: 1;" class="btn-shine"></span>
                 </a>
