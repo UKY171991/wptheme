@@ -776,6 +776,77 @@ function blueprint_folder_mark_permalinks_flushed() {
 add_action('load-options-permalink.php', 'blueprint_folder_mark_permalinks_flushed');
 
 /**
+ * Enhanced Pagination Function
+ */
+function blueprint_folder_pagination($args = array()) {
+    $defaults = array(
+        'prev_text' => '<i class="fas fa-chevron-left me-2"></i>Previous',
+        'next_text' => 'Next<i class="fas fa-chevron-right ms-2"></i>',
+        'mid_size' => 2,
+        'end_size' => 1,
+        'show_all' => false,
+        'type' => 'array',
+        'class' => 'pagination',
+        'container_class' => 'blueprint-pagination'
+    );
+    
+    $args = wp_parse_args($args, $defaults);
+    $class = $args['class'];
+    $container_class = $args['container_class'];
+    unset($args['class'], $args['container_class']);
+    
+    $pagination = paginate_links($args);
+    
+    if (!$pagination) {
+        return;
+    }
+    
+    echo '<div class="' . esc_attr($container_class) . ' mt-5">';
+    echo '<nav aria-label="Pagination Navigation" class="d-flex justify-content-center">';
+    echo '<ul class="' . esc_attr($class) . '">';
+    
+    foreach ($pagination as $page) {
+        if (strpos($page, 'current') !== false) {
+            echo '<li class="page-item active">';
+            echo str_replace('page-numbers', 'page-link', $page);
+            echo '</li>';
+        } elseif (strpos($page, 'dots') !== false) {
+            echo '<li class="page-item disabled">';
+            echo '<span class="page-link dots">...</span>';
+            echo '</li>';
+        } elseif (strpos($page, 'prev') !== false) {
+            echo '<li class="page-item">';
+            echo str_replace(array('page-numbers', 'class="'), array('page-link prev', 'class="page-link prev '), $page);
+            echo '</li>';
+        } elseif (strpos($page, 'next') !== false) {
+            echo '<li class="page-item">';
+            echo str_replace(array('page-numbers', 'class="'), array('page-link next', 'class="page-link next '), $page);
+            echo '</li>';
+        } else {
+            echo '<li class="page-item">';
+            echo str_replace('page-numbers', 'page-link', $page);
+            echo '</li>';
+        }
+    }
+    
+    echo '</ul>';
+    echo '</nav>';
+    echo '</div>';
+}
+
+/**
+ * Improve WordPress default pagination styling
+ */
+function blueprint_folder_pagination_wrapper($links) {
+    if (empty($links)) {
+        return $links;
+    }
+    
+    return '<div class="blueprint-pagination-wrapper d-flex justify-content-center mt-4 mb-4">' . $links . '</div>';
+}
+add_filter('the_posts_pagination', 'blueprint_folder_pagination_wrapper');
+
+/**
  * BASIC SEO META TAGS
  */
 function blueprint_folder_seo_meta() {

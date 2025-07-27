@@ -84,21 +84,13 @@ get_header(); ?>
                     <?php endwhile; ?>
                 </div>
                 
-                <!-- Pagination -->
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <nav aria-label="Services pagination">
-                            <?php
-                            echo paginate_links(array(
-                                'prev_text' => '<i class="fas fa-chevron-left"></i> Previous',
-                                'next_text' => 'Next <i class="fas fa-chevron-right"></i>',
-                                'type' => 'list',
-                                'class' => 'pagination justify-content-center'
-                            ));
-                            ?>
-                        </nav>
-                    </div>
-                </div>
+                <!-- Enhanced Pagination -->
+                <?php
+                blueprint_folder_pagination(array(
+                    'total' => $services->max_num_pages,
+                    'current' => max(1, get_query_var('paged'))
+                ));
+                ?>
                 
             <?php else : ?>
                 
