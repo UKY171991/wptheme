@@ -265,7 +265,7 @@ get_header(); ?>
                     'description' => 'Custom websites and web applications built with modern technologies and best practices.',
                     'icon' => 'fas fa-laptop-code',
                     'features' => array('Responsive Design', 'SEO Optimized', 'Fast Loading'),
-                    'url' => home_url('/services/web-development'),
+                    'url' => home_url('/service/web-development'),
                     'featured' => false
                 ),
                 array(
@@ -273,7 +273,7 @@ get_header(); ?>
                     'description' => 'Comprehensive digital marketing strategies to boost your online presence and drive results.',
                     'icon' => 'fas fa-chart-line',
                     'features' => array('SEO & SEM', 'Social Media', 'Content Marketing'),
-                    'url' => home_url('/services/digital-marketing'),
+                    'url' => home_url('/service/digital-marketing'),
                     'featured' => true
                 ),
                 array(
@@ -281,7 +281,7 @@ get_header(); ?>
                     'description' => 'Expert guidance to help your business optimize operations and achieve strategic goals.',
                     'icon' => 'fas fa-users-cog',
                     'features' => array('Strategy Planning', 'Process Optimization', 'Growth Analysis'),
-                    'url' => home_url('/services/consulting'),
+                    'url' => home_url('/service/consulting'),
                     'featured' => false
                 ),
                 array(
@@ -289,7 +289,7 @@ get_header(); ?>
                     'description' => 'Native and cross-platform mobile applications for iOS and Android devices.',
                     'icon' => 'fas fa-mobile-alt',
                     'features' => array('iOS & Android', 'User-Friendly UI', 'App Store Ready'),
-                    'url' => home_url('/services/mobile-apps'),
+                    'url' => home_url('/service/mobile-apps'),
                     'featured' => false
                 ),
                 array(
@@ -297,7 +297,7 @@ get_header(); ?>
                     'description' => 'Comprehensive security solutions to protect your business from digital threats.',
                     'icon' => 'fas fa-shield-alt',
                     'features' => array('Security Audits', 'Threat Monitoring', 'Data Protection'),
-                    'url' => home_url('/services/cybersecurity'),
+                    'url' => home_url('/service/cybersecurity'),
                     'featured' => false
                 ),
                 array(
@@ -305,7 +305,7 @@ get_header(); ?>
                     'description' => 'Scalable cloud infrastructure and migration services for modern businesses.',
                     'icon' => 'fas fa-cloud',
                     'features' => array('Cloud Migration', 'Infrastructure Setup', '24/7 Monitoring'),
-                    'url' => home_url('/services/cloud-solutions'),
+                    'url' => home_url('/service/cloud-solutions'),
                     'featured' => false
                 )
             );
@@ -369,7 +369,7 @@ get_header(); ?>
         </div>
         
         <div class="text-center mt-5">
-            <a href="<?php echo esc_url(get_post_type_archive_link('service') ?: home_url('/services')); ?>" class="btn btn-primary btn-lg">
+            <a href="<?php echo esc_url(get_post_type_archive_link('service') ?: home_url('/service')); ?>" class="btn btn-primary btn-lg">
                 <i class="fas fa-th-large me-2"></i>
                 View All Services
             </a>
