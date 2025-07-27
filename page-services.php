@@ -14,7 +14,20 @@ get_header(); ?>
     );
     ?>
 
-  
+    <!-- Services Categories Section -->
+    <section id="services-categories" class="section">
+        <div class="container">
+            <?php echo services_pro_get_section_heading(
+                'Service Categories',
+                'Explore our comprehensive range of professional home services'
+            ); ?>
+            
+            <!-- Service Categories Display -->
+            <div class="service-categories-content">
+                <?php services_pro_display_service_categories(); ?>
+            </div>
+        </div>
+    </section>
 
     <!-- Individual Services Section -->
     <section id="services-grid" class="section bg-light">
