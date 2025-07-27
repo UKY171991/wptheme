@@ -116,9 +116,9 @@ class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
         // Add dropdown indicators
         if ($has_children) {
             if ($depth === 0) {
-                $item_output .= ' <span class="dropdown-arrow ms-1">▼</span>';
+               // $item_output .= ' <span class="dropdown-arrow ms-1">▼</span>';
             } else {
-                $item_output .= ' <span class="dropdown-arrow ms-auto">▶</span>';
+              //  $item_output .= ' <span class="dropdown-arrow ms-auto">▶</span>';
             }
         }
 
