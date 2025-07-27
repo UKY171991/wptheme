@@ -1,8 +1,13 @@
 <?php
 /**
  * Professional Banner Section Template
- * Displays on all pages with dynamic content
+ * Displays on all pages except front page (which has its own hero)
  */
+
+// Exit early if this is the front page (it has its own hero section)
+if (is_front_page()) {
+    return;
+}
 
 // Get current page information
 $page_title = '';
@@ -10,7 +15,7 @@ $page_subtitle = '';
 $page_description = '';
 $banner_class = 'page-banner';
 
-if (is_front_page()) {
+if (false) { // This condition will never be true now
     $page_title = get_theme_mod('hero_title', 'Professional Services That Drive Results');
     $page_subtitle = get_theme_mod('hero_subtitle', 'Excellence in Every Project');
     $page_description = get_theme_mod('hero_description', 'We deliver exceptional business solutions tailored to your unique needs. From consultation to implementation, we\'re your trusted partner for success.');

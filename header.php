@@ -93,8 +93,10 @@
         </nav>
     </header>
 
-    <!-- Professional Banner Section -->
-    <?php get_template_part('template-parts/banner-section'); ?>
+    <!-- Professional Banner Section (exclude homepage) -->
+    <?php if (!is_front_page()) : ?>
+        <?php get_template_part('template-parts/banner-section'); ?>
+    <?php endif; ?>
 
     <!-- Main Content Area -->
     <main id="main" class="site-main" role="main" id="main-content">
