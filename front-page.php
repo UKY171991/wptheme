@@ -144,74 +144,174 @@ get_header(); ?>
         </div>
     </div>
 </section>
-<!-- About Us Section -->
-<section class="about-section py-5 bg-light">
+<!-- Why Choose Us Section -->
+<section class="why-choose-section py-5 bg-light">
     <div class="container">
+        <!-- Section Header -->
+        <div class="text-center mb-5">
+            <div class="section-badge">
+                <i class="fas fa-star me-2"></i>
+                Why Choose Us
+            </div>
+            <h2 class="section-title mb-3">Why Choose BluePrint Folder?</h2>
+            <p class="section-description mx-auto" style="max-width: 600px;">
+                With over a decade of experience delivering exceptional results, we've become the trusted partner for businesses seeking professional excellence and measurable growth.
+            </p>
+        </div>
+
+        <!-- Statistics Row -->
+        <div class="stats-container mb-5">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center h-100">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-number">1,200+</div>
+                        <div class="stat-label">Projects Completed</div>
+                        <div class="stat-description">Successfully delivered across various industries</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center h-100">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Happy Clients</div>
+                        <div class="stat-description">Businesses trust our expertise worldwide</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center h-100">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years Experience</div>
+                        <div class="stat-description">Proven track record of excellence</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card text-center h-100">
+                        <div class="stat-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Client Retention</div>
+                        <div class="stat-description">Long-term partnerships built on trust</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row -->
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="about-content">
-                    <div class="section-badge">
-                        <i class="fas fa-info-circle me-2"></i>
-                        About Us
-                    </div>
-                    <h2 class="section-title">Why Choose BluePrint Folder?</h2>
-                    <p class="section-description">With over a decade of experience in providing professional services, BluePrint Folder has established itself as a leader in delivering quality solutions that drive real business results.</p>
-                    <div class="about-stats">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="stat-box">
-                                    <div class="stat-number">500+</div>
-                                    <div class="stat-label">Projects Completed</div>
-                                </div>
+                <div class="choose-content">
+                    <h3 class="mb-4">What Sets Us Apart</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon-small">
+                                <i class="fas fa-rocket"></i>
                             </div>
-                            <div class="col-6">
-                                <div class="stat-box">
-                                    <div class="stat-number">100%</div>
-                                    <div class="stat-label">Client Satisfaction</div>
-                                </div>
+                            <div class="feature-content">
+                                <h5>Fast Turnaround</h5>
+                                <p>Quick delivery without compromising quality standards</p>
                             </div>
                         </div>
+                        <div class="feature-item">
+                            <div class="feature-icon-small">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h5>Enterprise Security</h5>
+                                <p>Bank-level security protocols protect your data</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon-small">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h5>Custom Solutions</h5>
+                                <p>Tailored strategies designed for your unique needs</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon-small">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h5>24/7 Support</h5>
+                                <p>Round-the-clock assistance whenever you need it</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle text-primary me-2"></i>
-                            <span>Expert Team of Professionals</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle text-primary me-2"></i>
-                            <span>Proven Track Record</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle text-primary me-2"></i>
-                            <span>Customized Solutions</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle text-primary me-2"></i>
-                            <span>24/7 Customer Support</span>
-                        </div>
-                    </div>
-                    <a href="<?php echo esc_url(home_url('/about'));?>" class="btn btn-primary btn-lg">
-                        <i class="fas fa-arrow-right me-2"></i>
-                        Learn More About Us
-                    </a>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="about-visual">
-                    <div class="about-image-container">
-                        <div class="about-image">
-                            <div class="image-placeholder">
-                                <i class="fas fa-building fa-4x text-primary"></i>
-                                <h4>Professional Excellence</h4>
+                <div class="choose-visual">
+                    <div class="visual-container">
+                        <div class="main-visual-card">
+                            <div class="card-header">
+                                <div class="card-dots">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <h5>BluePrint Dashboard</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="progress-item">
+                                    <span>Project Success Rate</span>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" style="width: 98%">98%</div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span>Client Satisfaction</span>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" style="width: 95%">95%</div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span>On-Time Delivery</span>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" style="width: 92%">92%</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="about-badge badge-1">
-                            <i class="fas fa-award"></i>
+                        <div class="floating-badge badge-award">
+                            <i class="fas fa-trophy"></i>
                             <span>Industry Leader</span>
                         </div>
-                        <div class="about-badge badge-2">
+                        <div class="floating-badge badge-rating">
                             <i class="fas fa-star"></i>
-                            <span>5-Star Rated</span>
+                            <span>5.0 Rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="cta-section text-center bg-primary py-5 rounded-3">
+                    <div class="container">
+                        <h3 class="text-white mb-3">Ready to Transform Your Business?</h3>
+                        <p class="text-white mb-4 opacity-75">Join hundreds of successful businesses who trust BluePrint Folder for their growth.</p>
+                        <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                            <a href="<?php echo esc_url(home_url('/contact'));?>" class="btn btn-light btn-lg">
+                                <i class="fas fa-phone me-2"></i>
+                                Get Free Consultation
+                            </a>
+                            <a href="<?php echo esc_url(home_url('/about'));?>" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-arrow-right me-2"></i>
+                                Learn More About Us
+                            </a>
                         </div>
                     </div>
                 </div>
