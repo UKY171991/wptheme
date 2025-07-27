@@ -6,13 +6,38 @@
 get_header(); ?>
 
 <main id="main" class="site-main">
-    <?php
-    // Hero Section
-    echo services_pro_get_hero_section(
-        'Our Blog',
-        'Stay updated with the latest home service tips, industry news, and expert advice to keep your home in perfect condition.'
-    );
-    ?>
+    <!-- Blog Introduction Section -->
+    <section class="blog-intro-section section-sm bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="intro-content">
+                        <h2 class="h3 mb-3" style="color: #2c3e50; font-weight: 600;">
+                            <i class="fas fa-blog me-3" style="color: #3498db;"></i>
+                            Latest Insights & Updates
+                        </h2>
+                        <p class="lead text-muted mb-4">
+                            Stay informed with our latest articles, industry insights, and expert tips to help your business grow and succeed in today's competitive marketplace.
+                        </p>
+                        <div class="blog-stats d-flex justify-content-center gap-4 flex-wrap">
+                            <div class="stat-item">
+                                <span class="stat-number h5 text-primary mb-0"><?php echo wp_count_posts()->publish; ?></span>
+                                <span class="stat-label small text-muted d-block">Articles Published</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number h5 text-primary mb-0"><?php echo count(get_categories()); ?></span>
+                                <span class="stat-label small text-muted d-block">Categories</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number h5 text-primary mb-0"><?php echo date('Y') - 2020; ?>+</span>
+                                <span class="stat-label small text-muted d-block">Years Experience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Blog Posts Section -->
     <section id="blog-posts" class="section">

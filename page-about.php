@@ -8,21 +8,6 @@ get_header(); ?>
 
 <?php while (have_posts()) : the_post(); ?>
 
-<!-- Page Header -->
-<section class="section-sm bg-light-gray">
-    <div class="container">
-        <?php blueprint_folder_breadcrumb(); ?>
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h1 class="page-title"><?php the_title(); ?></h1>
-                <?php if (has_excerpt()) : ?>
-                    <p class="lead"><?php the_excerpt(); ?></p>
-                <?php endif; ?>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- About Content -->
 <section class="section">
     <div class="container">
@@ -167,6 +152,115 @@ get_header(); ?>
 </section>
 
 <?php endwhile; ?>
+
+<!-- Team Section -->
+<section class="team-section section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="mb-3" style="color: #2c3e50; font-weight: 600;">
+                    <i class="fas fa-users me-3" style="color: #3498db;"></i>
+                    Meet Our Team
+                </h2>
+                <p class="lead text-muted">
+                    Our experienced professionals are dedicated to delivering exceptional results and building lasting partnerships with our clients.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Team Member 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-member-card h-100">
+                    <div class="team-member-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/about.jpg" 
+                             alt="Team Member" class="img-fluid w-100" style="height: 300px; object-fit: cover;">
+                        <div class="team-social text-center">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info p-4 text-center">
+                        <h4 class="h5 mb-1" style="color: #2c3e50;">John Smith</h4>
+                        <p class="text-primary mb-2 small font-weight-medium">Founder & CEO</p>
+                        <p class="text-muted small">Leading our team with vision and strategic expertise to deliver exceptional business solutions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Member 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-member-card h-100">
+                    <div class="team-member-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/about.jpg" 
+                             alt="Team Member" class="img-fluid w-100" style="height: 300px; object-fit: cover;">
+                        <div class="team-social text-center">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info p-4 text-center">
+                        <h4 class="h5 mb-1" style="color: #2c3e50;">Sarah Johnson</h4>
+                        <p class="text-primary mb-2 small font-weight-medium">Creative Director</p>
+                        <p class="text-muted small">Bringing creative vision and innovative design solutions to every project we undertake.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Member 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-member-card h-100">
+                    <div class="team-member-image">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/about.jpg" 
+                             alt="Team Member" class="img-fluid w-100" style="height: 300px; object-fit: cover;">
+                        <div class="team-social text-center">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info p-4 text-center">
+                        <h4 class="h5 mb-1" style="color: #2c3e50;">Mike Chen</h4>
+                        <p class="text-primary mb-2 small font-weight-medium">Technical Lead</p>
+                        <p class="text-muted small">Ensuring technical excellence and innovative solutions that drive business success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Team Stats -->
+        <div class="team-stats mt-5">
+            <div class="row text-center">
+                <div class="col-md-3 col-6">
+                    <div class="stat-box p-3">
+                        <h3 class="h2 text-primary mb-2">50+</h3>
+                        <p class="text-muted mb-0">Projects Completed</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box p-3">
+                        <h3 class="h2 text-primary mb-2">5+</h3>
+                        <p class="text-muted mb-0">Years Experience</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box p-3">
+                        <h3 class="h2 text-primary mb-2">30+</h3>
+                        <p class="text-muted mb-0">Happy Clients</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box p-3">
+                        <h3 class="h2 text-primary mb-2">99%</h3>
+                        <p class="text-muted mb-0">Client Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- CTA Section -->
 <section class="section bg-primary">
