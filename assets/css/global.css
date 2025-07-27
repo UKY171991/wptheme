@@ -1382,8 +1382,9 @@ body.mobile-menu-open {
 
 .enhanced-cta-btn.loading::before {
     display: none;
-}/
-* ========================================
+}
+
+/* ========================================
    PERFORMANCE OPTIMIZATIONS
    ======================================== */
 
@@ -2512,6 +2513,50 @@ html {
     background: white;
 }
 
+/* Multi-level dropdown support (Bootstrap 5 dropend) */
+.navbar-nav .dropend {
+    position: relative;
+}
+
+.navbar-nav .dropend > .dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-top: 0;
+    margin-left: 0.125rem;
+}
+
+.navbar-nav .dropend > .dropdown-toggle::after {
+    display: inline-block;
+    margin-left: auto;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid transparent;
+    border-right: 0;
+    border-bottom: 0.3em solid transparent;
+    border-left: 0.3em solid;
+}
+
+.navbar-nav .dropend > .dropdown-toggle:empty::after {
+    margin-left: 0;
+}
+
+/* Enhanced submenu positioning */
+.navbar-nav .dropdown-submenu {
+    position: relative;
+}
+
+.navbar-nav .dropdown-submenu > .dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-top: 0;
+    margin-left: 0.125rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    z-index: 1051;
+}
+
 /* Fix dropdown item styling */
 .navbar-nav .dropdown-item {
     display: block;
@@ -2527,6 +2572,7 @@ html {
     border: 0;
     border-radius: 0.25rem;
     margin-bottom: 0.25rem;
+    position: relative;
 }
 
 .navbar-nav .dropdown-item:hover,
@@ -2535,10 +2581,47 @@ html {
     background-color: var(--accent-light);
 }
 
+/* Submenu toggle indicators */
+.navbar-nav .dropdown-item.dropdown-toggle {
+    padding-right: 2rem;
+}
+
+.navbar-nav .dropend .dropdown-item.dropdown-toggle::after {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '\f054';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 0.7em;
+    border: none;
+    margin: 0;
+}
+
+/* Hover effects for better UX */
+.navbar-nav .dropdown:hover > .dropdown-menu,
+.navbar-nav .dropend:hover > .dropdown-menu {
+    display: block;
+}
+
 /* Ensure proper spacing from header */
 @media (min-width: 992px) {
     .navbar-nav .dropdown-menu {
         margin-top: 0.5rem;
+    }
+    
+    /* Right-align dropdowns for menu items near the end */
+    .navbar-nav .nav-item:nth-last-child(-n+2) .dropdown-menu:not(.mega-menu) {
+        left: auto;
+        right: 0;
+    }
+    
+    .navbar-nav .nav-item:nth-last-child(-n+2) .dropend > .dropdown-menu {
+        left: auto;
+        right: 100%;
+        margin-left: 0;
+        margin-right: 0.125rem;
     }
 }
 
