@@ -93,5 +93,8 @@
         </nav>
     </header>
 
+    <!-- Professional Banner Section -->
+    <?php get_template_part('template-parts/banner-section'); ?>
+
     <!-- Main Content Area -->
-    <main id="main" class="site-main" role="main">
+    <main id="main" class="site-main" role="main" id="main-content">

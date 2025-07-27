@@ -652,6 +652,9 @@ function blueprint_folder_scripts() {
     // Dropdown menu fix
     wp_enqueue_style('blueprint-folder-dropdown-fix', get_template_directory_uri() . '/assets/css/dropdown-fix.css', array('blueprint-folder-global'), '1.0.0');
     
+    // Banner section styles
+    wp_enqueue_style('blueprint-folder-banner', get_template_directory_uri() . '/assets/css/banner-section.css', array('blueprint-folder-global'), '1.0.0');
+    
     // Bootstrap JS (CDN)
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
     
@@ -660,6 +663,9 @@ function blueprint_folder_scripts() {
     
     // Dropdown menu fix
     wp_enqueue_script('blueprint-folder-dropdown-fix', get_template_directory_uri() . '/assets/js/dropdown-fix.js', array('blueprint-folder-global'), '1.0.0', true);
+    
+    // Banner section functionality
+    wp_enqueue_script('blueprint-folder-banner', get_template_directory_uri() . '/assets/js/banner-section.js', array('blueprint-folder-global'), '1.0.0', true);
     
     // Localize script for AJAX and theme data
     wp_localize_script('blueprint-folder-global', 'wpAjax', array(
@@ -1524,7 +1530,7 @@ function blueprint_folder_header_customizer($wp_customize) {
 add_action('customize_register', 'blueprint_folder_header_customizer');
 
 /**
- * GET CUSTOMIZER VALUES FOR HEADER
+ * GET CUSTOMIZER VALUES FOR HEADER AND BANNER
  */
 function blueprint_folder_get_header_cta_text() {
     return get_theme_mod('header_cta_text', 'Get Quote');
@@ -1537,6 +1543,51 @@ function blueprint_folder_get_header_cta_url() {
     }
     return $url;
 }
+
+/**
+ * ADD BANNER CUSTOMIZER OPTIONS
+ */
+function blueprint_folder_banner_customizer($wp_customize) {
+    // Banner Section
+    $wp_customize->add_section('banner_section', array(
+        'title' => __('Banner Section', 'blueprint-folder'),
+        'priority' => 30,
+    ));
+
+    // Hero Title
+    $wp_customize->add_setting('hero_title', array(
+        'default' => 'Professional Services That Drive Results',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('hero_title', array(
+        'label' => __('Hero Title', 'blueprint-folder'),
+        'section' => 'banner_section',
+        'type' => 'text',
+    ));
+
+    // Hero Subtitle
+    $wp_customize->add_setting('hero_subtitle', array(
+        'default' => 'Excellence in Every Project',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('hero_subtitle', array(
+        'label' => __('Hero Subtitle', 'blueprint-folder'),
+        'section' => 'banner_section',
+        'type' => 'text',
+    ));
+
+    // Hero Description
+    $wp_customize->add_setting('hero_description', array(
+        'default' => 'We deliver exceptional business solutions tailored to your unique needs. From consultation to implementation, we\'re your trusted partner for success.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('hero_description', array(
+        'label' => __('Hero Description', 'blueprint-folder'),
+        'section' => 'banner_section',
+        'type' => 'textarea',
+    ));
+}
+add_action('customize_register', 'blueprint_folder_banner_customizer');
 
 /**
  * MENU ITEM CUSTOM FIELDS SUPPORT
