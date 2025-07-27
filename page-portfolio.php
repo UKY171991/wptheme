@@ -5,36 +5,7 @@
 
 get_header(); ?>
 <main id="main" class="site-main">
-    <!-- Portfolio Hero Section -->
-    <section class="section bg-primary-dark text-white">
-        <div class="overlay-accent"></div>
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-8 section-content">
-                    <nav aria-label="breadcrumb" class="mb-4">
-                        <ol class="breadcrumb bg-transparent p-0 m-0 justify-content-center">
-                            <li class="breadcrumb-item">
-                                <a href="<?php echo esc_url(home_url('/'));?>" class="text-white text-decoration-none">
-                                    <i class="fas fa-home me-1"></i>Home
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item active text-accent" aria-current="page">Portfolio</li>
-                        </ol>
-                    </nav>
-                    <div class="fade-in-up">
-                        <div class="badge bg-accent text-white px-4 py-2 rounded-pill mb-4 d-inline-flex align-items-center">
-                            <i class="fas fa-briefcase me-2"></i>Our Work
-                        </div>
-                        <h1 class="display-4 fw-bold mb-4">
-                            Portfolio
-                            <span class="text-accent d-block">Showcasing Excellence</span>
-                        </h1>
-                        <p class="lead mb-0">Discover our comprehensive range of professional services designed to help your business succeed.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- Portfolio Filter -->
     <section class="section bg-light">
         <div class="container">
