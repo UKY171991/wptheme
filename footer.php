@@ -57,7 +57,7 @@
                                 <div class="row g-3">
                                     <div class="col-6">
                                         <div class="stat-item text-center p-3" style="background: rgba(255,255,255,0.1); border-radius: 12px; backdrop-filter: blur(10px);">
-                                            <div class="stat-number h4 mb-1" style="color: #3498db; font-weight: 700;">500+</div>
+                                            <div class="stat-number h4 mb-1" style="color: #3498db; font-weight: 700;">250+</div>
                                             <div class="stat-label" style="color: #bdc3c7; font-size: 12px;">Projects</div>
                                         </div>
                                     </div>
