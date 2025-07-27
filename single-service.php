@@ -128,6 +128,137 @@ get_header(); ?>
     </div>
 </section>
 
+<!-- Service Categories Section -->
+<section class="service-categories-section bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header text-center mb-5">
+                    <h2 class="h3 mb-3" style="color: #2c3e50; font-weight: 600;">
+                        <i class="fas fa-layer-group me-3" style="color: #3498db;"></i>
+                        Browse All Service Categories
+                    </h2>
+                    <p class="text-muted lead">Explore our complete range of professional services organized by category</p>
+                </div>
+                
+                <!-- Enhanced Categories Grid -->
+                <div class="categories-grid">
+                    <div class="row g-4">
+                        <!-- All Services Card -->
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="category-card h-100">
+                                <a href="<?php echo get_post_type_archive_link('service'); ?>" class="category-card-link">
+                                    <div class="category-card-inner p-4 text-center bg-white rounded-3 shadow-sm border-0 h-100">
+                                        <div class="category-icon mb-3">
+                                            <i class="fas fa-th-large" style="font-size: 2.5rem; color: #3498db;"></i>
+                                        </div>
+                                        <h3 class="category-title h5 mb-2" style="color: #2c3e50; font-weight: 600;">
+                                            All Services
+                                        </h3>
+                                        <p class="category-description text-muted small mb-3">
+                                            View our complete service portfolio
+                                        </p>
+                                        <div class="category-count">
+                                            <span class="badge bg-primary">
+                                                <?php echo wp_count_posts('service')->publish; ?> Services
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <?php
+                        // Get all service categories
+                        $service_categories = get_terms(array(
+                            'taxonomy' => 'service_category',
+                            'hide_empty' => true,
+                            'orderby' => 'name',
+                            'order' => 'ASC'
+                        ));
+                        
+                        if ($service_categories && !is_wp_error($service_categories)) :
+                            foreach ($service_categories as $category) :
+                                // Get category icon (if stored as meta)
+                                $category_icon = get_term_meta($category->term_id, 'category_icon', true);
+                                $category_icon = $category_icon ?: 'fas fa-tag';
+                                
+                                // Get category color (if stored as meta)
+                                $category_color = get_term_meta($category->term_id, 'category_color', true);
+                                $category_color = $category_color ?: '#3498db';
+                        ?>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="category-card h-100">
+                                    <a href="<?php echo get_term_link($category); ?>" class="category-card-link">
+                                        <div class="category-card-inner p-4 text-center bg-white rounded-3 shadow-sm border-0 h-100">
+                                            <div class="category-icon mb-3">
+                                                <i class="<?php echo esc_attr($category_icon); ?>" 
+                                                   style="font-size: 2.5rem; color: <?php echo esc_attr($category_color); ?>;"></i>
+                                            </div>
+                                            <h3 class="category-title h5 mb-2" style="color: #2c3e50; font-weight: 600;">
+                                                <?php echo esc_html($category->name); ?>
+                                            </h3>
+                                            <?php if ($category->description) : ?>
+                                                <p class="category-description text-muted small mb-3">
+                                                    <?php echo esc_html(wp_trim_words($category->description, 12)); ?>
+                                                </p>
+                                            <?php else : ?>
+                                                <p class="category-description text-muted small mb-3">
+                                                    Professional <?php echo strtolower($category->name); ?> services
+                                                </p>
+                                            <?php endif; ?>
+                                            <div class="category-count">
+                                                <span class="badge" style="background-color: <?php echo esc_attr($category_color); ?>;">
+                                                    <?php echo $category->count; ?> Service<?php echo $category->count != 1 ? 's' : ''; ?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php 
+                            endforeach;
+                        endif; 
+                        ?>
+                    </div>
+                </div>
+                
+                <!-- Quick Navigation -->
+                <div class="quick-navigation mt-5">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="navigation-wrapper bg-white rounded-3 p-4 shadow-sm">
+                                <h4 class="h6 mb-3 text-center" style="color: #2c3e50; font-weight: 600;">
+                                    <i class="fas fa-compass me-2" style="color: #3498db;"></i>
+                                    Quick Navigation
+                                </h4>
+                                <div class="nav-links d-flex flex-wrap justify-content-center gap-3">
+                                    <a href="<?php echo get_post_type_archive_link('service'); ?>" 
+                                       class="nav-link-btn btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-list me-2"></i>All Services
+                                    </a>
+                                    <a href="<?php echo home_url('/contact'); ?>" 
+                                       class="nav-link-btn btn btn-outline-success btn-sm">
+                                        <i class="fas fa-envelope me-2"></i>Get Quote
+                                    </a>
+                                    <a href="<?php echo home_url('/about'); ?>" 
+                                       class="nav-link-btn btn btn-outline-info btn-sm">
+                                        <i class="fas fa-info-circle me-2"></i>About Us
+                                    </a>
+                                    <a href="<?php echo home_url('/portfolio'); ?>" 
+                                       class="nav-link-btn btn btn-outline-warning btn-sm">
+                                        <i class="fas fa-briefcase me-2"></i>Portfolio
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="section bg-primary">
     <div class="container">
