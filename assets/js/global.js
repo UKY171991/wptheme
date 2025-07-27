@@ -13,6 +13,7 @@ Bootstrap 5 Compatible | Vanilla JS
     window.BlueprintFolder = {
         init: function() {
             this.navigation.init();
+            this.layout.init();
             this.animations.init();
             this.forms.init();
             this.utils.init();
@@ -143,6 +144,18 @@ Bootstrap 5 Compatible | Vanilla JS
                         // Desktop hover behavior
                         if (window.innerWidth >= 992) {
                             dropdown.addEventListener('mouseenter', function() {
+                                // Close other dropdowns first
+                                dropdowns.forEach(otherDropdown => {
+                                    if (otherDropdown !== dropdown) {
+                                        const otherToggle = otherDropdown.querySelector('.dropdown-toggle');
+                                        const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                                        if (otherToggle && otherMenu) {
+                                            otherToggle.setAttribute('aria-expanded', 'false');
+                                            otherMenu.classList.remove('show');
+                                        }
+                                    }
+                                });
+                                
                                 toggle.setAttribute('aria-expanded', 'true');
                                 menu.classList.add('show');
                             });
@@ -156,9 +169,11 @@ Bootstrap 5 Compatible | Vanilla JS
                         // Click behavior for all devices
                         toggle.addEventListener('click', function(e) {
                             e.preventDefault();
+                            e.stopPropagation();
+                            
                             const isExpanded = this.getAttribute('aria-expanded') === 'true';
                             
-                            // Close other dropdowns
+                            // Close all other dropdowns
                             dropdowns.forEach(otherDropdown => {
                                 if (otherDropdown !== dropdown) {
                                     const otherToggle = otherDropdown.querySelector('.dropdown-toggle');
@@ -178,10 +193,12 @@ Bootstrap 5 Compatible | Vanilla JS
                                 this.setAttribute('aria-expanded', 'true');
                                 menu.classList.add('show');
                                 
-                                // Focus first menu item
-                                const firstItem = menu.querySelector('.dropdown-item');
-                                if (firstItem && window.innerWidth < 992) {
-                                    setTimeout(() => firstItem.focus(), 100);
+                                // Focus first menu item on mobile
+                                if (window.innerWidth < 992) {
+                                    const firstItem = menu.querySelector('.dropdown-item');
+                                    if (firstItem) {
+                                        setTimeout(() => firstItem.focus(), 100);
+                                    }
                                 }
                             }
                         });
@@ -193,7 +210,28 @@ Bootstrap 5 Compatible | Vanilla JS
                                 menu.classList.remove('show');
                             }
                         });
+                        
+                        // Close dropdown on escape key
+                        document.addEventListener('keydown', function(e) {
+                            if (e.key === 'Escape') {
+                                toggle.setAttribute('aria-expanded', 'false');
+                                menu.classList.remove('show');
+                                toggle.focus();
+                            }
+                        });
                     }
+                });
+                
+                // Handle window resize to reset dropdown behavior
+                window.addEventListener('resize', function() {
+                    dropdowns.forEach(dropdown => {
+                        const toggle = dropdown.querySelector('.dropdown-toggle');
+                        const menu = dropdown.querySelector('.dropdown-menu');
+                        if (toggle && menu) {
+                            toggle.setAttribute('aria-expanded', 'false');
+                            menu.classList.remove('show');
+                        }
+                    });
                 });
             },
 
@@ -834,6 +872,188 @@ Bootstrap 5 Compatible | Vanilla JS
         // Reinitialize components that depend on window size
         BlueprintFolder.navigation.setupDropdowns();
     }, 250));
+
+    // Error handling
+    window.addEventListener('error', function(e) {
+        console.error('BlueprintFolder Theme Error:', e.error);
+    });
+
+    // Initialize the theme when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            BlueprintFolder.init();
+        });
+    } else {
+        BlueprintFolder.init();
+    }
+
+    // Handle page visibility changes for performance
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            // Pause animations when page is not visible
+            document.body.classList.add('page-hidden');
+        } else {
+            // Resume animations when page becomes visible
+            document.body.classList.remove('page-hidden');
+        }
+    });
+
+    // Handle online/offline states
+    window.addEventListener('online', function() {
+        document.body.classList.remove('offline');
+        if (typeof BlueprintFolder !== 'undefined' && BlueprintFolder.utils && BlueprintFolder.utils.showNotification) {
+            BlueprintFolder.utils.showNotification('Connection restored', 'success');
+        }
+    });
+
+    window.addEventListener('offline', function() {
+        document.body.classList.add('offline');
+        if (typeof BlueprintFolder !== 'undefined' && BlueprintFolder.utils && BlueprintFolder.utils.showNotification) {
+            BlueprintFolder.utils.showNotification('Connection lost', 'warning');
+        }
+    });
+
+    // Expose BlueprintFolder globally for debugging
+    window.BlueprintFolder = BlueprintFolder;
+
+        },
+
+        // Layout and UI fixes
+        layout: {
+            init: function() {
+                this.fixHeaderSpacing();
+                this.handleServiceFilters();
+                this.setupScrollEffects();
+                this.fixMobileLayout();
+            },
+
+            fixHeaderSpacing: function() {
+                // Ensure proper spacing for fixed header
+                const header = document.querySelector('.site-header');
+                const body = document.body;
+                
+                if (header) {
+                    const headerHeight = header.offsetHeight;
+                    body.style.paddingTop = (headerHeight + 10) + 'px';
+                    
+                    // Adjust for admin bar
+                    if (body.classList.contains('admin-bar')) {
+                        const adminBar = document.getElementById('wpadminbar');
+                        if (adminBar) {
+                            const adminBarHeight = adminBar.offsetHeight;
+                            body.style.paddingTop = (headerHeight + adminBarHeight + 10) + 'px';
+                        }
+                    }
+                }
+                
+                // Fix hero section overlap
+                const heroSection = document.querySelector('.hero-section');
+                if (heroSection && header) {
+                    const headerHeight = header.offsetHeight;
+                    heroSection.style.marginTop = '0';
+                    heroSection.style.paddingTop = (headerHeight + 40) + 'px';
+                }
+            },
+
+            handleServiceFilters: function() {
+                // Service filter functionality
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const serviceCards = document.querySelectorAll('.service-card');
+                
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const filter = this.getAttribute('data-filter');
+                        
+                        // Update active button
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Filter service cards
+                        serviceCards.forEach(card => {
+                            const categories = card.getAttribute('data-category');
+                            
+                            if (filter === 'all' || (categories && categories.includes(filter))) {
+                                card.style.display = 'block';
+                                card.style.animation = 'fadeInUp 0.5s ease';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            },
+
+            setupScrollEffects: function() {
+                // Smooth scroll for anchor links
+                const anchorLinks = document.querySelectorAll('a[href^="#"]');
+                
+                anchorLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            e.preventDefault();
+                            
+                            const header = document.querySelector('.site-header');
+                            const headerHeight = header ? header.offsetHeight : 0;
+                            const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                            
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+                
+                // Add scroll-based header effects
+                let lastScrollTop = 0;
+                const header = document.querySelector('.site-header');
+                
+                window.addEventListener('scroll', function() {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    if (header) {
+                        if (scrollTop > 100) {
+                            header.classList.add('scrolled');
+                        } else {
+                            header.classList.remove('scrolled');
+                        }
+                    }
+                    
+                    lastScrollTop = scrollTop;
+                }, { passive: true });
+            },
+
+            fixMobileLayout: function() {
+                // Fix mobile layout issues
+                const handleResize = () => {
+                    const viewport = window.innerWidth;
+                    
+                    // Fix mobile menu positioning
+                    if (viewport < 992) {
+                        const mobileMenu = document.querySelector('.navbar-collapse');
+                        if (mobileMenu) {
+                            mobileMenu.style.maxHeight = (window.innerHeight - 100) + 'px';
+                            mobileMenu.style.overflowY = 'auto';
+                        }
+                    }
+                    
+                    // Fix grid layouts on small screens
+                    const grids = document.querySelectorAll('.services-grid, .categories-grid, .blog-grid');
+                    grids.forEach(grid => {
+                        if (viewport < 576) {
+                            grid.style.gridTemplateColumns = '1fr';
+                        }
+                    });
+                };
+                
+                window.addEventListener('resize', handleResize);
+                handleResize(); // Run on load
+            }
+        },    };
+
 
     // Error handling
     window.addEventListener('error', function(e) {
