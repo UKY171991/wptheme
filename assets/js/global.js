@@ -304,6 +304,10 @@ Bootstrap 5 Compatible | Vanilla JS
                 });
             }
         },
+
+        // Additional utility functions
+        additionalUtils: {
+            setupActiveStates: function() {
                 // Set active states based on current page
                 const currentUrl = window.location.pathname;
                 const navLinks = document.querySelectorAll('.nav-link');
@@ -836,150 +840,7 @@ Bootstrap 5 Compatible | Vanilla JS
         console.error('BlueprintFolder Theme Error:', e.error);
     });
 
-})();
-            setupCTAButton: function() {
-                // Enhanced CTA button functionality
-                const ctaButtons = document.querySelectorAll('.enhanced-cta-btn');
-                
-                ctaButtons.forEach(button => {
-                    // Add ripple effect on click
-                    button.addEventListener('click', function(e) {
-                        const ripple = document.createElement('span');
-                        const rect = this.getBoundingClientRect();
-                        const size = Math.max(rect.width, rect.height);
-                        const x = e.clientX - rect.left - size / 2;
-                        const y = e.clientY - rect.top - size / 2;
-                        
-                        ripple.style.cssText = `
-                            position: absolute;
-                            width: ${size}px;
-                            height: ${size}px;
-                            left: ${x}px;
-                            top: ${y}px;
-                            background: rgba(255, 255, 255, 0.3);
-                            border-radius: 50%;
-                            transform: scale(0);
-                            animation: ripple 0.6s linear;
-                            pointer-events: none;
-                        `;
-                        
-                        this.appendChild(ripple);
-                        
-                        setTimeout(() => {
-                            ripple.remove();
-                        }, 600);
-                    });
-                    
-                    // Add loading state functionality
-                    button.addEventListener('click', function(e) {
-                        if (this.href && this.href.includes('contact')) {
-                            // Add loading state for contact page navigation
-                            const originalText = this.querySelector('.cta-text').textContent;
-                            const icon = this.querySelector('i');
-                            
-                            this.classList.add('loading');
-                            this.querySelector('.cta-text').textContent = 'Loading...';
-                            if (icon) {
-                                icon.className = 'fas fa-spinner fa-spin me-2';
-                            }
-                            
-                            // Reset after navigation (in case of SPA or back button)
-                            setTimeout(() => {
-                                this.classList.remove('loading');
-                                this.querySelector('.cta-text').textContent = originalText;
-                                if (icon) {
-                                    icon.className = 'fas fa-envelope me-2';
-                                }
-                            }, 2000);
-                        }
-                    });
-                });
-            }
-        },    
-    // Performance optimizations
-        performance: {
-            init: function() {
-                this.optimizeScrollEvents();
-                this.setupResizeObserver();
-                this.preloadCriticalResources();
-                this.setupIntersectionObserver();
-            },
-
-            optimizeScrollEvents: function() {
-                // Throttled scroll events for better performance
-                let isScrolling = false;
-                
-                const optimizedScroll = BlueprintFolder.utils.throttle(() => {
-                    // Your scroll-based logic here
-                    isScrolling = true;
-                    requestAnimationFrame(() => {
-                        isScrolling = false;
-                    });
-                }, 16); // ~60fps
-
-                window.addEventListener('scroll', optimizedScroll, { passive: true });
-            },
-
-            setupResizeObserver: function() {
-                // Optimize layout recalculations
-                if ('ResizeObserver' in window) {
-                    const resizeObserver = new ResizeObserver(entries => {
-                        entries.forEach(entry => {
-                            // Handle responsive adjustments
-                            const element = entry.target;
-                            if (element.classList.contains('responsive-element')) {
-                                // Your responsive logic here
-                            }
-                        });
-                    });
-
-                    document.querySelectorAll('.responsive-element').forEach(el => {
-                        resizeObserver.observe(el);
-                    });
-                }
-            },
-
-            preloadCriticalResources: function() {
-                // Preload critical navigation resources
-                const criticalLinks = [
-                    '/contact',
-                    '/services',
-                    '/about'
-                ];
-
-                criticalLinks.forEach(link => {
-                    const linkElement = document.createElement('link');
-                    linkElement.rel = 'prefetch';
-                    linkElement.href = link;
-                    document.head.appendChild(linkElement);
-                });
-            },
-
-            setupIntersectionObserver: function() {
-                // Optimize visibility-based operations
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Lazy load or initialize components when visible
-                            const element = entry.target;
-                            if (element.dataset.lazyInit) {
-                                // Initialize component
-                                element.classList.add('initialized');
-                                observer.unobserve(element);
-                            }
-                        }
-                    });
-                }, {
-                    rootMargin: '50px'
-                });
-
-                // Observe elements that need lazy initialization
-                document.querySelectorAll('[data-lazy-init]').forEach(el => {
-                    observer.observe(el);
-                });
-            }
-        },    // Ini
-tialize the theme when DOM is ready
+    // Initialize the theme when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
             BlueprintFolder.init();
@@ -1002,12 +863,16 @@ tialize the theme when DOM is ready
     // Handle online/offline states
     window.addEventListener('online', function() {
         document.body.classList.remove('offline');
-        BlueprintFolder.utils.showNotification('Connection restored', 'success');
+        if (typeof BlueprintFolder !== 'undefined' && BlueprintFolder.utils && BlueprintFolder.utils.showNotification) {
+            BlueprintFolder.utils.showNotification('Connection restored', 'success');
+        }
     });
 
     window.addEventListener('offline', function() {
         document.body.classList.add('offline');
-        BlueprintFolder.utils.showNotification('Connection lost', 'warning');
+        if (typeof BlueprintFolder !== 'undefined' && BlueprintFolder.utils && BlueprintFolder.utils.showNotification) {
+            BlueprintFolder.utils.showNotification('Connection lost', 'warning');
+        }
     });
 
     // Expose BlueprintFolder globally for debugging

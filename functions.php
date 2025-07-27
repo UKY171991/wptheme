@@ -1551,7 +1551,7 @@ add_action('customize_register', 'blueprint_folder_customize_register');
 }
 
 // That's all folks!
-?>
+
 /**
  * ENHANCED MENU CUSTOMIZATION SUPPORT
  */
