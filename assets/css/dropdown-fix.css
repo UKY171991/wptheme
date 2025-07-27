@@ -1,53 +1,81 @@
-/* Dropdown Menu Fix */
-.dropdown-menu {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
+/* Simple Standard Menu Styles */
+
+/* Desktop Menu */
+@media (min-width: 992px) {
+    /* Right align the menu */
+    .navbar-nav {
+        margin-left: auto;
+    }
+    
+    /* Standard dropdown styling */
+    .dropdown-menu {
+        border: 1px solid rgba(0,0,0,.15);
+        border-radius: 0.375rem;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,.175);
+        padding: 0.5rem 0;
+        margin: 0.125rem 0 0;
+        min-width: 10rem;
+        background-color: #fff;
+        z-index: 1000;
+    }
+    
+    /* Dropdown items */
+    .dropdown-item {
+        display: block;
+        width: 100%;
+        padding: 0.25rem 1rem;
+        clear: both;
+        font-weight: 400;
+        color: #212529;
+        text-decoration: none;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+    }
+    
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        color: #1e2125;
+        background-color: #e9ecef;
+    }
+    
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    
+    /* Right align last dropdown */
+    .navbar-nav .nav-item:last-child .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
 }
 
-.dropdown:hover > .dropdown-menu,
-.dropdown-menu.show {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-    display: block !important;
-}
-
-/* Ensure proper z-index */
-.navbar-nav .dropdown {
-    position: relative;
-    z-index: 1000;
-}
-
-.dropdown-menu {
-    z-index: 1050;
-    position: absolute;
-}
-
-/* Fix submenu positioning */
-.dropdown-submenu {
-    position: relative;
-}
-
-.dropdown-submenu > .dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-}
-
-/* Mobile fixes */
+/* Mobile Menu */
 @media (max-width: 991.98px) {
     .dropdown-menu {
-        position: static !important;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: transparent;
+        border: 0;
+        box-shadow: none;
         display: none;
+        padding-left: 1rem;
     }
     
     .dropdown-menu.show {
-        display: block !important;
+        display: block;
+    }
+    
+    .dropdown-item {
+        padding: 0.5rem 1rem;
+        color: #212529;
+    }
+    
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        background-color: #f8f9fa;
     }
 }

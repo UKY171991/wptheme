@@ -63,81 +63,41 @@
                     <?php endif; ?>
                 </div>
 
-                <!-- Enhanced Mobile Menu Toggle -->
-                <button class="navbar-toggler enhanced-mobile-toggle" 
+                <!-- Mobile Menu Toggle -->
+                <button class="navbar-toggler" 
                         type="button" 
                         data-bs-toggle="collapse" 
                         data-bs-target="#primary-navigation" 
                         aria-controls="primary-navigation" 
                         aria-expanded="false" 
-                        aria-label="<?php esc_attr_e('Toggle main navigation menu', 'blueprint-folder'); ?>"
-                        data-mobile-menu-trigger>
-                    <span class="hamburger-lines" aria-hidden="true">
-                        <span class="line line-1"></span>
-                        <span class="line line-2"></span>
-                        <span class="line line-3"></span>
-                    </span>
-                    <span class="sr-only"><?php esc_html_e('Menu', 'blueprint-folder'); ?></span>
+                        aria-label="<?php esc_attr_e('Toggle navigation', 'blueprint-folder'); ?>">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Enhanced Primary Navigation -->
-                <div class="collapse navbar-collapse enhanced-navigation" id="primary-navigation" data-mobile-menu-panel>
-                    <!-- Mobile Menu Header (Hidden on Desktop) -->
-                    <div class="mobile-menu-header d-lg-none">
-                        <div class="mobile-brand">
-                            <?php if (has_custom_logo()) : ?>
-                                <?php the_custom_logo(); ?>
-                            <?php else : ?>
-                                <span class="mobile-site-title"><?php bloginfo('name'); ?></span>
-                            <?php endif; ?>
-                        </div>
-                        <button class="mobile-menu-close" aria-label="<?php esc_attr_e('Close navigation menu', 'blueprint-folder'); ?>" data-mobile-menu-close>
-                            <i class="fas fa-times" aria-hidden="true"></i>
-                        </button>
-                    </div>
-
+                <!-- Primary Navigation -->
+                <div class="collapse navbar-collapse" id="primary-navigation">
                     <!-- Navigation Menu -->
-                    <div class="navigation-wrapper" role="menubar">
                         <?php
                         wp_nav_menu(array(
                             'theme_location'    => 'primary',
                             'menu_id'          => 'primary-menu',
-                            'menu_class'       => 'navbar-nav ms-auto enhanced-nav-menu',
+                            'menu_class'       => 'navbar-nav',
                             'container'        => false,
-                            'depth'            => 3,
+                            'depth'            => 2,
                             'fallback_cb'      => 'blueprint_folder_navigation_fallback',
                             'walker'           => new WP_Bootstrap_Navwalker(),
-                            'items_wrap'       => '<ul id="%1$s" class="%2$s" role="menubar">%3$s</ul>',
+                            'items_wrap'       => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                         ));
                         ?>
-                    </div>
                     
-                    <!-- Enhanced CTA Section -->
-                    <div class="navbar-actions ms-lg-3">
-                        <div class="cta-wrapper">
-                            <a href="<?php echo esc_url(blueprint_folder_get_header_cta_url()); ?>" 
-                               class="btn btn-primary enhanced-cta-btn" 
-                               role="button"
-                               aria-describedby="cta-description">
-                                <i class="fas fa-envelope me-2" aria-hidden="true"></i>
-                                <span class="cta-text"><?php echo esc_html(blueprint_folder_get_header_cta_text()); ?></span>
-                            </a>
-                            <span id="cta-description" class="sr-only">
-                                <?php esc_html_e('Contact us for a free quote on our services', 'blueprint-folder'); ?>
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Mobile Menu Footer (Hidden on Desktop) -->
-                    <div class="mobile-menu-footer d-lg-none">
-                        <div class="mobile-contact-info">
-                            <p class="mobile-tagline"><?php echo esc_html(get_bloginfo('description')); ?></p>
-                        </div>
+                    <!-- CTA Button -->
+                    <div class="d-flex ms-3">
+                        <a href="<?php echo esc_url(blueprint_folder_get_header_cta_url()); ?>" 
+                           class="btn btn-primary">
+                            <?php echo esc_html(blueprint_folder_get_header_cta_text()); ?>
+                        </a>
                     </div>
                 </div>
-
-                <!-- Mobile Menu Backdrop -->
-                <div class="mobile-menu-backdrop d-lg-none" data-mobile-menu-backdrop aria-hidden="true"></div>
             </div>
         </nav>
         
