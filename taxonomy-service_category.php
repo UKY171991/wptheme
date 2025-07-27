@@ -127,9 +127,27 @@ $services_count = $current_term->count ?? 0;
                 </p>
             </div>
             
-            <?php if (have_posts()) : ?>
+            <?php 
+            // Custom query to ensure we get the services for this category
+            $current_term = get_queried_object();
+            $services_query = new WP_Query(array(
+                'post_type' => 'service',
+                'posts_per_page' => 12,
+                'post_status' => 'publish',
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'service_category',
+                        'field' => 'term_id',
+                        'terms' => $current_term->term_id,
+                    ),
+                ),
+                'orderby' => 'title',
+                'order' => 'ASC'
+            ));
+            
+            if ($services_query->have_posts()) : ?>
                 <div class="row g-4">
-                    <?php while (have_posts()) : the_post(); 
+                    <?php while ($services_query->have_posts()) : $services_query->the_post(); 
                         $service_icon = get_post_meta(get_the_ID(), '_service_icon', true) ?: 'fas fa-home';
                         $service_price = get_post_meta(get_the_ID(), '_service_price', true);
                         $service_featured = get_post_meta(get_the_ID(), '_service_featured', true);
@@ -188,17 +206,28 @@ $services_count = $current_term->count ?? 0;
                     <?php endwhile; ?>
                 </div>
                 
+                <?php wp_reset_postdata(); ?>
+                
                 <!-- Pagination -->
-                <div class="mt-5">
-                    <?php
-                    the_posts_pagination(array(
-                        'mid_size' => 2,
-                        'prev_text' => '<i class="fas fa-chevron-left me-1"></i> Previous',
-                        'next_text' => 'Next <i class="fas fa-chevron-right ms-1"></i>',
-                        'class' => 'pagination justify-content-center'
-                    ));
-                    ?>
-                </div>
+                <?php if ($services_query->max_num_pages > 1) : ?>
+                    <div class="mt-5">
+                        <?php
+                        // Custom pagination for our custom query
+                        $big = 999999999;
+                        echo paginate_links(array(
+                            'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                            'format' => '?paged=%#%',
+                            'current' => max(1, get_query_var('paged')),
+                            'total' => $services_query->max_num_pages,
+                            'mid_size' => 2,
+                            'prev_text' => '<i class="fas fa-chevron-left me-1"></i> Previous',
+                            'next_text' => 'Next <i class="fas fa-chevron-right ms-1"></i>',
+                            'type' => 'list',
+                            'class' => 'pagination justify-content-center'
+                        ));
+                        ?>
+                    </div>
+                <?php endif; ?>
                 
             <?php else : ?>
                 <div class="text-center py-5">
