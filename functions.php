@@ -154,6 +154,18 @@ function blueprint_folder_register_post_types() {
 add_action('init', 'blueprint_folder_register_post_types');
 
 /**
+ * CUSTOM REWRITE RULES FOR SERVICE URLS
+ */
+function blueprint_folder_add_rewrite_rules() {
+    // Add rewrite rule for /service/ to redirect to /services/ archive
+    add_rewrite_rule('^service/?$', 'index.php?post_type=service', 'top');
+    
+    // Add rewrite rule for /service/page/number
+    add_rewrite_rule('^service/page/([0-9]+)/?$', 'index.php?post_type=service&paged=$matches[1]', 'top');
+}
+add_action('init', 'blueprint_folder_add_rewrite_rules');
+
+/**
  * REGISTER TAXONOMIES
  */
 function blueprint_folder_register_taxonomies() {
@@ -191,10 +203,10 @@ add_action('after_switch_theme', function() {
 
 // Also flush on theme activation - simplified
 add_action('init', function() {
-    if (!get_option('blueprint_folder_rewrite_rules_flushed_v2')) {
+    if (!get_option('blueprint_folder_rewrite_rules_flushed_v3')) {
         flush_rewrite_rules();
-        update_option('blueprint_folder_rewrite_rules_flushed_v2', 1);
-}
+        update_option('blueprint_folder_rewrite_rules_flushed_v3', 1);
+    }
 }, 999);
 
 /**
