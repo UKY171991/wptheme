@@ -675,6 +675,9 @@ function blueprint_folder_scripts() {
     // Portfolio styles
     wp_enqueue_style('blueprint-folder-portfolio', get_template_directory_uri() . '/assets/css/portfolio.css', array('blueprint-folder-global'), '1.0.0');
 
+    // Business Library styles
+    wp_enqueue_style('blueprint-folder-business-library', get_template_directory_uri() . '/assets/css/business-library.css', array('blueprint-folder-global'), '1.0.0');
+
     // Bootstrap JS (CDN)
     wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array(), '5.3.0', true);
 
@@ -686,6 +689,9 @@ function blueprint_folder_scripts() {
 
     // Banner section functionality
     wp_enqueue_script('blueprint-folder-banner', get_template_directory_uri() . '/assets/js/banner-section.js', array('blueprint-folder-global'), '1.0.0', true);
+
+    // Business Library functionality
+    wp_enqueue_script('blueprint-folder-business-library', get_template_directory_uri() . '/assets/js/business-library.js', array('blueprint-folder-global'), '1.0.0', true);
 
     // Localize script for AJAX and theme data
     wp_localize_script('blueprint-folder-global', 'wpAjax', array(
