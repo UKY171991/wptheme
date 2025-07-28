@@ -86,20 +86,64 @@ document.addEventListener('DOMContentLoaded', function() {
             searchInput.addEventListener('input', function(e) {
                 const searchTerm = e.target.value.toLowerCase();
                 const cards = document.querySelectorAll('.business-card');
+                let visibleCount = 0;
                 
                 cards.forEach(card => {
                     const title = card.querySelector('.service-title').textContent.toLowerCase();
                     const description = card.querySelector('.service-description').textContent.toLowerCase();
+                    const category = card.getAttribute('data-category') ? card.getAttribute('data-category').toLowerCase() : '';
                     
-                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                        card.style.display = 'block';
+                    if (title.includes(searchTerm) || 
+                        description.includes(searchTerm) || 
+                        category.includes(searchTerm) ||
+                        searchTerm === '') {
+                        
                         card.parentElement.style.display = 'block';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                        visibleCount++;
                     } else {
-                        card.style.display = 'none';
                         card.parentElement.style.display = 'none';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
                     }
                 });
+                
+                // Show/hide no results message
+                let noResultsMsg = document.getElementById('no-results-message');
+                if (visibleCount === 0 && searchTerm !== '') {
+                    if (!noResultsMsg) {
+                        noResultsMsg = document.createElement('div');
+                        noResultsMsg.id = 'no-results-message';
+                        noResultsMsg.className = 'col-12 text-center mt-4';
+                        noResultsMsg.innerHTML = `
+                            <div class="alert alert-info">
+                                <h5><i class="fas fa-search me-2"></i>No services found</h5>
+                                <p class="mb-0">Try adjusting your search terms or browse our categories.</p>
+                            </div>
+                        `;
+                        document.querySelector('.business-library-services .row').appendChild(noResultsMsg);
+                    }
+                    noResultsMsg.style.display = 'block';
+                } else if (noResultsMsg) {
+                    noResultsMsg.style.display = 'none';
+                }
+                
+                // Reset filters when searching
+                if (searchTerm !== '') {
+                    const filterButtons = document.querySelectorAll('.filter-btn');
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('.filter-btn[data-filter="all"]')?.classList.add('active');
+                }
             });
+            
+            // Add search suggestions (optional)
+            const suggestions = [
+                'web design', 'marketing', 'consulting', 'development', 
+                'business', 'digital', 'creative', 'technical'
+            ];
+            
+            // You can implement autocomplete here if needed
         }
     }
 
@@ -121,7 +165,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.classList.add('active');
                     
                     cards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-color') === filter) {
+                        const cardCategory = card.getAttribute('data-category') || '';
+                        const cardColor = card.getAttribute('data-color') || '';
+                        
+                        // Show/hide based on filter
+                        if (filter === 'all' || 
+                            cardCategory.toLowerCase() === filter.toLowerCase() || 
+                            cardColor === filter) {
+                            
                             card.parentElement.style.display = 'block';
                             setTimeout(() => {
                                 card.style.opacity = '1';
@@ -135,8 +186,26 @@ document.addEventListener('DOMContentLoaded', function() {
                             }, 300);
                         }
                     });
+                    
+                    // Update URL with filter (optional)
+                    if (history.pushState) {
+                        const newUrl = filter === 'all' ? 
+                            window.location.pathname : 
+                            window.location.pathname + '?filter=' + encodeURIComponent(filter);
+                        history.pushState(null, null, newUrl);
+                    }
                 });
             });
+            
+            // Check for URL parameter on load
+            const urlParams = new URLSearchParams(window.location.search);
+            const filterParam = urlParams.get('filter');
+            if (filterParam) {
+                const targetButton = document.querySelector(`[data-filter="${filterParam}"]`);
+                if (targetButton) {
+                    targetButton.click();
+                }
+            }
         }
     }
 

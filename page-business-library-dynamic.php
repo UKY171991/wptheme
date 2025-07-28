@@ -19,6 +19,54 @@ get_header(); ?>
                         Your All-in-One Collection of Ready-to-Launch<br>
                         Digital Business Guides
                     </p>
+                    
+                    <!-- Search Box -->
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-lg-6">
+                            <div class="search-box">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-white border-end-0">
+                                        <i class="fas fa-search text-muted"></i>
+                                    </span>
+                                    <input type="text" 
+                                           class="form-control border-start-0 shadow-sm" 
+                                           id="business-search" 
+                                           placeholder="Search services..."
+                                           style="border-left: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <?php
+    $total_services = wp_count_posts('service')->publish;
+    $total_categories = wp_count_terms('service_category');
+    ?>
+    <section class="stats-section py-4" style="background: #007bff;">
+        <div class="container">
+            <div class="row text-center text-white">
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <h3 class="display-6 fw-bold mb-1"><?php echo $total_services; ?></h3>
+                        <p class="mb-0">Professional Services</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <h3 class="display-6 fw-bold mb-1"><?php echo $total_categories; ?></h3>
+                        <p class="mb-0">Service Categories</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <h3 class="display-6 fw-bold mb-1">24/7</h3>
+                        <p class="mb-0">Support Available</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,213 +77,263 @@ get_header(); ?>
         <div class="container">
             <div class="row g-4">
                 <?php
-                // Define the business services data
-                $business_services = array(
-                    array(
-                        'title' => 'Profitable Podcast',
-                        'book_title' => 'Profitable<br>Podcast',
-                        'subtitle' => 'Start a<br>podcast and<br>make money',
-                        'description' => 'Start a podcast and make money',
-                        'color' => 'blue',
-                        'link' => get_permalink(get_page_by_path('profitable-podcast')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Freelance Formula',
-                        'book_title' => 'Freelance<br>Formula',
-                        'subtitle' => 'Build a<br>successful<br>freelance business',
-                        'description' => 'Build a successful freelance business',
-                        'color' => 'pink',
-                        'link' => get_permalink(get_page_by_path('freelance-formula')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Consulting',
-                        'book_title' => 'Consulting',
-                        'subtitle' => 'Become a highly-<br>paid consultant',
-                        'description' => 'Become a highly-paid consultant',
-                        'color' => 'yellow',
-                        'link' => get_permalink(get_page_by_path('consulting')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Content Creator',
-                        'book_title' => 'Property<br>Investment',
-                        'subtitle' => 'Make wealth<br>through smart<br>investments',
-                        'description' => 'Monetize your creativity online',
-                        'color' => 'blue',
-                        'link' => get_permalink(get_page_by_path('content-creator')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Property Investment',
-                        'book_title' => 'Social<br>Media<br>Agency',
-                        'subtitle' => 'Success with a<br>social media<br>agency',
-                        'description' => 'Build wealth through smart investments',
-                        'color' => 'yellow',
-                        'link' => get_permalink(get_page_by_path('property-investment')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Course Creator',
-                        'book_title' => 'Substack',
-                        'subtitle' => 'Start and<br>monetize a<br>newsletter',
-                        'description' => 'Create and sell online courses',
-                        'color' => 'blue',
-                        'link' => get_permalink(get_page_by_path('course-creator')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Affiliate Marketing',
-                        'book_title' => 'Course<br>Creator',
-                        'subtitle' => 'Create and<br>sell online<br>courses',
-                        'description' => 'Make passive income with referrals',
-                        'color' => 'yellow',
-                        'link' => get_permalink(get_page_by_path('affiliate-marketing')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Virtual Assistant',
-                        'book_title' => 'Affiliate<br>Marketing',
-                        'subtitle' => 'Make passive<br>income with<br>referrals',
-                        'description' => 'Launch your VA business from home',
-                        'color' => 'blue',
-                        'link' => get_permalink(get_page_by_path('virtual-assistant')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Dropshipping Business',
-                        'book_title' => 'Dropshipping<br>Business',
-                        'subtitle' => 'Run a profitable<br>business without<br>inventory',
-                        'description' => 'Run a profitable business without inventory',
-                        'color' => 'pink',
-                        'link' => get_permalink(get_page_by_path('dropshipping-business')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Course Creator',
-                        'book_title' => 'Course<br>Creator',
-                        'subtitle' => 'Create and<br>sell online<br>courses',
-                        'description' => 'Create and sell online courses',
-                        'color' => 'yellow',
-                        'link' => get_permalink(get_page_by_path('course-creator-advanced')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Affiliate Marketing',
-                        'book_title' => 'Affiliate<br>Marketing',
-                        'subtitle' => 'Make passive<br>income with<br>referrals',
-                        'description' => 'Make passive income with referrals',
-                        'color' => 'blue',
-                        'link' => get_permalink(get_page_by_path('affiliate-marketing-pro')) ?: '#'
-                    ),
-                    array(
-                        'title' => 'Virtual Assistant',
-                        'book_title' => 'Virtual<br>Assistant',
-                        'subtitle' => 'Launch your VA<br>business from<br>home',
-                        'description' => 'Launch your VA business from home',
-                        'color' => 'pink',
-                        'link' => get_permalink(get_page_by_path('virtual-assistant-pro')) ?: '#'
-                    )
-                );
+                // Get all services from WordPress
+                $services_query = new WP_Query(array(
+                    'post_type' => 'service',
+                    'posts_per_page' => -1, // Get all services
+                    'post_status' => 'publish',
+                    'orderby' => 'menu_order',
+                    'order' => 'ASC'
+                ));
 
                 // Get gradient colors for each service type
                 $color_gradients = array(
                     'blue' => 'linear-gradient(135deg, #4285f4, #1a73e8)',
                     'pink' => 'linear-gradient(135deg, #ea4335, #d33b2c)', 
                     'yellow' => 'linear-gradient(135deg, #fbbc04, #f9ab00)',
-                    'green' => 'linear-gradient(135deg, #34a853, #137333)'
+                    'green' => 'linear-gradient(135deg, #34a853, #137333)',
+                    'purple' => 'linear-gradient(135deg, #9c27b0, #673ab7)',
+                    'orange' => 'linear-gradient(135deg, #ff9800, #f57c00)',
+                    'teal' => 'linear-gradient(135deg, #009688, #00695c)',
+                    'indigo' => 'linear-gradient(135deg, #3f51b5, #303f9f)'
                 );
 
-                // Loop through each service
-                foreach ($business_services as $index => $service) :
-                    $gradient = $color_gradients[$service['color']];
+                $colors = array('blue', 'pink', 'yellow', 'green', 'purple', 'orange', 'teal', 'indigo');
+                $color_index = 0;
+
+                if ($services_query->have_posts()) :
+                    while ($services_query->have_posts()) : 
+                        $services_query->the_post();
+                        
+                        // Get service categories
+                        $service_categories = get_the_terms(get_the_ID(), 'service_category');
+                        $category_name = '';
+                        if ($service_categories && !is_wp_error($service_categories)) {
+                            $category_name = $service_categories[0]->name;
+                        }
+                        
+                        // Get service meta data
+                        $price = get_post_meta(get_the_ID(), '_service_price', true);
+                        $duration = get_post_meta(get_the_ID(), '_service_duration', true);
+                        
+                        // Assign color
+                        $current_color = $colors[$color_index % count($colors)];
+                        $gradient = $color_gradients[$current_color];
+                        $color_index++;
+                        
+                        // Get description
+                        $description = has_excerpt() ? get_the_excerpt() : wp_trim_words(get_the_content(), 15, '...');
+                        
+                        // Format title for book display
+                        $book_title = wp_trim_words(get_the_title(), 3, '');
+                        $book_title_formatted = str_replace(' ', '<br>', $book_title);
+                        
+                        // Create subtitle from description or category
+                        $subtitle_text = $description;
+                        if (strlen($subtitle_text) > 60) {
+                            $subtitle_text = wp_trim_words($subtitle_text, 8, '...');
+                        }
+                        $subtitle_formatted = str_replace(' ', '<br>', $subtitle_text);
                 ?>
                     <div class="col-lg-3 col-md-6">
-                        <div class="business-card h-100" data-color="<?php echo esc_attr($service['color']); ?>">
+                        <div class="business-card h-100" data-color="<?php echo esc_attr($current_color); ?>" data-category="<?php echo esc_attr($category_name); ?>">
                             <div class="business-book">
                                 <div class="book-spine" style="background: <?php echo esc_attr($gradient); ?>;">
                                     <div class="book-title">
-                                        <h3><?php echo $service['book_title']; ?></h3>
-                                        <p class="book-subtitle"><?php echo $service['subtitle']; ?></p>
+                                        <h3><?php echo $book_title_formatted; ?></h3>
+                                        <p class="book-subtitle"><?php echo $subtitle_formatted; ?></p>
+                                        
+                                        <?php if ($price || $duration) : ?>
+                                            <div class="book-meta mt-2">
+                                                <?php if ($price) : ?>
+                                                    <div class="price-badge">
+                                                        <small style="opacity: 0.9; font-size: 0.7rem;">Starting from</small><br>
+                                                        <strong style="font-size: 0.9rem;"><?php echo esc_html($price); ?></strong>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="business-info">
-                                <h4 class="service-title"><?php echo esc_html($service['title']); ?></h4>
-                                <p class="service-description"><?php echo esc_html($service['description']); ?></p>
-                                <a href="<?php echo esc_url($service['link']); ?>" class="btn btn-primary btn-rounded">
+                                <h4 class="service-title"><?php the_title(); ?></h4>
+                                
+                                <?php if ($category_name) : ?>
+                                    <div class="service-category mb-2">
+                                        <span class="badge bg-secondary"><?php echo esc_html($category_name); ?></span>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <p class="service-description"><?php echo esc_html($description); ?></p>
+                                
+                                <?php if ($duration) : ?>
+                                    <div class="service-duration mb-2">
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock me-1"></i>
+                                            Duration: <?php echo esc_html($duration); ?>
+                                        </small>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <a href="<?php the_permalink(); ?>" class="btn btn-primary btn-rounded">
                                     Learn More
                                 </a>
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                <?php 
+                    endwhile;
+                    wp_reset_postdata();
+                else : ?>
+                    <!-- No services found - Show fallback content -->
+                    <div class="col-12">
+                        <div class="alert alert-info text-center">
+                            <h4><i class="fas fa-info-circle me-2"></i>No Services Found</h4>
+                            <p>We're currently updating our service offerings. Please check back soon!</p>
+                            <a href="<?php echo esc_url(site_url('/contact')); ?>" class="btn btn-primary">
+                                Contact Us for Custom Services
+                            </a>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </section>
 
-    <!-- Additional Services Section (Optional) -->
+    <!-- Service Categories Section -->
     <?php
-    // Query actual services from WordPress if you have a services post type
-    $services_query = new WP_Query(array(
-        'post_type' => 'service',
-        'posts_per_page' => 8,
-        'post_status' => 'publish',
-        'meta_query' => array(
-            array(
-                'key' => 'featured_service',
-                'value' => 'yes',
-                'compare' => '='
-            )
-        )
+    // Get all service categories
+    $service_categories = get_terms(array(
+        'taxonomy' => 'service_category',
+        'hide_empty' => true,
+        'orderby' => 'name',
+        'order' => 'ASC'
     ));
 
-    if ($services_query->have_posts()) : ?>
-        <section class="additional-services py-5" style="background: #ffffff;">
+    if ($service_categories && !is_wp_error($service_categories)) : ?>
+        <section class="service-categories-section py-5" style="background: #f8f9fa;">
             <div class="container">
                 <div class="row justify-content-center text-center mb-5">
                     <div class="col-lg-8">
                         <h2 class="h1 fw-bold mb-3" style="color: #2c3e50;">
-                            Featured Services
+                            <i class="fas fa-layer-group me-3" style="color: #3498db;"></i>
+                            Service Categories
                         </h2>
                         <p class="lead text-muted">
-                            Explore our most popular and highly-rated services
+                            Explore our services organized by category to find exactly what you need
                         </p>
                     </div>
                 </div>
+                
+                <!-- Category Filter Buttons -->
+                <div class="category-filters text-center mb-5">
+                    <button class="btn btn-outline-primary btn-rounded filter-btn active me-2 mb-2" data-filter="all">
+                        <i class="fas fa-th-large me-2"></i>All Services
+                    </button>
+                    <?php foreach ($service_categories as $category) : ?>
+                        <button class="btn btn-outline-primary btn-rounded filter-btn me-2 mb-2" data-filter="<?php echo esc_attr($category->name); ?>">
+                            <i class="fas fa-tag me-2"></i><?php echo esc_html($category->name); ?>
+                            <span class="badge bg-primary ms-2"><?php echo $category->count; ?></span>
+                        </button>
+                    <?php endforeach; ?>
+                </div>
+                
+                <!-- Category Cards -->
                 <div class="row g-4">
-                    <?php 
-                    $colors = array('blue', 'pink', 'yellow', 'green');
-                    $color_index = 0;
-                    
-                    while ($services_query->have_posts()) : 
-                        $services_query->the_post();
-                        $current_color = $colors[$color_index % 4];
-                        $gradient = $color_gradients[$current_color];
-                        $color_index++;
-                    ?>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="business-card h-100" data-color="<?php echo esc_attr($current_color); ?>">
-                                <div class="business-book">
-                                    <div class="book-spine" style="background: <?php echo esc_attr($gradient); ?>;">
-                                        <div class="book-title">
-                                            <h3><?php echo wp_trim_words(get_the_title(), 2, ''); ?></h3>
-                                            <p class="book-subtitle">
-                                                <?php echo wp_trim_words(get_the_excerpt() ?: get_the_content(), 8, '...'); ?>
-                                            </p>
-                                        </div>
+                    <!-- All Services Card -->
+                    <div class="col-lg-4 col-md-6">
+                        <a href="<?php echo get_post_type_archive_link('service'); ?>" class="text-decoration-none">
+                            <div class="category-card h-100 bg-white rounded-3 shadow-sm border-0 overflow-hidden hover-lift">
+                                <div class="card-body p-4 text-center">
+                                    <div class="category-icon mb-3">
+                                        <i class="fas fa-th-large" style="font-size: 3rem; color: #3498db;"></i>
                                     </div>
-                                </div>
-                                <div class="business-info">
-                                    <h4 class="service-title"><?php the_title(); ?></h4>
-                                    <p class="service-description">
-                                        <?php echo wp_trim_words(get_the_excerpt() ?: get_the_content(), 15, '...'); ?>
+                                    <h3 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">
+                                        All Services
+                                    </h3>
+                                    <p class="text-muted mb-3">
+                                        Browse our complete portfolio of professional services
                                     </p>
-                                    <a href="<?php the_permalink(); ?>" class="btn btn-primary btn-rounded">
-                                        Learn More
-                                    </a>
+                                    <div class="category-count mb-3">
+                                        <span class="badge bg-primary">
+                                            <?php echo wp_count_posts('service')->publish; ?> Services
+                                        </span>
+                                    </div>
+                                    <span class="btn btn-outline-primary btn-sm">
+                                        View All Services <i class="fas fa-arrow-right ms-1"></i>
+                                    </span>
                                 </div>
                             </div>
+                        </a>
+                    </div>
+                    
+                    <?php foreach ($service_categories as $category) : 
+                        // Default icons for different categories
+                        $category_icons = array(
+                            'cleaning' => 'fas fa-broom',
+                            'maintenance' => 'fas fa-tools',
+                            'plumbing' => 'fas fa-wrench',
+                            'electrical' => 'fas fa-bolt',
+                            'gardening' => 'fas fa-seedling',
+                            'painting' => 'fas fa-paint-roller',
+                            'repair' => 'fas fa-hammer',
+                            'installation' => 'fas fa-cogs',
+                            'consulting' => 'fas fa-lightbulb',
+                            'design' => 'fas fa-palette',
+                            'marketing' => 'fas fa-bullhorn',
+                            'development' => 'fas fa-code',
+                            'support' => 'fas fa-headset',
+                            'business' => 'fas fa-briefcase',
+                            'digital' => 'fas fa-laptop',
+                            'creative' => 'fas fa-palette',
+                            'technical' => 'fas fa-cogs'
+                        );
+
+                        $icon = 'fas fa-tag'; // default
+                        foreach ($category_icons as $key => $icon_class) {
+                            if (strpos(strtolower($category->slug), $key) !== false) {
+                                $icon = $icon_class;
+                                break;
+                            }
+                        }
+                    ?>
+                        <div class="col-lg-4 col-md-6">
+                            <a href="<?php echo esc_url(get_term_link($category)); ?>" class="text-decoration-none">
+                                <div class="category-card h-100 bg-white rounded-3 shadow-sm border-0 overflow-hidden hover-lift">
+                                    <div class="card-body p-4 text-center">
+                                        <div class="category-icon mb-3">
+                                            <i class="<?php echo esc_attr($icon); ?>" style="font-size: 3rem; color: #3498db;"></i>
+                                        </div>
+                                        <h3 class="h5 mb-3" style="color: #2c3e50; font-weight: 600;">
+                                            <?php echo esc_html($category->name); ?>
+                                        </h3>
+                                        <?php if ($category->description) : ?>
+                                            <p class="text-muted mb-3">
+                                                <?php echo esc_html(wp_trim_words($category->description, 15)); ?>
+                                            </p>
+                                        <?php else : ?>
+                                            <p class="text-muted mb-3">
+                                                Professional <?php echo strtolower($category->name); ?> services
+                                            </p>
+                                        <?php endif; ?>
+                                        <div class="category-count mb-3">
+                                            <span class="badge bg-primary">
+                                                <?php echo $category->count; ?> Service<?php echo $category->count !== 1 ? 's' : ''; ?>
+                                            </span>
+                                        </div>
+                                        <span class="btn btn-outline-primary btn-sm">
+                                            View Services <i class="fas fa-arrow-right ms-1"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
-    <?php 
-    endif;
-    wp_reset_postdata();
-    ?>
+    <?php endif; ?>
 
     <!-- Call to Action Section -->
     <section class="business-library-cta py-5" style="background: linear-gradient(135deg, #007bff, #0056b3);">

@@ -14,6 +14,41 @@
     letter-spacing: -0.5px;
 }
 
+/* Search Box Styling */
+.search-box .input-group-text {
+    background: white;
+    border-right: none;
+}
+
+.search-box .form-control {
+    border-left: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.search-box .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 4px 20px rgba(0,123,255,0.2);
+}
+
+/* Stats Section */
+.stats-section {
+    background: linear-gradient(135deg, #007bff, #0056b3) !important;
+}
+
+.stat-item {
+    padding: 1rem 0;
+}
+
+.stat-item h3 {
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.stat-item p {
+    opacity: 0.9;
+    font-weight: 500;
+}
+
 .business-library-services {
     padding: 60px 0 80px;
 }
@@ -118,11 +153,100 @@
     line-height: 1.2;
 }
 
+.service-category {
+    margin-bottom: 10px;
+}
+
+.service-category .badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+}
+
 .service-description {
     font-size: 0.9rem;
     color: #6c757d;
     margin-bottom: 15px;
     line-height: 1.4;
+}
+
+.service-duration {
+    font-size: 0.8rem;
+}
+
+/* Book Meta Styling */
+.book-meta {
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 6px 8px;
+    margin-top: 10px;
+}
+
+.price-badge {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Category Cards Styling */
+.category-card {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-color: #007bff;
+}
+
+.hover-lift {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+.category-icon {
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-icon i {
+    transform: scale(1.1);
+    color: #007bff !important;
+}
+
+/* Filter Buttons */
+.category-filters {
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid #007bff;
+    background: transparent;
+    color: #007bff;
+    margin: 0 5px 10px 0;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #007bff;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.filter-btn .badge {
+    background: rgba(255,255,255,0.2) !important;
+    color: inherit;
+}
+
+.filter-btn:hover .badge,
+.filter-btn.active .badge {
+    background: rgba(255,255,255,0.3) !important;
 }
 
 /* Button Styling */
